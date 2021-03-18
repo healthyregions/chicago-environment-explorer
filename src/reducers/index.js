@@ -1,0 +1,293 @@
+import { INITIAL_STATE } from '../constants/defaults';
+import * as turf from '@turf/turf'
+
+const generateBins = (data, nBins, mapParams) => {
+    const length = data.features.length;
+    const columnData = data.features.map(row => row[mapParams.numerator][mapParams.nProperty]).sort((a,b) => a - b)
+    let bins = [];
+    
+    for (let i=0; i<nBins; i++){
+      bins.push(columnData[Math.round((length/nBins)*i)])
+    }
+
+    return bins;
+}
+
+var reducer = (state = INITIAL_STATE, action) => {
+    switch(action.type) {
+        case 'DATA_LOAD':
+            const mapParamsObj = {
+                ...state.mapParams,
+                bins: action.payload.bins
+            }
+            let centroidsArray = [];
+            
+            for (let i=0; i<action.payload.geojsonData.features.length; i++){
+                centroidsArray.push({
+                    feature: turf.centroid(action.payload.geojsonData.features[i]),
+                    GEOID: action.payload.geojsonData.features[i].properties.geoid
+                })
+            }
+
+            return {
+                ...state,
+                storedGeojson: action.payload.geojsonData,
+                mapParams: mapParamsObj,
+                centroids: centroidsArray
+            };
+        case 'CHANGE_VARIABLE': 
+            const tempParamsObj = {
+                ...state.mapParams,
+                bins:generateBins(state.storedGeojson, 6, {...state.mapParams,...action.payload.params,}),
+                ...action.payload.params,
+            }
+            
+            return {
+                ...state,
+                mapParams: tempParamsObj
+            }
+        case 'SET_GEOID': 
+            return {
+                ...state,
+                currentGeoid: action.payload.geoid
+            };
+        case 'SET_STORED_DATA':
+            let obj = {
+                ...state.storedData,
+            }
+            obj[action.payload.name] = action.payload.data
+            return {
+                ...state,
+                storedData: obj
+            };
+        case 'SET_STORED_GEOJSON':
+            let geojsonObj = {
+                ...state.storedGeojson,
+            }
+            geojsonObj[action.payload.name] = action.payload.data
+            return {
+                ...state,
+                storedGeojson: geojsonObj
+            };
+        case 'SET_STORED_LISA_DATA':
+            // let lisaObj = {
+            //     ...state.storedLisaData,
+            // }
+            // lisaObj[action.payload.name] = action.payload.data
+            return {
+                ...state,
+                storedLisaData: action.payload.data
+            };
+        case 'SET_STORED_CARTOGRAM_DATA':
+            // let cartoObj = {
+            //     ...state.storedCartogramData,
+            // }
+            // cartoObj[action.payload.name] = action.payload.data
+            return {
+                ...state,
+                storedCartogramData: action.payload.data
+            };
+        case 'SET_STORED_MOBILITY_DATA':
+            return {
+                ...state,
+                storedMobilityData: action.payload.data
+            }
+        case 'SET_CENTROIDS':
+            let centroidsObj = {
+                ...state.centroids,
+            }
+            centroidsObj[action.payload.name] = action.payload.data
+            return {
+                ...state,
+                centroids: centroidsObj
+            };
+        case 'SET_CURRENT_DATA':
+            return {
+                ...state,
+                currentData: action.payload.data
+            }
+        case 'SET_GEODA_PROXY':
+            return {
+                ...state,
+                geodaProxy: action.payload.proxy
+            }
+        case 'SET_DATES':
+            return {
+                ...state,
+                dates: action.payload.data
+            }
+        case 'SET_DATA_FUNCTION':
+            return {
+                ...state,
+                currentDataFn: action.payload.fn
+            }
+        case 'SET_COLUMN_NAMES':
+            let colObj = {
+                ...state.cols
+            }
+            colObj[action.payload.name] = action.payload.data
+            return {
+                ...state,
+                cols: colObj
+            }
+        case 'SET_CURR_DATE':
+            return {
+                ...state,
+                currDate: action.payload.date
+            }
+        case 'SET_DATE_INDEX':
+            return {
+                ...state,
+                currDateIndex: action.payload.index
+            }
+        case 'SET_START_DATE_INDEX':
+            return {
+                ...state,
+                startDateIndex: action.payload.index
+            }
+        case 'SET_BINS':
+            let binsObj = {};
+            binsObj['bins'] =  action.payload.bins;
+            binsObj['breaks'] =  action.payload.breaks;
+            return {
+                ...state,
+                bins: binsObj
+            }
+        case 'SET_3D':
+            return {
+                ...state,
+                use3D: !state.use3D
+            }
+        case 'SET_DATA_SIDEBAR':
+            return {
+                ...state,
+                sidebarData: action.payload.data
+            }
+        case 'SET_PANELS':
+            let panelsObj = {
+                ...state.panelState,
+                ...action.payload.params
+            }
+            return {
+                ...state,
+                panelState: panelsObj 
+            }
+        case 'SET_VARIABLE_NAME':
+            return {
+                ...state,
+                currentVariable: action.payload.name
+            }
+        case 'SET_SELECTION_DATA':
+            return {
+                ...state,
+                chartData: action.payload.data.values,
+                selectionKeys: [action.payload.data.name],
+                selectionIndex: [action.payload.data.index]
+            }
+        case 'APPEND_SELECTION_DATA':
+            let appendedChartData = state.chartData;
+            let countCol = action.payload.data.name + ' Daily Count'
+            let sumCol = action.payload.data.name + ' Total Cases'
+
+            for (let i=0; i<appendedChartData.length;i++) {
+                appendedChartData[i][countCol] = action.payload.data.values[i][countCol]
+                appendedChartData[i][sumCol] = action.payload.data.values[i][sumCol]
+            }
+
+            let appendedSelectionNames = [action.payload.data.name, ...state.selectionKeys];
+            let appendedSelectionIndex = [action.payload.data.index, ...state.selectionIndex];
+
+            return {
+                ...state,
+                chartData: appendedChartData,
+                selectionKeys: appendedSelectionNames,
+                selectionIndex: appendedSelectionIndex,
+            }
+        case 'REMOVE_SELECTION_DATA':
+            let removedSelectionNames = [...state.selectionKeys]
+            let tempRemoveIndex = removedSelectionNames.indexOf(action.payload.data.name)
+            removedSelectionNames.splice(tempRemoveIndex, 1)
+
+            let removedSelectionIndex = [...state.selectionIndex]
+            tempRemoveIndex = removedSelectionIndex.indexOf(action.payload.data.index)
+            removedSelectionIndex.splice(tempRemoveIndex, 1)
+
+
+            return {
+                ...state,
+                selectionKeys: removedSelectionNames,
+                selectionIndex: removedSelectionIndex,
+            }
+        case 'SET_ANCHOR_EL':
+            return {
+                ...state,
+                anchorEl: action.payload.anchorEl
+            }
+        case 'SET_MAP_LOADED':
+            return {
+                ...state,
+                mapLoaded: action.payload.loaded
+            }
+        case 'SET_NOTIFICATION':
+            return {
+                ...state,
+                notification: action.payload.info
+            }
+        // case 'SET_URL_PARAMS':
+        //     const { urlParams, presets } = action.payload;
+
+        //     let preset = urlParams.var ? presets[urlParams.var.replace(/_/g, ' ')] : {};
+
+        //     let urlMapParamsObj = {
+        //         ...state.mapParams,
+        //         binMode: urlParams.dbin ? 'dynamic' : '',
+        //         mapType: urlParams.mthd || state.mapParams.mapType,
+        //         overlay: urlParams.ovr ||  state.mapParams.overlay,
+        //         resource: urlParams.res || state.mapParams.resource,
+        //         vizType: urlParams.viz || state.mapParams.vizType
+        //     };
+
+        //     let urlDataParamsObj = {
+        //         ...state.mapParams,
+        //         ...preset,
+        //         nIndex: urlParams.date || state.mapParams.nIndex,
+        //         nRange: urlParams.hasOwnProperty('range') ? urlParams.range === 'null' ? null : urlParams.range : state.mapParams.nRange,
+        //         nProperty: urlParams.prop || state.mapParams.nProperty
+        //     };
+            
+        //     let urlCoordObj = {
+        //         lat: urlParams.lat || '',
+        //         lon: urlParams.lon || '',
+        //         z: urlParams.z || ''
+        //     }
+
+        //     let urlParamsSource = urlParams.src ? 
+        //         `${urlParams.src}.geojson` : 
+        //         state.currentData 
+
+        //     return {
+        //         ...state,
+        //         currentData: urlParamsSource,
+        //         urlParams: urlCoordObj,
+        //         mapParams: urlMapParamsObj,
+        //         mapParams: urlDataParamsObj
+        //     }
+        case "OPEN_CONTEXT_MENU":
+            let contextPanelsObj = {
+                ...state.panelState,
+                context: true,
+                contextPos: {
+                    x: action.payload.params.x,
+                    y: action.payload.params.y
+                }
+            }
+            return {
+                ...state,
+                panelState: contextPanelsObj
+            }
+        default:
+            return state;
+    }
+}
+
+export default reducer;

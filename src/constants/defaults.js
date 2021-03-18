@@ -1,0 +1,47 @@
+export const INITIAL_STATE = {
+  storedGeojson: {},
+  currentData: 'tree_sst_master_tracts.geojson',
+  mapParams: {
+    variableName: 'Tree Crown Density',
+    numerator: 'properties',
+    nType: 'charactertistic',
+    nRange: null,
+    nProperty: 'trees_crown_den',
+    denominator: 'properties',
+    dType: null,
+    dProperty: null,
+    dRange:null,
+    dIndex:null,
+    scale:1,
+    scale3D: 100,
+    fixedScale: null,
+    colorScale: null,
+    zAxisParams: null,
+    fixedScale: null,
+    colorScale: null,
+    storedRange: null,
+    bins: [],
+    overlay: '',
+    colorScale: [
+      [255,255,204],
+      [217,240,163],
+      [173,221,142],
+      [120,198,121],
+      [49,163,84],
+      [0,104,55]
+    ],
+  },
+  panelState: {
+    variables:true,
+    info:false,
+    tutorial:false,
+    lineChart:true,
+    context: false,
+    contextPos: {x:null,y:null}
+  },
+  sidebarData: {},
+  anchorEl: null,
+  mapLoaded: false,
+  notification: null,
+  urlParams: {}
+};

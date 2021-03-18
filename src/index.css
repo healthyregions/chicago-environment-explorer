@@ -1,0 +1,135 @@
+* {
+  box-sizing:border-box;
+  padding:0;
+  margin:0;
+}
+
+body {
+  background:#F9F9ED;
+  font-family: 'Lato', sans-serif;
+}
+
+div#view-default-view, div#view-MapView {
+    z-index:500;
+}
+
+/* bottom drawer */
+#bottom-drawer.hidden {
+    bottom:-266px;
+}
+
+/* break-after: avoid; */
+body {
+    margin: 0; 
+    padding: 0;
+    font-family: Lato, sans-serif !important;
+    font-size: 13px;
+    /* background-color: #111333; */
+    overflow-x: hidden;
+  } 
+  
+#mainContainer { 
+  position: absolute; 
+  top: 50px; 
+  width: 100%; 
+  height:  calc(100% - 50px);
+}
+
+#mainContainer.loading {
+  opacity:0.7;
+}
+
+#mainContainer.loading #variablePanel {
+  pointer-events: none;
+}
+
+#root {
+  height:calc(100% - 50px);
+}
+
+.mapboxgl-ctrl-top-right .mapboxgl-ctrl {
+  margin:7px 7px 0 0;
+}
+.mapboxgl-ctrl-top-right {
+  position: fixed !important;
+  max-height: 43px !important;
+  overflow:hidden !important;
+}
+
+/* svg styles */
+
+.cls-1 {
+  stroke-miterlimit:10;
+  stroke-width:4px;
+}
+
+/* mapbox fix */
+
+button.mapboxgl-ctrl-attrib-button {
+  display:none;
+}
+
+#view-main {
+  z-index:0;
+  clip-path:url(#window);
+}
+/* 
+#view-alaskaMap, #view-hawaiiMap {
+  border:1px solid white;
+  z-index:1;
+} */
+
+.highlighted {
+  animation: highlightedShadow 1.5s linear infinite;
+  transition:250ms all;
+  /* box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important; */
+}
+
+@keyframes highlightedShadow {
+  0% {box-shadow:inset 0px 0px 0.5vw #FFCE00;}
+  25% {box-shadow:inset 0px 0px 0.5vw #FFCE0055;}
+  50% {box-shadow:inset 0px 0px 0.5vw #FFCE00;}
+  75% {box-shadow:inset 0px 0px 0.5vw #FFCE0055;}
+  100% {box-shadow:inset 0px 0px 0.5vw #FFCE00;}
+}
+
+/* @keyframes highlightedShadow {
+  0% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+  25% {box-shadow:5px -5px 3px red, -5px 5px 3px red, 5px 5px 3px red, -5px -5px 3px red !important;}
+  50% {box-shadow:-5px -5px 3px red, 0px 0px 3px red, 0px -5px 3px red, 0px 5px 3px red !important;}
+  75% {box-shadow:5px 0px 3px red, -5px -5px 3px red, 5px 5px 3px red, -5px 0px 3px red !important;}
+  100% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+}
+
+@-webkit-keyframes highlightedShadow {
+  0% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+  25% {box-shadow:5px -5px 3px red, -5px 5px 3px red, 5px 5px 3px red, -5px -5px 3px red !important;}
+  50% {box-shadow:-5px -5px 3px red, 0px 0px 3px red, 0px -5px 3px red, 0px 5px 3px red !important;}
+  75% {box-shadow:5px 0px 3px red, -5px -5px 3px red, 5px 5px 3px red, -5px 0px 3px red !important;}
+  100% {box-shadow:0px 0px 3px red, -5px 0px 3px red, 5px -5px 3px red, 0px 5px 3px red !important;}
+} */
+
+#loadingIcon {
+  position: fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%, -50%);
+  width: 100px;
+  height:100px;
+  z-index:50;
+  background-size:cover;
+  background-repeat: no-repeat;
+  opacity:1;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+}
+#loadingIcon:after {
+  content: 'Loading Data...';
+  color:black;
+  font-weight: bold;
+  position: absolute;
+  bottom:-30px;
+  text-align: center;
+  width:100%;
+  background:white;
+}
