@@ -15,7 +15,7 @@ import MapboxGLMap from 'react-map-gl';
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from '../components';
 import { setSelectionData } from '../actions';
-import { mapFn, dataFn, getVarId, getURLParams } from '../utils';
+import { mapFn, dataFn, getVarId } from '../utils';
 import { colors, colorScales, MAPBOX_ACCESS_TOKEN } from '../config';
 import * as SVG from '../config/svg'; 
 
@@ -321,25 +321,25 @@ function MapSection(props){
     });
 
     const handleShare = async (params) => {
-        const shareData = {
-            title: 'The US Covid Atlas',
-            text: 'Near Real-Time Exploration of the COVID-19 Pandemic.',
-            url: `${window.location.href.split('?')[0]}${getURLParams(params)}`,
-        }
+        // const shareData = {
+        //     title: 'The US Covid Atlas',
+        //     text: 'Near Real-Time Exploration of the COVID-19 Pandemic.',
+        //     url: `${window.location.href.split('?')[0]}${getURLParams(params)}`,
+        // }
 
-        try {
-            await navigator.share(shareData)
-          } catch(err) {
-            let copyText = document.querySelector("#share-url");
-            copyText.value = `${shareData.url}`;
-            copyText.style.display = 'block'
-            copyText.select();
-            copyText.setSelectionRange(0, 99999);
-            document.execCommand("copy");
-            copyText.style.display = 'none';
-            setShared(true)
-            setTimeout(() => setShared(false), 5000);
-        }
+        // try {
+        //     await navigator.share(shareData)
+        //   } catch(err) {
+        //     let copyText = document.querySelector("#share-url");
+        //     copyText.value = `${shareData.url}`;
+        //     copyText.style.display = 'block'
+        //     copyText.select();
+        //     copyText.setSelectionRange(0, 99999);
+        //     document.execCommand("copy");
+        //     copyText.style.display = 'none';
+        //     setShared(true)
+        //     setTimeout(() => setShared(false), 5000);
+        // }
     }
 
     const handleKeyDown = (e) => {
