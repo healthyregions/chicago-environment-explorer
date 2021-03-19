@@ -36,7 +36,7 @@ function Data(){
                 
                 <h2>CURRENT RELEASE</h2>
                 
-                <hr/>
+                {/* <hr/>
                 <SectionTitle>Confirmed COVID Cases and Deaths</SectionTitle>
                 <p>
                     Because there is no one single validated source for county-level COVID cases and deaths for real-time analysis, 
@@ -108,12 +108,12 @@ function Data(){
                     reported from apps that collect locations data. This data has been made available for COVID-19 related research projects. The data is generated from a series of location pings throughout the day, which determine various behaviors, such as 
                     staying completely home, full time work (at a workplace outside of home for 6-8 hours), part time work (at a workplace outside of home for 3-6 hours), and delivery (multiple, short visits). Access to the data consortium is available <a href="https://www.safegraph.com/covid-19-data-consortium" target="_blank" rel="noopener noreferrer">here</a>.
                 </BlockIndent>
-                
-                <h2>Detailed Data Descriptions</h2>
+                 */}
+                {/* <h2>Detailed Data Descriptions</h2>
                 <hr />
                 <DataDetails />
                 <Gutter h={40}/>
-                <CsvDownloader/>
+                <CsvDownloader/> */}
                
             </ContentContainer>
             <Footer/>
