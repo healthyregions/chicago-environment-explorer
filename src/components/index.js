@@ -1,4 +1,4 @@
-import BarChart from './barChart';
+import BarChart from './BarChart';
 import BottomPanel from './bottomPanel';
 import ContextMenu from './contextMenu';
 import CsvDownloader from './csvDownloader';
