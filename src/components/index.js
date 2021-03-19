@@ -1,4 +1,4 @@
-
+import BarChart from './barChart';
 import BottomPanel from './bottomPanel';
 import ContextMenu from './contextMenu';
 import CsvDownloader from './csvDownloader';
@@ -7,7 +7,6 @@ import DataPanel from './dataPanel';
 import Dock from './dock';
 import Draggable from './draggable';
 import Footer from './Footer';
-import HeroMap from './heroMap';
 import InfoBox from './infoBox';
 import Legend from './legend';
 import MapSection from './mapSection';
@@ -33,6 +32,7 @@ import LoadingMessage from './Pages/LoadingMessage';
 import Map from './Pages/Map';
 
 export {
+    BarChart,
     BottomPanel,
     ContextMenu,
     CsvDownloader,
@@ -42,7 +42,6 @@ export {
     Draggable,
     Geocoder,
     Footer,
-    HeroMap,
     InfoBox,
     Legend,
     MapSection,

@@ -18,6 +18,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();  
 
+  // generate quantile bins based on rank order
+  // this is a simplified, but still reasonably accurate method, inline with typical Pandas quantiles
+  // It's very fast, and avoids import JsGeoDa, which may be overkill for this dashboard
   const generateBins = async (data, nBins, mapParams) => {
     const length = data.features.length;
     const columnData = data.features.map(row => row[mapParams.numerator][mapParams.nProperty]).sort((a,b) => a - b)
@@ -62,8 +65,8 @@ function App() {
           bins={mapParams.bins}
           />
         <VariablePanel />
-        {/* <DataPanel />
-        <Popover />     */}
+        <DataPanel />
+        <Popover />    
 
       </div>
     </div>

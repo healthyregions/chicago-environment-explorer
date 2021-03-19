@@ -15,9 +15,8 @@ import MapboxGLMap from 'react-map-gl';
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from '../components';
 import { setSelectionData } from '../actions';
-import { mapFn, dataFn, getVarId, getCSV, getCartogramCenter, getDataForCharts, getURLParams } from '../utils';
+import { mapFn, dataFn, getVarId, getURLParams } from '../utils';
 import { colors, colorScales, MAPBOX_ACCESS_TOKEN } from '../config';
-import MAP_STYLE from '../config/style.json';
 import * as SVG from '../config/svg'; 
 
 // US bounds
@@ -27,6 +26,8 @@ const bounds = fitBounds({
     bounds: [[-87.971649,41.609282],[-87.521896,42.040624]]
 })
 
+
+const getRightMargin = () => window.innerWidth * .15 < 250 ? 260 : window.innerWidth*.15 + 10;
 
 // component styling
 const MapContainer = styled.div`
@@ -74,7 +75,7 @@ const HoverDiv = styled.div`
 
 const MapButtonContainer = styled.div`
     position: absolute;
-    right: ${props => props.infoPanel ? 317 : 10}px;
+    right: ${props => props.infoPanel ? getRightMargin() : 10}px;
     bottom: 30px;
     z-index: 10;
     transition: 250ms all;
@@ -174,7 +175,7 @@ function useForceUpdate(){
 
 function MapSection(props){ 
     // fetch pieces of state from store    
-    const { storedGeojson, panelState, mapParams, urlParams, centroids } = useSelector(state => state);
+    const { storedGeojson, panelState, mapParams, urlParams, centroids, columnNames, ranges, selectionData } = useSelector(state => state);
 
     // component state elements
     // hover and highlight geographibes
@@ -198,17 +199,50 @@ function MapSection(props){
     const [multipleSelect, setMultipleSelect] = useState(false);
     const [boxSelect, setBoxSelect] = useState(false);
     const [boxSelectDims, setBoxSelectDims] = useState({});
+    const [QueryFeaturesWorker] = useState(new Worker(`${process.env.PUBLIC_URL}/workers/queryRenderedFeaturesWorker.js`));
     const forceUpdate = useForceUpdate();
     // const [resetSelect, setResetSelect] = useState(null);
     // const [mobilityData, setMobilityData] = useState([]);
 
-    // local data store for parsed data
-    const [currentMapData, setCurrentMapData] = useState({
-        data: [],
-        params: {}
-    })
-
     const dispatch = useDispatch();
+
+    
+    const RunQueryWorker = async (params) => {
+        QueryFeaturesWorker.postMessage(params);
+        QueryFeaturesWorker.onmessage = (e) => {
+            const result = e?.data;
+            if (result) {
+                dispatch(setSelectionData(result))
+            }
+        }
+    }
+
+    var queryViewport = debounce((e) => {
+        if (centroids.length){
+            const viewport = new WebMercatorViewport(e.viewState);      
+            const extent = [...viewport.unproject([0, 0]),...viewport.unproject([viewport.width, viewport.height])];
+            RunQueryWorker({
+                storedGeojson,
+                centroids,
+                columnNames,
+                extent,
+                ranges,
+            })
+
+        }
+    }, 250);
+
+    useEffect(() => {
+        if (!Object.keys(selectionData).length) {
+            RunQueryWorker({
+                storedGeojson,
+                centroids,
+                columnNames,
+                extent:[-100, 100, 100, -100],
+                ranges,
+            })
+        }
+    },[centroids, storedGeojson, columnNames, ranges, selectionData])
 
     let hidden = null;
     let visibilityChange = null;
@@ -372,7 +406,7 @@ function MapSection(props){
     const handleGeocoder = useCallback(location => {
         if (location.center !== undefined) {
             let center = location.center;
-            let zoom = 6;
+            let zoom = 16;
 
             if (location.bbox) {
                 let bounds = fitBounds({
@@ -538,24 +572,6 @@ function MapSection(props){
             console.log('bad selection')
         }
     }
-    var myEfficientFn = debounce(function(e) {
-        if (centroids.length){
-            const viewport = new WebMercatorViewport(e.viewState);          
-            const [west,north] = viewport.unproject([0, 0]);
-            const [east,south] = viewport.unproject([viewport.width, viewport.height]);
-
-            let returnArray = [];
-            for (let i=0; i<centroids.length; i++){
-                if (centroids[i].feature.geometry.coordinates[0] < east && 
-                    centroids[i].feature.geometry.coordinates[0] > west && 
-                    centroids[i].feature.geometry.coordinates[1] > south && 
-                    centroids[i].feature.geometry.coordinates[1] < north 
-                    ){
-                        console.log(centroids[i])
-                    }
-            }
-        }
-    }, 500);
 
     return (
         <MapContainer
@@ -588,12 +604,13 @@ function MapSection(props){
                         touchRotate: !boxSelect, 
                         keyboard: true, 
                         scrollZoom: true,
-                        inertia: 50
+                        inertia: 100
                     }
                 }
                 views={view}
                 pickingRadius={20}
-                onViewStateChange={(e) => myEfficientFn(e)}
+                onViewStateChange={queryViewport}
+                onViewportLoad={queryViewport}
                 
             >
                 <MapboxGLMap
@@ -602,6 +619,7 @@ function MapSection(props){
                     mapStyle={'mapbox://styles/lixun910/ckmf5w2e20sn217oiluj5uzd7'} 
                     preventStyleDiffing={true}
                     mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
+                    on
                     >
                 </MapboxGLMap >
             </DeckGL>

@@ -1,5 +1,5 @@
 import { INITIAL_STATE } from '../constants/defaults';
-import * as turf from '@turf/turf'
+import * as turf from '@turf/turf';
 
 const generateBins = (data, nBins, mapParams) => {
     const length = data.features.length;
@@ -21,19 +21,55 @@ var reducer = (state = INITIAL_STATE, action) => {
                 bins: action.payload.bins
             }
             let centroidsArray = [];
-            
+            let columnValues = {};
+            // const columnNames = Object.keys(action.payload.geojsonData.features[0].properties);\
+            const columnNames = state.columnNames;
+
+            for (let n=0; n<columnNames.length;n++){
+                    columnValues[columnNames[n]] = {
+                        min: 1e10,
+                        max:-1e10
+                    }
+            }
+
             for (let i=0; i<action.payload.geojsonData.features.length; i++){
                 centroidsArray.push({
                     feature: turf.centroid(action.payload.geojsonData.features[i]),
                     GEOID: action.payload.geojsonData.features[i].properties.geoid
                 })
+                for (let n=0; n<columnNames.length;n++){
+                    if (action.payload.geojsonData.features[i].properties[columnNames[n]] !== null &&
+                        (action.payload.geojsonData.features[i].properties[columnNames[n]] < columnValues[columnNames[n]].min)
+                    ) columnValues[columnNames[n]].min = action.payload.geojsonData.features[i].properties[columnNames[n]];
+                    
+                    if (
+                        action.payload.geojsonData.features[i].properties[columnNames[n]] !== null && 
+                        (action.payload.geojsonData.features[i].properties[columnNames[n]] > columnValues[columnNames[n]].max)
+                    ) columnValues[columnNames[n]].max = action.payload.geojsonData.features[i].properties[columnNames[n]];
+                }
+            }
+
+            for (let n=0; n<columnNames.length;n++){
+                const currMin = columnValues[columnNames[n]].min;
+                const currMax = columnValues[columnNames[n]].max;
+                const range = currMax - currMin;
+                const step = range/10;
+
+                let binArray = []
+                
+                for (let x=1; x<=10;x++){
+                    binArray.push(currMin+(step*x))
+                }
+
+                columnValues[columnNames[n]]['histogramBins'] = binArray
             }
 
             return {
                 ...state,
                 storedGeojson: action.payload.geojsonData,
                 mapParams: mapParamsObj,
-                centroids: centroidsArray
+                centroids: centroidsArray,
+                ranges: columnValues
             };
         case 'CHANGE_VARIABLE': 
             const tempParamsObj = {
@@ -180,9 +216,7 @@ var reducer = (state = INITIAL_STATE, action) => {
         case 'SET_SELECTION_DATA':
             return {
                 ...state,
-                chartData: action.payload.data.values,
-                selectionKeys: [action.payload.data.name],
-                selectionIndex: [action.payload.data.index]
+                selectionData: action.payload.data
             }
         case 'APPEND_SELECTION_DATA':
             let appendedChartData = state.chartData;

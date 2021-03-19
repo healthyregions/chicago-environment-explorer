@@ -39,7 +39,7 @@ const DockButton = styled.button`
     padding:10px;
     height:40px;
     box-sizing:border-box;
-    font-family:'Lato', sans-serif;
+    font-family:'Montserrat', sans-serif;
     font-weight:bold;
     margin:2px 2px 0 0;
     box-shadow: 2px 0px 5px rgba(0,0,0,0.7);

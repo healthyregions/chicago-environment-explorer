@@ -1,3 +1,4 @@
+import { pink } from "@material-ui/core/colors";
 
 export const defaultData = 'tree_sst_master_tracts.geojson';
 
@@ -166,5 +167,14 @@ export const colors = {
     // orange: '#f37e43',
     pink: '#e83e8c',
     ivory: '#F9F9ED',
-    green:'#97DB4F'
+    green:'#97DB4F',
+    cartoColors: {
+      green:'#49c767',
+      gold:'#e0d09d',
+      gray:'#c7cfc9',
+      slate:'#9db3e0',
+      sky:'#9dcee0',
+      pink:'#e09dd0',
+      spring:'#9de0c3'
+    }
 }

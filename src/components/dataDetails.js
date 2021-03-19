@@ -13,7 +13,7 @@ import { colors } from '../config';
 const Container = styled.div`
     h3 {
         margin:20px 0 5px 0;
-        font-family: 'Lato', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         font-style:normal;
         font-weight:bold;
         font-size:16px;

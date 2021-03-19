@@ -130,7 +130,6 @@ const ControlsContainer = styled.div`
   }
   p.data-description {
     max-width: 40ch;
-    font-size:1rem;
     line-height:1.3;
   }
 `

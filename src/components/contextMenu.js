@@ -22,7 +22,7 @@ const MenuContainer = styled(Paper)`
     padding:0 15px 15px 15px;
     border-radius:4px;
     z-index:50000;
-    font-family:'Lato', sans-serif;
+    font-family:'Montserrat', sans-serif;
     svg {
         width:20px;
         height:20px;

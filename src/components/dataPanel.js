@@ -1,286 +1,435 @@
-// // This components formats the data for the selected geography
-// // and displays it in the right side panel.
+// This components formats the data for the selected geography
+// and displays it in the right side panel.
 
-// // Import main libraries
-// import React, {useState} from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+// Import main libraries
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-// // Import helper libraries
-// import styled from 'styled-components';
-// import FormControl from '@material-ui/core/FormControl';
-// import Select from '@material-ui/core/Select';
-// import MenuItem from '@material-ui/core/MenuItem';
+// Import helper libraries
+import styled from 'styled-components';
+import FormControl from '@material-ui/core/FormControl';
+import Slider from '@material-ui/core/Slider';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 
-// // Import config and sub-components
-// import Tooltip from './tooltip';
-// import { setPanelState } from '../actions';
-// import {dataFn, colLookup} from '../utils';
-// import { colors } from '../config';
-// import { report } from '../config/svg';
+// Import config and sub-components
+import Tooltip from './tooltip';
+import BarChart from './BarChart'
+import { setPanelState } from '../actions';
+import { colors } from '../config';
+import { report } from '../config/svg';
 
-// //// Styled components CSS
-// // Main container for entire panel
-// const DataPanelContainer = styled.div`
-//   display: ${props => props.dataLength === 0 ? 'none' : 'initial'};
-//   position:fixed;
-//   min-width:250px;
-//   right:0;
-//   top:50px;
-//   overflow-x:visible;
-//   height:calc(100vh - 50px);
-//   background-color: ${colors.gray}fa;
-//   box-shadow: -2px 0px 5px rgba(0,0,0,0.7);
-//   padding:20px;
-//   box-sizing: border-box;
-//   transition:250ms all;
-//   font: 'Lato', sans-serif;
-//   color: white;
-//   font-size:100%;
-//   padding:0;
-//   z-index:5;
-//   transform: translateX(100%);
-//   h4 {
-//     margin:10px 0;
-//   }
-//   &.open {
-//     transform:none;
-//   }
-//   @media (max-width:1024px) {
-//     min-width:50vw;
-//   }  
-//   @media (max-width:600px) {
-//     width:100%;
-//     left:0;
-//     transform:translateX(-100%);
-//     z-index:51;
-//     &.open {
-//       transform:none;
-//     }
-//     display: ${props => (props.otherPanels || props.dataLength === 0) ? 'none' : 'initial'};
-//   }
-//   button#showHideRight {
-//     position:absolute;    
-//     right:calc(100% - 20px);
-//     top:20px;
-//     width:40px;
-//     height:40px;
-//     padding:0;
-//     margin:0;
-//     background-color: ${colors.gray};
-//     box-shadow: 0px 0px 6px rgba(0,0,0,1);
-//     outline:none;
-//     border:none;
-//     cursor: pointer;
-//     transition:500ms all;
-//     svg {
-//       width:15px;
-//       height:15px;
-//       margin:12.5px 0 0 0;
-//       @media (max-width:600px){
-//         width:20px;
-//         height:20px;
-//         margin:5px;
-//       }
-//       fill:white;
-//       transform:rotate(180deg);
-//       transition:500ms all;
-//     }
-//     :after {
-//       opacity:0;
-//       font-weight:bold;
-//       color:white;
-//       position: relative;
-//       top:-17px;
-//       transition:500ms all;
-//       content: 'Report';
-//       right:50px;
-//       z-index:4;
-//     }  
-//     &.hidden {
-//       right:100%;
-//       svg {
-//         transform:rotate(0deg);
-//       }
-//       :after {
-//         opacity:1;
-//       }
-//     }
-//     @media (max-width:768px){
-//       top:120px;
-//     }
-//     @media (max-width:600px) {
-//       left:100%;
-//       width:30px;
-//       height:30px;
-//       top:180px;
-//       &.hidden svg {
-//         transform:rotate(0deg);
-//       }
-//       :after {
-//         display:none;
-//       }
-//       &.active {
-//         left:90%;
-//       }
-//       &.active svg {
-//         transform:rotate(90deg);
-//       }
-//     }
-//   }
+//// Styled components CSS
+// Main container for entire panel
+const DataPanelContainer = styled.div`
+  display: ${props => props.dataLength === 0 ? 'none' : 'initial'};
+  position:fixed;
+  min-width:250px;
+  width:15%;
+  right:0;
+  top:50px;
+  overflow-x:visible;
+  height:calc(100vh - 50px);
+  background-color: ${colors.ivory};
+  box-shadow: 2px 0px 5px ${colors.gray}44;
+  padding:20px;
+  box-sizing: border-box;
+  transition:250ms all;
+  font: 'Montserrat', sans-serif;
+  color:${colors.black};
+  font-size:100%;
+  padding:0;
+  z-index:5;
+  transform: translateX(100%);
+  h4, h1 {
+    font-family: 'Lora', serif;
+    margin:10px 0;
+  }
+  h4 {
+    font-size:1rem;
+    padding:2rem 0 0 0;
+    margin:0;
+  }
+  &.open {
+    transform:none;
+  }
+  @media (max-width:1024px) {
+    min-width:50vw;
+  }  
+  @media (max-width:600px) {
+    width:100%;
+    left:0;
+    transform:translateX(-100%);
+    z-index:51;
+    &.open {
+      transform:none;
+    }
+    display: ${props => (props.otherPanels || props.dataLength === 0) ? 'none' : 'initial'};
+  }
+  button#showHideRight {
+    position:absolute;    
+    right:calc(100% - 20px);
+    top:20px;
+    width:40px;
+    height:40px;
+    padding:0;
+    margin:0;
+    background-color: ${colors.ivory};
+    box-shadow: 2px 0px 5px ${colors.gray}88;
+    outline:none;
+    border:none;
+    border-radius:20px;
+    cursor: pointer;
+    transition:500ms all;
+    svg {
+      width:15px;
+      height:15px;
+      margin:12.5px 0 0 0;
+      @media (max-width:600px){
+        width:20px;
+        height:20px;
+        margin:5px;
+      }
+      fill:${colors.gray};
+      transform:rotate(180deg);
+      transition:500ms all;
+    }
+    :after {
+      opacity:0;
+      font-weight:bold;
+      color:${colors.gray};
+      position: relative;
+      top:-17px;
+      transition:500ms all;
+      content: 'Report';
+      right:50px;
+      z-index:4;
+    }  
+    &.hidden {
+      right:105%;
+      svg {
+        transform:rotate(0deg);
+      }
+      :after {
+        opacity:1;
+      }
+    }
+    @media (max-width:768px){
+      top:120px;
+    }
+    @media (max-width:600px) {
+      left:100%;
+      width:30px;
+      height:30px;
+      top:180px;
+      &.hidden svg {
+        transform:rotate(0deg);
+      }
+      :after {
+        display:none;
+      }
+      &.active {
+        left:90%;
+      }
+      &.active svg {
+        transform:rotate(90deg);
+      }
+    }
+  }
   
 
-//   div {
-//     div {
-//       p {
-//         line-height:1.5;
-//         margin:0;
-//         display:inline-block;
-//       }
-//     }
-//   }
-//   h2 {
-//     padding:15px 0 5px 0;
-//     margin:0;
-//     display:inline-block;
-//     max-width:200px;
-//   }
-//   h6, p {
-//     padding:0 0 15px 0;
-//     margin:0;
-//     max-width:30ch;
-//     a {
-//       color:${colors.yellow};
-//       text-decoration:none;
-//     }
-//   }
-//   .extraPadding {
-//     padding-bottom:20vh;
-//   }
-//   p {
-//     padding-right:10px;
-//   }
-// `
-// // Scrollable Wrapper for main report information
-// const ReportWrapper = styled.div`
-//   height:100vh;
-//   overflow-y:scroll;
-// `
+  div {
+    div {
+      p {
+        line-height:1.5;
+        margin:0;
+        display:inline-block;
+      }
+    }
+  }
+  h2 {
+    padding:15px 0 5px 0;
+    margin:0;
+    display:inline-block;
+    max-width:200px;
+  }
+  h6, p {
+    padding:0 0 15px 0;
+    margin:0;
+    max-width:30ch;
+    a {
+      color:${colors.yellow};
+      text-decoration:none;
+    }
+  }
+  .extraPadding {
+    padding-bottom:20vh;
+  }
+  p {
+    padding-right:10px;
+  }
+`
+// Scrollable Wrapper for main report information
+const ReportWrapper = styled.div`
+  height:100vh;
+  overflow-y:scroll;
+`
 
-// // Inner container for report content
-// const ReportContainer = styled.div`
-//     padding:5px 0 0 30px;
-//     box-sizing:border-box;
-//     overflow-x:visible;
-//     // Multi-column layout (NYI)
-//     // display:flex;
-//     // flex-direction:column;
-//     // flex-wrap:wrap;
-//     // width:500px;
-//     // columns:${props => props.cols} 250px;
-//     // column-gap:10px;
-//     // display:inline-block;
-//     h3 {
-//       font-size:${props => props.expanded ? '150%' : '100%'};
-//       display:${props => props.expanded ? 'block' : 'inline'};
-//       margin:${props => props.expanded ? '0': '0 15px 0 0'};
-//       padding:${props => props.expanded ? '0 0 15px 0 !important': '0'};
-//       &:before {
-//         content: ': ';
-//         display: ${props => props.expanded ? 'none' : 'initial'};
-//       }
-//       &:after {
-//         content:" ";
-//         white-space:pre;
-//         height:0;
-//         display: ${props => props.expanded ? 'none' : 'block'};
-//       }
-//     }
-//     div.numberChartContainer {
-//       width:100%;
-//       display:${props => props.expanded ? 'flex' : 'inline'};
-//       align-items: center;
-//     }
-//     div.numberContainer {
-//       display:${props => props.expanded ? 'flex' : 'inline'};
-//     }
-//     .bigOnly {
-//       display: ${props => props.expanded ? 'initial' : 'none'};
-//     }
+// Inner container for report content
+const ReportContainer = styled.div`
+    padding:5px 0 200px 30px;
+    box-sizing:border-box;
+    overflow-x:visible;
+    // Multi-column layout (NYI)
+    // display:flex;
+    // flex-direction:column;
+    // flex-wrap:wrap;
+    // width:500px;
+    // columns:${props => props.cols} 250px;
+    // column-gap:10px;
+    // display:inline-block;
+    h3 {
+      font-size:150%;
+      display:block;
+      margin:0;
+      padding:0 0 15px 0 !important;
+      &:before {
+        content: ': ';
+        display: none;
+      }
+      &:after {
+        content:" ";
+        white-space:pre;
+        height:0;
+        display:none;
+      }
+    }
+    div.numberChartContainer {
+      width:100%;
+      display:flex;
+      align-items: center;
+    }
+    div.numberContainer {
+      display:flex;
+    }
+    .bigOnly {
+      display:initial;
+    }
     
-// `
+`
 
-// // Subsection of report
-// const ReportSection = styled.span`
-//     padding-right:20px;
-//     box-sizing:border-box;
-//     // width:100%;
-//     // display:inline-block;
-//     padding: 0;
-//     margin: 0;
-// `
+// Subsection of report
+const ReportSection = styled.span`
+    padding-right:20px;
+    box-sizing:border-box;
+    // width:100%;
+    // display:inline-block;
+    padding: 0;
+    margin: 0;
+`
 
-// // Toggle styling for condensed and expanded drop down
-// const ExpandSelect = styled(FormControl)`
-//   outline:none;
-//   border:none;
-//   position:absolute !important;
-//   right:25px;
-//   top:15px;
-//   div.MuiInputBase-root:before {
-//     display:none !important;
-//   }
-//   div.MuiInputBase-root:after {
-//     display:none !important;
-//   }
-//   svg {
-//     path {
-//       fill:white;
-//     }
-//   }
+// Toggle styling for condensed and expanded drop down
+const ExpandSelect = styled(FormControl)`
+  outline:none;
+  border:none;
+  position:absolute !important;
+  right:25px;
+  top:15px;
+  div.MuiInputBase-root:before {
+    display:none !important;
+  }
+  div.MuiInputBase-root:after {
+    display:none !important;
+  }
+  svg {
+    path {
+      fill:white;
+    }
+  }
+`
+const ChartContainer = styled.div`
+  display:block;
+  width:calc(100% - 1em);
+  margin:0 auto;
+  height:75px;
+  cursor:crosshair !important;
+`
 
-// `
+const AxisContainer = styled.div`
+  display:flex;
+  padding:0 15px 0 5px;
+  span {
+    flex:1;
+    text-align:center;
+  }
+  span:nth-of-type(1){
+    text-align:left;
+  }
+  span:nth-of-type(3){
+    text-align:right;
+  }
+`
 
-// // DataPanel Function Component
-// const DataPanel = () => {
+const AirbnbSlider = withStyles({
+  root: {
+    color: colors.cartoColors.gray,
+    height: 3,
+    padding: '0 25px 0 15px',
+    marginLeft:'0px',
+    width:'calc(100% - 30px)',
+    boxSizing: 'border-box'
+  },
+  thumb: {
+    height: 27,
+    width: 15,
+    backgroundColor: '#fff',
+    border: '1px solid currentColor',
+    marginTop: -12,
+    marginLeft: 0,
+    boxShadow: '#ebebeb 0 2px 2px',
+    borderRadius:0,
+    '&:focus, &:hover, &$active': {
+      boxShadow: '#ccc 0 2px 3px 1px',
+    },
+    '& .bar': {
+      // display: inline-block !important;
+      height: 9,
+      width: 1,
+      backgroundColor: 'currentColor',
+      marginLeft: 1,
+      marginRight: 1,
+    },
+  },
+  active: {},
+  track: {
+    height: 3,
+  },
+  rail: {
+    color: colors.cartoColors.gray,
+    opacity: 1,
+    height: 3,
+  },
+})(Slider);
 
-//   const dispatch = useDispatch();
+function AirbnbThumbComponent(props) {
+  return (
+    <span {...props}>
+      <span className="bar" />
+      <span className="bar" />
+      <span className="bar" />
+    </span>
+  );
+}
 
-//   const storedData = useSelector(state => state.storedData);
-//   // name of current data set
-//   const currentData = useSelector(state => state.currentData);
-//   // current date and index
-//   const currDateIndex = useSelector(state => state.dataParams.nIndex);
-//   const dates = useSelector(state => state.dates);
-//   const selectionKeys = useSelector(state => state.selectionKeys);
-//   const selectionIndex = useSelector(state => state.selectionIndex);
-//   // panels open/close state
-//   const panelState = useSelector(state => state.panelState);
-//   //column names
-//   const cols = useSelector(state => state.cols);
-//   const [expanded, setExpanded] = useState(true)
+const columnsToChart = [
+  {
+    'column':'trees_crown_den',
+    'name':'Percent Canopy Coverage',
+    'color':colors.cartoColors.green,
+    'preset':'',
+  },
+  {
+    'column':'heatisl',
+    'name':'Temperature Percentile',
+    'color':colors.cartoColors.gold,
+    'preset':'',
+  },
+  {
+    'column':'nn_q3_pm2_5',
+    'name':'Summer PM2.5',
+    'color':colors.cartoColors.gray,
+    'preset':'',
+  },
+  {
+    'column':'logtraf',
+    'name': 'Traffic Volume',
+    'color':colors.cartoColors.slate,
+    'preset':'',
+  },
+  {
+    'column':'urban_flood_suscep',
+    'name':'Urban Flood Susceptibility',
+    'color':colors.cartoColors.sky,
+    'preset':'',
+  },
+  {
+    'column':'svi_pecentile',
+    'name':'Social Vulnerability',
+    'color':colors.cartoColors.pink,
+    'preset':'',
+  },
+  {
+    'column':'asthma_age_adj_rate',
+    'name':'Asthma Cases per 10,000 Residents',
+    'color':colors.cartoColors.gold,
+    'preset':'',
+  },
+  {
+    'column':'hardship',
+    'name':'Economic Hardship Index',
+    'color':colors.cartoColors.spring,
+    'preset':'',
+  },
+]
 
-//   // Set expanded or contracted view
-//   const handleExpandContract = (event) => setExpanded(event.target.value)
+// DataPanel Function Component
+const DataPanel = () => {
 
-//   return (
-//     <DataPanelContainer className={panelState.info ? 'open' : ''} id="data-panel"  otherPanels={panelState.variables} dataLength={selectionKeys.length}> 
-//       <ExpandSelect>
-//         <Select
-//           labelId="expand-view-label"
-//           id="expand-view"
-//           value={null}
-//           onChange={handleExpandContract}
-//         >
-//           <MenuItem value={true}>Expanded</MenuItem>
-//           <MenuItem value={false}>Compact</MenuItem>
-//         </Select>
-//       </ExpandSelect>
-//       <ReportWrapper>
-//         <ReportContainer>
-//         </ReportContainer>
-//       </ReportWrapper>
-//     </DataPanelContainer>
-//   );
-// }
+  const dispatch = useDispatch();
+  const selectionData = useSelector(state => state.selectionData);
+  const panelState = useSelector(state => state.panelState);
+  const ranges = useSelector(state => state.ranges);
 
-// export default DataPanel;
+  // handles panel open/close
+  const handleOpenClose = () => dispatch(setPanelState({info:panelState.info ? false : true}))
+
+  return (
+    <DataPanelContainer className={panelState.info ? 'open' : ''} id="data-panel"  otherPanels={panelState.variables}> 
+    {selectionData.success && 
+        <ReportWrapper>
+            <ReportContainer>
+                <h1>Current View</h1>
+                <ReportSection>
+                    <p>Population</p>
+                    <div className="numberChartContainer">
+                        <h3>{selectionData.totalPop.toLocaleString('en')}</h3>
+                    </div>
+                    <p>Tree Count</p>
+                    <div className="numberChartContainer">
+                        <h3>{selectionData.totalTrees.toLocaleString('en')}</h3>
+                    </div>
+                    <p>Tracts Selected: {selectionData.sums.count}</p>
+                </ReportSection>
+                {
+                  columnsToChart.map(row => 
+                    <>
+                      <h4>{row.name}</h4>
+                      <ChartContainer>
+                        <BarChart data={selectionData.histCounts[row.column]} xAxis={'max'} dataKey={'count'} color={row.color}/>
+                      </ChartContainer>
+                      <AxisContainer>
+                        <span>{ranges[row.column].min}</span>
+                        {
+                          ranges[row.column].histogramBins.map((val, idx) => idx === 4 ? <span>{Math.round(val*10)/10}</span> : '')
+                        }
+                        <span>{ranges[row.column].max}</span>
+                      </AxisContainer>
+                      <AirbnbSlider
+                        ThumbComponent={AirbnbThumbComponent}
+                        getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+                        defaultValue={[ranges[row.column].min, ranges[row.column].max]}
+                        min={ranges[row.column].min}
+                        max={ranges[row.column].max}
+                        step={(ranges[row.column].max-ranges[row.column].min)/20}
+                      />
+                    </>)
+                }
+            </ReportContainer>
+        </ReportWrapper>
+    }
+      
+      <button onClick={handleOpenClose} id="showHideRight" className={panelState.info ? 'active' : 'hidden'}>{report}</button>
+    </DataPanelContainer>
+  );
+}
+
+export default DataPanel;

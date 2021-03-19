@@ -10,7 +10,7 @@ const CsvDownloaderContainer = styled.div`
     border:1px solid ${colors.darkgray};
     background:${colors.lightblue}11;
     span {
-        font-family: 'Lato', Arial, sans-serif;
+        font-family: 'Montserrat', Arial, sans-serif;
     }
     .inset {
         margin: 0 0 20px 20px;

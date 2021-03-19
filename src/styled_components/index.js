@@ -8,11 +8,11 @@ export const StyledDropDown = styled(FormControl)`
   color:${colors.black};
   padding:0;
   .MuiInputBase-root {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
   .MuiFormLabel-root {
     color: ${colors.black};
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
   .Mui-focused {
     color: ${colors.black} !important;
@@ -36,7 +36,7 @@ export const StyledDropDown = styled(FormControl)`
     .MuiFormControlLabel-root{
       color:${colors.black};
       span {
-        font-family: 'Lato', sans-serif;
+        font-family: 'Montserrat', sans-serif;
       }
       .MuiRadio-root {
         color: ${colors.black}55;
@@ -125,13 +125,12 @@ export const ContentContainer = styled.div`
     color: #0d0d0d;
   }
   h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-size: 49px;
     font-weight: 300;
-    font-style: italic;
   }
   h2 { 
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 1.75px;
@@ -140,13 +139,12 @@ export const ContentContainer = styled.div`
     margin-bottom:20px;
   }
   h3 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Lora', serif;
     font-size: 24px;
     font-weight: 300;
-    font-style: italic;
   }
   p, a, ul li, ol li {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     font-weight: 400;
     font-stretch: normal;

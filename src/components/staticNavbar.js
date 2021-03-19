@@ -6,7 +6,7 @@ import { colors } from '../config';
 
 const Navbar = styled.div`
     width:100vw;
-    background: ${colors.skyblue};
+    background: ${colors.ivory};
     top:0;
     left:0;
     padding: 20px 16px;
@@ -34,7 +34,7 @@ const NavbarContent = styled.div`
             border:none;
             cursor:pointer;
             text-transform:uppercase;
-            font-family: Lato, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: 16px;
             line-height: 1.5;
             letter-spacing: 1.75px;
@@ -42,8 +42,10 @@ const NavbarContent = styled.div`
             font-stretch: normal;
             color: #0d0d0d;
             text-decoration:none;
+            transition:250ms all;
             &:hover {
                 opacity:0.7;
+                color: ${colors.green};
             }
         }
         ul {
@@ -135,26 +137,15 @@ const StaticNavbar = () => {
             <NavbarContent>
                 <NavLink to="/">
                     <img 
-                        src={`${process.env.PUBLIC_URL}/img/us-covid-atlas-cluster-logo.svg`}
-                        alt="US Covid Atlas Logo"
+                        src={`${process.env.PUBLIC_URL}/logo.png`}
+                        alt="Chicago Enviroment Explorer"
                         className="logo"
                     />
                 </NavLink>
                 <nav className="mainNav">
                     <ul>
-                        <li>     
-                            <button onClick={handleNavOpen}>Map</button>
-                            {mapLinksOpen && 
-                            <ul id="mapLinks">
-                                <NavLink to="/map">Explore</NavLink>
-                                <NavLink to="/data">Data</NavLink>
-                                <NavLink to="/api">API</NavLink>
-                                <NavLink to="/methods">Methods</NavLink>
-                                <NavLink to="/faq">Help + Faq</NavLink>
-                            </ul>}
-                        </li>
                         <li>
-                            <NavLink to="/insights">Insights</NavLink>
+                                <NavLink to="/data">Data</NavLink>
                         </li>
                         <li>
                             <NavLink to="/about">About</NavLink>
@@ -173,10 +164,6 @@ const StaticNavbar = () => {
                     <ul id="mapLinks">
                         <NavLink to="/map">Explore</NavLink>
                         <NavLink to="/data">Data</NavLink>
-                        <NavLink to="/api">API</NavLink>
-                        <NavLink to="/methods">Methods</NavLink>
-                        <NavLink to="/insights">Insights</NavLink>
-                        <NavLink to="/faq">Help + Faq</NavLink>
                         <NavLink to="/about">About</NavLink>
                         <NavLink to="/contact">Contact</NavLink>
                     </ul>}

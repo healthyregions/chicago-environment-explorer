@@ -75,7 +75,7 @@ const DrawerButton = styled.button`
     outline:none;
     line-height:2;
     transition:250ms;
-    font-family:'Lato', sans-serif;
+    font-family:'Montserrat', sans-serif;
     opacity: ${props => props.active ? 1 : 0.6};
     &:hover {
         opacity:1;
@@ -150,7 +150,7 @@ const TutorialButton = styled.button`
     margin: 5px;
     display:inline-block;
     color:${colors.white};
-    font-family:'Lato', sans-serif;
+    font-family:'Montserrat', sans-serif;
     padding:10px;
     transition:250ms all;
     &:hover {

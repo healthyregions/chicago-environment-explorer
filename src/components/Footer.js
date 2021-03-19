@@ -9,9 +9,9 @@ import { colors } from '../config';
 
 const FooterContainer = styled.footer`
     width:100%;
-    background: ${colors.teal};
+    background: ${colors.green};
     p {
-        color:${colors.lightgray};
+        color:${colors.black};
         font-size:1rem;
     }
     h6 {
@@ -23,11 +23,11 @@ const FooterContainer = styled.footer`
         font-style: normal;
         line-height: normal;
         letter-spacing: normal;
-        color: ${colors.white};
+        color: ${colors.black};
     }
     a {
         text-decoration:none;
-        color:${colors.skyblue};
+        color:${colors.black};
         opacity:0.8;
         &:hover {
             opacity:1;
@@ -40,6 +40,10 @@ const FooterContainer = styled.footer`
             display:block;
             margin:40px auto;
         }
+    }
+    img.logo {
+        margin:0 auto;
+        display:block;
     }
     hr.footerHr {
         margin:20px 0;
@@ -58,11 +62,17 @@ const LinkLists = styled(Grid)`
         list-style:none;
         li {
             line-height:1.5;
+            color:${colors.darkgray};
+            font-weight:bold;
         }
     }
-    p.copyright {
-        font-size:.9rem;
-        color:${colors.lightgray};
+    h6.copyright {
+        text-align:center;
+        font-size:1.5rem;
+        font-family:'Lora', serif;
+        padding:0 0 2rem 0;
+        color:${colors.darkgray};
+        font-weight:bold;
     }
     @media (max-width: 960px) {
         text-align:center;
@@ -103,7 +113,7 @@ const SignupForm = styled.div`
         outline:none;
         border-radius:5px;
         font-weight:bold;
-        font-family:'Lato', sans-serif;
+        font-family:'Montserrat', sans-serif;
         cursor:pointer;
     }
     .sr-only {
@@ -138,39 +148,40 @@ const Footer = ( props ) => {
                     
                 {props.signUp && <hr className="footerHr" />}
                 <LinkLists container spacing={1}>
-                    <Grid item xs={6} md={3}>
+                    {/* <Grid item xs={6} md={3}>
                         <p>
-                            <h6>Explore</h6>
                             <ul>
-                                <li><NavLink to="/map">The Atlas</NavLink></li>
+                                <li><NavLink to="/map">Explore</NavLink></li>
                                 <li><NavLink to="/data">Data</NavLink></li>
-                                <li><NavLink to="/methods">Methods</NavLink></li>
-                                <li><NavLink to="/faq">Help + Faq</NavLink></li>
                             </ul>
                         </p>
                     </Grid>
                     <Grid item xs={6} md={4}>
                         <p>
-                            <h6>About</h6>
                             <ul>
                                 <li><NavLink to="/about">Our Team</NavLink></li>
                                 <li><NavLink to="/contact">Contact Us</NavLink></li>
                                 <li><a href="https://geodacenter.github.io/" target="_blank" rel="noopener noreferrer">GeoDa Open Software</a></li>
-                                <li><a href="https://covidatlas.healthcarecommunities.org" target="_blank" rel="noopener noreferrer">Learning Community</a></li>
-                                <li><NavLink to="/conduct">Code of Conduct</NavLink></li>
                             </ul>
                         </p>
+                    </Grid> */}
+                    <Grid item xs={12}>
+                        <h6 className="copyright">
+                            Brought to you by:
+                        </h6>
                     </Grid>
-                    <Grid item xs={12} md={5}>
-                        <img src={`${process.env.PUBLIC_URL}/img/csds-university-wordmark-white.png`} width="100%;" alt="Center for Spatial Data Science logo" />
-                        <p className="copyright">
-                            Brought to you by the Center for Spatial Data Science <a href="https://spatial.uchicago.edu/" target="_blank" rel="noopener noreferrer">@UChicago</a>. Powered by <a href="https://geodacenter.github.io/" target="_blank" rel="noopener noreferrer">GeoDa</a>. Funded in part by the <a href="https://www.rwjf.org/" target="_blank" rel="noopener noreferrer">Robert Wood Johnson Foundation</a>.
-                        </p>
-                        <br/>
-                        <p className="copyright">
-                            <a href="http://netlify.com/" target="_blank" rel="noopener noreferrer">Powered by Netlify</a>
-                        </p>
+                    <Grid item xs={12} md={6}>
+                        <a href="https://spatial.uchicago.edu/content/spatial-research-csds" target="_blank" rel="noopener noreferrer">
+                            <img className="logo" src={`${process.env.PUBLIC_URL}/csds-university-wordmark-white.png`} width="75%;" alt="Center for Spatial Data Science logo" />
+                        </a>
                     </Grid>
+                    <Grid item xs={12} md={6}>
+                        <a href="https://voices.uchicago.edu/herop/" target="_blank" rel="noopener noreferrer">
+                            <img className="logo" src={`${process.env.PUBLIC_URL}/herop_light_logo.png`} width="50%;" alt="Center for Spatial Data Science logo" />
+                        </a>
+                    </Grid>
+
+                    
                 </LinkLists>
             </FooterContent>
         </FooterContainer>
