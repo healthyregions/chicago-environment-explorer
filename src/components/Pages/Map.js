@@ -41,10 +41,11 @@ function App() {
   }
 
   useEffect(() => {
-    console.log(Object.keys(storedGeojson))
     if (!(Object.keys(storedGeojson).length)){
-      console.log('loading data')
       handleData()
+    }
+    if (isLoading) {
+      setIsLoading(false)
     }
   },[])
   

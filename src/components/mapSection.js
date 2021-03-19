@@ -29,13 +29,15 @@ const bounds = fitBounds({
 
 const getRightMargin = () => window.innerWidth * .15 < 250 ? 260 : window.innerWidth*.15 + 10;
 
+const QueryFeaturesWorker = new Worker(`${process.env.PUBLIC_URL}/workers/queryRenderedFeaturesWorker.js`);
 // component styling
 const MapContainer = styled.div`
     position:absolute;
     left:0;
     top:0;
-    width:100%;
+    width:${props => props.infoPanel ? `calc(100% - ${getRightMargin()-10}px)` : '100%'};
     height:100%;
+    transition: 250ms all;
     background:${colors.ivory};
     overflow:hidden;
     @media (max-width:600px) {
@@ -75,7 +77,7 @@ const HoverDiv = styled.div`
 
 const MapButtonContainer = styled.div`
     position: absolute;
-    right: ${props => props.infoPanel ? getRightMargin() : 10}px;
+    right: 10px;
     bottom: 30px;
     z-index: 10;
     transition: 250ms all;
@@ -199,7 +201,6 @@ function MapSection(props){
     const [multipleSelect, setMultipleSelect] = useState(false);
     const [boxSelect, setBoxSelect] = useState(false);
     const [boxSelectDims, setBoxSelectDims] = useState({});
-    const [QueryFeaturesWorker] = useState(new Worker(`${process.env.PUBLIC_URL}/workers/queryRenderedFeaturesWorker.js`));
     const forceUpdate = useForceUpdate();
     // const [resetSelect, setResetSelect] = useState(null);
     // const [mobilityData, setMobilityData] = useState([]);
@@ -217,6 +218,9 @@ function MapSection(props){
         }
     }
 
+    const isVisible = (feature) => {
+        return 1
+    };
     var queryViewport = debounce((e) => {
         if (centroids.length){
             const viewport = new WebMercatorViewport(e.viewState);      
@@ -451,7 +455,8 @@ function MapSection(props){
             },
             transitions: {
                 getFillColor: 250
-            }
+            },
+            getFilterValue: d =>  0
         }),
         new GeoJsonLayer({
             id: 'highlightLayer',
@@ -579,6 +584,7 @@ function MapSection(props){
             onKeyUp={handleKeyUp}
             onMouseDown={e => boxSelect ? handleBoxSelect(e) : null}
             onMouseUp={e => boxSelect ? handleBoxSelect(e) : null}
+            infoPanel={panelState.info}
         >
             {
                 // boxSelectDims.hasOwnProperty('x') && 

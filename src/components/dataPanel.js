@@ -276,14 +276,15 @@ const AirbnbSlider = withStyles({
     padding: '0 25px 0 15px',
     marginLeft:'0px',
     width:'calc(100% - 30px)',
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    transform: 'translateY(-55px)'
   },
   thumb: {
-    height: 27,
+    height: 56,
     width: 15,
     backgroundColor: '#fff',
     border: '1px solid currentColor',
-    marginTop: -12,
+    marginTop: -27,
     marginLeft: 0,
     boxShadow: '#ebebeb 0 2px 2px',
     borderRadius:0,
@@ -301,12 +302,10 @@ const AirbnbSlider = withStyles({
   },
   active: {},
   track: {
-    height: 3,
+    display:'none',
   },
   rail: {
-    color: colors.cartoColors.gray,
-    opacity: 1,
-    height: 3,
+    display:'none'
   },
 })(Slider);
 
@@ -419,7 +418,7 @@ const DataPanel = () => {
                         defaultValue={[ranges[row.column].min, ranges[row.column].max]}
                         min={ranges[row.column].min}
                         max={ranges[row.column].max}
-                        step={(ranges[row.column].max-ranges[row.column].min)/20}
+                        step={(ranges[row.column].max-ranges[row.column].min)/10}
                       />
                     </>)
                 }
