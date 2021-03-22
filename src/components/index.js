@@ -7,7 +7,7 @@ import DataPanel from './dataPanel';
 import Dock from './dock';
 import Draggable from './draggable';
 import Footer from './Footer';
-import Histogram from './Histogram';
+import Histogram from './Histogram.js';
 import InfoBox from './infoBox';
 import Legend from './legend';
 import MapSection from './mapSection';
