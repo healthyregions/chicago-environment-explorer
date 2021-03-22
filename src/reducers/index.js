@@ -82,6 +82,44 @@ var reducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 mapParams: tempParamsObj
             }
+        case 'APPLY_FILTER_VALUES': 
+            const filterValuesObject = typeof action.payload.range === 'string' ? 
+                {
+                    ...state.filterValues,
+                    [action.payload.name]: [
+                        ...state.filterValues[action.payload.name]||[], 
+                        action.payload.range
+                    ]
+                }
+            :
+                {
+                    ...state.filterValues,
+                    [action.payload.name]: action.payload.range
+                }
+            
+            return {
+                ...state,
+                filterValues: filterValuesObject
+            }
+        case 'REMOVE_FILTER_VALUES': 
+            const removeFilterValuesObject = {
+                ...state.filterValues,
+            }
+            delete removeFilterValuesObject[action.payload.name]
+
+            return {
+                ...state,
+                filterValues: removeFilterValuesObject
+            }
+        case 'REMOVE_FILTER_ENTRY': 
+            const removedEntryValuesObject =  {
+                    ...state.filterValues,
+                    [action.payload.name]: state.filterValues[action.payload.name].filter(o => o !== action.payload.value)
+                }            
+            return {
+                ...state,
+                filterValues: removedEntryValuesObject
+            }
         case 'SET_GEOID': 
             return {
                 ...state,

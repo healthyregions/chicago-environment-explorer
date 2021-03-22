@@ -15,6 +15,7 @@
   "homepage": "https://theuscovidatlas.org",
   "dependencies": {
     "@deck.gl/core": "^8.3.11",
+    "@deck.gl/extensions": "^8.4.10",
     "@deck.gl/geo-layers": "^8.3.12",
     "@deck.gl/layers": "^8.3.11",
     "@deck.gl/mesh-layers": "^8.3.12",

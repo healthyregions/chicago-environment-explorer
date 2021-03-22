@@ -25,7 +25,7 @@ const Container = styled.div`
         border-bottom:2px solid ${colors.yellow};
     }
     .MuiInput-underline:after {
-        border-bottom:2px solid ${colors.strongOrange};
+        border-bottom:2px solid ${colors.green};
 
     }
     .MuiFormControl-root .MuiInputBase-adornedEnd:before {

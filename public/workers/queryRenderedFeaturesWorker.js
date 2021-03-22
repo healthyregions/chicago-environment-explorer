@@ -18,7 +18,8 @@ function generateFilteredData(params){
     var centroids = params.centroids;
     var extent = params.extent;
     var columns = params.columnNames;
-    var ranges = params.ranges
+    var ranges = params.ranges;
+    var filters = params.filterValues;
     // declare return arrays and object
     // return array will hold the list of objects with data information
     // data columns have the names of the data from geojson
@@ -28,6 +29,7 @@ function generateFilteredData(params){
     var totalPop = 0;
     var totalTrees = 0;
     var totalTreesArea = 0;
+    var communityCounts = {};
     var count = 0;
     
     for (var n=0; n<columns.length;n++){
@@ -37,13 +39,49 @@ function generateFilteredData(params){
             histCounts[columns[n]].push({binNumber:x, count:0, min: ranges[columns[n]].histogramBins[n-1]||ranges[columns[n]].min, max:ranges[columns[n]].histogramBins[n]})
         }          
     };
+
+    var filterPresent = false;
+    if (Object.keys(filters).length) filterPresent = true;
     
     for (var i=0; i<geojsonData.features.length;i++){
         if (within(centroids[i].feature.geometry.coordinates, extent)) {
-            totalPop += geojsonData.features[i].properties.acs_population
-            totalTrees += geojsonData.features[i].properties.trees_n
-            totalTreesArea += geojsonData.features[i].properties.trees_area
-            count += 1;
+            
+            if (communityCounts[geojsonData.features[i].properties.community] === undefined) {
+                communityCounts[geojsonData.features[i].properties.community] = 1 
+            } else {
+                communityCounts[geojsonData.features[i].properties.community] += 1
+            }
+
+            var filterPass = true;
+
+            if (filterPresent) {
+                var filterList = Object.keys(filters);
+                var filterValues = Object.values(filters);
+
+                for (var n=0; n<filterList.length;n++){
+                    if (typeof filterValues[n][0] === 'string') {
+                        if (!filterValues[n][0].includes(geojsonData.features[i].properties[filterList[n]])) {
+                            filterPass = false;
+                            break;
+                        }
+                    } else {
+                        if (geojsonData.features[i].properties[filterList[n]] < filterValues[n][0] 
+                        || 
+                        geojsonData.features[i].properties[filterList[n]] > filterValues[n][1]) {
+                            filterPass = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (filterPass) {
+                totalPop += geojsonData.features[i].properties.acs_population
+                totalTrees += geojsonData.features[i].properties.trees_n
+                totalTreesArea += geojsonData.features[i].properties.trees_area
+                count += 1;                
+            }
+
 
             for (var n=0; n<columns.length;n++){
                 if (!geojsonData.features[i].properties[columns[n]]) continue
@@ -63,7 +101,7 @@ function generateFilteredData(params){
 
     sums['count'] = count
 
-    return {success: true, histCounts, sums, totalPop, totalTrees, totalTreesArea};
+    return {success: true, communityCounts, histCounts, sums, totalPop, totalTrees, totalTreesArea};
 }
 
 

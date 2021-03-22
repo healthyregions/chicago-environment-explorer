@@ -4,6 +4,7 @@ export const INITIAL_STATE = {
   columnNames: ["acs_population", "cities_casthma_prev", "cities_copd_prev", "svi_pecentile", "trees_n", "trees_area", "trees_den", "trees_crown_den", "asthma_5yr_avg", "asthma_age_adj_rate", "urban_flood_suscep", "heatisl", "nn_q3_pm2_5", "uchosp_casthma_visit", "logtraf", "hardship"],
   ranges:{},
   selectionData: {},
+  filterValues: {},
   mapParams: {
     variableName: 'Tree Crown Density',
     numerator: 'properties',

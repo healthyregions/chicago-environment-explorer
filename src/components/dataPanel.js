@@ -13,7 +13,9 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 // Import config and sub-components
 import Tooltip from './tooltip';
-import BarChart from './BarChart'
+import BarChart from './BarChart';
+import Histogram from './Histogram';
+import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../actions';
 import { colors } from '../config';
 import { report } from '../config/svg';
@@ -43,11 +45,6 @@ const DataPanelContainer = styled.div`
   h4, h1 {
     font-family: 'Lora', serif;
     margin:10px 0;
-  }
-  h4 {
-    font-size:1rem;
-    padding:2rem 0 0 0;
-    margin:0;
   }
   &.open {
     transform:none;
@@ -246,68 +243,6 @@ const ExpandSelect = styled(FormControl)`
     }
   }
 `
-const ChartContainer = styled.div`
-  display:block;
-  width:calc(100% - 1em);
-  margin:0 auto;
-  height:75px;
-  cursor:crosshair !important;
-`
-
-const AxisContainer = styled.div`
-  display:flex;
-  padding:0 15px 0 5px;
-  span {
-    flex:1;
-    text-align:center;
-  }
-  span:nth-of-type(1){
-    text-align:left;
-  }
-  span:nth-of-type(3){
-    text-align:right;
-  }
-`
-
-const AirbnbSlider = withStyles({
-  root: {
-    color: colors.cartoColors.gray,
-    height: 3,
-    padding: '0 25px 0 15px',
-    marginLeft:'0px',
-    width:'calc(100% - 30px)',
-    boxSizing: 'border-box',
-    transform: 'translateY(-55px)'
-  },
-  thumb: {
-    height: 56,
-    width: 15,
-    backgroundColor: '#fff',
-    border: '1px solid currentColor',
-    marginTop: -27,
-    marginLeft: 0,
-    boxShadow: '#ebebeb 0 2px 2px',
-    borderRadius:0,
-    '&:focus, &:hover, &$active': {
-      boxShadow: '#ccc 0 2px 3px 1px',
-    },
-    '& .bar': {
-      // display: inline-block !important;
-      height: 9,
-      width: 1,
-      backgroundColor: 'currentColor',
-      marginLeft: 1,
-      marginRight: 1,
-    },
-  },
-  active: {},
-  track: {
-    display:'none',
-  },
-  rail: {
-    display:'none'
-  },
-})(Slider);
 
 function AirbnbThumbComponent(props) {
   return (
@@ -377,6 +312,7 @@ const DataPanel = () => {
   const selectionData = useSelector(state => state.selectionData);
   const panelState = useSelector(state => state.panelState);
   const ranges = useSelector(state => state.ranges);
+  const filterValues = useSelector(state => state.filterValues);
 
   // handles panel open/close
   const handleOpenClose = () => dispatch(setPanelState({info:panelState.info ? false : true}))
@@ -397,30 +333,21 @@ const DataPanel = () => {
                         <h3>{selectionData.totalTrees.toLocaleString('en')}</h3>
                     </div>
                     <p>Tracts Selected: {selectionData.sums.count}</p>
+                    <NeighborhoodCounts 
+                      counts={selectionData.communityCounts}
+                      activeCommunities={filterValues.community}
+                    />
                 </ReportSection>
                 {
                   columnsToChart.map(row => 
-                    <>
-                      <h4>{row.name}</h4>
-                      <ChartContainer>
-                        <BarChart data={selectionData.histCounts[row.column]} xAxis={'max'} dataKey={'count'} color={row.color}/>
-                      </ChartContainer>
-                      <AxisContainer>
-                        <span>{ranges[row.column].min}</span>
-                        {
-                          ranges[row.column].histogramBins.map((val, idx) => idx === 4 ? <span>{Math.round(val*10)/10}</span> : '')
-                        }
-                        <span>{ranges[row.column].max}</span>
-                      </AxisContainer>
-                      <AirbnbSlider
-                        ThumbComponent={AirbnbThumbComponent}
-                        getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-                        defaultValue={[ranges[row.column].min, ranges[row.column].max]}
-                        min={ranges[row.column].min}
-                        max={ranges[row.column].max}
-                        step={(ranges[row.column].max-ranges[row.column].min)/10}
-                      />
-                    </>)
+                    <Histogram 
+                      name={row.name} 
+                      column={row.column}
+                      histCounts={selectionData.histCounts[row.column]} 
+                      range={ranges[row.column]} 
+                      color={row.color}
+                    />
+                  )
                 }
             </ReportContainer>
         </ReportWrapper>

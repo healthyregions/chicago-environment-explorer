@@ -98,3 +98,33 @@ export const openContextMenu = ( params ) => {
         }
     }
 }
+
+export const applyFilterValues = ( name, range ) => {
+    return {
+        type: 'APPLY_FILTER_VALUES',
+        payload: {
+            name,
+            range
+        }
+    }
+}
+
+export const removeFilterValues = ( name ) => {
+    return {
+        type: 'REMOVE_FILTER_VALUES',
+        payload: {
+            name
+        }
+    }
+}
+
+export const removeFilterEntry = ( name, value ) => {
+    return {
+        type: 'REMOVE_FILTER_ENTRY',
+        payload: {
+            name, 
+            value
+        }
+    }
+}
+

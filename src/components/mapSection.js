@@ -11,6 +11,7 @@ import {MapView, FlyToInterpolator} from '@deck.gl/core';
 import { GeoJsonLayer, PolygonLayer, ScatterplotLayer, IconLayer, TextLayer } from '@deck.gl/layers';
 import {fitBounds} from '@math.gl/web-mercator';
 import MapboxGLMap from 'react-map-gl';
+import {DataFilterExtension} from '@deck.gl/extensions';
 
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from '../components';
@@ -177,7 +178,17 @@ function useForceUpdate(){
 
 function MapSection(props){ 
     // fetch pieces of state from store    
-    const { storedGeojson, panelState, mapParams, urlParams, centroids, columnNames, ranges, selectionData } = useSelector(state => state);
+    const { 
+        storedGeojson, 
+        panelState,
+        mapParams, 
+        urlParams, 
+        centroids, 
+        columnNames, 
+        ranges, 
+        selectionData,
+        filterValues,
+    } = useSelector(state => state);
 
     // component state elements
     // hover and highlight geographibes
@@ -218,9 +229,6 @@ function MapSection(props){
         }
     }
 
-    const isVisible = (feature) => {
-        return 1
-    };
     var queryViewport = debounce((e) => {
         if (centroids.length){
             const viewport = new WebMercatorViewport(e.viewState);      
@@ -231,6 +239,7 @@ function MapSection(props){
                 columnNames,
                 extent,
                 ranges,
+                filterValues
             })
 
         }
@@ -244,9 +253,16 @@ function MapSection(props){
                 columnNames,
                 extent:[-100, 100, 100, -100],
                 ranges,
+                filterValues
             })
         }
-    },[centroids, storedGeojson, columnNames, ranges, selectionData])
+    },[centroids, storedGeojson, columnNames, ranges, selectionData, filterValues])
+
+    useEffect(() => {
+        if (deckRef.current.viewports) {
+            queryViewport({viewState: {...deckRef.current.viewports[0]}})
+        }
+    },[filterValues])
 
     let hidden = null;
     let visibilityChange = null;
@@ -336,7 +352,7 @@ function MapSection(props){
         //   } catch(err) {
         //     let copyText = document.querySelector("#share-url");
         //     copyText.value = `${shareData.url}`;
-        //     copyText.style.display = 'block'
+        //     copyText.style.display = 'blockd'
         //     copyText.select();
         //     copyText.setSelectionRange(0, 99999);
         //     document.execCommand("copy");
@@ -438,6 +454,19 @@ function MapSection(props){
         .domain(mapParams.bins)
         .range(mapParams.colorScale);
 
+    const isVisible = (feature, filters) => {
+        for (const property in filters) {
+            if (typeof filters[property][0] === 'string') {
+                if (!filters[property].includes(feature.properties[property])) return false;
+            } else {
+                if (feature.properties[property] < filters[property][0] 
+                    || 
+                    feature.properties[property] > filters[property][1]) return false;
+            }
+        };
+        return true;
+    };
+
     const layers = [ 
         new GeoJsonLayer({
             id: 'choropleth',
@@ -449,14 +478,17 @@ function MapSection(props){
             getFillColor: f => COLOR_SCALE(f[mapParams.numerator][mapParams.nProperty]),
             opacity: 1,
             onHover: handleMapHover,
-            // onClick: handleMapClick,            
+            // onClick: handleMapClick,  
+            getFilterValue: d => isVisible(d, filterValues) ? 1 : 0,
+            filterRange: [1, 1], 
+            extensions: [new DataFilterExtension({filterSize: 1})],          
             updateTriggers: {
                 getFillColor: [storedGeojson.type, mapParams.variableName, mapParams.bins, mapParams.colorScale],
+                getFilterValue: filterValues
             },
             transitions: {
                 getFillColor: 250
             },
-            getFilterValue: d =>  0
         }),
         new GeoJsonLayer({
             id: 'highlightLayer',
