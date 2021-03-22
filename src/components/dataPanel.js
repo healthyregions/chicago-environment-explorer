@@ -14,7 +14,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 // Import config and sub-components
 import Tooltip from './tooltip';
 import BarChart from './BarChart';
-import Histogram from './Histogram';
+import Histogram from './histogram';
 import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../actions';
 import { colors } from '../config';
