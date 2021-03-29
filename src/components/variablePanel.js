@@ -215,8 +215,10 @@ const VariablePanel = (props) => {
             value={mapParams.overlay}
             onChange={handleMapOverlay}
           >
-            <MenuItem value="" key={'None'}>None</MenuItem> 
-            {/* <MenuItem value={'native_american_reservations'} key={'native_american_reservations'}>Native American Reservations</MenuItem> */}
+            <MenuItem value="None" key={'None'}>None</MenuItem> 
+            <MenuItem value={'community_areas'} key={'community_areas'}>Community Areas</MenuItem>
+            <MenuItem value={'wards'} key={'wards'}>Wards</MenuItem>
+            <MenuItem value={'properties'} key={'properties'}>City Owned Properties</MenuItem>
           </Select>
         </StyledDropDown>
 

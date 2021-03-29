@@ -305,6 +305,16 @@ var reducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 notification: action.payload.info
             }
+        case 'SET_MAP_PARAMS':
+            const paramsChangeObj = {
+                ...state.mapParams,
+                ...action.payload.params
+            }
+            
+            return {
+                ...state,
+                mapParams: paramsChangeObj
+            }
         // case 'SET_URL_PARAMS':
         //     const { urlParams, presets } = action.payload;
 

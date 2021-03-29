@@ -11,14 +11,16 @@ import {MapView, FlyToInterpolator} from '@deck.gl/core';
 import { GeoJsonLayer, PolygonLayer, ScatterplotLayer, IconLayer, TextLayer } from '@deck.gl/layers';
 import {fitBounds} from '@math.gl/web-mercator';
 import MapboxGLMap from 'react-map-gl';
-import {DataFilterExtension} from '@deck.gl/extensions';
+import {DataFilterExtension, FillStyleExtension} from '@deck.gl/extensions';
 
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from '../components';
 import { setSelectionData } from '../actions';
 import { mapFn, dataFn, getVarId } from '../utils';
-import { colors, colorScales, MAPBOX_ACCESS_TOKEN } from '../config';
+import { colors, colorScales } from '../config';
 import * as SVG from '../config/svg'; 
+
+const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 // US bounds
 const bounds = fitBounds({
@@ -26,7 +28,6 @@ const bounds = fitBounds({
     height: window.innerHeight,
     bounds: [[-87.971649,41.609282],[-87.521896,42.040624]]
 })
-
 
 const getRightMargin = () => window.innerWidth * .15 < 250 ? 260 : window.innerWidth*.15 + 10;
 
@@ -53,7 +54,7 @@ const HoverDiv = styled.div`
     padding:20px;
     color:${colors.black};
     box-shadow: 0px 0px 5px rgba(0,0,0,0.7);
-    border-radius:15px;
+    border-radius: 0 15px 15px 15px;
     h3 {
         margin:5px 0;
     }
@@ -376,7 +377,7 @@ function MapSection(props){
         }
     }
 
-    const handleMapHover = ({x, y, object}) => {
+    const handleMapClick = ({x, y, object}) => {
         if (object && object.properties) {
             setHoverGeog(object.properties.geoid)
             setHoverInfo({x, y, object: object.properties})
@@ -384,10 +385,6 @@ function MapSection(props){
             setHoverGeog(null)
             setHoverInfo({x:null, y:null, object:null})
         }
-    }
-
-    const handleMapClick = (info, e) => {
-        console.log(e)
     }
 
     const handleGeolocate = async () => {
@@ -466,7 +463,6 @@ function MapSection(props){
         };
         return true;
     };
-
     const layers = [ 
         new GeoJsonLayer({
             id: 'choropleth',
@@ -477,8 +473,8 @@ function MapSection(props){
             extruded: false,
             getFillColor: f => COLOR_SCALE(f[mapParams.numerator][mapParams.nProperty]),
             opacity: 1,
-            onHover: handleMapHover,
-            // onClick: handleMapClick,  
+            // onHover: handleMapHover,
+            onClick: handleMapClick,  
             getFilterValue: d => isVisible(d, filterValues) ? 1 : 0,
             filterRange: [1, 1], 
             extensions: [new DataFilterExtension({filterSize: 1})],          
@@ -489,6 +485,34 @@ function MapSection(props){
             transitions: {
                 getFillColor: 250
             },
+        }),
+        new GeoJsonLayer({
+            id: 'parks',
+            data: `${process.env.PUBLIC_URL}/geojson/parks.geojson`,
+            pickable: false,
+            stroked: false,
+            filled: true,
+            extruded: false,
+            getFillColor: [0,0,0,120],
+            opacity: 1,
+            
+            // props added by FillStyleExtension
+            fillPatternAtlas: `${process.env.PUBLIC_URL}/icons/park-pattern.png`,
+            fillPatternMapping: {
+                "dot": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 128,
+                  "height": 128,
+                  "mask": true
+                }
+            },
+            getFillPattern: f => 'dot',
+            getFillPatternScale: (19-GetMapView().zoom)/8,
+            getFillPatternOffset: [0, 0],
+
+            // Define extensions
+            extensions: [new FillStyleExtension({pattern: true})]
         }),
         new GeoJsonLayer({
             id: 'highlightLayer',
@@ -512,8 +536,45 @@ function MapSection(props){
                 getFillColor: 250
             }
         }),
+        new GeoJsonLayer({
+            id: 'community areas',
+            data: `${process.env.PUBLIC_URL}/geojson/community_areas.geojson`,
+            opacity: 0.8,
+            material:false,
+            pickable: false,
+            stroked: true,
+            filled:false,
+            lineWidthScale: 1,
+            lineWidthMinPixels:1,
+            lineWidthMaxPixels:4,
+            getLineWidth:1, 
+            getLineColor: [0,0,0,255],
+            visible: mapParams.overlay === 'community_areas',
+            updateTriggers: {
+                visible: [mapParams.overlay],
+            },
+        }),
+        new GeoJsonLayer({
+            id: 'community areas',
+            data: `${process.env.PUBLIC_URL}/geojson/boundaries_wards_2015_.geojson`,
+            opacity: 0.8,
+            material:false,
+            pickable: false,
+            stroked: true,
+            filled:false,
+            lineWidthScale: 1,
+            lineWidthMinPixels:1,
+            lineWidthMaxPixels:4,
+            getLineWidth:1, 
+            getLineColor: [0,0,0,255],
+            visible: mapParams.overlay === 'wards',
+            updateTriggers: {
+                visible: [mapParams.overlay],
+            },
+        })  
     ]
 
+    
     const view = new MapView({repeat: true});
     const handleSelectionBoxStart = () => {
         setBoxSelect(true)
@@ -609,7 +670,6 @@ function MapSection(props){
             console.log('bad selection')
         }
     }
-
     return (
         <MapContainer
             onKeyDown={handleKeyDown}
@@ -647,14 +707,17 @@ function MapSection(props){
                 }
                 views={view}
                 pickingRadius={20}
-                onViewStateChange={queryViewport}
+                onViewStateChange={e => {
+                    queryViewport(e)
+                    hoverInfo.object && handleMapClick({x:null, y:null, object:null})
+                }}
                 onViewportLoad={queryViewport}
                 
             >
                 <MapboxGLMap
                     reuseMaps
                     ref={mapRef}
-                    mapStyle={'mapbox://styles/lixun910/ckmf5w2e20sn217oiluj5uzd7'} 
+                    mapStyle={'mapbox://styles/csds-hiplab/ckmuv80qn2b6o17ltels6z7ub?fresh=true'} 
                     preventStyleDiffing={true}
                     mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
                     on

@@ -25,7 +25,7 @@ export const INITIAL_STATE = {
     colorScale: null,
     storedRange: null,
     bins: [],
-    overlay: '',
+    overlay: 'community_areas',
     colorScale: [
       [255,255,204],
       [217,240,163],

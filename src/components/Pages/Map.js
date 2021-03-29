@@ -51,15 +51,10 @@ function App() {
   
   return (
     <div className="Map-App">
-      <Preloader loaded={isLoading} />
       <NavBar />
-      {isLoading && <div id="loadingIcon" style={{backgroundImage: `url('${process.env.PUBLIC_URL}assets/img/bw_preloader.gif')`}}></div>}
-      <header className="App-header" style={{position:'fixed', left: '20vw', top:'100px', zIndex:10}}>
-        {/* <button onClick={() => console.log(fullState)}>Log state</button> */}
-      </header>
+      {isLoading && <div id="loadingIcon"></div>}
       <div id="mainContainer" className={isLoading ? 'loading' : ''}>
         <MapSection />
-        {/* <TopPanel /> */}
         <Legend 
           variableName={mapParams.variableName} 
           colorScale={mapParams.colorScale}

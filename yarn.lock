@@ -1446,10 +1446,10 @@
   dependencies:
     "@luma.gl/shadertools" "^8.4.1"
 
-"@deck.gl/geo-layers@^8.3.12":
-  version "8.4.10"
-  resolved "https://registry.yarnpkg.com/@deck.gl/geo-layers/-/geo-layers-8.4.10.tgz#e50fba4c5332aa767979da592495d81e6de9ba44"
-  integrity sha512-j2XPRS5lIdJTPe0abiX3GhWJG2nlE+mXdtKWetYquk5qia5ss8iR7J3NubBjjv5sSQ/ZHzWlOmJNaILolEUbxA==
+"@deck.gl/geo-layers@^8.4.11":
+  version "8.4.11"
+  resolved "https://registry.yarnpkg.com/@deck.gl/geo-layers/-/geo-layers-8.4.11.tgz#acc2a3cc72155d5dfd99b416e09cca36a34e9c11"
+  integrity sha512-/FoANsW2Em77bakWpjnX28+FFGHraNx7v+2Fao4UI2etO9WfOapkol+oX3GRIJtBt1ijwJqzmyDii8mmOcj8eg==
   dependencies:
     "@loaders.gl/3d-tiles" "^2.3.13"
     "@loaders.gl/gis" "^2.3.13"
