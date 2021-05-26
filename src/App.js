@@ -18,12 +18,12 @@ class App extends Component {
                 <Route path="/" component={Map} exact/>
                 <Route path="/map" component={Map}/>
                 <Route path="/map.html" component={Map}/>
-                <Route path="/about" component={About}/>
+                {/* <Route path="/about" component={About}/>
                 <Route path="/about.html" component={About}/>
                 <Route path="/contact" component={Contact}/>
                 <Route path="/contact.html" component={Contact}/>
                 <Route path="/data" component={Data}/>
-                <Route path="/data.html" component={Data}/>
+                <Route path="/data.html" component={Data}/> */}
                 <Route component={ErrorPage} />
                 <Route />
             </Switch>

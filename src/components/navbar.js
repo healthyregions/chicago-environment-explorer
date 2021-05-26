@@ -74,13 +74,13 @@ const NavBar = () => {
     return (
         <NavContainer>
             <div className="nav-logo">
-              <img src={`${process.env.PUBLIC_URL}/logo.png`} style={{height: '30px', paddingRight: '5px'}} alt="US Covid Atlas Logo" /><a href="/">Chicago Environment Explorer</a>
+              <img src={`${process.env.PUBLIC_URL}/logo.png`} style={{height: '30px', paddingRight: '5px'}} alt="Chicago Environment Explorer" /><a href="/">Chicago Environment Explorer</a>
             </div>
-          <NavItems> 
+          {/* <NavItems> 
             <li><NavLink to="/data">DATA</NavLink></li>
             <li><NavLink to="/about">ABOUT</NavLink></li>
             <li><NavLink to="/contact">CONTACT</NavLink></li>
-          </NavItems>
+          </NavItems> */}
         </NavContainer>
     )
 }
