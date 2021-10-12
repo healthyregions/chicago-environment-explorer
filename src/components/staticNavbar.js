@@ -6,7 +6,7 @@ import { colors } from '../config';
 
 const Navbar = styled.div`
     width:100vw;
-    background: ${colors.ivory};
+    background: ${colors.white};
     top:0;
     left:0;
     padding: 20px 16px;
@@ -34,7 +34,7 @@ const NavbarContent = styled.div`
             border:none;
             cursor:pointer;
             text-transform:uppercase;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-size: 16px;
             line-height: 1.5;
             letter-spacing: 1.75px;

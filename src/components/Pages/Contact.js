@@ -49,7 +49,7 @@ const InputBlock = styled.div`
     .MuiInputBase-root, .MuiFormControl-root, .MuiFormLabel-root {
         min-width:75%;
         width:${props => props.fullWidth ? '100%' : 'auto'};
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Roboto', sans-serif;
         @media (max-width: 960px) {
             width:100%;
         }
@@ -64,7 +64,7 @@ const InputBlock = styled.div`
         background-color: ${colors.blue};
         color: ${colors.white};
         padding: 0 20px;
-        border-radius: .3rem;
+        // border-radius: .3rem;
         text-decoration:none;
         border:none;
         float:right;

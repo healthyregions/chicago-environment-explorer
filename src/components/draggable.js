@@ -17,7 +17,7 @@ const DragContainer = styled.div`
     padding:20px 20px 0 20px;
     box-sizing: border-box;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.7);
-    border-radius: 0.5vh;
+    // border-radius: 0.5vh;
     &.collapsed {
         display:none;
     };
@@ -54,7 +54,7 @@ const CollapseButton = styled.button`
     p {
         font-size:50%;
         display:inline;
-        font-family:'Montserrat', sans-serif;
+        font-family:'Lora', sans-serif;
         line-height:1;
     }
     svg {

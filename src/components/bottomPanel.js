@@ -16,7 +16,7 @@ const BottomDrawer = styled.div`
     position: fixed;
     bottom:0;
     left:50%;
-    background:${colors.gray};
+    background:${colors.white};
     transform:translateX(-50%);
     width:38vw;
     max-width: 500px;
@@ -24,7 +24,7 @@ const BottomDrawer = styled.div`
     padding:0 0 5px 0;
     margin:0;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.7);
-    border-radius:0.5vh 0.5vh 0 0;
+    // border-radius:0.5vh 0.5vh 0 0;
     transition:250ms all;
     hr {
         opacity:0.5;

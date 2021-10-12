@@ -12,7 +12,7 @@ const BottomPanel = styled.div`
     left:50%;
     background:${colors.ivory};
     transform:translateX(-50%);
-    width:38vw;
+    width:25vw;
     max-width: 500px;
     box-sizing: border-box;
     padding:0 0 5px 0;
@@ -69,7 +69,7 @@ const LegendContainer = styled.div`
 
 const LegendTitle = styled.h3`
     text-align: center;
-    font-family:'Lora', serif;
+    font-family:'Roboto', sans-serif;
     padding:0;
     font-weight:bold;
     margin:0;

@@ -14,7 +14,7 @@ const BioSection = styled.div`
         width:100%;
         max-width:200px;
         display:block;
-        border-radius:50%;
+        // border-radius:50%;
         margin:40px auto 10px auto;
     }
     p.affiliation {

@@ -11,6 +11,7 @@ const Container = styled.div`
     width:100%;
     .MuiFormControl-root {
         margin:0;
+        border-bottom:2px solid ${colors.chicagoDarkBlue};
     }
     .MuiAutocomplete-inputRoot {
         background:white;
@@ -20,12 +21,13 @@ const Container = styled.div`
     }
     .MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child {
         padding:0;
+        color:${colors.black};
     }
     .MuiInput-underline:hover:not(.Mui-disabled):before {
-        border-bottom:2px solid ${colors.yellow};
+        border-bottom:2px solid ${colors.chicagoBlue};
     }
     .MuiInput-underline:after {
-        border-bottom:2px solid ${colors.green};
+        border-bottom:2px solid ${colors.chicagoBlue};
 
     }
     .MuiFormControl-root .MuiInputBase-adornedEnd:before {

@@ -31,20 +31,24 @@ const DataPanelContainer = styled.div`
   top:50px;
   overflow-x:visible;
   height:calc(100vh - 50px);
-  background-color: ${colors.ivory};
+  background-color: ${colors.white};
   box-shadow: 2px 0px 5px ${colors.gray}44;
   padding:20px;
   box-sizing: border-box;
   transition:250ms all;
-  font: 'Montserrat', sans-serif;
+  font: 'Roboto', sans-serif;
   color:${colors.black};
   font-size:100%;
   padding:0;
   z-index:5;
   transform: translateX(100%);
+  border-top:2px solid ${colors.chicagoDarkBlue};
   h4, h1 {
-    font-family: 'Lora', serif;
+    font-family: 'Roboto', sans-serif;
     margin:10px 0;
+  }
+  p {
+    font-family: 'Lora', serif;
   }
   &.open {
     transform:none;
@@ -70,11 +74,11 @@ const DataPanelContainer = styled.div`
     height:40px;
     padding:0;
     margin:0;
-    background-color: ${colors.ivory};
+    background-color: ${colors.white};
     box-shadow: 2px 0px 5px ${colors.gray}88;
     outline:none;
     border:none;
-    border-radius:20px;
+    // border-radius:20px;
     cursor: pointer;
     transition:500ms all;
     svg {
@@ -132,6 +136,8 @@ const DataPanelContainer = styled.div`
       }
     }
   }
+
+  
   
 
   div {
@@ -169,6 +175,32 @@ const DataPanelContainer = styled.div`
 const ReportWrapper = styled.div`
   height:100vh;
   overflow-y:scroll;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: ${colors.white};
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoBlue};
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%, 100%; 
+    transition:125ms all;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoDarkBlue};
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%, 100%; 
+  }
 `
 
 // Inner container for report content
@@ -258,49 +290,49 @@ const columnsToChart = [
   {
     'column':'trees_crown_den',
     'name':'Percent Canopy Coverage',
-    'color':colors.cartoColors.green,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
   {
     'column':'heatisl',
     'name':'Temperature Percentile',
-    'color':colors.cartoColors.gold,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
   {
     'column':'nn_q3_pm2_5',
     'name':'Summer PM2.5',
-    'color':colors.cartoColors.gray,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
   {
     'column':'logtraf',
     'name': 'Traffic Volume',
-    'color':colors.cartoColors.slate,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
   {
     'column':'urban_flood_suscep',
     'name':'Urban Flood Susceptibility',
-    'color':colors.cartoColors.sky,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
   {
     'column':'svi_pecentile',
     'name':'Social Vulnerability',
-    'color':colors.cartoColors.pink,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
   {
     'column':'asthma_age_adj_rate',
     'name':'Asthma Cases per 10,000 Residents',
-    'color':colors.cartoColors.gold,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
   {
     'column':'hardship',
     'name':'Economic Hardship Index',
-    'color':colors.cartoColors.spring,
+    'color':colors.chicagoBlue,
     'preset':'',
   },
 ]

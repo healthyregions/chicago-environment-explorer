@@ -52,7 +52,7 @@ const Hero = styled.div`
     padding:50px 10px 0 10px;
     p {
         
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Lora', sans-serif;
         font-size: 1.25rem;
         font-stretch: normal;
         text-align:left;
@@ -72,7 +72,7 @@ const Hero = styled.div`
         color: #0d0d0d;
         padding: 1rem 1.5rem;
         margin:1rem;
-        border-radius: .3rem;
+        // border-radius: .3rem;
         text-decoration:none;
     }
     .small-text {

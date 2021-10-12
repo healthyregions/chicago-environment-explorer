@@ -5,17 +5,17 @@ import { colors } from '../config';
 
 export const StyledDropDown = styled(FormControl)`
   margin:0 10px 0 0;
-  color:${colors.black};
+  color:${colors.chicagoBlue};
   padding:0;
   .MuiInputBase-root {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
   }
   .MuiFormLabel-root {
-    color: ${colors.black};
-    font-family: 'Montserrat', sans-serif;
+    color: ${colors.chicagoBlue};
+    font-family: 'Roboto', sans-serif;
   }
   .Mui-focused {
-    color: ${colors.black} !important;
+    // color: ${colors.black} !important;
   }
   .MuiInput-underline:before {
     border-bottom:1px solid rgba(255,255, 255, 0.42);
@@ -24,19 +24,20 @@ export const StyledDropDown = styled(FormControl)`
     border-bottom: 2px solid ${colors.black};
   }
   .MuiInputBase-root {
-    color: ${colors.black};
+    color: ${colors.chicagoBlue};
+    border-bottom:2px solid ${colors.chicagoDarkBlue};
     .MuiSvgIcon-root {
       color: rgba(255,255,255,0.54);
     },
     .MuiPopover-paper {
-      color:${colors.black};
+      // color:${colors.black};
     }
   }
   .MuiFormGroup-root {
     .MuiFormControlLabel-root{
-      color:${colors.black};
+      // color:${colors.black};
       span {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Roboto', sans-serif;
       }
       .MuiRadio-root {
         color: ${colors.black}55;
@@ -130,7 +131,7 @@ export const ContentContainer = styled.div`
     font-weight: 300;
   }
   h2 { 
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 1.75px;
@@ -144,7 +145,7 @@ export const ContentContainer = styled.div`
     font-weight: 300;
   }
   p, a, ul li, ol li {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Lora', sans-serif;
     font-size: 16px;
     font-weight: 400;
     font-stretch: normal;

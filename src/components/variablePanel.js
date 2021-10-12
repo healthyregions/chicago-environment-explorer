@@ -20,23 +20,24 @@ const VariablePanelContainer = styled.div`
   top:60px;
   height:auto;
   min-width:200px;
-  background-color: ${colors.ivory};
+  background-color: ${colors.white};
   box-shadow: 2px 0px 5px ${colors.gray}44;
   padding:0;
   box-sizing: border-box;
   transition:250ms all;
-  font: 'Montserrat', sans-serif;
+  font: 'Roboto', sans-serif;
   color:${colors.black};
   z-index:50;
-  border-radius:20px;
+  // border-radius:20px;
   &.hidden {
     transform: translateX(-100%);
   }
   h1,h2,h3,h4 {
-    font-family: 'Lora', serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0 0 10px 0;
   }
   p {
+    font-family: 'Lora', serif;
     margin: 10px 0;
   }
   @media (max-width:1024px) {
@@ -55,11 +56,11 @@ const VariablePanelContainer = styled.div`
     box-sizing:border-box;
     padding:0;
     margin:0;
-    background-color: ${colors.ivory};
+    background-color: ${colors.white};
     box-shadow: 2px 0px 5px ${colors.gray}88;
     outline:none;
     border:none;
-    border-radius:20px;
+    // border-radius:20px;
     cursor: pointer;
     transition:500ms all;
     svg { 
@@ -117,7 +118,8 @@ const VariablePanelContainer = styled.div`
 `
 
 const ControlsContainer = styled.div`
-  max-height:78vh;
+  max-height:60vh;
+  overflow-y:scroll;
   padding:20px;
 
   @media (max-height:899px){
@@ -131,6 +133,32 @@ const ControlsContainer = styled.div`
   p.data-description {
     max-width: 40ch;
     line-height:1.3;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: ${colors.white};
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoBlue};
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%, 100%; 
+    transition:125ms all;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoDarkBlue};
+    background-position: center center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%, 100%; 
   }
 `
 

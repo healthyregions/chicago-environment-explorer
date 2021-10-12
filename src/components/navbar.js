@@ -17,13 +17,12 @@ const NavContainer = styled.div`
   top: 0px; 
   left: 0px;
   z-index:999;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 14px;
   line-height: 1.5;
   letter-spacing: 1.75px;
   font-weight: 400;
   font-stretch: normal;
-  color: red;
 
   a {
     color: gray;
@@ -40,9 +39,10 @@ const NavContainer = styled.div`
     padding-left: 20px;
     font-size: 20px;
     a {
-      font-family: 'Lora', serif;
+      font-family: 'Roboto', serif;
       font-weight:bold;
       letter-spacing: initial;
+      color:${colors.black};
     }
   }
 

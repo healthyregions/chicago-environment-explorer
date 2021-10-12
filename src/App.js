@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
  
 import {Map, LoadingMessage, ErrorPage} from './components/';
  
-const About = React.lazy(() => import('./components/Pages/About'));
-const Contact = React.lazy(() => import('./components/Pages/Contact'));
-const Data = React.lazy(() => import('./components/Pages/Data'));
+// const About = React.lazy(() => import('./components/Pages/About'));
+// const Contact = React.lazy(() => import('./components/Pages/Contact'));
+// const Data = React.lazy(() => import('./components/Pages/Data'));
 
 class App extends Component {
 

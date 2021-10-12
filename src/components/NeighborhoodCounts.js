@@ -15,24 +15,24 @@ const CountsContainer = styled.div`
 
 const TagButton = styled.button`
     background:${colors.white};
-    border:none;
+    border:1px solid ${colors.chicagoBlue};
     text-transform:capitalize;
     margin:2px;
     padding:5px;
-    border-radius:1rem;
+    // border-radius:1rem;
     font-size:13px;
-    font-family:'Montserrat', sans-serif;
+    font-family:'Lora', serif;
     cursor:pointer;
     transition:250ms all;
     &:hover {
-        background:${colors.green};
+        background:${colors.chicagoLightBlue};
     }
     span {
         font-weight:bold;
         padding-left:5px;
     }
     &.active {
-        background:${colors.yellow};
+        background:${colors.chicagoBlue};
     }
 `
 

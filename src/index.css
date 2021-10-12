@@ -5,7 +5,7 @@
 }
 
 body {
-  background:#F9F9ED;
+  background:#ffffff;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -33,6 +33,7 @@ body {
   top: 50px; 
   width: 100%; 
   height:  calc(100% - 50px);
+  border-top:2px solid #005899;
 }
 
 #mainContainer.loading {
@@ -132,4 +133,13 @@ button.mapboxgl-ctrl-attrib-button {
   text-align: center;
   width:100%;
   background:white;
+}
+
+.mapboxgl-ctrl-bottom-left {
+  transform:translateY(-20px);
+}
+
+.mapboxgl-ctrl-bottom-right {
+  left:0 !important;
+  right:initial !important;
 }

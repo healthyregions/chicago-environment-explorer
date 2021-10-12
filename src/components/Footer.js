@@ -111,9 +111,9 @@ const SignupForm = styled.div`
         color: #0d0d0d;
         border:none;
         outline:none;
-        border-radius:5px;
+        // border-radius:5px;
         font-weight:bold;
-        font-family:'Montserrat', sans-serif;
+        font-family:'Roboto', sans-serif;
         cursor:pointer;
     }
     .sr-only {

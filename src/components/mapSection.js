@@ -40,7 +40,7 @@ const MapContainer = styled.div`
     width:${props => props.infoPanel ? `calc(100% - ${getRightMargin()-10}px)` : '100%'};
     height:100%;
     transition: 250ms all;
-    background:${colors.ivory};
+    background:${colors.white};
     overflow:hidden;
     @media (max-width:600px) {
         div.mapboxgl-ctrl-geocoder {
@@ -50,7 +50,7 @@ const MapContainer = styled.div`
 `
 
 const HoverDiv = styled.div`
-    background:${colors.ivory};
+    background:${colors.white};
     padding:20px;
     color:${colors.black};
     box-shadow: 0px 0px 5px rgba(0,0,0,0.7);
@@ -67,7 +67,7 @@ const HoverDiv = styled.div`
         border-collapse:collapse;
     }
     table tr:nth-of-type(even) {
-        background:${colors.lightgray}55;
+        background:${colors.chicagoLightBlue};
     }
     table tr td {
         padding:2px 0;
@@ -79,8 +79,8 @@ const HoverDiv = styled.div`
 
 const MapButtonContainer = styled.div`
     position: absolute;
-    right: 10px;
-    bottom: 30px;
+    right: 0.75em;
+    bottom: 5em;
     z-index: 10;
     transition: 250ms all;
     @media (max-width:768px) {
@@ -153,6 +153,20 @@ const GeocoderContainer = styled.div`
     width:250px;
     @media (max-width:600px) {
         display:none;
+    }
+`
+
+const LogoContainer = styled.div`
+    position:absolute;
+    right:0.75em;
+    bottom:0.75em;
+    zIndex:500;
+    height:4em;
+    background:white;
+    padding:0.5em 1em;
+    border:1px solid #00e59e;
+    img {
+        height:100%;
     }
 `
 
@@ -231,7 +245,7 @@ function MapSection(props){
     }
 
     var queryViewport = debounce((e) => {
-        if (centroids.length){
+        if (!!centroids && centroids.length){
             const viewport = new WebMercatorViewport(e.viewState);      
             const extent = [...viewport.unproject([0, 0]),...viewport.unproject([viewport.width, viewport.height])];
             RunQueryWorker({
@@ -523,8 +537,8 @@ function MapSection(props){
             stroked: true,
             filled:true,
             lineWidthScale: 5,
-            getLineColor: d => d.properties.geoid == hoverGeog ? [0,0,0,255] : [100,100,100,0],
-            getFillColor: d => d.properties.geoid == hoverGeog ? [255,255,255,120] : [255,255,255,0],
+            getLineColor: d => d.properties.geoid == hoverGeog ? [65,182,230,255] : [100,100,100,0],
+            getFillColor: d => d.properties.geoid == hoverGeog ? [65,182,230,120] : [65,182,230,0],
             getLineWidth:1, 
             lineWidthMinPixels: 3,        
             updateTriggers: {
@@ -727,7 +741,7 @@ function MapSection(props){
             <MapButtonContainer 
                 infoPanel={panelState.info}
             >
-                <NavInlineButtonGroup>
+                {/* <NavInlineButtonGroup>
                     <NavInlineButton
                         title="Selection Box"
                         id="boxSelect"
@@ -736,7 +750,7 @@ function MapSection(props){
                     >
                         {SVG.selectRect}
                     </NavInlineButton>
-                </NavInlineButtonGroup>
+                </NavInlineButtonGroup> */}
                 <NavInlineButtonGroup>
                     <NavInlineButton
                         title="Geolocate"
@@ -772,7 +786,7 @@ function MapSection(props){
                         {SVG.compass}
                     </NavInlineButton>
                 </NavInlineButtonGroup>
-                <NavInlineButtonGroup>
+                {/* <NavInlineButtonGroup>
                     <NavInlineButton
                         title="Share this Map"
                         id="shareButton"
@@ -782,7 +796,7 @@ function MapSection(props){
                         {SVG.share}
                     </NavInlineButton>
                 </NavInlineButtonGroup>
-                <ShareURL type="text" value="" id="share-url" />
+                <ShareURL type="text" value="" id="share-url" /> */}
             </MapButtonContainer>
             <GeocoderContainer>
                 <Geocoder 
@@ -798,6 +812,11 @@ function MapSection(props){
                     <MapTooltipContent content={hoverInfo.object} />
                 </HoverDiv>
             )}
+            <LogoContainer>
+                <a href="https://herop.ssd.uchicago.edu/" target="_blank" rel="noopener noreferrer">
+                    <img src={`${process.env.PUBLIC_URL}/herop_dark_logo_teal.png`} />
+                </a>
+            </LogoContainer>
         </MapContainer>
     ) 
 }

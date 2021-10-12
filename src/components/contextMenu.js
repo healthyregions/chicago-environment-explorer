@@ -20,7 +20,7 @@ const MenuContainer = styled(Paper)`
     top: ${props=>props.y}px;
     background:${colors.lightgray};
     padding:0 15px 15px 15px;
-    border-radius:4px;
+    // border-radius:4px;
     z-index:50000;
     font-family:'Montserrat', sans-serif;
     svg {

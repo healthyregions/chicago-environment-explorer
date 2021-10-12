@@ -150,7 +150,7 @@ export const fixedScales = {
 
 export const colors = {
     white: '#ffffff',
-    black: '#00000',
+    black: '#000000',
     darkgray:'#1a1a1a',
     gray:'#2b2b2b',
     buttongray: '#f5f5f5',
@@ -165,7 +165,7 @@ export const colors = {
     teal: '#00575c',
     // orange: '#f37e43',
     pink: '#e83e8c',
-    ivory: '#F9F9ED',
+    ivory: '#fff',
     green:'#97DB4F',
     cartoColors: {
       green:'#49c767',
@@ -175,5 +175,9 @@ export const colors = {
       sky:'#9dcee0',
       pink:'#e09dd0',
       spring:'#9de0c3'
-    }
+    },
+    chicagoBlue: '#41B6E6',
+    chicagoDarkBlue: '#005899',
+    chicagoLightBlue: "#E1F3F8",
+    chicagoRed: "#E4002B"
 }
