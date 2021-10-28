@@ -1,5 +1,6 @@
 import BarChart from './BarChart';
 import BottomPanel from './bottomPanel';
+import ContactForm from './ContactForm';
 import ContextMenu from './contextMenu';
 import CsvDownloader from './csvDownloader';
 import DataDetails from './dataDetails';
@@ -12,6 +13,7 @@ import InfoBox from './infoBox';
 import Legend from './legend';
 import MapSection from './mapSection';
 import MapTooltipContent from './mapTooltipContent';
+import MemberGrid from './MemberGrid';
 import NavBar from './navbar';
 import NotificationBox from './notificationBox';
 import VariablePanel from './variablePanel';
@@ -35,6 +37,7 @@ import Map from './Pages/Map';
 export {
     BarChart,
     BottomPanel,
+    ContactForm,
     ContextMenu,
     CsvDownloader,
     DataDetails,
@@ -48,6 +51,7 @@ export {
     Legend,
     MapSection,
     MapTooltipContent,
+    MemberGrid,
     NavBar,
     NotificationBox,
     VariablePanel,

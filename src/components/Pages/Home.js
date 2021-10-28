@@ -14,7 +14,7 @@ const HomePage = styled.div`
         font-size: 4rem;
         font-weight: 300;
         text-align: left;
-        color: ${colors.green};
+        color: ${colors.black};
         width: 80vw;
         max-width: 940px;
         margin: 0 0 40px 0;
@@ -68,7 +68,7 @@ const Hero = styled.div`
         line-height:5;
         text-align: center;
         text-transform:uppercase;
-        background-color: ${colors.green};
+        background-color: ${colors.chicagoBlue};
         color: #0d0d0d;
         padding: 1rem 1.5rem;
         margin:1rem;
@@ -96,7 +96,7 @@ const Hero = styled.div`
 
 `
 
-function home(){
+export default function Home(){
     return (
        <HomePage>
            <StaticNavbar/>
@@ -119,5 +119,3 @@ function home(){
        </HomePage>
     );
 }
- 
-export default home;

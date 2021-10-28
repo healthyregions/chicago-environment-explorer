@@ -45,7 +45,7 @@ const NavbarContent = styled.div`
             transition:250ms all;
             &:hover {
                 opacity:0.7;
-                color: ${colors.green};
+                color: ${colors.chicagoBlue};
             }
         }
         ul {
@@ -145,10 +145,13 @@ const StaticNavbar = () => {
                 <nav className="mainNav">
                     <ul>
                         <li>
-                                <NavLink to="/data">Data</NavLink>
+                            <NavLink to="/map">Map</NavLink>
                         </li>
                         <li>
                             <NavLink to="/about">About</NavLink>
+                        </li>
+                        <li>
+                                <NavLink to="/data">Data</NavLink>
                         </li>
                         <li>
                             <NavLink to="/contact">Contact</NavLink>

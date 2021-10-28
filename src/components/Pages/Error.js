@@ -20,12 +20,11 @@ const Error = () => {
             <StaticNavbar/>
             <ContentContainer>
                 <h1>Error 404</h1>
-                <img className="errorImg" src={`${process.env.PUBLIC_URL}/icons/regional-hot-spots@3x.png`} alt="Error Page Missing"/>
                 <h2>We can't get you where you're going.</h2>
                 <p>
                     Sorry, we can't find the page you're looking for. It may have moved or recently changed.
                     <br/><br/>
-                    Please use the navigation bar or footer to explore the Atlas.
+                    Please use the navigation bar or footer.
                 </p>
             </ContentContainer>
             <Footer/>

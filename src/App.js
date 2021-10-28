@@ -1,11 +1,12 @@
 import React, { Component, Suspense  } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
  
-import {Map, LoadingMessage, ErrorPage} from './components/';
+import {Home, LoadingMessage, ErrorPage} from './components/';
  
-// const About = React.lazy(() => import('./components/Pages/About'));
-// const Contact = React.lazy(() => import('./components/Pages/Contact'));
-// const Data = React.lazy(() => import('./components/Pages/Data'));
+const Map = React.lazy(() => import('./components/Pages/Map'));
+const About = React.lazy(() => import('./components/Pages/About'));
+const Contact = React.lazy(() => import('./components/Pages/Contact'));
+const Data = React.lazy(() => import('./components/Pages/Data'));
 
 class App extends Component {
 
@@ -15,15 +16,15 @@ class App extends Component {
         <div>
           <Suspense fallback={<LoadingMessage />}>
               <Switch>
-                <Route path="/" component={Map} exact/>
+                <Route path="/" component={Home} exact/>
                 <Route path="/map" component={Map}/>
                 <Route path="/map.html" component={Map}/>
-                {/* <Route path="/about" component={About}/>
+                <Route path="/about" component={About}/>
                 <Route path="/about.html" component={About}/>
                 <Route path="/contact" component={Contact}/>
                 <Route path="/contact.html" component={Contact}/>
                 <Route path="/data" component={Data}/>
-                <Route path="/data.html" component={Data}/> */}
+                <Route path="/data.html" component={Data}/>
                 <Route component={ErrorPage} />
                 <Route />
             </Switch>
