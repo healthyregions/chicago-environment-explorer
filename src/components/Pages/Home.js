@@ -105,14 +105,26 @@ export default function Home(){
                     <h1>Uncover the nature of Chicago's environment.</h1>
                     <p>
                         Chicago's urban environment has profound impacts on the health of communities and individuals. 
-                        A handful of key metrics―tree cover, PM2 estimates, heat island effects, traffic volumes, and social vulnerability index―
+                        A handful of key metrics―tree cover, air pollution estimates, heat island effects, traffic volumes, and social vulnerability index―
                         help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
                         <br/><br/>
 
-                        This visualization Tool for Tree Site Selection &amp; Environment Exploration was created in partnership with CDPH and UChicago's Center for Spatial Data Science, funded by the Partnership for Healthy Cities.
+                        Like the <a href="">smelly onion</a> that Chicago was named for, data about the city's environment should 
+                        be <b>tasty</b> and <b>plentiful</b>. By tasty, we mean easily accessible and ready to use and explore. By plentiful,
+                        we mean the data should extend across multiple dimensions the city's landscape, and be updated regularly.<br/><br/>
 
                     </p>
+
                     <NavLink to="/map" id="button-cta">Explore Chicago's Environment</NavLink>
+                    <br/><br/>
+
+                    <p>    
+
+                        This project refactors data from the a <a href="">previous partnership</a> with the City, and gets customized
+                         as a new platform for the wider community. We invite to you add more resources to the CHIVES explorer as build out
+                         an open data coalition to prepare Chicago for a more resilient future!
+
+                    </p>
                 </Hero>
            </HomePageContent>
            <Footer signUp={false} />
