@@ -8,6 +8,7 @@ import { StaticNavbar, Footer } from '../../components';
 import { colors } from '../../config';
 import { Gutter } from '../../styled_components';
 
+
 const HomePage = styled.div`
     h1 {    
         font-family: 'Lora', serif;
@@ -96,6 +97,11 @@ const Hero = styled.div`
 
 `
 
+
+
+
+
+
 export default function Home(){
     return (
        <HomePage>
@@ -115,8 +121,9 @@ export default function Home(){
 
                     </p>
 
-                    <NavLink to="/map" id="button-cta">Explore Chicago's Environment</NavLink>
+                    <NavLink to="/map" id="button-cta">Explore Chicago's Environment</NavLink><br/>
                     <br/><br/>
+
 
                     <p>    
 
@@ -125,7 +132,31 @@ export default function Home(){
                          an open data coalition to prepare Chicago for a more resilient future!
 
                     </p>
+
+                            
+                    <Grid container spacing ={2}>
+                        <Grid item xs={4}> 
+                            <Grid item> Text </Grid>
+                        </Grid>
+                        <Grid item xs={4}> 
+                            <Grid item> ... </Grid>
+                        </Grid>
+                        <Grid item xs={4}> 
+                            <Grid item> Text </Grid>
+                        </Grid>
+                    </Grid>
+
+                    <br/><br/>
+       
+                    <Gutter h={20}/>
+
+
+
+
                 </Hero>
+
+
+
            </HomePageContent>
            <Footer signUp={false} />
        </HomePage>
