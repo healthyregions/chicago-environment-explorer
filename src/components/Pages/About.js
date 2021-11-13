@@ -92,7 +92,7 @@ export default function About(){
                     In the Research Pilot Stage, The <a href="">HeRoP</a> team was led by Marynia Kolak, MS, MFA, PhD (Associate Director of Health Informatics) and supported by 
                     research assistants Isaac Kamber, Lorenz Menendez, Yuming Liu, and Jizhou Wang, with previous analytic work by graduate 
                     student Haowen Shang, and ongoing collaboration with Center for Spatial Data Science Academic Director, Luc Anselin, PhD, Executive Director,    
-                    Julia Koschinsky, PhD, as well as Raed Mansour, MS and Dave Graham at the Chicago Department of Public Health. Dozens of additional, invaluable contributors 
+                    Julia Koschinsky, PhD, as well as Raed Mansour, MS and Dave Graham at the Chicago Department of Public Health. Dozens of additional, invaluable 
                     public, private, and community stakeholders impacted the success of the Tree Tool application: follow the City of Chicago for more details coming soon!
 
                 </p>
@@ -104,8 +104,8 @@ export default function About(){
                 <p>
                     After the completion of the research pilot, HeRoP refactored the data into a fresh, newly customized web mapping application. This
                     facilitates more open, flexible, and free design and allows the community to collaborate more directly, in line with HeRoP's mission. New 
-                    data will be added regularly, and existing datasets will be updated as needed. Community groups can add request new data, which will be included 
-                    if in line with our core mission. We additionally added a new resource page curating environmental mapping resources in Chicago.
+                    data will be added regularly, and existing datasets will be updated as needed. Community groups can request new data, which will be included 
+                    if in line with our core mission and within the lab's capabilities. We additionally added a new resource page curating environmental mapping resources in Chicago.
 
                 </p>
 
