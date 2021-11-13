@@ -39,9 +39,14 @@ const HomePage = styled.div`
         line-height: 1.5;
         color: ${colors.darkgray};
     }
-     .photo {
-      width: 100%;
-
+    .photo {
+        width: 100%;
+        @media(max-width: 960px) {
+            max-height:40vh;
+            width: auto;
+            margin:0 auto;
+            display:block;
+        }
     }
     a {
         color: ${colors.chicagoBlue};
@@ -129,65 +134,45 @@ export default function Home(){
            <StaticNavbar/>
            <HomePageContent>
                 <Hero>
-
-                            <h1>Uncover the nature of Chicago's environment.</h1>
-                            <p>
-                                Chicago's urban environment has profound impacts on the health of communities and individuals. 
-                                A handful of key metrics―tree cover, air pollution estimates, heat island effects, traffic volumes, and social vulnerability index―
-                                help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
-                            </p>
-
-                                <br/> 
-                                <NavLink to="/map" id="button-cta">Explore Chicago's Environment --> </NavLink>
-                                <NavLink to="/map" id="button-search">Enter an Address to Start</NavLink><br/>
-
-
-
-
-
-                            
-                <Grid container spacing ={2}>
-                        <Grid item xs={4}> 
-                            <Grid item> 
-                                <img className="photo" src={onion} alt="Wild Onion" loading="lazy"/>
-                            </Grid>
+                    <h1>Uncover the nature of Chicago's environment.</h1>
+                    <p>
+                        Chicago's urban environment has profound impacts on the health of communities and individuals. 
+                        A handful of key metrics―tree cover, air pollution estimates, heat island effects, traffic volumes, and social vulnerability index―
+                        help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
+                    </p>
+                    <br/> 
+                    <NavLink to="/map" id="button-cta">Explore Chicago's Environment --> </NavLink>
+                    <NavLink to="/map" id="button-search">Enter an Address to Start</NavLink><br/>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={4}> 
+                            <img className="photo" src={onion} alt="Wild Onion" loading="lazy"/>
                         </Grid>
-                        <Grid item xs={8}> 
-                            <Grid item> 
-
-                    <br/><br/>
-
-                            <p> Like the <a href="">wild onion</a> that Chicago was named for, data about the city's environment should 
-                        be <b>tasty</b> and <b>plentiful</b>. By tasty, we mean easily accessible and ready to use and explore. By plentiful,
-                        we mean the data should extend across multiple dimensions of the city's landscape, and be updated regularly. 
+                        <Grid item xs={12} md={8}> 
                             <br/><br/>
-                        We <a href="">harmonize & standardize</a> environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of 
-                        resources on the Chicago Environment, cultivated by a community of curators.
-                            <br/><br/>
-                            This project refactors data from the a <a href="">previous partnership</a> with the City, and gets customized
-                        as a new opensource platform for the wider community. <br/><br/>
-
-                            Have data to add? A mapping resource to recommend? <a href="">We invite you</a> to add more resources to the <i>ChiVes</i> explorer as build out
-                        an open data coalition to prepare Chicago for a more resilient future! </p>
-
-                           <h5>Image of <i>Wild Onion, Allium acuminatum </i> by Margaret Neilson Armstrong (1913) via <br/> 
-                           Creative Commons CC0 1.0 Universal Public Domain Dedication.</h5>
-
-                            </Grid>
+                            <p> 
+                                Like the <a href="">wild onion</a> that Chicago was named for, data about the city's environment should 
+                                be <b>tasty</b> and <b>plentiful</b>. By tasty, we mean easily accessible and ready to use and explore. By plentiful,
+                                we mean the data should extend across multiple dimensions of the city's landscape, and be updated regularly. 
+                                <br/><br/>
+                                We <a href="">harmonize & standardize</a> environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of 
+                                resources on the Chicago Environment, cultivated by a community of curators.
+                                <br/><br/>
+                                This project refactors data from the a <a href="">previous partnership</a> with the City, and gets customized
+                                as a new opensource platform for the wider community.
+                                <br/><br/>
+                                Have data to add? A mapping resource to recommend? <a href="">We invite you</a> to add more resources to the <i>ChiVes</i> explorer as build out
+                                an open data coalition to prepare Chicago for a more resilient future! 
+                            </p>
+                            <h5>
+                                Image of <i>Wild Onion, Allium acuminatum </i> by Margaret Neilson Armstrong (1913) via 
+                                <br/> 
+                                Creative Commons CC0 1.0 Universal Public Domain Dedication.
+                            </h5>
                         </Grid>
                     </Grid>
-
                     <br/><br/>
-       
                     <Gutter h={20}/>
-
-
-
                 </Hero>
-
-
-
-
            </HomePageContent>
            <Footer signUp={false} />
        </HomePage>
