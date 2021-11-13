@@ -89,7 +89,7 @@ export default function About(){
                      rounds of refinement and editing across multiple city and community stakeholders.
                      <br/><br/> 
 
-                    In the Research Pilot Stage, The <a href="">HEROP</a> team was led by Marynia Kolak, MS, MFA, PhD (Associate Director of Health Informatics) and supported by 
+                    In the Research Pilot Stage, The <a href="">HeRoP</a> team was led by Marynia Kolak, MS, MFA, PhD (Associate Director of Health Informatics) and supported by 
                     research assistants Isaac Kamber, Lorenz Menendez, Yuming Liu, and Jizhou Wang, with previous analytic work by graduate 
                     student Haowen Shang, and ongoing collaboration with Center for Spatial Data Science Academic Director, Luc Anselin, PhD, Executive Director,    
                     Julia Koschinsky, PhD, as well as Raed Mansour, MS and Dave Graham at the Chicago Department of Public Health. Dozens of additional, invaluable contributors 
