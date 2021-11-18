@@ -457,7 +457,7 @@ function MapSection(props){
     const handleGeocoder = useCallback(location => {
         if (location.center !== undefined) {
             let center = location.center;
-            let zoom = 16;
+            let zoom = 13;
 
             if (location.bbox) {
                 let bounds = fitBounds({
@@ -480,7 +480,18 @@ function MapSection(props){
             })
         }  
       }, []);
-
+    
+    // on initial render, navigate to lon/lat if provided
+    useEffect(() => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        if (urlParams.has('lat') && urlParams.has('lon')) {
+            const center = [+urlParams.get('lon'), +urlParams.get('lat')]
+            handleGeocoder({
+                center
+            })
+        }
+    },[])
     const COLOR_SCALE = scaleThreshold()
         .domain(mapParams.bins)
         .range(mapParams.colorScale);

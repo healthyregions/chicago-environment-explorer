@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Grid from '@material-ui/core/Grid';
 
-import { StaticNavbar, Footer } from '../../components';
+import { Geocoder, StaticNavbar, Footer } from '../../components';
 import { colors } from '../../config';
 import { Gutter } from '../../styled_components';
 import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
 import onion from './onion.png'
 
+const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const HomePage = styled.div`
     h1 {    
@@ -95,15 +96,13 @@ const Hero = styled.div`
         font-size: 16px;
         font-weight: 700;
         letter-spacing: 1.75px;
-        line-height:5;
         text-align: center;
         text-transform:uppercase;
         background-color: ${colors.darkgray};
         color: #FFFFFF;
         padding: 1rem 1.5rem;
-        margin:1rem;
-        // border-radius: .3rem;
         text-decoration:none;
+        line-height:2.5;        
     }
 
     .small-text {
@@ -127,8 +126,22 @@ const Hero = styled.div`
 
 `
 
-
 export default function Home(){
+        
+    const handleGeocoder = useCallback(location => {
+        if (location.center !== undefined) {
+            let url = '';
+            
+            if ((`${window.location.href}`).includes('index')) {
+                url += (`${window.location.href}`).split('index')[0]
+            } else {
+                url += window.location.href
+            }
+            url += `map?lat=${location.center[1]}&lon=${location.center[0]}`
+            window.location.href = url 
+        }  
+    }, []);
+
     return (
        <HomePage>
            <StaticNavbar/>
@@ -141,7 +154,25 @@ export default function Home(){
                         help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
                     </p>
                     <br/> 
-                    <NavLink to="/map" id="button-search">Chives: Explore The Chicago Environment</NavLink><br/>
+                    
+                    <NavLink to="/map" id="button-search">Chives: Explore The Chicago Environment</NavLink>
+                    <Gutter h={40}/>
+                    <Grid container spacing={8} alignItems="center">
+                        <Grid item xs={12} sm={12} md={6}>
+                            <p>
+                                <i>Got somewhere you want to explore? Search for an address to navigate directly to your neighborhood.</i>
+                            </p>
+                        </Grid>
+                        <Grid item xs={12} sm={12} md={6}>
+                            <Geocoder 
+                                id="Geocoder"
+                                placeholder={"Find your location - eg. 1155 E 60th Street"}
+                                API_KEY={MAPBOX_ACCESS_TOKEN}
+                                onChange={handleGeocoder}
+                            />
+                        </Grid>
+                    </Grid>
+                    <Gutter h={20}/>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={4}> 
                             <img className="photo" src={onion} alt="Wild Onion" loading="lazy"/>
