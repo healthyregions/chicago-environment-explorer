@@ -48,6 +48,14 @@ const MapContainer = styled.div`
         }
         width:100%;
     }
+    @media (max-width:768px) {
+        div.mapboxgl-ctrl-bottom-right {
+            transform: translateY(-60px);
+        }
+        div.mapboxgl-ctrl-bottom-left {
+            transform: translate(30px, -60px);
+        }
+    }
 `
 
 const HoverDiv = styled.div`
@@ -174,6 +182,11 @@ const LogoContainer = styled.div`
     border:1px solid #00e59e;
     img {
         height:100%;
+    }
+    @media (max-width:768px) {
+        bottom:initial;
+        top:0;
+        right:0;
     }
 `
 
@@ -413,7 +426,7 @@ function MapSection(props){
             setViewState({
                     longitude: position.coords.longitude,
                     latitude: position.coords.latitude,
-                    zoom:7,
+                    zoom:14,
                     transitionDuration: 1000,
                     transitionInterpolator: new FlyToInterpolator()
                 })
