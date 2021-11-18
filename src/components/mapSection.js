@@ -46,6 +46,7 @@ const MapContainer = styled.div`
         div.mapboxgl-ctrl-geocoder {
             display:none;
         }
+        width:100%;
     }
 `
 
@@ -79,15 +80,21 @@ const HoverDiv = styled.div`
 
 const MapButtonContainer = styled.div`
     position: absolute;
-    right: 0.75em;
+    right:${props => props.infoPanel ? `calc(${getRightMargin()/5}px)` : '0.75em'};
     bottom: 5em;
     z-index: 10;
     transition: 250ms all;
+    @media (max-width: 1000px) {
+        right:${props => props.infoPanel ? '35%' : '0.75em'};
+    }
     @media (max-width:768px) {
         bottom:100px;
     }
     @media (max-width: 400px) {
         transform:scale(0.75) translate(20%, 20%);
+    }
+    @media (max-width: 600px){
+        right:0.75em;
     }
 `
 

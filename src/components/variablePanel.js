@@ -31,6 +31,9 @@ const VariablePanelContainer = styled.div`
   // border-radius:20px;
   &.hidden {
     transform: translateX(-100%);
+    @media (max-width:600px){
+      transform: translateX(calc(-100% - 30px));
+    }
   }
   h1,h2,h3,h4 {
     font-family: 'Roboto', sans-serif;
@@ -106,7 +109,7 @@ const VariablePanelContainer = styled.div`
     }
   }
   button#showHideLeft.hidden {
-    left:105%;
+    left:calc(100% + 20px);
     svg {
       transform:rotate(90deg);
     }

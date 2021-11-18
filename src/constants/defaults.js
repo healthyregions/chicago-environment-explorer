@@ -36,8 +36,8 @@ export const INITIAL_STATE = {
     ],
   },
   panelState: {
-    variables:true,
-    info:true,
+    variables:window.innerWidth > 768,
+    info:window.innerWidth > 768,
     tutorial:false,
     context: false,
     contextPos: {x:null,y:null}
