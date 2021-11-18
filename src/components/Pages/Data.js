@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
 import { StaticNavbar, Footer, Table } from '../'; 
 import { colors } from '../../config';
+import { NavLink } from 'react-router-dom';
+
 
 const DataPage = styled.div`
     background:white;
@@ -19,6 +21,42 @@ const SectionTitle = styled.h3`
     &:nth-of-type(1){
         margin:10px 0;
     }
+`
+
+const Hero = styled.div`
+    width:100%;
+    max-width:1140px;
+    text-align:center;
+    color: ${colors.lightgray};
+    margin:0 auto;
+    padding:50px 10px 0 10px;
+    p {
+        
+        font-family: 'Lora', sans-serif;
+        font-size: 1.25rem;
+        font-stretch: normal;
+        text-align:left;
+        font-style: normal;
+        line-height: 1.6;
+        letter-spacing: normal;
+        padding:2rem 0;
+    }
+
+    #button-search{
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 1.75px;
+        line-height:5;
+        text-align: center;
+        text-transform:uppercase;
+        background-color: ${colors.darkgray};
+        color: #FFFFFF;
+        padding: 1rem 1.5rem;
+        margin:1rem;
+        // border-radius: .3rem;
+        text-decoration:none;
+    }
+
 `
 
 const variables = [{
@@ -59,7 +97,6 @@ const variables = [{
 },
 {
     name: "logTraf",
-    description: "Logged traffic volume, using street segment volume from IDOT."
 },
 {
     name: "pm25NN",
@@ -258,8 +295,18 @@ export default function Data(){
                     The <i>ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018).
                 </p>
                 <Gutter h={20}/>
+
+                <Hero>
+
+                <h2> CURRENT RELEASE (11.18.2021)</h2>
+
+                <NavLink to="/map" id="button-search">CSV</NavLink>
+                <NavLink to="/map" id="button-search">SHP</NavLink>
+                <NavLink to="/map" id="button-search">GEOJSON</NavLink>
+
+                </Hero>
                 
-                {/* <h2>CURRENT RELEASE</h2>
+                {/* <h3>Data Dictionary</h3>
 
                 <p>
 
@@ -318,14 +365,14 @@ export default function Data(){
                 
                                 <Gutter h={20}/>
 
-                <h2>Variable Names</h2>
+                <h2>Data Dictionary</h2>
                 <p>
                   <ul>
                     {variables.map(({name, description}) => <li><b>{name}:</b> {description}</li>)}
                   </ul>
                 </p>
                 <Gutter h={40}/>
-                <h2>Data Sources</h2>
+                <h2>Data Documentation</h2>
                 <Table columns={columns} data={dataSources} />
                
             </ContentContainer>
