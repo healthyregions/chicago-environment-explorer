@@ -203,7 +203,7 @@ const dataSources = [
     },
     {
       "Variable": "Economic Hardship Index",
-      "Documentation": "Metadata Document",
+      "Documentation": <NewTabLink link="" text="Metadata Document"/>,
       "Original Source": <><NewTabLink link="https://data.census.gov" text="ACS"/> via <NewTabLink link="https://herop.ssd.uchicago.edu/" text="CSDS"/></>,
       "Year Used": "2018 \n5-yr ave",
       "Scale": "Census tract",
@@ -300,9 +300,9 @@ export default function Data(){
 
                 <h2> CURRENT RELEASE (11.18.2021)</h2>
 
-                <NavLink to="/map" id="button-search">CSV</NavLink>
-                <NavLink to="/map" id="button-search">SHP</NavLink>
-                <NavLink to="/map" id="button-search">GEOJSON</NavLink>
+                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson/chiEnvExpl.csv" id="button-search">CSV</a>
+                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson" id="button-search">SHP</a>
+                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson/chiEnvExpl.geojson" id="button-search">GEOJSON</a>
 
                 </Hero>
                 
