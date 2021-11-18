@@ -107,7 +107,7 @@ export default function About(){
                     After the completion of the research pilot, HeRoP refactored the data into a fresh, newly customized web mapping application. This
                     facilitates more open, flexible, and free design and allows the community to collaborate more directly, in line with HeRoP's mission. New 
                     data will be added regularly, and existing datasets will be updated as needed. Community groups can request new data, which will be included 
-                    if in line with our core mission and within the lab's capabilities. We additionally added a new resource page curating environmental mapping resources in Chicago.
+                    if in line with our core mission and within the lab's capabilities. We will launch a new resource page curating environmental mapping resources in Chicago in early 2022, in collaboration with community partners.
 
                 </p>
 
