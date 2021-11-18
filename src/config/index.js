@@ -179,5 +179,7 @@ export const colors = {
     chicagoBlue: '#41B6E6',
     chicagoDarkBlue: '#005899',
     chicagoLightBlue: "#E1F3F8",
-    chicagoRed: "#E4002B"
+    chicagoRed: "#E4002B",
+    onionGreen: '#718c1f',
+    alliumPink: "#dd7f96"
 }

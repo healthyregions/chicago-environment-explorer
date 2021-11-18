@@ -2,9 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
 import { MemberGrid, StaticNavbar, Footer } from '../../components';
+import { colors } from '../../config';
 
 const AboutPage = styled.div`
     background:white;
+    a {
+        color: ${colors.onionGreen};
+        transition: 250ms all;
+        &:hover { 
+            color: ${colors.alliumPink};
+        }
+    }
 `
 const BioSection = styled.div`
     padding:40px 0;

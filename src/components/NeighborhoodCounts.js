@@ -15,7 +15,7 @@ const CountsContainer = styled.div`
 
 const TagButton = styled.button`
     background:${colors.white};
-    border:1px solid ${colors.chicagoBlue};
+    border:1px solid ${colors.onionGreen};
     text-transform:capitalize;
     margin:2px;
     padding:5px;
@@ -32,7 +32,7 @@ const TagButton = styled.button`
         padding-left:5px;
     }
     &.active {
-        background:${colors.chicagoBlue};
+        background:${colors.onionGreen};
     }
 `
 

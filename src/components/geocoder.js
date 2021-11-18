@@ -24,10 +24,10 @@ const Container = styled.div`
         color:${colors.black};
     }
     .MuiInput-underline:hover:not(.Mui-disabled):before {
-        border-bottom:2px solid ${colors.chicagoBlue};
+        border-bottom:2px solid ${colors.onionGreen};
     }
     .MuiInput-underline:after {
-        border-bottom:2px solid ${colors.chicagoBlue};
+        border-bottom:2px solid ${colors.onionGreen};
 
     }
     .MuiFormControl-root .MuiInputBase-adornedEnd:before {

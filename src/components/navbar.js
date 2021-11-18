@@ -74,7 +74,7 @@ const NavBar = () => {
     return (
         <NavContainer>
             <div className="nav-logo">
-              <img src={`${process.env.PUBLIC_URL}/logo.png`} style={{height: '30px', paddingRight: '5px'}} alt="Chicago Environment Explorer" /><a href="/">Chicago Environment Explorer</a>
+              <img src={`${process.env.PUBLIC_URL}/logo.png`} style={{height: '30px', paddingRight: '5px'}} alt="Chicago Environment Explorer" /><a href="/">Chives Explorer</a>
             </div>
           <NavItems> 
             <li><NavLink to="/data">DATA</NavLink></li>

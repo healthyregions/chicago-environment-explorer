@@ -146,7 +146,7 @@ const ControlsContainer = styled.div`
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoBlue};
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.onionGreen};
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%; 

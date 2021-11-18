@@ -49,7 +49,11 @@ const HomePage = styled.div`
         }
     }
     a {
-        color: ${colors.chicagoBlue};
+        color: ${colors.onionGreen};
+        transition: 250ms all;
+        &:hover { 
+            color: ${colors.alliumPink};
+        }
     }
 `
 

@@ -5,13 +5,13 @@ import { colors } from '../config';
 
 export const StyledDropDown = styled(FormControl)`
   margin:0 10px 0 0;
-  color:${colors.chicagoBlue};
+  color:${colors.onionGreen};
   padding:0;
   .MuiInputBase-root {
     font-family: 'Roboto', sans-serif;
   }
   .MuiFormLabel-root {
-    color: ${colors.chicagoBlue};
+    color: ${colors.onionGreen};
     font-family: 'Roboto', sans-serif;
   }
   .Mui-focused {
@@ -24,7 +24,7 @@ export const StyledDropDown = styled(FormControl)`
     border-bottom: 2px solid ${colors.black};
   }
   .MuiInputBase-root {
-    color: ${colors.chicagoBlue};
+    color: ${colors.onionGreen};
     border-bottom:2px solid ${colors.chicagoDarkBlue};
     .MuiSvgIcon-root {
       color: rgba(255,255,255,0.54);

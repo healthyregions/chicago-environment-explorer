@@ -187,7 +187,7 @@ const ReportWrapper = styled.div`
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoBlue};
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.onionGreen};
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%; 
@@ -290,49 +290,49 @@ const columnsToChart = [
   {
     'column':'trees_crown_den',
     'name':'Percent Canopy Coverage',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
   {
     'column':'heatisl',
     'name':'Temperature Percentile',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
   {
     'column':'nn_q3_pm2_5',
     'name':'Summer PM2.5',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
   {
     'column':'logtraf',
     'name': 'Traffic Volume',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
   {
     'column':'urban_flood_suscep',
     'name':'Urban Flood Susceptibility',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
   {
     'column':'svi_pecentile',
     'name':'Social Vulnerability',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
   {
     'column':'asthma_age_adj_rate',
     'name':'Asthma Cases per 10,000 Residents',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
   {
     'column':'hardship',
     'name':'Economic Hardship Index',
-    'color':colors.chicagoBlue,
+    'color':colors.onionGreen,
     'preset':'',
   },
 ]

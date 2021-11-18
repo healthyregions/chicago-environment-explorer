@@ -24,8 +24,12 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.App-link, a {
+  color: #718c1f;
+  transition:250ms all;
+}
+a:hover {
+  color: #dd7f96;
 }
 
 @keyframes App-logo-spin {

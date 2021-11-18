@@ -45,7 +45,7 @@ const NavbarContent = styled.div`
             transition:250ms all;
             &:hover {
                 opacity:0.7;
-                color: ${colors.chicagoBlue};
+                color: ${colors.onionGreen};
             }
         }
         ul {

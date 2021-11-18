@@ -9,7 +9,7 @@ import { colors } from '../config';
 
 const FooterContainer = styled.footer`
     width:100%;
-    background: ${colors.chicagoBlue};
+    background: ${colors.onionGreen};
     p {
         color:${colors.black};
         font-size:1rem;
