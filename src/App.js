@@ -14,7 +14,7 @@ export default function App() {
     const history = createBrowserHistory();
 
     history.listen(location => {
-      ReactGA.initialize('G-K0HGLZLGXG');
+      ReactGA.initialize('UA-213370928-1');
       ReactGA.set({ page: location.pathname });
       ReactGA.pageview(location.pathname);
     });
