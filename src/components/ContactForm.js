@@ -63,7 +63,7 @@ const InputBlock = styled.div`
 
 const SuccessMessage = styled.div`
     padding:20px;
-    background:${colors.teal};
+    background:${colors.lightblue};
     position:relative;
     margin:2rem 0;
     p {
@@ -90,7 +90,7 @@ export default function ContactForm(){
     const url =  `${process.env.REACT_APP_EMAIL_FORM_URL}`
 
     const [formData, setFormData] = useState({
-        'Category': 'General',
+        'Category': 'General (Tree)',
         'Contact_Name': '',
         'Contact_Email': '',
         'Contact_Phone': '_',
@@ -143,7 +143,7 @@ export default function ContactForm(){
         {submitted && 
             <SuccessMessage>
                 <p>
-                    Thanks for your message! Our team will review your message and get back with you as soon as possible. We appreciate your interest and helping us to improve the US Covid Atlas!
+                    Thanks for your message! Our team will review your message and get back with you as soon as possible. We value your feedback and engagement as we work to improve the ChiVes explorer!
                 </p>
                 <button onClick={() => setSubmitted(false)}>×</button>
             </SuccessMessage>
@@ -161,12 +161,12 @@ export default function ContactForm(){
                             onChange={handleSelect}
                             
                         >
-                            <MenuItem value={'General'}>General</MenuItem>
-                            <MenuItem value={'Bug'}>Bug Report or Error</MenuItem>
-                            <MenuItem value={'DataQuestion'}>Data Question</MenuItem>
-                            <MenuItem value={'FeatureRequest'}>Feature Request</MenuItem>
-                            <MenuItem value={'TechOpenSource'}>Technical or Open Source Questions</MenuItem>
-                            <MenuItem value={'Press'}>Press or Media</MenuItem>
+                            <MenuItem value={'General (Tree)'}>General</MenuItem>
+                            <MenuItem value={'Bug (Tree)'}>Bug Report or Error</MenuItem>
+                            <MenuItem value={'DataQuestion (Tree)'}>Data Question</MenuItem>
+                            <MenuItem value={'FeatureRequest (Tree)'}>Feature Request</MenuItem>
+                            <MenuItem value={'TechOpenSource (Tree)'}>Technical or Open Source Questions</MenuItem>
+                            <MenuItem value={'Press (Tree)'}>Press or Media</MenuItem>
                         </Select>
                     </InputBlock>
 
