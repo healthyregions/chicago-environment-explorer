@@ -22,6 +22,7 @@ import Preloader from './preloader';
 import Scaleable from './scaleable';
 import StaticNavbar from './staticNavbar';
 import Tooltip from './tooltip';
+import Table from './Table';
 import Geocoder from './geocoder';
 
 
@@ -59,6 +60,7 @@ export {
     Preloader,
     Scaleable,
     StaticNavbar,
+    Table,
     Tooltip, 
 
     About,
