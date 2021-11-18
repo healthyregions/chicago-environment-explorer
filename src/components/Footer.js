@@ -167,7 +167,6 @@ const Footer = ( props ) => {
                     </Grid> */}
                     <Grid item xs={12}>
                         <h6 className="copyright">
-                            Brought to you by:
                         </h6>
                     </Grid>
                     <Grid item xs={12} md={6}>

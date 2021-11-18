@@ -39,39 +39,24 @@ export default function Contact(){
            <StaticNavbar/>
            <ContentContainer>
                 <h1>Contact Us</h1>
-                <a href="https://twitter.com/covid_atlas" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <a href="https://twitter.com/healthyregions" target="_blank" rel="noopener noreferrer" className="social-icon">
                     <img src={`${process.env.PUBLIC_URL}/icons/twitter-icon-dark.png`} alt="Twitter Icon" />
                 </a>
-                <a href="https://github.com/GeoDaCenter/covid" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer" target="_blank" rel="noopener noreferrer" className="social-icon">
                     <img src={`${process.env.PUBLIC_URL}/icons/github-icon-dark.png`} alt="Twitter Icon" />
                 </a>
                 <hr/>
                 <p>
                     
-                    Contact US COVID Atlas co-leads directly if you have any questions about the Atlas or have media inquiries:<br/>
+                    Contact ChiVes co-leads directly if you have any questions about the project or have media inquiries:<br/>
                 </p>
                 
                 <ContactForm />
                 <p>
-                    For additional inquiries, contact the US COVID Atlas team: Marynia Kolak (mkolak at uchicago.edu) or Qinyun Lin (qinyunlin at uchicago.edu)
+                    For additional inquiries, contact Marynia Kolak (mkolak at uchicago.edu).
                 </p>
                 <Gutter h={40}/>
-                <h2>CITATION</h2>
-                <hr/>
-                <p>
-                    Citation Here.
-                </p>
-                <Gutter h={40}/>
-                <h2>MEDIA COVERAGE</h2>
-                <hr/>
-                {pressInfo.map(press => 
-                    <p>
-                        <b>{press.name} </b>
-                        <a href={press.link} target="_blank" rel="noopener noreferrer">{press.text} </a>
-                        {press.date}
-                        <br/><br/>
-                    </p>
-                )}
+
            </ContentContainer>
            <Footer/>
        </ContactPage>

@@ -141,8 +141,7 @@ export default function Home(){
                         help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
                     </p>
                     <br/> 
-                    <NavLink to="/map" id="button-cta">Explore Chicago's Environment --> </NavLink>
-                    <NavLink to="/map" id="button-search">Enter an Address to Start</NavLink><br/>
+                    <NavLink to="/map" id="button-search">Chives: Explore The Chicago Environment</NavLink><br/>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={4}> 
                             <img className="photo" src={onion} alt="Wild Onion" loading="lazy"/>
@@ -150,17 +149,17 @@ export default function Home(){
                         <Grid item xs={12} md={8}> 
                             <br/><br/>
                             <p> 
-                                Like the <a href="">wild onion</a> that Chicago was named for, data about the city's environment should 
+                                Like the <a href="https://www.wbez.org/stories/sniffing-for-chicagos-wild-onion/fcac5cbb-a174-4444-b17b-cfe767d0c369">wild onion</a> that Chicago was named for, data about the city's environment should 
                                 be <b>tasty</b> and <b>plentiful</b>. By tasty, we mean easily accessible and ready to use and explore. By plentiful,
                                 we mean the data should extend across multiple dimensions of the city's landscape, and be updated regularly. 
                                 <br/><br/>
-                                We <a href="">harmonize & standardize</a> environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of 
+                                We <a href="/data">harmonize & standardize</a> environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of 
                                 resources on the Chicago Environment, cultivated by a community of curators.
                                 <br/><br/>
-                                This project refactors data from the a <a href="">previous partnership</a> with the City, and gets customized
+                                This project refactors data from the a <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">previous partnership</a> with the City, and gets customized
                                 as a new opensource platform for the wider community.
                                 <br/><br/>
-                                Have data to add? A mapping resource to recommend? <a href="">We invite you</a> to add more resources to the <i>ChiVes</i> explorer as build out
+                                Have data to add? A mapping resource to recommend? <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxuLx5LgIuOP8CjEQgoW1-VP_yCrR_YNa_ha5wDHcSqfebbw/viewform">We invite you</a> to add more resources to the <i>ChiVes</i> explorer as build out
                                 an open data coalition to prepare Chicago for a more resilient future! 
                             </p>
                             <h5>
