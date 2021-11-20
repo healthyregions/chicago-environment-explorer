@@ -300,7 +300,7 @@ export default function Data(){
 
                 <h2> CURRENT RELEASE (11.18.2021)</h2>
 
-                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson/chiEnvExpl.csv" id="button-search">CSV</a>
+                <a href={`${process.env.PUBLIC_URL}/geojson/chiEnvExpl.csv`} id="button-search" download>CSV</a>
                 <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson" id="button-search">SHP</a>
                 <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson/chiEnvExpl.geojson" id="button-search">GEOJSON</a>
 

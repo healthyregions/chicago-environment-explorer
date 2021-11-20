@@ -10,11 +10,12 @@ const About = React.lazy(() => import('./components/Pages/About'));
 const Contact = React.lazy(() => import('./components/Pages/Contact'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
 
+ReactGA.initialize('UA-213370928-1');
+
 export default function App() {
     const history = createBrowserHistory();
 
     history.listen(location => {
-      ReactGA.initialize('UA-213370928-1');
       ReactGA.set({ page: location.pathname });
       ReactGA.pageview(location.pathname);
     });
