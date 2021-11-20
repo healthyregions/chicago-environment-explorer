@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
 import { StaticNavbar, Footer, ContactForm } from '../';
@@ -23,14 +23,14 @@ const ContactPage = styled.div`
     }
 `
 
-const pressInfo = [
-    // {
-    //     'name': 'UChicago News:',
-    //     'link': 'https://news.uchicago.edu/story/state-level-data-misses-growing-coronavirus-hot-spots-us-including-south',
-    //     'text': 'State-level data misses growing coronavirus hot spots in the U.S., including in the South',
-    //     'date': '(March 26)'
-    // }
-]
+// const pressInfo = [
+//     // {
+//     //     'name': 'UChicago News:',
+//     //     'link': 'https://news.uchicago.edu/story/state-level-data-misses-growing-coronavirus-hot-spots-us-including-south',
+//     //     'text': 'State-level data misses growing coronavirus hot spots in the U.S., including in the South',
+//     //     'date': '(March 26)'
+//     // }
+// ]
 
 
 export default function Contact(){

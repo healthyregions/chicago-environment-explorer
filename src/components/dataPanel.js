@@ -7,13 +7,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-import FormControl from '@material-ui/core/FormControl';
-import Slider from '@material-ui/core/Slider';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import FormControl from '@material-ui/core/FormControl';
+// import Slider from '@material-ui/core/Slider';
+// import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 // Import config and sub-components
-import Tooltip from './tooltip';
-import BarChart from './BarChart';
+// import Tooltip from './tooltip';
+// import BarChart from './BarChart';
 import Histogram from './histogram';
 import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../actions';
@@ -256,35 +256,35 @@ const ReportSection = styled.span`
     margin: 0;
 `
 
-// Toggle styling for condensed and expanded drop down
-const ExpandSelect = styled(FormControl)`
-  outline:none;
-  border:none;
-  position:absolute !important;
-  right:25px;
-  top:15px;
-  div.MuiInputBase-root:before {
-    display:none !important;
-  }
-  div.MuiInputBase-root:after {
-    display:none !important;
-  }
-  svg {
-    path {
-      fill:white;
-    }
-  }
-`
+// // Toggle styling for condensed and expanded drop down
+// const ExpandSelect = styled(FormControl)`
+//   outline:none;
+//   border:none;
+//   position:absolute !important;
+//   right:25px;
+//   top:15px;
+//   div.MuiInputBase-root:before {
+//     display:none !important;
+//   }
+//   div.MuiInputBase-root:after {
+//     display:none !important;
+//   }
+//   svg {
+//     path {
+//       fill:white;
+//     }
+//   }
+// `
 
-function AirbnbThumbComponent(props) {
-  return (
-    <span {...props}>
-      <span className="bar" />
-      <span className="bar" />
-      <span className="bar" />
-    </span>
-  );
-}
+// function AirbnbThumbComponent(props) {
+//   return (
+//     <span {...props}>
+//       <span className="bar" />
+//       <span className="bar" />
+//       <span className="bar" />
+//     </span>
+//   );
+// }
 
 const columnsToChart = [
   {

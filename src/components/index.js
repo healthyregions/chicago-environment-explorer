@@ -1,7 +1,7 @@
 import BarChart from './BarChart';
 import BottomPanel from './bottomPanel';
 import ContactForm from './ContactForm';
-import ContextMenu from './contextMenu';
+// import ContextMenu from './contextMenu';
 import CsvDownloader from './csvDownloader';
 import DataDetails from './dataDetails';
 import DataPanel from './dataPanel';
@@ -39,7 +39,7 @@ export {
     BarChart,
     BottomPanel,
     ContactForm,
-    ContextMenu,
+    // ContextMenu,
     CsvDownloader,
     DataDetails,
     DataPanel,

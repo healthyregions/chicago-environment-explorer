@@ -8,7 +8,7 @@ import {WebMercatorViewport} from '@deck.gl/core';
 // deck GL and helper function import
 import DeckGL from '@deck.gl/react';
 import {MapView, FlyToInterpolator} from '@deck.gl/core';
-import { GeoJsonLayer, PolygonLayer, ScatterplotLayer, IconLayer, TextLayer } from '@deck.gl/layers';
+import { GeoJsonLayer } from '@deck.gl/layers';
 import {fitBounds} from '@math.gl/web-mercator';
 import MapboxGLMap from 'react-map-gl';
 import {DataFilterExtension, FillStyleExtension} from '@deck.gl/extensions';
@@ -16,8 +16,8 @@ import {DataFilterExtension, FillStyleExtension} from '@deck.gl/extensions';
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from '../components';
 import { setSelectionData } from '../actions';
-import { mapFn, dataFn, getVarId } from '../utils';
-import { colors, colorScales } from '../config';
+// import { mapFn, dataFn, getVarId } from '../utils';
+import { colors } from '../config';
 import * as SVG from '../config/svg'; 
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
@@ -148,17 +148,17 @@ const NavInlineButton = styled.button`
     }
 `
 
-const ShareURL = styled.input`
-    position:fixed;
-    left:110%;
-`
+// const ShareURL = styled.input`
+//     position:fixed;
+//     left:110%;
+// `
 
-const IndicatorBox = styled.div`
-    position:fixed;
-    border:1px dashed #FFCE00;
-    background:rgba(0,0,0,0.25);
-    z-index:5;
-`
+// const IndicatorBox = styled.div`
+//     position:fixed;
+//     border:1px dashed #FFCE00;
+//     background:rgba(0,0,0,0.25);
+//     z-index:5;
+// `
 
 const GeocoderContainer = styled.div`
     position:fixed;
@@ -205,11 +205,11 @@ function debounce(func, wait, immediate) {
 	};
 };
 
-//create your forceUpdate hook
-function useForceUpdate(){
-    const [, setValue] = useState(0); // integer state
-    return () => setValue(value => value + 1); // update the state to force render
-}
+// //create your forceUpdate hook
+// function useForceUpdate(){
+//     const [, setValue] = useState(0); // integer state
+//     return () => setValue(value => value + 1); // update the state to force render
+// }
 
 function MapSection(props){ 
     // fetch pieces of state from store    
@@ -228,7 +228,7 @@ function MapSection(props){
     // component state elements
     // hover and highlight geographibes
     const [hoverInfo, setHoverInfo] = useState({x:null, y:null, object:null});
-    const [highlightGeog, setHighlightGeog] = useState([]);
+    // const [highlightGeog, setHighlightGeog] = useState([]);
     const [hoverGeog, setHoverGeog] = useState(null);
 
     // map view location
@@ -240,14 +240,14 @@ function MapSection(props){
         pitch:0
     })
 
-    // share button notification
-    const [shared, setShared] = useState(false);
+    // // share button notification
+    // const [shared, setShared] = useState(false);
     
     // interaction states
-    const [multipleSelect, setMultipleSelect] = useState(false);
-    const [boxSelect, setBoxSelect] = useState(false);
-    const [boxSelectDims, setBoxSelectDims] = useState({});
-    const forceUpdate = useForceUpdate();
+    // const [multipleSelect, setMultipleSelect] = useState(false);
+    // const [boxSelect, setBoxSelect] = useState(false);
+    // const [boxSelectDims, setBoxSelectDims] = useState({});
+    // const forceUpdate = useForceUpdate();
     // const [resetSelect, setResetSelect] = useState(null);
     // const [mobilityData, setMobilityData] = useState([]);
 
@@ -291,57 +291,59 @@ function MapSection(props){
                 filterValues
             })
         }
+        // eslint-disable-next-line
     },[centroids, storedGeojson, columnNames, ranges, selectionData, filterValues])
 
     useEffect(() => {
         if (deckRef.current.viewports) {
             queryViewport({viewState: {...deckRef.current.viewports[0]}})
         }
+        // eslint-disable-next-line
     },[filterValues])
 
-    let hidden = null;
-    let visibilityChange = null;
-    if (typeof document.hidden !== 'undefined') { // Opera 12.10 and Firefox 18 and later support 
-        hidden = 'hidden';
-        visibilityChange = 'visibilitychange';
-    } else if (typeof document.msHidden !== 'undefined') {
-        hidden = 'msHidden';
-        visibilityChange = 'msvisibilitychange';
-    } else if (typeof document.webkitHidden !== 'undefined') {
-        hidden = 'webkitHidden';
-        visibilityChange = 'webkitvisibilitychange';
-    }
+    // let hidden = null;
+    // let visibilityChange = null;
+    // if (typeof document.hidden !== 'undefined') { // Opera 12.10 and Firefox 18 and later support 
+    //     hidden = 'hidden';
+    //     visibilityChange = 'visibilitychange';
+    // } else if (typeof document.msHidden !== 'undefined') {
+    //     hidden = 'msHidden';
+    //     visibilityChange = 'msvisibilitychange';
+    // } else if (typeof document.webkitHidden !== 'undefined') {
+    //     hidden = 'webkitHidden';
+    //     visibilityChange = 'webkitvisibilitychange';
+    // }
 
     // shared view broadcast
-    useEffect(() => { 
-        document.addEventListener(visibilityChange, () => {
-            setBoxSelect(false);
-            setMultipleSelect(false);
-        });
+    // useEffect(() => { 
+    //     document.addEventListener(visibilityChange, () => {
+    //         setBoxSelect(false);
+    //         setMultipleSelect(false);
+    //     });
 
-        window.addEventListener('storage', () => {
-            // When local storage changes, dump the list to
-            // the console.
-            const SHARED_GEOID =  localStorage.getItem('SHARED_GEOID').split(',').map(d => parseInt(d))
+    //     window.addEventListener('storage', () => {
+    //         // When local storage changes, dump the list to
+    //         // the console.
+    //         const SHARED_GEOID =  localStorage.getItem('SHARED_GEOID').split(',').map(d => parseInt(d))
             
-            if (SHARED_GEOID !== null) {
-                setHighlightGeog(SHARED_GEOID); 
-            }
+    //         if (SHARED_GEOID !== null) {
+    //             setHighlightGeog(SHARED_GEOID); 
+    //         }
             
-            const SHARED_VIEW =  JSON.parse(localStorage.getItem('SHARED_VIEW'));
+    //         const SHARED_VIEW =  JSON.parse(localStorage.getItem('SHARED_VIEW'));
             
-            if (SHARED_VIEW !== null && SHARED_VIEW.hasOwnProperty('latitude')) {
-                setViewState({
-                        longitude: SHARED_VIEW.longitude,
-                        latitude: SHARED_VIEW.latitude,
-                        zoom: SHARED_VIEW.zoom,
-                        transitionDuration: 1000,
-                        transitionInterpolator: new FlyToInterpolator()
-                    })
-            }
-        });
+    //         if (SHARED_VIEW !== null && SHARED_VIEW.hasOwnProperty('latitude')) {
+    //             setViewState({
+    //                     longitude: SHARED_VIEW.longitude,
+    //                     latitude: SHARED_VIEW.latitude,
+    //                     zoom: SHARED_VIEW.zoom,
+    //                     transitionDuration: 1000,
+    //                     transitionInterpolator: new FlyToInterpolator()
+    //                 })
+    //         }
+    //     });
 
-    },[])
+    // },[])
     
     useEffect(() => {
         setViewState(view => ({
@@ -375,7 +377,7 @@ function MapSection(props){
         }
     });
 
-    const handleShare = async (params) => {
+    // const handleShare = async (params) => {
         // const shareData = {
         //     title: 'The US Covid Atlas',
         //     text: 'Near Real-Time Exploration of the COVID-19 Pandemic.',
@@ -395,21 +397,21 @@ function MapSection(props){
         //     setShared(true)
         //     setTimeout(() => setShared(false), 5000);
         // }
-    }
+    // }
 
-    const handleKeyDown = (e) => {
-        if (e.target.selectionStart === undefined){
-            if (e.ctrlKey) setMultipleSelect(true);
-            if (e.shiftKey) setBoxSelect(true);
-        }
-    }
+    // const handleKeyDown = (e) => {
+    //     if (e.target.selectionStart === undefined){
+    //         if (e.ctrlKey) setMultipleSelect(true);
+    //         if (e.shiftKey) setBoxSelect(true);
+    //     }
+    // }
 
-    const handleKeyUp = (e) => {
-        if (e.target.selectionStart === undefined){
-            if (!e.ctrlKey) setMultipleSelect(false);
-            if (!e.shiftKey) setBoxSelect(false);
-        }
-    }
+    // const handleKeyUp = (e) => {
+    //     if (e.target.selectionStart === undefined){
+    //         if (!e.ctrlKey) setMultipleSelect(false);
+    //         if (!e.shiftKey) setBoxSelect(false);
+    //     }
+    // }
 
     const handleMapClick = ({x, y, object}) => {
         if (object && object.properties) {
@@ -491,7 +493,9 @@ function MapSection(props){
                 center
             })
         }
+        // eslint-disable-next-line
     },[])
+
     const COLOR_SCALE = scaleThreshold()
         .domain(mapParams.bins)
         .range(mapParams.colorScale);
@@ -568,8 +572,8 @@ function MapSection(props){
             stroked: true,
             filled:true,
             lineWidthScale: 5,
-            getLineColor: d => d.properties.geoid == hoverGeog ? [65,182,230,255] : [100,100,100,0],
-            getFillColor: d => d.properties.geoid == hoverGeog ? [65,182,230,120] : [65,182,230,0],
+            getLineColor: d => d.properties.geoid === hoverGeog ? [65,182,230,255] : [100,100,100,0],
+            getFillColor: d => d.properties.geoid === hoverGeog ? [65,182,230,120] : [65,182,230,0],
             getLineWidth:1, 
             lineWidthMinPixels: 3,        
             updateTriggers: {
@@ -621,109 +625,109 @@ function MapSection(props){
 
     
     const view = new MapView({repeat: true});
-    const handleSelectionBoxStart = () => {
-        setBoxSelect(true)
-    }
+    // const handleSelectionBoxStart = () => {
+    //     setBoxSelect(true)
+    // }
 
-    const listener = (e) => {
+    // const listener = (e) => {
 
-        setBoxSelectDims(prev => {
-            let x;
-            let y;
-            let width;
-            let height;
+    //     setBoxSelectDims(prev => {
+    //         let x;
+    //         let y;
+    //         let width;
+    //         let height;
 
-            if (e.clientX < prev.ox) {
-                x = e.clientX;
-                width = prev.ox - e.clientX
-            } else {
-                x = prev.x;
-                width = e.clientX - prev.x
-            }
+    //         if (e.clientX < prev.ox) {
+    //             x = e.clientX;
+    //             width = prev.ox - e.clientX
+    //         } else {
+    //             x = prev.x;
+    //             width = e.clientX - prev.x
+    //         }
 
-            if (e.clientY < prev.oy) {
-                y = e.clientY;
-                height = prev.oy - e.clientY
-            } else {
-                y = prev.y;
-                height = e.clientY - prev.y
-            }
+    //         if (e.clientY < prev.oy) {
+    //             y = e.clientY;
+    //             height = prev.oy - e.clientY
+    //         } else {
+    //             y = prev.y;
+    //             height = e.clientY - prev.y
+    //         }
 
-            return { ...prev, x, y, width, height }
-        })
-    }
+    //         return { ...prev, x, y, width, height }
+    //     })
+    // }
     
-    const touchListener = (e) => {
-        // setX(e?.targetTouches[0]?.clientX-15)
-        // setY(e?.targetTouches[0]?.clientY-15)
-        // console.log(e)
-    }
+    // const touchListener = (e) => {
+    //     // setX(e?.targetTouches[0]?.clientX-15)
+    //     // setY(e?.targetTouches[0]?.clientY-15)
+    //     // console.log(e)
+    // }
 
-    const removeListeners = () => {
-        window.removeEventListener('touchmove', touchListener)
-        window.removeEventListener('touchend', removeListeners)
-        window.removeEventListener('mousemove', listener)
-        window.removeEventListener('mouseup', removeListeners)
-        setBoxSelectDims({
-            x:-50,
-            y:-50,
-            ox:0,
-            oy:0,
-            width:0,
-            height:0
-        })
-        setBoxSelect(false)
-    }
+    // const removeListeners = () => {
+    //     window.removeEventListener('touchmove', touchListener)
+    //     window.removeEventListener('touchend', removeListeners)
+    //     window.removeEventListener('mousemove', listener)
+    //     window.removeEventListener('mouseup', removeListeners)
+    //     setBoxSelectDims({
+    //         x:-50,
+    //         y:-50,
+    //         ox:0,
+    //         oy:0,
+    //         width:0,
+    //         height:0
+    //     })
+    //     setBoxSelect(false)
+    // }
 
-    const handleBoxSelect = (e) => {
-        try {
-            if (e.type === 'mousedown') {
-                setBoxSelectDims({
-                    x:e.pageX,
-                    y:e.pageY,
-                    ox:e.pageX,
-                    oy:e.pageY,
-                    width:0,
-                    height:0
-                });
-                window.addEventListener('touchmove', touchListener);
-                window.addEventListener('touchend', removeListeners);
-                window.addEventListener('mousemove', listener);
-                window.addEventListener('mouseup', removeListeners);
-            } else {
+    // const handleBoxSelect = (e) => {
+    //     try {
+    //         if (e.type === 'mousedown') {
+    //             setBoxSelectDims({
+    //                 x:e.pageX,
+    //                 y:e.pageY,
+    //                 ox:e.pageX,
+    //                 oy:e.pageY,
+    //                 width:0,
+    //                 height:0
+    //             });
+    //             window.addEventListener('touchmove', touchListener);
+    //             window.addEventListener('touchend', removeListeners);
+    //             window.addEventListener('mousemove', listener);
+    //             window.addEventListener('mouseup', removeListeners);
+    //         } else {
     
-                const {x, y, width, height } = boxSelectDims;
+    //             const {x, y, width, height } = boxSelectDims;
     
-                let layerIds = ['choropleth'];
+    //             let layerIds = ['choropleth'];
     
-                let features = deckRef.current.pickObjects(
-                        {
-                            x, y: y-50, width, height, layerIds
-                        }
-                    )
-                let GeoidList = [];
-                for (let i=0; i<features.length; i++) {                    
-                }
-                setHighlightGeog(GeoidList); 
-                window.localStorage.setItem('SHARED_GEOID', GeoidList);
-                window.localStorage.setItem('SHARED_VIEW', JSON.stringify(GetMapView()));
-                setBoxSelectDims({});
-                removeListeners();
-                setBoxSelect(false)
-            }
-        } catch {
-            console.log('bad selection')
-        }
-    }
+    //             let features = deckRef.current.pickObjects(
+    //                     {
+    //                         x, y: y-50, width, height, layerIds
+    //                     }
+    //                 )
+    //             let GeoidList = [];
+    //             for (let i=0; i<features.length; i++) {                    
+    //             }
+    //             setHighlightGeog(GeoidList); 
+    //             window.localStorage.setItem('SHARED_GEOID', GeoidList);
+    //             window.localStorage.setItem('SHARED_VIEW', JSON.stringify(GetMapView()));
+    //             setBoxSelectDims({});
+    //             removeListeners();
+    //             setBoxSelect(false)
+    //         }
+    //     } catch {
+    //         console.log('bad selection')
+    //     }
+    // }
     return (
         <MapContainer
-            onKeyDown={handleKeyDown}
-            onKeyUp={handleKeyUp}
-            onMouseDown={e => boxSelect ? handleBoxSelect(e) : null}
-            onMouseUp={e => boxSelect ? handleBoxSelect(e) : null}
+            // onKeyDown={handleKeyDown}
+            // onKeyUp={handleKeyUp}
+            // onMouseDown={e => boxSelect ? handleBoxSelect(e) : null}
+            // onMouseUp={e => boxSelect ? handleBoxSelect(e) : null}
             infoPanel={panelState.info}
         >
-            {
+            {/* {
                 // boxSelectDims.hasOwnProperty('x') && 
                 true && 
                 <IndicatorBox style={{
@@ -732,7 +736,7 @@ function MapSection(props){
                     width: boxSelectDims.width,
                     height: boxSelectDims.height}}
                     />
-            }
+            } */}
             <DeckGL
                 layers={layers}
                 ref={deckRef}
@@ -740,11 +744,11 @@ function MapSection(props){
                 initialViewState={viewState}
                 controller={
                     {
-                        dragRotate: !boxSelect, 
-                        dragPan: !boxSelect, 
-                        doubleClickZoom: !boxSelect, 
-                        touchZoom: !boxSelect, 
-                        touchRotate: !boxSelect, 
+                        dragRotate: true, 
+                        dragPan: true, 
+                        doubleClickZoom: true, 
+                        touchZoom: true, 
+                        touchRotate: true, 
                         keyboard: true, 
                         scrollZoom: true,
                         inertia: 100
@@ -845,7 +849,7 @@ function MapSection(props){
             )}
             <LogoContainer>
                 <a href="https://herop.ssd.uchicago.edu/" target="_blank" rel="noopener noreferrer">
-                    <img src={`${process.env.PUBLIC_URL}/herop_dark_logo_teal.png`} />
+                    <img src={`${process.env.PUBLIC_URL}/herop_dark_logo_teal.png`} alt="" />
                 </a>
             </LogoContainer>
         </MapContainer>

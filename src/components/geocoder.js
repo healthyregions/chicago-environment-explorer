@@ -85,6 +85,7 @@ const Geocoder = ( props ) => {
           throttle((text, callback) => {
                 getMapboxResults(text, callback)
           }, 200),
+          // eslint-disable-next-line
         [],
       );
       

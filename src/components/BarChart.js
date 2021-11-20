@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { BarChart, Bar, LabelList, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, LabelList, CartesianGrid, ResponsiveContainer } from 'recharts';
 
 export default function BarChartComponent(props){
     const [hoverVal, setHoverVal] = useState(null);

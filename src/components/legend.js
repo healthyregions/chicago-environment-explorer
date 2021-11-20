@@ -3,8 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import styled from 'styled-components';
 
 import { colors } from '../config';
-import { Gutter } from '../styled_components';
-import Tooltip from './tooltip';
+// import { Gutter } from '../styled_components';
+// import Tooltip from './tooltip';
 
 const BottomPanel = styled.div`
     position: fixed;

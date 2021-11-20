@@ -1,17 +1,17 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { 
-  getParseCSV, mergeData, getColumns, loadJson,
-  getDataForBins, getDataForCharts, getDataForLisa, getDateLists,
-  getLisaValues, getCartogramValues, getDateIndices } from '../../utils';
+// import { 
+//   getParseCSV, mergeData, getColumns, loadJson,
+//   getDataForBins, getDataForCharts, getDataForLisa, getDateLists,
+//   getLisaValues, getCartogramValues, getDateIndices } from '../../utils';
 
 import { loadDataAndBins } from '../../actions';
 
-import { MapSection, NavBar, VariablePanel, Legend,  TopPanel, Preloader,
-  DataPanel, Scaleable, Draggable, InfoBox, Popover } from '../../components';  
+import { MapSection, NavBar, VariablePanel, Legend,  
+  DataPanel,Popover } from '../../components';  //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 
-import { colorScales, fixedScales, dataPresets, variablePresets, colors, defaultData } from '../../config';
+import { defaultData } from '../../config'; // colorScales, fixedScales, dataPresets, variablePresets, colors, 
 
 function App() {
   const {storedGeojson, mapParams } = useSelector(state => state);
@@ -47,6 +47,7 @@ function App() {
     if (isLoading) {
       setIsLoading(false)
     }
+    // eslint-disable-next-line
   },[])
   
   return (

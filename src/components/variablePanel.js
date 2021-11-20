@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import ButtonGroup from '@material-ui/core/ButtonGroup'; 
 
 import styled from 'styled-components';
 
-import Tooltip from './tooltip';
-import { StyledDropDown, BinsContainer, Gutter } from '../styled_components';
+// import Tooltip from './tooltip';
+import { StyledDropDown, Gutter } from '../styled_components';
 import { changeVariable, setMapParams, setPanelState } from '../actions'; //variableChangeZ, setNotification, storeMobilityData
-import { fixedScales, colorScales, colors, variablePresets } from '../config';
+import { colors, variablePresets } from '../config';
 import * as SVG from '../config/svg';
 
 const VariablePanelContainer = styled.div`

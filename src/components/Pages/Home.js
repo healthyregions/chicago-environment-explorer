@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { Geocoder, StaticNavbar, Footer } from '../../components';
 import { colors } from '../../config';
 import { Gutter } from '../../styled_components';
-import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
+// import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
 import onion from './onion.png'
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;

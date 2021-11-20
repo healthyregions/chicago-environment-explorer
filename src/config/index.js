@@ -1,5 +1,3 @@
-import { pink } from "@material-ui/core/colors";
-
 export const defaultData = 'tree_sst_master_tracts.geojson';
 
 export const dataPresets = {
@@ -56,7 +54,6 @@ export const variablePresets = {
         scale:1,
         scale3D: 100,
         fixedScale: null,
-        colorScale: null,
         colorScale: [
           [247,247,247],
           [217,217,217],
@@ -81,7 +78,6 @@ export const variablePresets = {
         scale:1,
         scale3D: 100,
         fixedScale: null,
-        colorScale: null,
         colorScale: [
           [255,255,178],
           [254,217,118],
@@ -106,7 +102,6 @@ export const variablePresets = {
         scale:1,
         scale3D: 100,
         fixedScale: null,
-        colorScale: null,
         colorScale: [
           [241,238,246],
           [212,185,218],
@@ -131,7 +126,6 @@ export const variablePresets = {
         scale:1,
         scale3D: 100,
         fixedScale: null,
-        colorScale: null,
         colorScale: [
           [246,239,247],
           [208,209,230],

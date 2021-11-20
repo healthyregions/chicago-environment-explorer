@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import { withStyles, makeStyles } from '@material-ui/core/styles';
 
 import { applyFilterValues, removeFilterValues, removeFilterEntry } from '../actions';
 import { colors } from '../config';
-import * as _ from 'lodash';
+// import * as _ from 'lodash';
 
 const CountsContainer = styled.div`
   position:relative;

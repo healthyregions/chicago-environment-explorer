@@ -3,25 +3,25 @@ import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
 import { StaticNavbar, Footer, Table } from '../'; 
 import { colors } from '../../config';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
 
 const DataPage = styled.div`
     background:white;
 `
 
-const BlockIndent = styled.p`
-    margin-left:1rem;
-    padding-left:1rem;
-    border-left:2px solid ${colors.lightgray}
-`
+// const BlockIndent = styled.p`
+//     margin-left:1rem;
+//     padding-left:1rem;
+//     border-left:2px solid ${colors.lightgray}
+// `
 
-const SectionTitle = styled.h3`
-    margin: 40px 0 10px 0;
-    &:nth-of-type(1){
-        margin:10px 0;
-    }
-`
+// const SectionTitle = styled.h3`
+//     margin: 40px 0 10px 0;
+//     &:nth-of-type(1){
+//         margin:10px 0;
+//     }
+// `
 
 const Hero = styled.div`
     width:100%;
