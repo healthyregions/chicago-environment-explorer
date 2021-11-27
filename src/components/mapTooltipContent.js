@@ -7,7 +7,7 @@ const MapTooltipContent = (props) => {
             {props.content && <table>
                 <tr><td>Population</td><td> {props.content.acs_population && props.content.acs_population.toLocaleString('en')}</td></tr>
                 <tr><td>Number of Trees</td><td> {props.content.trees_n && props.content.trees_n.toLocaleString('en')}</td></tr>
-                <tr><td>Percent Canopty Cover</td><td> {props.content.trees_crown_den && props.content.trees_crown_den.toFixed(2)}%</td></tr>
+                <tr><td>Percent Canopy Cover</td><td> {props.content.trees_crown_den && props.content.trees_crown_den.toFixed(2)}%</td></tr>
                 <tr><td>Heat Island Percentile</td><td> {props.content.heatisl && props.content.heatisl.toFixed(2)}</td></tr>
                 <tr><td>PM2.5 in Summer (Model Average)</td><td> {props.content.nn_q3_pm2_5 && props.content.nn_q3_pm2_5.toFixed(2)}</td></tr>
                 <tr><td>Urban Flood Susceptibility Index</td><td> {props.content.urban_flood_suscep && props.content.urban_flood_suscep.toFixed(2)}</td></tr>
