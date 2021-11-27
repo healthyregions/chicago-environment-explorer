@@ -74,7 +74,7 @@ const NavBar = () => {
     return (
         <NavContainer>
             <div className="nav-logo">
-              <img src={`${process.env.PUBLIC_URL}/logo.png`} style={{height: '30px', paddingRight: '5px'}} alt="ChiVes" /><a href="/">ChiVes</a>
+              <img src={`${process.env.PUBLIC_URL}/logo.png`} style={{height: '30px', paddingRight: '5px'}} alt="ChiVes" /><a href="https://chicago-env-explorer.netlify.app/about">ChiVes</a>
             </div>
           <NavItems> 
             <li><NavLink to="/data">DATA</NavLink></li>
