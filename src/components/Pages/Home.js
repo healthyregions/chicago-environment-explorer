@@ -155,9 +155,11 @@ export default function Home(){
                     </p>
                     <br/> 
                     
-                    <NavLink to="/map" id="button-search">Chives: Explore The Chicago Environment</NavLink>
+                    <NavLink to="/map" id="button-search">Chives: Explore The Chicago Environment in April 2022</NavLink>
                     <Gutter h={40}/>
-                    <Grid container spacing={8} alignItems="center">
+                    
+
+                    /* <Grid container spacing={8} alignItems="center">
                         <Grid item xs={12} sm={12} md={6}>
                             <p>
                                 <i>Got somewhere you want to explore? Search for an address to navigate directly to your neighborhood.</i>
@@ -172,6 +174,9 @@ export default function Home(){
                             />
                         </Grid>
                     </Grid>
+                    */
+
+
                     <Gutter h={20}/>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={4}> 
