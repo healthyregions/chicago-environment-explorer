@@ -248,7 +248,6 @@ const VariablePanel = (props) => {
             <MenuItem value="None" key={'None'}>None</MenuItem> 
             <MenuItem value={'community_areas'} key={'community_areas'}>Community Areas</MenuItem>
             <MenuItem value={'wards'} key={'wards'}>Wards</MenuItem>
-            <MenuItem value={'properties'} key={'properties'}>City Owned Properties</MenuItem>
           </Select>
         </StyledDropDown>
 
