@@ -292,7 +292,7 @@ export default function Data(){
                 <h1>Data</h1>
                 <Gutter h={10}/>
                 <p>
-                    The <i>ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018).
+                    <i>ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018).
                 </p>
                 <Gutter h={20}/>
 
