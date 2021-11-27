@@ -138,7 +138,7 @@ const StaticNavbar = () => {
                 <NavLink to="/">
                     <img 
                         src={`${process.env.PUBLIC_URL}/logo.png`}
-                        alt="Chicago Enviroment Explorer"
+                        alt="ChiVes"
                         className="logo"
                     />
                 </NavLink>
