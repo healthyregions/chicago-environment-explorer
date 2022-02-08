@@ -6,11 +6,11 @@ export const INITIAL_STATE = {
   selectionData: {},
   filterValues: {},
   mapParams: {
-    variableName: 'Tree Crown Density',
+    variableName:"Surface Temperature",
     numerator: 'properties',
     nType: 'charactertistic',
     nRange: null,
-    nProperty: 'trees_crown_den',
+    nProperty: 'heatisl',
     denominator: 'properties',
     dType: null,
     dProperty: null,
@@ -19,18 +19,19 @@ export const INITIAL_STATE = {
     scale:1,
     scale3D: 100,
     fixedScale: null,
+    colorScale: [
+      [255,255,178],
+      [254,217,118],
+      [254,178,76],
+      [253,141,60],
+      [240,59,32],
+      [189,0,38],
+    ],
+    // defaults 
     zAxisParams: null,
     storedRange: null,
     bins: [],
     overlay: 'community_areas',
-    colorScale: [
-      [255,255,204],
-      [217,240,163],
-      [173,221,142],
-      [120,198,121],
-      [49,163,84],
-      [0,104,55]
-    ],
   },
   panelState: {
     variables:window.innerWidth > 768,
