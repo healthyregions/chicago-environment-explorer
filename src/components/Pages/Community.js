@@ -61,6 +61,21 @@ const TypeSpan = styled.span`
   width:10%;
   `
 
+const columnsToParse = [
+  {
+    'col':'',
+    op: 'sum'
+  },
+  {
+    'col':'',
+    op: 'avg'
+  },
+  [
+    'col':'',
+    op:'weightedAvg',
+    weight: 'population'
+  ]
+]
 
 function App() {
   const features = useSelector(state => state.staoredGeojson?.features)||[];
@@ -77,7 +92,7 @@ function App() {
     if (!(features && features.length)){
       handleData()
     } else {
-        setSearchList(getUniqueList(features, ['community','zip_code','geoid']));
+      setSearchList(getUniqueList(features, ['community','zip_code','geoid']));
     }
     // eslint-disable-next-line
   },[])
@@ -88,24 +103,76 @@ function App() {
     }
   },[features && features.length])
   
-  const filteredData = useMemo(() => {
+  const [
+    filteredFeatures,
+    filteredSummary,
+    overallSummary
+  ] = useMemo(() => {
     if (!(features && features.length) || !currentLocation?.type) {
       return []
     }
+    
+    const filterFunc = currentLocation.type === 'Zip Code'
+      ? (f) => f.properties.zip_code === currentLocation.label
+      : currentLocation.type === 'Community'
+      ? (f) => f.properties.community === currentLocation.label
+      : (f) => f.properties.geoid === currentLocation.label
+      
+    let filteredSummary = columnsToParse.map(f => ({
+      [f.col]: 0
+    })).reduce((a,b) => ({...a,...b}),{})
 
-    switch(currentLocation.type){
-      case 'Zip Code':
-        return features.filter(row => row.properties.zip_code === currentLocation.label)
-      case 'Community':
-        return features.filter(row => row.properties.community === currentLocation.label)
-      case 'Census Tract':
-        return features.filter(row => row.properties.geoid === currentLocation.label)
-      default:
-        return []
+    let overallSummary = columnsToParse.map(f => ({
+      [f.col]: 0
+    })).reduce((a,b) => ({...a,...b}),{})
+
+    let filteredFeatures = []
+
+    for (let i=0; i<features.length; i++){
+      const isFiltered = filterFunc(features[i])
+      if (isFiltered){
+        filteredFeatures.push(features[i])
+      }
+
+      for (let j=0; j<columnsToParse.length; j++){
+        const {col, op, weight, label} = columnsToParse[j];
+        if (op === 'weightedAvg'){
+
+          overallSummary[label] += features[i].properties[col] * features[i].properties[weight]
+          overallSummary[`${label}-weight`] += features[i].properties[weight]
+          if (isFiltered){
+            filteredSummary[label] += features[i].properties[col] * features[i].properties[weight]
+            filteredSummary[`${label}-weight`] += features[i].properties[weight]
+          }
+        }
+        if (op === 'avg' || op === 'sum'){
+          filteredSummary[label] += features[i].properties[col]
+          if (isFiltered){
+            filteredSummary[label] += features[i].properties[col]
+          }
+        }
+        if (i===features.length){
+          if (op === 'avg') {
+            overallSummary[label] /= features.length
+            filteredSummary[label] /= filteredFeatures.length
+          }
+          if (op === 'weightedAvg'){
+            overallSummary[label] /= overallSummary[`${label}-weight`]
+            filteredSummary[label] /= filteredSummary[`${label}-weight`]
+          }
+          }
+        }
+      }
     }
+
+    return [
+      filteredFeatures,
+      filteredSummary,
+      overallSummary
+    ]
+
   },[currentLocation.label, features && features.length])
   
-  console.log(filteredData)
   return (
     <CommunityPage>
         <StaticNavbar/>
