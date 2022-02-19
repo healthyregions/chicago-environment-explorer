@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // import { 
@@ -8,12 +8,12 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { loadDataAndBins } from '../../actions';
 
-import { MapSection, StaticNavbar, VariablePanel, Footer,  DataPanel,Popover } from '../../components';  //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
+import { Gutter, StaticNavbar, VariablePanel, Footer,  DataPanel,Popover } from '../../components';  //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 
 import { defaultData } from '../../config'; // colorScales, fixedScales, dataPresets, variablePresets, colors, 
 import styled from 'styled-components';
 
-import { ContentContainer, Gutter } from '../../styled_components';
+import { ContentContainer } from '../../styled_components';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Box, TextField } from '@mui/material';
 
@@ -63,57 +63,55 @@ const TypeSpan = styled.span`
 
 
 function App() {
-  const {storedGeojson, mapParams } = useSelector(state => state);
-  const [isLoading, setIsLoading] = useState(true);
-  const [currentLocation, setCurrentLocation] = useState(null);
+  const features = useSelector(state => state.staoredGeojson?.features)||[];
+  const [currentLocation, setCurrentLocation] = useState({});
   const [searchList, setSearchList] = useState([])
   const dispatch = useDispatch();  
 
-  // generate quantile bins based on rank order
-  // this is a simplified, but still reasonably accurate method, inline with typical Pandas quantiles
-  // It's very fast, and avoids import JsGeoDa, which may be overkill for this dashboard
-  const generateBins = async (data, nBins, mapParams) => {
-    const length = data.features.length;
-    const columnData = data.features.map(row => row[mapParams.numerator][mapParams.nProperty]).sort((a,b) => a - b)
-    let bins = [];
-    
-    for (let i=0; i<nBins; i++){
-      bins.push(columnData[Math.round((length/nBins)*i)])
-    }
-
-    return bins;
-  }
-
   const handleData = async () => {
     const data = await fetch(`${process.env.PUBLIC_URL}/geojson/${defaultData}`).then(r => r.json());
-    const bins = await generateBins(data, 6, mapParams);
-    dispatch(loadDataAndBins(data, bins))
-    setIsLoading(false)
+    dispatch(loadDataAndBins(data))
   }
 
   useEffect(() => {
-    if (!(Object.keys(storedGeojson).length)){
+    if (!(features && features.length)){
       handleData()
     } else {
-        setSearchList(getUniqueList(storedGeojson.features, ['community','zip_code','geoid']));
-    }
-    if (isLoading) {
-      setIsLoading(false)
+        setSearchList(getUniqueList(features, ['community','zip_code','geoid']));
     }
     // eslint-disable-next-line
   },[])
   
   useEffect(() => {
-    if (Object.keys(storedGeojson).length){
-        setSearchList(getUniqueList(storedGeojson.features, ['community','zip_code','geoid']));
+    if (features && features.length){
+        setSearchList(getUniqueList(features, ['community','zip_code','geoid']));
     }
-  },[Object.keys(storedGeojson).length])
+  },[features && features.length])
   
+  const filteredData = useMemo(() => {
+    if (!(features && features.length) || !currentLocation?.type) {
+      return []
+    }
+
+    switch(currentLocation.type){
+      case 'Zip Code':
+        return features.filter(row => row.properties.zip_code === currentLocation.label)
+      case 'Community':
+        return features.filter(row => row.properties.community === currentLocation.label)
+      case 'Census Tract':
+        return features.filter(row => row.properties.geoid === currentLocation.label)
+      default:
+        return []
+    }
+  },[currentLocation.label, features && features.length])
+  
+  console.log(filteredData)
   return (
     <CommunityPage>
         <StaticNavbar/>
         <ContentContainer>
             <h1>Community</h1>
+            <Gutter height="2em" />
             <Autocomplete
                 disablePortal
                 id="combo-box-demo"
@@ -125,6 +123,7 @@ function App() {
                     <TypeSpan>{option.type}</TypeSpan> {option.label}
                   </Box>
                 )}
+                onChange={(e, value) => setCurrentLocation(value)}
                 />
         </ContentContainer>
         <Footer/>

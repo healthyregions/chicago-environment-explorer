@@ -8,6 +8,7 @@ import DataPanel from './dataPanel';
 import Dock from './dock';
 import Draggable from './draggable';
 import Footer from './Footer';
+import { Gutter } from './Gutter';
 import Histogram from './histogram';
 import InfoBox from './infoBox';
 import Legend from './legend';
@@ -46,6 +47,7 @@ export {
     Dock,
     Draggable,
     Geocoder,
+    Gutter,
     Histogram,
     Footer,
     InfoBox,
