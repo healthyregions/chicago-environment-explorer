@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-// import FormControl from '@material-ui/core/FormControl';
-import Slider from '@material-ui/core/Slider';
-import { withStyles } from '@material-ui/core/styles';
+// import FormControl from '@mui/material/FormControl';
+import Slider from '@mui/material/Slider';
+import withStyles from '@mui/styles/withStyles';
 
 import BarChart from './BarChart';
 import { applyFilterValues, removeFilterValues } from '../actions';

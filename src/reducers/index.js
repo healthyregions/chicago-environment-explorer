@@ -87,7 +87,7 @@ var reducer = (state = INITIAL_STATE, action) => {
                 {
                     ...state.filterValues,
                     [action.payload.name]: [
-                        ...state.filterValues[action.payload.name]||[], 
+                        ...(state.filterValues[action.payload.name] || []), 
                         action.payload.range
                     ]
                 }

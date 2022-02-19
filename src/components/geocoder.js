@@ -1,7 +1,7 @@
 // general imports, state
 import React, { useState } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import throttle from 'lodash/throttle';
 import styled from 'styled-components';
 import { colors } from '../config';

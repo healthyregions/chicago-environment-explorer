@@ -7,9 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-// import FormControl from '@material-ui/core/FormControl';
-// import Slider from '@material-ui/core/Slider';
-// import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import FormControl from '@mui/material/FormControl';
+// import Slider from '@mui/material/Slider';
+// import { withStyles, makeStyles } from '@mui/material/styles';
 
 // Import config and sub-components
 // import Tooltip from './tooltip';

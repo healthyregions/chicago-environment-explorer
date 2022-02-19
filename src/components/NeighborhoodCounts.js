@@ -3,7 +3,7 @@ import {  useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-// import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import { withStyles, makeStyles } from '@mui/material/styles';
 
 import { applyFilterValues, removeFilterValues, removeFilterEntry } from '../actions';
 import { colors } from '../config';
