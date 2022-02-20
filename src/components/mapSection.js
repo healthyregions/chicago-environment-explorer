@@ -258,6 +258,7 @@ function MapSection(props){
         QueryFeaturesWorker.postMessage(params);
         QueryFeaturesWorker.onmessage = (e) => {
             const result = e?.data;
+            console.log(result)
             if (result) {
                 dispatch(setSelectionData(result))
             }

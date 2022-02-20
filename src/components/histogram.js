@@ -132,26 +132,31 @@ const debounce = (func, wait, immediate) => {
 	};
 };
 
-export default function Histogram(props){
+export default function Histogram({
+  name,
+  column,
+  histCounts
+}){
   
   const [filterIsActive, setFilterIsActive] = useState(false);
   const dispatch = useDispatch();
 
   const setFilterValues = debounce((e, newValues) => {
-    dispatch(applyFilterValues(props.column, newValues))
+    dispatch(applyFilterValues(column, newValues))
   }, 250)
 
   const resetFilter = () => {
-    dispatch(removeFilterValues(props.column))
+    dispatch(removeFilterValues(column))
     setFilterIsActive(false)
   }
+  console.log(histCounts)
 
   return (
     <HistogramContainer>
-      <h4>{props.name}</h4>
+      <h4>{name}</h4>
       {filterIsActive && <ClearButton onClick={() => resetFilter()}>clear</ClearButton>}
       
-      <ChartContainer onClick={() => setFilterIsActive(true)}>
+      {/* <ChartContainer onClick={() => setFilterIsActive(true)}>
         <BarChart 
           data={props.histCounts} 
           xAxis={'max'} 
@@ -176,7 +181,7 @@ export default function Histogram(props){
         min={props.range.min}
         max={props.range.max}
         step={(props.range.max-props.range.min)/10}
-      />}
+      />} */}
 
     </HistogramContainer>
   )
