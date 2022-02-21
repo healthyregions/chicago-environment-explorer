@@ -30,8 +30,8 @@ export default function App() {
         <Suspense fallback={<LoadingMessage />}>
             <Switch>
               <Route path="/" component={Home} exact/>
-              <Route path="/map" component={Map}/>
-              <Route path="/map.html" component={Map}/>
+              {/* <Route path="/map" component={Map}/>
+              <Route path="/map.html" component={Map}/> */}
               <Route path="/about" component={About}/>
               <Route path="/about.html" component={About}/>
               <Route path="/contact" component={Contact}/>
