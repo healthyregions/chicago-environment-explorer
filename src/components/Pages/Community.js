@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import booleanWithin from "@turf/boolean-within";
+import { quantileRank } from 'simple-statistics'
 import { nicelyFormatNumber } from "../../utils";
 import { loadDataAndBins } from "../../actions";
 
@@ -14,15 +15,21 @@ import {
 } from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 import useFilterData from "../../hooks/useFilterData";
 import useProcessData from "../../hooks/useProcessData";
-import { defaultData } from "../../config"; // colorScales, fixedScales, dataPresets, variablePresets, colors,
+import { defaultData } from "../../config"; 
 import styled from "styled-components";
 
 import { ContentContainer } from "../../styled_components";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Box, TextField, Button, ButtonGroup, Typography } from "@mui/material";
+import TableComponent from "../Table";
 
 const CommunityPage = styled.div`
   background: white;
+  h3 {
+    font-size:1.5rem;
+    font-weight:bold;
+    border-bottom:2px solid #e83f6f;
+  }
 `;
 
 const typeTranslation = {
@@ -72,10 +79,28 @@ const metricsToParse = [
     reducer: (data) => data.accumulated / data.values.length,
   },
   {
-    name: "density",
-    accessor: (row) => row.properties.acs_population / row.properties.aland,
+    name: "asthma",
+    accessor: (row) => row.properties.cities_asthma_prev,
     accumulator: (prev, curr) => prev + curr,
-    reducer: (data) => (data.accumulated / data.values.length) * 1000,
+    reducer: (data) => data.accumulated / data.values.length,
+  },
+  {
+    name: "asthmaAgeAdj",
+    accessor: (row) => row.properties.asthma_age_adj_rate,
+    accumulator: (prev, curr) => prev + curr,
+    reducer: (data) => data.accumulated / data.values.length,
+  },
+  {
+    name: "copd",
+    accessor: (row) => row.properties.cities_copd_prev,
+    accumulator: (prev, curr) => prev + curr,
+    reducer: (data) => data.accumulated / data.values.length,
+  },
+  {
+    name: "density",
+    accessor: (row) => row.properties.acs_population / (row.properties.aland),
+    accumulator: (prev, curr) => prev + curr,
+    reducer: (data) => (data.accumulated / data.values.length),
   },
   {
     name: "treeNumber",
@@ -86,6 +111,12 @@ const metricsToParse = [
   {
     name: "treeDensity",
     accessor: (row) => row.properties.trees_crown_den,
+    accumulator: (prev, curr) => prev + curr,
+    reducer: (data) => data.accumulated / data.values.length,
+  },
+  {
+    name: "floodSusceptibility",
+    accessor: (row) => row.properties.urban_flood_suscep,
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
   },
@@ -107,11 +138,54 @@ const metricsToParse = [
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
   },
+  // econ
   {
     name: "hardship",
     accessor: (row) => row.properties.hardship,
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
+  },
+  {
+    name: "svi",
+    accessor: (row) => row.properties.svi_percentile,
+    accumulator: (prev, curr) => prev + curr,
+    reducer: (data) => data.accumulated / data.values.length,
+  },
+  // race
+  {
+    name: "White",
+    accessor: (row) => [(+row.properties.pct_white * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
+    reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
+    defaultAccumulated: [0, 0],
+  },
+  {
+    name: "Black or African American",
+    accessor: (row) => [(+row.properties.pct_black * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
+    reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
+    defaultAccumulated: [0, 0],
+  },
+  {
+    name: "Native American",
+    accessor: (row) => [(+row.properties.pct_nativeam * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
+    reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
+    defaultAccumulated: [0, 0],
+  },
+  {
+    name: "Asian",
+    accessor: (row) => [(+row.properties.pct_asian * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
+    reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
+    defaultAccumulated: [0, 0],
+  },
+  {
+    name: "All additional races and ethnicities",
+    accessor: (row) => [(+row.properties.pct_other * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
+    reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
+    defaultAccumulated: [0, 0],
   },
 ];
 
@@ -158,14 +232,34 @@ const columnsToPresent = [
   },
 ];
 
-const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+const reportColumns =[
+  {
+    Header: '',
+    accessor: 'Label',
+    width: 900
+  },
+  {
+    Header: '',
+    accessor: 'Value',
+    width: 60
+  },
+  {
+    Header: '',
+    accessor: 'Description',
+    width: 150
+  },
+]
 
+const onlyUnique = (value, index, self) => self.indexOf(value) === index;
+const ColorSpan = styled.span`
+  color: ${props => props.color || 'black'};
+  background-color: ${props => props.backgroundColor || 'none'};
+  padding: 0.25em;
+`
 const ReportSection = styled.section`
   h2 {
     font-size: 1.5rem;
-    span {
-      color: #e83f6f;
-    }
+    font-family: 'Lora',serif;
   }
   ul {
     list-style: none;
@@ -218,9 +312,12 @@ function App() {
   });
   const handleGeolocate = () => {
     if ("geolocation" in navigator) {
-      console.log("Available");
+      console.log("Geolocaiton Available");
     } else {
-      console.log("Not Available");
+      setGeolocatingStatus({
+        status: "error",
+        message: `Geolocation service not available`
+      });
     }
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -239,9 +336,8 @@ function App() {
         if (intersectingFeature) {
           setGeolocatingStatus({
             status: "success",
-            message: `Successfully located you at ${
-              Math.round(1000 * position.coords.latitude) / 1000
-            }, ${Math.round(1000 * position.coords.longitude) / 1000}`,
+            message: `Successfully located you at ${Math.round(1000 * position.coords.latitude) / 1000
+              }, ${Math.round(1000 * position.coords.longitude) / 1000}`,
             data: intersectingFeature,
           });
           const locationInfo = {
@@ -250,8 +346,8 @@ function App() {
               geolocateType === "Zip Code"
                 ? intersectingFeature.properties.zip_code
                 : geolocateType === "Community"
-                ? titleCase(intersectingFeature.properties.community)
-                : intersectingFeature.properties.geoid,
+                  ? titleCase(intersectingFeature.properties.community)
+                  : intersectingFeature.properties.geoid,
           };
           setCurrentLocation(locationInfo);
         } else {
@@ -279,8 +375,8 @@ function App() {
           geolocateType === "Zip Code"
             ? intersectingFeature.properties.zip_code
             : geolocateType === "Community"
-            ? titleCase(intersectingFeature.properties.community)
-            : intersectingFeature.properties.geoid,
+              ? titleCase(intersectingFeature.properties.community)
+              : intersectingFeature.properties.geoid,
       });
     }
   }, [geolocateType]);
@@ -290,8 +386,8 @@ function App() {
       currentLocation.type === "Zip Code"
         ? (f) => f.properties.zip_code === currentLocation.label
         : currentLocation.type === "Community"
-        ? (f) => f.properties.community === currentLocation.label.toUpperCase()
-        : (f) => f.properties.geoid === currentLocation.label,
+          ? (f) => f.properties.community === currentLocation.label.toUpperCase()
+          : (f) => f.properties.geoid === currentLocation.label,
     [JSON.stringify(currentLocation)]
   );
 
@@ -357,12 +453,17 @@ function App() {
     currentLocation?.label &&
     transposedData.length &&
     transposedData[0][currentLocation.label] !== undefined;
-  console.log(filteredSummaries);
+
+  // metadata helpers
+  const ethnicMajority = ["White", "Black or African American", "Native American", "Asian", "All additional races and ethnicities"].find(raceEthnicity => filteredSummaries[raceEthnicity] ? filteredSummaries[raceEthnicity].reduced > 50 : false)
+  const densityPercentile = dataReady && quantileRank(summaries.density.values, filteredSummaries.density.reduced)
+  
   return (
     <CommunityPage>
       <StaticNavbar />
       <ContentContainer>
         <h1>Community</h1>
+        <h2>Alert! This page is a work in progress.</h2>
         <p>
           ChiVes community reports provide information and context about your
           community, zip code, or census tract. To start, search for your
@@ -437,52 +538,53 @@ function App() {
         </GeolocateSection>
         <Gutter height="2em" />
         {!!dataReady && (
-          <ReportSection>
-            {currentLocation.type === "Zip Code" && (
-              <h2>
-                Your zip code:{" "}
-                <span>
-                  {currentLocation.label}, part of{" "}
-                  {filteredFeatures
-                    .map((f) => titleCase(f.properties.community))
-                    .filter(onlyUnique)
-                    .join(", ")}
-                  , and {filteredFeatures.length} census tracts.
-                </span>
-              </h2>
-            )}
-            {currentLocation.type === "Community" && (
-              <h2>
-                Your community:{" "}
-                <span>
-                  {currentLocation.label}, including zip codes{" "}
-                  {filteredFeatures
-                    .map((f) => f.properties.zip_code)
-                    .filter(onlyUnique)
-                    .join(", ")}
-                  , and {filteredFeatures.length} census tracts.
-                </span>
-              </h2>
-            )}
-            {currentLocation.type === "Census Tract" && (
-              <h2>
-                Your census tract:{" "}
-                <span>
-                  {currentLocation.label}, located in{" "}
-                  {filteredFeatures
-                    .map((f) => titleCase(f.properties.community))
-                    .filter(onlyUnique)
-                    .join(", ")}{" "}
-                  and zip code{" "}
-                  {filteredFeatures
-                    .map((f) => f.properties.zip_code)
-                    .filter(onlyUnique)
-                    .join(", ")}
-                  .
-                </span>
-              </h2>
-            )}
-            <h3>
+          <>
+            <ReportSection>
+              {currentLocation.type === "Zip Code" && (
+                <h2>
+                  Your zip code:{" "}
+                  <ColorSpan color={'#e83f6f'}>
+                    {currentLocation.label}, part of{" "}
+                    {filteredFeatures
+                      .map((f) => titleCase(f.properties.community))
+                      .filter(onlyUnique)
+                      .join(", ")}
+                    , and {filteredFeatures.length} census tracts.
+                  </ColorSpan>
+                </h2>
+              )}
+              {currentLocation.type === "Community" && (
+                <h2>
+                  Your community:{" "}
+                  <span>
+                    {currentLocation.label}, including zip codes{" "}
+                    {filteredFeatures
+                      .map((f) => f.properties.zip_code)
+                      .filter(onlyUnique)
+                      .join(", ")}
+                    , and {filteredFeatures.length} census tracts.
+                  </span>
+                </h2>
+              )}
+              {currentLocation.type === "Census Tract" && (
+                <h2>
+                  Your census tract:{" "}
+                  <span>
+                    {currentLocation.label}, located in{" "}
+                    {filteredFeatures
+                      .map((f) => titleCase(f.properties.community))
+                      .filter(onlyUnique)
+                      .join(", ")}{" "}
+                    and zip code{" "}
+                    {filteredFeatures
+                      .map((f) => f.properties.zip_code)
+                      .filter(onlyUnique)
+                      .join(", ")}
+                    .
+                  </span>
+                </h2>
+              )}
+              {/* <h3>
               Key indicators for environmental and air quality show us how
               healthy it is for people.{" "}
             </h3>
@@ -499,10 +601,142 @@ function App() {
               <br />
               These outcomes relate to a number of factors, but the environment
               is a central part.
-            </h3>
-          </ReportSection>
+            </h3> */}
+            </ReportSection>
+            <ReportSection>
+              <h3><ColorSpan color={'#e83f6f'}>
+                Environmental Indicators in {currentLocation.label}
+              </ColorSpan>
+              </h3>
+              <TableComponent
+                columns={reportColumns}
+                data={[{
+                  Label: 'Average Air Polution (PM2.5)',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.pm25?.reduced !== undefined && filteredSummaries.pm25.reduced.toFixed(1)}</ColorSpan>,
+                  Description: 'Presence of particulates in the air, smaller than 2.5 microns in size. Estiamted during January through August over 2014-2018.'
+                }, {
+                  Label: 'Heat Island Effect',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.heatIsland?.reduced !== undefined && filteredSummaries.heatIsland.reduced.toFixed(1)}</ColorSpan>,
+                  Description: 'The surface heat on a scale of 0-100, where 100 is the hottest in Chicago and 0 is the coldest.'
+                },{
+                  Label: 'Urban Flood Susceptibility',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.floodSusceptibility?.reduced !== undefined && filteredSummaries.floodSusceptibility.reduced.toFixed(1)}</ColorSpan>,
+                  Description: 'A FEMA index, where 0 is the less susceptible and 10 is the more susceptible.'
+                },{
+                  Label: 'Average Traffic Volume',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.traffic?.reduced !== undefined && filteredSummaries.traffic.reduced.toFixed(1)}</ColorSpan>,
+                  Description: 'The average daily traffic count per road segment over a year, scaled logarithmically.'
+                }, {
+                  Label: 'Tree Crown Density',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.treeDensity?.reduced !== undefined && filteredSummaries.treeDensity.reduced.toFixed(1)}</ColorSpan>,
+                  Description: 'Percent of the area covered by trees.'
+                }]}
+                tableProps={{
+                  style: {
+                    fontSize: '1rem'
+                  }
+                }}
+                rowProps={{
+                  style: {
+                    padding: '.5em',
+                  }
+                }}
+              />
+            </ReportSection>
+            <Gutter height="2em" />
+            <ReportSection>
+              <h3><ColorSpan color={'#e83f6f'}>
+                People living in {currentLocation.label}
+              </ColorSpan>
+              </h3>
+              <TableComponent
+                columns={reportColumns}
+                data={[{
+                  Label: 'Residents',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.population?.reduced !== undefined && Math.round(filteredSummaries.population.reduced).toLocaleString()}</ColorSpan>,
+                }, {
+                  Label: 'Population Density',
+                  Value: <><ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.density?.reduced !== undefined && Math.round(filteredSummaries.density.reduced * 1e6).toLocaleString()}</ColorSpan> people per square kilometer</>,
+                  Description: `
+                  About the density of ${filteredSummaries?.density?.reduced !== undefined && Math.round(filteredSummaries.density.reduced * 2e4).toLocaleString()} people in 
+                  a downtown city block. ${currentLocation.label} is denser than ${Math.round(densityPercentile*100)}% of Chicago.`
+                }, {
+                  Label: 'Race and Ethnicity',
+                  Value: ethnicMajority ? `Majority ${ethnicMajority}` : 'Diverse',
+                  Description: `People in ${currentLocation.label} are made up of the following races and ethnicities: ${filteredSummaries['Black or African American'].reduced}% of residents are Black or African American, ${filteredSummaries['Native American'].reduced}% are Native American or Indigenous, ${filteredSummaries['Asian'].reduced}% are Asian, ${filteredSummaries['White'].reduced}% are White, and ${filteredSummaries['All additional races and ethnicities'].reduced}% of people come from additional races or ethnicities.`
+                }]}
+                tableProps={{
+                  style: {
+                    fontSize: '1rem'
+                  }
+                }}
+                rowProps={{
+                  style: {
+                    padding: '.5em',
+                  }
+                }}
+              />
+            </ReportSection>
+            <Gutter height="2em" />
+            <ReportSection>
+              <h3><ColorSpan color={'#e83f6f'}>
+                Health Outcomes in {currentLocation.label}
+              </ColorSpan>
+              </h3>
+              <TableComponent
+                columns={reportColumns}
+                data={[{
+                  Label: 'Asthma Prevalence',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthma?.reduced !== undefined && filteredSummaries.asthma.reduced.toFixed(2)}</ColorSpan>,
+                }, {
+                  Label: 'Age Adjusted Asthma Rate',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined && filteredSummaries.asthmaAgeAdj.reduced.toFixed(2)}</ColorSpan>,
+                }, {
+                  Label: 'COPD Prevalence',
+                  Value:<ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined && filteredSummaries.copd.reduced.toFixed(2)}</ColorSpan>,
+                }, ]}
+                tableProps={{
+                  style: {
+                    fontSize: '1rem'
+                  }
+                }}
+                rowProps={{
+                  style: {
+                    padding: '.5em',
+                  }
+                }}
+              />
+            </ReportSection>
+            <Gutter height="2em" />
+            <ReportSection>
+              <h3><ColorSpan color={'#e83f6f'}>
+                Social and Economic Indicators in {currentLocation.label}
+              </ColorSpan>
+              </h3>
+              <TableComponent
+                columns={reportColumns}
+                data={[{
+                  Label: 'Economic Hardship Index',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.hardship?.reduced !== undefined && filteredSummaries?.hardship?.reduced.toFixed(2)}</ColorSpan>,
+                }, {
+                  Label: 'Social Vulnerability Index',
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.svi?.reduced !== undefined && filteredSummaries.svi.reduced.toFixed(2)}</ColorSpan>,
+                }]}
+                tableProps={{
+                  style: {
+                    fontSize: '1rem'
+                  }
+                }}
+                rowProps={{
+                  style: {
+                    padding: '.5em',
+                  }
+                }}
+              />
+            </ReportSection>
+          </>
         )}
-        {!!dataReady && <Table columns={columns} data={transposedData} />}
+        {/* {!!dataReady && <Table columns={columns} data={transposedData} />} */}
       </ContentContainer>
       <Footer />
     </CommunityPage>

@@ -2,23 +2,22 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import {scaleThreshold} from 'd3-scale';
-import {WebMercatorViewport} from '@deck.gl/core';
+import { WebMercatorViewport } from '@deck.gl/core';
 
 // deck GL and helper function import
 import DeckGL from '@deck.gl/react';
-import {MapView, FlyToInterpolator} from '@deck.gl/core';
+import { MapView, FlyToInterpolator } from '@deck.gl/core';
 import { GeoJsonLayer } from '@deck.gl/layers';
-import {fitBounds} from '@math.gl/web-mercator';
+import { fitBounds } from '@math.gl/web-mercator';
 import MapboxGLMap from 'react-map-gl';
-import {DataFilterExtension, FillStyleExtension} from '@deck.gl/extensions';
+import { DataFilterExtension, FillStyleExtension } from '@deck.gl/extensions';
 
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from '../components';
 import { setSelectionData } from '../actions';
-// import { mapFn, dataFn, getVarId } from '../utils';
+import { scaleColor } from '../utils';
 import { colors } from '../config';
-import * as SVG from '../config/svg'; 
+import * as SVG from '../config/svg';
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -26,10 +25,10 @@ const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 const bounds = fitBounds({
     width: window.innerWidth,
     height: window.innerHeight,
-    bounds: [[-87.971649,41.609282],[-87.521896,42.040624]]
+    bounds: [[-87.971649, 41.609282], [-87.521896, 42.040624]]
 })
 
-const getRightMargin = () => window.innerWidth * .15 < 250 ? 260 : window.innerWidth*.15 + 10;
+const getRightMargin = () => window.innerWidth * .15 < 250 ? 260 : window.innerWidth * .15 + 10;
 
 const QueryFeaturesWorker = new Worker(`${process.env.PUBLIC_URL}/workers/queryRenderedFeaturesWorker.js`);
 // component styling
@@ -37,7 +36,7 @@ const MapContainer = styled.div`
     position:absolute;
     left:0;
     top:0;
-    width:${props => props.infoPanel ? `calc(100% - ${getRightMargin()-10}px)` : '100%'};
+    width:100%;
     height:100%;
     transition: 250ms all;
     background:${colors.white};
@@ -88,8 +87,8 @@ const HoverDiv = styled.div`
 
 const MapButtonContainer = styled.div`
     position: absolute;
-    right:${props => props.infoPanel ? `calc(${getRightMargin()/5}px)` : '0.75em'};
-    bottom: 5em;
+    right:${props => props.infoPanel ? `calc(${getRightMargin()}px)` : '0.75em'};
+    bottom: 0;
     z-index: 10;
     transition: 250ms all;
     @media (max-width: 1000px) {
@@ -144,7 +143,7 @@ const NavInlineButton = styled.button`
     }
     svg {
         transition:250ms all;
-        transform:${props => props.tilted ? 'rotate(30deg)' : 'none' };
+        transform:${props => props.tilted ? 'rotate(30deg)' : 'none'};
     }
 `
 
@@ -173,7 +172,7 @@ const GeocoderContainer = styled.div`
 
 const LogoContainer = styled.div`
     position:absolute;
-    right:0.75em;
+    right:${props => props.infoPanel ? `calc(${getRightMargin()}px)` : '0.75em'};
     bottom:0.75em;
     zIndex:500;
     height:4em;
@@ -191,18 +190,18 @@ const LogoContainer = styled.div`
 `
 
 function debounce(func, wait, immediate) {
-	var timeout;
-	return function() {
-		var context = this, args = arguments;
-		var later = function() {
-			timeout = null;
-			if (!immediate) func.apply(context, args);
-		};
-		var callNow = immediate && !timeout;
-		clearTimeout(timeout);
-		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
-	};
+    var timeout;
+    return function () {
+        var context = this, args = arguments;
+        var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
 };
 
 // //create your forceUpdate hook
@@ -211,23 +210,23 @@ function debounce(func, wait, immediate) {
 //     return () => setValue(value => value + 1); // update the state to force render
 // }
 
-function MapSection(props){ 
+function MapSection(props) {
     // fetch pieces of state from store    
-    const { 
-        storedGeojson, 
+    const {
+        storedGeojson,
         panelState,
-        mapParams, 
-        urlParams, 
-        centroids, 
-        columnNames, 
-        ranges, 
+        mapParams,
+        urlParams,
+        centroids,
+        columnNames,
+        ranges,
         selectionData,
         filterValues,
     } = useSelector(state => state);
 
     // component state elements
     // hover and highlight geographibes
-    const [hoverInfo, setHoverInfo] = useState({x:null, y:null, object:null});
+    const [hoverInfo, setHoverInfo] = useState({ x: null, y: null, object: null });
     // const [highlightGeog, setHighlightGeog] = useState([]);
     const [hoverGeog, setHoverGeog] = useState(null);
 
@@ -236,13 +235,13 @@ function MapSection(props){
         latitude: +urlParams.lat || bounds.latitude,
         longitude: +urlParams.lon || bounds.longitude,
         zoom: +urlParams.z || bounds.zoom,
-        bearing:0,
-        pitch:0
+        bearing: 0,
+        pitch: 0
     })
 
     // // share button notification
     // const [shared, setShared] = useState(false);
-    
+
     // interaction states
     // const [multipleSelect, setMultipleSelect] = useState(false);
     // const [boxSelect, setBoxSelect] = useState(false);
@@ -253,12 +252,12 @@ function MapSection(props){
 
     const dispatch = useDispatch();
 
-    
+
     const RunQueryWorker = async (params) => {
         QueryFeaturesWorker.postMessage(params);
         QueryFeaturesWorker.onmessage = (e) => {
             const result = e?.data;
-            console.log(result)
+            // console.log(result)
             if (result) {
                 dispatch(setSelectionData(result))
             }
@@ -266,9 +265,9 @@ function MapSection(props){
     }
 
     var queryViewport = debounce((e) => {
-        if (!!centroids && centroids.length){
-            const viewport = new WebMercatorViewport(e.viewState);      
-            const extent = [...viewport.unproject([0, 0]),...viewport.unproject([viewport.width, viewport.height])];
+        if (!!centroids && centroids.length) {
+            const viewport = new WebMercatorViewport(e.viewState);
+            const extent = [...viewport.unproject([0, 0]), ...viewport.unproject([viewport.width, viewport.height])];
             RunQueryWorker({
                 storedGeojson,
                 centroids,
@@ -287,20 +286,20 @@ function MapSection(props){
                 storedGeojson,
                 centroids,
                 columnNames,
-                extent:[-100, 100, 100, -100],
+                extent: [-100, 100, 100, -100],
                 ranges,
                 filterValues
             })
         }
         // eslint-disable-next-line
-    },[centroids, storedGeojson, columnNames, ranges, selectionData, filterValues])
+    }, [centroids, storedGeojson, columnNames, ranges, selectionData, filterValues])
 
     useEffect(() => {
         if (deckRef.current.viewports) {
-            queryViewport({viewState: {...deckRef.current.viewports[0]}})
+            queryViewport({ viewState: { ...deckRef.current.viewports[0] } })
         }
         // eslint-disable-next-line
-    },[filterValues])
+    }, [filterValues])
 
     // let hidden = null;
     // let visibilityChange = null;
@@ -326,13 +325,13 @@ function MapSection(props){
     //         // When local storage changes, dump the list to
     //         // the console.
     //         const SHARED_GEOID =  localStorage.getItem('SHARED_GEOID').split(',').map(d => parseInt(d))
-            
+
     //         if (SHARED_GEOID !== null) {
     //             setHighlightGeog(SHARED_GEOID); 
     //         }
-            
+
     //         const SHARED_VIEW =  JSON.parse(localStorage.getItem('SHARED_VIEW'));
-            
+
     //         if (SHARED_VIEW !== null && SHARED_VIEW.hasOwnProperty('latitude')) {
     //             setViewState({
     //                     longitude: SHARED_VIEW.longitude,
@@ -345,27 +344,27 @@ function MapSection(props){
     //     });
 
     // },[])
-    
+
     useEffect(() => {
         setViewState(view => ({
             ...view,
             latitude: +urlParams.lat || bounds.latitude,
             longitude: +urlParams.lon || bounds.longitude,
             zoom: +urlParams.z || bounds.zoom,
-            bearing:0,
-            pitch:0
+            bearing: 0,
+            pitch: 0
         }));
     }, [urlParams])
 
     const GetMapView = () => {
         try {
             const currView = deckRef.current.deck.viewState.MapView
-            return currView || {...viewState}
+            return currView || { ...viewState }
         } catch {
-            return {...viewState}
+            return { ...viewState }
         }
     }
-    
+
     const mapRef = useRef(null);
 
     const deckRef = useRef({
@@ -379,25 +378,25 @@ function MapSection(props){
     });
 
     // const handleShare = async (params) => {
-        // const shareData = {
-        //     title: 'The US Covid Atlas',
-        //     text: 'Near Real-Time Exploration of the COVID-19 Pandemic.',
-        //     url: `${window.location.href.split('?')[0]}${getURLParams(params)}`,
-        // }
+    // const shareData = {
+    //     title: 'The US Covid Atlas',
+    //     text: 'Near Real-Time Exploration of the COVID-19 Pandemic.',
+    //     url: `${window.location.href.split('?')[0]}${getURLParams(params)}`,
+    // }
 
-        // try {
-        //     await navigator.share(shareData)
-        //   } catch(err) {
-        //     let copyText = document.querySelector("#share-url");
-        //     copyText.value = `${shareData.url}`;
-        //     copyText.style.display = 'blockd'
-        //     copyText.select();
-        //     copyText.setSelectionRange(0, 99999);
-        //     document.execCommand("copy");
-        //     copyText.style.display = 'none';
-        //     setShared(true)
-        //     setTimeout(() => setShared(false), 5000);
-        // }
+    // try {
+    //     await navigator.share(shareData)
+    //   } catch(err) {
+    //     let copyText = document.querySelector("#share-url");
+    //     copyText.value = `${shareData.url}`;
+    //     copyText.style.display = 'blockd'
+    //     copyText.select();
+    //     copyText.setSelectionRange(0, 99999);
+    //     document.execCommand("copy");
+    //     copyText.style.display = 'none';
+    //     setShared(true)
+    //     setTimeout(() => setShared(false), 5000);
+    // }
     // }
 
     // const handleKeyDown = (e) => {
@@ -414,47 +413,48 @@ function MapSection(props){
     //     }
     // }
 
-    const handleMapClick = ({x, y, object}) => {
+    const handleMapClick = ({ x, y, object }) => {
+        console.log(object)
         if (object && object.properties) {
             setHoverGeog(object.properties.geoid)
-            setHoverInfo({x, y, object: object.properties})
+            setHoverInfo({ x, y, object: object.properties })
         } else {
             setHoverGeog(null)
-            setHoverInfo({x:null, y:null, object:null})
+            setHoverInfo({ x: null, y: null, object: null })
         }
     }
 
     const handleGeolocate = async () => {
-        navigator.geolocation.getCurrentPosition( position => {
+        navigator.geolocation.getCurrentPosition(position => {
             setViewState({
-                    longitude: position.coords.longitude,
-                    latitude: position.coords.latitude,
-                    zoom:14,
-                    transitionDuration: 1000,
-                    transitionInterpolator: new FlyToInterpolator()
-                })
-        }) 
+                longitude: position.coords.longitude,
+                latitude: position.coords.latitude,
+                zoom: 14,
+                transitionDuration: 1000,
+                transitionInterpolator: new FlyToInterpolator()
+            })
+        })
     }
 
     const handleZoom = (zoom) => {
         const currMapView = GetMapView()
         setViewState({
-                ...currMapView,
-                zoom: currMapView.zoom + zoom,
-                transitionDuration: 250,
-                transitionInterpolator: new FlyToInterpolator()
-            })
+            ...currMapView,
+            zoom: currMapView.zoom + zoom,
+            transitionDuration: 250,
+            transitionInterpolator: new FlyToInterpolator()
+        })
     }
-    
+
     const resetTilt = () => {
         const currMapView = GetMapView()
         setViewState({
-                ...currMapView,
-                bearing:0,
-                pitch:0,
-                transitionDuration: 250,
-                transitionInterpolator: new FlyToInterpolator()
-            })
+            ...currMapView,
+            bearing: 0,
+            pitch: 0,
+            transitionDuration: 250,
+            transitionInterpolator: new FlyToInterpolator()
+        })
     }
 
     const handleGeocoder = useCallback(location => {
@@ -466,24 +466,24 @@ function MapSection(props){
                 let bounds = fitBounds({
                     width: window.innerWidth,
                     height: window.innerHeight,
-                    bounds: [[location.bbox[0],location.bbox[1]],[location.bbox[2],location.bbox[3]]]
+                    bounds: [[location.bbox[0], location.bbox[1]], [location.bbox[2], location.bbox[3]]]
                 })
                 center = [bounds.longitude, bounds.latitude];
-                zoom = bounds.zoom*.9;
+                zoom = bounds.zoom * .9;
             };
 
             setViewState({
                 longitude: center[0],
                 latitude: center[1],
                 zoom: zoom,
-                bearing:0,
-                pitch:0,
+                bearing: 0,
+                pitch: 0,
                 transitionDuration: 'auto',
                 transitionInterpolator: new FlyToInterpolator()
             })
-        }  
-      }, []);
-    
+        }
+    }, []);
+
     // on initial render, navigate to lon/lat if provided
     useEffect(() => {
         const queryString = window.location.search;
@@ -495,25 +495,23 @@ function MapSection(props){
             })
         }
         // eslint-disable-next-line
-    },[])
+    }, [])
 
-    const COLOR_SCALE = scaleThreshold()
-        .domain(mapParams.bins)
-        .range(mapParams.colorScale);
+    const COLOR_SCALE = x => scaleColor(x,mapParams.bins, mapParams.colorScale);
 
     const isVisible = (feature, filters) => {
         for (const property in filters) {
             if (typeof filters[property][0] === 'string') {
                 if (!filters[property].includes(feature.properties[property])) return false;
             } else {
-                if (feature.properties[property] < filters[property][0] 
-                    || 
+                if (feature.properties[property] < filters[property][0]
+                    ||
                     feature.properties[property] > filters[property][1]) return false;
             }
         };
         return true;
     };
-    const layers = [ 
+    const layers = [
         new GeoJsonLayer({
             id: 'choropleth',
             data: storedGeojson,
@@ -521,13 +519,20 @@ function MapSection(props){
             stroked: false,
             filled: true,
             extruded: false,
-            getFillColor: f => COLOR_SCALE(f[mapParams.numerator][mapParams.nProperty]),
+            getFillColor: feature => {
+                const val = mapParams.accessor(feature)
+                if ([null, undefined].includes(val)) {
+                    return [0, 0, 0, 0]
+                } else {
+                    return COLOR_SCALE(val)
+                }
+            },
             opacity: 1,
             // onHover: handleMapHover,
-            onClick: handleMapClick,  
+            onClick: handleMapClick,
             getFilterValue: d => isVisible(d, filterValues) ? 1 : 0,
-            filterRange: [1, 1], 
-            extensions: [new DataFilterExtension({filterSize: 1})],          
+            filterRange: [1, 1],
+            extensions: [new DataFilterExtension({ filterSize: 1 })],
             updateTriggers: {
                 getFillColor: [storedGeojson.type, mapParams.variableName, mapParams.bins, mapParams.colorScale],
                 getFilterValue: filterValues
@@ -543,40 +548,40 @@ function MapSection(props){
             stroked: false,
             filled: true,
             extruded: false,
-            getFillColor: [0,0,0,120],
+            getFillColor: [0, 0, 0, 120],
             opacity: 1,
-            
+
             // props added by FillStyleExtension
             fillPatternAtlas: `${process.env.PUBLIC_URL}/icons/park-pattern.png`,
             fillPatternMapping: {
                 "dot": {
-                  "x": 0,
-                  "y": 0,
-                  "width": 128,
-                  "height": 128,
-                  "mask": true
+                    "x": 0,
+                    "y": 0,
+                    "width": 128,
+                    "height": 128,
+                    "mask": true
                 }
             },
             getFillPattern: f => 'dot',
-            getFillPatternScale: (19-GetMapView().zoom)/8,
+            getFillPatternScale: (19 - GetMapView().zoom) / 8,
             getFillPatternOffset: [0, 0],
 
             // Define extensions
-            extensions: [new FillStyleExtension({pattern: true})]
+            extensions: [new FillStyleExtension({ pattern: true })]
         }),
         new GeoJsonLayer({
             id: 'highlightLayer',
             data: storedGeojson,
             opacity: 0.8,
-            material:false,
+            material: false,
             pickable: false,
             stroked: true,
-            filled:true,
+            filled: true,
             lineWidthScale: 5,
-            getLineColor: d => d.properties.geoid === hoverGeog ? [65,182,230,255] : [100,100,100,0],
-            getFillColor: d => d.properties.geoid === hoverGeog ? [65,182,230,120] : [65,182,230,0],
-            getLineWidth:1, 
-            lineWidthMinPixels: 3,        
+            getLineColor: d => d.properties.geoid === hoverGeog ? [65, 182, 230, 255] : [100, 100, 100, 0],
+            getFillColor: d => d.properties.geoid === hoverGeog ? [65, 182, 230, 120] : [65, 182, 230, 0],
+            getLineWidth: 1,
+            lineWidthMinPixels: 3,
             updateTriggers: {
                 getLineColor: [hoverGeog],
                 getFillColor: [hoverGeog],
@@ -590,15 +595,15 @@ function MapSection(props){
             id: 'community areas',
             data: `${process.env.PUBLIC_URL}/geojson/community_areas.geojson`,
             opacity: 0.8,
-            material:false,
+            material: false,
             pickable: false,
             stroked: true,
-            filled:false,
+            filled: false,
             lineWidthScale: 1,
-            lineWidthMinPixels:1,
-            lineWidthMaxPixels:4,
-            getLineWidth:1, 
-            getLineColor: [0,0,0,255],
+            lineWidthMinPixels: 1,
+            lineWidthMaxPixels: 4,
+            getLineWidth: 1,
+            getLineColor: [0, 0, 0, 255],
             visible: mapParams.overlay === 'community_areas',
             updateTriggers: {
                 visible: [mapParams.overlay],
@@ -608,24 +613,24 @@ function MapSection(props){
             id: 'community areas',
             data: `${process.env.PUBLIC_URL}/geojson/boundaries_wards_2015_.geojson`,
             opacity: 0.8,
-            material:false,
+            material: false,
             pickable: false,
             stroked: true,
-            filled:false,
+            filled: false,
             lineWidthScale: 1,
-            lineWidthMinPixels:1,
-            lineWidthMaxPixels:4,
-            getLineWidth:1, 
-            getLineColor: [0,0,0,255],
+            lineWidthMinPixels: 1,
+            lineWidthMaxPixels: 4,
+            getLineWidth: 1,
+            getLineColor: [0, 0, 0, 255],
             visible: mapParams.overlay === 'wards',
             updateTriggers: {
                 visible: [mapParams.overlay],
             },
-        })  
+        })
     ]
 
-    
-    const view = new MapView({repeat: true});
+
+    const view = new MapView({ repeat: true });
     // const handleSelectionBoxStart = () => {
     //     setBoxSelect(true)
     // }
@@ -657,7 +662,7 @@ function MapSection(props){
     //         return { ...prev, x, y, width, height }
     //     })
     // }
-    
+
     // const touchListener = (e) => {
     //     // setX(e?.targetTouches[0]?.clientX-15)
     //     // setY(e?.targetTouches[0]?.clientY-15)
@@ -696,11 +701,11 @@ function MapSection(props){
     //             window.addEventListener('mousemove', listener);
     //             window.addEventListener('mouseup', removeListeners);
     //         } else {
-    
+
     //             const {x, y, width, height } = boxSelectDims;
-    
+
     //             let layerIds = ['choropleth'];
-    
+
     //             let features = deckRef.current.pickObjects(
     //                     {
     //                         x, y: y-50, width, height, layerIds
@@ -745,12 +750,12 @@ function MapSection(props){
                 initialViewState={viewState}
                 controller={
                     {
-                        dragRotate: true, 
-                        dragPan: true, 
-                        doubleClickZoom: true, 
-                        touchZoom: true, 
-                        touchRotate: true, 
-                        keyboard: true, 
+                        dragRotate: true,
+                        dragPan: true,
+                        doubleClickZoom: true,
+                        touchZoom: true,
+                        touchRotate: true,
+                        keyboard: true,
                         scrollZoom: true,
                         inertia: 100
                     }
@@ -759,22 +764,22 @@ function MapSection(props){
                 pickingRadius={20}
                 onViewStateChange={e => {
                     queryViewport(e)
-                    hoverInfo.object && handleMapClick({x:null, y:null, object:null})
+                    hoverInfo.object && handleMapClick({ x: null, y: null, object: null })
                 }}
                 onViewportLoad={queryViewport}
-                
+
             >
                 <MapboxGLMap
                     reuseMaps
                     ref={mapRef}
-                    mapStyle={'mapbox://styles/csds-hiplab/ckmuv80qn2b6o17ltels6z7ub?fresh=true'} 
+                    mapStyle={'mapbox://styles/csds-hiplab/ckmuv80qn2b6o17ltels6z7ub?fresh=true'}
                     preventStyleDiffing={true}
                     mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
                     on
-                    >
+                >
                 </MapboxGLMap >
             </DeckGL>
-            <MapButtonContainer 
+            <MapButtonContainer
                 infoPanel={panelState.info}
             >
                 {/* <NavInlineButtonGroup>
@@ -796,10 +801,10 @@ function MapSection(props){
                         {SVG.locate}
                     </NavInlineButton>
                 </NavInlineButtonGroup>
-                
+
                 <NavInlineButtonGroup>
                     <NavInlineButton
-                    
+
                         title="Zoom In"
                         id="zoomIn"
                         onClick={() => handleZoom(0.5)}
@@ -835,7 +840,7 @@ function MapSection(props){
                 <ShareURL type="text" value="" id="share-url" /> */}
             </MapButtonContainer>
             <GeocoderContainer>
-                <Geocoder 
+                <Geocoder
                     id="Geocoder"
                     placeholder={"Search by location"}
                     API_KEY={MAPBOX_ACCESS_TOKEN}
@@ -844,17 +849,17 @@ function MapSection(props){
             </GeocoderContainer>
 
             {hoverInfo.object && (
-                <HoverDiv style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: hoverInfo.x, top: hoverInfo.y}}>
+                <HoverDiv style={{ position: 'absolute', zIndex: 1, pointerEvents: 'none', left: hoverInfo.x, top: hoverInfo.y }}>
                     <MapTooltipContent content={hoverInfo.object} />
                 </HoverDiv>
             )}
-            <LogoContainer>
+            <LogoContainer infoPanel={panelState.info}>
                 <a href="https://herop.ssd.uchicago.edu/" target="_blank" rel="noopener noreferrer">
                     <img src={`${process.env.PUBLIC_URL}/herop_dark_logo_teal.png`} alt="" />
                 </a>
             </LogoContainer>
         </MapContainer>
-    ) 
+    )
 }
 
 export default MapSection

@@ -30,6 +30,7 @@
     "@mui/x-data-grid": "^5.5.1",
     "@react-icons/all-files": "^4.1.0",
     "@turf/boolean-within": "^6.5.0",
+    "@turf/centroid": "^6.5.0",
     "@turf/turf": "^6.3.0",
     "d3-dsv": "^2.0.0",
     "d3-scale": "^3.2.0",
@@ -49,6 +50,7 @@
     "react-table": "^7.7.0",
     "recharts": "^1.8.5",
     "redux": "^4.0.5",
+    "simple-statistics": "^7.7.3",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4",
     "webfontloader": "^1.6.28"

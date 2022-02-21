@@ -7,12 +7,13 @@ const processData = (data, columnsToParse, prefix) => {
         const { accessor,
             accumulator,
             reducer,
-            name } = columnsToParse[j];
+            name,
+        defaultAccumulated=0 } = columnsToParse[j];
         const prefixedName = prefix + name
 
         processedData[prefixedName] = {
             values: [],
-            accumulated: 0,
+            accumulated: defaultAccumulated,
             reduced: 0
         }
         for (let i = 0; i < data.length; i++) {
@@ -22,6 +23,7 @@ const processData = (data, columnsToParse, prefix) => {
                 processedData[prefixedName].accumulated = accumulator(processedData[prefixedName].accumulated, entry)
             }
         }
+        
         processedData[prefixedName].reduced = reducer(processedData[prefixedName])
         processedData[prefixedName].values = processedData[prefixedName].values.sort((a,b) => a-b)
     }

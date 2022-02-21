@@ -15,7 +15,7 @@ const BottomPanel = styled.div`
     width:25vw;
     max-width: 500px;
     box-sizing: border-box;
-    padding:0 0 5px 0;
+    padding:1.75em .5em .25em .5em;
     margin:0;
     box-shadow: 0px 0px 5px ${colors.gray}55;
     border-radius:0.5vh 0.5vh 0 0;
@@ -58,11 +58,10 @@ const BottomPanel = styled.div`
 
 const LegendContainer = styled.div`
     width:100%;
-    padding:10px;
     margin:0;
     box-sizing: border-box;
     div.MuiGrid-item {
-        padding:5px 5px 0 5px;
+        padding-top:0;
     }
 `
 
@@ -116,31 +115,35 @@ const BinBars = styled.div`
 `
 
 
-const Legend =  (props) => {
+const Legend =  ({
+    variableName,
+    bins,
+    colorScale
+}) => {
     
     return (
         <BottomPanel id="bottomPanel">
-            <LegendContainer>
+            {!!bins && !!colorScale && <LegendContainer>
                 <Grid container spacing={2} id='legend-bins-container'>
                     <Grid item xs={12}>
                         <LegendTitle>
-                            {props.variableName}
+                            {variableName}
                         </LegendTitle>
                     </Grid>
                     <Grid item xs={12}>
-                        {props.colorScale !== undefined &&  
+                        {colorScale !== undefined &&  
                             <span>
                                 <BinBars>
-                                    {props.colorScale.map(color => <div className="bin color" key={`${color[0]}${color[1]}`}style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
+                                    {colorScale.map(color => <div className="bin color" key={`${color[0]}${color[1]}`}style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
                                 </BinBars>
-                                <BinLabels binLength={props.bins.length}> 
-                                    {props.bins.slice(1,).map(bin => <div className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
+                                <BinLabels binLength={bins.length}> 
+                                    {bins.map(bin => <div className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
                                 </BinLabels>
                             </span>
                         }
                     </Grid>
                 </Grid>
-            </LegendContainer>
+            </LegendContainer>}
         </BottomPanel>
     )
 }

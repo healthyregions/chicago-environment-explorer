@@ -17,7 +17,7 @@ const Container = styled.div`
         background:white;
         height:36px;
         border-radius:0px;
-        padding:0 35px;
+        padding:0;
     }
     .MuiAutocomplete-inputRoot[class*="MuiInput-root"] .MuiAutocomplete-input:first-child {
         padding:0;
@@ -44,7 +44,9 @@ const Container = styled.div`
 `
 
 const StyledOption = styled.span`
+    height: 2em;
     span {
+        padding-left:1em;
         display:block;
         font-size:12px;
         &:first-child {
@@ -61,6 +63,7 @@ const Geocoder = ( props ) => {
         results: [],
         value: '',
     })
+    console.log(searchState)
 
     const loadResults = (results) => {
         setSearchState(prev => ({
@@ -93,27 +96,29 @@ const Geocoder = ( props ) => {
     const handleSearch = async (e) => {
         if (e.target.value.length > 3) {
             queryMapbox(e.target.value, (r) => loadResults(r))
-
         }
     }
 
     const formatPlaceContext = (contextArray) => {
         let returnString = ``
-        for (let i=0; i<contextArray.length; i++) {
-            if (
-                contextArray[i].id.includes('region')
-                ||
-                contextArray[i].id.includes('country')
-                ||
-                contextArray[i].id.includes('place')
-                ||
-                contextArray[i].id.includes('neighborhood')
-            ) {
-                returnString += `${contextArray[i].text}, `
+        if (contextArray && contextArray.length){
+            for (let i=0; i<contextArray.length; i++) {
+                if (
+                    contextArray[i].id.includes('region')
+                    ||
+                    contextArray[i].id.includes('country')
+                    ||
+                    contextArray[i].id.includes('place')
+                    ||
+                    contextArray[i].id.includes('neighborhood')
+                ) {
+                    returnString += `${contextArray[i].text}, `
+                }
             }
         }
         return returnString.slice(0,-2)
     }
+    console.log(searchState)
 
     return (
         <Container>
@@ -131,14 +136,13 @@ const Geocoder = ( props ) => {
                     clearInput();
                     props.onChange(selectedOption);
                 }}
-                renderOption={(option, idx) => (
-                <React.Fragment>
-                    <StyledOption id={idx}>
-                        <span>{option.place_name.split(',')[0]}</span>
-                        <span>{formatPlaceContext(option.context)}</span>
-                    </StyledOption>
-                </React.Fragment>
-                )}
+                // renderOption={(option, idx) => <React.Fragment>
+                //     <StyledOption id={idx}>
+                //         <span>{!!option.key && option.key.split(',')[0]}</span>
+                //         <span>{!!option.key && option.key.split(',').slice(1,).join(', ')}</span>
+                //     </StyledOption>
+                // </React.Fragment>
+                // }
                 renderInput={(params) => (
                     <TextField
                     {...params}
