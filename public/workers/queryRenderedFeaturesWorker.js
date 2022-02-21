@@ -1,16 +1,6 @@
 // webworker.js
 
-function within(point, bounds){
-    if (point[0] > bounds[0] && 
-        point[0] < bounds[2] && 
-        point[1] < bounds[1] && 
-        point[1] > bounds[3]
-    ) {
-        return true
-    } else {
-        return false
-    }
-};
+const within = (point, bounds) => (point[0] > bounds[0] && point[0] < bounds[2] && point[1] < bounds[1] && point[1] > bounds[3])
 
 function generateFilteredData(params){
     // Instead of destructuring for older ES support    
@@ -35,8 +25,15 @@ function generateFilteredData(params){
     for (var n=0; n<columns.length;n++){
         sums[columns[n]] = 0       
         histCounts[columns[n]] = []
-        for (var x=0; x<10; x++){
-            histCounts[columns[n]].push({binNumber:x, count:0, min: ranges[columns[n]].histogramBins[n-1]||ranges[columns[n]].min, max:ranges[columns[n]].histogramBins[n]})
+        for (var x=0; x<9; x++){
+            histCounts[columns[n]].push(
+                {
+                    binNumber:x, 
+                    count:0, 
+                    min: x === 0 ? ranges[columns[n]].min : ranges[columns[n]].histogramBins[x-1], 
+                    max:ranges[columns[n]].histogramBins[x]
+                }
+            )
         }          
     };
 
@@ -87,8 +84,8 @@ function generateFilteredData(params){
                 if (!geojsonData.features[i].properties[columns[n]]) continue
                 sums[columns[n]] += geojsonData.features[i].properties[columns[n]]
 
-                for (var x=0; x<10; x++){
-                    if (geojsonData.features[i].properties[columns[n]] < ranges[columns[n]].histogramBins[x]) {
+                for (var x=0; x<9; x++){
+                    if (geojsonData.features[i].properties[columns[n]] <= ranges[columns[n]].histogramBins[x]) {
                         histCounts[columns[n]][x].count += 1
                         break
                     }                    
@@ -101,7 +98,7 @@ function generateFilteredData(params){
 
     sums['count'] = count
 
-    return {success: true, communityCounts, histCounts, sums, totalPop, totalTrees, totalTreesArea};
+    return {success: true, communityCounts, ranges, histCounts, sums, totalPop, totalTrees, totalTreesArea};
 }
 
 
