@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
+import FormControl from '@mui/material/FormControl';
+import Grid from '@mui/material/Grid';
 import { colors } from '../config';
 
 export const StyledDropDown = styled(FormControl)`
@@ -134,14 +134,12 @@ export const ContentContainer = styled.div`
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
     line-height: 1.5;
-    letter-spacing: 1.75px;
     font-weight: 700;
     font-stretch: normal;
     margin-bottom:20px;
   }
   h3 {
     font-family: 'Lora', serif;
-    font-size: 24px;
     font-weight: 300;
   }
   p, a, ul li, ol li {

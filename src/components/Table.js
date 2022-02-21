@@ -2,7 +2,9 @@ import { useTable } from 'react-table';
 import styled from 'styled-components';
 
 const TableContainer = styled.div`
-  overflow-x: scroll;
+  @media (max-width: 768px) {
+    overflow-x: scroll;
+  }
 `
 
 const Table = styled.table`
@@ -21,7 +23,7 @@ const Table = styled.table`
   }
 `
 
-export default function TableComponent({ columns, data }) {
+export default function TableComponent({ columns, data, tableProps, rowProps, overflowThreshold = 768 }) {
     // Use the state and functions returned from useTable to build your UI
     const {
       getTableProps,
@@ -36,8 +38,8 @@ export default function TableComponent({ columns, data }) {
   
     // Render the UI for your table
     return (
-      <TableContainer>
-        <Table {...getTableProps()}>
+      <TableContainer {...{overflowThreshold}}>
+        <Table {...getTableProps()} {...tableProps}>
           <thead>
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
@@ -51,7 +53,7 @@ export default function TableComponent({ columns, data }) {
             {rows.map((row, i) => {
               prepareRow(row)
               return (
-                <tr {...row.getRowProps()}>
+                <tr {...row.getRowProps()} {...rowProps}>
                   {row.cells.map(cell => {
                     return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                   })}

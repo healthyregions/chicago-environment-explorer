@@ -7,14 +7,15 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-// import FormControl from '@material-ui/core/FormControl';
-// import Slider from '@material-ui/core/Slider';
-// import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import FormControl from '@mui/material/FormControl';
+// import Slider from '@mui/material/Slider';
+// import { withStyles, makeStyles } from '@mui/material/styles';
 
 // Import config and sub-components
 // import Tooltip from './tooltip';
 // import BarChart from './BarChart';
 import Histogram from './histogram';
+import { Gutter } from './Gutter';
 import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../actions';
 import { colors } from '../config';
@@ -31,7 +32,10 @@ const DataPanelContainer = styled.div`
   top:50px;
   overflow-x:visible;
   height:calc(100vh - 50px);
-  background-color: ${colors.white};
+  background: rgba( 255, 255, 255, 0.85 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.85 );
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur( 20px );
   box-shadow: 2px 0px 5px ${colors.gray}44;
   padding:20px;
   box-sizing: border-box;
@@ -187,7 +191,7 @@ const ReportWrapper = styled.div`
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoBlue};
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.gray}55;
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%; 
@@ -196,7 +200,7 @@ const ReportWrapper = styled.div`
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoDarkBlue};
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.darkgray}99;
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%; 
@@ -290,25 +294,25 @@ const columnsToChart = [
   {
     'column':'trees_crown_den',
     'name':'Percent Canopy Coverage',
-    'color':colors.chicagoBlue,
+    'color':colors.green,
     'preset':'',
   },
   {
     'column':'heatisl',
     'name':'Temperature Percentile',
-    'color':colors.chicagoBlue,
+    'color':colors.orange,
     'preset':'',
   },
   {
     'column':'nn_q3_pm2_5',
     'name':'Summer PM2.5',
-    'color':colors.chicagoBlue,
+    'color':colors.chicagoRed,
     'preset':'',
   },
   {
     'column':'logtraf',
     'name': 'Traffic Volume',
-    'color':colors.chicagoBlue,
+    'color':colors.purple,
     'preset':'',
   },
   {
@@ -320,19 +324,19 @@ const columnsToChart = [
   {
     'column':'svi_pecentile',
     'name':'Social Vulnerability',
-    'color':colors.chicagoBlue,
+    'color':colors.teal,
     'preset':'',
   },
   {
     'column':'asthma_age_adj_rate',
     'name':'Asthma Cases per 10,000 Residents',
-    'color':colors.chicagoBlue,
+    'color':colors.chicagoDarkBlue,
     'preset':'',
   },
   {
     'column':'hardship',
     'name':'Economic Hardship Index',
-    'color':colors.chicagoBlue,
+    'color':colors.yellow,
     'preset':'',
   },
 ]

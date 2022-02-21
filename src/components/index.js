@@ -8,6 +8,7 @@ import DataPanel from './dataPanel';
 import Dock from './dock';
 import Draggable from './draggable';
 import Footer from './Footer';
+import { Gutter } from './Gutter';
 import Histogram from './histogram';
 import InfoBox from './infoBox';
 import Legend from './legend';
@@ -25,6 +26,8 @@ import Tooltip from './tooltip';
 import Table from './Table';
 import Geocoder from './geocoder';
 
+// report elements
+import Pm25Report from './Pm25Report';
 
 // pages
 import About from './Pages/About';
@@ -46,6 +49,7 @@ export {
     Dock,
     Draggable,
     Geocoder,
+    Gutter,
     Histogram,
     Footer,
     InfoBox,
@@ -62,6 +66,8 @@ export {
     StaticNavbar,
     Table,
     Tooltip, 
+
+    Pm25Report,
 
     About,
     Contact,
