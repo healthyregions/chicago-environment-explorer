@@ -29,6 +29,7 @@
     "@mui/styles": "^5.4.2",
     "@mui/x-data-grid": "^5.5.1",
     "@react-icons/all-files": "^4.1.0",
+    "@turf/boolean-within": "^6.5.0",
     "@turf/turf": "^6.3.0",
     "d3-dsv": "^2.0.0",
     "d3-scale": "^3.2.0",

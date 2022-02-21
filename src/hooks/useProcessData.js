@@ -23,6 +23,7 @@ const processData = (data, columnsToParse, prefix) => {
             }
         }
         processedData[prefixedName].reduced = reducer(processedData[prefixedName])
+        processedData[prefixedName].values = processedData[prefixedName].values.sort((a,b) => a-b)
     }
     
     return [processedData, new Date()]

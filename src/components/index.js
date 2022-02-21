@@ -26,6 +26,8 @@ import Tooltip from './tooltip';
 import Table from './Table';
 import Geocoder from './geocoder';
 
+// report elements
+import Pm25Report from './Pm25Report';
 
 // pages
 import About from './Pages/About';
@@ -64,6 +66,8 @@ export {
     StaticNavbar,
     Table,
     Tooltip, 
+
+    Pm25Report,
 
     About,
     Contact,

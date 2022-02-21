@@ -8,7 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 export default function StatsTable({
-  features = [],
+  columns = [],
   filteredFeatures = [],
   filteredLabel = "",
   columns = [],
@@ -16,27 +16,13 @@ export default function StatsTable({
   op = [],
   popColumn=""
 }) {
-    const overallData = features.reduce((prev, curr) => {
-        columns.forEach((col, idx) => {
-            if (op[idx] === "sum" || op[idx] === "avg") {
-                prev[col] = prev[col]||0 + curr.properties[col];
-            } else {
-                prev[col] = prev[col]||0 + (curr.properties[col] * curr.properties[popColumn])
-            }
-        }])
-        return prev
-        })
-    })
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            {columns.map(({name="", headerProps={}}, idx) => 
+            <TableCell {...headerProps} key={idx}>{name}</TableCell>})}
           </TableRow>
         </TableHead>
         <TableBody>
