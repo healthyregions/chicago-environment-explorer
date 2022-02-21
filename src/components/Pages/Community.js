@@ -613,7 +613,7 @@ function App() {
                 data={[{
                   Label: 'Average Air Polution (PM2.5)',
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.pm25?.reduced !== undefined && filteredSummaries.pm25.reduced.toFixed(1)}</ColorSpan>,
-                  Description: 'Presence of particulates in the air, smaller than 2.5 microns in size. Estiamted during January through August over 2014-2018.'
+                  Description: 'Presence of particulates in the air, smaller than 2.5 microns in size. Estimated during January through August over 2014-2018.'
                 }, {
                   Label: 'Heat Island Effect',
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.heatIsland?.reduced !== undefined && filteredSummaries.heatIsland.reduced.toFixed(1)}</ColorSpan>,
@@ -621,7 +621,7 @@ function App() {
                 },{
                   Label: 'Urban Flood Susceptibility',
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.floodSusceptibility?.reduced !== undefined && filteredSummaries.floodSusceptibility.reduced.toFixed(1)}</ColorSpan>,
-                  Description: 'A FEMA index, where 0 is the less susceptible and 10 is the more susceptible.'
+                  Description: 'A FEMA index, where 0 is less susceptible and 10 is more susceptible.'
                 },{
                   Label: 'Average Traffic Volume',
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.traffic?.reduced !== undefined && filteredSummaries.traffic.reduced.toFixed(1)}</ColorSpan>,
