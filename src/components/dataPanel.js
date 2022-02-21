@@ -370,6 +370,10 @@ const DataPanel = () => {
                       activeCommunities={filterValues.community}
                     />
                 </ReportSection>
+                <Gutter height="1em" />
+                <h2>Distributions</h2>
+                <br/>
+                <p style={{padding:0}}>Click charts to filter the map</p>
                 {
                   columnsToChart.map(row => 
                     <Histogram 

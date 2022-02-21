@@ -173,13 +173,14 @@ const GeocoderContainer = styled.div`
 
 const LogoContainer = styled.div`
     position:absolute;
-    right:0.75em;
+    right:${props => props.infoPanel ? `calc(${getRightMargin()}px + 3.5em)` : '3.5em'};
     bottom:0.75em;
     zIndex:500;
     height:4em;
     background:white;
     padding:0.5em 1em;
     border:1px solid #00e59e;
+    transition:250ms all;
     img {
         height:100%;
     }
