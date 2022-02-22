@@ -28,15 +28,16 @@ const DataPanelContainer = styled.div`
   position:fixed;
   min-width:250px;
   width:15%;
-  right:0;
-  top:50px;
+  right:0.5em;
+  top:0.5em;
   overflow-x:visible;
-  height:calc(100vh - 50px);
+  height:calc(100vh - 1em);
   background: rgba( 255, 255, 255, 0.85 );
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.85 );
   backdrop-filter: blur( 20px );
   -webkit-backdrop-filter: blur( 20px );
   box-shadow: 2px 0px 5px ${colors.gray}44;
+  border:1px solid ${colors.green};
   padding:20px;
   box-sizing: border-box;
   transition:250ms all;
@@ -45,8 +46,7 @@ const DataPanelContainer = styled.div`
   font-size:100%;
   padding:0;
   z-index:5;
-  transform: translateX(100%);
-  border-top:2px solid ${colors.chicagoDarkBlue};
+  transform: translateX(calc(100% + .5em));
   h4, h1 {
     font-family: 'Roboto', sans-serif;
     margin:10px 0;
@@ -80,8 +80,7 @@ const DataPanelContainer = styled.div`
     margin:0;
     background-color: ${colors.white};
     box-shadow: 2px 0px 5px ${colors.gray}88;
-    outline:none;
-    border:none;
+    border:1px solid ${colors.green};
     // border-radius:20px;
     cursor: pointer;
     transition:500ms all;

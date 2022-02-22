@@ -24,7 +24,8 @@ const VariablePanelContainer = styled.div`
   box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.85 );
   backdrop-filter: blur( 20px );
   -webkit-backdrop-filter: blur( 20px );
-  box-shadow: 2px 0px 5px ${colors.gray}44;
+  box-shadow: 2px 0px 5px ${colors.gray}44;  
+  border:1px solid ${colors.green};
   padding:0;
   box-sizing: border-box;
   transition:250ms all;
@@ -33,7 +34,7 @@ const VariablePanelContainer = styled.div`
   z-index:50;
   // border-radius:20px;
   &.hidden {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% - 20px));
     @media (max-width:600px){
       transform: translateX(calc(-100% - 30px));
     }
@@ -65,7 +66,7 @@ const VariablePanelContainer = styled.div`
     background-color: ${colors.white};
     box-shadow: 2px 0px 5px ${colors.gray}88;
     outline:none;
-    border:none;
+    border:1px solid ${colors.green};
     // border-radius:20px;
     cursor: pointer;
     transition:500ms all;

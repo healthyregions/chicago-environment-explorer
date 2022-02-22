@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
-import { MemberGrid, StaticNavbar, Footer } from '../../components';
+import { MemberGrid, NavBar, Footer } from '../../components';
 
 const AboutPage = styled.div`
     background:white;
@@ -59,7 +59,7 @@ const projectTeam = [
 export default function About(){
     return (
        <AboutPage>
-           <StaticNavbar/>
+           <NavBar />
            <ContentContainer>
                <h1>About Us</h1>
                <hr/>

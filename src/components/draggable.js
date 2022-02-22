@@ -29,7 +29,6 @@ const DragButton = styled.button`
     left:5px;
     top:5px;
     background:none;
-    outline:none;
     border:none;
     cursor:move;
     svg {
@@ -48,7 +47,6 @@ const CollapseButton = styled.button`
     cursor: pointer;
     padding:0;
     background:none;
-    outline:none;
     border:none;
     color:white;
     p {

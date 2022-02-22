@@ -30,10 +30,9 @@ body {
   
 #mainContainer { 
   position: absolute; 
-  top: 50px; 
+  top: 0; 
   width: 100%; 
-  height:  calc(100% - 50px);
-  border-top:2px solid #005899;
+  height:  100%;
 }
 
 #mainContainer.loading {
@@ -142,4 +141,15 @@ button.mapboxgl-ctrl-attrib-button {
 .mapboxgl-ctrl-bottom-right {
   left:0 !important;
   right:initial !important;
+}
+
+#nav-container div.MuiPaper-root {
+  transform: translate(-5px, 5px) !important;
+  background: rgba( 255, 255, 255, 0.85 );
+  /* box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.85 ); */
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur( 20px );
+  box-shadow: 2px 0px 5px gray;  
+  border:1px solid green;
+  border-radius:0;
 }

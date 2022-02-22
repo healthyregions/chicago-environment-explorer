@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
-import { StaticNavbar, Footer, ContactForm } from '../';
+import { NavBar, Footer, ContactForm } from '../';
 
 const ContactPage = styled.div`
     background:white;
@@ -36,7 +36,7 @@ const ContactPage = styled.div`
 export default function Contact(){
     return (
        <ContactPage>
-           <StaticNavbar/>
+           <NavBar/>
            <ContentContainer>
                 <h1>Contact Us</h1>
                 <a href="https://twitter.com/healthyregions" target="_blank" rel="noopener noreferrer" className="social-icon">

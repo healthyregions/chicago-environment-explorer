@@ -120,6 +120,7 @@ export const colors = {
   pink: '#e83e8c',
   ivory: '#fff',
   green: '#97DB4F',
+  forest: '#3d6017',
   cartoColors: {
     green: '#49c767',
     gold: '#e0d09d',

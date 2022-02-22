@@ -7,7 +7,7 @@ import { loadDataAndBins } from "../../actions";
 
 import {
   Gutter,
-  StaticNavbar,
+  NavBar,
   VariablePanel,
   Footer,
   Pm25Report,
@@ -15,7 +15,7 @@ import {
 } from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 import useFilterData from "../../hooks/useFilterData";
 import useProcessData from "../../hooks/useProcessData";
-import { defaultData } from "../../config"; 
+import { defaultData } from "../../config";
 import styled from "styled-components";
 
 import { ContentContainer } from "../../styled_components";
@@ -31,6 +31,14 @@ const CommunityPage = styled.div`
     border-bottom:2px solid #e83f6f;
   }
 `;
+
+const StyledAutocomplete = styled(Autocomplete)`
+  opacity: ${({usingGeolocate}) => usingGeolocate ? 0.5 : 1};
+  transition:250ms opacity;
+  &:hover {
+    opacity:1;
+  }
+`
 
 const typeTranslation = {
   zip_code: "Zip Code",
@@ -154,35 +162,35 @@ const metricsToParse = [
   // race
   {
     name: "White",
-    accessor: (row) => [(+row.properties.pct_white * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accessor: (row) => [(+row.properties.pct_white * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
     accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
     name: "Black or African American",
-    accessor: (row) => [(+row.properties.pct_black * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accessor: (row) => [(+row.properties.pct_black * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
     accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
     name: "Native American",
-    accessor: (row) => [(+row.properties.pct_nativeam * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accessor: (row) => [(+row.properties.pct_nativeam * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
     accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
     name: "Asian",
-    accessor: (row) => [(+row.properties.pct_asian * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accessor: (row) => [(+row.properties.pct_asian * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
     accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
     name: "All additional races and ethnicities",
-    accessor: (row) => [(+row.properties.pct_other * +row.properties.acs_population)||0, +(row.properties.acs_population)||0],
+    accessor: (row) => [(+row.properties.pct_other * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
     accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
@@ -232,7 +240,7 @@ const columnsToPresent = [
   },
 ];
 
-const reportColumns =[
+const reportColumns = [
   {
     Header: '',
     accessor: 'Label',
@@ -381,9 +389,9 @@ function App() {
     }
   }, [geolocateType]);
   // filter and summary data
-  console.log(currentLocation)
+
   const filterFunc = useMemo(
-    () => 
+    () =>
       currentLocation.type === "Zip Code"
         ? (f) => f.properties.zip_code === currentLocation.label
         : currentLocation.type === "Community"
@@ -458,10 +466,10 @@ function App() {
   // metadata helpers
   const ethnicMajority = ["White", "Black or African American", "Native American", "Asian", "All additional races and ethnicities"].find(raceEthnicity => filteredSummaries[raceEthnicity] ? filteredSummaries[raceEthnicity].reduced > 50 : false)
   const densityPercentile = dataReady && quantileRank(summaries.density.values, filteredSummaries.density.reduced)
-  
+
   return (
     <CommunityPage>
-      <StaticNavbar />
+      <NavBar />
       <ContentContainer>
         <h1>Community</h1>
         <h2>Alert! This page is a work in progress.</h2>
@@ -471,11 +479,12 @@ function App() {
           location or use your current location.
         </p>
         <Gutter height="2em" />
-        <Autocomplete
+        <StyledAutocomplete
           disablePortal
           id="combo-box-demo"
           options={searchList}
           sx={{ width: "100%" }}
+          usingGeolocate={geolocatingStatus.status === "success"}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -491,7 +500,13 @@ function App() {
               <TypeSpan>{option?.type}</TypeSpan> {option?.label}
             </Box>
           )}
-          onChange={(e, value) => !([null, undefined].includes(value)) && setCurrentLocation(value)}
+          onChange={(e, value) => {
+            !([null, undefined].includes(value)) && setCurrentLocation(value)
+            !([null, undefined].includes(value)) && setGeolocatingStatus({
+              status: "passive",
+              message: "",
+            })
+          }}
         />
         <GeolocateSection>
           <Button
@@ -518,6 +533,7 @@ function App() {
               <Button
                 variant={geolocateType === type ? "contained" : "outlined"}
                 onClick={() => setGeolocateType(type)}
+                disabled={geolocatingStatus.status !== "success"}
               >
                 {type}
               </Button>
@@ -556,21 +572,21 @@ function App() {
               )}
               {currentLocation.type === "Community" && (
                 <h2>
-                  Your community:{" "}
-                  <span>
+                  Your community:{" "}                  
+                  <ColorSpan color={'#e83f6f'}>
                     {currentLocation.label}, including zip codes{" "}
                     {filteredFeatures
                       .map((f) => f.properties.zip_code)
                       .filter(onlyUnique)
                       .join(", ")}
                     , and {filteredFeatures.length} census tracts.
-                  </span>
+                  </ColorSpan>
                 </h2>
               )}
               {currentLocation.type === "Census Tract" && (
                 <h2>
-                  Your census tract:{" "}
-                  <span>
+                  Your census tract:{" "}   
+                  <ColorSpan color={'#e83f6f'}>
                     {currentLocation.label}, located in{" "}
                     {filteredFeatures
                       .map((f) => titleCase(f.properties.community))
@@ -582,7 +598,7 @@ function App() {
                       .filter(onlyUnique)
                       .join(", ")}
                     .
-                  </span>
+                  </ColorSpan>
                 </h2>
               )}
               {/* <h3>
@@ -619,11 +635,11 @@ function App() {
                   Label: 'Heat Island Effect',
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.heatIsland?.reduced !== undefined && filteredSummaries.heatIsland.reduced.toFixed(1)}</ColorSpan>,
                   Description: 'The surface heat on a scale of 0-100, where 100 is the hottest in Chicago and 0 is the coldest.'
-                },{
+                }, {
                   Label: 'Urban Flood Susceptibility',
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.floodSusceptibility?.reduced !== undefined && filteredSummaries.floodSusceptibility.reduced.toFixed(1)}</ColorSpan>,
                   Description: 'A FEMA index, where 0 is less susceptible and 10 is more susceptible.'
-                },{
+                }, {
                   Label: 'Average Traffic Volume',
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.traffic?.reduced !== undefined && filteredSummaries.traffic.reduced.toFixed(1)}</ColorSpan>,
                   Description: 'The average daily traffic count per road segment over a year, scaled logarithmically.'
@@ -660,7 +676,7 @@ function App() {
                   Value: <><ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.density?.reduced !== undefined && Math.round(filteredSummaries.density.reduced * 1e6).toLocaleString()}</ColorSpan> people per square kilometer</>,
                   Description: `
                   About the density of ${filteredSummaries?.density?.reduced !== undefined && Math.round(filteredSummaries.density.reduced * 2e4).toLocaleString()} people in 
-                  a downtown city block. ${currentLocation.label} is denser than ${Math.round(densityPercentile*100)}% of Chicago.`
+                  a downtown city block. ${currentLocation.label} is denser than ${Math.round(densityPercentile * 100)}% of Chicago.`
                 }, {
                   Label: 'Race and Ethnicity',
                   Value: ethnicMajority ? `Majority ${ethnicMajority}` : 'Diverse',
@@ -694,8 +710,8 @@ function App() {
                   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined && filteredSummaries.asthmaAgeAdj.reduced.toFixed(2)}</ColorSpan>,
                 }, {
                   Label: 'COPD Prevalence',
-                  Value:<ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined && filteredSummaries.copd.reduced.toFixed(2)}</ColorSpan>,
-                }, ]}
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined && filteredSummaries.copd.reduced.toFixed(2)}</ColorSpan>,
+                },]}
                 tableProps={{
                   style: {
                     fontSize: '1rem'

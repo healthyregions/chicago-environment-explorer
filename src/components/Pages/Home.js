@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Grid from '@mui/material/Grid';
 
-import { Geocoder, StaticNavbar, Footer } from '../../components';
+import { Geocoder, NavBar, Footer } from '../../components';
 import { colors } from '../../config';
 import { Gutter } from '../../styled_components';
 // import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
@@ -144,7 +144,7 @@ export default function Home(){
 
     return (
        <HomePage>
-           <StaticNavbar/>
+           <NavBar />
            <HomePageContent>
                 <Hero>
                     <h1>Uncover the nature of Chicago's environment.</h1>

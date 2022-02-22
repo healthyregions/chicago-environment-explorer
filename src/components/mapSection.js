@@ -21,13 +21,6 @@ import * as SVG from '../config/svg';
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
-// US bounds
-const bounds = fitBounds({
-    width: window.innerWidth,
-    height: window.innerHeight,
-    bounds: [[-87.971649, 41.609282], [-87.521896, 42.040624]]
-})
-
 const getRightMargin = () => window.innerWidth * .15 < 250 ? 260 : window.innerWidth * .15 + 10;
 
 const QueryFeaturesWorker = new Worker(`${process.env.PUBLIC_URL}/workers/queryRenderedFeaturesWorker.js`);
@@ -161,10 +154,11 @@ const NavInlineButton = styled.button`
 
 const GeocoderContainer = styled.div`
     position:fixed;
-    right:7px;
+    left:12em;
     top:7px;
     z-index:500;
-    width:250px;
+    width:230px;
+    height:45px;
     @media (max-width:600px) {
         display:none;
     }
@@ -211,7 +205,10 @@ function debounce(func, wait, immediate) {
 //     return () => setValue(value => value + 1); // update the state to force render
 // }
 
-function MapSection(props) {
+function MapSection({
+    setViewStateFn=()=>{},
+    bounds
+}) {
     // fetch pieces of state from store    
     const {
         storedGeojson,
@@ -239,6 +236,9 @@ function MapSection(props) {
         bearing: 0,
         pitch: 0
     })
+    useEffect(() => {
+        setViewStateFn(setViewState)
+    },[])
 
     // // share button notification
     // const [shared, setShared] = useState(false);
@@ -747,7 +747,6 @@ function MapSection(props) {
             <DeckGL
                 layers={layers}
                 ref={deckRef}
-
                 initialViewState={viewState}
                 controller={
                     {
@@ -846,6 +845,7 @@ function MapSection(props) {
                     placeholder={"Search by location"}
                     API_KEY={MAPBOX_ACCESS_TOKEN}
                     onChange={handleGeocoder}
+                    height={45}
                 />
             </GeocoderContainer>
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { fitBounds } from '@math.gl/web-mercator';
 // import { 
 //   getParseCSV, mergeData, getColumns, loadJson,
 //   getDataForBins, getDataForCharts, getDataForLisa, getDateLists,
@@ -13,9 +13,17 @@ import { MapSection, NavBar, VariablePanel, Legend,
 import { generateQuantileBins } from '../../utils';
 import { defaultData } from '../../config'; 
 
+// US bounds
+const defaultBounds = fitBounds({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  bounds: [[-87.971649, 41.609282], [-87.521896, 42.040624]]
+})
+
 function App() {
   const {storedGeojson, mapParams } = useSelector(state => state);
   const [isLoading, setIsLoading] = useState(true);
+  const [viewstateFn, setViewStateFn] = useState(()=>{});
   const dispatch = useDispatch();  
 
   const handleData = async () => {
@@ -35,10 +43,11 @@ function App() {
   
   return (
     <div className="Map-App">
-      <NavBar />
+      <NavBar showMapControls={true} setViewState={setViewStateFn} bounds={defaultBounds} />
       {isLoading && <div id="loadingIcon"></div>}
       <div id="mainContainer" className={isLoading ? 'loading' : ''}>
-        <MapSection />
+        
+        <MapSection setViewStateFn={setViewStateFn} bounds={defaultBounds}/>
         <Legend 
           variableName={mapParams.variableName} 
           colorScale={mapParams.colorScale}

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
-import { StaticNavbar, Footer, Table } from '../'; 
+import { NavBar, Footer, Table } from '../'; 
 import { colors } from '../../config';
 // import { NavLink } from 'react-router-dom';
 
@@ -287,7 +287,7 @@ const columns = [{
 export default function Data(){
     return (
        <DataPage>
-           <StaticNavbar/>
+           <NavBar />
            <ContentContainer>
                 <h1>Data</h1>
                 <Gutter h={10}/>

@@ -9,7 +9,7 @@ import { colors } from '../config';
 
 const FooterContainer = styled.footer`
     width:100%;
-    background: ${colors.chicagoBlue};
+    background: ${colors.forest};
     p {
         color:${colors.black};
         font-size:1rem;
@@ -110,7 +110,6 @@ const SignupForm = styled.div`
         background-color: ${colors.orange};
         color: #0d0d0d;
         border:none;
-        outline:none;
         // border-radius:5px;
         font-weight:bold;
         font-family:'Roboto', sans-serif;
