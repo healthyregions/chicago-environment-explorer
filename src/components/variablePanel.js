@@ -51,8 +51,12 @@ const VariablePanelContainer = styled.div`
     min-width:50vw;
   }  
   @media (max-width:600px) {
-    width:100%;
+    width:calc(100% - 1em);
+    top:calc(1em + 45px);
+    height:calc(100% - 6em);
+    left:.5em;
     display: ${props => props.otherPanels ? 'none' : 'initial'};
+    padding-top:2em;
   }
   button#showHideLeft {
     position:absolute;
@@ -75,8 +79,6 @@ const VariablePanelContainer = styled.div`
       height:20px;
       margin:10px 0 0 0;
       @media (max-width:600px){
-        width:20px;
-        height:20px;
         margin:5px;
       }
       fill:${colors.gray};
@@ -103,10 +105,10 @@ const VariablePanelContainer = styled.div`
       top:120px;
     }
     @media (max-width:600px) {
-      left:90%;
-      width:30px;
-      height:30px;
-      top:140px;
+      left:calc(100% - 3em);
+      width:3em;
+      height:3em;
+      top:0;
       :after {
         display:none;
       }
@@ -114,6 +116,9 @@ const VariablePanelContainer = styled.div`
   }
   button#showHideLeft.hidden {
     left:calc(100% + 20px);
+    @media (max-width:600px){
+      left:calc(100% + 2.5em);
+    }
     svg {
       transform:rotate(90deg);
     }
@@ -135,6 +140,7 @@ const ControlsContainer = styled.div`
   
   @media (max-width:600px) {
     width:100%;
+    max-height:initial;
     padding:0 10px 25vh 10px;
   }
   p.data-description {

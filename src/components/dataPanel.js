@@ -61,9 +61,12 @@ const DataPanelContainer = styled.div`
     min-width:50vw;
   }  
   @media (max-width:600px) {
-    width:100%;
-    left:0;
-    transform:translateX(-100%);
+    width:calc(100% - 1em);
+    top:calc(1em + 45px);
+    height:calc(100% - 6em);
+    left:.75em;
+    padding-top:2em;
+    transform:translateX(calc(-100% - 1em));
     z-index:51;
     &.open {
       transform:none;
@@ -89,8 +92,6 @@ const DataPanelContainer = styled.div`
       height:15px;
       margin:12.5px 0 0 0;
       @media (max-width:600px){
-        width:20px;
-        height:20px;
         margin:5px;
       }
       fill:${colors.gray};
@@ -121,10 +122,10 @@ const DataPanelContainer = styled.div`
       top:120px;
     }
     @media (max-width:600px) {
-      left:100%;
-      width:30px;
-      height:30px;
-      top:180px;
+      left:calc(100% + 4.5em);
+      width:3em;
+      height:3em;
+      top:0;
       &.hidden svg {
         transform:rotate(0deg);
       }
