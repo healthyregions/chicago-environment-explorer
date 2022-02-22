@@ -381,8 +381,9 @@ function App() {
     }
   }, [geolocateType]);
   // filter and summary data
+  console.log(currentLocation)
   const filterFunc = useMemo(
-    () =>
+    () => 
       currentLocation.type === "Zip Code"
         ? (f) => f.properties.zip_code === currentLocation.label
         : currentLocation.type === "Community"
@@ -487,10 +488,10 @@ function App() {
               sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
               {...props}
             >
-              <TypeSpan>{option.type}</TypeSpan> {option.label}
+              <TypeSpan>{option?.type}</TypeSpan> {option?.label}
             </Box>
           )}
-          onChange={(e, value) => setCurrentLocation(value)}
+          onChange={(e, value) => !([null, undefined].includes(value)) && setCurrentLocation(value)}
         />
         <GeolocateSection>
           <Button
