@@ -19,6 +19,8 @@ function generateFilteredData(params){
     var totalPop = 0;
     var totalTrees = 0;
     var totalTreesArea = 0;
+    var heatIsland = 0;
+    var treeCoverage = 0;
     var communityCounts = {};
     var count = 0;
     
@@ -76,6 +78,8 @@ function generateFilteredData(params){
                 totalPop += geojsonData.features[i].properties.acs_population
                 totalTrees += geojsonData.features[i].properties.trees_n
                 totalTreesArea += geojsonData.features[i].properties.trees_area
+                heatIsland += geojsonData.features[i].properties.heatisl
+                treeCoverage += geojsonData.features[i].properties.trees_crown_den
                 count += 1;                
             }
 
@@ -95,10 +99,11 @@ function generateFilteredData(params){
             continue
         }
     }
-
+    heatIsland /= count
+    treeCoverage /= count
     sums['count'] = count
 
-    return {success: true, communityCounts, ranges, histCounts, sums, totalPop, totalTrees, totalTreesArea};
+    return {success: true, communityCounts, ranges, histCounts, sums, totalPop, totalTrees, totalTreesArea, treeCoverage, heatIsland};
 }
 
 

@@ -46,7 +46,7 @@ const BottomPanel = styled.div`
 
         width:100%;
         max-width:100%;
-        padding:0;
+        padding:2em 1em 0 1em;
         left:0;
         transform:none;
     }

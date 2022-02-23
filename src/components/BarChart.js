@@ -28,7 +28,9 @@ export default function BarChartComponent({data, dataKey, color, x, y, stroke, v
             <CartesianGrid horizontal={false}/>
             <Bar 
                 dataKey={dataKey} 
-                fill={color}
+                stroke={color}
+                strokeWidth={1}
+                fill={'rgb(200,200,200)'}
                 onMouseOver={handleHover}
                 onMouseOut={resetHover}
             >

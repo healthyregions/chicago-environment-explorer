@@ -360,19 +360,19 @@ const DataPanel = () => {
             <ReportContainer>
                 <h1>Current View</h1>
                 <ReportSection>
-                    <p>Population</p>
+                    <p>Tree Canopy Coverage</p>
                     <div className="numberChartContainer">
-                        <h3>{selectionData.totalPop.toLocaleString('en')}</h3>
+                        <h3>{selectionData.treeCoverage.toFixed(1)}%</h3>
                     </div>
-                    <p>Tree Count</p>
+                    <p>Heat Island Percentile</p>
                     <div className="numberChartContainer">
-                        <h3>{selectionData.totalTrees.toLocaleString('en')}</h3>
+                        <h3>{selectionData.heatIsland.toFixed(1)}</h3>
                     </div>
-                    <p>Tracts Selected: {selectionData.sums.count}</p>
-                    <NeighborhoodCounts 
+                    <p>Averaged over {selectionData.sums.count} census tracts</p>
+                    {/* <NeighborhoodCounts 
                       counts={selectionData.communityCounts}
                       activeCommunities={filterValues.community}
-                    />
+                    /> */}
                 </ReportSection>
                 <Gutter height="1em" />
                 <h2>Distributions</h2>
