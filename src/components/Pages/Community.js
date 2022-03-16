@@ -88,7 +88,7 @@ const metricsToParse = [
   },
   {
     name: "asthma",
-    accessor: (row) => row.properties.cities_asthma_prev,
+    accessor: (row) => row.properties.cities_casthma_prev,
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
   },
@@ -155,7 +155,7 @@ const metricsToParse = [
   },
   {
     name: "svi",
-    accessor: (row) => row.properties.svi_percentile,
+    accessor: (row) => row.properties.svi_pecentile, // TODO: fix typo across all data
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
   },
@@ -249,7 +249,7 @@ const reportColumns = [
   {
     Header: '',
     accessor: 'Value',
-    width: 60
+    width: 120
   },
   {
     Header: '',
@@ -466,7 +466,9 @@ function App() {
   // metadata helpers
   const ethnicMajority = ["White", "Black or African American", "Native American", "Asian", "All additional races and ethnicities"].find(raceEthnicity => filteredSummaries[raceEthnicity] ? filteredSummaries[raceEthnicity].reduced > 50 : false)
   const densityPercentile = dataReady && quantileRank(summaries.density.values, filteredSummaries.density.reduced)
-
+  const ageAdjAsthmaPct = dataReady && quantileRank(summaries.asthmaAgeAdj.values, filteredSummaries.asthmaAgeAdj.reduced)
+  const hardshipPercentile = dataReady && quantileRank(summaries.hardship.values, filteredSummaries.hardship.reduced)
+  console.log(currentLocation)
   return (
     <CommunityPage>
       <NavBar />
@@ -670,12 +672,13 @@ function App() {
                 columns={reportColumns}
                 data={[{
                   Label: 'Residents',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.population?.reduced !== undefined && Math.round(filteredSummaries.population.reduced).toLocaleString()}</ColorSpan>,
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.population?.reduced !== undefined ? Math.round(filteredSummaries.population.reduced).toLocaleString() : "No Data"}</ColorSpan>,
+                  Description: 'The number of people living in the area.'
                 }, {
                   Label: 'Population Density',
-                  Value: <><ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.density?.reduced !== undefined && Math.round(filteredSummaries.density.reduced * 1e6).toLocaleString()}</ColorSpan> people per square kilometer</>,
+                  Value: <><ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 1e6).toLocaleString() : "No Data"}</ColorSpan> people per square kilometer</>,
                   Description: `
-                  About the density of ${filteredSummaries?.density?.reduced !== undefined && Math.round(filteredSummaries.density.reduced * 2e4).toLocaleString()} people in 
+                  About the density of ${filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 2e4).toLocaleString() : "No Data"} people in 
                   a downtown city block. ${currentLocation.label} is denser than ${Math.round(densityPercentile * 100)}% of Chicago.`
                 }, {
                   Label: 'Race and Ethnicity',
@@ -704,13 +707,16 @@ function App() {
                 columns={reportColumns}
                 data={[{
                   Label: 'Asthma Prevalence',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthma?.reduced !== undefined && filteredSummaries.asthma.reduced.toFixed(2)}</ColorSpan>,
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthma?.reduced !== undefined ? filteredSummaries.asthma.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                  Description: 'The percentage of people who have asthma.'
                 }, {
                   Label: 'Age Adjusted Asthma Rate',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined && filteredSummaries.asthmaAgeAdj.reduced.toFixed(2)}</ColorSpan>,
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined ? filteredSummaries.asthmaAgeAdj.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                  Description: `How many emergency room visits people under 18 took between 2013 and 2018. Higher than ${Math.round(ageAdjAsthmaPct * 100)}% of Chicago tracts.`
                 }, {
                   Label: 'COPD Prevalence',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined && filteredSummaries.copd.reduced.toFixed(2)}</ColorSpan>,
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined ? filteredSummaries.copd.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                  Description: 'The percentage of people who have COPD.'
                 },]}
                 tableProps={{
                   style: {
@@ -734,10 +740,12 @@ function App() {
                 columns={reportColumns}
                 data={[{
                   Label: 'Economic Hardship Index',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.hardship?.reduced !== undefined && filteredSummaries?.hardship?.reduced.toFixed(2)}</ColorSpan>,
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.hardship?.reduced !== undefined ? filteredSummaries?.hardship?.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                  Description: `An index the reflects a combination of unemployment, dependency, and education, income, crowded housing, and poverty for people living here. In ${currentLocation.label}, this is higher than ${Math.round(hardshipPercentile * 100)}% of all Chicago.`
                 }, {
                   Label: 'Social Vulnerability Index',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.svi?.reduced !== undefined && filteredSummaries.svi.reduced.toFixed(2)}</ColorSpan>,
+                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.svi?.reduced !== undefined? filteredSummaries.svi.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                  Description: 'A national index of overall social vulnerability.'
                 }]}
                 tableProps={{
                   style: {

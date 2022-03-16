@@ -7,7 +7,8 @@ import { WebMercatorViewport } from '@deck.gl/core';
 // deck GL and helper function import
 import DeckGL from '@deck.gl/react';
 import { MapView, FlyToInterpolator } from '@deck.gl/core';
-import { GeoJsonLayer } from '@deck.gl/layers';
+import { GeoJsonLayer, ScatterplotLayer, TextLayer } from '@deck.gl/layers';
+import {GPUGridLayer, HeatmapLayer} from '@deck.gl/aggregation-layers';
 import { fitBounds } from '@math.gl/web-mercator';
 import MapboxGLMap from 'react-map-gl';
 import { DataFilterExtension, FillStyleExtension } from '@deck.gl/extensions';
@@ -227,6 +228,7 @@ function MapSection({
     const [hoverInfo, setHoverInfo] = useState({ x: null, y: null, object: null });
     // const [highlightGeog, setHighlightGeog] = useState([]);
     const [hoverGeog, setHoverGeog] = useState(null);
+    const [zoom, setZoom] = useState(bounds.zoom);
 
     // map view location
     const [viewState, setViewState] = useState({
@@ -512,6 +514,15 @@ function MapSection({
         };
         return true;
     };
+    const CONTOURS = [
+        {threshold: [0,1], color: [0,0,0,25], strokeWidth: 0, zIndex:1}, // => Isoline for threshold 1
+        {threshold: [1,4], color: [254,240,217], strokeWidth: 0, zIndex:2}, // => Isoline for threshold 1
+        {threshold: [4,8], color: [253,204,138], strokeWidth: 0, zIndex:3}, // => Isoline for threshold 5
+        {threshold: [8,10], color: [252,141,89], strokeWidth: 0, zIndex:4}, // => Isoline for threshold 5
+        {threshold: [10,15], color: [227,74,51], strokeWidth: 0, zIndex:5}, // => Isoline for threshold 5
+        {threshold: [15,200], color: [179,0,0], strokeWidth: 0, zIndex:6}, // => Isoline for threshold 5
+      ];
+    const AQ_COL = "weekend_median"
     const layers = [
         new GeoJsonLayer({
             id: 'choropleth',
@@ -627,7 +638,75 @@ function MapSection({
             updateTriggers: {
                 visible: [mapParams.overlay],
             },
-        })
+        }),
+        // new GPUGridLayer({
+        //     id: 'contour',
+        //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+        //     colorAggregation: 'MEAN',
+        //     getPosition: feature => [feature.Longitude, feature.Latitude],
+        //     getColorWeight: feature => feature[AQ_COL],
+        //     cellSize: 2000,
+        //     contours: CONTOURS
+        // }),
+        // new HeatmapLayer({
+        //     id: 'heatmap1',
+        //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+        //     aggregation: 'MEAN',
+        //     colorRange: [
+        //         [254,235,226],
+        //         [252,197,192],
+        //         [250,159,181],
+        //         [247,104,161],
+        //         [197,27,138],
+        //         [122,1,119],
+        //     ],
+        //     getPosition: feature => [feature.Longitude, feature.Latitude],
+        //     getWeight: feature => feature[AQ_COL],
+        //     radiusPixels: 1.3 ** (zoom * 2),
+        //     intensity: 0.75,
+        //     colorDomain: [5,13]
+        // }),
+        // new HeatmapLayer({
+        //     id: 'heatmap2',
+        //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+        //     aggregation: 'MEAN',
+        //     getPosition: feature => [feature.Longitude, feature.Latitude],
+        //     getWeight: feature => feature[AQ_COL],
+        //     radiusPixels: 1.65 ** (zoom),
+        //     intensity: 0.75,
+        //     colorDomain: [9, 11],
+            
+        // }),
+        // new ScatterplotLayer({
+        //     id: 'scatterplot-layer',
+        //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+        //     pickable: false,
+        //     opacity: 0.8,
+        //     stroked: false,
+        //     radiusUnits: 'pixels',
+        //     radiusScale: 1,
+        //     radiusMinPixels: 1,
+        //     radiusMaxPixels: 100,
+        //     getPosition: feature => [feature.Longitude, feature.Latitude],
+        //     getRadius: d => zoom,
+        //     getFillColor: d => [120, 0, 0],
+        // }),
+        // new TextLayer({
+        //     id: 'text-layer',
+        //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+        //     getPosition: feature => [feature.Longitude, feature.Latitude],
+        //     getText: feature => `${Math.round(feature[AQ_COL]*10)/10}`,
+        //     getSize: zoom ** 2,
+        //     getAngle: 0,
+        //     getTextAnchor: 'middle',
+        //     getAlignmentBaseline: 'center',
+        //     sizeScale: 0.15,
+        //     background: true,
+        //     backgroundPadding: [5,0,5,0],
+        //     getPixelOffset: [0, -10],
+        //     getBorderColor: [0,0,0],
+        //     getBorderWidth: 1,
+        // })
     ]
 
 
@@ -764,6 +843,7 @@ function MapSection({
                 pickingRadius={20}
                 onViewStateChange={e => {
                     queryViewport(e)
+                    if (e?.viewState?.zoom !== e?.oldViewState?.zoom) setZoom(e.viewState.zoom)
                     hoverInfo.object && handleMapClick({ x: null, y: null, object: null })
                 }}
                 onViewportLoad={queryViewport}

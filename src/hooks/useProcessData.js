@@ -23,8 +23,8 @@ const processData = (data, columnsToParse, prefix) => {
                 processedData[prefixedName].accumulated = accumulator(processedData[prefixedName].accumulated, entry)
             }
         }
-        
-        processedData[prefixedName].reduced = reducer(processedData[prefixedName])
+        const reduced = reducer(processedData[prefixedName])
+        processedData[prefixedName].reduced = isNaN(reduced) ? undefined : reduced;
         processedData[prefixedName].values = processedData[prefixedName].values.sort((a,b) => a-b)
     }
     

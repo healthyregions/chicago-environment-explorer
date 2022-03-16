@@ -14,6 +14,7 @@
   },
   "homepage": "https://theuscovidatlas.org",
   "dependencies": {
+    "@deck.gl/aggregation-layers": "^8.7.0",
     "@deck.gl/core": "^8.6.0",
     "@deck.gl/extensions": "^8.6.0",
     "@deck.gl/geo-layers": "^8.6.0",
@@ -34,9 +35,11 @@
     "@turf/turf": "^6.3.0",
     "d3-dsv": "^2.0.0",
     "d3-scale": "^3.2.0",
+    "geobuf": "^3.0.2",
     "history": "^5.1.0",
     "lodash": "^4.17.20",
     "object-resolve-path": "^1.1.1",
+    "pbf": "^3.2.1",
     "react": "^17.0.1",
     "react-countup": "^4.3.3",
     "react-dom": "^17.0.1",
@@ -82,6 +85,9 @@
     ]
   },
   "devDependencies": {
+    "node-fetch": "2",
+    "papaparse": "^5.3.1",
+    "shp-write": "^0.3.2",
     "worker-loader": "^3.0.6"
   }
 }
