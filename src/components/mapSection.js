@@ -501,7 +501,12 @@ function MapSection({
     }, [])
 
     const COLOR_SCALE = x => scaleColor(x,mapParams.bins, mapParams.colorScale);
-
+    const REDLINING_COLOR_SCALE = {
+        "A":[115, 169, 77],
+        "B":[52, 172, 198],
+        "C":[219, 207, 0],
+        "D":[226, 77, 90],
+    }
     const isVisible = (feature, filters) => {
         for (const property in filters) {
             if (typeof filters[property][0] === 'string') {
@@ -602,6 +607,37 @@ function MapSection({
                 getLineColor: 250,
                 getFillColor: 250
             }
+        }),
+        new GeoJsonLayer({
+            id: 'redlining areas',
+            data: `${process.env.PUBLIC_URL}/geojson/redlining.geojson`,
+            opacity: 1,
+            material: false,
+            pickable: false,
+            stroked: false,
+            filled: true,
+            getFillColor: d => REDLINING_COLOR_SCALE[d.properties["holc_grade"]] || [0,0,0],
+            visible: mapParams.overlay === 'redlining',
+            // props added by FillStyleExtension
+            fillPatternAtlas: `${process.env.PUBLIC_URL}/icons/redlining-pattern.png`,
+            // fillPatternMask: true,
+            fillPatternEnabled: true,
+            fillPatternMapping: {
+                "hatch": {
+                    "x": 132,
+                    "y": 4,
+                    "width": 120,
+                    "height": 120,
+                    "mask": true
+                }
+            },
+            getFillPattern: f => 'hatch',
+            getFillPatternScale: 2,
+            getFillPatternOffset: [0, 0],
+            extensions: [new FillStyleExtension({ pattern: true })],
+            updateTriggers: {
+                visible: [mapParams.overlay],
+            },
         }),
         new GeoJsonLayer({
             id: 'community areas',
