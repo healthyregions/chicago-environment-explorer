@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/geojson/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
