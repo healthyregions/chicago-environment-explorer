@@ -79,7 +79,7 @@ export default function About(){
                 <li><a href="https://github.com/GeoDaCenter/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.</li>
                  
                 <br/>
-                Standards for each option are published <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">here</a>. They are evaluated on a regular basis by the data collaborative.  
+                Standards and Submission Guidelines are published <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">here</a>. They are evaluated on a regular basis by the data collaborative.  
                 </p>
                 <br/><br/>
 
