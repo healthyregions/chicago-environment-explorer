@@ -192,11 +192,8 @@ export default function Home(){
                                 We <a href="/data">harmonize & standardize</a> environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of 
                                 resources on the Chicago Environment, cultivated by a community of curators.
                                 <br/><br/>
-                                This project refactors data from the a <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">previous partnership</a> with the City, and gets customized
-                                as a new opensource platform for the wider community.
-                                <br/><br/>
-                                Have data to add? A mapping resource to recommend? <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxuLx5LgIuOP8CjEQgoW1-VP_yCrR_YNa_ha5wDHcSqfebbw/viewform">We invite you</a> to add more resources to the <i>ChiVes</i> explorer as build out
-                                an open data coalition to prepare Chicago for a more resilient future! 
+                                ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level. It’s a partnership of researchers, community organizations, and civic groups. 
+                                Have data to add? A mapping resource to recommend? Learn about how to <a href="">get involved</a>!
                             </p>
                             <h5>
                                 Image of <i>Wild Onion, Allium acuminatum </i> by Margaret Neilson Armstrong (1913) via 

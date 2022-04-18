@@ -61,8 +61,51 @@ export default function About(){
        <AboutPage>
            <StaticNavbar/>
            <ContentContainer>
-               <h1>About Us</h1>
+               <h1>About </h1>
                <hr/>
+
+               <p>
+
+               ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the neighborhood level. It’s a partnership of researchers, community organizations, and civic groups. 
+                Organizations and individuals can participate in ChiVes in multiple ways:
+
+                <br/><br/>
+                <li> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform">Data Collaborative.</a> Integrate your data directly. Members agree that the final, integrated data will meet Collaborative standards. </li>
+
+
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform">Resource Guide.</a> Share your web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards. </li>
+
+
+                <li><a href="https://github.com/GeoDaCenter/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.</li>
+                 
+                <br/>
+                Standards for each option are published <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">here</a>. They are evaluated on a regular basis by the data collaborative.  
+                </p>
+                <br/><br/>
+
+               <h2>Data Collaborative Members </h2>
+
+               <p>
+
+               The Data Collaborative provides insight, direction, and relavent environmental data to the Chicago community. The group advises on ChiVes data standards and needs,
+               and includes the following members:
+                <br/><br/>
+                <li> Zac Adelman,  Lake Michigan Air Directors Consortium </li>
+                <li> Elsa Anderson & Sophie Taddeo , Chicago Botanic Gardens </li>
+                <li> Madeleine Daepp, Microsoft Research </li>
+                <li> Tiffany Davis, Environmental Law & Policy Center </li>
+                <li> Anne Dodge, Mansuetto Institute, University of Chicago </li>
+                <li> Jim Franke, Haynes Stephens, Dept of Geophysical Sciences, University of Chicago </li>
+                <li> James Keane, Dylan Halpern, Marynia Kolak, Healthy Regions & Policies Lab, University of Chicago </li>
+                <li> Anastasia Montgomery, Sara Camilleri & Dan Horton, Climate Change Research Group, Northwestern University </li>
+                <li> Michelle Stuhlmacher, Dept of Geography, DePaul University </li>
+                <br/>
+                We are also grateful to the Nature Conservancy, the Audobon Society, and the Field Museum for the insights and support.
+
+                
+                </p> 
+                <br/><br/>
+
 
                <h2>
                    A HeRoP Project  
@@ -78,9 +121,11 @@ export default function About(){
                     To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
                 </p>
                 <br/><br/>
+
                <h2>
                    Background: the Community Tree Tool Research Pilot
                 </h2>
+
                 <p>
                     Before <i>ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool </a></b> as 
                     an extension of our ongoing work on understanding <a href="https://herop.ssd.uchicago.edu/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using 
