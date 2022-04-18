@@ -116,6 +116,8 @@ export default function About(){
                 We are also grateful to the Nature Conservancy, the Audobon Society, and the Field Museum for their insights and support.
                 </p> 
 
+
+
                 <BioSection>
                     <h3>Project Leadership</h3>
                     <MemberGrid 
@@ -125,7 +127,7 @@ export default function About(){
                         }}
                         />
 
-                    <h3>Current Data Contributors</h3>
+                    <h3>Data Contributors</h3>
                     <MemberGrid 
                         members={contributors}
                         columns={{
@@ -156,7 +158,7 @@ export default function About(){
 
                 <h4> West Humboldt Park Resource Map (2017)  </h4> <br/>
                 <p>
-                The project was developed as a friendly collaboration out of the Wests Humboldt Park Health Coalition, a collective of community organizations, local businesses, health, and academic partners.
+                The project was developed as a friendly collaboration out of the West Humboldt Park Health Coalition, a collective of community organizations, local businesses, health, and academic partners.
                 Staff from West Humboldt Park Development Council, Our Lady of Angels, and the Northwestern Memorial Community Services group outlined the need and drove the concept. Lead developers are Marynia Kolak and Michael Steptoe. Student interns who've worked on this include Rachel Weisz (Northwestern University) and Gentry Nissen (Arizona State University).
                 </p>
 
