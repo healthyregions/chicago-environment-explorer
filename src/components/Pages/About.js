@@ -114,62 +114,7 @@ export default function About(){
                 <li> Michelle Stuhlmacher, Dept of Geography, DePaul University </li>
                 <br/>
                 We are also grateful to the Nature Conservancy, the Audobon Society, and the Field Museum for their insights and support.
-
-                
                 </p> 
-                <br/><br/>
-
-
-               <h2>
-                   A HeRoP Project  
-                </h2>
-                <p>
-
-               This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a> at the Center for Spatial Data Science at the University
-                    of Chicago. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
-                    Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
-                    Each project has both a research and applied component, like the <a href="http://uscovidatlas.org/">US Covid Atlas</a> and the <a href="https://oeps.ssd.uchicago.edu/">Opioid Environment Policy Scan</a>. 
-                    We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
-                    To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
-                </p>
-                <br/><br/>
-
-               <h2>
-                   Background: the Community Tree Tool Research Pilot
-                </h2>
-
-
-
-                <p>
-                    Before <i>ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool </a></b> as 
-                    an extension of our ongoing work on understanding <a href="https://herop.ssd.uchicago.edu/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using 
-                     <a href="https://carto.com/" target="_blank" rel="noopener noreferrer"> Carto</a> to facilitate rapid development and prototyping. This tool followed years of iterative process and design and dozens
-                     of previous dashboard iterations, highlighting the winding process of agile application development. The final tool went through dozens of additional
-                     rounds of refinement and editing across multiple city and community stakeholders.
-                     <br/><br/> 
-
-                    In the Research Pilot Stage, The HeRoP team was led by Marynia Kolak, MS, MFA, PhD (Associate Director of Health Informatics) and supported by 
-                    research assistants Isaac Kamber, Lorenz Menendez, Yuming Liu, and Jizhou Wang, with previous analytic work by graduate 
-                    student Haowen Shang, and ongoing collaboration with Center for Spatial Data Science Academic Director, Luc Anselin, PhD, Executive Director,    
-                    Julia Koschinsky, PhD, as well as Raed Mansour, MS and Dave Graham at the Chicago Department of Public Health. Dozens of additional, invaluable 
-                    public, private, and community stakeholders impacted the success of the Tree Tool application: follow the City of Chicago for more details coming soon!
-                    <br/><br/> 
-                    This work was part of a Partnership for Healthy Cities, a global network of cities committed to saving lives by preventing noncommunicable diseases (NCDs) and injuries, supported by Bloomberg Philanthropies in partnership with the World Health Organization and Vital Strategies.
-
-                </p>
-
-               <br/><br/>
-<h2>
-                   ChiVes: An OpenSource, Interactive Platform for Coalition Building
-                </h2>
-                <p>
-                    After the completion of the research pilot, HeRoP refactored the data into a fresh, newly customized web mapping application. This
-                    facilitates more open, flexible, and free design and allows the community to collaborate more directly, in line with HeRoP's mission. New 
-                    data will be added regularly, and existing datasets will be updated as needed. Community groups can request new data, which will be included 
-                    if in line with our core mission and within the lab's capabilities. We will launch a new resource page curating environmental mapping resources in Chicago in early 2022, in collaboration with community partners.
-
-                </p>
-
 
                 <BioSection>
                     <h3>Project Leadership</h3>
@@ -191,6 +136,78 @@ export default function About(){
                     
                     
                 </BioSection>
+
+               <h1> 
+                   A HeRoP Project  
+                </h1>
+                <hr/>
+                <p>
+
+               This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a> at the Center for Spatial Data Science at the University
+                    of Chicago. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
+                    Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
+                    We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
+                    To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
+                </p>
+                <br/><br/>
+
+                <p> The ChiVes application builds on multiple former projects via HeRoP members. Explore them below: 
+                </p><br/>
+
+                <h4> West Humboldt Park Resource Map (2017)  </h4> <br/>
+                <p>
+                The project was developed as a friendly collaboration out of the Wests Humboldt Park Health Coalition, a collective of community organizations, local businesses, health, and academic partners.
+                Staff from West Humboldt Park Development Council, Our Lady of Angels, and the Northwestern Memorial Community Services group outlined the need and drove the concept. Lead developers are Marynia Kolak and Michael Steptoe. Student interns who've worked on this include Rachel Weisz (Northwestern University) and Gentry Nissen (Arizona State University).
+                </p>
+
+               <br/><br/>
+
+
+                <h4> The US Covid Atlas (2020) </h4> <br/>
+                <p>
+                    Add description.                </p>
+
+               <br/><br/>
+
+
+
+                <h4> Opioid Environment Policy Scan (2021) </h4> <br/>
+                <p>
+                    Add description.                </p>
+
+               <br/><br/>
+
+
+                <h4> Diversitree (2021) </h4> <br/>
+                <p>
+                    Using open-source data on global tree inventories, <a href="https://senseable.mit.edu/diversitree/">Diversitree </a> examines (1) the diversity of species, genera, and family of urban street trees in eight cities internationally; (2) how they score on diversity benchmarks and indices; and (3) the diversity variation inside and outside of cities’ centers. This project came from the MIT Sensable Cities lab. Check out the publication at: Galle, N., Halpern, D., Nitoslawski, S., Duarte, F., Ratti, C. & Pilla, F. (2021). Mapping the diversity of street tree inventories across eight cities internationally using open data. Urban Forestry and Urban Greening.
+                </p>
+
+               <br/><br/>
+
+
+                <h4> Chicago Tree Tool (2022) </h4> <br/>
+                <p>
+                    Before <i>ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool </a></b> as 
+                    an extension of  ongoing work on understanding <a href="https://herop.ssd.uchicago.edu/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using 
+                     <a href="https://carto.com/" target="_blank" rel="noopener noreferrer"> Carto</a> to facilitate rapid development and prototyping. This tool followed years of iterative process and design and dozens
+                     of previous dashboard iterations, highlighting the winding process of agile application development. The final tool went through dozens of additional
+                     rounds of refinement and editing across multiple city and community stakeholders.
+                     <br/><br/> 
+
+                    In the Research Pilot Stage, The HeRoP team was led by Marynia Kolak, MS, MFA, PhD (Associate Director of Health Informatics) and supported by 
+                    research assistants Isaac Kamber, Lorenz Menendez, Yuming Liu, and Jizhou Wang, with previous analytic work by graduate 
+                    student Haowen Shang, and ongoing collaboration with Center for Spatial Data Science Academic Director, Luc Anselin, PhD, Executive Director,    
+                    Julia Koschinsky, PhD, as well as Raed Mansour, MS and Dave Graham at the Chicago Department of Public Health. Dozens of additional, invaluable 
+                    public, private, and community stakeholders impacted the success of the Tree Tool application: follow the City of Chicago for more details coming soon!
+                    <br/><br/> 
+                    This work was part of a Partnership for Healthy Cities, a global network of cities committed to saving lives by preventing noncommunicable diseases (NCDs) and injuries, supported by Bloomberg Philanthropies in partnership with the World Health Organization and Vital Strategies.
+
+                </p>
+
+               <br/><br/>
+
+
            </ContentContainer>
            <Footer/>
        </AboutPage>
