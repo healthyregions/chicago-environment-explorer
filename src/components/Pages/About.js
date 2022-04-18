@@ -13,7 +13,6 @@ const BioSection = styled.div`
         margin:2em 0 1em 0;
     }
 `
-
 const projectTeam = [
     {
         name: 'Marynia Kolak, MS, MFA, PhD',
@@ -28,27 +27,41 @@ const projectTeam = [
         img: `dylan.png`,
         affiliation:'(CSDS)',
         title:'Sr. Principal Software Engineer',
-    },
-        {
+    }
+]
+
+
+// // Past contributors
+const contributors = [
+    {
         name: 'Isaac Kamber',
-        link: 'https://makosak.github.io/',
+        link: '',
         img: `isaac.png`,
         affiliation: '(CSDS)',
         title: 'Senior Research Assistant'
     },
     {
         name:'Lorenz Menendez',
-        link:'https://dylanhalpern.com/',
+        link:'',
         img: `Menendez_Lorenz.jpeg`,
         affiliation:'(CSDS)',
         title: 'Senior Research Assistant'
     },
+    {
+        name:'James Keane',
+        link:'',
+        img: ``,
+        affiliation:'(CSDS)',
+        title: 'Senior Research Assistant'
+    },
+    {
+        name:'James Keane',
+        link:'',
+        img: ``,
+        affiliation:'(CSDS)',
+        title: 'Senior Research Assistant'
+    }
 ]
-
-// // Past contributors
-// const contributors = [
-
-// ]
 
 // // Community Partners contributors
 // const communityPartners = [
@@ -88,7 +101,7 @@ export default function About(){
                <p>
 
                The Data Collaborative provides insight, direction, and relavent environmental data to the Chicago community. The group advises on ChiVes data standards and needs,
-               and includes the following members:
+               and includes the following members (and *current leadership):
                 <br/><br/>
                 <li> Zac Adelman,  Lake Michigan Air Directors Consortium </li>
                 <li> Elsa Anderson & Sophie Taddeo, Chicago Botanic Gardens </li>
@@ -96,7 +109,7 @@ export default function About(){
                 <li> Tiffany Davis, Environmental Law & Policy Center </li>
                 <li> Anne Dodge, Mansuetto Institute, University of Chicago </li>
                 <li> Jim Franke, Haynes Stephens, Dept of Geophysical Sciences, University of Chicago </li>
-                <li> James Keane, Dylan Halpern, Marynia Kolak, Healthy Regions & Policies Lab, University of Chicago </li>
+                <li> James Keane, *Dylan Halpern, *Marynia Kolak, Healthy Regions & Policies Lab, University of Chicago </li>
                 <li> Anastasia Montgomery, Sara Camilleri & Dan Horton, Climate Change Research Group, Northwestern University </li>
                 <li> Michelle Stuhlmacher, Dept of Geography, DePaul University </li>
                 <br/>
@@ -124,6 +137,8 @@ export default function About(){
                <h2>
                    Background: the Community Tree Tool Research Pilot
                 </h2>
+
+
 
                 <p>
                     Before <i>ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool </a></b> as 
@@ -157,14 +172,21 @@ export default function About(){
 
 
                 <BioSection>
-                    <h3>ChiVes Project Team</h3>
+                    <h3>Project Leadership</h3>
                     <MemberGrid 
                         members={projectTeam}
                         columns={{
                             md: 3,
                         }}
                         />
-                     The team is currently co-led by Marynia & Dylan. Isaac and Lorenz were integral in data wrangling and processing for the core content on the application. 
+
+                    <h3>Current Data Contributors</h3>
+                    <MemberGrid 
+                        members={contributors}
+                        columns={{
+                            md: 3,
+                        }}
+                        />
                     <Gutter h={10}/>
                     
                     

@@ -192,8 +192,8 @@ export default function Home(){
                                 We <a href="/data">harmonize & standardize</a> environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of 
                                 resources on the Chicago Environment, cultivated by a community of curators.
                                 <br/><br/>
-                                ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level. It’s a partnership of researchers, community organizations, and civic groups. 
-                                Have data to add? A mapping resource to recommend? Learn about how to <a href="">get involved</a>!
+                                ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level. 
+                                Have data to add? A mapping resource to recommend? Learn <a href="/about">more</a>!
                             </p>
                             <h5>
                                 Image of <i>Wild Onion, Allium acuminatum </i> by Margaret Neilson Armstrong (1913) via 
