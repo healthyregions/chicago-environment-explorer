@@ -1,3 +1,4 @@
+import Accordion from './Accordion';
 import BarChart from './BarChart';
 import BottomPanel from './bottomPanel';
 import ContactForm from './ContactForm';
@@ -39,6 +40,7 @@ import LoadingMessage from './Pages/LoadingMessage';
 import Map from './Pages/Map';
 
 export {
+    Accordion,
     BarChart,
     BottomPanel,
     ContactForm,
