@@ -91,7 +91,7 @@ export default function About(){
                and includes the following members:
                 <br/><br/>
                 <li> Zac Adelman,  Lake Michigan Air Directors Consortium </li>
-                <li> Elsa Anderson & Sophie Taddeo , Chicago Botanic Gardens </li>
+                <li> Elsa Anderson & Sophie Taddeo, Chicago Botanic Gardens </li>
                 <li> Madeleine Daepp, Microsoft Research </li>
                 <li> Tiffany Davis, Environmental Law & Policy Center </li>
                 <li> Anne Dodge, Mansuetto Institute, University of Chicago </li>
@@ -100,7 +100,7 @@ export default function About(){
                 <li> Anastasia Montgomery, Sara Camilleri & Dan Horton, Climate Change Research Group, Northwestern University </li>
                 <li> Michelle Stuhlmacher, Dept of Geography, DePaul University </li>
                 <br/>
-                We are also grateful to the Nature Conservancy, the Audobon Society, and the Field Museum for the insights and support.
+                We are also grateful to the Nature Conservancy, the Audobon Society, and the Field Museum for their insights and support.
 
                 
                 </p> 
@@ -115,8 +115,7 @@ export default function About(){
                This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a> at the Center for Spatial Data Science at the University
                     of Chicago. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
                     Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
-                    Each project has both a research and applied component, like the <a href="http://uscovidatlas.org/">US Covid Atlas</a> and the <a href="https://oeps.ssd.uchicago.edu/">Opioid Environment Policy Scan</a>. <br/><br/>
-
+                    Each project has both a research and applied component, like the <a href="http://uscovidatlas.org/">US Covid Atlas</a> and the <a href="https://oeps.ssd.uchicago.edu/">Opioid Environment Policy Scan</a>. 
                     We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
                     To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
                 </p>
