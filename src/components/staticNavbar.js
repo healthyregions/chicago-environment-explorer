@@ -144,9 +144,9 @@ const StaticNavbar = () => {
                 </NavLink>
                 <nav className="mainNav">
                     <ul>
-                        <li>
+                        {/* <li>
                             <NavLink to="/map">Map</NavLink>
-                        </li>
+                        </li> */}
                         <li>
                             <NavLink to="/community">My Community</NavLink>
                         </li>
@@ -168,7 +168,7 @@ const StaticNavbar = () => {
                     </button>
                     {mapLinksOpen && 
                     <ul id="mapLinks">
-                        <NavLink to="/map">Explore</NavLink>
+                        {/* <NavLink to="/map">Explore</NavLink> */}
                         <NavLink to="/data">Data</NavLink>
                         <NavLink to="/about">About</NavLink>
                         <NavLink to="/contact">Contact</NavLink>

@@ -155,9 +155,11 @@ export default function Home(){
                     </p>
                     <br/> 
                     
-                    <NavLink to="/map" id="button-search">Chives: Explore The Chicago Environment</NavLink>
+                    <NavLink to="/" id="button-search">Chives: Explore The Chicago Environment in April 2022</NavLink>
                     <Gutter h={40}/>
-                    <Grid container spacing={8} alignItems="center">
+                    
+
+                    {/* <Grid container spacing={8} alignItems="center">
                         <Grid item xs={12} sm={12} md={6}>
                             <p>
                                 <i>Got somewhere you want to explore? Search for an address to navigate directly to your neighborhood.</i>
@@ -171,7 +173,10 @@ export default function Home(){
                                 onChange={handleGeocoder}
                             />
                         </Grid>
-                    </Grid>
+                    </Grid> */}
+                    
+
+
                     <Gutter h={20}/>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={4}> 
@@ -180,18 +185,15 @@ export default function Home(){
                         <Grid item xs={12} md={8}> 
                             <br/><br/>
                             <p> 
-                                Like the <a href="https://www.wbez.org/stories/sniffing-for-chicagos-wild-onion/fcac5cbb-a174-4444-b17b-cfe767d0c369">wild onion</a> that Chicago was named for, data about the city's environment should 
+                                Like the <a href="https://www.illinoiswildflowers.info/woodland/plants/wild_leek.htm">wild onion</a> that Chicago was named for, data about the city's environment should 
                                 be <b>tasty</b> and <b>plentiful</b>. By tasty, we mean easily accessible and ready to use and explore. By plentiful,
                                 we mean the data should extend across multiple dimensions of the city's landscape, and be updated regularly. 
                                 <br/><br/>
                                 We <a href="/data">harmonize & standardize</a> environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of 
                                 resources on the Chicago Environment, cultivated by a community of curators.
                                 <br/><br/>
-                                This project refactors data from the a <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">previous partnership</a> with the City, and gets customized
-                                as a new opensource platform for the wider community.
-                                <br/><br/>
-                                Have data to add? A mapping resource to recommend? <a href="https://docs.google.com/forms/d/e/1FAIpQLSdxuLx5LgIuOP8CjEQgoW1-VP_yCrR_YNa_ha5wDHcSqfebbw/viewform">We invite you</a> to add more resources to the <i>ChiVes</i> explorer as build out
-                                an open data coalition to prepare Chicago for a more resilient future! 
+                                ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level. 
+                                Have data to add? A mapping resource to recommend? Learn <a href="/about">more</a>!
                             </p>
                             <h5>
                                 Image of <i>Wild Onion, Allium acuminatum </i> by Margaret Neilson Armstrong (1913) via 
