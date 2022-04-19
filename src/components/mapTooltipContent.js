@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
+import {colors} from '../config'
 const PolarSpeciesPlot = React.lazy(() => import('../components/PolarSpeciesPlot.js'));
-
 // This component handles and formats the map tooltip info. 
 // The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
 const MapTooltipContent = (props) => {
@@ -25,6 +25,7 @@ const MapTooltipContent = (props) => {
 
     return (
         <>
+            <h2>Tract {props.content.geoid}</h2>
             {props.content && <span><table>
                 <tr><td>Population</td><td> {props.content.acs_population && props.content.acs_population.toLocaleString('en')}</td></tr>
                 <tr><td>Number of Trees</td><td> {props.content.trees_n && props.content.trees_n.toLocaleString('en')}</td></tr>
@@ -37,7 +38,7 @@ const MapTooltipContent = (props) => {
                 <tr><td>Age Adjusted Asthma Cases (Per 10k)</td><td> {props.content.asthma_age_adj_rate && props.content.asthma_age_adj_rate}</td></tr>
                 <tr><td>Urban Flood Susceptibility Index</td><td> {props.content.urban_flood_suscep && props.content.urban_flood_suscep.toFixed(2)}</td></tr>
             </table>
-            <Button variant="contained" onClick={handleSpeciesPlot}>Show Species Plot</Button>
+            <Button variant="contained" onClick={handleSpeciesPlot} style={{marginTop:'.5em', fontFamily:'"Lato", sans-serif', background:colors.forest}}>Show Species Plot</Button>
             <PolarSpeciesPlot
                 geoid={speciesPlotInfo.geoid}
                 open={speciesPlotInfo.open}

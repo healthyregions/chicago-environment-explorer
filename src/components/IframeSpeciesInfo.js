@@ -1,6 +1,7 @@
 import React from "react";
 
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 // import Button from "@mui/material/Button";
 // import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
@@ -17,6 +18,8 @@ const style = {
   p: 4,
 };
 
+const MARGIN = '-.25em'
+
 function IframeSpeciesInfo({ name, open, setOpen }) {
   const handleClose = () => setOpen(false);
   const url = `https://www.catalogueoflife.org/data/search?facet=rank&facet=issue&facet=status&facet=nomStatus&facet=nameType&facet=field&facet=authorship&facet=extinct&facet=environment&limit=50&offset=0&q=${name}&sortBy=taxonomic`;
@@ -28,6 +31,14 @@ function IframeSpeciesInfo({ name, open, setOpen }) {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+      <Button
+        onClick={handleClose}
+        style={{ position: 'absolute', right: MARGIN, top: MARGIN, fontSize:'1.5rem' }}
+        title="Close"
+        color="success"
+      >
+        ×
+      </Button>
         <iframe
           src={url}
           width="100%"
