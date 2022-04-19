@@ -19,7 +19,7 @@ import MemberGrid from './MemberGrid';
 import NavBar from './navbar';
 import NotificationBox from './notificationBox';
 import VariablePanel from './variablePanel';
-import Popover from './tooltipPopper';
+// import Popover from './tooltipPopper';
 import Preloader from './preloader';
 import Scaleable from './scaleable';
 import StaticNavbar from './staticNavbar';
@@ -62,7 +62,7 @@ export {
     NavBar,
     NotificationBox,
     VariablePanel,
-    Popover,
+    // Popover,
     Preloader,
     Scaleable,
     StaticNavbar,

@@ -468,7 +468,7 @@ function App() {
   const densityPercentile = dataReady && quantileRank(summaries.density.values, filteredSummaries.density.reduced)
   const ageAdjAsthmaPct = dataReady && quantileRank(summaries.asthmaAgeAdj.values, filteredSummaries.asthmaAgeAdj.reduced)
   const hardshipPercentile = dataReady && quantileRank(summaries.hardship.values, filteredSummaries.hardship.reduced)
-  console.log(currentLocation)
+  
   return (
     <CommunityPage>
       <NavBar />

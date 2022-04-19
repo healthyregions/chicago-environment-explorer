@@ -49,13 +49,13 @@ function App() {
         
         <MapSection setViewStateFn={setViewStateFn} bounds={defaultBounds}/>
         <Legend 
-          variableName={mapParams.variableName} 
+          variableName={`${mapParams.variableName} ${mapParams.units ? `(${mapParams.units})` : ''}`} 
           colorScale={mapParams.colorScale}
           bins={mapParams.bins}
           />
         <VariablePanel />
         <DataPanel />
-        <Popover />    
+        {/* <Popover />     */}
 
       </div>
     </div>
