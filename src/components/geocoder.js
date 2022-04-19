@@ -49,19 +49,19 @@ const Container = styled.div`
 
 `
 
-const StyledOption = styled.span`
-    height: 2em;
-    span {
-        padding-left:1em;
-        display:block;
-        font-size:12px;
-        &:first-child {
-            font-size:16px;
-            font-weight:bold;
-        }
+// const StyledOption = styled.span`
+//     height: 2em;
+//     span {
+//         padding-left:1em;
+//         display:block;
+//         font-size:12px;
+//         &:first-child {
+//             font-size:16px;
+//             font-weight:bold;
+//         }
 
-    }
-`
+//     }
+// `
 
 const Geocoder = ({
     onChange,
@@ -110,25 +110,25 @@ const Geocoder = ({
         }
     }
 
-    const formatPlaceContext = (contextArray) => {
-        let returnString = ``
-        if (contextArray && contextArray.length){
-            for (let i=0; i<contextArray.length; i++) {
-                if (
-                    contextArray[i].id.includes('region')
-                    ||
-                    contextArray[i].id.includes('country')
-                    ||
-                    contextArray[i].id.includes('place')
-                    ||
-                    contextArray[i].id.includes('neighborhood')
-                ) {
-                    returnString += `${contextArray[i].text}, `
-                }
-            }
-        }
-        return returnString.slice(0,-2)
-    }
+    // const formatPlaceContext = (contextArray) => {
+    //     let returnString = ``
+    //     if (contextArray && contextArray.length){
+    //         for (let i=0; i<contextArray.length; i++) {
+    //             if (
+    //                 contextArray[i].id.includes('region')
+    //                 ||
+    //                 contextArray[i].id.includes('country')
+    //                 ||
+    //                 contextArray[i].id.includes('place')
+    //                 ||
+    //                 contextArray[i].id.includes('neighborhood')
+    //             ) {
+    //                 returnString += `${contextArray[i].text}, `
+    //             }
+    //         }
+    //     }
+    //     return returnString.slice(0,-2)
+    // }
 
     return (
         <Container {...{height}}>

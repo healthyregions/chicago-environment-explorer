@@ -9,7 +9,7 @@ import { fitBounds } from '@math.gl/web-mercator';
 import { loadDataAndBins } from '../../actions';
 
 import { MapSection, NavBar, VariablePanel, Legend,  
-  DataPanel,Popover } from '../../components';  //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
+  DataPanel } from '../../components';  //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 import { generateQuantileBins } from '../../utils';
 import { defaultData } from '../../config'; 
 
@@ -21,9 +21,9 @@ const defaultBounds = fitBounds({
 })
 
 function App() {
-  const {storedGeojson, mapParams } = useSelector(state => state);
+  const mapParams = useSelector(state => state.mapParams);
   const [isLoading, setIsLoading] = useState(true);
-  const [viewstateFn, setViewStateFn] = useState(()=>{});
+  // const [viewstateFn, setViewStateFn] = useState(()=>{});
   const dispatch = useDispatch();  
 
   const handleData = async () => {
@@ -43,11 +43,11 @@ function App() {
   
   return (
     <div className="Map-App">
-      <NavBar showMapControls={true} setViewState={setViewStateFn} bounds={defaultBounds} />
+      <NavBar showMapControls={true} bounds={defaultBounds} />
       {isLoading && <div id="loadingIcon"></div>}
       <div id="mainContainer" className={isLoading ? 'loading' : ''}>
         
-        <MapSection setViewStateFn={setViewStateFn} bounds={defaultBounds}/>
+        <MapSection bounds={defaultBounds}/>
         <Legend 
           variableName={`${mapParams.variableName} ${mapParams.units ? `(${mapParams.units})` : ''}`} 
           colorScale={mapParams.colorScale}

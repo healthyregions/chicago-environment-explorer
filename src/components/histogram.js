@@ -34,20 +34,20 @@ const ChartContainer = styled.div`
   }
 `
 
-const AxisContainer = styled.div`
-  display:flex;
-  padding:0 15px 0 5px;
-  span {
-    flex:1;
-    text-align:center;
-  }
-  span:nth-of-type(1){
-    text-align:left;
-  }
-  span:nth-of-type(3){
-    text-align:right;
-  }
-`
+// const AxisContainer = styled.div`
+//   display:flex;
+//   padding:0 15px 0 5px;
+//   span {
+//     flex:1;
+//     text-align:center;
+//   }
+//   span:nth-of-type(1){
+//     text-align:left;
+//   }
+//   span:nth-of-type(3){
+//     text-align:right;
+//   }
+// `
 
 const ClearButton = styled.button`
   background:none;

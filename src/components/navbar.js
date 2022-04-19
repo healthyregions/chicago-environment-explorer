@@ -96,6 +96,7 @@ function SvgLogo({
       ])
     }, 2000)
     return () => clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return <SvgLogoContainer version="1.1" x="0px" y="0px" viewBox="0 0 115 115" >
@@ -175,8 +176,8 @@ export default function Nav({
           {!!showMapControls && <>
             <Typography>Map Controls</Typography>
             <NavItems>
-              <li><a onClick={() => handleOpenClose('variables')}>{SVG.settings} Variables Panel</a></li>
-              <li><a onClick={() => handleOpenClose('info')}>{SVG.report}Data View</a></li>
+              <li><a href="#" onClick={() => handleOpenClose('variables')}>{SVG.settings} Variables Panel</a></li>
+              <li><a href="#" onClick={() => handleOpenClose('info')}>{SVG.report}Data View</a></li>
               {/* <li><a onClick={() => setViewState({
                 ...bounds,
                 bearing:0,

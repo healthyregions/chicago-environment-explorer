@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { nicelyFormatNumber } from "../utils";
+// import { nicelyFormatNumber } from "../utils";
 
 const colorScale = {
   Good: "#00e400",

@@ -16,7 +16,7 @@ import styled from 'styled-components';
 // import BarChart from './BarChart';
 import Histogram from './histogram';
 import { Gutter } from './Gutter';
-import NeighborhoodCounts from './NeighborhoodCounts';
+// import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../actions';
 import { colors } from '../config';
 import { report } from '../config/svg';
@@ -348,7 +348,7 @@ const DataPanel = () => {
   const selectionData = useSelector(state => state.selectionData);
   const panelState = useSelector(state => state.panelState);
   const ranges = useSelector(state => state.ranges);
-  const filterValues = useSelector(state => state.filterValues);
+  // const filterValues = useSelector(state => state.filterValues);
 
   // handles panel open/close
   const handleOpenClose = () => dispatch(setPanelState({info:panelState.info ? false : true}))

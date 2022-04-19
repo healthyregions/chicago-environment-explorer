@@ -3,7 +3,7 @@ import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import styled from "styled-components";
-import { colors } from "../config";
+// import { colors } from "../config";
 
 const AccordionContainer = styled(MuiAccordion)`
   &.MuiPaper-elevation1 {

@@ -37,5 +37,6 @@ export default function useProcessData({
     updateTrigger = null,
     prefix =''
 }) {
+    //eslint-disable-next-line
     return useMemo(() => processData(data, metrics, prefix), [updateTrigger ? updateTrigger : JSON.stringify({ data, metrics, updateTrigger })]);
 }

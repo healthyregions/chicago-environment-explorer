@@ -5,5 +5,6 @@ export default function useFilterData({
     filterFunc=()=>true,
     updateTrigger=null
 }){
+    //eslint-disable-next-line
     return useMemo(() => data.filter(filterFunc),[updateTrigger ? updateTrigger : JSON.stringify({data, filterFunc, updateTrigger})]);
 }

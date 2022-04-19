@@ -2,16 +2,16 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import booleanWithin from "@turf/boolean-within";
 import { quantileRank } from 'simple-statistics'
-import { nicelyFormatNumber } from "../../utils";
+// import { nicelyFormatNumber } from "../../utils";
 import { loadDataAndBins } from "../../actions";
 
 import {
   Gutter,
   NavBar,
-  VariablePanel,
+  // VariablePanel,
   Footer,
-  Pm25Report,
-  Table,
+  // Pm25Report,
+  // Table,
 } from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 import useFilterData from "../../hooks/useFilterData";
 import useProcessData from "../../hooks/useProcessData";
@@ -308,7 +308,7 @@ function App() {
       return getUniqueList(features, ["community", "zip_code", "geoid"]);
     } else {
       return [];
-    }
+    } // eslint-disable-next-line
   }, [features && features.length]);
 
   // geolocation
@@ -387,6 +387,7 @@ function App() {
               : intersectingFeature.properties.geoid,
       });
     }
+    // eslint-disable-next-line
   }, [geolocateType]);
   // filter and summary data
 
@@ -397,6 +398,7 @@ function App() {
         : currentLocation.type === "Community"
           ? (f) => f.properties.community === currentLocation.label.toUpperCase()
           : (f) => f.properties.geoid === currentLocation.label,
+    // eslint-disable-next-line
     [JSON.stringify(currentLocation)]
   );
 
@@ -407,13 +409,13 @@ function App() {
   });
 
   // summarize data
-  const [summaries, summariesTimestamp] = useProcessData({
+  const [summaries] = useProcessData({ //summariesTimestamp
     data: features,
     metrics: metricsToParse,
     updateTrigger: features.length,
   });
 
-  const [filteredSummaries, filteredSummariesTimestamp] = useProcessData({
+  const [filteredSummaries] = useProcessData({ //filteredSummariesTimestamp
     data: filteredFeatures,
     metrics: metricsToParse,
     updateTrigger: filteredFeatures.length && JSON.stringify(filteredFeatures),
@@ -430,34 +432,6 @@ function App() {
     })
   );
 
-  const columns = [
-    { accessor: "name", Header: "Measure", maxWidth: 50 },
-    {
-      accessor: "chicago",
-      Header: "Chicago",
-      width: 70,
-      type: "number",
-      Cell: ({ value }) => <>{nicelyFormatNumber(value)}</>,
-    },
-    {
-      accessor: currentLocation.label,
-      Header: currentLocation.label,
-      width: 70,
-      type: "number",
-      Cell: ({ value }) => <>{nicelyFormatNumber(value)}</>,
-    },
-    // {
-    //   field: 'fullName',
-    //   headerName: 'Full name',
-    //   description: 'This column has a value getter and is not sortable.',
-    //   sortable: false,
-    //   width: 160,
-    //   valueGetter: (params) =>
-    //     `${params.getValue(params.id, 'firstName') || ''} ${
-    //       params.getValue(params.id, 'lastName') || ''
-    //     }`,
-    // },
-  ];
   const dataReady =
     currentLocation?.label &&
     transposedData.length &&

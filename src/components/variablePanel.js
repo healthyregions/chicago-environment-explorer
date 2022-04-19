@@ -8,11 +8,11 @@ import Select from "@mui/material/Select";
 import styled from "styled-components";
 
 // import Tooltip from './tooltip';
-import { StyledDropDown, Gutter } from "../styled_components";
+import { Gutter } from "../styled_components";
 import { changeVariable, setMapParams, setPanelState } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
 import { colors, variablePresets, dataDescriptions } from "../config";
 import * as SVG from "../config/svg";
-import { FormControl, FormHelperText } from "@mui/material";
+import { FormControl } from "@mui/material";
 const REDLINING_COLOR_SCALE = {
   A: [115, 169, 77],
   B: [52, 172, 198],

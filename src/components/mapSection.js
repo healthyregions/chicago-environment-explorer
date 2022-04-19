@@ -7,8 +7,8 @@ import { WebMercatorViewport } from "@deck.gl/core";
 // deck GL and helper function import
 import DeckGL from "@deck.gl/react";
 import { MapView, FlyToInterpolator } from "@deck.gl/core";
-import { GeoJsonLayer, ScatterplotLayer, TextLayer } from "@deck.gl/layers";
-import { GPUGridLayer, HeatmapLayer } from "@deck.gl/aggregation-layers";
+import { GeoJsonLayer } from "@deck.gl/layers"; //, ScatterplotLayer, TextLayer 
+// import { GPUGridLayer, HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { fitBounds } from "@math.gl/web-mercator";
 import MapboxGLMap from "react-map-gl";
 import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
@@ -236,7 +236,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
   });
   // const [highlightGeog, setHighlightGeog] = useState([]);
   const [hoverGeog, setHoverGeog] = useState(null);
-  const [zoom, setZoom] = useState(bounds.zoom);
+  // const [zoom, setZoom] = useState(bounds.zoom);
 
   // map view location
   const [viewState, setViewState] = useState({
@@ -248,6 +248,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
   });
   useEffect(() => {
     setViewStateFn(setViewState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // // share button notification
@@ -373,6 +374,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
       bearing: 0,
       pitch: 0,
     }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlParams]);
 
   const GetMapView = () => {
@@ -543,15 +545,15 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
     }
     return true;
   };
-  const CONTOURS = [
-    { threshold: [0, 1], color: [0, 0, 0, 25], strokeWidth: 0, zIndex: 1 }, // => Isoline for threshold 1
-    { threshold: [1, 4], color: [254, 240, 217], strokeWidth: 0, zIndex: 2 }, // => Isoline for threshold 1
-    { threshold: [4, 8], color: [253, 204, 138], strokeWidth: 0, zIndex: 3 }, // => Isoline for threshold 5
-    { threshold: [8, 10], color: [252, 141, 89], strokeWidth: 0, zIndex: 4 }, // => Isoline for threshold 5
-    { threshold: [10, 15], color: [227, 74, 51], strokeWidth: 0, zIndex: 5 }, // => Isoline for threshold 5
-    { threshold: [15, 200], color: [179, 0, 0], strokeWidth: 0, zIndex: 6 }, // => Isoline for threshold 5
-  ];
-  const AQ_COL = "weekend_median";
+  // const CONTOURS = [
+  //   { threshold: [0, 1], color: [0, 0, 0, 25], strokeWidth: 0, zIndex: 1 }, // => Isoline for threshold 1
+  //   { threshold: [1, 4], color: [254, 240, 217], strokeWidth: 0, zIndex: 2 }, // => Isoline for threshold 1
+  //   { threshold: [4, 8], color: [253, 204, 138], strokeWidth: 0, zIndex: 3 }, // => Isoline for threshold 5
+  //   { threshold: [8, 10], color: [252, 141, 89], strokeWidth: 0, zIndex: 4 }, // => Isoline for threshold 5
+  //   { threshold: [10, 15], color: [227, 74, 51], strokeWidth: 0, zIndex: 5 }, // => Isoline for threshold 5
+  //   { threshold: [15, 200], color: [179, 0, 0], strokeWidth: 0, zIndex: 6 }, // => Isoline for threshold 5
+  // ];
+  // const AQ_COL = "weekend_median";
   const mapAlphaFunc = mapParams.variableName.toLowerCase().includes("biodiversity")
     ? (feature, color) => [...color, feature.properties.specCt > 7 ? 255 : 75]
     : (_, color) => color;
@@ -916,8 +918,8 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
         pickingRadius={20}
         onViewStateChange={(e) => {
           queryViewport(e);
-          if (e?.viewState?.zoom !== e?.oldViewState?.zoom)
-            setZoom(e.viewState.zoom);
+          // if (e?.viewState?.zoom !== e?.oldViewState?.zoom)
+          //   setZoom(e.viewState.zoom);
           hoverInfo.object &&
             handleMapClick({ x: null, y: null, object: null });
         }}

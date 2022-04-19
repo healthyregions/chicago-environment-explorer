@@ -3,8 +3,8 @@ import PolarSpeciesPlotInner from "./PolarSpeciesPlotInner";
 import { ParentSize } from "@visx/responsive";
 import rawData from "../data/speciesData.json";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+// import Button from "@mui/material/Button";
+// import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 const style = {
@@ -35,7 +35,7 @@ export default function PolarSpeciesPlot({ geoid, open, setOpen }) {
     } else {
       setData({});
       setOpen(false);
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [geoid]);
 
   return (

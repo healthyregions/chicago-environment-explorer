@@ -6,15 +6,15 @@ import { createBrowserHistory } from "history";
 import {Home, LoadingMessage, ErrorPage} from './components/';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 
-import makeStyles from '@mui/styles/makeStyles';
+// import makeStyles from '@mui/styles/makeStyles';
 
 const theme = createTheme();
 
-const useStyles = makeStyles((theme) => {
-  root: {
-    // some CSS that access to theme
-  }
-});
+// const useStyles = makeStyles((theme) => {
+//   root: {
+//     // some CSS that access to theme
+//   }
+// });
 
 const Map = React.lazy(() => import('./components/Pages/Map'));
 const About = React.lazy(() => import('./components/Pages/About'));
