@@ -5,16 +5,44 @@ import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
 import { LinkRadial } from "@visx/shape";
 import IframeSpeciesInfo from "./IframeSpeciesInfo";
+import { Zoom } from '@visx/zoom';
+import { localPoint } from '@visx/event';
+import { RectClipPath } from '@visx/clip-path';
+import { scaleLinear } from '@visx/scale';
+import { Button } from "@mui/material";
 
 const defaultMargin = { top: 20, left: 20, right: 20, bottom: 20 };
+const sizeScale = scaleLinear({ domain: [0, 600], range: [0.5, 8] });
+const initialTransform = {
+  scaleX: 1,
+  scaleY: 1,
+  translateX: 0,
+  translateY: 0,
+  skewX: 0,
+  skewY: 0,
+};
 
+const getFontSize = (count) => {
+  if (count < 30) {
+    return 10
+  }
+  if (count < 100) {
+    return 8
+  }
+  if (count < 500) {
+    return 6
+  }
+  return 4
+}
 function PolarSpeciesPlotInner({
   data,
+  count,
   width,
   height,
   margin = defaultMargin,
 }) {
   const [selectedNode, setSelectedNode] = useState(null);
+  // const [showMiniMap, setShowMiniMap] = useState(true);
   const [iframeOpen, setIframeOpen] = useState(false);
   const handleNode = (node) => {
     setSelectedNode(node);
@@ -35,98 +63,185 @@ function PolarSpeciesPlotInner({
   };
   const sizeWidth = 2 * Math.PI;
   const sizeHeight = Math.min(innerWidth, innerHeight) / 2;
-
+  const fontSize = getFontSize(count);
   return width < 10 ? null : (
-    <div>
-      <svg width={width} height={height}>
-        <LinearGradient id="links-gradient" from="#3caa54" to="#aae6a2" />
-        <Group top={margin.top} left={margin.left}>
-          <Tree
-            root={hierarchy(data, (d) => (d.isExpanded ? null : d.children))}
-            size={[sizeWidth, sizeHeight]}
-            separation={(a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth}
-          >
-            {(tree) => (
-              <Group top={origin.y} left={origin.x}>
-                {tree.links().map((link, i) => (
-                  <LinkRadial
-                    key={i}
-                    data={link}
-                    percent={0.5}
-                    stroke="rgb(150,60,120,0.9)"
-                    strokeWidth="1"
-                    fill="none"
-                  />
-                ))}
+    <Zoom
+      width={width}
+      height={height}
+      scaleXMin={1 / 2}
+      scaleXMax={4}
+      scaleYMin={1 / 2}
+      scaleYMax={4}
+      initialTransformMatrix={initialTransform}
+    >
+      {(zoom) => (
+        <div className="relative">
+          <svg width={width} height={height}
+            style={{ cursor: zoom.isDragging ? 'grabbing' : 'grab', touchAction: 'none' }}
+            ref={zoom.containerRef}>
 
-                {tree.descendants().map((node, key) => {
-                  const width = 100;
-                  const height = 20;
+            <RectClipPath id="zoom-clip" width={width} height={height} />
+            <LinearGradient id="links-gradient" from="#3caa54" to="#aae6a2" />
+            <Group top={margin.top} left={margin.left} transform={zoom.toString()}>
+              <Tree
+                root={hierarchy(data, (d) => (d.isExpanded ? null : d.children))}
+                size={[sizeWidth, sizeHeight]}
+                separation={(a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth}
+              >
+                {(tree) => (
+                  <Group top={origin.y} left={origin.x}>
+                    {tree.links().map((link, i) => (
+                      <LinkRadial
+                        key={i}
+                        data={link}
+                        percent={0.5}
+                        stroke="rgb(150,60,120,0.9)"
+                        strokeWidth="1"
+                        fill="none"
+                      />
+                    ))}
 
-                  const [radialX, radialY] = pointRadial(node.x, node.y);
-                  const top = radialY;
-                  const left = radialX;
+                    {tree.descendants().map((node, key) => {
+                      const width = 100;
+                      const height = 20;
 
-                  return (
-                    <Group top={top} left={left} key={key}>
-                      {node.depth === 0 && (
-                        <circle
-                          r={12}
-                          fill="url('#links-gradient')"
-                        />
-                      )}
-                      {node.depth !== 0 && (
-                        <rect
-                          height={height}
-                          width={width}
-                          y={-height / 2}
-                          x={-width / 2}
-                          fill="rgba(255,255,0,0)"
-                          stroke={"none"}
-                          strokeWidth={1}
-                          strokeDasharray={node.data.children ? "0" : "2,2"}
-                          strokeOpacity={node.data.children ? 1 : 0.6}
-                          rx={node.data.children ? 0 : 10}
-                          onClick={() => {
-                            handleNode(node.data.name)
-                            // console.log(node);
-                            // forceUpdate();
-                          }}
-                        />
-                      )}
-                      <text
-                        dy=".33em"
-                        fontSize={10}
-                        fontFamily="Arial"
-                        textAnchor="middle"
-                        stroke={"white"}
-                        strokeWidth={"2"}
-                        paintOrder="stroke"
-                        // stroke: #000000;
-                        // stroke-width: 1px;
-                        strokeLinecap="butt"
-                        strokeLinejoin="miter"
-                        style={{ pointerEvents: "none" }}
-                        fill={
-                          node.depth === 0
-                            ? "#71248e"
-                            : node.children
-                            ? "black"
-                            : "blue"
-                        }
-                      >
-                        {node.data.name}
-                      </text>
-                    </Group>
-                  );
-                })}
-              </Group>
-            )}
-          </Tree>
-        </Group>
-      </svg>
-      <IframeSpeciesInfo name={selectedNode} open={iframeOpen} setOpen={setIframeOpen} />
-    </div>
+                      const [radialX, radialY] = pointRadial(node.x, node.y);
+                      const top = radialY;
+                      const left = radialX;
+
+                      return (
+                        <Group top={top} left={left} key={key}>
+                          {node.depth === 0 && (
+                            <circle
+                              r={12}
+                              fill="url('#links-gradient')"
+                            />
+                          )}
+                          {node.depth !== 0 && (
+                            <rect
+                              height={height}
+                              width={width}
+                              y={-height / 2}
+                              x={-width / 2}
+                              fill="rgba(255,255,0,0)"
+                              stroke={"none"}
+                              strokeWidth={1}
+                              strokeDasharray={node.data.children ? "0" : "2,2"}
+                              strokeOpacity={node.data.children ? 1 : 0.6}
+                              rx={node.data.children ? 0 : 10}
+                              onClick={() => {
+                                handleNode(node.data.name)
+                                // console.log(node);
+                                // forceUpdate();
+                              }}
+                            />
+                          )}
+                          <text
+                            dy=".33em"
+                            fontSize={fontSize}
+                            fontFamily="Arial"
+                            textAnchor="middle"
+                            stroke={"white"}
+                            strokeWidth={"2"}
+                            paintOrder="stroke"
+                            // stroke: #000000;
+                            // stroke-width: 1px;
+                            strokeLinecap="butt"
+                            strokeLinejoin="miter"
+                            style={{ pointerEvents: "none" }}
+                            fill={
+                              node.depth === 0
+                                ? "#71248e"
+                                : node.children
+                                  ? "black"
+                                  : "blue"
+                            }
+                          >
+                            {node.data.name}
+                          </text>
+                        </Group>
+                      );
+                    })}
+                  </Group>
+                )}
+              </Tree>
+            </Group>
+            {/* {showMiniMap && (
+              <g
+                clipPath="url(#zoom-clip)"
+                transform={`
+                    scale(0.25)
+                    translate(${width * 4 - width - 60}, ${height * 4 - height - 60})
+                  `}
+              >
+                <rect width={width} height={height} fill="#1a1a1a" />
+                <Group>
+                  <Tree
+                    root={hierarchy(data, (d) => (d.isExpanded ? null : d.children))}
+                    size={[sizeWidth, sizeHeight]}
+                    separation={(a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth}
+                  >
+                    {(tree) => (
+                      <Group top={origin.y} left={origin.x}>
+                        {tree.links().map((link, i) => (
+                          <LinkRadial
+                            key={i}
+                            data={link}
+                            percent={0.5}
+                            stroke="rgb(150,60,120,0.9)"
+                            strokeWidth="1"
+                            fill="none"
+                          />
+                        ))}
+                      </Group>)}
+                  </Tree>
+                </Group>
+                <rect
+                  width={width}
+                  height={height}
+                  fill="white"
+                  fillOpacity={0.2}
+                  stroke="white"
+                  strokeWidth={4}
+                  transform={zoom.toStringInvert()}
+                />
+              </g>
+            )} */}
+          </svg> 
+          <div style={{position:'absolute', display:'flex', flexDirection:'column', left:0, top:'50%', transform:'translateY(-50%)'}}>
+            <Button style={{fontWeight:'bold', textAlign:'left'}}
+              type="button"
+              className="btn btn-zoom"
+              onClick={() => zoom.scale({ scaleX: 1.2, scaleY: 1.2 })}
+            >
+              +
+            </Button>
+            <Button style={{fontWeight:'bold', textAlign:'left'}}
+              type="button"
+              className="btn btn-zoom btn-bottom"
+              onClick={() => zoom.scale({ scaleX: 0.8, scaleY: 0.8 })}
+            >
+              -
+            </Button>
+            <Button style={{fontWeight:'bold', textAlign:'left'}} type="button" className="btn btn-lg" onClick={zoom.center}>
+              Center
+            </Button>
+            <Button style={{fontWeight:'bold', textAlign:'left'}} type="button" className="btn btn-lg" onClick={zoom.reset}>
+              Reset
+            </Button>
+          </div>
+          {/* <div className="mini-map">
+            <button
+              type="button"
+              className="btn btn-lg"
+              onClick={() => setShowMiniMap(!showMiniMap)}
+            >
+              {showMiniMap ? 'Hide' : 'Show'} Mini Map
+            </button>
+          </div> */}
+          <IframeSpeciesInfo name={selectedNode} open={iframeOpen} setOpen={setIframeOpen} />
+        </div>
+      )}</Zoom>
   );
 }
 
