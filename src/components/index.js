@@ -18,6 +18,7 @@ import MapTooltipContent from './mapTooltipContent';
 import MemberGrid from './MemberGrid';
 import NavBar from './navbar';
 import NotificationBox from './notificationBox';
+import PolarSpeciesPlot from './PolarSpeciesPlot';
 import VariablePanel from './variablePanel';
 // import Popover from './tooltipPopper';
 import Preloader from './preloader';
@@ -61,6 +62,7 @@ export {
     MemberGrid,
     NavBar,
     NotificationBox,
+    PolarSpeciesPlot,
     VariablePanel,
     // Popover,
     Preloader,

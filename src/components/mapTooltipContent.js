@@ -1,10 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Button } from '@mui/material';
+const PolarSpeciesPlot = React.lazy(() => import('../components/PolarSpeciesPlot.js'));
+
 // This component handles and formats the map tooltip info. 
 // The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
 const MapTooltipContent = (props) => {
+    const [speciesPlotInfo, setSpeciesPlotInfo] = useState({
+        open: false,
+        geoid: null
+    });
+    
+    const handleSpeciesPlot = () => {
+        setSpeciesPlotInfo({
+            open: true,
+            geoid: +props.content.geoid
+        });
+    }
+    const handleSetOpen = (bool) => {
+        setSpeciesPlotInfo(prev =>({
+            ...prev,
+            open: bool
+        }))
+    }
+
     return (
         <>
-            {props.content && <table>
+            {props.content && <span><table>
                 <tr><td>Population</td><td> {props.content.acs_population && props.content.acs_population.toLocaleString('en')}</td></tr>
                 <tr><td>Number of Trees</td><td> {props.content.trees_n && props.content.trees_n.toLocaleString('en')}</td></tr>
                 <tr><td>Percent Canopy Cover</td><td> {props.content.trees_crown_den && props.content.trees_crown_den.toFixed(2)}%</td></tr>
@@ -15,7 +36,14 @@ const MapTooltipContent = (props) => {
                 <tr><td>Social Vulnerability Index</td><td> {props.content.svi_pecentile && props.content.svi_pecentile.toFixed(2)}</td></tr>
                 <tr><td>Age Adjusted Asthma Cases (Per 10k)</td><td> {props.content.asthma_age_adj_rate && props.content.asthma_age_adj_rate}</td></tr>
                 <tr><td>Urban Flood Susceptibility Index</td><td> {props.content.urban_flood_suscep && props.content.urban_flood_suscep.toFixed(2)}</td></tr>
-            </table>}
+            </table>
+            <Button variant="contained" onClick={handleSpeciesPlot}>Show Species Plot</Button>
+            <PolarSpeciesPlot
+                geoid={speciesPlotInfo.geoid}
+                open={speciesPlotInfo.open}
+                setOpen={handleSetOpen}
+                />
+            </span>}
         </>
     )
 }
