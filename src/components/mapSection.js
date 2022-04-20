@@ -554,7 +554,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
   //   { threshold: [15, 200], color: [179, 0, 0], strokeWidth: 0, zIndex: 6 }, // => Isoline for threshold 5
   // ];
   // const AQ_COL = "weekend_median";
-  const mapAlphaFunc = mapParams.variableName.toLowerCase().includes("biodiversity")
+  const mapAlphaFunc = mapParams.variableName.toLowerCase().includes("plant diversity")
     ? (feature, color) => [...color, feature.properties.specCt > 7 ? 255 : 75]
     : (_, color) => color;
 

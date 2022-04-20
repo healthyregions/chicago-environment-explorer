@@ -7,7 +7,15 @@ export const variablePresets = rawVariables.reduce(
   (obj, row) => Object.assign(obj, { [row['Variable Name']]: { ...row, accessor: feature => feature.properties[row.Column] } }), {});
 
 export const dataDescriptions = rawVariables.reduce(
-  (obj, row) => Object.assign(obj, { [row['Variable Name']]: <div><span dangerouslySetInnerHTML={{ __html: row.Description }}></span><br /><br /><b>Data Source</b>:{"  "}{row['Data Source(s)']}, {row['Data Year']}</div> }), {});
+  (obj, row) => Object.assign(obj, { 
+    [row['Variable Name']]: 
+    <div>
+      <span dangerouslySetInnerHTML={{ __html: row.Description }}></span>
+      <br /><br />
+      <b>Data Source</b>:{"  "}<span dangerouslySetInnerHTML={{__html:row['Data Source(s)']}}/>
+      <br/>
+      <b>Data Year</b>:{" "}{row['Data Year']}</div> }),
+  {});
 
 // mapbox API token
 

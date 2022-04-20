@@ -1,18 +1,18 @@
 {
-  "name": "covid-atlas",
+  "name": "chives",
   "version": "1.0.0",
-  "description": "COVID Atlas [v2]",
+  "description": "ChiVes harmonizes & standardizes environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeoDaCenter/covid.git"
+    "url": "git+https://github.com/GeoDaCenter/chicago-environment-explorer.git"
   },
   "author": "Spatial@UChicago <spatial@uchicago.edu>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/GeoDaCenter/covid/issues"
+    "url": "https://github.com/GeoDaCenter/chicago-environment-explorer/issues"
   },
-  "homepage": "https://theuscovidatlas.org",
+  "homepage": "https://chichives.com",
   "dependencies": {
     "@deck.gl/aggregation-layers": "^8.7.0",
     "@deck.gl/core": "^8.6.0",
@@ -70,7 +70,7 @@
     "start": "react-scripts start",
     "build": "yarn build:data && react-scripts build",
     "build:data": "node lib/buildPublicData",
-    "netlify-build": "react-scripts build && cd build && cat _redirects",
+    "netlify-build": "node lib/buildPublicData && react-scripts build",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
