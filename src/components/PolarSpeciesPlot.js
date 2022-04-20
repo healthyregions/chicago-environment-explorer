@@ -82,7 +82,7 @@ export default function PolarSpeciesPlot({ geoid, open, setOpen }) {
         </Button>
         <p style={{ position: 'absolute', left: MARGIN, bottom: MARGIN, maxWidth: '35ch' }}>
           {data.count < 7 && <>
-            ⚠️ This tracts has a low number of species observations!
+            ⚠️ This tract has a low number of species observations!
             Join your fellow Chicagoans on <a href="https://www.inaturalist.org/" target="_blank" rel="noopener noreferrer">iNaturalist</a>{" "}
             or <a href="https://budburst.org/" target="_blank" rel="noopener noreferrer">Budburst</a> to help record biodiversity in your neighborhood.
             <br /><br /><hr /><br />
