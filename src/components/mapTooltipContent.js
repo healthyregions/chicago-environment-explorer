@@ -38,7 +38,7 @@ const MapTooltipContent = (props) => {
                 <tr><td>Age Adjusted Asthma Cases (Per 10k)</td><td> {props.content.asthma_age_adj_rate && props.content.asthma_age_adj_rate}</td></tr>
                 <tr><td>Urban Flood Susceptibility Index</td><td> {props.content.urban_flood_suscep && props.content.urban_flood_suscep.toFixed(2)}</td></tr>
             </table>
-            <Button variant="contained" onClick={handleSpeciesPlot} style={{marginTop:'.5em', fontFamily:'"Lato", sans-serif', background:colors.forest}}>Show Species Plot</Button>
+            <Button variant="contained" onClick={handleSpeciesPlot} style={{marginTop:'.5em', fontFamily:'"Lato", sans-serif', background:colors.forest}}>Open Species Tree</Button>
             <PolarSpeciesPlot
                 geoid={speciesPlotInfo.geoid}
                 open={speciesPlotInfo.open}
