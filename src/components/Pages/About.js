@@ -191,7 +191,7 @@ export default function About(){
                 We are also grateful to the <b>Nature Conservancy</b>, <b>Audobon Society</b>, and <b>Field Museum</b> for their insights and support.
                 <br/><br/>
                 Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a> and 
-                <a href="https://www.linkedin.com/in/lorenzmenendez/">Lorenz Menendez</a>, now alumni of University of Chicago, who developed multiple measures
+                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a>, now alumni of University of Chicago, who developed multiple measures
                 for this application as a core component of their Research Assistantships from 2019-2021.
                                 </p> <br/><br/>
 
