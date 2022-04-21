@@ -92,8 +92,8 @@ const metricsToParse = [
     reducer: (data) => data.accumulated / data.values.length,
   },
   {
-    name: "asthma",
-    accessor: (row) => row.properties.cities_casthma_prev,
+    name: "asthmaEdVisits",
+    accessor: (row) => row.properties.asthma_5yr_avg,
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
   },
@@ -103,12 +103,12 @@ const metricsToParse = [
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
   },
-  {
-    name: "copd",
-    accessor: (row) => row.properties.cities_copd_prev,
-    accumulator: (prev, curr) => prev + curr,
-    reducer: (data) => data.accumulated / data.values.length,
-  },
+  // {
+  //   name: "copd",
+  //   accessor: (row) => row.properties.cities_copd_prev,
+  //   accumulator: (prev, curr) => prev + curr,
+  //   reducer: (data) => data.accumulated / data.values.length,
+  // },
   {
     name: "density",
     accessor: (row) => row.properties.acs_population / (row.properties.aland),
@@ -763,18 +763,20 @@ function App() {
                 <TableComponent
                   columns={reportColumns}
                   data={[{
-                    Label: 'Asthma Prevalence',
-                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthma?.reduced !== undefined ? filteredSummaries.asthma.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                    Description: 'The percentage of people who have asthma.'
+                    Label: 'Childhood Asthma ED Visits',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaEdVisits?.reduced !== undefined ? filteredSummaries.asthmaEdVisits.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: `The number of childhood emergency room visits between 2013 and 2017.`
                   }, {
-                    Label: 'Age Adjusted Asthma Rate',
+                    Label: 'Childhood Asthma Rate',
                     Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined ? filteredSummaries.asthmaAgeAdj.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                    Description: `How many emergency room visits people under 18 took between 2013 and 2018. Higher than ${Math.round(ageAdjAsthmaPct * 100)}% of Chicago tracts.`
-                  }, {
-                    Label: 'COPD Prevalence',
-                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined ? filteredSummaries.copd.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                    Description: 'The percentage of people who have COPD.'
-                  },]}
+                    Description: 'The rate of childhood emergency room visits for asthma per 10,000 people.'
+                  }, 
+                  // {
+                  //   Label: 'COPD Prevalence',
+                  //   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined ? filteredSummaries.copd.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                  //   Description: 'The percentage of people who have COPD.'
+                  // },
+                ]}
                   tableProps={{
                     style: {
                       fontSize: '1rem'
