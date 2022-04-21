@@ -23,6 +23,7 @@ import VariablePanel from './variablePanel';
 // import Popover from './tooltipPopper';
 import Preloader from './preloader';
 import Scaleable from './scaleable';
+import Showcase from './Carousel';
 import StaticNavbar from './staticNavbar';
 import Tooltip from './tooltip';
 import Table from './Table';
@@ -67,6 +68,7 @@ export {
     // Popover,
     Preloader,
     Scaleable,
+    Showcase,
     StaticNavbar,
     Table,
     Tooltip, 
