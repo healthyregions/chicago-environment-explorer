@@ -54,7 +54,7 @@ const projectTeam = [
         title:'Engineering & Visualization Lead',
     },
         {
-        name:'Susan Paykin',
+        name:'Susan Paykin, MPP',
         link:'https://www.linkedin.com/in/susanpaykin/',
         degrees: 'MPP',
         img: `SPaykin.jpg`,
@@ -100,27 +100,44 @@ const contributors = [
 const accordionContent = [
     {
         label: "West Humboldt Park Resource Map (2017)",
-        content: <p>The project was developed as a friendly collaboration out of the West Humboldt Park Health Coalition, a collective of community organizations, local businesses, health, and academic partners. Staff from West Humboldt Park Development Council, Our Lady of Angels, and the Northwestern Memorial Community Services group outlined the need and drove the concept. Lead developers are Marynia Kolak and Michael Steptoe. Student interns who've worked on this include Rachel Weisz (Northwestern University) and Gentry Nissen (Arizona State University).</p>
+        content: <p>The project was developed as a friendly collaboration out of the West Humboldt Park Health Coalition, a collective of community organizations, local businesses, health, and academic partners. Staff from West Humboldt Park Development Council, Our Lady of Angels, and the Northwestern Memorial Community Services group outlined the need and drove the concept. Lead developers are Marynia Kolak and Michael Steptoe. Student interns who've worked on this include Rachel Weisz (Northwestern University) and Gentry Nissen (Arizona State University).
+            <a href="http://makosak.github.io/HumboldtResources/about.html"> Learn more</a>.
+        </p>
     },
 
         {
-        label: "The US Covid Atlas (2020)",
-        content: "Description."
+        label: "US Covid Atlas (2020)",
+        content: <p>
+            The US Covid Atlas is a visualization tool led by HeRoP and the Center for Spatial Data Science that helspc onnects COVID case data with community indicaotrs across the United States from the beginning of the pandemic until today. 
+            The Atlas works to understand, archive, and represent the often unequal impact of the COVID-19 pandemic in the United States.
+            <a href="https://theuscovidatlas.org/"> Learn more</a>.
+        </p>
     },
 
         {
         label: "Opioid Environment Policy Scan (2021)",
-        content: "Description."
+        content: <p>The Opioid Environment Policy Scan (OEPS) is an open-source data warehouse to help characterize the multi-dimensional risk environment impacting opioid use and health outcomes across the United States.
+            The OEPS provides access to data at multiple spatial scales - from U.S. states down to Census tracts - and is designed to support research seeking to study environments impacting and impacted by opioid use and opioid use disorder (OUD), inform public policy, and reduce harm in communities nationwide.
+            This project was developed as part of the Lab's work with Justice Community Opioid Innovation Network (JCOIN), an NIH-HEAL Initiative, as part of the Methodology and Advanced Analytics Resource Center (MAARC).
+            <a href="https://oeps.ssd.uchicago.edu/"> Learn more</a>.
+            </p>
     },
 
         {
         label: "Diversitree (2021)",
-        content: "Description."
+        content: <p>
+            Diversitree is an MIT Senseable Cities Lab project that use tree inventory data to measure street tree diversity in eight global cities, comparing the city center with the outer areas of the city. 
+            Dylan Halpern helped develop and lead this project when he worked at Senseable.  
+            <a href="https://senseable.mit.edu/diversitree/"> Learn more</a>.
+        </p>
     },
 
         {
-        label: "Respiratory Association Collaboration (2021)",
-        content:"Description."
+        label: "Respiratory Health Association Collaboration (2020)",
+        content: <p>
+            The Respiratory Health Association (RHA) is a nonprofit organization that provides respiratory care services to the general public. HeRoP partnered with the RHA, along with te support of the Joyce Foundation, Chicago Transit Authority (CTA), and Chicago Department of Public Health,
+            to develop a web map application to help communities understand the health implications of the electrification of CTA buses. <a href="https://resphealth.org/wp-content/uploads/2020/09/CTA-Electrification-Health-Benefits-Report.pdf"> Learn more</a>.
+        </p>
     },
 
         {

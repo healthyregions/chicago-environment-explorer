@@ -52,9 +52,6 @@ export default function Contact(){
                 </p>
                 
                 <ContactForm />
-                <p>
-                    For additional inquiries, contact Marynia Kolak (mkolak at uchicago.edu).
-                </p>
                 <Gutter h={40}/>
 
            </ContentContainer>

@@ -1,6 +1,6 @@
 import rawVariables from './variables.json';
 
-export const defaultData = 'merged-data.geojson';
+export const defaultData = 'chives-data.geojson';
 export const defaultVariable = "Surface Temperature";
 
 export const variablePresets = rawVariables.reduce(
