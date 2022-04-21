@@ -52,7 +52,7 @@ const projectTeam = [
         title:'Research & Visualization Lead',
     },
         {
-        name:'Susan Paykin',
+        name:'Susan Paykin, MPP',
         link:'https://www.linkedin.com/in/susanpaykin/',
         img: `SPaykin.jpg`,
         affiliation:'(CSDS)',

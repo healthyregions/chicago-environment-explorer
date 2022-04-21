@@ -293,18 +293,37 @@ export default function Data(){
                 <Gutter h={10}/>
                 <p>
                     <i>ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018).
+                    Read more on our <a href="/About">About</a> page.
+                    <br/><br/>
+
+                    Data is added and updated through a collaborative partnership of researchers, community organizations, and civic groups. Organizations and individuals can participate in <i>ChiVes</i> in multiple ways:
+                    
+                    <br/><br/>
+                <li> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform">Data Collaborative.</a> Integrate your data directly. Members agree that the final, integrated data will meet Collaborative standards. </li>
+
+
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform">Resource Guide.</a> Share your web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards. </li>
+
+
+                <li><a href="https://github.com/GeoDaCenter/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.</li>
+                 
+                <br/>
+                View our <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">Standards and Submission Guidelines</a>. These guidelines are evaluated on a regular basis by members of the Data Collaborative. 
+                <br/><br/>
+                Download the latest version of our data here: 
+                <br/>
                 </p>
-                <Gutter h={20}/>
 
                 <Hero>
 
-                <h2> CURRENT RELEASE (11.18.2021)</h2>
+<h2> CURRENT RELEASE (11.18.2021)</h2>
 
-                <a href={`${process.env.PUBLIC_URL}/geojson/chiEnvExpl.csv`} id="button-search" download>CSV</a>
-                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson" id="button-search">SHP</a>
-                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson/chiEnvExpl.geojson" id="button-search">GEOJSON</a>
+<a href={`${process.env.PUBLIC_URL}/geojson/chiEnvExpl.csv`} id="button-search" download>CSV</a>
+<a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson" id="button-search">SHP</a>
+<a href="https://github.com/GeoDaCenter/chicago-environment-explorer/blob/main/docs/geojson/chiEnvExpl.geojson" id="button-search">GEOJSON</a>
 
-                </Hero>
+</Hero>
+
                 
                 {/* <h3>Data Dictionary</h3>
 
