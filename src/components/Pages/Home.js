@@ -9,6 +9,10 @@ import { colors } from "../../config";
 import { Gutter } from "../../styled_components";
 // import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
 import onion from "./onion.png";
+import map from "./map.png";
+import guide from "./noun-book-of-nature-3583880.png";
+import collab from "./noun-planting-tree-3583881.png";
+
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -52,6 +56,16 @@ const HomePage = styled.div`
     color: ${colors.darkgray};
   }
   .photo {
+    width: 50%;
+    @media (max-width: 960px) {
+      max-height: 40vh;
+      width: auto;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+    .photo2 {
     width: 100%;
     @media (max-width: 960px) {
       max-height: 40vh;
@@ -202,20 +216,40 @@ export default function Home() {
               />
             </Grid>
           </Grid>
+
           <ThreeUpGrid container spacing={1}>
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                <h2>Community</h2>
-                <p>Description</p>
-            </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                <h2>Open Data</h2>
-                <p>Description</p>
-            </Grid>
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                <h2>ChiVes Collaborative</h2>
-                <p>Description</p>
-            </Grid>
-        </ThreeUpGrid>
+
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                  <h2>Guide</h2>
+                  <a href="/guide"><img
+                className="photo"
+                src={guide}
+                alt="Wild Onion"
+                loading="lazy"
+              /></a>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                  <h2>Map</h2>
+                  <a href="/map"> <img
+                className="photo"
+                src={map}
+                alt="Wild Onion"
+                loading="lazy"
+              /></a>
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                  <h2>Contribute</h2>
+                  <a href="/about"><img
+                className="photo"
+                src={collab}
+                alt="Wild Onion"
+                loading="lazy"
+              /></a>
+              </Grid>
+
+          </ThreeUpGrid>
 
           {/* <Grid container spacing={8} alignItems="center">
                         <Grid item xs={12} sm={12} md={6}>
@@ -237,7 +271,7 @@ export default function Home() {
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
               <img
-                className="photo"
+                className="photo2"
                 src={onion}
                 alt="Wild Onion"
                 loading="lazy"
