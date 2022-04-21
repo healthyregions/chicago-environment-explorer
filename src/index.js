@@ -13,7 +13,7 @@ const store = createStore(
 
 WebFont.load({
   google: {
-    families: ['Lora:400,600', 'Roboto:500,700', 'sans-serif']
+    families: ['Lora:400,600', 'Roboto:300,500,700', 'sans-serif']
   }
 });
 

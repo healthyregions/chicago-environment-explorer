@@ -3,29 +3,35 @@ import styled from 'styled-components';
 import ResourceList from '../../config/resources.json';
 import { ContentContainer } from '../../styled_components';
 import { ResourceGuideRow, NavBar, Footer } from '../../components';
+import { colors } from "../../config";
 
-const GuidePage = styled.div`
+
+
+const GuidePageContent = styled.div`
+  width: 100%;
+  margin: 0 auto;
     background:white;
     min-height:100vh;
-    text-align:center;
-`
+    text-align:left
+`;
+
 
 const Guide = () => {
 
     return (
-       <GuidePage>
-            <NavBar/>
+
+       <GuidePageContent>
+             <NavBar/>
             <ContentContainer>
+            <br/><br/>
                 <h1>Resource Guide</h1>
-                
-                <h2>Test.</h2>
-                <p>
-                    Test
-                </p>
+                <hr/>
                 {ResourceList.map((entry, index) => <ResourceGuideRow entry={entry} key={index}/>)}
+
             </ContentContainer>
-            <Footer/>
-       </GuidePage>
+                  <Footer/>
+       </GuidePageContent>
+
     );
 }
  
