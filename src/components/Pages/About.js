@@ -38,22 +38,25 @@ const BioSection = styled.div`
 `
 const projectTeam = [
     {
-        name: 'Marynia Kolak, MS, MFA, PhD',
+        name: 'Marynia Kolak',
         link: 'https://makosak.github.io/',
+        degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
         affiliation: '(CSDS)',
-        title: 'Research Lead'
+        title: 'Research & Data Integration Lead'
     },
     {
-        name:'Dylan Halpern, MCP',
+        name:'Dylan Halpern',
         link:'https://dylanhalpern.com/',
+        degrees: 'MCP',
         img: `dylan.png`,
         affiliation:'(CSDS)',
-        title:'Research & Visualization Lead',
+        title:'Engineering & Visualization Lead',
     },
         {
         name:'Susan Paykin',
         link:'https://www.linkedin.com/in/susanpaykin/',
+        degrees: 'MPP',
         img: `SPaykin.jpg`,
         affiliation:'(CSDS)',
         title:'Research & Community Management',
@@ -195,10 +198,10 @@ export default function About(){
                 for this application as a core component of their Research Assistantships from 2019-2021.
                                 </p> <br/><br/>
 
-               <h1> 
+               <h2> 
                    A HeRoP Project  
-                </h1>
-                <hr/>
+                </h2>
+
                 <p>
 
                This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a> at the Center for Spatial Data Science at the University
@@ -210,11 +213,9 @@ export default function About(){
                 <br/><br/>
 
 
-               <h2>Project Leadership </h2>
-
                <p> Marynia, Dylan, and Susan lead the ChiVes project in the current release.  </p><br/>
 
-                                   <MemberGrid 
+                      <MemberGrid 
                         members={projectTeam}
                         columns={{
                             md: 3,

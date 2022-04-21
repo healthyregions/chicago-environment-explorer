@@ -50,9 +50,9 @@ const HomePage = styled.div`
     border-top: 1px solid ${colors.darkgray};
   }
   p {
-    font-family: "Lora", sans-serif;
+    font-family: "Roboto";
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 300;
     line-height: 1.5;
     color: ${colors.darkgray};
   }
@@ -94,7 +94,8 @@ const Hero = styled.div`
   margin: 0 auto;
   padding: 50px 10px 0 10px;
   p {
-    font-family: "Lora", sans-serif;
+    font-family: "Roboto";
+    font-weight: 300;
     font-size: 1.25rem;
     font-stretch: normal;
     text-align: left;
@@ -301,13 +302,17 @@ export default function Home() {
               <br />
               <br />
               <p>
+                ChiVes is a data collaborative and community mapping application
+                that brings data on Chicago’s environment together at the
+                neighborhood level.
+                <br />
+                <br />
                 Like the{" "}
                 <a href="https://www.illinoiswildflowers.info/woodland/plants/wild_leek.htm">
                   wild onion
-                </a>{" "}
-                that Chicago was named for, data about the city's environment
-                should be <b>tasty</b> and <b>plentiful</b>. By tasty, we mean
-                easily accessible and ready to use and explore. By plentiful, we
+                </a>{" "}that Chicago was named for, data about the city's environment
+                should be tasty and plentiful. By <i>tasty</i>, we mean
+                easily accessible and ready to use and explore. By <i>plentiful</i>, we
                 mean the data should extend across multiple dimensions of the
                 city's landscape, and be updated regularly.
                 <br />
@@ -318,10 +323,8 @@ export default function Home() {
                 Chicago Environment, cultivated by a community of curators.
                 <br />
                 <br />
-                ChiVes is a data collaborative and community mapping application
-                that brings data on Chicago’s environment together at the
-                neighborhood level. Have data to add? A mapping resource to
-                recommend? Learn <a href="/about">more</a>!
+                Have data to add? A mapping resource to share or
+                recommend? Please <a href="/about">contribute</a> !
               </p>
               <h5>
                 Image of <i>Wild Onion, Allium acuminatum </i> by Margaret

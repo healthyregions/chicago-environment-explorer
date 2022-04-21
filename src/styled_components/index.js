@@ -131,21 +131,25 @@ export const ContentContainer = styled.div`
     font-weight: 300;
   }
   h2 { 
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-family: 'Lora', sans-serif;
+    font-size: 30px;
     line-height: 1.5;
-    font-weight: 700;
+    font-weight: 600;
     font-stretch: normal;
     margin-bottom:20px;
   }
   h3 {
-    font-family: 'Lora', serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
     font-weight: 300;
+    font-stretch: normal;
+    margin-bottom:20px;
   }
   p, a, ul li, ol li {
-    font-family: 'Lora', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
     font-stretch: normal;
     font-style: normal;
     line-height: 1.63;

@@ -55,9 +55,9 @@ function Accordion({ entries = [], initialTab = -1 }) {
               aria-controls={`panel${label}-${index}d-content`}
               id={`panel${label}-${index}d-header`}
             >
-              <h2>
+              <h3>
                 <b>{label}</b>
-              </h2>
+              </h3>
             </AccordionSummary>
             <AccordionDetails>{content}</AccordionDetails>
           </AccordionContainer>

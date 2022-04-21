@@ -4,18 +4,35 @@ import { Grid } from '@mui/material';
 const TeamBio = styled(Grid)`
     display:flex;
     h4 {
-        font-size:1rem;
+    font-family: 'Lora', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    font-weight: 600;
+    font-stretch: normal;
+    margin-bottom:6px;
     }
     h5 {
-        font-size:1rem;
-        padding:0 0 0.5em 0;
-        font-weight:normal;
-        font-style:italic;
+
+    font-family: 'Robot', sans-serif;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 300;
+    font-stretch: normal;
+    margin-bottom:20px;
+    }
+    h6 {
+
+    font-family: 'Lora', sans-serif;
+    font-size: 13px;
+    line-height: 1;
+    font-weight: 600;
+    font-stretch: normal;
+    margin-bottom:10px;
     }
     img {
         max-width:10em;
         padding-bottom:2em;
-        width:100%;    
+        height:100%;    
         align-self: flex-start;
     }
     span {
@@ -28,6 +45,7 @@ const CoreMemberBio = ({member, columns}) =>
         <img src={`${process.env.PUBLIC_URL}/img/people/${member.img}`} alt={`${member.name}`}/>
         <span>
             <h4>{member.name}</h4>
+            <h6>{member.degrees}</h6>
             <h5>{member.title}</h5>
             {!!member.bio && <p>{member.bio}</p>}
         </span>
