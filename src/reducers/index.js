@@ -245,7 +245,6 @@ export default function reducer(state = INITIAL_STATE, action){
                 currentVariable: action.payload.name
             }
         case 'SET_SELECTION_DATA':
-            console.log(action.payload.data)
             return {
                 ...state,
                 selectionData: action.payload.data
