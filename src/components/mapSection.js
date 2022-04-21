@@ -213,7 +213,7 @@ function debounce(func, wait, immediate) {
 //     return () => setValue(value => value + 1); // update the state to force render
 // }
 
-function MapSection({ setViewStateFn = () => {}, bounds }) {
+function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
   // fetch pieces of state from store
   const {
     storedGeojson,
@@ -246,6 +246,9 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
     bearing: 0,
     pitch: 0,
   });
+  useEffect(() => {
+    setViewState(bounds)
+  },[JSON.stringify(bounds)])
   useEffect(() => {
     setViewStateFn(setViewState);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -559,6 +562,31 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
     : (_, color) => color;
 
   const layers = [
+    new GeoJsonLayer({
+      id: "highlighted-geoids",
+      data: storedGeojson,
+      pickable: false,
+      stroked: true,
+      filled: true,
+      extruded: false,
+      getFillColor: [232,63,111],
+      getLineColor: [0,0,0,120],
+      getLineWidth: 1,
+      lineWidthMaxPixels:1,
+      lineWidthMinPixels:1,
+      opacity: 0.5,
+      getFilterValue: (d) => geoids.includes(+d.properties.geoid) ? 1 : 0,
+      visible: geoids.length > 0,
+      filterRange: [1, 1],
+      extensions: [new DataFilterExtension({ filterSize: 1 })],
+      updateTriggers: {
+        getFilterValue: JSON.stringify(geoids),
+        visible: geoids.length
+      },
+      transitions: {
+        getFillColor: 250,
+      },
+    }),
     new GeoJsonLayer({
       id: "choropleth",
       data: storedGeojson,
@@ -936,7 +964,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
           on
         ></MapboxGLMap>
       </DeckGL>
-      <MapButtonContainer infoPanel={panelState.info}>
+      {!geoids.length && <MapButtonContainer infoPanel={panelState.info}>
         {/* <NavInlineButtonGroup>
                     <NavInlineButton
                         title="Selection Box"
@@ -995,8 +1023,8 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
                     </NavInlineButton>
                 </NavInlineButtonGroup>
                 <ShareURL type="text" value="" id="share-url" /> */}
-      </MapButtonContainer>
-      <GeocoderContainer>
+      </MapButtonContainer>}
+      {!geoids.length && <GeocoderContainer>
         <Geocoder
           id="Geocoder"
           placeholder={"Search by location"}
@@ -1004,7 +1032,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
           onChange={handleGeocoder}
           height={45}
         />
-      </GeocoderContainer>
+      </GeocoderContainer>}
 
       {hoverInfo.object && (
         <HoverDiv
@@ -1019,7 +1047,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
           <MapTooltipContent content={hoverInfo.object} />
         </HoverDiv>
       )}
-      <LogoContainer infoPanel={panelState.info}>
+      {!geoids.length && <LogoContainer infoPanel={panelState.info}>
         <a
           href="https://herop.ssd.uchicago.edu/"
           target="_blank"
@@ -1030,7 +1058,7 @@ function MapSection({ setViewStateFn = () => {}, bounds }) {
             alt=""
           />
         </a>
-      </LogoContainer>
+      </LogoContainer>}
     </MapContainer>
   );
 }

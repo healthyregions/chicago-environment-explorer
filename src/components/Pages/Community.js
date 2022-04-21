@@ -4,6 +4,8 @@ import booleanWithin from "@turf/boolean-within";
 import { quantileRank } from 'simple-statistics'
 // import { nicelyFormatNumber } from "../../utils";
 import { loadDataAndBins } from "../../actions";
+import { colors } from "../../config";
+import bbox from '@turf/bbox';
 
 import {
   Gutter,
@@ -12,6 +14,7 @@ import {
   Footer,
   // Pm25Report,
   // Table,
+  PolarSpeciesPlot
 } from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 import useFilterData from "../../hooks/useFilterData";
 import useProcessData from "../../hooks/useProcessData";
@@ -20,8 +23,10 @@ import styled from "styled-components";
 
 import { ContentContainer } from "../../styled_components";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Box, TextField, Button, ButtonGroup, Typography } from "@mui/material";
+import { Box, TextField, Button, ButtonGroup, Typography, Grid } from "@mui/material";
 import TableComponent from "../Table";
+import MapSection from "../mapSection";
+import { fitBounds } from '@math.gl/web-mercator';
 
 const CommunityPage = styled.div`
   background: white;
@@ -33,7 +38,7 @@ const CommunityPage = styled.div`
 `;
 
 const StyledAutocomplete = styled(Autocomplete)`
-  opacity: ${({usingGeolocate}) => usingGeolocate ? 0.5 : 1};
+  opacity: ${({ usingGeolocate }) => usingGeolocate ? 0.5 : 1};
   transition:250ms opacity;
   &:hover {
     opacity:1;
@@ -146,6 +151,18 @@ const metricsToParse = [
     accumulator: (prev, curr) => prev + curr,
     reducer: (data) => data.accumulated / data.values.length,
   },
+  {
+    name: "simpson",
+    accessor: (row) => row.properties.simpson,
+    accumulator: (prev, curr) => prev + curr,
+    reducer: (data) => (data.accumulated / data.values.length),
+  },
+  {
+    name: "ndvi",
+    accessor: (row) => row.properties.ndvi,
+    accumulator: (prev, curr) => prev + curr,
+    reducer: (data) => (data.accumulated / data.values.length),
+  },
   // econ
   {
     name: "hardship",
@@ -238,6 +255,16 @@ const columnsToPresent = [
     accessor: (row) => row.hardship.reduced,
     vals: (row) => row.hardship.values,
   },
+  {
+    name: "Average Plant Biodiversity",
+    accessor: (row) => row.simpson.reduced,
+    vals: (row) => row.simpson.values,
+  },
+  {
+    name: "Average Vegetation Index (NDVI)",
+    accessor: (row) => row.ndvi.reduced,
+    vals: (row) => row.ndvi.values,
+  },
 ];
 
 const reportColumns = [
@@ -257,6 +284,12 @@ const reportColumns = [
     width: 150
   },
 ]
+
+const defaultBounds = fitBounds({
+  width: window.innerWidth / 2,
+  height: 400,
+  bounds: [[-87.971649, 41.609282], [-87.521896, 42.040624]]
+})
 
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 const ColorSpan = styled.span`
@@ -280,6 +313,20 @@ const ReportSection = styled.section`
     }
   }
 `;
+
+const StyledButton = styled(Button)`
+  border-color:black;
+  color:black;
+  &.MuiButton-containedPrimary {
+    background: ${colors.forest};
+    color: white;
+  }
+  &.Mui-disabled {
+    background:none;
+    color:#ddd;
+    border:1px solid #ddd;
+  }
+`
 
 const GeolocateSection = styled.section``;
 
@@ -374,6 +421,26 @@ function App() {
       }
     );
   };
+  const [speciesPlotInfo, setSpeciesPlotInfo] = useState({
+    geoid: 0,
+    open: false
+  })
+
+  const [viewState, setViewState] = useState({})
+
+  const handleSpeciesPlot = (geoid) => {
+    setSpeciesPlotInfo({
+      open: true,
+      geoid: +geoid
+    });
+  }
+  const handleSetOpen = (bool) => {
+    setSpeciesPlotInfo(prev => ({
+      ...prev,
+      open: bool
+    }))
+  }
+
   useEffect(() => {
     if (geolocatingStatus.data) {
       const intersectingFeature = geolocatingStatus.data;
@@ -407,6 +474,9 @@ function App() {
     filterFunc,
     updateTrigger: currentLocation,
   });
+  const currGeoids = filteredFeatures.map((f) => +f.properties.geoid);
+
+
 
   // summarize data
   const [summaries] = useProcessData({ //summariesTimestamp
@@ -418,8 +488,29 @@ function App() {
   const [filteredSummaries] = useProcessData({ //filteredSummariesTimestamp
     data: filteredFeatures,
     metrics: metricsToParse,
-    updateTrigger: filteredFeatures.length && JSON.stringify(filteredFeatures),
+    updateTrigger: filteredFeatures.length && JSON.stringify(currGeoids),
   });
+
+  const filteredViewport = useMemo(() => {
+    const bounds = bbox({
+      type: "FeatureCollection",
+      features: filteredFeatures
+    })
+    if (bounds[0] === Infinity) {
+      return defaultBounds
+    }
+    const viewport = fitBounds({
+      width: window.innerWidth / 2,
+      height: 400,
+      bounds: [[bounds[0],bounds[1]],[bounds[2],bounds[3]]],
+      padding:20
+    })
+    return {
+      ...viewport,
+      pitch:0,
+      bearing:0
+    }
+  },[filteredFeatures.length && JSON.stringify(currGeoids)])  
 
   const transposedData = columnsToPresent.map(
     ({ name, accessor, vals }, id) => ({
@@ -442,13 +533,12 @@ function App() {
   const densityPercentile = dataReady && quantileRank(summaries.density.values, filteredSummaries.density.reduced)
   const ageAdjAsthmaPct = dataReady && quantileRank(summaries.asthmaAgeAdj.values, filteredSummaries.asthmaAgeAdj.reduced)
   const hardshipPercentile = dataReady && quantileRank(summaries.hardship.values, filteredSummaries.hardship.reduced)
-  
+
   return (
     <CommunityPage>
       <NavBar />
       <ContentContainer>
         <h1>Community</h1>
-        <h2>Alert! This page is a work in progress.</h2>
         <p>
           ChiVes community reports provide information and context about your
           community, zip code, or census tract. To start, search for your
@@ -485,7 +575,7 @@ function App() {
           }}
         />
         <GeolocateSection>
-          <Button
+          <StyledButton
             variant="outlined"
             color={
               geolocatingStatus.status === "passive"
@@ -498,7 +588,7 @@ function App() {
             onClick={handleGeolocate}
           >
             Use my current location
-          </Button>
+          </StyledButton>
           <ButtonGroup
             aria-label="outlined primary button group"
             style={{
@@ -506,13 +596,13 @@ function App() {
             }}
           >
             {["Zip Code", "Community", "Census Tract"].map((type) => (
-              <Button
+              <StyledButton
                 variant={geolocateType === type ? "contained" : "outlined"}
                 onClick={() => setGeolocateType(type)}
                 disabled={geolocatingStatus.status !== "success"}
               >
                 {type}
-              </Button>
+              </StyledButton>
             ))}
           </ButtonGroup>
           {["error", "success"].includes(geolocatingStatus.status) && (
@@ -531,211 +621,223 @@ function App() {
         </GeolocateSection>
         <Gutter height="2em" />
         {!!dataReady && (
-          <>
-            <ReportSection>
-              {currentLocation.type === "Zip Code" && (
-                <h2>
-                  Your zip code:{" "}
-                  <ColorSpan color={'#e83f6f'}>
-                    {currentLocation.label}, part of{" "}
-                    {filteredFeatures
-                      .map((f) => titleCase(f.properties.community))
-                      .filter(onlyUnique)
-                      .join(", ")}
-                    , and {filteredFeatures.length} census tracts.
-                  </ColorSpan>
-                </h2>
-              )}
-              {currentLocation.type === "Community" && (
-                <h2>
-                  Your community:{" "}                  
-                  <ColorSpan color={'#e83f6f'}>
-                    {currentLocation.label}, including zip codes{" "}
-                    {filteredFeatures
-                      .map((f) => f.properties.zip_code)
-                      .filter(onlyUnique)
-                      .join(", ")}
-                    , and {filteredFeatures.length} census tracts.
-                  </ColorSpan>
-                </h2>
-              )}
-              {currentLocation.type === "Census Tract" && (
-                <h2>
-                  Your census tract:{" "}   
-                  <ColorSpan color={'#e83f6f'}>
-                    {currentLocation.label}, located in{" "}
-                    {filteredFeatures
-                      .map((f) => titleCase(f.properties.community))
-                      .filter(onlyUnique)
-                      .join(", ")}{" "}
-                    and zip code{" "}
-                    {filteredFeatures
-                      .map((f) => f.properties.zip_code)
-                      .filter(onlyUnique)
-                      .join(", ")}
-                    .
-                  </ColorSpan>
-                </h2>
-              )}
-              {/* <h3>
-              Key indicators for environmental and air quality show us how
-              healthy it is for people.{" "}
-            </h3>
-            <ul>
-              <li>
-                Air Quality PM2.5{" "}
-                <Pm25Report value={filteredSummaries.pm25.reduced} />
-              </li>
-            </ul>
-
-            <h3>
-              Key outcomes show the (often unequal) impacts of environmental
-              factors on health.
-              <br />
-              These outcomes relate to a number of factors, but the environment
-              is a central part.
-            </h3> */}
-            </ReportSection>
-            <ReportSection>
-              <h3><ColorSpan color={'#e83f6f'}>
-                Environmental Indicators in {currentLocation.label}
-              </ColorSpan>
-              </h3>
-              <TableComponent
-                columns={reportColumns}
-                data={[{
-                  Label: 'Average Air Polution (PM2.5)',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.pm25?.reduced !== undefined && filteredSummaries.pm25.reduced.toFixed(1)}</ColorSpan>,
-                  Description: 'Presence of particulates in the air, smaller than 2.5 microns in size. Estimated during January through August over 2014-2018.'
-                }, {
-                  Label: 'Heat Island Effect',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.heatIsland?.reduced !== undefined && filteredSummaries.heatIsland.reduced.toFixed(1)}</ColorSpan>,
-                  Description: 'The surface heat on a scale of 0-100, where 100 is the hottest in Chicago and 0 is the coldest.'
-                }, {
-                  Label: 'Urban Flood Susceptibility',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.floodSusceptibility?.reduced !== undefined && filteredSummaries.floodSusceptibility.reduced.toFixed(1)}</ColorSpan>,
-                  Description: 'A FEMA index, where 0 is less susceptible and 10 is more susceptible.'
-                }, {
-                  Label: 'Average Traffic Volume',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.traffic?.reduced !== undefined && filteredSummaries.traffic.reduced.toFixed(1)}</ColorSpan>,
-                  Description: 'The average daily traffic count per road segment over a year, scaled logarithmically.'
-                }, {
-                  Label: 'Tree Crown Density',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.treeDensity?.reduced !== undefined && filteredSummaries.treeDensity.reduced.toFixed(1)}</ColorSpan>,
-                  Description: 'Percent of the area covered by trees.'
-                }]}
-                tableProps={{
-                  style: {
-                    fontSize: '1rem'
-                  }
-                }}
-                rowProps={{
-                  style: {
-                    padding: '.5em',
-                  }
-                }}
-              />
-            </ReportSection>
-            <Gutter height="2em" />
-            <ReportSection>
-              <h3><ColorSpan color={'#e83f6f'}>
-                People living in {currentLocation.label}
-              </ColorSpan>
-              </h3>
-              <TableComponent
-                columns={reportColumns}
-                data={[{
-                  Label: 'Residents',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.population?.reduced !== undefined ? Math.round(filteredSummaries.population.reduced).toLocaleString() : "No Data"}</ColorSpan>,
-                  Description: 'The number of people living in the area.'
-                }, {
-                  Label: 'Population Density',
-                  Value: <><ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 1e6).toLocaleString() : "No Data"}</ColorSpan> people per square kilometer</>,
-                  Description: `
+          <Grid container spacing={2}>
+            <Grid item xs={12} md={12} lg={12} xl={12}>
+              <ReportSection>
+                {currentLocation.type === "Zip Code" && (
+                  <h2>
+                    Your zip code:{" "}
+                    <ColorSpan color={'#e83f6f'}>
+                      {currentLocation.label}, part of{" "}
+                      {filteredFeatures
+                        .map((f) => titleCase(f.properties.community))
+                        .filter(onlyUnique)
+                        .join(", ")}
+                      , and {filteredFeatures.length} census tracts.
+                    </ColorSpan>
+                  </h2>
+                )}
+                {currentLocation.type === "Community" && (
+                  <h2>
+                    Your community:{" "}
+                    <ColorSpan color={'#e83f6f'}>
+                      {currentLocation.label}, including zip codes{" "}
+                      {filteredFeatures
+                        .map((f) => f.properties.zip_code)
+                        .filter(onlyUnique)
+                        .join(", ")}
+                      , and {filteredFeatures.length} census tracts.
+                    </ColorSpan>
+                  </h2>
+                )}
+                {currentLocation.type === "Census Tract" && (
+                  <h2>
+                    Your census tract:{" "}
+                    <ColorSpan color={'#e83f6f'}>
+                      {currentLocation.label}, located in{" "}
+                      {filteredFeatures
+                        .map((f) => titleCase(f.properties.community))
+                        .filter(onlyUnique)
+                        .join(", ")}{" "}
+                      and zip code{" "}
+                      {filteredFeatures
+                        .map((f) => f.properties.zip_code)
+                        .filter(onlyUnique)
+                        .join(", ")}
+                      .
+                    </ColorSpan>
+                  </h2>
+                )}
+              </ReportSection>
+            </Grid>
+            <Grid item xs={12} md={12} lg={7} xl={7}>
+              <ReportSection>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  Environmental Indicators in {currentLocation.label}
+                </ColorSpan>
+                </h3>
+                <TableComponent
+                  columns={reportColumns}
+                  data={[{
+                    Label: 'Average Air Polution (PM2.5)',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.pm25?.reduced !== undefined && filteredSummaries.pm25.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'Presence of particulates in the air, smaller than 2.5 microns in size. Estimated during January through August over 2014-2018.'
+                  }, {
+                    Label: 'Heat Island Effect',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.heatIsland?.reduced !== undefined && filteredSummaries.heatIsland.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'The surface heat on a scale of 0-100, where 100 is the hottest in Chicago and 0 is the coldest.'
+                  }, {
+                    Label: 'Urban Flood Susceptibility',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.floodSusceptibility?.reduced !== undefined && filteredSummaries.floodSusceptibility.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'A FEMA index, where 0 is less susceptible and 10 is more susceptible.'
+                  }, {
+                    Label: 'Average Traffic Volume',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.traffic?.reduced !== undefined && filteredSummaries.traffic.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'The average daily traffic count per road segment over a year, scaled logarithmically.'
+                  }, {
+                    Label: 'Tree Crown Density',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.treeDensity?.reduced !== undefined && filteredSummaries.treeDensity.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'Percent of the area covered by trees.'
+                  }, {
+                    Label: 'Average Plant Biodiversity',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.simpson?.reduced !== undefined && filteredSummaries.simpson.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'Ranging from 0 to 1, a number representing the average diversity of plants observed by volunteers in your area.'
+                  }, {
+                    Label: 'Average Vegetation Index (NDVI)',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.ndvi?.reduced !== undefined && filteredSummaries.ndvi.reduced.toFixed(3)}</ColorSpan>,
+                    Description: 'From -1 to 1, a number representing the average coverage of vegetation seen from satellites.'
+                  }]}
+                  tableProps={{
+                    style: {
+                      fontSize: '1rem'
+                    }
+                  }}
+                  rowProps={{
+                    style: {
+                      padding: '.5em',
+                    }
+                  }}
+                />
+              </ReportSection>
+              <Gutter height="2em" />
+              <ReportSection>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  People living in {currentLocation.label}
+                </ColorSpan>
+                </h3>
+                <TableComponent
+                  columns={reportColumns}
+                  data={[{
+                    Label: 'Residents',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.population?.reduced !== undefined ? Math.round(filteredSummaries.population.reduced).toLocaleString() : "No Data"}</ColorSpan>,
+                    Description: 'The number of people living in the area.'
+                  }, {
+                    Label: 'Population Density',
+                    Value: <><ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 1e6).toLocaleString() : "No Data"}</ColorSpan> people per square kilometer</>,
+                    Description: `
                   About the density of ${filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 2e4).toLocaleString() : "No Data"} people in 
                   a downtown city block. ${currentLocation.label} is denser than ${Math.round(densityPercentile * 100)}% of Chicago.`
-                }, {
-                  Label: 'Race and Ethnicity',
-                  Value: ethnicMajority ? `Majority ${ethnicMajority}` : 'Diverse',
-                  Description: `People in ${currentLocation.label} are made up of the following races and ethnicities: ${filteredSummaries['Black or African American'].reduced}% of residents are Black or African American, ${filteredSummaries['Native American'].reduced}% are Native American or Indigenous, ${filteredSummaries['Asian'].reduced}% are Asian, ${filteredSummaries['White'].reduced}% are White, and ${filteredSummaries['All additional races and ethnicities'].reduced}% of people come from additional races or ethnicities.`
-                }]}
-                tableProps={{
-                  style: {
-                    fontSize: '1rem'
-                  }
-                }}
-                rowProps={{
-                  style: {
-                    padding: '.5em',
-                  }
-                }}
-              />
-            </ReportSection>
-            <Gutter height="2em" />
-            <ReportSection>
-              <h3><ColorSpan color={'#e83f6f'}>
-                Health Outcomes in {currentLocation.label}
-              </ColorSpan>
-              </h3>
-              <TableComponent
-                columns={reportColumns}
-                data={[{
-                  Label: 'Asthma Prevalence',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthma?.reduced !== undefined ? filteredSummaries.asthma.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                  Description: 'The percentage of people who have asthma.'
-                }, {
-                  Label: 'Age Adjusted Asthma Rate',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined ? filteredSummaries.asthmaAgeAdj.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                  Description: `How many emergency room visits people under 18 took between 2013 and 2018. Higher than ${Math.round(ageAdjAsthmaPct * 100)}% of Chicago tracts.`
-                }, {
-                  Label: 'COPD Prevalence',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined ? filteredSummaries.copd.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                  Description: 'The percentage of people who have COPD.'
-                },]}
-                tableProps={{
-                  style: {
-                    fontSize: '1rem'
-                  }
-                }}
-                rowProps={{
-                  style: {
-                    padding: '.5em',
-                  }
-                }}
-              />
-            </ReportSection>
-            <Gutter height="2em" />
-            <ReportSection>
-              <h3><ColorSpan color={'#e83f6f'}>
-                Social and Economic Indicators in {currentLocation.label}
-              </ColorSpan>
-              </h3>
-              <TableComponent
-                columns={reportColumns}
-                data={[{
-                  Label: 'Economic Hardship Index',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.hardship?.reduced !== undefined ? filteredSummaries?.hardship?.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                  Description: `An index the reflects a combination of unemployment, dependency, and education, income, crowded housing, and poverty for people living here. In ${currentLocation.label}, this is higher than ${Math.round(hardshipPercentile * 100)}% of all Chicago.`
-                }, {
-                  Label: 'Social Vulnerability Index',
-                  Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.svi?.reduced !== undefined? filteredSummaries.svi.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                  Description: 'A national index of overall social vulnerability.'
-                }]}
-                tableProps={{
-                  style: {
-                    fontSize: '1rem'
-                  }
-                }}
-                rowProps={{
-                  style: {
-                    padding: '.5em',
-                  }
-                }}
-              />
-            </ReportSection>
-          </>
+                  }, {
+                    Label: 'Race and Ethnicity',
+                    Value: ethnicMajority ? `Majority ${ethnicMajority}` : 'Diverse',
+                    Description: `People in ${currentLocation.label} are made up of the following races and ethnicities: ${filteredSummaries['Black or African American'].reduced}% of residents are Black or African American, ${filteredSummaries['Native American'].reduced}% are Native American or Indigenous, ${filteredSummaries['Asian'].reduced}% are Asian, ${filteredSummaries['White'].reduced}% are White, and ${filteredSummaries['All additional races and ethnicities'].reduced}% of people come from additional races or ethnicities.`
+                  }]}
+                  tableProps={{
+                    style: {
+                      fontSize: '1rem'
+                    }
+                  }}
+                  rowProps={{
+                    style: {
+                      padding: '.5em',
+                    }
+                  }}
+                />
+              </ReportSection>
+              <Gutter height="2em" />
+              <ReportSection>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  Health Outcomes in {currentLocation.label}
+                </ColorSpan>
+                </h3>
+                <TableComponent
+                  columns={reportColumns}
+                  data={[{
+                    Label: 'Asthma Prevalence',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthma?.reduced !== undefined ? filteredSummaries.asthma.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: 'The percentage of people who have asthma.'
+                  }, {
+                    Label: 'Age Adjusted Asthma Rate',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined ? filteredSummaries.asthmaAgeAdj.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: `How many emergency room visits people under 18 took between 2013 and 2018. Higher than ${Math.round(ageAdjAsthmaPct * 100)}% of Chicago tracts.`
+                  }, {
+                    Label: 'COPD Prevalence',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined ? filteredSummaries.copd.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: 'The percentage of people who have COPD.'
+                  },]}
+                  tableProps={{
+                    style: {
+                      fontSize: '1rem'
+                    }
+                  }}
+                  rowProps={{
+                    style: {
+                      padding: '.5em',
+                    }
+                  }}
+                />
+              </ReportSection>
+              <Gutter height="2em" />
+              <ReportSection>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  Social and Economic Indicators in {currentLocation.label}
+                </ColorSpan>
+                </h3>
+                <TableComponent
+                  columns={reportColumns}
+                  data={[{
+                    Label: 'Economic Hardship Index',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.hardship?.reduced !== undefined ? filteredSummaries?.hardship?.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: `An index the reflects a combination of unemployment, dependency, and education, income, crowded housing, and poverty for people living here. In ${currentLocation.label}, this is higher than ${Math.round(hardshipPercentile * 100)}% of all Chicago.`
+                  }, {
+                    Label: 'Social Vulnerability Index',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.svi?.reduced !== undefined ? filteredSummaries.svi.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: 'A national index of overall social vulnerability.'
+                  }]}
+                  tableProps={{
+                    style: {
+                      fontSize: '1rem'
+                    }
+                  }}
+                  rowProps={{
+                    style: {
+                      padding: '.5em',
+                    }
+                  }}
+                />
+              </ReportSection>
+            </Grid>
+            <Grid item xs={12} md={12} lg={5} xl={5}>
+              <div style={{ position: 'relative', width: '100%', height: 400 }}>
+                <MapSection bounds={filteredViewport} geoids={currGeoids} />
+              </div>
+              <Gutter h={40} />
+              {currGeoids.length && <ReportSection>
+                <p>
+                  <b>Species in census tracts near you</b><br />
+                  Click to see species tree
+                </p>
+                {currGeoids.map((geoid, i) => <StyledButton onClick={() => handleSpeciesPlot(geoid)} variant="outlined" style={{ margin: '.5em .5em 0 0', fontFamily: '"Lato", sans-serif' }}>{geoid}</StyledButton>
+                )}
+              </ReportSection>}
+            </Grid>
+          </Grid>
         )}
-        {/* {!!dataReady && <Table columns={columns} data={transposedData} />} */}
+        <PolarSpeciesPlot
+          geoid={speciesPlotInfo.geoid}
+          open={speciesPlotInfo.open}
+          setOpen={handleSetOpen}
+        />
       </ContentContainer>
       <Footer />
     </CommunityPage>
