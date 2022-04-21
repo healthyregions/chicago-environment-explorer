@@ -2,6 +2,29 @@ import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
 import { MemberGrid, NavBar, Footer } from '../../components';
+import MuiAccordion from "@material-ui/core/Accordion";
+import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
+import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
+// import { colors } from "../config";
+
+const Accordion = styled(MuiAccordion)`
+    &.MuiPaper-elevation1 {
+        box-shadow:none;
+        border:1px solid ${colors.white};
+        transition:250ms border;
+        &.Mui-expanded {
+            border:1px solid ${colors.lightgray};
+            box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
+        }
+    }
+`
+
+const AccordionSummary = styled(MuiAccordionSummary)`
+`
+
+const AccordionDetails = styled(MuiAccordionDetails)`
+`
+
 
 const AboutPage = styled.div`
     background:white;
@@ -69,6 +92,15 @@ const contributors = [
 
 // ]
 
+
+// ... other constants
+const accordionContent = [
+    {
+        label: "Label",
+        content: "Content"
+    }
+]
+
 export default function About(){
     return (
        <AboutPage>
@@ -119,15 +151,8 @@ export default function About(){
 
 
                 <BioSection>
-                    <h3>Project Leadership</h3>
-                    <MemberGrid 
-                        members={projectTeam}
-                        columns={{
-                            md: 3,
-                        }}
-                        />
-
-                    <h3>Data Contributors</h3>
+/*
+                    <h2>Data Contributors</h2>
                     <MemberGrid 
                         members={contributors}
                         columns={{
@@ -136,8 +161,9 @@ export default function About(){
                         />
                     <Gutter h={10}/>
                     
-                    
+                        */      
                 </BioSection>
+
 
                <h1> 
                    A HeRoP Project  
@@ -153,8 +179,19 @@ export default function About(){
                 </p>
                 <br/><br/>
 
+                    <h2>Current Project Leadership</h2>
+                    <MemberGrid 
+                        members={projectTeam}
+                        columns={{
+                            md: 3,
+                        }}
+                        />
+
                 <p> The ChiVes application builds on multiple former projects via HeRoP members. Explore them below: 
                 </p><br/>
+
+
+                <Accordion entries={accordionContent} initialTab={0} />
 
                 <h4> West Humboldt Park Resource Map (2017)  </h4> <br/>
                 <p>
@@ -208,6 +245,8 @@ export default function About(){
                 </p>
 
                <br/><br/>
+
+
 
 
            </ContentContainer>
