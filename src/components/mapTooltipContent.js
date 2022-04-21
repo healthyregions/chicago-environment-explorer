@@ -50,7 +50,7 @@ const MapTooltipContent = ({content}) => {
                     <tr><td>Urban Flood Susceptibility Index</td><td> {urban_flood_suscep && urban_flood_suscep.toFixed(2)}</td></tr>
                     <tr><td>Logged Traffic Volume</td><td> {logtraf && logtraf.toFixed(2)}</td></tr>
                     <tr><td>Social Vulnerability Index</td><td> {svi_pecentile && svi_pecentile.toFixed(2)}</td></tr>
-                    <tr><td>Age Adjusted Asthma Cases (Per 10k)</td><td> {asthma_age_adj_rate && asthma_age_adj_rate}</td></tr>
+                    <tr><td>Childhood Asthma Rate</td><td> {asthma_age_adj_rate && asthma_age_adj_rate}</td></tr>
                     <tr><td>Urban Flood Susceptibility Index</td><td> {urban_flood_suscep && urban_flood_suscep.toFixed(2)}</td></tr>
                     <tr><td>Vegetation Index (NDVI)</td><td> {ndvi && ndvi.toFixed(3)}</td></tr>
                     <tr><td>Plant Biodiversity</td><td>{simpson && simpson.toFixed(2)}</td></tr>

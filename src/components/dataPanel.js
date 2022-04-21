@@ -349,7 +349,7 @@ const SocialColumnsToChart = [
   },
   {
     'column':'asthma_age_adj_rate',
-    'name':'Asthma Cases per 10,000 Residents',
+    'name':'Childhood Asthma Rate',
     'color':colors.chicagoDarkBlue,
     'preset':'',
   },
