@@ -12,6 +12,8 @@ export const dataDescriptions = rawVariables.reduce(
     <div>
       <span dangerouslySetInnerHTML={{ __html: row.Description }}></span>
       <br /><br />
+      <b>Data Contributor:</b>{" "}<span dangerouslySetInnerHTML={{__html:row['Added By']}}/>
+      <br />
       <b>Data Source</b>:{"  "}<span dangerouslySetInnerHTML={{__html:row['Data Source(s)']}}/>
       <br/>
       <b>Data Year</b>:{" "}{row['Data Year']}</div> }),
