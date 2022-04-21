@@ -53,10 +53,10 @@ const projectTeam = [
     },
         {
         name:'Susan Paykin',
-        link:'',
-        img: ``,
+        link:'https://www.linkedin.com/in/susanpaykin/',
+        img: `SusanPaykin.jpg`,
         affiliation:'(CSDS)',
-        title:'Researcher & Community Management',
+        title:'Research & Community Management',
     }
 ]
 
@@ -65,29 +65,22 @@ const projectTeam = [
 const contributors = [
     {
         name: 'Isaac Kamber',
-        link: '',
+        link: 'https://www.linkedin.com/in/isaac-kamber/',
         img: `isaac.png`,
         affiliation: '(CSDS)',
         title: 'Senior Research Assistant'
     },
     {
         name:'Lorenz Menendez',
-        link:'',
+        link:'https://www.linkedin.com/in/lorenzmenendez/',
         img: `Menendez_Lorenz.jpeg`,
         affiliation:'(CSDS)',
         title: 'Senior Research Assistant'
     },
     {
         name:'James Keane',
-        link:'',
-        img: ``,
-        affiliation:'(CSDS)',
-        title: 'Senior Research Assistant'
-    },
-    {
-        name:'James Keane',
-        link:'',
-        img: ``,
+        link:'https://www.linkedin.com/in/james-keane-678863b7/',
+        img: `JamesKeane.jpg`,
         affiliation:'(CSDS)',
         title: 'Senior Research Assistant'
     }
