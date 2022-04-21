@@ -50,6 +50,7 @@ const HomePage = styled.div`
     border-top: 1px solid ${colors.darkgray};
   }
   p {
+    font-family: "Lora", sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -62,6 +63,7 @@ const HomePage = styled.div`
       width: auto;
       margin: 0 auto;
       display: block;
+
     }
   }
 
@@ -149,18 +151,23 @@ const Hero = styled.div`
 `;
 
 const ThreeUpGrid = styled(Grid)`
-    background: ${colors.forest};
+    background: ${colors.white};
     padding: 2em 1em;
-    margin: 4em 0;
+    margin: 1em 0;
     color:white;
     border-radius:1em;
     h2 {
+        color: ${colors.darkgray};
         font-size: 1.5rem;
-        font-family: 'Lora', serif;
+        font-family: 'Roboto', serif;
     }
     p {
-        color:white;
-        font-family: 'Montserrat', sans-serif;
+        color: ${colors.light};
+        font-family: 'Lora', sans-serif;
+            text-align: center;
+            line-height: 1;
+            font-size: 1.0rem;
+
     }
 `
 
@@ -192,13 +199,58 @@ export default function Home() {
             social vulnerability index― help to reveal where in the city people
             face particular challenges as we work towards a healthier Chicago.
           </p>
-          <br />
 
-          <NavLink to="/map" id="button-search">
-            Chives: Explore The Chicago Environment
-          </NavLink>
-          <Gutter h={40} />
-          <Grid container spacing={8} alignItems="center">
+          <ThreeUpGrid container spacing={3}>
+
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                                              <h2>Community Report</h2>
+
+                  <a href="/community"><img
+                className="photo"
+                src={guide}
+                alt="Wild Onion"
+                loading="lazy"
+              /></a>
+
+               <p> Get a dynamic report about key indicators and environmental
+               metrics for your neighborhood. Search by your location. </p>
+                 
+
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                                                            <h2>Neighborhood Map</h2>
+
+                  <a href="/map"> <img
+                className="photo"
+                src={map}
+                alt="Wild Onion"
+                loading="lazy"
+              /></a>
+
+              <p> Explore dimensions of the environment across Chicago 
+              in an interactive map. Data comes from collaborators across the city!</p>
+
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+                                              <h2>Resource Guide</h2>
+
+                  <a href="/guide"><img
+                className="photo"
+                src={collab}
+                alt="Wild Onion"
+                loading="lazy"
+              /></a>
+               <p> Find other maps, data, and resources about the Chicago environment
+               from featured partners and a curated list of resources. </p>
+
+              </Grid>
+
+          </ThreeUpGrid>
+
+
+          <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} sm={12} md={6}>
               <p>
                 <i>
@@ -207,6 +259,7 @@ export default function Home() {
                 </i>
               </p>
             </Grid>
+
             <Grid item xs={12} sm={12} md={6}>
               <Geocoder
                 id="Geocoder"
@@ -217,39 +270,6 @@ export default function Home() {
             </Grid>
           </Grid>
 
-          <ThreeUpGrid container spacing={1}>
-
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                  <h2>Community Report</h2>
-                  <a href="/community"><img
-                className="photo"
-                src={guide}
-                alt="Wild Onion"
-                loading="lazy"
-              /></a>
-              </Grid>
-
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                  <h2>Neighborhood Map</h2>
-                  <a href="/map"> <img
-                className="photo"
-                src={map}
-                alt="Wild Onion"
-                loading="lazy"
-              /></a>
-              </Grid>
-
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                  <h2>Resource Guide</h2>
-                  <a href="/guide"><img
-                className="photo"
-                src={collab}
-                alt="Wild Onion"
-                loading="lazy"
-              /></a>
-              </Grid>
-
-          </ThreeUpGrid>
 
           {/* <Grid container spacing={8} alignItems="center">
                         <Grid item xs={12} sm={12} md={6}>
