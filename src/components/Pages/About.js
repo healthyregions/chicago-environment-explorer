@@ -176,22 +176,23 @@ export default function About(){
                <p>
 
                The Data Collaborative provides insight, direction, and relavent environmental data to the Chicago community. The group advises on ChiVes data standards and needs,
-               and includes the following members (and *current leadership):
+               and includes the following members (* indicates Current Leadership):
                 <br/><br/>
-                <li> Zac Adelman,  Lake Michigan Air Directors Consortium </li>
-                <li> Elsa Anderson & Sophie Taddeo, Chicago Botanic Gardens </li>
-                <li> Madeleine Daepp, Microsoft Research </li>
-                <li> Tiffany Davis, Environmental Law & Policy Center </li>
-                <li> Anne Dodge, Mansuetto Institute, University of Chicago </li>
-                <li> Jim Franke, Haynes Stephens, Dept of Geophysical Sciences, University of Chicago </li>
-                <li> James Keane, *Dylan Halpern, *Marynia Kolak, Healthy Regions & Policies Lab, University of Chicago </li>
-                <li> Anastasia Montgomery, Sara Camilleri & Dan Horton, Climate Change Research Group, Northwestern University </li>
-                <li> Michelle Stuhlmacher, Dept of Geography, DePaul University </li>
+                <li>  <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, Lake Michigan Air Directors Consortium </li>
+                <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Chicago Botanic Gardens </li>
+                <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research </li>
+                <li> <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, Environmental Law & Policy Center </li>
+                <li> <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a>, Mansueto Institute, University of Chicago </li>
+                <li> <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a> & <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, Department of Geophysical Sciences, University of Chicago </li>
+                <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
+                <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li>
+                <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li>
                 <br/>
-                We are also grateful to the Nature Conservancy, the Audobon Society, and the Field Museum for their insights and support.
+                We are also grateful to the <b>Nature Conservancy</b>, <b>Audobon Society</b>, and <b>Field Museum</b> for their insights and support.
                 <br/><br/>
-                Finally, a major thanks go to Isaac Kamber and Lorenz Menendez, now alumni of University of Chicago, who developed multiple measures
-                for this application as a core component of their research assistantships from 2019-2021.
+                Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a> and 
+                <a href="https://www.linkedin.com/in/lorenzmenendez/">Lorenz Menendez</a>, now alumni of University of Chicago, who developed multiple measures
+                for this application as a core component of their Research Assistantships from 2019-2021.
                                 </p> <br/><br/>
 
                <h1> 
