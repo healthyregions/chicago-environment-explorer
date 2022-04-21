@@ -24,6 +24,7 @@ import VariablePanel from './variablePanel';
 import Preloader from './preloader';
 import ResourceGuideRow from './ResourceGuideRow';
 import Scaleable from './scaleable';
+import Showcase from './Carousel';
 import StaticNavbar from './staticNavbar';
 import Tooltip from './tooltip';
 import Table from './Table';
@@ -69,6 +70,7 @@ export {
     Preloader,
     ResourceGuideRow,
     Scaleable,
+    Showcase,
     StaticNavbar,
     Table,
     Tooltip, 

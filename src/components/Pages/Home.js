@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Grid from "@mui/material/Grid";
 
-import { Geocoder, NavBar, Footer } from "../../components";
+import { Geocoder, Showcase, NavBar, Footer } from "../../components";
 import { colors } from "../../config";
 import { Gutter } from "../../styled_components";
 // import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
@@ -269,7 +269,7 @@ export default function Home() {
               />
             </Grid>
           </Grid>
-
+          <Showcase />
 
           {/* <Grid container spacing={8} alignItems="center">
                         <Grid item xs={12} sm={12} md={6}>
