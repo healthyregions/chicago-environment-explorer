@@ -39,16 +39,17 @@ export default function reducer(state = INITIAL_STATE, action){
                     ) columnValues[columnNames[n]].max = action.payload.geojsonData.features[i].properties[columnNames[n]];
                 }
             }
+            const num_steps = 19;
 
             for (let n=0; n<columnNames.length;n++){
                 const currMin = columnValues[columnNames[n]].min;
                 const currMax = columnValues[columnNames[n]].max;
                 const range = currMax - currMin;
-                const step = range/10;
+                const step = range/(num_steps);
 
-                let binArray = []
+                let binArray = [currMin]
                 
-                for (let x=1; x<=10;x++){
+                for (let x=1; x<=num_steps;x++){
                     binArray.push(currMin+(step*x))
                 }
 
@@ -244,6 +245,7 @@ export default function reducer(state = INITIAL_STATE, action){
                 currentVariable: action.payload.name
             }
         case 'SET_SELECTION_DATA':
+            console.log(action.payload.data)
             return {
                 ...state,
                 selectionData: action.payload.data

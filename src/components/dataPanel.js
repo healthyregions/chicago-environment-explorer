@@ -379,13 +379,14 @@ const DataPanel = () => {
                 <br/>
                 <p style={{padding:0}}>Click charts to filter the map</p>
                 {
-                  columnsToChart.map(row => 
+                  columnsToChart.map(({name, column, color}) => 
                     <Histogram 
-                      name={row.name} 
-                      column={row.column}
-                      histCounts={selectionData.histCounts[row.column]} 
-                      range={ranges[row.column]} 
-                      color={row.color}
+                      name={name} 
+                      column={column}
+                      histCounts={selectionData.histCounts[column]} 
+                      density={selectionData.densities[column]} 
+                      range={ranges[column]} 
+                      color={color}
                     />
                   )
                 }

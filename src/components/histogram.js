@@ -140,31 +140,37 @@ const debounce = (func, wait, immediate) => {
 	};
 };
 
-export default function Histogram(props){
+export default function Histogram({
+  name,
+  column,
+  histCounts,
+  density,
+  range,
+  color
+}){
   
   const [filterIsActive, setFilterIsActive] = useState(false);
   const dispatch = useDispatch();
 
   const setFilterValues = debounce((e, newValues) => {
-    dispatch(applyFilterValues(props.column, newValues))
+    dispatch(applyFilterValues(column, newValues))
   }, 250)
 
   const resetFilter = () => {
-    dispatch(removeFilterValues(props.column))
+    dispatch(removeFilterValues(column))
     setFilterIsActive(false)
   }
-
   return (
     <HistogramContainer>
-      <h4>{props.name}</h4>
+      <h4>{name}</h4>
       {filterIsActive && <ClearButton onClick={() => resetFilter()}>clear</ClearButton>}
       
       <ChartContainer onClick={() => setFilterIsActive(true)}>
         <BarChart 
-          data={props.histCounts} 
+          data={histCounts} 
           xAxis={'max'} 
           dataKey={'count'} 
-          color={props.color}
+          color={color}
         />
       </ChartContainer>
 
@@ -172,10 +178,10 @@ export default function Histogram(props){
         ThumbComponent={StyledThumb}
         onChange={setFilterValues}
         // getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-        defaultValue={[props.range.min, props.range.max]}
-        min={props.range.min}
-        max={props.range.max}
-        step={(props.range.max-props.range.min)/9}
+        defaultValue={[range.min, range.max]}
+        min={range.min}
+        max={range.max}
+        step={(range.max-range.min)/19}
       />}
 
     </HistogramContainer>
