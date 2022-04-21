@@ -54,7 +54,7 @@ const projectTeam = [
         {
         name:'Susan Paykin',
         link:'https://www.linkedin.com/in/susanpaykin/',
-        img: `SusanPaykin.jpg`,
+        img: `SPaykin.jpg`,
         affiliation:'(CSDS)',
         title:'Research & Community Management',
     }
