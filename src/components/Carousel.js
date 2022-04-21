@@ -24,9 +24,11 @@ import styled from 'styled-components';
 import {SHOWCASE_ITEMS} from '../config/showcase';
 import {media} from './CarouselStyle';
 import Carousel from './CarouselInner';
+import { colors } from '../config';
 
 const CarouselContainer = styled.div`
   height: 360px;
+  margin-top:3rem;
   ${media.palm`
     height: 240px;
   `} ${media.desk`
@@ -60,7 +62,7 @@ const NavItem = styled.div`
   margin: 0.5rem;
   font-size: 10px;
   text-align: center;
-  filter: ${props => props.isActive && 'brightness(300%)'};
+  filter: ${props => props.isActive ? 'saturate(100%)' : 'saturate(10%)'};
   transform: ${props => props.isActive && 'scale(1.1)'};
   transition: transform 500ms, filter 500ms;
   cursor: pointer;
@@ -83,6 +85,22 @@ const NavIcon = styled.img`
   `};
 `;
 
+const CarouselExplainerText = styled.p`
+  width:100%;
+  text-align: center !important;
+  padding:0 !important;
+`
+const CarouselHeader = styled.h2`
+  width:100%;
+  text-align: center !important;
+  padding:0 !important;
+  color:${colors.forest};
+  font-size:1.5rem;
+  font-family:"Lora", serif;
+  font-weight:bold;
+  padding-bottom:4rem;
+`
+
 const Nav = ({items, selectedIndex, onClick}) => (
   <NavContainer>
     {items.map(({text, icon}, i) => (
@@ -96,12 +114,15 @@ const Nav = ({items, selectedIndex, onClick}) => (
 
 class Showcase extends PureComponent {
   state = {
-    selectedIndex: 3
+    selectedIndex: 0
   };
-
+  
   render() {
+    const explainerText = SHOWCASE_ITEMS[this.state.selectedIndex].explainerText;
+
     return (
       <div>
+        <CarouselHeader>Understand more about Chicago's environment and society</CarouselHeader>
         <CarouselContainer>
           <Carousel
             selectedIndex={this.state.selectedIndex}
@@ -112,6 +133,7 @@ class Showcase extends PureComponent {
             ))}
           </Carousel>
         </CarouselContainer>
+        <CarouselExplainerText>{explainerText}</CarouselExplainerText>
         <Nav
           items={SHOWCASE_ITEMS}
           selectedIndex={this.state.selectedIndex}
