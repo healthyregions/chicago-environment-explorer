@@ -269,7 +269,7 @@ export default function Home() {
               />
             </Grid>
           </Grid>
-
+          <Showcase />
 
           {/* <Grid container spacing={8} alignItems="center">
                         <Grid item xs={12} sm={12} md={6}>
