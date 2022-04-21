@@ -220,8 +220,8 @@ export default function Home() {
           <ThreeUpGrid container spacing={1}>
 
               <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                  <h2>Guide</h2>
-                  <a href="/guide"><img
+                  <h2>Community Report</h2>
+                  <a href="/community"><img
                 className="photo"
                 src={guide}
                 alt="Wild Onion"
@@ -230,7 +230,7 @@ export default function Home() {
               </Grid>
 
               <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                  <h2>Map</h2>
+                  <h2>Neighborhood Map</h2>
                   <a href="/map"> <img
                 className="photo"
                 src={map}
@@ -240,8 +240,8 @@ export default function Home() {
               </Grid>
 
               <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                  <h2>Contribute</h2>
-                  <a href="/about"><img
+                  <h2>Resource Guide</h2>
+                  <a href="/guide"><img
                 className="photo"
                 src={collab}
                 alt="Wild Onion"
