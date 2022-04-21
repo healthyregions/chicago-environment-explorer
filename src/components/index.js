@@ -22,6 +22,7 @@ import PolarSpeciesPlot from './PolarSpeciesPlot';
 import VariablePanel from './variablePanel';
 // import Popover from './tooltipPopper';
 import Preloader from './preloader';
+import ResourceGuideRow from './ResourceGuideRow';
 import Scaleable from './scaleable';
 import Showcase from './Carousel';
 import StaticNavbar from './staticNavbar';
@@ -67,6 +68,7 @@ export {
     VariablePanel,
     // Popover,
     Preloader,
+    ResourceGuideRow,
     Scaleable,
     Showcase,
     StaticNavbar,
