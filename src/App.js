@@ -18,6 +18,7 @@ const theme = createTheme();
 
 const Map = React.lazy(() => import('./components/Pages/Map'));
 const About = React.lazy(() => import('./components/Pages/About'));
+const Guide = React.lazy(() => import('./components/Pages/Guide'));
 const Contact = React.lazy(() => import('./components/Pages/Contact'));
 const Community = React.lazy(() => import('./components/Pages/Community'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
@@ -48,6 +49,8 @@ export default function App() {
                 <Route path="/map.html" component={Map}/>
                 <Route path="/about" component={About}/>
                 <Route path="/about.html" component={About}/>
+                <Route path="/guide" component={Guide}/>
+                <Route path="/guide.html" component={Guide}/>
                 <Route path="/contact" component={Contact}/>
                 <Route path="/contact.html" component={Contact}/>
                 <Route path="/community" component={Community}/>

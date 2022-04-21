@@ -192,6 +192,7 @@ export default function Nav({
             <li><NavLink to="/map">Map</NavLink></li>
             <li><NavLink to="/data">Data</NavLink></li>
             <li><NavLink to="/community">My Community</NavLink></li>
+            <li><NavLink to="/guide">Resource Guide</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
             <li><NavLink to="/contact">Contact</NavLink></li>
           </NavItems>
