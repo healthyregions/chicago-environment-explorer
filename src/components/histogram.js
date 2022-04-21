@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import Slider from '@mui/material/Slider';
 import withStyles from '@mui/styles/withStyles';
 
-import BarChart from './BarChart';
+import DensityChart from './DensityChart';
 import { applyFilterValues, removeFilterValues } from '../actions';
 import { colors } from '../config';
 
@@ -85,7 +85,7 @@ const StyledSlider = withStyles({
     height: 0,
     padding: '0 25px 0 15px',
     marginLeft:'0px',
-    width:'calc(100% - 30px)',
+    width:'calc(100% - 42px)',
     boxSizing: 'border-box',
     transform: 'translateY(-55px)'
   },
@@ -160,16 +160,18 @@ export default function Histogram({
     dispatch(removeFilterValues(column))
     setFilterIsActive(false)
   }
+  
   return (
     <HistogramContainer>
       <h4>{name}</h4>
       {filterIsActive && <ClearButton onClick={() => resetFilter()}>clear</ClearButton>}
       
       <ChartContainer onClick={() => setFilterIsActive(true)}>
-        <BarChart 
-          data={histCounts} 
+        <DensityChart 
+          data={density}
+          // density={density} 
           xAxis={'max'} 
-          dataKey={'count'} 
+          dataKey={'density'} 
           color={color}
         />
       </ChartContainer>
@@ -181,7 +183,7 @@ export default function Histogram({
         defaultValue={[range.min, range.max]}
         min={range.min}
         max={range.max}
-        step={(range.max-range.min)/19}
+        step={(range.max-range.min)/10}
       />}
 
     </HistogramContainer>

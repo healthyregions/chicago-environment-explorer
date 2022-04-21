@@ -102,17 +102,16 @@ function generateFilteredData(params) {
             continue
         }
     }
-
     for (let n=0; n<columns.length; n++) {
-        var kde = kernelDensityEstimator(kernelEpanechnikov(7), ranges[columns[n]].histogramBins)
+        var k = (ranges[columns[n]].max - ranges[columns[n]].min)/10
+        var kde = kernelDensityEstimator(kernelEpanechnikov(k), ranges[columns[n]].histogramBins)
         var estimate =  kde(rawVals[columns[n]])
         densities[columns[n]] = estimate.map(([value, density]) => ({
             value,
             density 
         }))
     }
-
-    console.log(densities)
+    
     heatIsland /= count
     treeCoverage /= count
     sums['count'] = count
@@ -134,9 +133,7 @@ function mean(array, accessor) {
 
 function kernelDensityEstimator(kernel, X) {
     return function (V) {
-        return X.map(function (x) {
-            return [x, mean(V, (v) => kernel(x - v))];
-        });
+        return X.map((x) => [x, mean(V, (v) => kernel(x - v))])
     };
 }
 

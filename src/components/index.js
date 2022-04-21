@@ -6,6 +6,7 @@ import ContactForm from './ContactForm';
 import CsvDownloader from './csvDownloader';
 import DataDetails from './dataDetails';
 import DataPanel from './dataPanel';
+import DensityChart from './DensityChart';
 import Dock from './dock';
 import Draggable from './draggable';
 import Footer from './Footer';
@@ -51,6 +52,7 @@ export {
     CsvDownloader,
     DataDetails,
     DataPanel,
+    DensityChart,
     Dock,
     Draggable,
     Geocoder,

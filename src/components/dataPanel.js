@@ -53,6 +53,7 @@ const DataPanelContainer = styled.div`
   }
   p {
     font-family: 'Lora', serif;
+    max-width:100%;
   }
   &.open {
     transform:none;
@@ -162,7 +163,6 @@ const DataPanelContainer = styled.div`
   h6, p {
     padding:0 0 15px 0;
     margin:0;
-    max-width:30ch;
     a {
       color:${colors.yellow};
       text-decoration:none;
@@ -220,11 +220,12 @@ const ReportContainer = styled.div`
     // columns:${props => props.cols} 250px;
     // column-gap:10px;
     // display:inline-block;
-    h3 {
+    h3, .h3 {
       font-size:150%;
       display:block;
       margin:0;
       padding:0 0 15px 0 !important;
+      font-weight:bold;
       &:before {
         content: ': ';
         display: none;
@@ -236,6 +237,11 @@ const ReportContainer = styled.div`
         display:none;
       }
     }
+    h3.sectionHeader {
+      margin:0;
+      padding:0 !important;
+    }
+
     div.numberChartContainer {
       width:100%;
       display:flex;
@@ -290,7 +296,7 @@ const ReportSection = styled.span`
 //   );
 // }
 
-const columnsToChart = [
+const EnvironmentalColumnsToChart = [
   {
     'column':'trees_crown_den',
     'name':'Percent Canopy Coverage',
@@ -310,21 +316,35 @@ const columnsToChart = [
     'preset':'',
   },
   {
-    'column':'logtraf',
-    'name': 'Traffic Volume',
-    'color':colors.purple,
-    'preset':'',
-  },
-  {
     'column':'urban_flood_suscep',
     'name':'Urban Flood Susceptibility',
     'color':colors.chicagoBlue,
     'preset':'',
   },
   {
+    'column':'ndvi',
+    'name':'Vegetation Index (NDVI)',
+    'color':colors.forest,
+    'preset':'',
+  },
+  {
+    'column':'simpson',
+    'name':'Plant Biodiversity (Simpson)',
+    'color':colors.green,
+    'preset':'',
+  }
+]
+const SocialColumnsToChart = [
+  {
     'column':'svi_pecentile',
     'name':'Social Vulnerability',
     'color':colors.teal,
+    'preset':'',
+  },
+  {
+    'column':'hardship',
+    'name':'Economic Hardship Index',
+    'color':colors.yellow,
     'preset':'',
   },
   {
@@ -334,9 +354,9 @@ const columnsToChart = [
     'preset':'',
   },
   {
-    'column':'hardship',
-    'name':'Economic Hardship Index',
-    'color':colors.yellow,
+    'column':'logtraf',
+    'name': 'Traffic Volume',
+    'color':colors.purple,
     'preset':'',
   },
 ]
@@ -362,11 +382,11 @@ const DataPanel = () => {
                 <ReportSection>
                     <p>Tree Canopy Coverage</p>
                     <div className="numberChartContainer">
-                        <h3>{selectionData.treeCoverage.toFixed(1)}%</h3>
+                        <div className="h3">{selectionData.treeCoverage.toFixed(1)}%</div>
                     </div>
                     <p>Heat Island Percentile</p>
                     <div className="numberChartContainer">
-                        <h3>{selectionData.heatIsland.toFixed(1)}</h3>
+                        <div className='h3'>{selectionData.heatIsland.toFixed(1)}</div>
                     </div>
                     <p>Averaged over {selectionData.sums.count} census tracts</p>
                     {/* <NeighborhoodCounts 
@@ -375,11 +395,29 @@ const DataPanel = () => {
                     /> */}
                 </ReportSection>
                 <Gutter height="1em" />
-                <h2>Distributions</h2>
+                <h2>Filters</h2>
                 <br/>
-                <p style={{padding:0}}>Click charts to filter the map</p>
+                <p style={{padding:0}}>
+                  These charts show the distribution of variables in the tracts on your screen. Click to filter the map.
+                </p>
+                <Gutter height="1em" />                
+                <h3 className="sectionHeader">Environmental</h3>
                 {
-                  columnsToChart.map(({name, column, color}) => 
+                  EnvironmentalColumnsToChart.map(({name, column, color}) => 
+                    <Histogram 
+                      name={name} 
+                      column={column}
+                      histCounts={selectionData.histCounts[column]} 
+                      density={selectionData.densities[column]} 
+                      range={ranges[column]} 
+                      color={color}
+                    />
+                  )
+                }
+                <Gutter height="1em" />
+                <h3 className="sectionHeader">Socio-Economic</h3>
+                {
+                  SocialColumnsToChart.map(({name, column, color}) => 
                     <Histogram 
                       name={name} 
                       column={column}
