@@ -3,52 +3,58 @@ import { useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-// import FormControl from '@material-ui/core/FormControl';
-import Slider from '@material-ui/core/Slider';
-import { withStyles } from '@material-ui/core/styles';
+// import FormControl from '@mui/material/FormControl';
+import Slider from '@mui/material/Slider';
+import withStyles from '@mui/styles/withStyles';
 
-import BarChart from './BarChart';
+import DensityChart from './DensityChart';
 import { applyFilterValues, removeFilterValues } from '../actions';
 import { colors } from '../config';
 
 const HistogramContainer = styled.div`
   position:relative;
-  margin:2rem 0 0 0;
+  margin:1rem 0 0 0;
   h4 {
     font-size:1rem;
     margin:0;
+    padding:0;
   }
+  border-bottom:1px solid ${colors.gray}55;
 `
 
 const ChartContainer = styled.div`
   display:block;
   width:calc(100% - 1em);
-  margin:0 auto;
-  height:75px;
+  margin:20px auto 0 auto;
+  height:125px;
   cursor:crosshair !important;
+  .recharts-cartesian-axis-tick {    
+    font-size: .55rem;
+    font-family: Roboto, sans-serif;
+  }
 `
 
-const AxisContainer = styled.div`
-  display:flex;
-  padding:0 15px 0 5px;
-  span {
-    flex:1;
-    text-align:center;
-  }
-  span:nth-of-type(1){
-    text-align:left;
-  }
-  span:nth-of-type(3){
-    text-align:right;
-  }
-`
+// const AxisContainer = styled.div`
+//   display:flex;
+//   padding:0 15px 0 5px;
+//   span {
+//     flex:1;
+//     text-align:center;
+//   }
+//   span:nth-of-type(1){
+//     text-align:left;
+//   }
+//   span:nth-of-type(3){
+//     text-align:right;
+//   }
+// `
 
 const ClearButton = styled.button`
   background:none;
   border:none;
   border-bottom:1px solid ${colors.darkgray};
   position:absolute;
-  top:0;
+  top:1rem;
   right:1rem;
   text-transform:uppercase;
   font-size:0.5rem;
@@ -79,17 +85,19 @@ const StyledSlider = withStyles({
     height: 0,
     padding: '0 25px 0 15px',
     marginLeft:'0px',
-    width:'calc(100% - 30px)',
+    width:'calc(100% - 42px)',
     boxSizing: 'border-box',
     transform: 'translateY(-55px)'
   },
   thumb: {
-    height: 56,
-    width: 15,
-    backgroundColor: '#343434',
+    height: 95,
+    width: 1,
+    borderLeft: '6px solid rgba(0,0,0,0)',
+    borderRight: '6px solid rgba(0,0,0,0)',
+    backgroundColor: '#787878',
     border: '1px solid currentColor',
-    marginTop: -30,
-    marginLeft: 0,
+    marginTop: -35,
+    marginLeft: 10,
     boxShadow: '#00000044 0 2px 2px',
     borderRadius:0,
     '&:focus, &:hover, &$active': {
@@ -132,50 +140,50 @@ const debounce = (func, wait, immediate) => {
 	};
 };
 
-export default function Histogram(props){
+export default function Histogram({
+  name,
+  column,
+  histCounts,
+  density,
+  range,
+  color
+}){
   
   const [filterIsActive, setFilterIsActive] = useState(false);
   const dispatch = useDispatch();
 
   const setFilterValues = debounce((e, newValues) => {
-    dispatch(applyFilterValues(props.column, newValues))
+    dispatch(applyFilterValues(column, newValues))
   }, 250)
 
   const resetFilter = () => {
-    dispatch(removeFilterValues(props.column))
+    dispatch(removeFilterValues(column))
     setFilterIsActive(false)
   }
-
+  
   return (
     <HistogramContainer>
-      <h4>{props.name}</h4>
+      <h4>{name}</h4>
       {filterIsActive && <ClearButton onClick={() => resetFilter()}>clear</ClearButton>}
       
       <ChartContainer onClick={() => setFilterIsActive(true)}>
-        <BarChart 
-          data={props.histCounts} 
+        <DensityChart 
+          data={density}
+          // density={density} 
           xAxis={'max'} 
-          dataKey={'count'} 
-          color={props.color}
+          dataKey={'density'} 
+          color={color}
         />
       </ChartContainer>
-
-      <AxisContainer>
-        <span>{props.range.min}</span>
-        {
-          props.range.histogramBins.map((val, idx) => idx === 4 ? <span>{Math.round(val*10)/10}</span> : '')
-        }
-        <span>{props.range.max}</span>
-      </AxisContainer>
 
       {filterIsActive && <StyledSlider
         ThumbComponent={StyledThumb}
         onChange={setFilterValues}
         // getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
-        defaultValue={[props.range.min, props.range.max]}
-        min={props.range.min}
-        max={props.range.max}
-        step={(props.range.max-props.range.min)/10}
+        defaultValue={[range.min, range.max]}
+        min={range.min}
+        max={range.max}
+        step={(range.max-range.min)/10}
       />}
 
     </HistogramContainer>

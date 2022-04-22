@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer, Gutter } from '../../styled_components';
-import { StaticNavbar, Footer, ContactForm } from '../';
+import { NavBar, Footer, ContactForm } from '../';
 
 const ContactPage = styled.div`
     background:white;
@@ -36,7 +36,7 @@ const ContactPage = styled.div`
 export default function Contact(){
     return (
        <ContactPage>
-           <StaticNavbar/>
+           <NavBar/>
            <ContentContainer>
                 <h1>Contact Us</h1>
                 <a href="https://twitter.com/healthyregions" target="_blank" rel="noopener noreferrer" className="social-icon">
@@ -47,14 +47,10 @@ export default function Contact(){
                 </a>
                 <hr/>
                 <p>
-                    
-                    Contact ChiVes co-leads directly if you have any questions about the project or have media inquiries:<br/>
+                    Contact the <i>ChiVes</i> leadership team directly through this form if you have any questions about the project or media inquiries.
                 </p>
                 
                 <ContactForm />
-                <p>
-                    For additional inquiries, contact Marynia Kolak (mkolak at uchicago.edu).
-                </p>
                 <Gutter h={40}/>
 
            </ContentContainer>

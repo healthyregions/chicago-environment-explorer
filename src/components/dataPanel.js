@@ -7,15 +7,16 @@ import { useSelector, useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-// import FormControl from '@material-ui/core/FormControl';
-// import Slider from '@material-ui/core/Slider';
-// import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import FormControl from '@mui/material/FormControl';
+// import Slider from '@mui/material/Slider';
+// import { withStyles, makeStyles } from '@mui/material/styles';
 
 // Import config and sub-components
 // import Tooltip from './tooltip';
 // import BarChart from './BarChart';
 import Histogram from './histogram';
-import NeighborhoodCounts from './NeighborhoodCounts';
+import { Gutter } from './Gutter';
+// import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../actions';
 import { colors } from '../config';
 import { report } from '../config/svg';
@@ -27,12 +28,16 @@ const DataPanelContainer = styled.div`
   position:fixed;
   min-width:250px;
   width:15%;
-  right:0;
-  top:50px;
+  right:0.5em;
+  top:0.5em;
   overflow-x:visible;
-  height:calc(100vh - 50px);
-  background-color: ${colors.white};
+  height:calc(100vh - 1em);
+  background: rgba( 255, 255, 255, 0.85 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.85 );
+  backdrop-filter: blur( 20px );
+  -webkit-backdrop-filter: blur( 20px );
   box-shadow: 2px 0px 5px ${colors.gray}44;
+  border:1px solid ${colors.green};
   padding:20px;
   box-sizing: border-box;
   transition:250ms all;
@@ -41,14 +46,14 @@ const DataPanelContainer = styled.div`
   font-size:100%;
   padding:0;
   z-index:5;
-  transform: translateX(100%);
-  border-top:2px solid ${colors.chicagoDarkBlue};
+  transform: translateX(calc(100% + .5em));
   h4, h1 {
     font-family: 'Roboto', sans-serif;
     margin:10px 0;
   }
   p {
     font-family: 'Lora', serif;
+    max-width:100%;
   }
   &.open {
     transform:none;
@@ -57,9 +62,12 @@ const DataPanelContainer = styled.div`
     min-width:50vw;
   }  
   @media (max-width:600px) {
-    width:100%;
-    left:0;
-    transform:translateX(-100%);
+    width:calc(100% - 1em);
+    top:calc(1em + 45px);
+    height:calc(100% - 6em);
+    left:.75em;
+    padding-top:2em;
+    transform:translateX(calc(-100% - 1em));
     z-index:51;
     &.open {
       transform:none;
@@ -76,8 +84,7 @@ const DataPanelContainer = styled.div`
     margin:0;
     background-color: ${colors.white};
     box-shadow: 2px 0px 5px ${colors.gray}88;
-    outline:none;
-    border:none;
+    border:1px solid ${colors.green};
     // border-radius:20px;
     cursor: pointer;
     transition:500ms all;
@@ -86,8 +93,6 @@ const DataPanelContainer = styled.div`
       height:15px;
       margin:12.5px 0 0 0;
       @media (max-width:600px){
-        width:20px;
-        height:20px;
         margin:5px;
       }
       fill:${colors.gray};
@@ -118,10 +123,10 @@ const DataPanelContainer = styled.div`
       top:120px;
     }
     @media (max-width:600px) {
-      left:100%;
-      width:30px;
-      height:30px;
-      top:180px;
+      left:calc(100% + 4.5em);
+      width:3em;
+      height:3em;
+      top:0;
       &.hidden svg {
         transform:rotate(0deg);
       }
@@ -158,7 +163,6 @@ const DataPanelContainer = styled.div`
   h6, p {
     padding:0 0 15px 0;
     margin:0;
-    max-width:30ch;
     a {
       color:${colors.yellow};
       text-decoration:none;
@@ -187,7 +191,7 @@ const ReportWrapper = styled.div`
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoBlue};
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.gray}55;
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%; 
@@ -196,7 +200,7 @@ const ReportWrapper = styled.div`
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.chicagoDarkBlue};
+    background: url('${process.env.PUBLIC_URL}/icons/grip.png'), ${colors.darkgray}99;
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%; 
@@ -216,11 +220,12 @@ const ReportContainer = styled.div`
     // columns:${props => props.cols} 250px;
     // column-gap:10px;
     // display:inline-block;
-    h3 {
+    h3, .h3 {
       font-size:150%;
       display:block;
       margin:0;
       padding:0 0 15px 0 !important;
+      font-weight:bold;
       &:before {
         content: ': ';
         display: none;
@@ -232,6 +237,11 @@ const ReportContainer = styled.div`
         display:none;
       }
     }
+    h3.sectionHeader {
+      margin:0;
+      padding:0 !important;
+    }
+
     div.numberChartContainer {
       width:100%;
       display:flex;
@@ -286,29 +296,23 @@ const ReportSection = styled.span`
 //   );
 // }
 
-const columnsToChart = [
+const EnvironmentalColumnsToChart = [
   {
     'column':'trees_crown_den',
-    'name':'Percent Canopy Coverage',
-    'color':colors.chicagoBlue,
+    'name':'Tree Canopy Coverage %',
+    'color':colors.green,
     'preset':'',
   },
   {
     'column':'heatisl',
     'name':'Temperature Percentile',
-    'color':colors.chicagoBlue,
+    'color':colors.orange,
     'preset':'',
   },
   {
     'column':'nn_q3_pm2_5',
     'name':'Summer PM2.5',
-    'color':colors.chicagoBlue,
-    'preset':'',
-  },
-  {
-    'column':'logtraf',
-    'name': 'Traffic Volume',
-    'color':colors.chicagoBlue,
+    'color':colors.chicagoRed,
     'preset':'',
   },
   {
@@ -318,21 +322,41 @@ const columnsToChart = [
     'preset':'',
   },
   {
-    'column':'svi_pecentile',
-    'name':'Social Vulnerability',
-    'color':colors.chicagoBlue,
+    'column':'ndvi',
+    'name':'Vegetation Index (NDVI)',
+    'color':colors.forest,
     'preset':'',
   },
   {
-    'column':'asthma_age_adj_rate',
-    'name':'Asthma Cases per 10,000 Residents',
-    'color':colors.chicagoBlue,
+    'column':'simpson',
+    'name':'Plant Biodiversity (Simpson)',
+    'color':colors.green,
+    'preset':'',
+  }
+]
+const SocialColumnsToChart = [
+  {
+    'column':'svi_pecentile',
+    'name':'Social Vulnerability',
+    'color':colors.teal,
     'preset':'',
   },
   {
     'column':'hardship',
     'name':'Economic Hardship Index',
-    'color':colors.chicagoBlue,
+    'color':colors.yellow,
+    'preset':'',
+  },
+  {
+    'column':'asthma_age_adj_rate',
+    'name':'Childhood Asthma Rate',
+    'color':colors.chicagoDarkBlue,
+    'preset':'',
+  },
+  {
+    'column':'logtraf',
+    'name': 'Traffic Volume',
+    'color':colors.purple,
     'preset':'',
   },
 ]
@@ -344,7 +368,7 @@ const DataPanel = () => {
   const selectionData = useSelector(state => state.selectionData);
   const panelState = useSelector(state => state.panelState);
   const ranges = useSelector(state => state.ranges);
-  const filterValues = useSelector(state => state.filterValues);
+  // const filterValues = useSelector(state => state.filterValues);
 
   // handles panel open/close
   const handleOpenClose = () => dispatch(setPanelState({info:panelState.info ? false : true}))
@@ -356,28 +380,53 @@ const DataPanel = () => {
             <ReportContainer>
                 <h1>Current View</h1>
                 <ReportSection>
-                    <p>Population</p>
+                    <p>Tree Canopy Coverage</p>
                     <div className="numberChartContainer">
-                        <h3>{selectionData.totalPop.toLocaleString('en')}</h3>
+                        <div className="h3">{selectionData.treeCoverage.toFixed(1)}%</div>
                     </div>
-                    <p>Tree Count</p>
+                    <p>Heat Island Percentile</p>
                     <div className="numberChartContainer">
-                        <h3>{selectionData.totalTrees.toLocaleString('en')}</h3>
+                        <div className='h3'>{selectionData.heatIsland.toFixed(1)}</div>
                     </div>
-                    <p>Tracts Selected: {selectionData.sums.count}</p>
-                    <NeighborhoodCounts 
+                    <p>Averaged over {selectionData.sums.count} census tracts</p>
+                    {/* <NeighborhoodCounts 
                       counts={selectionData.communityCounts}
                       activeCommunities={filterValues.community}
-                    />
+                    /> */}
                 </ReportSection>
+                <Gutter height="1em" />
+                <h2>Filters</h2>
+                <br/>
+                <p style={{padding:0}}>
+                  These charts show the distribution of variables in the tracts on your screen. Click to filter the map.
+                </p>
+                <Gutter height="1em" />                
+                <h3 className="sectionHeader">Environmental</h3>
                 {
-                  columnsToChart.map(row => 
+                  EnvironmentalColumnsToChart.map(({name, column, color}, i) => 
                     <Histogram 
-                      name={row.name} 
-                      column={row.column}
-                      histCounts={selectionData.histCounts[row.column]} 
-                      range={ranges[row.column]} 
-                      color={row.color}
+                      name={name} 
+                      column={column}
+                      histCounts={selectionData.histCounts[column]} 
+                      density={selectionData.densities[column]} 
+                      range={ranges[column]} 
+                      color={color}
+                      key={`distribution-${i}`}
+                    />
+                  )
+                }
+                <Gutter height="1em" />
+                <h3 className="sectionHeader">Socio-Economic</h3>
+                {
+                  SocialColumnsToChart.map(({name, column, color}, i) => 
+                    <Histogram 
+                      name={name} 
+                      column={column}
+                      histCounts={selectionData.histCounts[column]} 
+                      density={selectionData.densities[column]} 
+                      range={ranges[column]} 
+                      color={color}
+                      key={`distribution-2-${i}`}
                     />
                   )
                 }

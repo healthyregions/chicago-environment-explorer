@@ -35,7 +35,6 @@ const DockContainer = styled.div`
 const DockButton = styled.button`
     background:${props => props.isActive ? colors.lightgray : colors.gray};
     border:none;
-    outline:none;
     padding:10px;
     height:40px;
     box-sizing:border-box;

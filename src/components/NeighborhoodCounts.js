@@ -3,7 +3,7 @@ import {  useDispatch } from 'react-redux';
 
 // Import helper libraries
 import styled from 'styled-components';
-// import { withStyles, makeStyles } from '@material-ui/core/styles';
+// import { withStyles, makeStyles } from '@mui/material/styles';
 
 import { applyFilterValues, removeFilterValues, removeFilterEntry } from '../actions';
 import { colors } from '../config';
@@ -14,18 +14,19 @@ const CountsContainer = styled.div`
 `
 
 const TagButton = styled.button`
-    background:${colors.white};
-    border:1px solid ${colors.chicagoBlue};
+    background:${colors.chicagoLightBlue};
+    border:1px solid rgba(0,0,0,0);
     text-transform:capitalize;
     margin:2px;
-    padding:5px;
-    // border-radius:1rem;
+    padding:.25em .5em;
+    border-radius:.875rem;
+    height:1.75rem;
     font-size:13px;
     font-family:'Lora', serif;
     cursor:pointer;
     transition:250ms all;
     &:hover {
-        background:${colors.chicagoLightBlue};
+        border:1px solid ${colors.chicagoBlue};
     }
     span {
         font-weight:bold;

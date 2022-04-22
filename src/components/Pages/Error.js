@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { ContentContainer } from '../../styled_components';
-import { StaticNavbar, Footer } from '../';
+import { NavBar, Footer } from '../';
 
 const ErrorPage = styled.div`
     background:white;
@@ -17,7 +17,7 @@ const Error = () => {
 
     return (
        <ErrorPage >
-            <StaticNavbar/>
+            <NavBar/>
             <ContentContainer>
                 <h1>Error 404</h1>
                 <h2>We can't get you where you're going.</h2>

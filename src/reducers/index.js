@@ -1,19 +1,10 @@
 import { INITIAL_STATE } from '../constants/defaults';
-import * as turf from '@turf/turf';
+import centroid from '@turf/centroid';
+import {
+    generateQuantileBins
+} from '../utils';
 
-const generateBins = (data, nBins, mapParams) => {
-    const length = data.features.length;
-    const columnData = data.features.map(row => row[mapParams.numerator][mapParams.nProperty]).sort((a,b) => a - b)
-    let bins = [];
-    
-    for (let i=0; i<nBins; i++){
-      bins.push(columnData[Math.round((length/nBins)*i)])
-    }
-
-    return bins;
-}
-
-var reducer = (state = INITIAL_STATE, action) => {
+export default function reducer(state = INITIAL_STATE, action){
     switch(action.type) {
         case 'DATA_LOAD':
             const mapParamsObj = {
@@ -34,7 +25,7 @@ var reducer = (state = INITIAL_STATE, action) => {
 
             for (let i=0; i<action.payload.geojsonData.features.length; i++){
                 centroidsArray.push({
-                    feature: turf.centroid(action.payload.geojsonData.features[i]),
+                    feature: centroid(action.payload.geojsonData.features[i]),
                     GEOID: action.payload.geojsonData.features[i].properties.geoid
                 })
                 for (let n=0; n<columnNames.length;n++){
@@ -48,16 +39,17 @@ var reducer = (state = INITIAL_STATE, action) => {
                     ) columnValues[columnNames[n]].max = action.payload.geojsonData.features[i].properties[columnNames[n]];
                 }
             }
+            const num_steps = 19;
 
             for (let n=0; n<columnNames.length;n++){
                 const currMin = columnValues[columnNames[n]].min;
                 const currMax = columnValues[columnNames[n]].max;
                 const range = currMax - currMin;
-                const step = range/10;
+                const step = range/(num_steps);
 
-                let binArray = []
+                let binArray = [currMin]
                 
-                for (let x=1; x<=10;x++){
+                for (let x=1; x<=num_steps;x++){
                     binArray.push(currMin+(step*x))
                 }
 
@@ -71,23 +63,24 @@ var reducer = (state = INITIAL_STATE, action) => {
                 centroids: centroidsArray,
                 ranges: columnValues
             };
-        case 'CHANGE_VARIABLE': 
-            const tempParamsObj = {
+        case 'CHANGE_VARIABLE': {
+            const mapParams = {
                 ...state.mapParams,
-                bins:generateBins(state.storedGeojson, 6, {...state.mapParams,...action.payload.params,}),
+                bins:generateQuantileBins(state.storedGeojson, 6, {...state.mapParams,...action.payload.params}['accessor']),
                 ...action.payload.params,
             }
             
             return {
                 ...state,
-                mapParams: tempParamsObj
+                mapParams
             }
+        }
         case 'APPLY_FILTER_VALUES': 
             const filterValuesObject = typeof action.payload.range === 'string' ? 
                 {
                     ...state.filterValues,
                     [action.payload.name]: [
-                        ...state.filterValues[action.payload.name]||[], 
+                        ...(state.filterValues[action.payload.name] || []), 
                         action.payload.range
                     ]
                 }
@@ -371,5 +364,3 @@ var reducer = (state = INITIAL_STATE, action) => {
             return state;
     }
 }
-
-export default reducer;

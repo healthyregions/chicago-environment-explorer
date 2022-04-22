@@ -6,15 +6,14 @@ import './index.css';
 import WebFont from 'webfontloader';
 import { createStore } from 'redux';
 import rootReducer from './reducers';
-
 const store = createStore(
   rootReducer
-  // ,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  // , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 WebFont.load({
   google: {
-    families: ['Lora:400,600', 'Roboto:500,700', 'sans-serif']
+    families: ['Lora:400,600', 'Roboto:300,500,700', 'sans-serif']
   }
 });
 

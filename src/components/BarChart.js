@@ -1,40 +1,43 @@
 import React, {useState} from 'react';
-import { BarChart, Bar, LabelList, CartesianGrid, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, LabelList, CartesianGrid, ResponsiveContainer, XAxis } from 'recharts';
 
-export default function BarChartComponent(props){
+export default function BarChartComponent({data, dataKey, color, x, y, stroke, value, index}){
     const [hoverVal, setHoverVal] = useState(null);
 
-    const renderLabel = (props) => {
-        const {x, y, stroke, value, index} = props;	
+    const renderLabel = ({x, y, stroke, value, index}) => {
         return <text style={{transition:'125ms all'}} x={x+4} y={y} dy={-4} textAnchor='right' fill={index === hoverVal ? stroke : 'none'} >{value}</text>
     };
 
     const handleHover = (e) => setHoverVal(e.binNumber);
     const resetHover = () => setHoverVal(null);
-
+    
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <ResponsiveContainer width="100%">
         <BarChart
             width={500}
             height={300}
-            data={props.data}
+            data={data}
             margin={{
-                top: 20,
+                top: 0,
                 right: 10,
                 left: 0,
                 bottom: 0,
             }}
             barSize={300}
         >
-            <CartesianGrid strokeDasharray="3 3" />
+            <CartesianGrid horizontal={false}/>
             <Bar 
-                dataKey={props.dataKey} 
-                fill={props.color}
+                dataKey={dataKey} 
+                stroke={color}
+                strokeWidth={1}
+                fill={'rgb(200,200,200)'}
                 onMouseOver={handleHover}
                 onMouseOut={resetHover}
             >
-                <LabelList dataKey={props.dataKey}  content={renderLabel}/>
+                <LabelList dataKey={dataKey}  content={renderLabel}/>
             </Bar>
+            <XAxis dataKey={'min'} tickLine={false} tickFormatter={x => x.toFixed(2)} minTickGap={-5}/>
+            {/* <YAxis dataKey={'count'} label={{ value: "count", angle: -90, position: 'insideLeft' }} /> */}
         </BarChart>
       </ResponsiveContainer>
     );

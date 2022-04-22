@@ -148,6 +148,9 @@ const StaticNavbar = () => {
                             <NavLink to="/map">Map</NavLink>
                         </li> */}
                         <li>
+                            <NavLink to="/community">My Community</NavLink>
+                        </li>
+                        <li>
                             <NavLink to="/about">About</NavLink>
                         </li>
                         <li>

@@ -1,36 +1,42 @@
+import {
+  defaultData,
+  defaultVariable,
+  variablePresets
+} from '../config';
+
 export const INITIAL_STATE = {
   storedGeojson: {},
-  currentData: 'tree_sst_master_tracts.geojson',
-  columnNames: ["acs_population", "cities_casthma_prev", "cities_copd_prev", "svi_pecentile", "trees_n", "trees_area", "trees_den", "trees_crown_den", "asthma_5yr_avg", "asthma_age_adj_rate", "urban_flood_suscep", "heatisl", "nn_q3_pm2_5", "uchosp_casthma_visit", "logtraf", "hardship"],
+  currentData: defaultData,
+  columnNames: [
+    "acs_population", 
+    // "cities_casthma_prev", 
+    // "cities_copd_prev", 
+    "svi_pecentile", 
+    "trees_n", 
+    "trees_area", 
+    "trees_den", 
+    "trees_crown_den", 
+    "asthma_5yr_avg", 
+    "asthma_age_adj_rate", 
+    "urban_flood_suscep", 
+    "heatisl", 
+    "nn_q3_pm2_5", 
+    // "uchosp_casthma_visit", 
+    "logtraf", 
+    "hardship",
+    "ndvi",
+    "simpson"
+  ],
   ranges:{},
   selectionData: {},
   filterValues: {},
   mapParams: {
-    variableName: 'Tree Crown Density',
-    numerator: 'properties',
-    nType: 'charactertistic',
-    nRange: null,
-    nProperty: 'trees_crown_den',
-    denominator: 'properties',
-    dType: null,
-    dProperty: null,
-    dRange:null,
-    dIndex:null,
-    scale:1,
-    scale3D: 100,
-    fixedScale: null,
+    ...variablePresets[defaultVariable],
+    // defaults 
     zAxisParams: null,
     storedRange: null,
     bins: [],
     overlay: 'community_areas',
-    colorScale: [
-      [255,255,204],
-      [217,240,163],
-      [173,221,142],
-      [120,198,121],
-      [49,163,84],
-      [0,104,55]
-    ],
   },
   panelState: {
     variables:window.innerWidth > 768,

@@ -18,6 +18,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+#### `yarn build:data`
+
+Fetch and build relevant data. You must run this prior to development. 
+
 #### `yarn start`
 
 Runs the app in the development mode.\

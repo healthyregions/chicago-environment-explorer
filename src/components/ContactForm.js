@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import InputLabel from '@material-ui/core/InputLabel';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
 import { colors } from '../config';
 
 const ContactFormContainer = styled.form`
