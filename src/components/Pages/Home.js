@@ -212,6 +212,7 @@ const ContributersContainer = styled.div`
   overflow:hidden;
   height:5rem;
   margin:6rem 0 3rem 0;
+  pointer-events:none;
   img {
     height:5rem;
     display:inline;
@@ -420,15 +421,11 @@ function LogoScroll({logoList, autoscroll=true}){
   return (
     <ContributersContainer>
       <ContributersContainerInner>
-      {logoList.map(({Link, AltText, ImagePath}, i) => 
-        <a key={i} href={Link} target="_blank" rel="noopener noreferrer">
-          <img src={process.env.PUBLIC_URL + ImagePath} alt={AltText} loading="lazy" />
-        </a>
+      {logoList.map(({ImagePath}, i) => 
+          <img key={`logo-scroll-1-${i}`}src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
       )}
-      {logoList.map(({Link, AltText, ImagePath}, i) => 
-        <a key={i} href={Link} target="_blank" rel="noopener noreferrer">
-          <img src={process.env.PUBLIC_URL + ImagePath} alt={AltText} loading="lazy" />
-        </a>
+      {logoList.map(({ImagePath}, i) => 
+          <img key={`logo-scroll-2-${i}`}src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
       )}
       </ContributersContainerInner>
     </ContributersContainer>
