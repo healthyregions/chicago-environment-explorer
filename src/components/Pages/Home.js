@@ -21,6 +21,12 @@ const HomePage = styled.div`
     width: 80vw;
     max-width: 940px;
     margin: 0 0 40px 0;
+    @media (max-width:1024px) {
+      font-size:3rem;
+    }
+    @media (max-width:768px){
+      font-size:2rem;
+    }
   }
   .h1,
   .h2,
@@ -181,6 +187,10 @@ const ThreeUpGrid = styled(Grid)`
     display: table;
     box-shadow: 5px 5px 20px ${colors.forest}55;
     transition: 250ms all;
+    @media (max-width: 900px){
+      margin:1rem auto 2rem auto;
+      text-align:center;
+    }
     &:hover {
       background: ${colors.fuschia};
       box-shadow: 5px 10px 20px ${colors.forest}88;
@@ -266,7 +276,7 @@ export default function Home() {
                   />
                 </Grid>
                 <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
-                  <h2>Community Report</h2>
+                  <h2>Community <br/> Report</h2>
                 </Grid>
               </Grid>
               <p>
@@ -287,7 +297,7 @@ export default function Home() {
                   />
                 </Grid>
                 <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
-                  <h2>Neighborhood Map</h2>
+                  <h2>Neighborhood <br/> Map</h2>
                 </Grid>
               </Grid>
 

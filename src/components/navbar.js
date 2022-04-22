@@ -19,12 +19,13 @@ const NavItems = styled.ul`
   line-height:2;
   font-size:1rem;
   transition: 250ms all;
-  li a {
+  li a, button {
     text-decoration:none;
-    font-weight:bold;
+    font-family:"Roboto", sans-serif;
     color: ${colors.chicagoBlue};
     transition:250ms all;
     cursor: pointer;
+    text-transform:none;
     padding:0.5em 0;
     svg { 
       width:1em;
@@ -159,7 +160,7 @@ export default function Nav({
     <NavContainer>
       <LogoButtonContainer aria-describedby={id} variant="outlined" onClick={handleClick} title={id} color="success">
         <SvgLogo colors={[colors.green, colors.chicagoBlue, colors.skyblue, colors.chicagoDarkBlue, colors.chicagoRed]}></SvgLogo>
-        <Typography>ChiVes</Typography>
+        <Typography><span style={{fontWeight:"bold"}}>ChiVes</span></Typography>
       </LogoButtonContainer>
       <Popover
         id="nav-container"
