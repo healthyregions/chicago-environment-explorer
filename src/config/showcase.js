@@ -8,7 +8,7 @@ export const SHOWCASE_ITEMS = [
     },
     {
         text: 'Vegetation',
-        image: BASE_URL + '/img/showcase/ndvi2.png',
+        image: BASE_URL + '/img/showcase/ndvi2.jpg',
         icon: BASE_URL + '/img/showcase/icons/ndvi.png',
         explainerText:"How green is your community? The Vegetation Index, measured from satellite data, gives a measure of the abundance of vegetation for every tract in the City. Freshly made from DePaul University. Zoom in all the way to see individual trees!"
     },
@@ -20,19 +20,19 @@ export const SHOWCASE_ITEMS = [
     },
     {
         text: 'Traffic',
-        image: BASE_URL + '/img/showcase/traffic.png',
+        image: BASE_URL + '/img/showcase/traffic.jpg',
         icon: BASE_URL + '/img/showcase/icons/traffic.png',
         explainerText:"How bad is traffic in your area? We developed a score of traffic volume based on traffic estimates form the Illinois Department of Transportation. Zoom into the map, tile (using your control key), and explore!"
     },
     {
         text: 'Redlining',
-        image: BASE_URL + '/img/showcase/redlining.png',
+        image: BASE_URL + '/img/showcase/redlining.jpg',
         icon: BASE_URL + '/img/showcase/icons/redlining.png',
         explainerText:"A legacy of redlining and racialized deinvestment is a part of Chicago's history. Overlay historic redlining areas to see how communities today may have been shaped from the past."
     },
     {
         text: 'Asthma',
-        image: BASE_URL + '/img/showcase/asthma.png',
+        image: BASE_URL + '/img/showcase/asthma.jpg',
         icon: BASE_URL + '/img/showcase/icons/asthma.png',
         explainerText:"We connect community level health data from multiple sources to give an insight into health outcomes that may be associated with the physical environment. Explore multiple measures at once and adjust filters in real time."
     }
