@@ -105,7 +105,7 @@ export default function Data() {
         <DataPage>
             <NavBar />
             <ContentContainer>
-                <h1>Data</h1>
+                <h1>Data</h1> <hr/>
                 <Gutter h={10} />
                 <p>
                     <i>ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics,
