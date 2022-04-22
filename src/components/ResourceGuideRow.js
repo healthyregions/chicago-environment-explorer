@@ -15,12 +15,22 @@ const GuideRow = styled(Grid)`
         line-height: 2rem;
     }
 
-        p {
-    font-family: Roboto;
-    font-weight: 300;
+    p {
+        font-family: Roboto;
+        font-weight: 300;
+        &.date {
+        }
+        &.verified { 
+            color: ${colors.forest};
+            img {
+                max-height:.85rem;
+                display:inline-block;
+                margin:1em .5em 0 0;
+            }
+        }
     }
     a {
-    color: ${colors.chicagoBlue};
+     color: ${colors.chicagoBlue};
     }
     text-align:left;
     margin-bottom:2em;
@@ -38,12 +48,14 @@ export default function ResourceGuideRow({
         image,
         logoAltText,
         imageAltText,
-        link
+        link,
+        dateAdded,
+        verified
     } = entry;
     return (<GuideRow container spacing={4}>
         <Grid item xs={12} sm={12} md={3} lg={3} xl={3}>
             <a href={link} target="_blank" rel="noopener noreferrer"><img src={logo} alt={logoAltText} loading="lazy" />
-                
+
             </a>
         </Grid>
         <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
@@ -53,10 +65,18 @@ export default function ResourceGuideRow({
                 </a>
             </h2>
             <p dangerouslySetInnerHTML={{ __html: text }}></p>
+            <p className=".">
+                Resourced added in {dateAdded}.
+            </p>
+            {!!verified && <p className="verified">
+                <img src={`${process.env.PUBLIC_URL}/icons/verified.png`} alt="" />
+                This resource has been verified.
+            </p>}
+
         </Grid>
-         <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
             <h2>
-               <img src={image} alt={imageAltText} loading="lazy" />
+                <img src={image} alt={imageAltText} loading="lazy" />
             </h2>
         </Grid>
     </GuideRow>)
