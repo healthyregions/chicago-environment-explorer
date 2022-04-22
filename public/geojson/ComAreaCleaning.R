@@ -30,10 +30,17 @@ tm_shape(test) + tm_fill("LngCncRt", style = "quantile")
 tm_shape(test) + tm_fill("CancerRt", style = "quantile")
 tm_shape(test) + tm_fill("HypRt", style = "quantile")
 
+library(scales)
 final <- merge(chi,health, by ="commarea_n")
+
+final$logtrafScld <- rescale(final$logtraf, to = c(0,100))
+tm_shape(final) + tm_fill("logtrafScld", style = "quantile")
+
 
 st_write(final,"tree_sst_master_tracts2.geojson")
 final2 <- st_drop_geometry(final)
 write.csv(final2,"tree_sst_master_tracts2.csv")
+
+
 
 dim(test)
