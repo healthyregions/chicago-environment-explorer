@@ -31,7 +31,7 @@ const projectTeam = [
         title:'Engineering & Visualization Lead',
     },
         {
-        name:'Susan Paykin, MPP',
+        name:'Susan Paykin',
         link:'https://www.linkedin.com/in/susanpaykin/',
         degrees: 'MPP',
         img: `SPaykin.jpg`,
