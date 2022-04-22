@@ -1,7 +1,7 @@
 # ChiVes: The Chicago Environment Explorer
 ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level.
 
-## About ChiVes
+# About
 
 Chicago's urban environment has profound impacts on the health of communities and individuals. A handful of key metrics―tree cover, air pollution estimates, heat island effects, traffic volumes, and social vulnerability index― help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
 
@@ -52,12 +52,24 @@ Learn more on our [About](https://chichives.com/about) page, and feel free to [C
 
 ChiVes uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018). Learn more on the [Data](https://chichives.com/data) page. 
 
-Download the latest version of our data here: 
+## Data Standards & Submission Guidelines
+See the [Standards & Submissions Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit#heading=h.3v2r5cc9r630) for complete information. This resource includes information on:
+* Collaborative Guidelines, including data standards, resource guide standards, and web development standards; and 
+* Submission Guidelines, including a process overview, publishing data with Google spreadsheets, and a metadata template.
+
+## Download 
+Download the latest version of our data here, or see the [Data](https://chichives.com/data) page: 
 * [ShapeFile](https://chichives.com/shp/chives-data.zip)
 * [GeoJSON](https://chichives.com/geojson/chives-data.geojson)
 * [CSV / Excel](https://chichives.com/csv/chives-data.csv)
 
 This data is licensed under a [Creative Commons Attribution Non-Commercial license](https://creativecommons.org/licenses/by-nc/2.0/).
+
+## Data Dictionary
+See [Data](https://chichives.com/data) page.
+
+## Map Variables and Data Sources
+See [Data](https://chichives.com/data) page.
 
 # Getting Started with Create React App
 
