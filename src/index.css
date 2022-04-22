@@ -6,7 +6,7 @@
 
 body {
   background:#ffffff;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 div#view-default-view, div#view-MapView {
@@ -22,7 +22,7 @@ div#view-default-view, div#view-MapView {
 body {
     margin: 0; 
     padding: 0;
-    font-family: 'Montserrat', sans-serif !important;
+    font-family: 'Roboto', sans-serif !important;
     font-size: 13px;
     /* background-color: #111333; */
     overflow-x: hidden;
