@@ -44,7 +44,7 @@ Organizations and individuals can participate in ChiVes in multiple ways:
 * [Resource Guide](https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform). Share your web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards.
 * [Web Development](https://github.com/GeoDaCenter/chicago-environment-explorer). Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.
 
-View our [Standards and Submission Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing). These guidelines are evaluated on a regular basis by members of the Data Collaborative.
+View our [Standards and Submission Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing) for more information. These guidelines are evaluated on a regular basis by members of the Data Collaborative.
 
 Learn more on our [About](https://chichives.com/about) page, and feel free to [Contact Us](https://chichives.com/contact) with any questions. 
 
@@ -54,8 +54,8 @@ ChiVes uses harmonized, standardized environmental data at the census tract scal
 
 ## Data Standards & Submission Guidelines
 See the [Standards & Submissions Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit#heading=h.3v2r5cc9r630) for complete information. This resource includes information on:
-* Collaborative Guidelines, including data standards, resource guide standards, and web development standards; and 
-* Submission Guidelines, including a process overview, publishing data with Google spreadsheets, and a metadata template.
+* [Collaborative Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit#bookmark=id.oh5pq3bjlkt5), including data standards, resource guide standards, and web development standards; and 
+* [Submission Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit#bookmark=id.u9fqnrjfymzb), including an overview of the submission process, publishing data with Google spreadsheets, and a metadata template.
 
 ## Download 
 Download the latest version of our data here, or see the [Data](https://chichives.com/data) page: 
