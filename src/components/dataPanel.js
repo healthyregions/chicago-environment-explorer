@@ -403,7 +403,7 @@ const DataPanel = () => {
                 <Gutter height="1em" />                
                 <h3 className="sectionHeader">Environmental</h3>
                 {
-                  EnvironmentalColumnsToChart.map(({name, column, color}) => 
+                  EnvironmentalColumnsToChart.map(({name, column, color}, i) => 
                     <Histogram 
                       name={name} 
                       column={column}
@@ -411,13 +411,14 @@ const DataPanel = () => {
                       density={selectionData.densities[column]} 
                       range={ranges[column]} 
                       color={color}
+                      key={`distribution-${i}`}
                     />
                   )
                 }
                 <Gutter height="1em" />
                 <h3 className="sectionHeader">Socio-Economic</h3>
                 {
-                  SocialColumnsToChart.map(({name, column, color}) => 
+                  SocialColumnsToChart.map(({name, column, color}, i) => 
                     <Histogram 
                       name={name} 
                       column={column}
@@ -425,6 +426,7 @@ const DataPanel = () => {
                       density={selectionData.densities[column]} 
                       range={ranges[column]} 
                       color={color}
+                      key={`distribution-2-${i}`}
                     />
                   )
                 }
