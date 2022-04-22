@@ -39,7 +39,7 @@ const CarouselContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.125);
   object-fit: cover;
   width: 420px;
   height: 320px;
@@ -93,12 +93,11 @@ const CarouselExplainerText = styled.p`
 const CarouselHeader = styled.h2`
   width:100%;
   text-align: center !important;
-  padding:0 !important;
-  color:${colors.forest};
-  font-size:1.5rem;
+  color:black;
+  font-size:2rem;
   font-family:"Lora", serif;
   font-weight:bold;
-  padding-bottom:4rem;
+  padding:2rem 4rem;
 `
 
 const Nav = ({items, selectedIndex, onClick}) => (

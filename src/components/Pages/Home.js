@@ -1,18 +1,13 @@
-import React, { useCallback } from "react";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import React, { useCallback, useEffect, useRef } from "react";
+import { Link, NavLink } from "react-router-dom";
+import styled, {keyframes} from "styled-components";
 
 import Grid from "@mui/material/Grid";
 
 import { Geocoder, Showcase, NavBar, Footer } from "../../components";
 import { colors } from "../../config";
 import { Gutter } from "../../styled_components";
-// import { FaBeer } from "@react-icons/all-files/fa/FaBeer";
-import onion from "./onion.png";
-import map from "./map.png";
-import guide from "./noun-book-of-nature-3583880.png";
-import collab from "./noun-planting-tree-3583881.png";
-
+import logoList from '../../config/logos.json';
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -56,18 +51,11 @@ const HomePage = styled.div`
     line-height: 1.5;
     color: ${colors.darkgray};
   }
-  .photo {
-    width: 50%;
-    @media (max-width: 960px) {
-      max-height: 40vh;
-      width: auto;
-      margin: 0 auto;
-      display: block;
-
-    }
+  a {
+    color: ${colors.chicagoBlue};
   }
 
-    .photo2 {
+  .photo2 {
     width: 100%;
     @media (max-width: 960px) {
       max-height: 40vh;
@@ -76,8 +64,11 @@ const HomePage = styled.div`
       display: block;
     }
   }
-  a {
-    color: ${colors.chicagoBlue};
+  .logoScrollText {
+    font-size:2rem;
+    color:black;
+    font-family:"Lora", serif;
+    padding-bottom:2rem;
   }
 `;
 
@@ -152,24 +143,86 @@ const Hero = styled.div`
 `;
 
 const ThreeUpGrid = styled(Grid)`
-    background: ${colors.white};
-    padding: 2em 1em;
-    margin: 1em 0;
-    color:white;
-    border-radius:1em;
-    h2 {
-        color: ${colors.darkgray};
-        font-size: 1.5rem;
-        font-family: 'Roboto', serif;
+  padding: 2em 0;
+  margin: 1em 0;
+  h2 {
+    color: ${colors.darkgray};
+    text-align: left;
+    font-size: 2rem;
+    font-family: "Lora", serif;
+    margin: 0 0 0.5rem 0.5rem;
+    padding: 0;
+  }
+  p {
+    color: ${colors.light};
+    font-family: "Roboto", sans-serif;
+    text-align: left;
+    line-height: 1.1;
+    margin: 0.5rem 0 0 0;
+    padding: 0;
+    font-size: 1rem;
+    max-width: 95%;
+  }
+  img {
+    width: 100%;
+    max-width: 10em;
+    display: block;
+  }
+  a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: ${colors.forest};
+    color: white;
+    border-radius: 0.3rem;
+    margin: 0.5rem 1rem 0 0;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: bold;
+    display: table;
+    box-shadow: 5px 5px 20px ${colors.forest}55;
+    transition: 250ms all;
+    &:hover {
+      background: ${colors.fuschia};
+      box-shadow: 5px 10px 20px ${colors.forest}88;
     }
-    p {
-        color: ${colors.light};
-        font-family: 'Lora', sans-serif;
-            text-align: center;
-            line-height: 1;
-            font-size: 1.0rem;
+  }
+`;
 
-    }
+const GeocoderContainer = styled(Grid)`
+  background: ${colors.gray}10;
+  padding: 0 2rem;
+  margin: 4rem 0;
+  p {
+    max-width: 95%;
+  }
+`;
+
+const ContributersContainer = styled.div`
+  position:relative;
+  overflow:hidden;
+  height:5rem;
+  margin:6rem 0 3rem 0;
+  img {
+    height:5rem;
+    display:inline;
+    margin:0 2rem;
+    float:left;
+  }
+`
+
+const slide = keyframes`
+  from {
+    left:0;
+  }
+
+  to {
+    left:-140%;
+  }
+`;
+const ContributersContainerInner = styled.div`
+  width:auto;
+  position:absolute;
+  animation: ${slide} 15s linear infinite;
 `
 
 export default function Home() {
@@ -201,57 +254,78 @@ export default function Home() {
             face particular challenges as we work towards a healthier Chicago.
           </p>
 
-          <ThreeUpGrid container spacing={3}>
+          <ThreeUpGrid container spacing={0}>
+            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <Grid container spacing={0} alignItems="center">
+                <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+                  <img
+                    className="photo"
+                    src={process.env.PUBLIC_URL + "/icons/nature-book.png"}
+                    alt="Wild Onion"
+                    loading="lazy"
+                  />
+                </Grid>
+                <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
+                  <h2>Community Report</h2>
+                </Grid>
+              </Grid>
+              <p>
+                Get a dynamic report about key indicators and environmental
+                metrics for your neighborhood. Search by your location.{" "}
+              </p>
+              <Link to="/community">Find Your Community</Link>
+            </Grid>
 
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                                              <h2>Community Report</h2>
-
-                  <a href="/community"><img
-                className="photo"
-                src={guide}
-                alt="Wild Onion"
-                loading="lazy"
-              /></a>
-
-               <p> Get a dynamic report about key indicators and environmental
-               metrics for your neighborhood. Search by your location. </p>
-                 
-
+            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <Grid container spacing={0} alignItems="center">
+                <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+                  <img
+                    className="photo"
+                    src={process.env.PUBLIC_URL + "/icons/tree-location.svg"}
+                    alt="Wild Onion"
+                    loading="lazy"
+                  />
+                </Grid>
+                <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
+                  <h2>Neighborhood Map</h2>
+                </Grid>
               </Grid>
 
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                                                            <h2>Neighborhood Map</h2>
+              <p>
+                Explore dimensions of the environment across Chicago in an
+                interactive map. Data comes from collaborators across the city!
+              </p>
+              <Link to="/map">Start Mapping</Link>
+            </Grid>
 
-                  <a href="/map"> <img
-                className="photo"
-                src={map}
-                alt="Wild Onion"
-                loading="lazy"
-              /></a>
-
-              <p> Explore dimensions of the environment across Chicago 
-              in an interactive map. Data comes from collaborators across the city!</p>
-
+            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+              <Grid container spacing={0} alignItems="center">
+                <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
+                  <img
+                    className="photo"
+                    src={process.env.PUBLIC_URL + "/icons/tree-planting.png"}
+                    alt="Wild Onion"
+                    loading="lazy"
+                  />
+                </Grid>
+                <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
+                  <h2>
+                    Resource <br />
+                    Guide
+                  </h2>
+                </Grid>
               </Grid>
-
-              <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
-                                              <h2>Resource Guide</h2>
-
-                  <a href="/guide"><img
-                className="photo"
-                src={collab}
-                alt="Wild Onion"
-                loading="lazy"
-              /></a>
-               <p> Find other maps, data, and resources about the Chicago environment
-               from featured partners and a curated list of resources. </p>
-
-              </Grid>
-
+              <p>
+                {" "}
+                Find other maps, data, and resources about the Chicago
+                environment from featured partners and a curated list of
+                resources.{" "}
+              </p>
+              <Link to="/community">Learn More</Link>
+            </Grid>
           </ThreeUpGrid>
 
-
-          <Grid container spacing={4} alignItems="center">
+          <GeocoderContainer container spacing={0} alignItems="center">
             <Grid item xs={12} sm={12} md={6}>
               <p>
                 <i>
@@ -269,31 +343,17 @@ export default function Home() {
                 onChange={handleGeocoder}
               />
             </Grid>
-          </Grid>
+          </GeocoderContainer>
           <Showcase />
-
-          {/* <Grid container spacing={8} alignItems="center">
-                        <Grid item xs={12} sm={12} md={6}>
-                            <p>
-                                <i>Got somewhere you want to explore? Search for an address to navigate directly to your neighborhood.</i>
-                            </p>
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={6}>
-                            <Geocoder 
-                                id="Geocoder"
-                                placeholder={"Find your location - eg. 1155 E 60th Street"}
-                                API_KEY={MAPBOX_ACCESS_TOKEN}
-                                onChange={handleGeocoder}
-                            />
-                        </Grid>
-                    </Grid> */}
-
-          <Gutter h={20} />
+          <Gutter h={60} />
+          <LogoScroll logoList={logoList}/>
+          <h2 className="logoScrollText">Thanks to ChiVes data contributors!</h2>
+          <Gutter h={60} />
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
               <img
                 className="photo2"
-                src={onion}
+                src={process.env.PUBLIC_URL + "/img/onion.png"}
                 alt="Wild Onion"
                 loading="lazy"
               />
@@ -310,9 +370,10 @@ export default function Home() {
                 Like the{" "}
                 <a href="https://www.illinoiswildflowers.info/woodland/plants/wild_leek.htm">
                   wild onion
-                </a>{" "}that Chicago was named for, data about the city's environment
-                should be tasty and plentiful. By <i>tasty</i>, we mean
-                easily accessible and ready to use and explore. By <i>plentiful</i>, we
+                </a>{" "}
+                that Chicago was named for, data about the city's environment
+                should be tasty and plentiful. By <i>tasty</i>, we mean easily
+                accessible and ready to use and explore. By <i>plentiful</i>, we
                 mean the data should extend across multiple dimensions of the
                 city's landscape, and be updated regularly.
                 <br />
@@ -323,8 +384,8 @@ export default function Home() {
                 Chicago Environment, cultivated by a community of curators.
                 <br />
                 <br />
-                Have data to add? A mapping resource to share or
-                recommend? Please <a href="/about">contribute</a> !
+                Have data to add? A mapping resource to share or recommend?
+                Please <a href="/about">contribute</a> !
               </p>
               <h5>
                 Image of <i>Wild Onion, Allium acuminatum </i> by Margaret
@@ -342,4 +403,24 @@ export default function Home() {
       <Footer signUp={false} />
     </HomePage>
   );
+}
+
+
+function LogoScroll({logoList, autoscroll=true}){
+  return (
+    <ContributersContainer>
+      <ContributersContainerInner>
+      {logoList.map(({Link, AltText, ImagePath}, i) => 
+        <a key={i} href={Link} target="_blank" rel="noopener norefererr">
+          <img src={process.env.PUBLIC_URL + ImagePath} alt={AltText} loading="lazy" />
+        </a>
+      )}
+      {logoList.map(({Link, AltText, ImagePath}, i) => 
+        <a key={i} href={Link} target="_blank" rel="noopener norefererr">
+          <img src={process.env.PUBLIC_URL + ImagePath} alt={AltText} loading="lazy" />
+        </a>
+      )}
+      </ContributersContainerInner>
+    </ContributersContainer>
+  )
 }

@@ -608,6 +608,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
       getFilterValue: (d) => (isVisible(d, filterValues) ? 1 : 0),
       filterRange: [1, 1],
       extensions: [new DataFilterExtension({ filterSize: 1 })],
+      visible: geoids.length === 0,
       updateTriggers: {
         getFillColor: [
           storedGeojson.type,
@@ -615,6 +616,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
           mapParams.bins,
           mapParams.colorScale,
         ],
+        visible: geoids.length,
         getFilterValue: filterValues,
       },
       transitions: {

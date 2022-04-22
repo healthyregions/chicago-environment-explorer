@@ -42,6 +42,7 @@ export const colors = {
   ivory: '#fff',
   green: '#97DB4F',
   forest: '#3d6017',
+  fuschia: '#e83f6f',
   cartoColors: {
     green: '#49c767',
     gold: '#e0d09d',
