@@ -1,16 +1,54 @@
-# About ChiVes: The Chicago Environment Explorer
+# ChiVes: The Chicago Environment Explorer
+ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level.
+
+## About ChiVes
 
 Chicago's urban environment has profound impacts on the health of communities and individuals. A handful of key metrics―tree cover, air pollution estimates, heat island effects, traffic volumes, and social vulnerability index― help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
 
-With ChiVes, we harmonize & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.
+ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level. It’s a partnership of researchers, community organizations, and civic groups. With ChiVes, we harmonize & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.
 
 This project refactors data from the a previous partnership with the City of Chicago, and gets customized as a new opensource platform for the wider community.
 
-Have data to add? A mapping resource to recommend? We invite you to add more resources to the ChiVes explorer as build out an open data coalition to prepare Chicago for a more resilient future!
+## A Project from the Healthy Regions & Policies Lab
 
-*This is a working pre-lease, with the full release coming soon.*
+This project is brought to you by the [Healthy Regions & Policies Lab (HeRoP)](https://herop.ssd.uchicago.edu/) at the Center for Spatial Data Science at the University of Chicago. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies. Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. We’re interested in how place drives, interacts with, and influences health for different people, in different ways. To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
 
-## Getting Started with Create React App
+[Marynia Kolak](https://github.com/Makosak), [Dylan Halpern](https://github.com/nofurtherinformation), and [Susan Paykin](https://github.com/spaykin) lead the ChiVes project in the current release.
+
+
+## Data Collaborative Members
+
+The Data Collaborative provides insight, direction, and relavent environmental data to the Chicago community. The group advises on ChiVes data standards and needs, and includes the following members (* indicates Current Leadership):
+
+* Zac Adelman, Lake Michigan Air Directors Consortium
+* Elsa Anderson & Sophie Taddeo, Chicago Botanic Gardens
+* Madeleine Daepp, Microsoft Research
+* Tiffany Werner, Environmental Law & Policy Center
+* Anne Dodge, Mansueto Institute, University of Chicago
+* Jim Franke & Haynes Stephens, Department of Geophysical Sciences, University of Chicago
+* Anastasia (Stacy) Montgomery, Sara Camilleri & Dan Horton, Climate Change Research Group, Northwestern University
+* Michelle Stuhlmacher, Department of Geography, DePaul University
+* James Keane, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago
+
+We are also grateful to the Nature Conservancy, Audubon Society, and Field Museum for their insights and support.
+
+Finally, a major thank you goes to Isaac Kamber and Lorenz Menendez, now alumni of University of Chicago, who developed multiple measures for this application as a core component of their Research Assistantships from 2019-2021.
+
+## Get Involved
+
+Have data to add? A mapping resource to recommend? We invite you to add more resources to the ChiVes explorer as build out an open data coalition to prepare Chicago for a more resilient future.
+
+Organizations and individuals can participate in ChiVes in multiple ways:
+
+* [Data Collaborative](https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform). Integrate your data directly. Members agree that the final, integrated data will meet Collaborative standards.
+* [Resource Guide](https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform). Share your web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards.
+* [Web Development](https://github.com/GeoDaCenter/chicago-environment-explorer). Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.
+
+View our [Standards and Submission Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing). These guidelines are evaluated on a regular basis by members of the Data Collaborative.
+
+Learn more on our [About](https://chichives.com/about) page, and feel free to [Contact Us](https://chichives.com/contact) with any questions. 
+
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
