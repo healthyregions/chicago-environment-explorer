@@ -356,10 +356,8 @@ function App() {
     } else {
       return [];
     } // eslint-disable-next-line
-  }, [features && features.length]);
-
+  }, [features && features.length]); 
   // geolocation
-
   const [geolocateType, setGeolocateType] = useState("Zip Code");
   const [geolocatingStatus, setGeolocatingStatus] = useState({
     status: "passive",
@@ -425,8 +423,6 @@ function App() {
     geoid: 0,
     open: false
   })
-
-  const [viewState, setViewState] = useState({})
 
   const handleSpeciesPlot = (geoid) => {
     setSpeciesPlotInfo({
@@ -510,7 +506,7 @@ function App() {
       pitch:0,
       bearing:0
     }
-  },[filteredFeatures.length && JSON.stringify(currGeoids)])  
+  },[filteredFeatures.length && JSON.stringify(currGeoids)])  // eslint-disable-line
 
   const transposedData = columnsToPresent.map(
     ({ name, accessor, vals }, id) => ({
@@ -531,7 +527,7 @@ function App() {
   // metadata helpers
   const ethnicMajority = ["White", "Black or African American", "Native American", "Asian", "All additional races and ethnicities"].find(raceEthnicity => filteredSummaries[raceEthnicity] ? filteredSummaries[raceEthnicity].reduced > 50 : false)
   const densityPercentile = dataReady && quantileRank(summaries.density.values, filteredSummaries.density.reduced)
-  const ageAdjAsthmaPct = dataReady && quantileRank(summaries.asthmaAgeAdj.values, filteredSummaries.asthmaAgeAdj.reduced)
+  // const ageAdjAsthmaPct = dataReady && quantileRank(summaries.asthmaAgeAdj.values, filteredSummaries.asthmaAgeAdj.reduced)
   const hardshipPercentile = dataReady && quantileRank(summaries.hardship.values, filteredSummaries.hardship.reduced)
 
   return (

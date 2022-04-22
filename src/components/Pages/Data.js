@@ -12,19 +12,19 @@ const DataPage = styled.div`
 
 `
 
-const TableStyle  = styled.div`
-    a {
-        font-family: 'Lora', sans-serif;
-        font-size: 13px;
-        font-stretch: normal;
-        text-align:left;
-        font-style: normal;
-        line-height: 1.6;
-        letter-spacing: normal;
-        padding:2rem 0;
-    }
+// const TableStyle  = styled.div`
+//     a {
+//         font-family: 'Lora', sans-serif;
+//         font-size: 13px;
+//         font-stretch: normal;
+//         text-align:left;
+//         font-style: normal;
+//         line-height: 1.6;
+//         letter-spacing: normal;
+//         padding:2rem 0;
+//     }
 
-`
+// `
 
 const Hero = styled.div`
     width:100%;

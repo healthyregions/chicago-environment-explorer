@@ -6,13 +6,10 @@ import { pointRadial } from "d3-shape";
 import { LinkRadial } from "@visx/shape";
 import IframeSpeciesInfo from "./IframeSpeciesInfo";
 import { Zoom } from '@visx/zoom';
-import { localPoint } from '@visx/event';
 import { RectClipPath } from '@visx/clip-path';
-import { scaleLinear } from '@visx/scale';
 import { Button } from "@mui/material";
 
 const defaultMargin = { top: 20, left: 20, right: 20, bottom: 20 };
-const sizeScale = scaleLinear({ domain: [0, 600], range: [0.5, 8] });
 const initialTransform = {
   scaleX: 1,
   scaleY: 1,

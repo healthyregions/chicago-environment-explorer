@@ -248,11 +248,10 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
   });
   useEffect(() => {
     setViewState(bounds)
-  },[JSON.stringify(bounds)])
+  },[JSON.stringify(bounds)]) //eslint-disable-line
   useEffect(() => {
     setViewStateFn(setViewState);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); //eslint-disable-line
 
   // // share button notification
   // const [shared, setShared] = useState(false);

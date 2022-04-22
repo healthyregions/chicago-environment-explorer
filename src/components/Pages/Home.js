@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useCallback } from "react";
+import { Link } from "react-router-dom";
 import styled, {keyframes} from "styled-components";
 
 import Grid from "@mui/material/Grid";
@@ -411,12 +411,12 @@ function LogoScroll({logoList, autoscroll=true}){
     <ContributersContainer>
       <ContributersContainerInner>
       {logoList.map(({Link, AltText, ImagePath}, i) => 
-        <a key={i} href={Link} target="_blank" rel="noopener norefererr">
+        <a key={i} href={Link} target="_blank" rel="noopener noreferrer">
           <img src={process.env.PUBLIC_URL + ImagePath} alt={AltText} loading="lazy" />
         </a>
       )}
       {logoList.map(({Link, AltText, ImagePath}, i) => 
-        <a key={i} href={Link} target="_blank" rel="noopener norefererr">
+        <a key={i} href={Link} target="_blank" rel="noopener noreferrer">
           <img src={process.env.PUBLIC_URL + ImagePath} alt={AltText} loading="lazy" />
         </a>
       )}

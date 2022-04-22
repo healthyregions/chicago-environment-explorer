@@ -24,7 +24,6 @@ import styled from 'styled-components';
 import {SHOWCASE_ITEMS} from '../config/showcase';
 import {media} from './CarouselStyle';
 import Carousel from './CarouselInner';
-import { colors } from '../config';
 
 const CarouselContainer = styled.div`
   height: 360px;

@@ -1,41 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ContentContainer, Gutter } from '../../styled_components';
+import { ContentContainer } from '../../styled_components';
 import { Accordion, MemberGrid, NavBar, Footer } from '../../components';
-import MuiAccordion from "@material-ui/core/Accordion";
-import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
-import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
-// import { colors } from "../config";
-
-// const Accordion = styled(MuiAccordion)`
-//     &.MuiPaper-elevation1 {
-//         box-shadow:none;
-//         border:1px solid ${colors.white};
-//         transition:250ms border;
-//         &.Mui-expanded {
-//             border:1px solid ${colors.lightgray};
-//             box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 1px 3px 0px rgb(0 0 0 / 12%);
-//         }
-//     }
-// `
-
-// const AccordionSummary = styled(MuiAccordionSummary)`
-// `
-
-// const AccordionDetails = styled(MuiAccordionDetails)`
-// `
-
 
 const AboutPage = styled.div`
     background:white;
 `
-const BioSection = styled.div`
-    padding:40px 0;
-    // text-align:center;
-    h3 {
-        margin:2em 0 1em 0;
-    }
-`
+// const BioSection = styled.div`
+//     padding:40px 0;
+//     // text-align:center;
+//     h3 {
+//         margin:2em 0 1em 0;
+//     }
+// `
 const projectTeam = [
     {
         name: 'Marynia Kolak',
@@ -65,29 +42,29 @@ const projectTeam = [
 
 
 // // Past contributors
-const contributors = [
-    {
-        name: 'Isaac Kamber',
-        link: 'https://www.linkedin.com/in/isaac-kamber/',
-        img: `isaac.png`,
-        affiliation: '(CSDS)',
-        title: 'Senior Research Assistant'
-    },
-    {
-        name:'Lorenz Menendez',
-        link:'https://www.linkedin.com/in/lorenzmenendez/',
-        img: `Menendez_Lorenz.jpeg`,
-        affiliation:'(CSDS)',
-        title: 'Senior Research Assistant'
-    },
-    {
-        name:'James Keane',
-        link:'https://www.linkedin.com/in/james-keane-678863b7/',
-        img: `JamesKeane.jpg`,
-        affiliation:'(CSDS)',
-        title: 'Senior Research Assistant'
-    }
-]
+// const contributors = [
+//     {
+//         name: 'Isaac Kamber',
+//         link: 'https://www.linkedin.com/in/isaac-kamber/',
+//         img: `isaac.png`,
+//         affiliation: '(CSDS)',
+//         title: 'Senior Research Assistant'
+//     },
+//     {
+//         name:'Lorenz Menendez',
+//         link:'https://www.linkedin.com/in/lorenzmenendez/',
+//         img: `Menendez_Lorenz.jpeg`,
+//         affiliation:'(CSDS)',
+//         title: 'Senior Research Assistant'
+//     },
+//     {
+//         name:'James Keane',
+//         link:'https://www.linkedin.com/in/james-keane-678863b7/',
+//         img: `JamesKeane.jpg`,
+//         affiliation:'(CSDS)',
+//         title: 'Senior Research Assistant'
+//     }
+// ]
 
 // // Community Partners contributors
 // const communityPartners = [

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import ResourceList from '../../config/resources.json';
 import { ContentContainer } from '../../styled_components';
 import { ResourceGuideRow, NavBar, Footer } from '../../components';
-import { colors } from "../../config";
-
-
 
 const GuidePageContent = styled.div`
   width: 100%;

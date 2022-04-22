@@ -1,5 +1,5 @@
-import React, {useEffect, useState, useMemo} from 'react';
-import { AreaChart, Area,CartesianGrid, ResponsiveContainer, XAxis, YAxis, Text } from 'recharts';
+import React, {useEffect, useState} from 'react';
+import { AreaChart, Area,CartesianGrid, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 export default function BarChartComponent({data, dataKey, color}){
     const [yRange, setYRange] = useState([]);
@@ -10,7 +10,7 @@ export default function BarChartComponent({data, dataKey, color}){
         if (!yRange.length){
             setYRange([min, max])
         }
-    }, [JSON.stringify(data)])
+    }, [JSON.stringify(data)])  // eslint-disable-line react-hooks/exhaustive-deps
     const tickFormatter = f => Math.round(f*100)/100
     return (
       <ResponsiveContainer width="100%">

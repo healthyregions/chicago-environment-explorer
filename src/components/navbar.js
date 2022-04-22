@@ -176,8 +176,8 @@ export default function Nav({
           {!!showMapControls && <>
             <Typography>Map Controls</Typography>
             <NavItems>
-              <li><a href="#" onClick={() => handleOpenClose('variables')}>{SVG.settings} Variables Panel</a></li>
-              <li><a href="#" onClick={() => handleOpenClose('info')}>{SVG.report}Data View</a></li>
+              <li><Button href="#" onClick={() => handleOpenClose('variables')}>{SVG.settings} Variables Panel</Button></li>
+              <li><Button href="#" onClick={() => handleOpenClose('info')}>{SVG.report}Data View</Button></li>
               {/* <li><a onClick={() => setViewState({
                 ...bounds,
                 bearing:0,
