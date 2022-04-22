@@ -417,7 +417,7 @@ export default function Home() {
             </Grid>
           </Grid>
           <LogoScroll logoList={logoList} />
-          <h2 className="logoScrollText">Thanks to ChiVes data contributors!</h2>
+          <h2 className="logoScrollText">Thanks to ChiVes Contributors!</h2>
         </Hero>
       </HomePageContent>
       <Gutter h={60} />
