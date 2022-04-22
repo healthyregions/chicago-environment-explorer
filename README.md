@@ -49,7 +49,7 @@ View our [Standards and Submission Guidelines](https://docs.google.com/document/
 
 Learn more on our [About](https://chichives.com/about) page, and feel free to [Contact Us](https://chichives.com/contact) with any questions. 
 
-## Getting Started
+# Features
 
 There are several ways to get started using ChiVes and exploring Chicago's environment:
 
@@ -59,7 +59,7 @@ Got somewhere you want to explore? Search for an address on the homepage to navi
 
 ### [Find Your Community](https://chichives.com/community)
 Get a dynamic community report about key indicators and environmental metrics for your neighborhood. Search by your location.
-![Community Report](https://user-images.githubusercontent.com/49726781/164777763-9cfb4b68-0a51-40fc-94a6-4bd7202f50b1.png)
+[image](https://user-images.githubusercontent.com/49726781/164778812-1a78e608-e6fe-4873-9287-2e8883086253.png))
 
 ### [Start Mapping](https://chichives.com/map)
 Explore dimensions of the environment across Chicago in an interactive map. Data comes from collaborators across the city!
@@ -92,6 +92,7 @@ See [Data](https://chichives.com/data) page.
 
 ## Map Variables and Data Sources
 See [Data](https://chichives.com/data) page.
+
 
 # Using Create React App
 
