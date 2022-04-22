@@ -4,8 +4,12 @@ export const defaultData = 'chives-data.geojson';
 export const defaultVariable = "Surface Temperature";
 
 export const variablePresets = rawVariables.reduce(
-  (obj, row) => Object.assign(obj, { [row['Variable Name']]: { ...row, accessor: feature => feature.properties[row.Column] } }), {});
-
+  (obj, row) => Object.assign(obj, 
+    "HEADER" in row 
+      ? { ['HEADER::' + row['HEADER']]: { } }
+      : { [row['Variable Name']]: { ...row, accessor: feature => feature.properties[row.Column] } }
+    ), {});
+console.log(variablePresets);
 export const dataDescriptions = rawVariables.reduce(
   (obj, row) => Object.assign(obj, { 
     [row['Variable Name']]: 
