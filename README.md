@@ -48,6 +48,17 @@ View our [Standards and Submission Guidelines](https://docs.google.com/document/
 
 Learn more on our [About](https://chichives.com/about) page, and feel free to [Contact Us](https://chichives.com/contact) with any questions. 
 
+# Data
+
+ChiVes uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018). Learn more on the [Data](https://chichives.com/data) page. 
+
+Download the latest version of our data here: 
+* [ShapeFile](https://chichives.com/shp/chives-data.zip)
+* [GeoJSON](https://chichives.com/geojson/chives-data.geojson)
+* [CSV / Excel](https://chichives.com/csv/chives-data.csv)
+
+This data is licensed under a [Creative Commons Attribution Non-Commercial license](https://creativecommons.org/licenses/by-nc/2.0/).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
