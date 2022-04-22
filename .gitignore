@@ -29,3 +29,4 @@ yarn-error.log*
 *.Rhistory
 .Rhistory
 package-lock.json
+yarn.lock
