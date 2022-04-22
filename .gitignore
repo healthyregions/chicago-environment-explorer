@@ -24,3 +24,8 @@ yarn-error.log*
 .env
 
 .yarn
+
+*/**.Rhistory
+*.Rhistory
+.Rhistory
+package-lock.json
