@@ -232,7 +232,7 @@ const slide = keyframes`
 const ContributersContainerInner = styled.div`
   width:auto;
   position:absolute;
-  animation: ${slide} 15s linear infinite;
+  animation: ${slide} 30s linear infinite;
 `
 
 export default function Home() {
