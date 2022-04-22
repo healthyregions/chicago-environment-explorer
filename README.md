@@ -1,6 +1,7 @@
 # ChiVes: The Chicago Environment Explorer
 ### [ChiVes](https://chichives.com/) is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level.
 
+
 # About
 
 Chicago's urban environment has profound impacts on the health of communities and individuals. A handful of key metrics―tree cover, air pollution estimates, heat island effects, traffic volumes, and social vulnerability index― help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
@@ -92,7 +93,7 @@ See [Data](https://chichives.com/data) page.
 ## Map Variables and Data Sources
 See [Data](https://chichives.com/data) page.
 
-# Getting Started with Create React App
+# Using Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
