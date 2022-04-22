@@ -1,5 +1,5 @@
 # ChiVes: The Chicago Environment Explorer
-ChiVes is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level.
+### [ChiVes](https://chichives.com/) is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level.
 
 # About
 
@@ -52,16 +52,20 @@ Learn more on our [About](https://chichives.com/about) page, and feel free to [C
 
 There are several ways to get started using ChiVes and exploring Chicago's environment:
 
-1. Find your Community: Got somewhere you want to explore? Search for an address on the homepage to navigate directly to your neighborhod. 
+### [Search by Address](https://chichives.com/)
+Got somewhere you want to explore? Search for an address on the homepage to navigate directly to your neighborhod. 
 ![image](https://user-images.githubusercontent.com/49726781/164777564-1489d63a-0199-406a-aadd-4fef4c328c1d.png)
 
-2. Create a Community Report: Get a dynamic report about key indicators and environmental metrics for your neighborhood. Search by your location.
+### [Find Your Community](https://chichives.com/community)
+Get a dynamic community report about key indicators and environmental metrics for your neighborhood. Search by your location.
 ![Community Report](https://user-images.githubusercontent.com/49726781/164777763-9cfb4b68-0a51-40fc-94a6-4bd7202f50b1.png)
 
-3. Explore the Map: Explore dimensions of the environment across Chicago in an interactive map. Data comes from collaborators across the city!
+### [Start Mapping](https://chichives.com/map)
+Explore dimensions of the environment across Chicago in an interactive map. Data comes from collaborators across the city!
 <img width="1680" alt="NDVI" src="https://user-images.githubusercontent.com/49726781/164777803-5827ebf2-fe04-41db-9d17-9e68222e9d8b.png">
 
-4. Find Resources: Discover other maps, data, and resources about the Chicago environment from featured partners and a curated list of resources.
+### [Learn More](https://chichives.com/guide)
+Discover other maps, data, and resources about the Chicago environment from featured partners and a curated list of resources.
 <img width="1125" alt="ResourceGuide" src="https://user-images.githubusercontent.com/49726781/164777815-afa6fdc7-fb42-48e4-bf31-848f3423f954.png">
 
 
