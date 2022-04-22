@@ -14,7 +14,7 @@ const FooterContainer = styled.footer`
   }
   h6 {
     margin-top: 0;
-    margin-bottom: 12px;
+    margin-bottom: 2rem;
     font-size: 1rem;
     font-weight: 600;
     font-stretch: normal;
@@ -22,6 +22,7 @@ const FooterContainer = styled.footer`
     line-height: normal;
     letter-spacing: normal;
     color: ${colors.black};
+    text-align:left;
   }
   a {
     text-decoration: none;
@@ -67,6 +68,10 @@ const FooterContent = styled.div`
   max-width: 1140px;
   margin: 0 auto;
   padding: 2rem 0;
+  a, a img {
+    display: inline-block;
+    width:90%;
+  }
 `;
 
 const LinkLists = styled(Grid)`
@@ -95,8 +100,10 @@ const Footer = (props) => {
     <FooterContainer>
       <FooterContent>
         <LinkLists container spacing={0}>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12}>
             <h6>ChiVes</h6>
+          </Grid>
+          <Grid item xs={12} md={6}>
             <Grid container spacing={0}>
               <Grid item xs={6}>
                 <ul>
@@ -129,33 +136,38 @@ const Footer = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <a
-              href="https://voices.uchicago.edu/herop/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                className="logo"
-                src={`${process.env.PUBLIC_URL}/herop_light_logo.png`}
-                width="37.5%"
-                alt="Center for Spatial Data Science logo"
-              />
-            </a>
-            <a
-              href="https://spatial.uchicago.edu/content/spatial-research-csds"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img
-                className="logo"
-                src={`${process.env.PUBLIC_URL}/csds-university-wordmark-white.png`}
-                width="50%"
-                alt="Center for Spatial Data Science logo"
-              />
-            </a>
+          <Grid item xs={12} md={6} alignContent="center" alignItems="center">
+            <Grid container spacing={0}>
+              <Grid item xs={6}>
+
+                <a
+                  href="https://voices.uchicago.edu/herop/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    className="logo"
+                    src={`${process.env.PUBLIC_URL}/herop_light_logo.png`}
+                    alt="Center for Spatial Data Science logo"
+                  />
+                </a>
+              </Grid>
+              <Grid item xs={6}>
+                <a
+                  href="https://spatial.uchicago.edu/content/spatial-research-csds"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    className="logo"
+                    src={`${process.env.PUBLIC_URL}/csds-university-wordmark-white.png`}
+                    alt="Center for Spatial Data Science logo"
+                  />
+                </a>
+              </Grid>
+            </Grid>
           </Grid>
-          <hr/>
+          <hr />
           <Grid item xs={12}>
             <p className="copyright">
               Copyright ChiVes Contributors, Healthy Regions and Polices Lab
