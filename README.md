@@ -53,19 +53,25 @@ Learn more on our [About](https://chichives.com/about) page, and feel free to [C
 
 There are several ways to get started using ChiVes and exploring Chicago's environment:
 
-### [Search by Address](https://chichives.com/)
+## [Search by Address](https://chichives.com/)
 Got somewhere you want to explore? Search for an address on the homepage to navigate directly to your neighborhod. 
 ![image](https://user-images.githubusercontent.com/49726781/164777564-1489d63a-0199-406a-aadd-4fef4c328c1d.png)
 
-### [Find Your Community](https://chichives.com/community)
-Get a dynamic community report about key indicators and environmental metrics for your neighborhood. Search by your location.
-[image](https://user-images.githubusercontent.com/49726781/164778812-1a78e608-e6fe-4873-9287-2e8883086253.png))
+----
 
-### [Start Mapping](https://chichives.com/map)
+## [Find Your Community](https://chichives.com/community)
+Get a dynamic community report about key indicators and environmental metrics for your neighborhood. Search by your location.
+![image](https://user-images.githubusercontent.com/49726781/164778812-1a78e608-e6fe-4873-9287-2e8883086253.png)
+
+----
+
+## [Start Mapping](https://chichives.com/map)
 Explore dimensions of the environment across Chicago in an interactive map. Data comes from collaborators across the city!
 <img width="1680" alt="NDVI" src="https://user-images.githubusercontent.com/49726781/164777803-5827ebf2-fe04-41db-9d17-9e68222e9d8b.png">
 
-### [Learn More](https://chichives.com/guide)
+----
+
+## [Learn More](https://chichives.com/guide)
 Discover other maps, data, and resources about the Chicago environment from featured partners and a curated list of resources.
 <img width="1125" alt="ResourceGuide" src="https://user-images.githubusercontent.com/49726781/164777815-afa6fdc7-fb42-48e4-bf31-848f3423f954.png">
 
