@@ -77,8 +77,10 @@ const projectTeam = [
 const accordionContent = [
     {
         label: "West Humboldt Park Resource Map (2017)",
-        content: <p>The project was developed as a friendly collaboration out of the West Humboldt Park Health Coalition, a collective of community organizations, local businesses, health, and academic partners. Staff from West Humboldt Park Development Council, Our Lady of Angels, and the Northwestern Memorial Community Services group outlined the need and drove the concept. Lead developers are Marynia Kolak and Michael Steptoe. Student interns who've worked on this include Rachel Weisz (Northwestern University) and Gentry Nissen (Arizona State University).
-            <a href="http://makosak.github.io/HumboldtResources/about.html"> Learn more</a>.
+        content: <p>The West Humboldt Park Resource map was a community-engaged resource map highlighting assets in the neighborhood for a variety of organizations, people, and needs. It incorporated modern geospatial analytics to integrate data from multiple partners in a low-tech, easy to access way.
+        <br/><br/>
+        The project was developed as a friendly collaboration out of the West Humboldt Park Health Coalition, a collective of community organizations, local businesses, health, and academic partners. Staff from West Humboldt Park Development Council, Our Lady of Angels, and the Northwestern Memorial Community Services group outlined the need and drove the concept. Lead developers are Marynia Kolak and Michael Steptoe. Student interns who've worked on this include Rachel Weisz (Northwestern University) and Gentry Nissen (Arizona State University).
+            <a href="https://www.researchgate.net/profile/Marynia-Kolak/publication/336436397_Extending_Volunteered_Geographic_Information_VGI_with_Geospatial_Software_as_a_Service_Participatory_Asset_Mapping_Infrastructures_for_Urban_Health/links/5f4970d892851c6cfdf5af2a/Extending-Volunteered-Geographic-Information-VGI-with-Geospatial-Software-as-a-Service-Participatory-Asset-Mapping-Infrastructures-for-Urban-Health.pdf"> Learn more</a>.
         </p>
     },
 
@@ -185,7 +187,7 @@ export default function About(){
                 <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li>
                 <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li>
                 <br/>
-                We are also grateful to the <b>Nature Conservancy</b>, <b>Audobon Society</b>, and <b>Field Museum</b> for their insights and support.
+                We are also grateful to the <b>Nature Conservancy</b>, <b>Audubon Society</b>, and <b>Field Museum</b> for their insights and support.
                 <br/><br/>
                 Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a> and 
                 <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a>, now alumni of University of Chicago, who developed multiple measures
