@@ -341,7 +341,7 @@ export default function Home() {
                 environment from featured partners and a curated list of
                 resources.{" "}
               </p>
-              <Link to="/community">Learn More</Link>
+              <Link to="/guide">Learn More</Link>
             </Grid>
           </ThreeUpGrid>
 
