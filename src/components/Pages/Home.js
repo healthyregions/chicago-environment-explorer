@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import Grid from "@mui/material/Grid";
 
@@ -148,6 +148,15 @@ const Hero = styled.div`
   }
 `;
 
+const ShowCaseContainer = styled.div`
+  background: ${colors.gray}10;
+  padding:0 0 3em 0;
+  p {
+    max-width:80ch;
+    margin:0 auto;
+  }
+`
+
 const ThreeUpGrid = styled(Grid)`
   padding: 2em 0;
   margin: 1em 0;
@@ -170,7 +179,7 @@ const ThreeUpGrid = styled(Grid)`
     max-width: 95%;
   }
   img {
-    width: 100%;
+    width: 80%;
     max-width: 10em;
     display: block;
   }
@@ -277,7 +286,7 @@ export default function Home() {
                   />
                 </Grid>
                 <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
-                  <h2>Community <br/> Report</h2>
+                  <h2>Community <br /> Report</h2>
                 </Grid>
               </Grid>
               <p>
@@ -298,7 +307,7 @@ export default function Home() {
                   />
                 </Grid>
                 <Grid item xs={9} sm={9} md={9} lg={9} xl={9}>
-                  <h2>Neighborhood <br/> Map</h2>
+                  <h2>Neighborhood <br /> Map</h2>
                 </Grid>
               </Grid>
 
@@ -314,7 +323,7 @@ export default function Home() {
                 <Grid item xs={3} sm={3} md={3} lg={3} xl={3}>
                   <img
                     className="photo"
-                    src={process.env.PUBLIC_URL + "/icons/tree-planting.png"}
+                    src={process.env.PUBLIC_URL + "/icons/resource_guide.png"}
                     alt="Wild Onion"
                     loading="lazy"
                   />
@@ -355,10 +364,11 @@ export default function Home() {
               />
             </Grid>
           </GeocoderContainer>
-          <Showcase />
-          <Gutter h={60} />
-          <LogoScroll logoList={logoList}/>
-          <h2 className="logoScrollText">Thanks to ChiVes data contributors!</h2>
+          </Hero>
+          <ShowCaseContainer>
+            <Showcase />
+          </ShowCaseContainer>
+          <Hero>
           <Gutter h={60} />
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
@@ -406,27 +416,27 @@ export default function Home() {
               </h5>
             </Grid>
           </Grid>
-          <br />
-          <br />
-          <Gutter h={20} />
+          <LogoScroll logoList={logoList} />
+          <h2 className="logoScrollText">Thanks to ChiVes data contributors!</h2>
         </Hero>
       </HomePageContent>
-      <Footer signUp={false} />
+      <Gutter h={60} />
+      <Footer />
     </HomePage>
   );
 }
 
 
-function LogoScroll({logoList, autoscroll=true}){
+function LogoScroll({ logoList, autoscroll = true }) {
   return (
     <ContributersContainer>
       <ContributersContainerInner>
-      {logoList.map(({ImagePath}, i) => 
-          <img key={`logo-scroll-1-${i}`}src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
-      )}
-      {logoList.map(({ImagePath}, i) => 
-          <img key={`logo-scroll-2-${i}`}src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
-      )}
+        {logoList.map(({ ImagePath }, i) =>
+          <img key={`logo-scroll-1-${i}`} src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
+        )}
+        {logoList.map(({ ImagePath }, i) =>
+          <img key={`logo-scroll-2-${i}`} src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
+        )}
       </ContributersContainerInner>
     </ContributersContainer>
   )
