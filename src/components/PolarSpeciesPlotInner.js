@@ -39,17 +39,11 @@ function PolarSpeciesPlotInner({
   margin = defaultMargin,
 }) {
   const [selectedNode, setSelectedNode] = useState(null);
-  // const [showMiniMap, setShowMiniMap] = useState(true);
   const [iframeOpen, setIframeOpen] = useState(false);
   const handleNode = (node) => {
     setSelectedNode(node);
     setIframeOpen(true);
   }
-  // const [layout, setLayout] = useState("cartesian");
-  // const [orientation, setOrientation] = useState < string > "horizontal";
-  // const [linkType, setLinkType] = useState < string > "diagonal";
-  // const [stepPercent, setStepPercent] = useState < number > 0.5;
-  //   const forceUpdate = useForceUpdate();
 
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
@@ -163,47 +157,6 @@ function PolarSpeciesPlotInner({
                 )}
               </Tree>
             </Group>
-            {/* {showMiniMap && (
-              <g
-                clipPath="url(#zoom-clip)"
-                transform={`
-                    scale(0.25)
-                    translate(${width * 4 - width - 60}, ${height * 4 - height - 60})
-                  `}
-              >
-                <rect width={width} height={height} fill="#1a1a1a" />
-                <Group>
-                  <Tree
-                    root={hierarchy(data, (d) => (d.isExpanded ? null : d.children))}
-                    size={[sizeWidth, sizeHeight]}
-                    separation={(a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth}
-                  >
-                    {(tree) => (
-                      <Group top={origin.y} left={origin.x}>
-                        {tree.links().map((link, i) => (
-                          <LinkRadial
-                            key={i}
-                            data={link}
-                            percent={0.5}
-                            stroke="rgb(150,60,120,0.9)"
-                            strokeWidth="1"
-                            fill="none"
-                          />
-                        ))}
-                      </Group>)}
-                  </Tree>
-                </Group>
-                <rect
-                  width={width}
-                  height={height}
-                  fill="white"
-                  fillOpacity={0.2}
-                  stroke="white"
-                  strokeWidth={4}
-                  transform={zoom.toStringInvert()}
-                />
-              </g>
-            )} */}
           </svg> 
           <div style={{position:'absolute', display:'flex', flexDirection:'column', left:0, top:'50%', transform:'translateY(-50%)'}}>
             <Button style={{fontWeight:'bold', textAlign:'left'}}
@@ -227,15 +180,6 @@ function PolarSpeciesPlotInner({
               Reset
             </Button>
           </div>
-          {/* <div className="mini-map">
-            <button
-              type="button"
-              className="btn btn-lg"
-              onClick={() => setShowMiniMap(!showMiniMap)}
-            >
-              {showMiniMap ? 'Hide' : 'Show'} Mini Map
-            </button>
-          </div> */}
           <IframeSpeciesInfo name={selectedNode} open={iframeOpen} setOpen={setIframeOpen} />
         </div>
       )}</Zoom>

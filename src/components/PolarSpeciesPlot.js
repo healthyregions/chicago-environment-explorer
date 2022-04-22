@@ -29,10 +29,6 @@ export default function PolarSpeciesPlot({ geoid, open, setOpen }) {
   });
 
   const handleClose = () => {
-    setData({
-      taxa: {},
-      count: 0
-    });
     setOpen(false);
   };
 
