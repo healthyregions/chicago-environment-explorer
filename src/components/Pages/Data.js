@@ -9,8 +9,12 @@ import baseLayers from '../../config/baseLayers.json';
 
 const DataPage = styled.div`
     background:white;
+
+`
+
+const TableStyle  = styled.div`
     a {
-        font-family: 'Montserrat', sans-serif;
+        font-family: 'Lora', sans-serif;
         font-size: 13px;
         font-stretch: normal;
         text-align:left;
@@ -19,6 +23,7 @@ const DataPage = styled.div`
         letter-spacing: normal;
         padding:2rem 0;
     }
+
 `
 
 const Hero = styled.div`
@@ -28,6 +33,16 @@ const Hero = styled.div`
     color: ${colors.lightgray};
     margin:0 auto;
     padding:50px 10px 0 10px;
+        a {
+        font-family: 'Lora', sans-serif;
+        font-size: 13px;
+        font-stretch: normal;
+        text-align:left;
+        font-style: normal;
+        line-height: 1.6;
+        letter-spacing: normal;
+        padding:2rem 0;
+    }
     p, .license-description a {
         
         font-family: 'Lora', sans-serif;
@@ -133,6 +148,7 @@ export default function Data() {
                         {/* Cite this data as <i>ChiVes Data Contributors</i> */}
                     </p>
                 </Hero>
+
                 <Gutter h={20} />
                 <h2>Data Dictionary</h2>
                 <ul>
@@ -145,9 +161,15 @@ export default function Data() {
                     as well as the data methodology documentation and sources.
                     All map data are harmonized to the census tract scale.
                 </h3>
-                <Gutter h={20} />
-                <Table columns={columns} data={dataSources} />
-                <Gutter h={40} />
+
+
+                
+                    <Gutter h={20} />
+                    <Table columns={columns} data={dataSources} />
+                    <Gutter h={40} />
+               
+                    
+
                 <h2>Basemap Layers and Data</h2>
                 <h3>The variables below are represented in the map as base layers.</h3>
                 <Gutter h={20} />
