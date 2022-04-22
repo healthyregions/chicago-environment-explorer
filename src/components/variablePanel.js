@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import ListSubheader from '@mui/material/ListSubheader';
 
 import styled from "styled-components";
 
@@ -244,8 +245,10 @@ const VariablePanel = (props) => {
             onChange={handleVariable}
             MenuProps={{ id: "variableMenu" }}
           >
-            {Object.keys(variablePresets).map((variable) => (
-              <MenuItem value={variable} key={variable}>
+            {Object.keys(variablePresets).map((variable,i) => (
+              variable.includes("HEADER::")  
+               ? <ListSubheader key={`list-header-${i}`}>{variable.split("HEADER::")[1]}</ListSubheader>
+               : <MenuItem value={variable} key={`variable-menu-item-${i}`}>
                 {variable}
               </MenuItem>
             ))}
