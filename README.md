@@ -48,6 +48,23 @@ View our [Standards and Submission Guidelines](https://docs.google.com/document/
 
 Learn more on our [About](https://chichives.com/about) page, and feel free to [Contact Us](https://chichives.com/contact) with any questions. 
 
+## Getting Started
+
+There are several ways to get started using ChiVes and exploring Chicago's environment:
+
+1. Find your Community: Got somewhere you want to explore? Search for an address on the homepage to navigate directly to your neighborhod. 
+![image](https://user-images.githubusercontent.com/49726781/164777564-1489d63a-0199-406a-aadd-4fef4c328c1d.png)
+
+2. Create a Community Report: Get a dynamic report about key indicators and environmental metrics for your neighborhood. Search by your location.
+![Community Report](https://user-images.githubusercontent.com/49726781/164777763-9cfb4b68-0a51-40fc-94a6-4bd7202f50b1.png)
+
+3. Explore the Map: Explore dimensions of the environment across Chicago in an interactive map. Data comes from collaborators across the city!
+<img width="1680" alt="NDVI" src="https://user-images.githubusercontent.com/49726781/164777803-5827ebf2-fe04-41db-9d17-9e68222e9d8b.png">
+
+4. Find Resources: Discover other maps, data, and resources about the Chicago environment from featured partners and a curated list of resources.
+<img width="1125" alt="ResourceGuide" src="https://user-images.githubusercontent.com/49726781/164777815-afa6fdc7-fb42-48e4-bf31-848f3423f954.png">
+
+
 # Data
 
 ChiVes uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018). Learn more on the [Data](https://chichives.com/data) page. 
