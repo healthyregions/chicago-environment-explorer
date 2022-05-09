@@ -10,10 +10,10 @@ import styled from "styled-components";
 
 // import Tooltip from './tooltip';
 import { Gutter } from "../styled_components";
-import { changeVariable, setMapParams, setPanelState } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
+import { changeVariable, setMapParams, setPanelState, toggle3d } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
 import { colors, variablePresets, dataDescriptions } from "../config";
 import * as SVG from "../config/svg";
-import { FormControl } from "@mui/material";
+import { Button, FormControl } from "@mui/material";
 const REDLINING_COLOR_SCALE = {
   A: [115, 169, 77],
   B: [52, 172, 198],
@@ -229,7 +229,7 @@ const VariablePanel = (props) => {
 
   const handleVariable = (e) =>
     dispatch(changeVariable(variablePresets[e.target.value]));
-
+    
   return (
     <VariablePanelContainer
       className={panelState.variables ? "" : "hidden"}
@@ -255,6 +255,7 @@ const VariablePanel = (props) => {
           </Select>
         </FormControl>
         <Gutter h={20} />
+        {mapParams.variableName === 'Air Quality (Weekly Readings)' && <Button onClick={() => dispatch(toggle3d())} sx={{textTransform:'none', mb:1}} variant="outlined" >Toggle 3D Map</Button>}
 
         <h2>Data Description</h2>
         <p className="data-description">
@@ -262,7 +263,7 @@ const VariablePanel = (props) => {
         </p>
 
         <Gutter h={20} />
-        <h2>Boundary Overlay</h2>
+        <h2>Data Overlay</h2>
         <FormControl variant="filled">
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
@@ -272,6 +273,9 @@ const VariablePanel = (props) => {
           >
             <MenuItem value="None" key={"None"}>
               None
+            </MenuItem>
+            <MenuItem value={"aq"} key={"aq"}>
+              Weekly Air Quality 
             </MenuItem>
             <MenuItem value={"community_areas"} key={"community_areas"}>
               Community Areas

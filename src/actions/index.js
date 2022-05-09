@@ -11,6 +11,11 @@ export const loadDataAndBins = ( geojsonData, bins ) => {
     }
 }
 
+export const toggle3d = () => {
+    return {
+        type: 'TOGGLE_3D'
+    }
+}
 
 // sets the variables parameters (index and range, numerator, denominator, etc.)
 export const changeVariable = ( params ) => {
