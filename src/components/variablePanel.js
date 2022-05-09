@@ -255,7 +255,7 @@ const VariablePanel = (props) => {
           </Select>
         </FormControl>
         <Gutter h={20} />
-        {mapParams.variableName === 'Air Quality (Weekly Readings)' && <Button onClick={() => dispatch(toggle3d())} sx={{textTransform:'none', mb:1}} variant="outlined" >Toggle 3D Map</Button>}
+        {mapParams.custom === 'aq_grid' && <Button onClick={() => dispatch(toggle3d())} sx={{textTransform:'none', mb:1}} variant="outlined" >Toggle 3D Map</Button>}
 
         <h2>Data Description</h2>
         <p className="data-description">
