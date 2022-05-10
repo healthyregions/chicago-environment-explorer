@@ -78,7 +78,8 @@ export default function reducer(state = INITIAL_STATE, action) {
         : generateQuantileBins(
           state.storedGeojson,
           6,
-          { ...state.mapParams, ...action.payload.params }["accessor"]
+          { ...state.mapParams, ...action.payload.params }["accessor"],
+          action.payload.params
         )
       const mapParams = {
         ...state.mapParams,

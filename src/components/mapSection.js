@@ -515,7 +515,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       lineWidthMinPixels: 1,
       opacity: 0.5,
       getFilterValue: (d) => (geoids.includes(+d.properties.geoid) ? 1 : 0),
-      visible: geoids.length > 0 && !mapParams.custom,
+      visible: geoids.length > 0, // && !mapParams.custom
       filterRange: [1, 1],
       extensions: [new DataFilterExtension({ filterSize: 1 })],
       updateTriggers: {
@@ -546,7 +546,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       getFilterValue: (d) => (isVisible(d, filterValues) ? 1 : 0),
       filterRange: [1, 1],
       extensions: [new DataFilterExtension({ filterSize: 1 })],
-      visible: geoids.length === 0 && !mapParams.custom,
+      visible: geoids.length === 0, //&& !mapParams.custom,
       updateTriggers: {
         getFillColor: [
           storedGeojson.type,
@@ -620,35 +620,35 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     //     visible: [mapParams.custom, mapParams.variableName],
     //   }
     // }),
-    new ColumnLayer({
-      id: "aq_data_grid",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
-      loaders: [CSVLoader],
-      loadOptions: {
-        csv: {
-          dynamicTyping: true,
-          skipEmptyLines: true,
-          header: true,
-        },
-      },
-      getPosition: (d) => [d.x, d.y],
-      opacity: 1,
-      extruded: use3d,
-      getElevation: (d) => d["normalized_median"] - 1,
-      getFillColor: (feature) => {
-        const val = feature.topline_median;
-        return getAqColor(val);
-      },
-      elevationScale: 3000,
-      opacity: 1,
-      radius: 100,
-      visible: mapParams.custom === "aq_grid",
-      updateTriggers: {
-        visible: [mapParams.custom, mapParams.variableName],
-        getFillColor: [mapParams.variableName],
-        extruded: use3d
-      },
-    }),
+    // new ColumnLayer({
+    //   id: "aq_data_grid",
+    //   data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
+    //   loaders: [CSVLoader],
+    //   loadOptions: {
+    //     csv: {
+    //       dynamicTyping: true,
+    //       skipEmptyLines: true,
+    //       header: true,
+    //     },
+    //   },
+    //   getPosition: (d) => [d.x, d.y],
+    //   opacity: 1,
+    //   extruded: use3d,
+    //   getElevation: (d) => d["normalized_median"] - 1,
+    //   getFillColor: (feature) => {
+    //     const val = feature.topline_median;
+    //     return getAqColor(val);
+    //   },
+    //   elevationScale: 3000,
+    //   opacity: 1,
+    //   radius: 100,
+    //   visible: mapParams.custom === "aq_grid",
+    //   updateTriggers: {
+    //     visible: [mapParams.custom, mapParams.variableName],
+    //     getFillColor: [mapParams.variableName],
+    //     extruded: use3d
+    //   },
+    // }),
   ];
 
   const overlayLayers = [

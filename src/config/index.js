@@ -9,7 +9,7 @@ export const variablePresets = rawVariables.reduce(
       ? { ['HEADER::' + row['HEADER']]: { } }
       : { [row['Variable Name']]: { ...row, accessor: feature => feature.properties[row.Column] } }
     ), {});
-console.log(variablePresets);
+    
 export const dataDescriptions = rawVariables.reduce(
   (obj, row) => Object.assign(obj, { 
     [row['Variable Name']]: 

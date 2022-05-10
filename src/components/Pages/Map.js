@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fitBounds } from "@math.gl/web-mercator";
-import * as Papa from "papaparse";
-
-import { loadDataAndBins, loadAqData } from "../../actions";
-
 import {
   MapSection,
   NavBar,
@@ -12,8 +8,7 @@ import {
   Legend,
   DataPanel,
 } from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
-import { generateQuantileBins } from "../../utils";
-import { defaultData } from "../../config";
+import { handleData } from "../../utils/handleData";
 
 // US bounds
 const defaultBounds = fitBounds({
@@ -29,19 +24,9 @@ function App() {
   const mapParams = useSelector((state) => state.mapParams);
   const [isLoading, setIsLoading] = useState(true);
   // const [viewstateFn, setViewStateFn] = useState(()=>{});
-  const dispatch = useDispatch();
-
-  const handleData = async () => {
-    const data = await fetch(
-      `${process.env.PUBLIC_URL}/geojson/${defaultData}`
-    ).then((r) => r.json());
-    const bins = generateQuantileBins(data, 6, mapParams.accessor);
-    dispatch(loadDataAndBins(data, bins));
-    setIsLoading(false);
-  };
-  
+  const dispatch = useDispatch();  
   useEffect(() => {
-    handleData()
+    handleData(dispatch, mapParams, setIsLoading)
     if (isLoading) {
       setIsLoading(false);
     }
