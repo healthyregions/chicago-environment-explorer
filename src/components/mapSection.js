@@ -19,7 +19,7 @@ import { CSVLoader } from "@loaders.gl/csv";
 import { fitBounds } from "@math.gl/web-mercator";
 import MapboxGLMap from "react-map-gl";
 import { MapboxLayer } from "@deck.gl/mapbox";
-import { scaleLinear } from "d3-scale";
+import { scaleLinear, scaleThreshold } from "d3-scale";
 import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
 
 // component, action, util, and config import
@@ -450,7 +450,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   const COLOR_SCALE = (x) =>
     scaleColor(x, mapParams.bins, mapParams.colorScale);
 
-  const AQ_SCALE = scaleLinear()
+  const AQ_SCALE = scaleThreshold()
     .domain([5, 7.5, 10, 12, 12.5, 15])
     .range([
       "rgb(1,152,189)",
@@ -565,6 +565,35 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         getFilterValue: filterValues,
       },
       transitions: {
+        getFillColor: 250,
+      },
+    }),
+
+    new GeoJsonLayer({
+      id: "highlightLayer",
+      data: storedGeojson,
+      opacity: 0.8,
+      material: false,
+      pickable: false,
+      stroked: true,
+      filled: true,
+      lineWidthScale: 5,
+      getLineColor: (d) =>
+        d.properties.geoid === hoverGeog
+          ? [65, 182, 230, 255]
+          : [100, 100, 100, 0],
+      getFillColor: (d) =>
+        d.properties.geoid === hoverGeog
+          ? [65, 182, 230, 120]
+          : [65, 182, 230, 0],
+      getLineWidth: 1,
+      lineWidthMinPixels: 3,
+      updateTriggers: {
+        getLineColor: [hoverGeog],
+        getFillColor: [hoverGeog],
+      },
+      transitions: {
+        getLineColor: 250,
         getFillColor: 250,
       },
     }),

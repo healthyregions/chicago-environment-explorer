@@ -1,10 +1,10 @@
 import { generateQuantileBins } from "../utils";
 import { defaultData } from "../config";
-import { loadDataAndBins } from "../actions";
+import { loadDataAndBins, setAqLastUpdated } from "../actions";
 import * as Papa from "papaparse";
 
 export const handleData = async (dispatch, mapParams, setIsLoading = () => { }) => {
-    const [data, aqTractData] = await Promise.all([
+    const [data, aqTractData, aqLastUpdated] = await Promise.all([
         fetch(
             `${process.env.PUBLIC_URL}/geojson/${defaultData}`
         ).then((r) => r.json()),
@@ -12,7 +12,9 @@ export const handleData = async (dispatch, mapParams, setIsLoading = () => { }) 
             .then(r => r.text())
             .then(r => Object.assign({}, ...Papa.parse(r, { header: true }).data
             .map(({ Tract, topline_median }) => ({ [Tract]: +topline_median })))
-            )
+        ),        
+        fetch(process.env.REACT_APP_AQ_ENDPOINT + '_timestamp.json')
+            .then(r => r.json())        
     ])
     
     const mergedData = {
@@ -32,5 +34,6 @@ export const handleData = async (dispatch, mapParams, setIsLoading = () => { }) 
     
     const bins = generateQuantileBins(mergedData, 6, mapParams.accessor, mapParams);
     dispatch(loadDataAndBins(mergedData, bins));
+    dispatch(setAqLastUpdated(aqLastUpdated));
     setIsLoading(false);
 };

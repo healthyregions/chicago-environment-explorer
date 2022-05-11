@@ -209,7 +209,9 @@ const ControlsContainer = styled.div`
 const VariablePanel = (props) => {
   const dispatch = useDispatch();
 
-  const { mapParams, panelState } = useSelector((state) => state);
+  const mapParams = useSelector((state) => state.mapParams);
+  const panelState = useSelector((state) => state.panelState);
+  const aqLastUpdated = useSelector((state) => state.aqLastUpdated);
 
   const handleMapOverlay = (event) => {
     dispatch(
@@ -260,6 +262,10 @@ const VariablePanel = (props) => {
 
         <h2>Data Description</h2>
         <p className="data-description">
+          {mapParams.custom === 'aq_grid' && <>
+          <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
+          <br/><br/>
+          </>}
           {dataDescriptions[mapParams.variableName]}
         </p>
 

@@ -120,6 +120,12 @@ export default function reducer(state = INITIAL_STATE, action) {
         aqIdw,
       };
     }
+    case "SET_AQ_LAST_UPDATED": {
+      return {
+        ...state,
+        aqLastUpdated: action.payload,
+      }
+    }
     case "APPLY_FILTER_VALUES":
       const filterValuesObject =
         typeof action.payload.range === "string"
