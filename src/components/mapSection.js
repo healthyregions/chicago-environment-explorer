@@ -1,5 +1,5 @@
 // general imports, state
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
@@ -237,7 +237,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   });
   const [glContext, setGLContext] = useState(null);
   const [hoverGeog, setHoverGeog] = useState(null);
+  const [useCustom, setUseCustom] = useState(false)
   const mapRef = useRef(null);
+  const mapContainerRef = useRef(null)
   // map view location
   const [viewState, setViewState] = useState({
     latitude: +urlParams.lat || bounds.latitude,
@@ -285,8 +287,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       });
     }
   }, 250);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!Object.keys(selectionData).length) {
       RunQueryWorker({
         storedGeojson,
@@ -306,6 +307,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     selectionData,
     filterValues,
   ]);
+
+  useEffect(() => {
+    mapContainerRef.current.addEventListener("contextmenu", (event) => {
+      event.preventDefault()
+    });
+  },[])
 
   useEffect(() => {
     if (deckRef.current.viewports) {
@@ -515,12 +522,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       lineWidthMinPixels: 1,
       opacity: 0.5,
       getFilterValue: (d) => (geoids.includes(+d.properties.geoid) ? 1 : 0),
-      visible: geoids.length > 0, // && !mapParams.custom
+      visible: geoids.length === 0 && !mapParams.useCustom,
       filterRange: [1, 1],
       extensions: [new DataFilterExtension({ filterSize: 1 })],
       updateTriggers: {
         getFilterValue: JSON.stringify(geoids),
-        visible: [geoids.length, mapParams.custom],
+        visible: [geoids.length, mapParams.useCustom],
       },
       transitions: {
         getFillColor: 250,
@@ -546,7 +553,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       getFilterValue: (d) => (isVisible(d, filterValues) ? 1 : 0),
       filterRange: [1, 1],
       extensions: [new DataFilterExtension({ filterSize: 1 })],
-      visible: geoids.length === 0, //&& !mapParams.custom,
+      visible: geoids.length === 0 && !mapParams.useCustom,
       updateTriggers: {
         getFillColor: [
           storedGeojson.type,
@@ -554,7 +561,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           mapParams.bins,
           mapParams.colorScale,
         ],
-        visible: [geoids.length, mapParams.custom],
+        visible: [geoids.length, mapParams.useCustom],
         getFilterValue: filterValues,
       },
       transitions: {
@@ -620,35 +627,35 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     //     visible: [mapParams.custom, mapParams.variableName],
     //   }
     // }),
-    // new ColumnLayer({
-    //   id: "aq_data_grid",
-    //   data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
-    //   loaders: [CSVLoader],
-    //   loadOptions: {
-    //     csv: {
-    //       dynamicTyping: true,
-    //       skipEmptyLines: true,
-    //       header: true,
-    //     },
-    //   },
-    //   getPosition: (d) => [d.x, d.y],
-    //   opacity: 1,
-    //   extruded: use3d,
-    //   getElevation: (d) => d["normalized_median"] - 1,
-    //   getFillColor: (feature) => {
-    //     const val = feature.topline_median;
-    //     return getAqColor(val);
-    //   },
-    //   elevationScale: 3000,
-    //   opacity: 1,
-    //   radius: 100,
-    //   visible: mapParams.custom === "aq_grid",
-    //   updateTriggers: {
-    //     visible: [mapParams.custom, mapParams.variableName],
-    //     getFillColor: [mapParams.variableName],
-    //     extruded: use3d
-    //   },
-    // }),
+    new ColumnLayer({
+      id: "aq_data_grid",
+      data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
+      loaders: [CSVLoader],
+      loadOptions: {
+        csv: {
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          header: true,
+        },
+      },
+      getPosition: (d) => [d.x, d.y],
+      opacity: 1,
+      extruded: use3d,
+      getElevation: (d) => d["normalized_median"] - 1,
+      getFillColor: (feature) => {
+        const val = feature.topline_median;
+        return getAqColor(val);
+      },
+      elevationScale: 3000,
+      opacity: 1,
+      radius: 100,
+      visible: mapParams.custom === "aq_grid" && mapParams.useCustom,
+      updateTriggers: {
+        visible: [mapParams.custom, mapParams.useCustom],
+        getFillColor: [mapParams.variableName],
+        extruded: use3d
+      },
+    }),
   ];
 
   const overlayLayers = [
@@ -714,13 +721,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           header: true,
         },
       },
-      getSourcePosition: (feature) => [feature.longitude, feature.latitude, feature["topline_median"]*200],
+      getSourcePosition: (feature) => [feature.longitude, feature.latitude, feature["topline_median"]*200*use3d],
       getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
       getColor:[0,0,0],
       getWidth: 1,
       visible: mapParams.overlay === "aq",
       updateTriggers: {
         visible: [mapParams.overlay],
+        getSourcePosition: [use3d]
       },
     }),
     new TextLayer({
@@ -734,7 +742,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           header: true,
         },
       },
-      getPosition: (feature) => [feature.longitude, feature.latitude, feature["topline_median"]*200],
+      getPosition: (feature) => [feature.longitude, feature.latitude, feature["topline_median"]*200*use3d],
       getText: (feature) =>
         `${Math.round(feature["topline_median"] * 10) / 10}`,
       getSize: zoom ** 2,
@@ -750,6 +758,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       visible: mapParams.overlay === "aq",
       updateTriggers: {
         visible: [mapParams.overlay],
+        getPosition: [use3d],
+        getSize: [zoom]
       },
     }),
   ];
@@ -833,7 +843,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
   const view = new MapView({ repeat: true });
   return (
-    <MapContainer infoPanel={panelState.info}>
+    <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
       <DeckGL
         layers={allLayers}
         ref={deckRef}

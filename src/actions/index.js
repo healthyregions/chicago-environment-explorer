@@ -16,6 +16,11 @@ export const toggle3d = () => {
         type: 'TOGGLE_3D'
     }
 }
+export const toggleCustom = () => {
+    return {
+        type: 'TOGGLE_CUSTOM'
+    }
+}
 
 // sets the variables parameters (index and range, numerator, denominator, etc.)
 export const changeVariable = ( params ) => {

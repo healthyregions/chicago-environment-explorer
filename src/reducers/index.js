@@ -84,7 +84,11 @@ export default function reducer(state = INITIAL_STATE, action) {
       const mapParams = {
         ...state.mapParams,
         ...action.payload.params,
+        overlay: action.payload.params.custom === 'aq_grid'
+          ? 'aq'
+          : 'community_areas',
         bins,
+        useCustom: false
       };
 
       return {
@@ -97,6 +101,15 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         use3d: !state.use3d
+      }
+    }
+    case "TOGGLE_CUSTOM": {
+      return {
+        ...state,
+        mapParams: {
+          ...state.mapParams,
+          useCustom: !state.mapParams.useCustom
+        }
       }
     }
     case "LOAD_AQ_DATA": {

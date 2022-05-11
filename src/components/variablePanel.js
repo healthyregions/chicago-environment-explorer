@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 // import Tooltip from './tooltip';
 import { Gutter } from "../styled_components";
-import { changeVariable, setMapParams, setPanelState, toggle3d } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
+import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
 import { colors, variablePresets, dataDescriptions } from "../config";
 import * as SVG from "../config/svg";
 import { Button, FormControl } from "@mui/material";
@@ -169,7 +169,7 @@ const ControlsContainer = styled.div`
 
   @media (max-width: 600px) {
     width: 100%;
-    max-height: initial;
+    max-height: 100%;
     padding: 0 10px 25vh 10px;
   }
   p.data-description {
@@ -255,7 +255,8 @@ const VariablePanel = (props) => {
           </Select>
         </FormControl>
         <Gutter h={20} />
-        {mapParams.custom === 'aq_grid' && <Button onClick={() => dispatch(toggle3d())} sx={{textTransform:'none', mb:1}} variant="outlined" >Toggle 3D Map</Button>}
+        {!!mapParams.custom && <Button onClick={() => dispatch(toggleCustom())} sx={{textTransform:'none', mr: 2, mb:1}} variant="outlined" >View Source Data</Button>}
+        {mapParams.useCustom && mapParams.custom === 'aq_grid' && <Button onClick={() => dispatch(toggle3d())} sx={{textTransform:'none', mb:1}} variant="outlined" >View 3D Map</Button>}
 
         <h2>Data Description</h2>
         <p className="data-description">
