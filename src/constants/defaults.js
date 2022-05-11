@@ -28,6 +28,7 @@ export const INITIAL_STATE = {
     "hardship",
     "ndvi",
     "simpson",
+    "topline_median"
   ],
   ranges: {},
   selectionData: {},
