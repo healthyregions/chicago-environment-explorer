@@ -9,17 +9,17 @@ import { WebMercatorViewport, MapView, FlyToInterpolator } from "@deck.gl/core";
 import {
   TextLayer,
   GeoJsonLayer,
-  GridCellLayer,
+  // GridCellLayer,
   ColumnLayer,
   LineLayer,
 } from "@deck.gl/layers"; //, ScatterplotLayer, TextLayer
-import { GridLayer, HexagonLayer } from "@deck.gl/aggregation-layers";
+// import { GridLayer, HexagonLayer } from "@deck.gl/aggregation-layers";
 import { CSVLoader } from "@loaders.gl/csv";
 // import { GPUGridLayer, HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { fitBounds } from "@math.gl/web-mercator";
 import MapboxGLMap from "react-map-gl";
 import { MapboxLayer } from "@deck.gl/mapbox";
-import { scaleLinear, scaleThreshold } from "d3-scale";
+import { scaleThreshold } from "d3-scale";
 import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
 
 // component, action, util, and config import
@@ -237,7 +237,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   });
   const [glContext, setGLContext] = useState(null);
   const [hoverGeog, setHoverGeog] = useState(null);
-  const [useCustom, setUseCustom] = useState(false)
+  
   const mapRef = useRef(null);
   const mapContainerRef = useRef(null)
   // map view location
@@ -681,7 +681,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       diskResolution: 8,
       flatShading: true,
       elevationScale: 3000,
-      opacity: 1,
       radius: 100,
       visible: mapParams.custom === "aq_grid" && mapParams.useCustom,
       updateTriggers: {
@@ -776,7 +775,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           header: true,
         },
       },
-      getPosition: (feature) => [feature.longitude, feature.latitude, feature["topline_median"]*200*use3d],
+      getPosition: (feature) => [feature.longitude, feature.latitude, (feature["topline_median"]*200*use3d)+1],
       getText: (feature) =>
         `${Math.round(feature["topline_median"] * 10) / 10}`,
       getSize: zoom ** 2,
@@ -809,10 +808,10 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         ["community areas", "wards", "aq-text-layer", "aq_data_grid"].includes(
           layersKeys[i]
         )
-          ? "water-point-label"
+          ? 'state-label'
           : "water" // index layer order
       );
-    }
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // new GPUGridLayer({
   //     id: 'contour',
@@ -872,7 +871,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       handleTilt()
     } else {
       resetTilt()
-    }
+    }  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[use3d])
 
   const view = new MapView({ repeat: true });

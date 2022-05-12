@@ -109,7 +109,8 @@ export default function reducer(state = INITIAL_STATE, action) {
         mapParams: {
           ...state.mapParams,
           useCustom: !state.mapParams.useCustom
-        }
+        },
+        use3d: true
       }
     }
     case "LOAD_AQ_DATA": {
