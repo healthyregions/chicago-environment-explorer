@@ -37,7 +37,7 @@ const MapTooltipContent = ({content}) => {
             open: bool
         }))
     }
-    console.log(content)
+    
     return (
         <>
             <h2>Tract {geoid}</h2>
