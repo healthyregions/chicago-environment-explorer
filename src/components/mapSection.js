@@ -588,9 +588,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           : [65, 182, 230, 0],
       getLineWidth: 1,
       lineWidthMinPixels: 3,
+      visible: geoids.length === 0 && !mapParams.useCustom,
       updateTriggers: {
         getLineColor: [hoverGeog],
         getFillColor: [hoverGeog],
+        visible: [geoids.length, mapParams.useCustom],
       },
       transitions: {
         getLineColor: 250,
