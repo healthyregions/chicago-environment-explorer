@@ -669,6 +669,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           header: true,
         },
       },
+      // material: null,
       getPosition: (d) => [d.x, d.y],
       opacity: 1,
       extruded: use3d,
@@ -677,6 +678,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         const val = feature.topline_median;
         return getAqColor(val);
       },
+      diskResolution: 8,
+      flatShading: true,
       elevationScale: 3000,
       opacity: 1,
       radius: 100,
