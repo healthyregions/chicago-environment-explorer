@@ -1,16 +1,25 @@
 // general imports, state
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { WebMercatorViewport } from "@deck.gl/core";
 
 // deck GL and helper function import
 import DeckGL from "@deck.gl/react";
-import { MapView, FlyToInterpolator } from "@deck.gl/core";
-import { GeoJsonLayer } from "@deck.gl/layers"; //, ScatterplotLayer, TextLayer 
+import { WebMercatorViewport, MapView, FlyToInterpolator } from "@deck.gl/core";
+import {
+  TextLayer,
+  GeoJsonLayer,
+  // GridCellLayer,
+  ColumnLayer,
+  LineLayer,
+} from "@deck.gl/layers"; //, ScatterplotLayer, TextLayer
+// import { GridLayer, HexagonLayer } from "@deck.gl/aggregation-layers";
+import { CSVLoader } from "@loaders.gl/csv";
 // import { GPUGridLayer, HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { fitBounds } from "@math.gl/web-mercator";
 import MapboxGLMap from "react-map-gl";
+import { MapboxLayer } from "@deck.gl/mapbox";
+import { scaleThreshold } from "d3-scale";
 import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
 
 // component, action, util, and config import
@@ -207,26 +216,18 @@ function debounce(func, wait, immediate) {
   };
 }
 
-// //create your forceUpdate hook
-// function useForceUpdate(){
-//     const [, setValue] = useState(0); // integer state
-//     return () => setValue(value => value + 1); // update the state to force render
-// }
-
-function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
+function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   // fetch pieces of state from store
-  const {
-    storedGeojson,
-    panelState,
-    mapParams,
-    urlParams,
-    centroids,
-    columnNames,
-    ranges,
-    selectionData,
-    filterValues,
-  } = useSelector((state) => state);
-
+  const storedGeojson = useSelector((state) => state.storedGeojson);
+  const panelState = useSelector((state) => state.panelState);
+  const mapParams = useSelector((state) => state.mapParams);
+  const urlParams = useSelector((state) => state.urlParams);
+  const centroids = useSelector((state) => state.centroids);
+  const columnNames = useSelector((state) => state.columnNames);
+  const ranges = useSelector((state) => state.ranges);
+  const selectionData = useSelector((state) => state.selectionData);
+  const filterValues = useSelector((state) => state.filterValues);
+  const use3d = useSelector((state) => state.use3d);
   // component state elements
   // hover and highlight geographibes
   const [hoverInfo, setHoverInfo] = useState({
@@ -234,10 +235,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
     y: null,
     object: null,
   });
-  // const [highlightGeog, setHighlightGeog] = useState([]);
+  const [glContext, setGLContext] = useState(null);
   const [hoverGeog, setHoverGeog] = useState(null);
-  // const [zoom, setZoom] = useState(bounds.zoom);
-
+  
+  const mapRef = useRef(null);
+  const mapContainerRef = useRef(null)
   // map view location
   const [viewState, setViewState] = useState({
     latitude: +urlParams.lat || bounds.latitude,
@@ -246,26 +248,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
     bearing: 0,
     pitch: 0,
   });
+  const zoom = Math.round(viewState.zoom);
+
   useEffect(() => {
-    setViewState(bounds)
-  },[JSON.stringify(bounds)]) //eslint-disable-line
+    setViewState(bounds);
+  }, [JSON.stringify(bounds)]); //eslint-disable-line
+
   useEffect(() => {
     setViewStateFn(setViewState);
   }, []); //eslint-disable-line
 
-  // // share button notification
-  // const [shared, setShared] = useState(false);
-
-  // interaction states
-  // const [multipleSelect, setMultipleSelect] = useState(false);
-  // const [boxSelect, setBoxSelect] = useState(false);
-  // const [boxSelectDims, setBoxSelectDims] = useState({});
-  // const forceUpdate = useForceUpdate();
-  // const [resetSelect, setResetSelect] = useState(null);
-  // const [mobilityData, setMobilityData] = useState([]);
-
   const dispatch = useDispatch();
-
   const RunQueryWorker = async (params) => {
     QueryFeaturesWorker.postMessage(params);
     QueryFeaturesWorker.onmessage = (e) => {
@@ -294,8 +287,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
       });
     }
   }, 250);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!Object.keys(selectionData).length) {
       RunQueryWorker({
         storedGeojson,
@@ -317,55 +309,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
   ]);
 
   useEffect(() => {
+    mapContainerRef.current.addEventListener("contextmenu", (event) => {
+      event.preventDefault()
+    });
+  },[])
+
+  useEffect(() => {
     if (deckRef.current.viewports) {
       queryViewport({ viewState: { ...deckRef.current.viewports[0] } });
     }
     // eslint-disable-next-line
   }, [filterValues]);
-
-  // let hidden = null;
-  // let visibilityChange = null;
-  // if (typeof document.hidden !== 'undefined') { // Opera 12.10 and Firefox 18 and later support
-  //     hidden = 'hidden';
-  //     visibilityChange = 'visibilitychange';
-  // } else if (typeof document.msHidden !== 'undefined') {
-  //     hidden = 'msHidden';
-  //     visibilityChange = 'msvisibilitychange';
-  // } else if (typeof document.webkitHidden !== 'undefined') {
-  //     hidden = 'webkitHidden';
-  //     visibilityChange = 'webkitvisibilitychange';
-  // }
-
-  // shared view broadcast
-  // useEffect(() => {
-  //     document.addEventListener(visibilityChange, () => {
-  //         setBoxSelect(false);
-  //         setMultipleSelect(false);
-  //     });
-
-  //     window.addEventListener('storage', () => {
-  //         // When local storage changes, dump the list to
-  //         // the console.
-  //         const SHARED_GEOID =  localStorage.getItem('SHARED_GEOID').split(',').map(d => parseInt(d))
-
-  //         if (SHARED_GEOID !== null) {
-  //             setHighlightGeog(SHARED_GEOID);
-  //         }
-
-  //         const SHARED_VIEW =  JSON.parse(localStorage.getItem('SHARED_VIEW'));
-
-  //         if (SHARED_VIEW !== null && SHARED_VIEW.hasOwnProperty('latitude')) {
-  //             setViewState({
-  //                     longitude: SHARED_VIEW.longitude,
-  //                     latitude: SHARED_VIEW.latitude,
-  //                     zoom: SHARED_VIEW.zoom,
-  //                     transitionDuration: 1000,
-  //                     transitionInterpolator: new FlyToInterpolator()
-  //                 })
-  //         }
-  //     });
-
-  // },[])
 
   useEffect(() => {
     setViewState((view) => ({
@@ -388,8 +342,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
     }
   };
 
-  const mapRef = useRef(null);
-
   const deckRef = useRef({
     deck: {
       viewState: {
@@ -399,42 +351,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
       },
     },
   });
-
-  // const handleShare = async (params) => {
-  // const shareData = {
-  //     title: 'The US Covid Atlas',
-  //     text: 'Near Real-Time Exploration of the COVID-19 Pandemic.',
-  //     url: `${window.location.href.split('?')[0]}${getURLParams(params)}`,
-  // }
-
-  // try {
-  //     await navigator.share(shareData)
-  //   } catch(err) {
-  //     let copyText = document.querySelector("#share-url");
-  //     copyText.value = `${shareData.url}`;
-  //     copyText.style.display = 'blockd'
-  //     copyText.select();
-  //     copyText.setSelectionRange(0, 99999);
-  //     document.execCommand("copy");
-  //     copyText.style.display = 'none';
-  //     setShared(true)
-  //     setTimeout(() => setShared(false), 5000);
-  // }
-  // }
-
-  // const handleKeyDown = (e) => {
-  //     if (e.target.selectionStart === undefined){
-  //         if (e.ctrlKey) setMultipleSelect(true);
-  //         if (e.shiftKey) setBoxSelect(true);
-  //     }
-  // }
-
-  // const handleKeyUp = (e) => {
-  //     if (e.target.selectionStart === undefined){
-  //         if (!e.ctrlKey) setMultipleSelect(false);
-  //         if (!e.shiftKey) setBoxSelect(false);
-  //     }
-  // }
 
   const handleMapClick = ({ x, y, object }) => {
     if (object && object.properties) {
@@ -463,6 +379,15 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
     setViewState({
       ...currMapView,
       zoom: currMapView.zoom + zoom,
+      transitionDuration: 250,
+      transitionInterpolator: new FlyToInterpolator(),
+    });
+  };
+  const handleTilt = () => {
+    const currMapView = GetMapView();
+    setViewState({
+      ...currMapView,
+      pitch: 45,
       transitionDuration: 250,
       transitionInterpolator: new FlyToInterpolator(),
     });
@@ -525,6 +450,25 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
   const COLOR_SCALE = (x) =>
     scaleColor(x, mapParams.bins, mapParams.colorScale);
 
+  const AQ_SCALE = scaleThreshold()
+    .domain([5, 7.5, 10, 12, 12.5, 15])
+    .range([
+      "rgb(1,152,189)",
+      "rgb(73,227,206)",
+      "rgb(216,254,181)",
+      "rgb(254,237,177)",
+      "rgb(254,173,84)",
+      "rgb(209,55,78)",
+    ]);
+
+  const getAqColor = (val) => {
+    const color = AQ_SCALE(val);
+    return color
+      .slice(4, -1)
+      .split(",")
+      .map((x) => parseInt(x));
+  };
+
   const REDLINING_COLOR_SCALE = {
     A: [115, 169, 77],
     B: [52, 172, 198],
@@ -556,11 +500,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
   //   { threshold: [15, 200], color: [179, 0, 0], strokeWidth: 0, zIndex: 6 }, // => Isoline for threshold 5
   // ];
   // const AQ_COL = "weekend_median";
-  const mapAlphaFunc = mapParams.variableName.toLowerCase().includes("plant diversity")
+
+  const mapAlphaFunc = mapParams.variableName
+    .toLowerCase()
+    .includes("plant diversity")
     ? (feature, color) => [...color, feature.properties.specCt > 7 ? 255 : 75]
     : (_, color) => color;
-
-  const layers = [
+    
+  const baseLayers = [
     new GeoJsonLayer({
       id: "highlighted-geoids",
       data: storedGeojson,
@@ -568,19 +515,19 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
       stroked: true,
       filled: true,
       extruded: false,
-      getFillColor: [232,63,111],
-      getLineColor: [0,0,0,120],
+      getFillColor: [232, 63, 111],
+      getLineColor: [0, 0, 0, 120],
       getLineWidth: 1,
-      lineWidthMaxPixels:1,
-      lineWidthMinPixels:1,
+      lineWidthMaxPixels: 1,
+      lineWidthMinPixels: 1,
       opacity: 0.5,
-      getFilterValue: (d) => geoids.includes(+d.properties.geoid) ? 1 : 0,
-      visible: geoids.length > 0,
+      getFilterValue: (d) => (geoids.includes(+d.properties.geoid) ? 1 : 0),
+      visible: geoids.length === 0 && !mapParams.useCustom,
       filterRange: [1, 1],
       extensions: [new DataFilterExtension({ filterSize: 1 })],
       updateTriggers: {
         getFilterValue: JSON.stringify(geoids),
-        visible: geoids.length
+        visible: [geoids.length, mapParams.useCustom],
       },
       transitions: {
         getFillColor: 250,
@@ -602,12 +549,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
         }
       },
       opacity: 1,
-      // onHover: handleMapHover,
       onClick: handleMapClick,
       getFilterValue: (d) => (isVisible(d, filterValues) ? 1 : 0),
       filterRange: [1, 1],
       extensions: [new DataFilterExtension({ filterSize: 1 })],
-      visible: geoids.length === 0,
+      visible: geoids.length === 0 && !mapParams.useCustom,
       updateTriggers: {
         getFillColor: [
           storedGeojson.type,
@@ -615,41 +561,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
           mapParams.bins,
           mapParams.colorScale,
         ],
-        visible: geoids.length,
+        visible: [geoids.length, mapParams.useCustom],
         getFilterValue: filterValues,
       },
       transitions: {
         getFillColor: 250,
       },
     }),
-    new GeoJsonLayer({
-      id: "parks",
-      data: `${process.env.PUBLIC_URL}/geojson/parks.geojson`,
-      pickable: false,
-      stroked: false,
-      filled: true,
-      extruded: false,
-      getFillColor: [0, 0, 0, 120],
-      opacity: 1,
 
-      // props added by FillStyleExtension
-      fillPatternAtlas: `${process.env.PUBLIC_URL}/icons/park-pattern.png`,
-      fillPatternMapping: {
-        dot: {
-          x: 0,
-          y: 0,
-          width: 128,
-          height: 128,
-          mask: true,
-        },
-      },
-      getFillPattern: (f) => "dot",
-      getFillPatternScale: (19 - GetMapView().zoom) / 8,
-      getFillPatternOffset: [0, 0],
-
-      // Define extensions
-      extensions: [new FillStyleExtension({ pattern: true })],
-    }),
     new GeoJsonLayer({
       id: "highlightLayer",
       data: storedGeojson,
@@ -669,15 +588,110 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
           : [65, 182, 230, 0],
       getLineWidth: 1,
       lineWidthMinPixels: 3,
+      visible: geoids.length === 0 && !mapParams.useCustom,
       updateTriggers: {
         getLineColor: [hoverGeog],
         getFillColor: [hoverGeog],
+        visible: [geoids.length, mapParams.useCustom],
       },
       transitions: {
         getLineColor: 250,
         getFillColor: 250,
       },
     }),
+    new GeoJsonLayer({
+      id: "parks",
+      data: `${process.env.PUBLIC_URL}/geojson/parks.geojson`,
+      pickable: false,
+      stroked: false,
+      filled: true,
+      extruded: false,
+      getFillColor: [0, 0, 0, 120],
+      opacity: 1,
+      fillPatternAtlas: `${process.env.PUBLIC_URL}/icons/park-pattern.png`,
+      fillPatternMapping: {
+        dot: {
+          x: 0,
+          y: 0,
+          width: 128,
+          height: 128,
+          mask: true,
+        },
+      },
+      getFillPattern: (f) => "dot",
+      getFillPatternScale: (19 - GetMapView().zoom) / 8,
+      getFillPatternOffset: [0, 0],
+      extensions: [new FillStyleExtension({ pattern: true })],
+    }),
+  ];
+  const customLayers = [
+    // new HexagonLayer({
+    //   id: "aq_data_grid",
+    //   data: process.env.REACT_APP_AQ_IDW_ENDPOINT,
+    //   loaders: [CSVLoader],
+    //   loadOptions: {
+    //     csv: {
+    //       dynamicTyping: true,
+    //       skipEmptyLines: true,
+    //       header: true,
+    //     },
+    //   },
+    //   getPosition: (d) => [d.x, d.y],
+    //   opacity:1,
+    //   colorDomain: [7,12],
+    //   colorRange: mapParams.colorScale,
+    //   coverage: 0.9,
+    //   // extruded: true,
+    //   getColorWeight: (d) => d["topline_median"],
+    //   colorAggregation: "MEAN",
+    //   getElevationWeight: (d) => d["topline_median"],
+    //   elevationScale: 10,
+    //   elevationAggregation: "MEAN",
+    //   elevationDomain: [7, 12],
+    //   elevationRange: [0, 1000],
+    //   opacity: 0.5,
+    //   radius: 500,
+    //   // upperPercentile,
+    //   // lowerPercentile,
+    //   visible: mapParams.custom === 'aq_grid',
+    //   updateTriggers: {
+    //     visible: [mapParams.custom, mapParams.variableName],
+    //   }
+    // }),
+    new ColumnLayer({
+      id: "aq_data_grid",
+      data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
+      loaders: [CSVLoader],
+      loadOptions: {
+        csv: {
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          header: true,
+        },
+      },
+      // material: null,
+      getPosition: (d) => [d.x, d.y],
+      opacity: 1,
+      extruded: use3d,
+      getElevation: (d) => d["normalized_median"] - 1,
+      getFillColor: (feature) => {
+        const val = feature.topline_median;
+        return getAqColor(val);
+      },
+      diskResolution: 8,
+      flatShading: true,
+      elevationScale: 3000,
+      radius: 100,
+      visible: mapParams.custom === "aq_grid" && mapParams.useCustom,
+      updateTriggers: {
+        visible: [mapParams.custom, mapParams.useCustom],
+        getFillColor: [mapParams.variableName],
+        extruded: use3d
+      },
+    }),
+  ];
+
+  const overlayLayers = [
     new GeoJsonLayer({
       id: "redlining areas",
       data: `${process.env.PUBLIC_URL}/geojson/redlining.geojson`,
@@ -689,23 +703,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
       getFillColor: (d) =>
         REDLINING_COLOR_SCALE[d.properties["holc_grade"]] || [0, 0, 0],
       visible: mapParams.overlay === "redlining",
-      // props added by FillStyleExtension
-      // fillPatternAtlas: `${process.env.PUBLIC_URL}/icons/redlining-pattern.png`,
-      // // fillPatternMask: true,
-      // fillPatternEnabled: true,
-      // fillPatternMapping: {
-      //     "hatch": {
-      //         "x": 132,
-      //         "y": 4,
-      //         "width": 120,
-      //         "height": 120,
-      //         "mask": true
-      //     }
-      // },
-      // getFillPattern: f => 'hatch',
-      // getFillPatternScale: 2,
-      // getFillPatternOffset: [0, 0],
-      // extensions: [new FillStyleExtension({ pattern: true })],
       updateTriggers: {
         visible: [mapParams.overlay],
       },
@@ -729,7 +726,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
       },
     }),
     new GeoJsonLayer({
-      id: "community areas",
+      id: "wards",
       data: `${process.env.PUBLIC_URL}/geojson/boundaries_wards_2015_.geojson`,
       opacity: 0.8,
       material: false,
@@ -746,191 +743,142 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
         visible: [mapParams.overlay],
       },
     }),
-    // new GPUGridLayer({
-    //     id: 'contour',
-    //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
-    //     colorAggregation: 'MEAN',
-    //     getPosition: feature => [feature.Longitude, feature.Latitude],
-    //     getColorWeight: feature => feature[AQ_COL],
-    //     cellSize: 2000,
-    //     contours: CONTOURS
-    // }),
-    // new HeatmapLayer({
-    //     id: 'heatmap1',
-    //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
-    //     aggregation: 'MEAN',
-    //     colorRange: [
-    //         [254,235,226],
-    //         [252,197,192],
-    //         [250,159,181],
-    //         [247,104,161],
-    //         [197,27,138],
-    //         [122,1,119],
-    //     ],
-    //     getPosition: feature => [feature.Longitude, feature.Latitude],
-    //     getWeight: feature => feature[AQ_COL],
-    //     radiusPixels: 1.3 ** (zoom * 2),
-    //     intensity: 0.75,
-    //     colorDomain: [5,13]
-    // }),
-    // new HeatmapLayer({
-    //     id: 'heatmap2',
-    //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
-    //     aggregation: 'MEAN',
-    //     getPosition: feature => [feature.Longitude, feature.Latitude],
-    //     getWeight: feature => feature[AQ_COL],
-    //     radiusPixels: 1.65 ** (zoom),
-    //     intensity: 0.75,
-    //     colorDomain: [9, 11],
-
-    // }),
-    // new ScatterplotLayer({
-    //     id: 'scatterplot-layer',
-    //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
-    //     pickable: false,
-    //     opacity: 0.8,
-    //     stroked: false,
-    //     radiusUnits: 'pixels',
-    //     radiusScale: 1,
-    //     radiusMinPixels: 1,
-    //     radiusMaxPixels: 100,
-    //     getPosition: feature => [feature.Longitude, feature.Latitude],
-    //     getRadius: d => zoom,
-    //     getFillColor: d => [120, 0, 0],
-    // }),
-    // new TextLayer({
-    //     id: 'text-layer',
-    //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
-    //     getPosition: feature => [feature.Longitude, feature.Latitude],
-    //     getText: feature => `${Math.round(feature[AQ_COL]*10)/10}`,
-    //     getSize: zoom ** 2,
-    //     getAngle: 0,
-    //     getTextAnchor: 'middle',
-    //     getAlignmentBaseline: 'center',
-    //     sizeScale: 0.15,
-    //     background: true,
-    //     backgroundPadding: [5,0,5,0],
-    //     getPixelOffset: [0, -10],
-    //     getBorderColor: [0,0,0],
-    //     getBorderWidth: 1,
-    // })
+    new LineLayer({
+      id: "aq-line-layer",
+      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
+      loaders: [CSVLoader],
+      loadOptions: {
+        csv: {
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          header: true,
+        },
+      },
+      getSourcePosition: (feature) => [feature.longitude, feature.latitude, feature["topline_median"]*200*use3d],
+      getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
+      getColor:[0,0,0],
+      getWidth: 1,
+      visible: mapParams.overlay === "aq",
+      updateTriggers: {
+        visible: [mapParams.overlay],
+        getSourcePosition: [use3d]
+      },
+    }),
+    new TextLayer({
+      id: "aq-text-layer",
+      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
+      loaders: [CSVLoader],
+      loadOptions: {
+        csv: {
+          dynamicTyping: true,
+          skipEmptyLines: true,
+          header: true,
+        },
+      },
+      getPosition: (feature) => [feature.longitude, feature.latitude, (feature["topline_median"]*200*use3d)+1],
+      getText: (feature) =>
+        `${Math.round(feature["topline_median"] * 10) / 10}`,
+      getSize: zoom ** 2,
+      getAngle: 0,
+      getTextAnchor: "middle",
+      getAlignmentBaseline: "center",
+      sizeScale: 0.15,
+      background: true,
+      backgroundPadding: [5, 0, 5, 0],
+      getPixelOffset: [0, -10],
+      getBorderColor: [0, 0, 0],
+      getBorderWidth: 1,
+      visible: mapParams.overlay === "aq",
+      updateTriggers: {
+        visible: [mapParams.overlay],
+        getPosition: [use3d],
+        getSize: [zoom]
+      },
+    }),
   ];
+  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
+  const onMapLoad = useCallback(() => {
+    if (mapRef.current === undefined) return;
+    const map = mapRef.current.getMap();
+    const deck = deckRef.current.deck;
+    const layersKeys = allLayers.map((f) => f.props.id);
+    for (let i = 0; i < layersKeys.length; i++) {      
+      map.addLayer(
+        new MapboxLayer({ id: layersKeys[i], deck }), // add layer
+        ["community areas", "wards", "aq-text-layer", "aq_data_grid"].includes(
+          layersKeys[i]
+        )
+          ? 'state-label'
+          : "water" // index layer order
+      );
+    } // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // new GPUGridLayer({
+  //     id: 'contour',
+  //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+  //     colorAggregation: 'MEAN',
+  //     getPosition: feature => [feature.Longitude, feature.Latitude],
+  //     getColorWeight: feature => feature[AQ_COL],
+  //     cellSize: 2000,
+  //     contours: CONTOURS
+  // }),
+  // new HeatmapLayer({
+  //     id: 'heatmap1',
+  //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+  //     aggregation: 'MEAN',
+  //     colorRange: [
+  //         [254,235,226],
+  //         [252,197,192],
+  //         [250,159,181],
+  //         [247,104,161],
+  //         [197,27,138],
+  //         [122,1,119],
+  //     ],
+  //     getPosition: feature => [feature.Longitude, feature.Latitude],
+  //     getWeight: feature => feature[AQ_COL],
+  //     radiusPixels: 1.3 ** (zoom * 2),
+  //     intensity: 0.75,
+  //     colorDomain: [5,13]
+  // }),
+  // new HeatmapLayer({
+  //     id: 'heatmap2',
+  //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+  //     aggregation: 'MEAN',
+  //     getPosition: feature => [feature.Longitude, feature.Latitude],
+  //     getWeight: feature => feature[AQ_COL],
+  //     radiusPixels: 1.65 ** (zoom),
+  //     intensity: 0.75,
+  //     colorDomain: [9, 11],
+
+  // }),
+  // new ScatterplotLayer({
+  //     id: 'scatterplot-layer',
+  //     data: `${process.env.PUBLIC_URL}/aq_data/aq_data.json`,
+  //     pickable: false,
+  //     opacity: 0.8,
+  //     stroked: false,
+  //     radiusUnits: 'pixels',
+  //     radiusScale: 1,
+  //     radiusMinPixels: 1,
+  //     radiusMaxPixels: 100,
+  //     getPosition: feature => [feature.Longitude, feature.Latitude],
+  //     getRadius: d => zoom,
+  //     getFillColor: d => [120, 0, 0],
+  // }),
+  // ];
+  useEffect(() => {
+    if (use3d) {
+      handleTilt()
+    } else {
+      resetTilt()
+    }  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[use3d])
 
   const view = new MapView({ repeat: true });
-  // const handleSelectionBoxStart = () => {
-  //     setBoxSelect(true)
-  // }
-
-  // const listener = (e) => {
-
-  //     setBoxSelectDims(prev => {
-  //         let x;
-  //         let y;
-  //         let width;
-  //         let height;
-
-  //         if (e.clientX < prev.ox) {
-  //             x = e.clientX;
-  //             width = prev.ox - e.clientX
-  //         } else {
-  //             x = prev.x;
-  //             width = e.clientX - prev.x
-  //         }
-
-  //         if (e.clientY < prev.oy) {
-  //             y = e.clientY;
-  //             height = prev.oy - e.clientY
-  //         } else {
-  //             y = prev.y;
-  //             height = e.clientY - prev.y
-  //         }
-
-  //         return { ...prev, x, y, width, height }
-  //     })
-  // }
-
-  // const touchListener = (e) => {
-  //     // setX(e?.targetTouches[0]?.clientX-15)
-  //     // setY(e?.targetTouches[0]?.clientY-15)
-  //     // console.log(e)
-  // }
-
-  // const removeListeners = () => {
-  //     window.removeEventListener('touchmove', touchListener)
-  //     window.removeEventListener('touchend', removeListeners)
-  //     window.removeEventListener('mousemove', listener)
-  //     window.removeEventListener('mouseup', removeListeners)
-  //     setBoxSelectDims({
-  //         x:-50,
-  //         y:-50,
-  //         ox:0,
-  //         oy:0,
-  //         width:0,
-  //         height:0
-  //     })
-  //     setBoxSelect(false)
-  // }
-
-  // const handleBoxSelect = (e) => {
-  //     try {
-  //         if (e.type === 'mousedown') {
-  //             setBoxSelectDims({
-  //                 x:e.pageX,
-  //                 y:e.pageY,
-  //                 ox:e.pageX,
-  //                 oy:e.pageY,
-  //                 width:0,
-  //                 height:0
-  //             });
-  //             window.addEventListener('touchmove', touchListener);
-  //             window.addEventListener('touchend', removeListeners);
-  //             window.addEventListener('mousemove', listener);
-  //             window.addEventListener('mouseup', removeListeners);
-  //         } else {
-
-  //             const {x, y, width, height } = boxSelectDims;
-
-  //             let layerIds = ['choropleth'];
-
-  //             let features = deckRef.current.pickObjects(
-  //                     {
-  //                         x, y: y-50, width, height, layerIds
-  //                     }
-  //                 )
-  //             let GeoidList = [];
-  //             for (let i=0; i<features.length; i++) {
-  //             }
-  //             setHighlightGeog(GeoidList);
-  //             window.localStorage.setItem('SHARED_GEOID', GeoidList);
-  //             window.localStorage.setItem('SHARED_VIEW', JSON.stringify(GetMapView()));
-  //             setBoxSelectDims({});
-  //             removeListeners();
-  //             setBoxSelect(false)
-  //         }
-  //     } catch {
-  //         console.log('bad selection')
-  //     }
-  // }
   return (
-    <MapContainer
-      // onKeyDown={handleKeyDown}
-      // onKeyUp={handleKeyUp}
-      // onMouseDown={e => boxSelect ? handleBoxSelect(e) : null}
-      // onMouseUp={e => boxSelect ? handleBoxSelect(e) : null}
-      infoPanel={panelState.info}
-    >
-      {/* {
-                // boxSelectDims.hasOwnProperty('x') && 
-                true && 
-                <IndicatorBox style={{
-                    left:boxSelectDims.x, 
-                    top:boxSelectDims.y, 
-                    width: boxSelectDims.width,
-                    height: boxSelectDims.height}}
-                    />
-            } */}
+    <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
       <DeckGL
-        layers={layers}
+        layers={allLayers}
         ref={deckRef}
         initialViewState={viewState}
         controller={{
@@ -952,21 +900,26 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
           hoverInfo.object &&
             handleMapClick({ x: null, y: null, object: null });
         }}
+        
+        glOptions={{ stencil: true }}
         onViewportLoad={queryViewport}
+        onWebGLInitialized={setGLContext}
       >
         <MapboxGLMap
           reuseMaps
           ref={mapRef}
+          gl={glContext}
           mapStyle={
             "mapbox://styles/csds-hiplab/ckmuv80qn2b6o17ltels6z7ub?fresh=true"
           }
           preventStyleDiffing={true}
           mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN}
-          on
+          onLoad={onMapLoad}
         ></MapboxGLMap>
       </DeckGL>
-      {!geoids.length && <MapButtonContainer infoPanel={panelState.info}>
-        {/* <NavInlineButtonGroup>
+      {!geoids.length && (
+        <MapButtonContainer infoPanel={panelState.info}>
+          {/* <NavInlineButtonGroup>
                     <NavInlineButton
                         title="Selection Box"
                         id="boxSelect"
@@ -976,44 +929,44 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
                         {SVG.selectRect}
                     </NavInlineButton>
                 </NavInlineButtonGroup> */}
-        <NavInlineButtonGroup>
-          <NavInlineButton
-            title="Geolocate"
-            id="geolocate"
-            onClick={() => handleGeolocate()}
-          >
-            {SVG.locate}
-          </NavInlineButton>
-        </NavInlineButtonGroup>
+          <NavInlineButtonGroup>
+            <NavInlineButton
+              title="Geolocate"
+              id="geolocate"
+              onClick={() => handleGeolocate()}
+            >
+              {SVG.locate}
+            </NavInlineButton>
+          </NavInlineButtonGroup>
 
-        <NavInlineButtonGroup>
-          <NavInlineButton
-            title="Zoom In"
-            id="zoomIn"
-            onClick={() => handleZoom(0.5)}
-          >
-            {SVG.plus}
-          </NavInlineButton>
-          <NavInlineButton
-            title="Zoom Out"
-            id="zoomOut"
-            onClick={() => handleZoom(-0.5)}
-          >
-            {SVG.minus}
-          </NavInlineButton>
-          <NavInlineButton
-            title="Reset Tilt"
-            id="resetTilt"
-            tilted={
-              deckRef.current?.deck.viewState?.MapView?.bearing !== 0 ||
-              deckRef.current?.deck.viewState?.MapView?.pitch !== 0
-            }
-            onClick={() => resetTilt()}
-          >
-            {SVG.compass}
-          </NavInlineButton>
-        </NavInlineButtonGroup>
-        {/* <NavInlineButtonGroup>
+          <NavInlineButtonGroup>
+            <NavInlineButton
+              title="Zoom In"
+              id="zoomIn"
+              onClick={() => handleZoom(0.5)}
+            >
+              {SVG.plus}
+            </NavInlineButton>
+            <NavInlineButton
+              title="Zoom Out"
+              id="zoomOut"
+              onClick={() => handleZoom(-0.5)}
+            >
+              {SVG.minus}
+            </NavInlineButton>
+            <NavInlineButton
+              title="Reset Tilt"
+              id="resetTilt"
+              tilted={
+                deckRef.current?.deck.viewState?.MapView?.bearing !== 0 ||
+                deckRef.current?.deck.viewState?.MapView?.pitch !== 0
+              }
+              onClick={() => resetTilt()}
+            >
+              {SVG.compass}
+            </NavInlineButton>
+          </NavInlineButtonGroup>
+          {/* <NavInlineButtonGroup>
                     <NavInlineButton
                         title="Share this Map"
                         id="shareButton"
@@ -1024,16 +977,19 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
                     </NavInlineButton>
                 </NavInlineButtonGroup>
                 <ShareURL type="text" value="" id="share-url" /> */}
-      </MapButtonContainer>}
-      {!geoids.length && <GeocoderContainer>
-        <Geocoder
-          id="Geocoder"
-          placeholder={"Search by location"}
-          API_KEY={MAPBOX_ACCESS_TOKEN}
-          onChange={handleGeocoder}
-          height={45}
-        />
-      </GeocoderContainer>}
+        </MapButtonContainer>
+      )}
+      {!geoids.length && (
+        <GeocoderContainer>
+          <Geocoder
+            id="Geocoder"
+            placeholder={"Search by location"}
+            API_KEY={MAPBOX_ACCESS_TOKEN}
+            onChange={handleGeocoder}
+            height={45}
+          />
+        </GeocoderContainer>
+      )}
 
       {hoverInfo.object && (
         <HoverDiv
@@ -1048,18 +1004,20 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids=[] }) {
           <MapTooltipContent content={hoverInfo.object} />
         </HoverDiv>
       )}
-      {!geoids.length && <LogoContainer infoPanel={panelState.info}>
-        <a
-          href="https://herop.ssd.uchicago.edu/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src={`${process.env.PUBLIC_URL}/herop_dark_logo_teal.png`}
-            alt=""
-          />
-        </a>
-      </LogoContainer>}
+      {!geoids.length && (
+        <LogoContainer infoPanel={panelState.info}>
+          <a
+            href="https://herop.ssd.uchicago.edu/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src={`${process.env.PUBLIC_URL}/herop_dark_logo_teal.png`}
+              alt=""
+            />
+          </a>
+        </LogoContainer>
+      )}
     </MapContainer>
   );
 }

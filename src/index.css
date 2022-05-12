@@ -9,9 +9,9 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-div#view-default-view, div#view-MapView {
+/* div#view-default-view, div#view-MapView {
     z-index:500;
-}
+} */
 
 /* bottom drawer */
 #bottom-drawer.hidden {

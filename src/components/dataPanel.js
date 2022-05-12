@@ -309,6 +309,12 @@ const EnvironmentalColumnsToChart = [
     'color':colors.orange,
     'preset':'',
   },
+  // {
+  //   'column':'topline_median',
+  //   'name':'PM2.5 Weekly Median',
+  //   'color':colors.yellow,
+  //   'preset':'',
+  // },
   {
     'column':'nn_q3_pm2_5',
     'name':'Summer PM2.5',

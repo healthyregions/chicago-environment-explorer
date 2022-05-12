@@ -11,7 +11,22 @@ export const loadDataAndBins = ( geojsonData, bins ) => {
     }
 }
 
-
+export const toggle3d = () => {
+    return {
+        type: 'TOGGLE_3D'
+    }
+}
+export const toggleCustom = () => {
+    return {
+        type: 'TOGGLE_CUSTOM'
+    }
+}
+export const setAqLastUpdated = (aqLastUpdated) => {
+    return {
+        type: 'SET_AQ_LAST_UPDATED',
+        payload: aqLastUpdated
+    }
+}
 // sets the variables parameters (index and range, numerator, denominator, etc.)
 export const changeVariable = ( params ) => {
     return {

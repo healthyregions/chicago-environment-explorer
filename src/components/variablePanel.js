@@ -10,10 +10,10 @@ import styled from "styled-components";
 
 // import Tooltip from './tooltip';
 import { Gutter } from "../styled_components";
-import { changeVariable, setMapParams, setPanelState } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
+import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
 import { colors, variablePresets, dataDescriptions } from "../config";
 import * as SVG from "../config/svg";
-import { FormControl } from "@mui/material";
+import { FormControl, Switch, Stack } from "@mui/material";
 const REDLINING_COLOR_SCALE = {
   A: [115, 169, 77],
   B: [52, 172, 198],
@@ -169,7 +169,7 @@ const ControlsContainer = styled.div`
 
   @media (max-width: 600px) {
     width: 100%;
-    max-height: initial;
+    max-height: 100%;
     padding: 0 10px 25vh 10px;
   }
   p.data-description {
@@ -206,10 +206,51 @@ const ControlsContainer = styled.div`
   }
 `
 
+const AntSwitch = styled(Switch)(({ theme }) => ({
+  width: 28,
+  height: 16,
+  padding: 0,
+  display: 'flex',
+  '&:active': {
+    '& .MuiSwitch-thumb': {
+      width: 15,
+    },
+    '& .MuiSwitch-switchBase.Mui-checked': {
+      transform: 'translateX(9px)',
+    },
+  },
+  '& .MuiSwitch-switchBase': {
+    padding: 2,
+    '&.Mui-checked': {
+      transform: 'translateX(12px)',
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        opacity: 1,
+        backgroundColor: '#1890ff',
+      },
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+  },
+  '& .MuiSwitch-track': {
+    borderRadius: 16 / 2,
+    opacity: 1,
+    backgroundColor:'rgba(0,0,0,.25)',
+    boxSizing: 'border-box',
+  },
+}));
+
 const VariablePanel = (props) => {
   const dispatch = useDispatch();
 
-  const { mapParams, panelState } = useSelector((state) => state);
+  const mapParams = useSelector((state) => state.mapParams);
+  const use3d = useSelector((state) => state.use3d);
+  const panelState = useSelector((state) => state.panelState);
+  const aqLastUpdated = useSelector((state) => state.aqLastUpdated);
 
   const handleMapOverlay = (event) => {
     dispatch(
@@ -229,7 +270,7 @@ const VariablePanel = (props) => {
 
   const handleVariable = (e) =>
     dispatch(changeVariable(variablePresets[e.target.value]));
-
+    
   return (
     <VariablePanelContainer
       className={panelState.variables ? "" : "hidden"}
@@ -255,14 +296,36 @@ const VariablePanel = (props) => {
           </Select>
         </FormControl>
         <Gutter h={20} />
-
         <h2>Data Description</h2>
         <p className="data-description">
+          {mapParams.custom === 'aq_grid' && <>
+          <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
+          </>}
+          
+        {mapParams.custom === 'aq_grid' && <>
+          <p>
+            To see the source data grid, click the switch below.
+          </p>
+          <Stack direction="row" spacing={1} alignItems="center">
+          
+          <p>Aggregated by Tract</p>
+          <AntSwitch checked={mapParams.useCustom}  onClick={() => dispatch(toggleCustom())} inputProps={{ 'aria-label': 'ant design' }} />
+          <p>Source Data</p>
+        </Stack>
+          <Stack direction="row" spacing={1} alignItems="center" sx={{opacity: mapParams.useCustom ? 1 : 0.25}}>
+          
+          <p>2D Map</p>
+          <AntSwitch checked={use3d}  onClick={() => dispatch(toggle3d())} disabled={!mapParams.useCustom} inputProps={{ 'aria-label': 'ant design' }} />
+          <p>3D Map</p>
+        </Stack> 
+        </>
+        }
           {dataDescriptions[mapParams.variableName]}
         </p>
+        
 
         <Gutter h={20} />
-        <h2>Boundary Overlay</h2>
+        <h2>Data Overlay</h2>
         <FormControl variant="filled">
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
@@ -272,6 +335,9 @@ const VariablePanel = (props) => {
           >
             <MenuItem value="None" key={"None"}>
               None
+            </MenuItem>
+            <MenuItem value={"aq"} key={"aq"}>
+              Weekly PM2.5 Readings
             </MenuItem>
             <MenuItem value={"community_areas"} key={"community_areas"}>
               Community Areas
