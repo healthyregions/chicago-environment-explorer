@@ -62,6 +62,13 @@ const NavContainer = styled.div`
   top:.5em;
   left:.5em;
   z-index:500;
+  button {
+    padding-top: 5px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    border: 1px solid #97DB4F;
+  }
 
 `
 const SvgLogoContainer = styled.svg`
