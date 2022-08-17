@@ -89,7 +89,7 @@ const metricsToParse = [
     name: "population",
     accessor: (row) => row.properties.acs_population,
     accumulator: (prev, curr) => prev + curr,
-    reducer: (data) => data.accumulated / data.values.length,
+    reducer: (data) => data.accumulated,
   },
   {
     name: "asthmaEdVisits",
