@@ -134,10 +134,10 @@ const Legend =  ({
                         {colorScale !== undefined &&  
                             <span>
                                 <BinBars>
-                                    {colorScale.map(color => <div className="bin color" key={`${color[0]}${color[1]}`}style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
+                                    {colorScale.map((color, i) => <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
                                 </BinBars>
                                 <BinLabels binLength={bins.length}> 
-                                    {bins.map(bin => <div className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
+                                    {bins.map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
                                 </BinLabels>
                             </span>
                         }
