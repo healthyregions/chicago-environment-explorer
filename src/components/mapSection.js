@@ -28,6 +28,7 @@ import { setSelectionData } from "../actions";
 import { scaleColor } from "../utils";
 import { colors } from "../config";
 import * as SVG from "../config/svg";
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -300,12 +301,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     }
     // eslint-disable-next-line
   }, [
-    centroids,
-    storedGeojson,
-    columnNames,
-    ranges,
-    selectionData,
-    filterValues,
+      centroids?.length,
+      storedGeojson?.features?.length,
+      columnNames?.length,
+      ranges,
+      selectionData?.totalPop,
+      filterValues,
   ]);
 
   useEffect(() => {
