@@ -11,16 +11,14 @@ export default function reducer(state = INITIAL_STATE, action) {
       };
       let centroidsArray = [];
       let columnValues = {};
-      let tempValues = {}
       // const columnNames = Object.keys(action.payload.geojsonData.features[0].properties);\
       const columnNames = state.columnNames;
 
       for (let n = 0; n < columnNames.length; n++) {
         columnValues[columnNames[n]] = {
-          min: 0,
-          max: 0
+          min: 1e10,
+          max: -1e10,
         };
-        tempValues[columnNames[n]] = []
       }
 
       for (let i = 0; i < action.payload.geojsonData.features.length; i++) {
@@ -30,23 +28,25 @@ export default function reducer(state = INITIAL_STATE, action) {
         });
         for (let n = 0; n < columnNames.length; n++) {
           if (
-            ![null, undefined].includes(action.payload.geojsonData.features[i].properties[
+            action.payload.geojsonData.features[i].properties[
               columnNames[n]
-            ])
-          ) {
-            tempValues[columnNames[n]].push(
-              action.payload.geojsonData.features[i].properties[columnNames[n]]
-            );
-          }
-        }
-      }
-      const OUTLIER_EXCLUSION = .00
+            ] !== null &&
+            action.payload.geojsonData.features[i].properties[columnNames[n]] <
+              columnValues[columnNames[n]].min
+          )
+            columnValues[columnNames[n]].min =
+              action.payload.geojsonData.features[i].properties[columnNames[n]];
 
-      for (let n = 0; n < columnNames.length; n++) {
-        tempValues[columnNames[n]] = tempValues[columnNames[n]].sort((a,b) => a - b);
-        const currLength = tempValues[columnNames[n]].length;
-        columnValues[columnNames[n]].min = tempValues[columnNames[n]][Math.floor(currLength*(0+OUTLIER_EXCLUSION))];
-        columnValues[columnNames[n]].max = tempValues[columnNames[n]][Math.floor(currLength*(1-OUTLIER_EXCLUSION)-1)];
+          if (
+            action.payload.geojsonData.features[i].properties[
+              columnNames[n]
+            ] !== null &&
+            action.payload.geojsonData.features[i].properties[columnNames[n]] >
+              columnValues[columnNames[n]].max
+          )
+            columnValues[columnNames[n]].max =
+              action.payload.geojsonData.features[i].properties[columnNames[n]];
+        }
       }
       const num_steps = 19;
 
