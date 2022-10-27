@@ -223,16 +223,16 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   const [hoverGeog, setHoverGeog] = useState(null);
 
   const mapRef = useRef(null);
-  
+
   const handlePanMap = (viewState) => {
     mapRef?.current?.flyTo({
       center: [viewState.longitude, viewState.latitude],
       zoom: viewState.zoom,
       bearing: viewState.bearing,
-      pitch: viewState.pitch
-    })
-  }
-    
+      pitch: viewState.pitch,
+    });
+  };
+
   const viewRef = useRef(null);
   const mapContainerRef = useRef(null);
   // map view location
@@ -243,7 +243,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     bearing: 0,
     pitch: 0,
   });
-  
 
   const zoom = Math.round(viewState.zoom);
   const mapIsTilted =
@@ -251,7 +250,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
   useEffect(() => {
     setViewState(bounds);
-    handlePanMap(bounds)
+    handlePanMap(bounds);
   }, [JSON.stringify(bounds)]); //eslint-disable-line
 
   useEffect(() => {
@@ -311,7 +310,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       handlePanMap({
         longitude: position.coords.longitude,
         latitude: position.coords.latitude,
-        zoom: 14
+        zoom: 14,
       });
     });
   };
@@ -320,11 +319,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     const currMapView = GetMapView();
     handlePanMap({
       ...currMapView,
-      zoom: currMapView.zoom + zoom
+      zoom: currMapView.zoom + zoom,
     });
   };
   const handleTilt = () => {
-    console.log(mapRef?.current)
+    console.log(mapRef?.current);
     const currMapView = GetMapView();
     handlePanMap({
       ...currMapView,
@@ -366,7 +365,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       handlePanMap({
         longitude: center[0],
         latitude: center[1],
-        zoom: zoom
+        zoom: zoom,
       });
     }
   }, []);
@@ -469,7 +468,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       transitions: {
         getFillColor: 250,
       },
-      beforeId: "water"
+      beforeId: "water",
     }),
     new GeoJsonLayer({
       id: "choropleth",
@@ -503,7 +502,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           mapParams.variableName,
           mapParams.bins,
           mapParams.colorScale,
-          JSON.stringify(geoids)
+          JSON.stringify(geoids),
         ],
         visible: [geoids.length, mapParams.useCustom],
         getFilterValue: filterValues,
@@ -511,7 +510,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       transitions: {
         getFillColor: 250,
       },
-      beforeId: "water"
+      beforeId: "water",
     }),
 
     new GeoJsonLayer({
@@ -567,7 +566,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       getFillPatternScale: (19 - GetMapView().zoom) / 8,
       getFillPatternOffset: [0, 0],
       extensions: [new FillStyleExtension({ pattern: true })],
-      beforeId: "water"
+      beforeId: "water",
     }),
   ];
   const customLayers = [
@@ -634,7 +633,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         getFillColor: [mapParams.variableName],
         extruded: use3d,
       },
-      beforeId: "water"
+      beforeId: "water",
     }),
   ];
 
@@ -653,7 +652,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       updateTriggers: {
         visible: [mapParams.overlay],
       },
-      beforeId: "state-label"
+      beforeId: "state-label",
     }),
     new GeoJsonLayer({
       id: "community areas",
@@ -672,7 +671,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       updateTriggers: {
         visible: [mapParams.overlay],
       },
-      beforeId: "state-label"
+      beforeId: "state-label",
     }),
     new GeoJsonLayer({
       id: "wards",
@@ -691,7 +690,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       updateTriggers: {
         visible: [mapParams.overlay],
       },
-      beforeId: "state-label"
+      beforeId: "state-label",
     }),
     new LineLayer({
       id: "aq-line-layer",
@@ -717,7 +716,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         visible: [mapParams.overlay],
         getSourcePosition: [use3d],
       },
-      beforeId: "state-label"
+      beforeId: "state-label",
     }),
     new TextLayer({
       id: "aq-text-layer",
@@ -753,7 +752,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         getPosition: [use3d],
         getSize: [zoom],
       },
-      beforeId: "state-label"
+      beforeId: "state-label",
     }),
   ];
   const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
@@ -767,36 +766,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   }, [use3d]);
 
   const view = new MapView({ repeat: true });
-  
+
   return (
     <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
-      {/* <DeckGL
-        layers={allLayers}
-        ref={deckRef}
-        initialViewState={viewState}
-        controller={{
-          dragRotate: true,
-          dragPan: true,
-          doubleClickZoom: true,
-          touchZoom: true,
-          touchRotate: true,
-          keyboard: true,
-          scrollZoom: true,
-          inertia: 100,
-        }}
-        views={view}
-        pickingRadius={20}
-        onViewStateChange={(e) => {
-          queryViewport(e.viewState);
-          // if (e?.viewState?.zoom !== e?.oldViewState?.zoom)
-          //   setZoom(e.viewState.zoom);
-          hoverInfo.object &&
-            handleMapClick({ x: null, y: null, object: null });
-        }}
-        // glOptions={{ stencil: true }}
-        onViewportLoad={queryViewport}
-        // onWebGLInitialized={setGLContext}
-      > */}
       <MapboxGLMap
         ref={mapRef}
         mapStyle={
@@ -804,8 +776,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         }
         preventStyleDiffing={true}
         mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
-        // // onLoad={onMapLoad}
-        // // ref={deckRef}
         initialViewState={viewState}
         controller={{
           dragRotate: true,
@@ -830,7 +800,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           hoverInfo.object &&
             handleMapClick({ x: null, y: null, object: null });
         }}
-        // glOptions={{ stencil: true }}
         onViewportLoad={(e) => {
           queryViewport({
             ...(e?.viewState || {}),
@@ -846,19 +815,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           layers={allLayers}
         />
       </MapboxGLMap>
-      {/* </DeckGL> */}
       {!geoids.length && (
         <MapButtonContainer infoPanel={panelState.info}>
-          {/* <NavInlineButtonGroup>
-                    <NavInlineButton
-                        title="Selection Box"
-                        id="boxSelect"
-                        isActive={boxSelect}
-                        onClick={() => handleSelectionBoxStart()}
-                    >
-                        {SVG.selectRect}
-                    </NavInlineButton>
-                </NavInlineButtonGroup> */}
           <NavInlineButtonGroup>
             <NavInlineButton
               title="Geolocate"
@@ -893,17 +851,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
               {SVG.compass}
             </NavInlineButton>
           </NavInlineButtonGroup>
-          {/* <NavInlineButtonGroup>
-                    <NavInlineButton
-                        title="Share this Map"
-                        id="shareButton"
-                        shareNotification={shared}
-                        // onClick={() => handleShare({mapParams, dataParams, currentData, coords: GetMapView(), lastDateIndex: dateIndices[currentData][dataParams.numerator]})}
-                    >
-                        {SVG.share}
-                    </NavInlineButton>
-                </NavInlineButtonGroup>
-                <ShareURL type="text" value="" id="share-url" /> */}
         </MapButtonContainer>
       )}
       {!geoids.length && (
@@ -923,7 +870,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           style={{
             position: "absolute",
             zIndex: 1,
-            // pointerEvents: "none",
             left: hoverInfo.x,
             top: hoverInfo.y,
           }}

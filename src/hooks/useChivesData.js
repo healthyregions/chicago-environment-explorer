@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadDataAndBins } from "../actions";
-import { defaultData } from "../config";
+import { loadData } from "../utils/handleData";
 
 export const useChivesData = () => {
   // state mgmt
@@ -12,9 +12,7 @@ export const useChivesData = () => {
   // data loading
   const handleData = async () => {
     if (features.length === 0) {
-      const data = await fetch(
-        `${process.env.PUBLIC_URL}/geojson/${defaultData}`
-      ).then((r) => r.json());
+      const data = await loadData();
       
       dispatch(loadDataAndBins(data));
     }
