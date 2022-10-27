@@ -5,7 +5,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
-import { colors } from '../config';
+import { colors } from '../../config';
 
 const ContactFormContainer = styled.form`
     &.locked{

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Grid from "@mui/material/Grid";
-import { colors } from '../config';
+import { colors } from '../../config';
 
 const GuideRow = styled(Grid)`
     img {

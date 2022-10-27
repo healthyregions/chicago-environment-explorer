@@ -5,10 +5,10 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import styled from 'styled-components';
-import { colors } from '../config';
+import { colors } from '../../config';
 import { Box } from '@mui/system';
-import { setPanelState } from '../actions';
-import * as SVG from '../config/svg';
+import { setPanelState } from '../../actions';
+import * as SVG from '../../config/svg';
 
 const NavItems = styled.ul`
   border-top: 1px solid ${colors.lightgray};
@@ -48,7 +48,7 @@ const NavItems = styled.ul`
     &:hover {
       color: ${colors.green};
         svg {
-          fill ${colors.green};
+          fill: ${colors.green};
         .cls-1 {
           stroke:${colors.green};
         }
@@ -77,7 +77,7 @@ const SvgLogoContainer = styled.svg`
   width:2.5em;
   circle {
     transition:2000ms all;
-    transitionInterpolator: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 `
 const initialSizing = [

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import { fitBounds } from "@math.gl/web-mercator";
 import {
   MapSection,
@@ -7,8 +7,7 @@ import {
   VariablePanel,
   Legend,
   DataPanel,
-} from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
-import { handleData } from "../../utils/handleData";
+} from "../../components"; 
 
 // US bounds
 const defaultBounds = fitBounds({
@@ -22,22 +21,11 @@ const defaultBounds = fitBounds({
 
 function App() {
   const mapParams = useSelector((state) => state.mapParams);
-  const [isLoading, setIsLoading] = useState(true);
-  // const [viewstateFn, setViewStateFn] = useState(()=>{});
-  const dispatch = useDispatch();  
-  useEffect(() => {
-    handleData(dispatch, mapParams, setIsLoading)
-    if (isLoading) {
-      setIsLoading(false);
-    }
-    // eslint-disable-next-line
-  }, []);
 
   return (
     <div className="Map-App">
       <NavBar showMapControls={true} bounds={defaultBounds} />
-      {isLoading && <div id="loadingIcon"></div>}
-      <div id="mainContainer" className={isLoading ? "loading" : ""}>
+      <div id="mainContainer">
         <MapSection bounds={defaultBounds} />
         <Legend
           variableName={`${mapParams.variableName} ${

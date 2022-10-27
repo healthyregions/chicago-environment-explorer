@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import {colors} from '../config'
-const PolarSpeciesPlot = React.lazy(() => import('../components/PolarSpeciesPlot.js'));
+import {colors} from '../../config'
+const PolarSpeciesPlot = React.lazy(() => import('../Charts/PolarSpeciesPlot.js'));
 // This component handles and formats the map tooltip info. 
 // The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
 const MapTooltipContent = ({content}) => {

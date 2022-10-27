@@ -8,8 +8,8 @@ import Slider from '@mui/material/Slider';
 import withStyles from '@mui/styles/withStyles';
 
 import DensityChart from './DensityChart';
-import { applyFilterValues, removeFilterValues } from '../actions';
-import { colors } from '../config';
+import { applyFilterValues, removeFilterValues } from '../../actions';
+import { colors } from '../../config';
 
 const HistogramContainer = styled.div`
   position:relative;

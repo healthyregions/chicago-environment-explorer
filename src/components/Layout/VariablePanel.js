@@ -9,10 +9,10 @@ import ListSubheader from '@mui/material/ListSubheader';
 import styled from "styled-components";
 
 // import Tooltip from './tooltip';
-import { Gutter } from "../styled_components";
-import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } from "../actions"; //variableChangeZ, setNotification, storeMobilityData
-import { colors, variablePresets, dataDescriptions } from "../config";
-import * as SVG from "../config/svg";
+import { Gutter } from "../../styled_components";
+import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } from "../../actions"; //variableChangeZ, setNotification, storeMobilityData
+import { colors, variablePresets, dataDescriptions } from "../../config";
+import * as SVG from "../../config/svg";
 import { FormControl, Switch, Stack } from "@mui/material";
 const REDLINING_COLOR_SCALE = {
   A: [115, 169, 77],

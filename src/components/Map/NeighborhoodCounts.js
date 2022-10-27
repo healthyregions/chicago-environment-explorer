@@ -5,8 +5,8 @@ import {  useDispatch } from 'react-redux';
 import styled from 'styled-components';
 // import { withStyles, makeStyles } from '@mui/material/styles';
 
-import { applyFilterValues, removeFilterValues, removeFilterEntry } from '../actions';
-import { colors } from '../config';
+import { applyFilterValues, removeFilterValues, removeFilterEntry } from '../../actions';
+import { colors } from '../../config';
 // import * as _ from 'lodash';
 
 const CountsContainer = styled.div`

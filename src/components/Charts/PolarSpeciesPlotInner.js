@@ -4,7 +4,7 @@ import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
 import { LinkRadial } from "@visx/shape";
-import IframeSpeciesInfo from "./IframeSpeciesInfo";
+import IframeSpeciesInfo from "../Layout/IframeSpeciesInfo";
 import { Zoom } from '@visx/zoom';
 import { RectClipPath } from '@visx/clip-path';
 import { Button } from "@mui/material";

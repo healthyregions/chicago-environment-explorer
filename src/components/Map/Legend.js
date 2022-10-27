@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 
-import { colors } from '../config';
+import { colors } from '../../config';
 // import { Gutter } from '../styled_components';
 // import Tooltip from './tooltip';
 

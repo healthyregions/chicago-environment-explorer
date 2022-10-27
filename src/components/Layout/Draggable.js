@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components'
 
 // Import config and actions
-import { colors } from '../config';
-import { setPanelState } from '../actions';
+import { colors } from '../../config';
+import { setPanelState } from '../../actions';
 
 // Styles - Container
 const DragContainer = styled.div`

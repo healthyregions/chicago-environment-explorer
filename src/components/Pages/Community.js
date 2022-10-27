@@ -1,9 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import booleanWithin from "@turf/boolean-within";
 import { quantileRank } from 'simple-statistics'
 // import { nicelyFormatNumber } from "../../utils";
-import { loadDataAndBins } from "../../actions";
 import { colors } from "../../config";
 import bbox from '@turf/bbox';
 
@@ -18,15 +16,15 @@ import {
 } from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 import useFilterData from "../../hooks/useFilterData";
 import useProcessData from "../../hooks/useProcessData";
-import { defaultData } from "../../config";
 import styled from "styled-components";
 
 import { ContentContainer } from "../../styled_components";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Box, TextField, Button, ButtonGroup, Typography, Grid } from "@mui/material";
-import TableComponent from "../Table";
-import MapSection from "../mapSection";
+import TableComponent from "../Layout/Table";
+import {MapSection} from "../../components";
 import { fitBounds } from '@math.gl/web-mercator';
+import { useChivesData } from "../../hooks/useChivesData";
 
 const CommunityPage = styled.div`
   background: white;
@@ -331,22 +329,9 @@ const StyledButton = styled(Button)`
 const GeolocateSection = styled.section``;
 
 function App() {
-  // state mgmt
-  const features = useSelector((state) => state.storedGeojson?.features) || [];
-  const dispatch = useDispatch();
-  // data loading
-  const handleData = async () => {
-    const data = await fetch(
-      `${process.env.PUBLIC_URL}/geojson/${defaultData}`
-    ).then((r) => r.json());
-    dispatch(loadDataAndBins(data));
-  };
-  useEffect(() => {
-    if (!(features && features.length)) {
-      handleData();
-    }
-    // eslint-disable-next-line
-  }, []);
+  const {
+    features
+  } = useChivesData()
 
   // local state
   const [currentLocation, setCurrentLocation] = useState({});

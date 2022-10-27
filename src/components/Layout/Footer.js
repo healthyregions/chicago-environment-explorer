@@ -3,7 +3,7 @@ import styled from "styled-components";
 // import { NavLink } from 'react-router-dom';
 import Grid from "@mui/material/Grid";
 import { Link } from "react-router-dom";
-import { colors } from "../config";
+import { colors } from "../../config";
 
 const FooterContainer = styled.footer`
   width: 100%;

@@ -99,7 +99,12 @@ See [Data](https://chichives.com/data) page.
 ## Map Variables and Data Sources
 See [Data](https://chichives.com/data) page.
 
-
+## Required Environment Variables
+The below are required environmnent variables. These should be available in `.env` or `.env.local` in your repo root. Don't commit them to Github.
+REACT_APP_MAPBOX_TOKEN=pk....
+- Your mapbox token
+REACT_APP_AQ_ENDPOINT=https:...
+- Your air quality API endpoint
 # Using Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

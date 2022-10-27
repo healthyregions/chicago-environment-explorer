@@ -14,12 +14,12 @@ import styled from 'styled-components';
 // Import config and sub-components
 // import Tooltip from './tooltip';
 // import BarChart from './BarChart';
-import Histogram from './histogram';
-import { Gutter } from './Gutter';
+import Histogram from '../Charts/Histogram';
+import { Gutter } from '../Layout/Gutter';
 // import NeighborhoodCounts from './NeighborhoodCounts';
-import { setPanelState } from '../actions';
-import { colors } from '../config';
-import { report } from '../config/svg';
+import { setPanelState } from '../../actions';
+import { colors } from '../../config';
+import { report } from '../../config/svg';
 
 //// Styled components CSS
 // Main container for entire panel

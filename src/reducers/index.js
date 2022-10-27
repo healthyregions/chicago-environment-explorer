@@ -5,10 +5,19 @@ import { generateQuantileBins } from "../utils";
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "DATA_LOAD":
+      const bins = action.payload.bins
+        ? action.payload.bins
+        : generateQuantileBins(
+            action.payload.geojsonData,
+            6,
+            { ...state.mapParams }["accessor"],
+            state.mapParams
+          );
       const mapParamsObj = {
         ...state.mapParams,
-        bins: action.payload.bins,
+        bins,
       };
+
       let centroidsArray = [];
       let columnValues = {};
       // const columnNames = Object.keys(action.payload.geojsonData.features[0].properties);\
@@ -76,42 +85,41 @@ export default function reducer(state = INITIAL_STATE, action) {
       const bins = action.payload.params.bins
         ? action.payload.params.bins
         : generateQuantileBins(
-          state.storedGeojson,
-          6,
-          { ...state.mapParams, ...action.payload.params }["accessor"],
-          action.payload.params
-        )
+            state.storedGeojson,
+            6,
+            { ...state.mapParams, ...action.payload.params }["accessor"],
+            action.payload.params
+          );
       const mapParams = {
         ...state.mapParams,
         ...action.payload.params,
-        overlay: action.payload.params.custom === 'aq_grid'
-          ? 'aq'
-          : 'community_areas',
+        overlay:
+          action.payload.params.custom === "aq_grid" ? "aq" : "community_areas",
         bins,
-        useCustom: false
+        useCustom: false,
       };
 
       return {
         ...state,
         mapParams,
-        use3d: false
+        use3d: false,
       };
     }
     case "TOGGLE_3D": {
       return {
         ...state,
-        use3d: !state.use3d
-      }
+        use3d: !state.use3d,
+      };
     }
     case "TOGGLE_CUSTOM": {
       return {
         ...state,
         mapParams: {
           ...state.mapParams,
-          useCustom: !state.mapParams.useCustom
+          useCustom: !state.mapParams.useCustom,
         },
-        use3d: true
-      }
+        use3d: true,
+      };
     }
     case "LOAD_AQ_DATA": {
       const { aqSummary, aqIdw } = action.payload;
@@ -125,7 +133,7 @@ export default function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         aqLastUpdated: action.payload,
-      }
+      };
     }
     case "APPLY_FILTER_VALUES":
       const filterValuesObject =

@@ -1,38 +1,28 @@
-import Accordion from './Accordion';
-import BarChart from './BarChart';
-import BottomPanel from './bottomPanel';
-import ContactForm from './ContactForm';
-// import ContextMenu from './contextMenu';
-import CsvDownloader from './csvDownloader';
-import DataDetails from './dataDetails';
-import DataPanel from './dataPanel';
-import DensityChart from './DensityChart';
-import Dock from './dock';
-import Draggable from './draggable';
-import Footer from './Footer';
-import { Gutter } from './Gutter';
-import Histogram from './histogram';
-import InfoBox from './infoBox';
-import Legend from './legend';
-import MapSection from './mapSection';
-import MapTooltipContent from './mapTooltipContent';
-import MemberGrid from './MemberGrid';
-import NavBar from './navbar';
-import NotificationBox from './notificationBox';
-import PolarSpeciesPlot from './PolarSpeciesPlot';
-import VariablePanel from './variablePanel';
-// import Popover from './tooltipPopper';
-import Preloader from './preloader';
-import ResourceGuideRow from './ResourceGuideRow';
-import Scaleable from './scaleable';
-import Showcase from './Carousel';
-import StaticNavbar from './staticNavbar';
-import Tooltip from './tooltip';
-import Table from './Table';
-import Geocoder from './geocoder';
+import Accordion from './Layout/Accordion';
+import BarChart from './Charts/BarChart';
+import BottomPanel from './Layout/BottomPanel';
+import ContactForm from './Layout/ContactForm';
+import DataPanel from './Map/DataPanel';
+import DensityChart from './Charts/DensityChart';
+import Draggable from './Layout/Draggable';
+import Footer from './Layout/Footer';
+import { Gutter } from './Layout/Gutter';
+import Histogram from './Charts/Histogram';
+import Legend from './Map/Legend';
+import MapSection from './Map/MapSection';
+import MapTooltipContent from './Map/MapTooltipContent';
+import MemberGrid from './Layout/MemberGrid';
+import NavBar from './Layout/Navbar';
+import PolarSpeciesPlot from './Charts/PolarSpeciesPlot';
+import VariablePanel from './Layout/VariablePanel';
+import Preloader from './Layout/Preloader';
+import ResourceGuideRow from './Layout/ResourceGuideRow';
+import Scaleable from './Layout/Scaleable';
+import Showcase from './Layout/Carousel/Carousel';
+import StaticNavbar from './Layout/StaticNavbar';
+import Table from './Layout/Table';
+import Geocoder from './Pages/Geocoder';
 
-// report elements
-import Pm25Report from './Pm25Report';
 
 // pages
 import About from './Pages/About';
@@ -49,23 +39,19 @@ export {
     BottomPanel,
     ContactForm,
     // ContextMenu,
-    CsvDownloader,
-    DataDetails,
     DataPanel,
     DensityChart,
-    Dock,
     Draggable,
     Geocoder,
     Gutter,
     Histogram,
     Footer,
-    InfoBox,
+    // InfoBox,
     Legend,
     MapSection,
     MapTooltipContent,
     MemberGrid,
     NavBar,
-    NotificationBox,
     PolarSpeciesPlot,
     VariablePanel,
     // Popover,
@@ -75,10 +61,6 @@ export {
     Showcase,
     StaticNavbar,
     Table,
-    Tooltip, 
-
-    Pm25Report,
-
     About,
     Contact,
     Data,

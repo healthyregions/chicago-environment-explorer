@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 // import { Legend } from '../components';
-import { colors } from '../config';
+import { colors } from '../../config';
 
 // helper function to get dock offset
 const getChartHeight = () => { try { return document.querySelector('#main-chart-container').offsetHeight} catch { return 0} }
