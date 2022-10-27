@@ -117,6 +117,65 @@ In the project directory, you can run:
 
 Fetch and build relevant data. You must run this prior to development. 
 
+This builds 4 main things:
+- Main data for the application
+- Map variable specification
+- Documentation for the docs / about page
+- Resource page entries
+
+![](/public/img/data_diagram.jpeg "Data diagram")
+
+Data is pulled from the data management spreadsheets which contains the following sheets/columns:
+
+*Data Sheets*
+- Name: name of data
+- Manager: Owner of data
+- Data Sheet Link: CORS accessible CSV endpoint or file URL
+- Meta Data Link
+
+*Columns*
+- Column: column name in data
+- Description: Text description of data
+
+*Variables*
+- Variable Name
+- Column: accessor column
+- units: suffix, eg %
+- Description: HTML description for in-map description of variable
+- Data Year: data year
+- Data Source(s): data sources
+- Original Scale: origin geospatial unit
+- Metadata Doc: link to full metadata
+- Bins: If specifying bin scale, otherwise quantile
+- colorScale: rgb[] | rgba[] repeated bins
+- Added By: data attribution
+- listGroup: grouping on the variable drop down
+- custom: if custom layer, indicated an ID here and integrate that on the frontend
+
+*Basemap Layers*
+- Variable Name: name of variable
+- Data Year: data year
+- Data Source(s): data sources
+- Original Scale: origin geospatial unit
+- Metadata Doc: link to full metadata
+- Added By: data attribution
+
+*Resources*
+- title: title of resource
+- link: link to resource
+- text: text description of resource
+- logo: logo of resource - path relative to chives repo > public folder
+- image: image of resource - path relative to chives repo > public folder
+- logoAltText: alt text for logo
+- imageAltText: alt text for image
+- dateAdded: date added to resource guide
+- verified: if verified by chives team
+
+*Contributor Logos*
+- Contributor: name of contributor
+- Link: link to contributor's website
+- ImagePath: path to contributor's logo - path relative to chives repo > public folder
+- AltText: alt text for logo
 #### `yarn start`
 
 Runs the app in the development mode.\
