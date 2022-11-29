@@ -24,11 +24,14 @@ The Data Collaborative provides insight, direction, and relavent environmental d
 * Zac Adelman, Lake Michigan Air Directors Consortium
 * Elsa Anderson & Sophie Taddeo, Chicago Botanic Gardens
 * Madeleine Daepp, Microsoft Research
+* Tiffany Werner, Environmental Law & Policy Center
 * Anne Dodge, Mansueto Institute, University of Chicago
 * Jim Franke & Haynes Stephens, Department of Geophysical Sciences, University of Chicago
 * Anastasia (Stacy) Montgomery, Sara Camilleri & Dan Horton, Climate Change Research Group, Northwestern University
+* Michelle Stuhlmacher, Department of Geography, DePaul University
+* James Keane, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago
 
-We are also grateful to the Nature Conservancy and Audubon Society for their insights and support. A warm thank you to Tiffany Werner (Environmental Law & Policy Center), James Keane (formerly UChicago CSDS), Dylan Halpern (formerly UChicago CSDS), and Susan Paykin (formerly UChicago CSDS) for their previous development and community management work. 
+We are also grateful to the Nature Conservancy, Audubon Society, and Field Museum for their insights and support.
 
 Finally, a major thank you goes to Isaac Kamber and Lorenz Menendez, now alumni of University of Chicago, who developed multiple measures for this application as a core component of their Research Assistantships from 2019-2021.
 
