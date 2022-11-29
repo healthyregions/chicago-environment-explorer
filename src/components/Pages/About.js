@@ -16,27 +16,27 @@ const AboutPage = styled.div`
 const projectTeam = [
     {
         name: 'Marynia Kolak',
-        link: 'https://healthyregions.org/team/',
+        link: 'https://makosak.github.io/',
         degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
-        affiliation: '(UIUC)',
-        title: 'Informatics Lead'
+        affiliation: '(CSDS)',
+        title: 'Research & Data Integration Lead'
     },
     {
-        name:'Michelle Stuhlmacher',
-        link:'https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx',
-        degrees: 'PhD',
-        img: `michelle.jpeg`,
-        affiliation:'(DePaul)',
-        title:'Research Lead',
+        name:'Dylan Halpern',
+        link:'https://dylanhalpern.com/',
+        degrees: 'MCP',
+        img: `dylan.png`,
+        affiliation:'(CSDS)',
+        title:'Engineering & Visualization Lead',
     },
         {
-        name:'Winifred Curran',
-        link:'https://las.depaul.edu/academics/geography/faculty/Pages/winifred-curran.aspx',
-        degrees: 'PhD',
-        img: `curran1.jpeg`,
-        affiliation:'(DePaul)',
-        title:'Community Lead',
+        name:'Susan Paykin',
+        link:'https://www.linkedin.com/in/susanpaykin/',
+        degrees: 'MPP',
+        img: `SPaykin.jpg`,
+        affiliation:'(CSDS)',
+        title:'Research & Community Management',
     }
 ]
 
@@ -181,15 +181,20 @@ export default function About(){
                 <li>  <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, Lake Michigan Air Directors Consortium </li>
                 <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Chicago Botanic Gardens </li>
                 <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research </li>
+                <li> <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, Environmental Law & Policy Center </li>
                 <li> <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a>, Mansueto Institute, University of Chicago </li>
                 <li> <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a> & <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, Department of Geophysical Sciences, University of Chicago </li>
                 <li> <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, Unite Us, Illinois </li>
                 <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
+                <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li>
+                <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li>
                 <br/>
-                We are also grateful to the <b>Nature Conservancy</b>, <b>Audubon Society</b>, and Tiffany Werner (from the 
-                Environmental Law and Policy Center) for their insights and support.
+                We are also grateful to the <b>Nature Conservancy</b>, <b>Audubon Society</b>, and <b>Field Museum</b> for their insights and support.
                 <br/><br/>
-
+                Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a> and 
+                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a>, now alumni of University of Chicago, who developed multiple measures
+                for this application as a core component of their Research Assistantships from 2019-2021.
+                                </p> <br/><br/>
 
                <h2> 
                    A HeRoP Project  
@@ -197,9 +202,8 @@ export default function About(){
 
                 <p>
 
-               This project is brought to you by the <a href="https://www.healthyregions.org/"> Health Regions & Policies Lab (HeRoP)</a> 
-               at the Department of Goegraphy and GIScience at the University
-                    of Illinois at Urbana-Champaign. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
+               This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a> at the Center for Spatial Data Science at the University
+                    of Chicago. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
                     Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
                     We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
                     To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
@@ -207,7 +211,7 @@ export default function About(){
                 <br/><br/>
 
 
-               <p> The current release of the ChiVes project is led by.  </p><br/>
+               <p> Marynia, Dylan, and Susan lead the ChiVes project in the current release.  </p><br/>
 
                       <MemberGrid 
                         members={projectTeam}
@@ -216,15 +220,8 @@ export default function About(){
                         }}
                         />
 
-                <a href=">Dylan Halpern</a> was the previous engineering lead on Chives, and developed this refactored version in 2021. 
-                <a href=">Susan Paykin</a> supported the project as a communities manager, and the Microsoft Research sensor 
-                visualization was developed by a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a> (with support from Halpern). Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a> and 
-                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a>, now alumni of University of Chicago, who developed multiple measures
-                for this application as a core component of their Research Assistantships from 2019-2021.
-                                </p> <br/><br/>
 
-
-                <p> The ChiVes application builds on multiple former projects via (current and former) HeRoP members. Explore them below: 
+                <p> The ChiVes application builds on multiple former projects via HeRoP members. Explore them below: 
                 </p><br/>
 
 
