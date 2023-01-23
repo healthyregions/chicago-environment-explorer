@@ -23,21 +23,29 @@ const projectTeam = [
         title: 'Research & Data Integration Lead'
     },
     {
-        name:'Dylan Halpern',
-        link:'https://dylanhalpern.com/',
-        degrees: 'MCP',
-        img: `dylan.png`,
-        affiliation:'(CSDS)',
-        title:'Engineering & Visualization Lead',
+        name: 'Winifred Curran',
+        link: 'https://www.linkedin.com/in/winifred-curran-6026525',
+        degrees: 'BA, MA, PhD',
+        img: `curran.jpg`,
+        affiliation: '(CSDS)',
+        title: 'Professor of Geography, Sustainable Urban Development'
     },
-        {
-        name:'Susan Paykin',
-        link:'https://www.linkedin.com/in/susanpaykin/',
-        degrees: 'MPP',
-        img: `SPaykin.jpg`,
-        affiliation:'(CSDS)',
-        title:'Research & Community Management',
+    {
+        name: 'Michelle Stuhlmacher',
+        link: 'https://www.linkedin.com/in/michellestuhlmacher',
+        degrees: 'MA, PhD',
+        img: `stuhlmacher.jpg`,
+        affiliation: '(CSDS)',
+        title: 'Assistant Professor of Geography, Geographic Information Systems'
+    }, {
+        name: 'Sparshdeep Singh',
+        link: 'https://www.linkedin.com/in/sparshdeep-singh-08a07b221',
+        degrees: 'BS',
+        img: `sparshdeepsingh.jpg`,
+        affiliation: '(CSDS)',
+        title: 'Research & Visualization Developer'
     }
+    
 ]
 
 
@@ -63,6 +71,22 @@ const projectTeam = [
 //         img: `JamesKeane.jpg`,
 //         affiliation:'(CSDS)',
 //         title: 'Senior Research Assistant'
+//     },
+//     {
+//         name:'Dylan Halpern',
+//         link:'https://dylanhalpern.com/',
+//         degrees: 'MCP',
+//         img: `dylan.png`,
+//         affiliation:'(CSDS)',
+//         title:'Engineering & Visualization Lead',
+//     },
+//         {
+//         name:'Susan Paykin',
+//         link:'https://www.linkedin.com/in/susanpaykin/',
+//         degrees: 'MPP',
+//         img: `SPaykin.jpg`,
+//         affiliation:'(CSDS)',
+//         title:'Research & Community Management',
 //     }
 // ]
 
@@ -211,12 +235,12 @@ export default function About(){
                 <br/><br/>
 
 
-               <p> Marynia, Dylan, and Susan lead the ChiVes project in the current release.  </p><br/>
+               <p> Marynia, Winifred, Michelle, and Sparsh lead the ChiVes project in the current release.  </p><br/>
 
                       <MemberGrid 
                         members={projectTeam}
                         columns={{
-                            md: 3,
+                            md: 4,
                         }}
                         />
 
