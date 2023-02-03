@@ -48,6 +48,25 @@ const projectTeam = [
     
 ]
 
+const pastProjectTeam = [
+    {
+                name:'Dylan Halpern',
+                link:'https://dylanhalpern.com/',
+                degrees: 'MCP',
+                img: `dylan.png`,
+                affiliation:'(CSDS)',
+                title:'Engineering & Visualization Lead',
+            },
+                {
+                name:'Susan Paykin',
+                link:'https://www.linkedin.com/in/susanpaykin/',
+                degrees: 'MPP',
+                img: `SPaykin.jpg`,
+                affiliation:'(CSDS)',
+                title:'Research & Community Management',
+            }
+]
+
 
 // // Past contributors
 // const contributors = [
@@ -205,20 +224,16 @@ export default function About(){
                 <li>  <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, Lake Michigan Air Directors Consortium </li>
                 <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Chicago Botanic Gardens </li>
                 <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research </li>
-                <li> <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, Environmental Law & Policy Center </li>
+                {/* <li> <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, Environmental Law & Policy Center </li> */}
                 <li> <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a>, Mansueto Institute, University of Chicago </li>
-                <li> <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a> & <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, Department of Geophysical Sciences, University of Chicago </li>
+                {/* <li> <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a> & <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, Department of Geophysical Sciences, University of Chicago </li> */}
                 <li> <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, Unite Us, Illinois </li>
                 <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
-                <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li>
+                {/* <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li> */}
                 <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li>
                 <br/>
                 We are also grateful to the <b>Nature Conservancy</b>, <b>Audubon Society</b>, and <b>Field Museum</b> for their insights and support.
-                <br/><br/>
-                Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a> and 
-                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a>, now alumni of University of Chicago, who developed multiple measures
-                for this application as a core component of their Research Assistantships from 2019-2021.
-                                </p> <br/><br/>
+                <br/><br/>                                </p>
 
                <h2> 
                    A HeRoP Project  
@@ -240,11 +255,23 @@ export default function About(){
                       <MemberGrid 
                         members={projectTeam}
                         columns={{
-                            md: 4,
+                            md: 3
                         }}
                         />
+                <p><strong>Past contributors:</strong></p>
+                <br/>
 
+                    <MemberGrid
+                        members={pastProjectTeam}
+                        columns={{
+                            md: 3
+                        }}
+                    />
 
+                <p> Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a>, 
+                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a> and <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, now alumni of University of Chicago, who developed multiple measures
+                for this application as a core component of their Research Assistantships from 2019-2021.</p>
+                <br/>
                 <p> The ChiVes application builds on multiple former projects via HeRoP members. Explore them below: 
                 </p><br/>
 
