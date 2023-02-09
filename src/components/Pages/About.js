@@ -64,6 +64,14 @@ const pastProjectTeam = [
                 img: `SPaykin.jpg`,
                 affiliation:'(CSDS)',
                 title:'Research & Community Management',
+            },
+            {
+                name: 'James Keane',
+                link: 'https://www.linkedin.com/in/james-keane-678863b7/',
+                degrees: 'BS, MS',
+                img: 'keane.jfif',
+                affiliation: '(CSDS)',
+                title: 'Senior Data Science Research Assistant',
             }
 ]
 
@@ -230,10 +238,13 @@ export default function About(){
                 <li> <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, Unite Us, Illinois </li>
                 <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
                 {/* <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li> */}
-                <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li>
+                {/* <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li> */}
                 <br/>
                 We are also grateful to the <b>Nature Conservancy</b>, <b>Audubon Society</b>, and <b>Field Museum</b> for their insights and support.
+                Finally, a thanks to <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a>, and
+                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a>, for their past work on the data collaborative team.
                 <br/><br/>                                </p>
+
 
                <h2> 
                    A HeRoP Project  
@@ -255,7 +266,7 @@ export default function About(){
                       <MemberGrid 
                         members={projectTeam}
                         columns={{
-                            md: 3
+                            md: 5
                         }}
                         />
                 <p><strong>Past contributors:</strong></p>
@@ -264,13 +275,11 @@ export default function About(){
                     <MemberGrid
                         members={pastProjectTeam}
                         columns={{
-                            md: 3
+                            md: 5
                         }}
                     />
 
-                <p> Finally, a major thank you goes to <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a>, 
-                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a> and <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, now alumni of University of Chicago, who developed multiple measures
-                for this application as a core component of their Research Assistantships from 2019-2021.</p>
+                
                 <br/>
                 <p> The ChiVes application builds on multiple former projects via HeRoP members. Explore them below: 
                 </p><br/>
