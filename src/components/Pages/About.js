@@ -19,15 +19,15 @@ const projectTeam = [
         link: 'https://makosak.github.io/',
         degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
-        affiliation: '(CSDS)',
-        title: 'Research & Data Integration Lead'
+        affiliation: '(HEROP @UIUC)',
+        title: 'As'
     },
     {
         name: 'Winifred Curran',
         link: 'https://www.linkedin.com/in/winifred-curran-6026525',
         degrees: 'BA, MA, PhD',
         img: `curran.jpg`,
-        affiliation: '(CSDS)',
+        affiliation: '(DePaul)',
         title: 'Professor of Geography, Sustainable Urban Development'
     },
     {
@@ -42,8 +42,8 @@ const projectTeam = [
         link: 'https://www.linkedin.com/in/sparshdeep-singh-08a07b221',
         degrees: 'BS',
         img: `sparshdeepsingh.jpg`,
-        affiliation: '(CSDS)',
-        title: 'Research & Visualization Developer'
+        affiliation: '(HEROP @UIUC)',
+        title: 'Research Assistant'
     }
     
 ]
@@ -54,7 +54,7 @@ const pastProjectTeam = [
                 link:'https://dylanhalpern.com/',
                 degrees: 'MCP',
                 img: `dylan.png`,
-                affiliation:'(CSDS)',
+                affiliation:'(CSDS @UChicago)',
                 title:'Engineering & Visualization Lead',
             },
                 {
@@ -62,7 +62,7 @@ const pastProjectTeam = [
                 link:'https://www.linkedin.com/in/susanpaykin/',
                 degrees: 'MPP',
                 img: `SPaykin.jpg`,
-                affiliation:'(CSDS)',
+                affiliation:'(CSDS @UChicago)',
                 title:'Research & Community Management',
             },
             {
@@ -70,52 +70,26 @@ const pastProjectTeam = [
                 link: 'https://www.linkedin.com/in/james-keane-678863b7/',
                 degrees: 'BS, MS',
                 img: 'keane.jfif',
-                affiliation: '(CSDS)',
+                affiliation: '(CSDS @UChicago)',
                 title: 'Senior Data Science Research Assistant',
-            }
+            },
+        {
+               name: 'Isaac Kamber',
+               link: 'https://www.linkedin.com/in/isaac-kamber/',
+               img: `isaac.png`,
+               affiliation: '(CSDS)',
+               title: 'Senior Research Assistant'
+           },
+           {
+               name:'Lorenz Menendez',
+               link:'https://www.linkedin.com/in/lorenzmenendez/',
+               img: `Menendez_Lorenz.jpeg`,
+               affiliation:'(CSDS)',
+               title: 'Senior Research Assistant'
+           }
+    
 ]
 
-
-// // Past contributors
-// const contributors = [
-//     {
-//         name: 'Isaac Kamber',
-//         link: 'https://www.linkedin.com/in/isaac-kamber/',
-//         img: `isaac.png`,
-//         affiliation: '(CSDS)',
-//         title: 'Senior Research Assistant'
-//     },
-//     {
-//         name:'Lorenz Menendez',
-//         link:'https://www.linkedin.com/in/lorenzmenendez/',
-//         img: `Menendez_Lorenz.jpeg`,
-//         affiliation:'(CSDS)',
-//         title: 'Senior Research Assistant'
-//     },
-//     {
-//         name:'James Keane',
-//         link:'https://www.linkedin.com/in/james-keane-678863b7/',
-//         img: `JamesKeane.jpg`,
-//         affiliation:'(CSDS)',
-//         title: 'Senior Research Assistant'
-//     },
-//     {
-//         name:'Dylan Halpern',
-//         link:'https://dylanhalpern.com/',
-//         degrees: 'MCP',
-//         img: `dylan.png`,
-//         affiliation:'(CSDS)',
-//         title:'Engineering & Visualization Lead',
-//     },
-//         {
-//         name:'Susan Paykin',
-//         link:'https://www.linkedin.com/in/susanpaykin/',
-//         degrees: 'MPP',
-//         img: `SPaykin.jpg`,
-//         affiliation:'(CSDS)',
-//         title:'Research & Community Management',
-//     }
-// ]
 
 // // Community Partners contributors
 // const communityPartners = [
@@ -240,9 +214,8 @@ export default function About(){
                 {/* <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li> */}
                 {/* <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li> */}
                 <br/>
-                We are also grateful to the <b>Nature Conservancy</b>, <b>Audubon Society</b>, and <b>Field Museum</b> for their insights and support.
-                Finally, a thanks to <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, <a href="https://www.linkedin.com/in/isaac-kamber/">Isaac Kamber</a>, and
-                <a href="https://www.linkedin.com/in/lorenzmenendez/"> Lorenz Menendez</a>, for their past work on the data collaborative team.
+                We are also grateful to the <b>Nature Conservancy</b> and <b>Audubon Society</b> for their insights and support.
+                Finally, a thanks to <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> for their past work on the data collaborative team.
                 <br/><br/>                                </p>
 
 
