@@ -20,7 +20,7 @@ const projectTeam = [
         degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
         affiliation: '(HEROP)',
-        title: 'Informatics PI, 2018-2022; <br/> UIUC/NASA Technical Lead, 2022-2024'
+        title: 'Project PI, 2018-2022; <br/> NASA Technical Lead, 2022-2024'
     },
     {
         name: 'Winifred Curran',
@@ -28,7 +28,7 @@ const projectTeam = [
         degrees: 'BA, MA, PhD',
         img: `curran.jpg`,
         affiliation: '(DePaul)',
-        title: 'DePaul/NASA, Community Engagement, 2022-2024'
+        title: 'NASA Community Lead, 2022-2024'
     },
     {
         name: 'Michelle Stuhlmacher',
@@ -36,7 +36,7 @@ const projectTeam = [
         degrees: 'MA, PhD',
         img: `stuhlmacher.jpg`,
         affiliation: '(DePaul)',
-        title: 'DePaul/NASA PI, Community Engagement, 2022-2024'
+        title: 'NASA Project PI, 2022-2024'
     }, {
         name: 'Sparshdeep Singh',
         link: 'https://www.linkedin.com/in/sparshdeep-singh-08a07b221',
