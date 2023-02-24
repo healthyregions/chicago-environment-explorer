@@ -20,7 +20,7 @@ const projectTeam = [
         degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
         affiliation: '(HEROP)',
-        title: 'Core Informatics Lead, 2019-2022, UIUC/NASA Technical Lead, 2022-2024'
+        title: 'Informatics PI, 2018-2022; <br/> UIUC/NASA Technical Lead, 2022-2024'
     },
     {
         name: 'Winifred Curran',
@@ -67,25 +67,24 @@ const projectTeam = [
                 degrees: 'BS, MS',
                 img: 'keane.tif',
                 affiliation: '(HEROP)',
-                title: 'ECLIPSE Visualization, 2021-2022',
+                title: 'Data Visualization, 2021-2022',
             },
         {
                name: 'Isaac Kamber',
                link: 'https://www.linkedin.com/in/isaac-kamber/',
                img: `isaac.png`,
                affiliation: '(HEROP)',
-               title: 'Data Integration, 2019-2021'
+               title: 'Data Integration, 2018-2021'
            },
            {
                name:'Lorenz Menendez',
                link:'https://www.linkedin.com/in/lorenzmenendez/',
                img: `Menendez_Lorenz.jpeg`,
                affiliation:'(HEROP)',
-               title: 'Data Integration, 2019-2021'
+               title: 'Data Integration, 2018-2021'
            }
     
 ]
-
 
 
 // ... other constants
@@ -212,12 +211,16 @@ export default function About(){
                    Core Project Team
                 </h2>
     
-                <p>Chicago's Chives Application is the product of multiple team members and universities since 2019. It continues to grow and mature. 
-                   While the initial version integrated various projects together at the Center for Spatial Data Science at the University of Chicago, 
-                   it has since expanded. Chives work is currently supported by NASA in a funded project to address environmental justice in Chicago, 
-                   led by Drs. Stuhlmacher, Curran, and Kolak. 
+                <p>This project is brought to you by the <b>Healthy Regions & Policies Lab (HeRoP) </b> at the Department of Geography & GIScience at the 
+                University of Illinois at Urbana-Champaign, in collaboration with the <b> Department of Geography </b> at DePaul University. The original  ChiVes 
+                (refactored data and integration of previous projects) emerged from HeRoP while at the Center for Spatial Data Science 
+                at the University of Chicago.<br/>
+                    <i> Chives </i> is the product of multiple team members and universities since 2018. It continues to grow and mature. 
+                   The project  is currently supported by NASA in a funded project to address environmental justice in Chicago, 
+                   led by Drs. Stuhlmacher, Curran, and Kolak. Explore current and past core contributors below.
+
                 </p>
-                <br/>
+                <br/><br/>
 
                       <MemberGrid 
                         members={projectTeam}
@@ -226,26 +229,16 @@ export default function About(){
                         }}
                         />
 
-               <h2> 
-                   A Joint Project  
-                </h2>
-
-                <p>
-             
-               This project is brought to you by the Healthy Regions & Policies Lab (HeRoP) at the Department of Geography & GIScience at the University of Illinois at Urbana-Champaign in collaboration with the Department of Geography at DePaul University. The original ChiVes (refactored data and integration of previous projects) emerged from HeRoP while at the Center for Spatial Data Science at the University of Chicago. From 2022-2024, this project is funded in part from NASA to support environmental justice applications in communities.
-                </p>
-
-                <p>
-               HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
-                    Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
-                    We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
-                    To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
-                </p>
-
+               <hr>
+                <h3> 
+                   Background  
+                </h3>
                 <br/>
-                <p> The Original ChiVes application builds on multiple former projects via HeRoP members. Explore them below:  </p>
+                <p> The Original ChiVes application builds on multiple former projects via Healthy Regions & Policies Lab members. Much of data currently
+integrated in Chives was gathered, calculated, and standardized from 2018-2021, for example. The team had experience with feedback and "lessons learned"
+from multiple dashboards from before. The current Chives application was refactored in 2022 by Dylan Halpern, and continues to mature. Explore some of the original 
+projects that inspired <i>Chives</i> below:  </p>
                 <br/>
-
 
                 <Accordion entries={accordionContent} initialTab={-1} />
 
