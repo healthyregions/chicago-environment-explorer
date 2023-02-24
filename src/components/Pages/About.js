@@ -211,13 +211,11 @@ export default function About(){
                    Core Project Team
                 </h2>
     
-                <p>This project is brought to you by the <b>Healthy Regions & Policies Lab (HeRoP) </b> at the Department of Geography & GIScience at the 
-                University of Illinois at Urbana-Champaign, in collaboration with the <b> Department of Geography </b> at DePaul University. The original  ChiVes 
-                (refactored data and integration of previous projects) emerged from HeRoP while at the Center for Spatial Data Science 
-                at the University of Chicago.<br/>
-                    <i> Chives </i> is the product of multiple team members and universities since 2018. It continues to grow and mature. 
-                   The project  is currently supported by NASA in a funded project to address environmental justice in Chicago, 
-                   led by Drs. Stuhlmacher, Curran, and Kolak. Explore current and past core contributors below.
+                <p>This project is brought to you by the <b>Healthy Regions & Policies Lab (HeRoP)</b>, housed at the Department of Geography & GIScience within the 
+                University of Illinois at Urbana-Champaign, in collaboration with the <b>Department of Geography</b> at DePaul University. The original <i>ChiVes</i>
+                emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago. <i>Chives</i> is funded in part by NASA, with a new inititative starting in 2022 led by Drs. Stuhlmacher, Curran, and Kolak. 
+                <br/><br/>
+                    Explore current and past core contributors below.
 
                 </p>
                 <br/><br/>
@@ -234,9 +232,8 @@ export default function About(){
                    Background  
                 </h3>
                 <br/>
-                <p> The Original ChiVes application builds on multiple former projects via Healthy Regions & Policies Lab members. Much of data currently
-integrated in Chives was gathered, calculated, and standardized from 2018-2021, for example. The team had experience with feedback and "lessons learned"
-from multiple dashboards from before. The current Chives application was refactored in 2022 by Dylan Halpern, and continues to mature. Explore some of the original 
+                <p> The original <i>ChiVes</i> application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently
+integrated within <i>ChiVes</i> was gathered, calculated, and standardized from 2018-2021. The current application was refactored in 2022 by Dylan Halpern, adopting a new web architecture. Explore some of the original 
 projects that inspired <i>Chives</i> below:  </p>
                 <br/>
 
