@@ -65,7 +65,7 @@ const projectTeam = [
                 name: 'James Keane',
                 link: 'https://www.linkedin.com/in/james-keane-678863b7/',
                 degrees: 'BS, MS',
-                img: 'keane.jfif',
+                img: 'keane.tif',
                 affiliation: '(HEROP)',
                 title: 'ECLIPSE Visualization, 2021-2022',
             },
