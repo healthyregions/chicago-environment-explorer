@@ -214,23 +214,14 @@ export default function About(){
                 Finally, a thanks to <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> for their past work on the data collaborative team.
                 <br/><br/>                                </p>
 
-
-               <h2> 
-                   A HeRoP Project  
+                <h2> 
+                   Project Team
                 </h2>
-
-                <p>
-
-               This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a> at the Center for Spatial Data Science at the University
-                    of Chicago. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
-                    Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
-                    We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
-                    To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
-                </p>
-                <br/><br/>
-
-
-               <p> Marynia, Winifred, Michelle, and Sparsh lead the ChiVes project in the current release.  </p><br/>
+    
+                   <p>Chicago's Chives Application is the product of countless team members, and continues to grow and mature. While the initial version integrated various projects
+                    together at the Center for Spatial Data Science at the University of Chicago, it has since expanded. Chives work is currently supported
+                    by NASA in a project to address environmental justice in Chicago, led by Drs. Stuhlmacher, Curran, and Kolak. 
+                    fro </p><br/>
 
                       <MemberGrid 
                         members={projectTeam}
@@ -238,7 +229,22 @@ export default function About(){
                             md: 4
                         }}
                         />
-                <p><strong>Past contributors:</strong></p>
+
+               <h2> 
+                   A HeRoP Project  
+                </h2>
+
+                <p>
+
+               This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a>, currently housed at the Department in Geography & GIScience at UIUC, (and previously at the Center for Spatial Data Science at the University
+                    of Chicago). HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
+                    Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
+                    We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
+                    To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
+                </p>
+                <br/><br/>
+
+                // <p><strong>Past contributors:</strong></p>
                 <br/>
                 <hr>
                 <br/>
