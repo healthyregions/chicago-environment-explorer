@@ -9,7 +9,7 @@ ChiVes is a data collaborative and community mapping application that brings dat
 
 This project refactors data from the a previous partnership with the City of Chicago, and gets customized as a new opensource platform for the wider community.
 
-This project is brought to you by the [Healthy Regions & Policies Lab (HeRoP)](https://herop.ssd.uchicago.edu/) at the Department of Geography & GIScience at the University of Illinois at Urbana-Champaign in collaboration with the Department of Geography at DePaul University. The original ChiVes (refactored data and integration of previous projects) emerged from the HeRoP at the Center for Spatial Data Science at the University of Chicago. From 2022-2024, this project is funded in part from NASA to support environmental justice applications in communities.
+This project is brought to you by the [Healthy Regions & Policies Lab (HeRoP)](https://herop.ssd.uchicago.edu/) at the Department of Geography & GIScience at the University of Illinois at Urbana-Champaign in collaboration with the Department of Geography at DePaul University. The original ChiVes (refactored data and integration of previous projects) emerged from HeRoP while at the Center for Spatial Data Science at the University of Chicago. From 2022-2024, this project is funded in part from NASA to support environmental justice applications in communities.
 
 ## Get Involved
 
