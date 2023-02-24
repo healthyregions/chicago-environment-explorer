@@ -20,7 +20,7 @@ const projectTeam = [
         degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
         affiliation: '(HEROP @UIUC)',
-        title: 'As'
+        title: 'Core Informatics Lead, 2019-2022, UIUC/NASA Technical Lead, 2022-2024'
     },
     {
         name: 'Winifred Curran',
@@ -28,7 +28,7 @@ const projectTeam = [
         degrees: 'BA, MA, PhD',
         img: `curran.jpg`,
         affiliation: '(DePaul)',
-        title: 'Professor of Geography, Sustainable Urban Development'
+        title: 'DePaul/NASA, Community Engagement, 2022-2024'
     },
     {
         name: 'Michelle Stuhlmacher',
@@ -36,26 +36,22 @@ const projectTeam = [
         degrees: 'MA, PhD',
         img: `stuhlmacher.jpg`,
         affiliation: '(CSDS)',
-        title: 'Assistant Professor of Geography, Geographic Information Systems'
+        title: 'DePaul/NASA PI, Community Engagement, 2022-2024'
     }, {
         name: 'Sparshdeep Singh',
         link: 'https://www.linkedin.com/in/sparshdeep-singh-08a07b221',
         degrees: 'BS',
         img: `sparshdeepsingh.jpg`,
         affiliation: '(HEROP @UIUC)',
-        title: 'Research Assistant'
-    }
-    
-]
-
-const pastProjectTeam = [
+        title: 'Developer, Data Integration, 2023'
+    },
     {
                 name:'Dylan Halpern',
                 link:'https://dylanhalpern.com/',
                 degrees: 'MCP',
                 img: `dylan.png`,
                 affiliation:'(CSDS @UChicago)',
-                title:'Engineering & Visualization Lead',
+                title:'Core Data Engineer & Developer, 2021-2022',
             },
                 {
                 name:'Susan Paykin',
@@ -63,7 +59,7 @@ const pastProjectTeam = [
                 degrees: 'MPP',
                 img: `SPaykin.jpg`,
                 affiliation:'(CSDS @UChicago)',
-                title:'Research & Community Management',
+                title:'Community Engagement, 2021-2022',
             },
             {
                 name: 'James Keane',
@@ -71,21 +67,21 @@ const pastProjectTeam = [
                 degrees: 'BS, MS',
                 img: 'keane.jfif',
                 affiliation: '(CSDS @UChicago)',
-                title: 'Senior Data Science Research Assistant',
+                title: 'ECLIPSE Visualization, 2021-2022',
             },
         {
                name: 'Isaac Kamber',
                link: 'https://www.linkedin.com/in/isaac-kamber/',
                img: `isaac.png`,
-               affiliation: '(CSDS)',
-               title: 'Senior Research Assistant'
+               affiliation: '(University of Chicago)',
+               title: 'Data Integration, 2019-2021'
            },
            {
                name:'Lorenz Menendez',
                link:'https://www.linkedin.com/in/lorenzmenendez/',
                img: `Menendez_Lorenz.jpeg`,
-               affiliation:'(CSDS)',
-               title: 'Senior Research Assistant'
+               affiliation:'(University of Chicago)',
+               title: 'Data Integration, 2019-2021'
            }
     
 ]
@@ -239,20 +235,12 @@ export default function About(){
                       <MemberGrid 
                         members={projectTeam}
                         columns={{
-                            md: 5
+                            md: 4
                         }}
                         />
                 <p><strong>Past contributors:</strong></p>
                 <br/>
-
-                    <MemberGrid
-                        members={pastProjectTeam}
-                        columns={{
-                            md: 5
-                        }}
-                    />
-
-                
+                <hr>
                 <br/>
                 <p> The ChiVes application builds on multiple former projects via HeRoP members. Explore them below: 
                 </p><br/>
