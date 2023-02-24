@@ -1,7 +1,6 @@
 # ChiVes: Chicago Environment Explorer
 ### [ChiVes](https://chichives.com/) is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level.
 
-
 # About
 
 Chicago's urban environment has profound impacts on the health of communities and individuals. A handful of key metrics―tree cover, air pollution estimates, heat island effects, traffic volumes, and social vulnerability index― help to reveal where in the city people face particular challenges as we work towards a healthier Chicago.
@@ -12,28 +11,7 @@ This project refactors data from the a previous partnership with the City of Chi
 
 ## A Project from the Healthy Regions & Policies Lab
 
-This project is brought to you by the [Healthy Regions & Policies Lab (HeRoP)](https://herop.ssd.uchicago.edu/) at the [Center for Spatial Data Science at the University of Chicago](https://github.com/GeoDaCenter). HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies. Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. We’re interested in how place drives, interacts with, and influences health for different people, in different ways. To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
-
-[Marynia Kolak](https://github.com/Makosak), [Dylan Halpern](https://github.com/nofurtherinformation), and [Susan Paykin](https://github.com/spaykin) lead the ChiVes project in the current release.
-
-
-## Data Collaborative Members
-
-The Data Collaborative provides insight, direction, and relavent environmental data to the Chicago community. The group advises on ChiVes data standards and needs, and includes the following members (* indicates Current Leadership):
-
-* Zac Adelman, Lake Michigan Air Directors Consortium
-* Elsa Anderson & Sophie Taddeo, Chicago Botanic Gardens
-* Madeleine Daepp, Microsoft Research
-* Tiffany Werner, Environmental Law & Policy Center
-* Anne Dodge, Mansueto Institute, University of Chicago
-* Jim Franke & Haynes Stephens, Department of Geophysical Sciences, University of Chicago
-* Anastasia (Stacy) Montgomery, Sara Camilleri & Dan Horton, Climate Change Research Group, Northwestern University
-* Michelle Stuhlmacher, Department of Geography, DePaul University
-* James Keane, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago
-
-We are also grateful to the Nature Conservancy, Audubon Society, and Field Museum for their insights and support.
-
-Finally, a major thank you goes to Isaac Kamber and Lorenz Menendez, now alumni of University of Chicago, who developed multiple measures for this application as a core component of their Research Assistantships from 2019-2021.
+This project is brought to you by the [Healthy Regions & Policies Lab (HeRoP)](https://herop.ssd.uchicago.edu/) at the Department of Geography & GIScience at the University of Illinois at Urbana-Champaign, and DePaul University. The original ChiVes (refactored data and integration of previous projects) emerged from the HeRoP at the Center for Spatial Data Science at the University of Chicago. HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies. Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. We’re interested in how place drives, interacts with, and influences health for different people, in different ways. To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
 
 ## Get Involved
 
