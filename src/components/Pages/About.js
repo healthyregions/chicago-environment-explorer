@@ -227,25 +227,24 @@ export default function About(){
                         />
 
                <h2> 
-                   A HeRoP Project  
+                   A Joint Project  
                 </h2>
 
                 <p>
+             
+               This project is brought to you by the Healthy Regions & Policies Lab (HeRoP) at the Department of Geography & GIScience at the University of Illinois at Urbana-Champaign in collaboration with the Department of Geography at DePaul University. The original ChiVes (refactored data and integration of previous projects) emerged from HeRoP while at the Center for Spatial Data Science at the University of Chicago. From 2022-2024, this project is funded in part from NASA to support environmental justice applications in communities.
+                </p>
 
-               This project is brought to you by the <a href="https://herop.ssd.uchicago.edu/"> Health Regions & Policies Lab (HeRoP)</a>, currently housed at the Department in Geography & GIScience at UIUC, (and previously at the Center for Spatial Data Science at the University
-                    of Chicago). HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
+                <p>
+               HeRoP integrates innovative GIScience, public health, and statistical approaches to explore, understand, and promote healthy regions and policies.
                     Our group is dedicated to Open Science and open source methodology & applications. We are committed to research translation for policy & public use. 
                     We’re interested in how place drives, interacts with, and influences health for different people, in different ways. 
                     To explore this further, we look at neighborhoods as complex systems with spatial signals that help decode their stories.
                 </p>
-                <br/><br/>
 
-                // <p><strong>Past contributors:</strong></p>
                 <br/>
-                <hr>
+                <p> The Original ChiVes application builds on multiple former projects via HeRoP members. Explore them below:  </p>
                 <br/>
-                <p> The ChiVes application builds on multiple former projects via HeRoP members. Explore them below: 
-                </p><br/>
 
 
                 <Accordion entries={accordionContent} initialTab={-1} />
