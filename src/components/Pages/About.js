@@ -222,7 +222,7 @@ export default function About(){
                       <MemberGrid 
                         members={projectTeam}
                         columns={{
-                            md: 5
+                            md: 4
                         }}
                         />
 
