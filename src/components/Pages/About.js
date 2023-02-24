@@ -19,7 +19,7 @@ const projectTeam = [
         link: 'https://makosak.github.io/',
         degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
-        affiliation: '(HEROP @UIUC)',
+        affiliation: '(HEROP)',
         title: 'Core Informatics Lead, 2019-2022, UIUC/NASA Technical Lead, 2022-2024'
     },
     {
@@ -35,14 +35,14 @@ const projectTeam = [
         link: 'https://www.linkedin.com/in/michellestuhlmacher',
         degrees: 'MA, PhD',
         img: `stuhlmacher.jpg`,
-        affiliation: '(CSDS)',
+        affiliation: '(DePaul)',
         title: 'DePaul/NASA PI, Community Engagement, 2022-2024'
     }, {
         name: 'Sparshdeep Singh',
         link: 'https://www.linkedin.com/in/sparshdeep-singh-08a07b221',
         degrees: 'BS',
         img: `sparshdeepsingh.jpg`,
-        affiliation: '(HEROP @UIUC)',
+        affiliation: '(HEROP)',
         title: 'Developer, Data Integration, 2023'
     },
     {
@@ -50,7 +50,7 @@ const projectTeam = [
                 link:'https://dylanhalpern.com/',
                 degrees: 'MCP',
                 img: `dylan.png`,
-                affiliation:'(CSDS @UChicago)',
+                affiliation:'(HEROP)',
                 title:'Core Data Engineer & Developer, 2021-2022',
             },
                 {
@@ -58,7 +58,7 @@ const projectTeam = [
                 link:'https://www.linkedin.com/in/susanpaykin/',
                 degrees: 'MPP',
                 img: `SPaykin.jpg`,
-                affiliation:'(CSDS @UChicago)',
+                affiliation:'(HEROP)',
                 title:'Community Engagement, 2021-2022',
             },
             {
@@ -66,32 +66,26 @@ const projectTeam = [
                 link: 'https://www.linkedin.com/in/james-keane-678863b7/',
                 degrees: 'BS, MS',
                 img: 'keane.jfif',
-                affiliation: '(CSDS @UChicago)',
+                affiliation: '(HEROP)',
                 title: 'ECLIPSE Visualization, 2021-2022',
             },
         {
                name: 'Isaac Kamber',
                link: 'https://www.linkedin.com/in/isaac-kamber/',
                img: `isaac.png`,
-               affiliation: '(University of Chicago)',
+               affiliation: '(HEROP)',
                title: 'Data Integration, 2019-2021'
            },
            {
                name:'Lorenz Menendez',
                link:'https://www.linkedin.com/in/lorenzmenendez/',
                img: `Menendez_Lorenz.jpeg`,
-               affiliation:'(University of Chicago)',
+               affiliation:'(HEROP)',
                title: 'Data Integration, 2019-2021'
            }
     
 ]
 
-
-// // Community Partners contributors
-// const communityPartners = [
-
-
-// ]
 
 
 // ... other constants
@@ -157,17 +151,17 @@ const accordionContent = [
                     public, private, and community stakeholders impacted the success of the Tree Tool application: follow the City of Chicago for more details coming soon!
                     <br/><br/> 
                     This work was part of a Partnership for Healthy Cities, a global network of cities committed to saving lives by preventing noncommunicable diseases (NCDs) and injuries, supported by Bloomberg Philanthropies in partnership with the World Health Organization and Vital Strategies.
-
-                </p>)
+                </p>
+                )
     }
-
-
 ]
 
 export default function About(){
     return (
        <AboutPage>
+
            <NavBar />
+
            <ContentContainer>
                <h1>About </h1>
                <hr/>
@@ -215,18 +209,20 @@ export default function About(){
                 <br/><br/>                                </p>
 
                 <h2> 
-                   Project Team
+                   Core Project Team
                 </h2>
     
-                   <p>Chicago's Chives Application is the product of countless team members, and continues to grow and mature. While the initial version integrated various projects
-                    together at the Center for Spatial Data Science at the University of Chicago, it has since expanded. Chives work is currently supported
-                    by NASA in a project to address environmental justice in Chicago, led by Drs. Stuhlmacher, Curran, and Kolak. 
-                    fro </p><br/>
+                <p>Chicago's Chives Application is the product of multiple team members and universities since 2019. It continues to grow and mature. 
+                   While the initial version integrated various projects together at the Center for Spatial Data Science at the University of Chicago, 
+                   it has since expanded. Chives work is currently supported by NASA in a funded project to address environmental justice in Chicago, 
+                   led by Drs. Stuhlmacher, Curran, and Kolak. 
+                </p>
+                <br/>
 
                       <MemberGrid 
                         members={projectTeam}
                         columns={{
-                            md: 4
+                            md: 5
                         }}
                         />
 
