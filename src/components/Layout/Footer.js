@@ -138,30 +138,17 @@ const Footer = (props) => {
           </Grid>
           <Grid item xs={12} md={6} alignContent="center" alignItems="center">
             <Grid container spacing={0}>
-              <Grid item xs={6}>
 
+              <Grid item xs={6}>
                 <a
-                  href="https://voices.uchicago.edu/herop/"
+                  href="https://www.healthyregions.org"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <img
                     className="logo"
                     src={`${process.env.PUBLIC_URL}/herop_light_logo.png`}
-                    alt="Center for Spatial Data Science logo"
-                  />
-                </a>
-              </Grid>
-              <Grid item xs={6}>
-                <a
-                  href="https://spatial.uchicago.edu/content/spatial-research-csds"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img
-                    className="logo"
-                    src={`${process.env.PUBLIC_URL}/csds-university-wordmark-white.png`}
-                    alt="Center for Spatial Data Science logo"
+                    alt="Healthy Regions & Policies Lab"
                   />
                 </a>
               </Grid>
