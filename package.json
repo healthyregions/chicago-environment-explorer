@@ -50,6 +50,7 @@
     "history": "^5.1.0",
     "lodash": "^4.17.20",
     "mapbox-gl": "1.13.2",
+    "netlify-cli": "^13.1.2",
     "object-resolve-path": "^1.1.1",
     "pbf": "^3.2.1",
     "react": "^17.0.1",

@@ -29,3 +29,6 @@ yarn-error.log*
 *.Rhistory
 .Rhistory
 package-lock.json
+
+# Local Netlify folder
+.netlify

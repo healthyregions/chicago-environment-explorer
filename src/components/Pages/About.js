@@ -227,7 +227,7 @@ export default function About(){
                         }}
                         />
 
-               <hr>
+               <hr/>
                 <h3> 
                    Background  
                 </h3>
