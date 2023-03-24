@@ -232,7 +232,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       pitch: viewState.pitch,
     });
   };
-
+  const hoverRef = useRef();
   const viewRef = useRef(null);
   const mapContainerRef = useRef(null);
   // map view location
@@ -275,6 +275,15 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlParams]);
 
+  useEffect(() => {
+    let handler = (e) => {
+      if (!hoverRef.current.contains(e.target)) {
+        setHoverInfo({x: null, y: null, object: null});
+      }
+    }
+
+    document.addEventListener("mousedown", handler);
+  })
   const GetMapView = () => {
     try {
       const currView = viewRef.current;
@@ -873,6 +882,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
             left: hoverInfo.x,
             top: hoverInfo.y,
           }}
+          ref={hoverRef}
         >
           <MapTooltipContent content={hoverInfo.object} />
         </HoverDiv>
