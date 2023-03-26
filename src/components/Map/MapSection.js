@@ -232,7 +232,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       pitch: viewState.pitch,
     });
   };
-  const hoverRef = useRef();
+  const hoverRef = useRef(null);
   const viewRef = useRef(null);
   const mapContainerRef = useRef(null);
   // map view location
@@ -284,6 +284,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
     document.addEventListener("mousedown", handler);
   })
+
   const GetMapView = () => {
     try {
       const currView = viewRef.current;
@@ -312,6 +313,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       setHoverGeog(null);
       setHoverInfo({ x: null, y: null, object: null });
     }
+    console.log(object.properties.primary_grade_4levels)
   };
 
   const handleGeolocate = async () => {

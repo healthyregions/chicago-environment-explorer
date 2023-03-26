@@ -113,7 +113,26 @@ const BinBars = styled.div`
         transform: ${props => props.firstBinZero ? 'scaleX(0.35)' : 'none'};
     }
 `
-
+const BinLabel = (obj, bins) => {
+    console.log("-----------" + obj["varName"])
+    if (obj["varName"].trim() === "Historical Redlining") {
+        console.log('success')
+        return (
+            <BinLabels>
+                <div key={'color-label1'} className='bin labe'>{"A"}</div>
+                <div key={'color-label2'} className='bin labe'>{"B"}</div>
+                <div key={'color-label3'} className='bin labe'>{"C"}</div>
+                <div key={'color-label4'} className='bin labe'>{"D"}</div>
+            </BinLabels>
+        )
+    } else {
+        return (
+            <BinLabels>
+                {obj["bins"].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}
+            </BinLabels>
+        )
+    }
+}
 
 const Legend =  ({
     variableName,
@@ -136,9 +155,10 @@ const Legend =  ({
                                 <BinBars>
                                     {colorScale.map((color, i) => <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
                                 </BinBars>
-                                <BinLabels binLength={bins.length}> 
-                                    {bins.map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
-                                </BinLabels>
+                                
+                                <BinLabel varName={variableName} bins={bins}/> 
+                                    {/* {bins.map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}                            */}
+                                
                             </span>
                         }
                     </Grid>
