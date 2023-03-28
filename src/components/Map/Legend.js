@@ -113,10 +113,9 @@ const BinBars = styled.div`
         transform: ${props => props.firstBinZero ? 'scaleX(0.35)' : 'none'};
     }
 `
+//conditionally render legend b/c redlining data is categorical, Math.round causes NaN
 const BinLabel = (obj, bins) => {
-    console.log("-----------" + obj["varName"])
     if (obj["varName"].trim() === "Historical Redlining") {
-        console.log('success')
         return (
             <BinLabels>
                 <div key={'color-label1'} className='bin labe'>{"A"}</div>
@@ -157,8 +156,6 @@ const Legend =  ({
                                 </BinBars>
                                 
                                 <BinLabel varName={variableName} bins={bins}/> 
-                                    {/* {bins.map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}                            */}
-                                
                             </span>
                         }
                     </Grid>
