@@ -450,7 +450,13 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     .toLowerCase()
     .includes("plant diversity")
     ? (feature, color) => [...color, feature.properties.specCt > 7 ? 255 : 75]
-    : (_, color) => color;
+    : (feature, color) => {
+      if (mapParams.variableName.toLowerCase().includes("redlining")) {
+        return REDLINING_COLOR_SCALE[feature.properties["primary_grade_4levels"]] || [0, 0, 0];
+      } else {
+        return color;
+      }
+    }
 
   const baseLayers = [
     new GeoJsonLayer({
