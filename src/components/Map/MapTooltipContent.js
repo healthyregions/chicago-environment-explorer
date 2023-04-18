@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { Button } from '@mui/material';
 import {colors} from '../../config'
 const PolarSpeciesPlot = React.lazy(() => import('../Charts/PolarSpeciesPlot.js'));
@@ -18,7 +19,11 @@ const MapTooltipContent = ({content}) => {
         urban_flood_suscep,
         ndvi,
         simpson,
-        topline_median
+        topline_median,
+        proportionA,
+        proportionB,
+        proportionC,
+        proportionD
     } = content;
     const [speciesPlotInfo, setSpeciesPlotInfo] = useState({
         open: false,
@@ -41,8 +46,11 @@ const MapTooltipContent = ({content}) => {
     return (
         <>
             <h2>Tract {geoid}</h2>
-            {content && <span><table>
+            
+            {content && <div style={{overflowY:'scroll', height:'300px'}}><span><table>
+                
                 <tbody>
+                    
                     <tr><td>Population</td><td> {acs_population && acs_population.toLocaleString('en')}</td></tr>
                     <tr><td>Number of Trees</td><td> {trees_n && trees_n.toLocaleString('en')}</td></tr>
                     <tr><td>Percent Canopy Cover</td><td> {trees_crown_den && trees_crown_den.toFixed(2)}%</td></tr>
@@ -56,15 +64,22 @@ const MapTooltipContent = ({content}) => {
                     <tr><td>Urban Flood Susceptibility Index</td><td> {urban_flood_suscep && urban_flood_suscep.toFixed(2)}</td></tr>
                     <tr><td>Vegetation Index (NDVI)</td><td> {ndvi && ndvi.toFixed(3)}</td></tr>
                     <tr><td>Plant Biodiversity</td><td>{simpson && simpson.toFixed(2)}</td></tr>
+                    <tr><td>Proportion A</td><td> {proportionA && proportionA.toFixed(2)}</td></tr>
+                    <tr><td>Proportion B</td><td> {proportionB && proportionB.toFixed(2)}</td></tr>
+                    <tr><td>Proportion C</td><td> {proportionC && proportionC.toFixed(2)}</td></tr>
+                    <tr><td>Proportion D</td><td> {proportionD && proportionD.toFixed(2)}</td></tr>
+                    
                 </tbody>
             </table>
+            
             <Button variant="contained" onClick={handleSpeciesPlot} style={{marginTop:'.5em', fontFamily:'"Lato", sans-serif', background:colors.forest}}>Open Species Tree</Button>
             <PolarSpeciesPlot
                 geoid={speciesPlotInfo.geoid}
                 open={speciesPlotInfo.open}
                 setOpen={handleSetOpen}
                 />
-            </span>}
+            </span></div>}
+            
         </>
     )
 }
