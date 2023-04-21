@@ -41,7 +41,7 @@ const MapTooltipContent = ({content}) => {
     return (
         <>
             <h2>Tract {geoid}</h2>
-            {content && <span><table>
+            {content && <div style={{overflowY:'scroll', height:'250px'}}><span><table>
                 <tbody>
                     <tr><td>Population</td><td> {acs_population && acs_population.toLocaleString('en')}</td></tr>
                     <tr><td>Number of Trees</td><td> {trees_n && trees_n.toLocaleString('en')}</td></tr>
@@ -64,7 +64,7 @@ const MapTooltipContent = ({content}) => {
                 open={speciesPlotInfo.open}
                 setOpen={handleSetOpen}
                 />
-            </span>}
+            </span></div>}
         </>
     )
 }
