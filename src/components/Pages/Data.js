@@ -10,15 +10,6 @@ import baseLayers from '../../config/baseLayers.json';
 const DataPage = styled.div`
     background:white;
 
-`
-function NUFilter(f) {
-    let colName = 'inf'
-    if (!!f['Column']) {
-        colName = f['Column'].slice(0, 4)
-    }
-    return (!!f['Variable Name'] && colName !== 'CMAQ')
-}
-
 // const TableStyle  = styled.div`
 //     a {
 //         font-family: 'Lora', sans-serif;
@@ -172,7 +163,7 @@ export default function Data() {
 
                 
                     <Gutter h={20} />
-                    <Table columns={columns} data={dataSources.filter(NUFilter)} />
+                    <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'])} />
                     <Gutter h={40} />
                
                     
