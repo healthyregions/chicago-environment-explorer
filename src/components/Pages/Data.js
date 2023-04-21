@@ -150,7 +150,19 @@ export default function Data() {
                 <Gutter h={20} />
                 <h2>Data Dictionary</h2>
                 <ul>
-                    {dataColumns.map(({ Column, Description },i) => <li key={i}><p><b>{Column}:</b> {Description}</p></li>)}
+                    {dataColumns.map(({ Column, Description }, i) => {
+                    if (Column !== "CMAQ_NO2" && Column !== "CMAQ_O3" && Column !== "CMAQ_PM25") {
+                        return (
+                        <li key={i}>
+                            <p>
+                            <b>{Column}:</b> {Description}
+                            </p>
+                        </li>
+                        );
+                    } else {
+                        return null;
+                    }
+                    })}
                 </ul>
                 <Gutter h={40} />
                 <h2>Map Variables and Data Sources</h2>
