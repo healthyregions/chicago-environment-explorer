@@ -20,7 +20,7 @@ const projectTeam = [
         degrees: 'MS, MFA, PhD',
         img: `mk.jpg`,
         affiliation: '(HEROP)',
-        title: 'Project PI, 2018-2022; <br/> NASA Technical Lead, 2022-2024'
+        title: 'Project PI, 2018-2022; NASA Technical Lead, 2022-2024'
     },
     {
         name: 'Winifred Curran',
@@ -44,6 +44,21 @@ const projectTeam = [
         img: `sparshdeepsingh.jpg`,
         affiliation: '(HEROP)',
         title: 'Developer, Data Integration, 2023'
+    }, {
+        name: 'Sarvagnya Vijay',
+        link: 'https://www.linkedin.com/in/sarvagnya-vijay-54640421b',
+        degrees: 'BS',
+        img: `sarvagnya_vijay.jpg`,
+        affiliation: '(HEROP)',
+        title: 'Developer, Data Integration, 2023'
+    },
+    {
+        name: 'Adam Cox',
+        link: 'https://www.linkedin.com/in/mradamcox/',
+        degrees: 'MS, MLIS',
+        img: `adam_cox.jpg`,
+        affiliation: '(HEROP)',
+        title: 'Research Software Engineer, Dev-Ops, 2023'
     },
     {
                 name:'Dylan Halpern',
@@ -196,7 +211,7 @@ export default function About(){
                 <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Chicago Botanic Gardens </li>
                 <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research </li>
                 {/* <li> <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, Environmental Law & Policy Center </li> */}
-                <li> <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a>, Mansueto Institute, University of Chicago </li>
+                {/* <li> <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a>, Mansueto Institute, University of Chicago </li> */}
                 {/* <li> <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a> & <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, Department of Geophysical Sciences, University of Chicago </li> */}
                 <li> <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, Unite Us, Illinois </li>
                 <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
@@ -204,7 +219,7 @@ export default function About(){
                 {/* <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li> */}
                 <br/>
                 We are also grateful to the <b>Nature Conservancy</b> and <b>Audubon Society</b> for their insights and support.
-                Finally, a thanks to <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> for their past work on the data collaborative team.
+                Finally, a thanks to <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> and <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a> for their past work on the data collaborative team.
                 <br/><br/>                                </p>
 
                 <h2> 

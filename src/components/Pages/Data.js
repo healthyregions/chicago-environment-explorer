@@ -11,6 +11,13 @@ const DataPage = styled.div`
     background:white;
 
 `
+function NUFilter(f) {
+    let colName = 'inf'
+    if (!!f['Column']) {
+        colName = f['Column'].slice(0, 4)
+    }
+    return (!!f['Variable Name'] && colName !== 'CMAQ')
+}
 
 // const TableStyle  = styled.div`
 //     a {
@@ -165,7 +172,7 @@ export default function Data() {
 
                 
                     <Gutter h={20} />
-                    <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'])} />
+                    <Table columns={columns} data={dataSources.filter(NUFilter)} />
                     <Gutter h={40} />
                
                     

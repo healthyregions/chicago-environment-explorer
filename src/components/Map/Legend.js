@@ -115,21 +115,30 @@ const BinBars = styled.div`
 `
 const BinLabel = (obj, bins) => {
     console.log(obj["obj"]);
-    if (obj["obj"].trim() === "Historical Redlining") {
-        return (
-            <BinLabels>
-                <div key={'color-label0'} className='bin labe'>{"A"}</div>
-                <div key={'color-label1'} className='bin labe'>{"B"}</div>
-                <div key={'color-label2'} className='bin labe'>{"C"}</div>
-                <div key={'color-label3'} className='bin labe'>{"D"}</div>
-            </BinLabels> 
-        )
-    } else {
-        return (
-            <BinLabels binLength={bins.length}> 
-                {obj["bins"].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
-            </BinLabels>
-        )
+    switch(obj["obj"].trim()) {
+        case "Historical Redlining":
+            return (
+                <BinLabels>
+                    <div key={'color-label0'} className='bin labe'>{"A"}</div>
+                    <div key={'color-label1'} className='bin labe'>{"B"}</div>
+                    <div key={'color-label2'} className='bin labe'>{"C"}</div>
+                    <div key={'color-label3'} className='bin labe'>{"D"}</div>
+                </BinLabels> 
+            );
+        case "Displacement Index":
+            return (
+                <BinLabels>
+                    <div key={'color-label0'} className='bin labe'>{"Lower-cost"}</div>
+                    <div key={'color-label1'} className='bin labe'>{"Moderate-cost"}</div>
+                    <div key={'color-label2'} className='bin labe'>{"High-cost"}</div>
+                </BinLabels> 
+            );
+        default:
+            return (
+                <BinLabels binLength={bins.length}> 
+                    {obj["bins"].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
+                </BinLabels>
+            );
     }
 }
 

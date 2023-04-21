@@ -421,6 +421,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     D: [226, 77, 90],
   };
 
+  const DISPLACEMENT_COLOR_SCALE = {
+    lower_cost: [100, 100, 172],
+    moderate_cost: [92, 108, 92],
+    high_cost: [172, 92, 92]
+  };
+
   const isVisible = (feature, filters) => {
     for (const property in filters) {
       if (typeof filters[property][0] === "string") {
@@ -446,17 +452,19 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   // ];
   // const AQ_COL = "weekend_median";
 
-  const mapAlphaFunc = mapParams.variableName
-    .toLowerCase()
-    .includes("plant diversity")
-    ? (feature, color) => [...color, feature.properties.specCt > 7 ? 255 : 75]
-    : (feature, color) => {
-      if (mapParams.variableName.toLowerCase().includes("redlining")) {
+  const mapAlphaFunc = (feature, color) => {
+    const variableName = mapParams.variableName.toLowerCase();
+    switch (true) {
+      case variableName.includes("plant diversity"):
+        return [...color, feature.properties.specCt > 7 ? 255 : 75];
+      case variableName.includes("redlining"):
         return REDLINING_COLOR_SCALE[feature.properties["primary_grade_4levels"]] || [0, 0, 0];
-      } else {
+      case variableName.includes("displacement"):
+        return DISPLACEMENT_COLOR_SCALE[feature.properties["HPRICETIER"]] || [0, 0, 0];
+      default:
         return color;
-      }
     }
+  };
 
   const baseLayers = [
     new GeoJsonLayer({
