@@ -4,12 +4,15 @@ import { useDispatch } from 'react-redux';
 // Import helper libraries
 import styled from 'styled-components';
 // import FormControl from '@mui/material/FormControl';
-import Slider from '@mui/material/Slider';
+import Slider, { SliderThumb } from '@mui/material/Slider';
 import withStyles from '@mui/styles/withStyles';
 
 import DensityChart from './DensityChart';
 import { applyFilterValues, removeFilterValues } from '../../actions';
 import { colors } from '../../config';
+import PropTypes from "prop-types";
+import clsx from "clsx";
+
 
 const HistogramContainer = styled.div`
   position:relative;
@@ -70,14 +73,24 @@ const ClearButton = styled.button`
 
 
 function StyledThumb(props) {
+
+  const { children, className, ...other } = props;
+  const thumbNumberClassName = other["data-index"] === 0 ? "first-thumb" : "second-thumb";
+  console.log(thumbNumberClassName);
+
   return (
-    <span {...props}>
+    <SliderThumb {...other} className={clsx(className, thumbNumberClassName)}>
+      {children}
       <span className="bar" />
       <span className="bar" />
       <span className="bar" />
-    </span>
+    </SliderThumb>
   );
 }
+
+StyledThumb.propTypes = {
+  children: PropTypes.node
+};
 
 const StyledSlider = withStyles({
   root: {
@@ -91,11 +104,13 @@ const StyledSlider = withStyles({
   },
   thumb: {
     height: 95,
-    width: 1,
-    borderLeft: '6px solid rgba(0,0,0,0)',
-    borderRight: '6px solid rgba(0,0,0,0)',
-    backgroundColor: '#787878',
+    width: 2,
+    // borderLeft: '6px solid rgba(0,0,0,0)',
+    // borderRight: '6px solid rgba(0,0,0,0)',
+    backgroundColor: 'transparent',
     border: '1px solid currentColor',
+    borderLeft: '2px dotted #000',
+    position: 'absolute',
     marginTop: -35,
     marginLeft: 10,
     boxShadow: '#00000044 0 2px 2px',
@@ -111,9 +126,23 @@ const StyledSlider = withStyles({
       marginLeft: 1,
       marginRight: 1,
     },
-    '& :after': {
-      display:'none',
-      content: 'xxx'
+    '&::after': {
+      // display:'none',
+      position: 'absolute',
+      content: '""',
+      width: 0,
+      height: 0,
+      borderWidth: '10px 10px 0 0',
+      borderColor: '#000 transparent transparent transparent',
+      transform: 'translateX(-20%) translateY(-2%)',
+      top: 0,
+      right: 0,
+      borderStyle: 'solid',
+      borderRadius: 0, 
+    },
+    '&.second-thumb::after': {
+      borderWidth: '10px 0 10px 10px',
+      transform: 'translateX(-100%)',
     }
   },
   active: {},
@@ -177,7 +206,8 @@ export default function Histogram({
       </ChartContainer>
 
       {filterIsActive && <StyledSlider
-        ThumbComponent={StyledThumb}
+        // ThumbComponent={StyledThumb}
+        components={{ Thumb: StyledThumb }}
         onChange={setFilterValues}
         // getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
         defaultValue={[range.min, range.max]}
