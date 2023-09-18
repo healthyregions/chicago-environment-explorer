@@ -13,7 +13,6 @@ import { colors } from '../../config';
 import PropTypes from "prop-types";
 import clsx from "clsx";
 
-
 const HistogramContainer = styled.div`
   position:relative;
   margin:1rem 0 0 0;
@@ -52,7 +51,7 @@ const ChartContainer = styled.div`
 //   }
 // `
 
-const ClearButton = styled.button`
+const ResetButton = styled.button`
   background:none;
   border:none;
   border-bottom:1px solid ${colors.darkgray};
@@ -104,11 +103,12 @@ const StyledSlider = withStyles({
   thumb: {
     height: 95,
     width: 2,
+    pointerEvents: "auto!important",
     // borderLeft: '6px solid rgba(0,0,0,0)',
     // borderRight: '6px solid rgba(0,0,0,0)',
     backgroundColor: 'transparent',
     border: '1px solid currentColor',
-    borderLeft: '2px dotted #000',
+    borderLeft: '2px dotted #5A5A5A',
     position: 'absolute',
     marginTop: -35,
     marginLeft: 10,
@@ -132,7 +132,7 @@ const StyledSlider = withStyles({
       width: 0,
       height: 0,
       borderWidth: '10px 10px 0 0',
-      borderColor: '#000 transparent transparent transparent',
+      borderColor: '#5A5A5A transparent transparent transparent',
       transform: 'translateX(-20%) translateY(-2%)',
       top: 0,
       right: 0,
@@ -181,7 +181,17 @@ export default function Histogram({
 }){
   
   const dispatch = useDispatch();
+  const minDistanceBetweenThumbs = (range.max-range.min)/11;
   const [sliderValue, setSliderValue] = useState([range.min, range.max]);
+
+  const valueChangeHandler = (e, newValues, activeThumb) => {
+    if (activeThumb === 0) {
+      setSliderValue([Math.min(newValues[0], sliderValue[1] - minDistanceBetweenThumbs), sliderValue[1]]);
+    }
+    else {
+      setSliderValue([sliderValue[0], Math.max(newValues[1], sliderValue[0] + minDistanceBetweenThumbs)]);
+    }
+  };
 
   const filterChart = useMemo(
     () => debounce((newValues) => dispatch(applyFilterValues(column, newValues)), 250),
@@ -201,7 +211,7 @@ export default function Histogram({
   return (
     <HistogramContainer>
       <h4>{name}</h4>
-      <ClearButton onClick={() => resetFilter()}>clear</ClearButton>
+      <ResetButton onClick={() => resetFilter()}>reset</ResetButton>
       
       <ChartContainer>
         <DensityChart 
@@ -216,13 +226,14 @@ export default function Histogram({
       <StyledSlider
         // ThumbComponent={StyledThumb}
         components={{ Thumb: StyledThumb }}
-        onChange={(e, newValues) => setSliderValue(newValues)}
+        onChange={valueChangeHandler}
         // getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
         value={sliderValue}
         defaultValue={[range.min, range.max]}
         min={range.min}
         max={range.max}
         step={(range.max-range.min)/10}
+        disableSwap
       />
 
     </HistogramContainer>
