@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 // Import helper libraries
@@ -76,7 +76,6 @@ function StyledThumb(props) {
 
   const { children, className, ...other } = props;
   const thumbNumberClassName = other["data-index"] === 0 ? "first-thumb" : "second-thumb";
-  console.log(thumbNumberClassName);
 
   return (
     <SliderThumb {...other} className={clsx(className, thumbNumberClassName)}>
@@ -143,7 +142,10 @@ const StyledSlider = withStyles({
     '&.second-thumb::after': {
       borderWidth: '10px 0 10px 10px',
       transform: 'translateX(-100%)',
-    }
+    },
+    '&.Mui-focusVisible': {
+      boxShadow: 'none',
+    },
   },
   active: {},
   track: {
@@ -178,24 +180,30 @@ export default function Histogram({
   color
 }){
   
-  const [filterIsActive, setFilterIsActive] = useState(false);
   const dispatch = useDispatch();
+  const [sliderValue, setSliderValue] = useState([range.min, range.max]);
 
-  const setFilterValues = debounce((e, newValues) => {
-    dispatch(applyFilterValues(column, newValues))
-  }, 250)
+  const filterChart = useMemo(
+    () => debounce((newValues) => dispatch(applyFilterValues(column, newValues)), 250),
+    []
+  );
+
+  useEffect(
+    () => filterChart(sliderValue),
+    [sliderValue]
+  );
 
   const resetFilter = () => {
-    dispatch(removeFilterValues(column))
-    setFilterIsActive(false)
+    dispatch(removeFilterValues(column));
+    setSliderValue([range.min, range.max]);
   }
   
   return (
     <HistogramContainer>
       <h4>{name}</h4>
-      {filterIsActive && <ClearButton onClick={() => resetFilter()}>clear</ClearButton>}
+      <ClearButton onClick={() => resetFilter()}>clear</ClearButton>
       
-      <ChartContainer onClick={() => setFilterIsActive(true)}>
+      <ChartContainer>
         <DensityChart 
           data={density}
           // density={density} 
@@ -205,16 +213,17 @@ export default function Histogram({
         />
       </ChartContainer>
 
-      {filterIsActive && <StyledSlider
+      <StyledSlider
         // ThumbComponent={StyledThumb}
         components={{ Thumb: StyledThumb }}
-        onChange={setFilterValues}
+        onChange={(e, newValues) => setSliderValue(newValues)}
         // getAriaLabel={(index) => (index === 0 ? 'Minimum price' : 'Maximum price')}
+        value={sliderValue}
         defaultValue={[range.min, range.max]}
         min={range.min}
         max={range.max}
         step={(range.max-range.min)/10}
-      />}
+      />
 
     </HistogramContainer>
   )
