@@ -316,7 +316,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
   const handleGeolocate = async () => {
     navigator.geolocation.getCurrentPosition((position) => {
+      const currMapView = GetMapView();
       handlePanMap({
+        ...currMapView,
         longitude: position.coords.longitude,
         latitude: position.coords.latitude,
         zoom: 14,
