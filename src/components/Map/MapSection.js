@@ -334,7 +334,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     });
   };
   const handleTilt = () => {
-    console.log(mapRef?.current);
     const currMapView = GetMapView();
     handlePanMap({
       ...currMapView,
@@ -377,6 +376,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         longitude: center[0],
         latitude: center[1],
         zoom: zoom,
+        bearing: 0,
+        pitch: 0,
       });
     }
   }, []);
