@@ -404,7 +404,7 @@ const DataPanel = () => {
                 <h2>Filters</h2>
                 <br/>
                 <p style={{padding:0}}>
-                  These charts show the distribution of variables in the tracts on your screen. Click to filter the map.
+                  These charts show the distribution of variables in the tracts on your screen. Adjust the sliders to filter the map.
                 </p>
                 <Gutter height="1em" />                
                 <h3 className="sectionHeader">Environmental</h3>
