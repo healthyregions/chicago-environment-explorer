@@ -591,7 +591,7 @@ function App() {
       : false
   );
 
-  const ethnicMajority = filteredSummaries["Latinx"].reduced > 50 ? "Hipanic/Latinx" : "Not Hispanic/Latinx";
+  const ethnicMajority = filteredSummaries["Latinx"].reduced > 50 ? "Hispanic/Latinx" : "Not Hispanic/Latinx";
 
   const densityPercentile =
     dataReady &&
@@ -901,9 +901,9 @@ function App() {
                       Description: `People in ${currentLocation.label} are of the following races: ${filteredSummaries["Black or African American"].reduced}% of residents are Black or African American, ${filteredSummaries["Native American"].reduced}% are Native American or Indigenous, ${filteredSummaries["Asian"].reduced}% are Asian, ${filteredSummaries["White"].reduced}% are White, ${filteredSummaries["Pacific Islander"].reduced}% are Native Hawaiian or Other Pacific Islander, and ${filteredSummaries["All additional races"].reduced}% of people come from additional races.`,
                     },
                     {
-                      Label: "Hispanic or Latinx ethnicity",
+                      Label: "Ethnicity",
                       Value: `Majority ${ethnicMajority}`,
-                      Description: `${filteredSummaries["Latinx"].reduced}% of residents in ${currentLocation.label} are Hispanic/Latinx`,
+                      Description: `${filteredSummaries["Latinx"].reduced}% of residents in ${currentLocation.label} identify themselves as Hispanic/Latinx.`,
                     },
                   ]}
                   tableProps={{
