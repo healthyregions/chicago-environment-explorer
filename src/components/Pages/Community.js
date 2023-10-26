@@ -719,10 +719,11 @@ function App() {
                   About the density of ${filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 2e4).toLocaleString() : "No Data"} people in 
                   a downtown city block. ${currentLocation.label} is denser than ${Math.round(densityPercentile * 100)}% of Chicago.`
                   }, {
-                    Label: 'Race and Ethnicity',
+                    Label: 'Self-Identified Race',
                     Value: ethnicMajority ? `Majority ${ethnicMajority}` : 'Diverse',
-                    Description: `People in ${currentLocation.label} are made up of the following races and ethnicities: ${filteredSummaries['Black or African American'].reduced}% of residents are Black or African American, ${filteredSummaries['Native American'].reduced}% are Native American or Indigenous, ${filteredSummaries['Asian'].reduced}% are Asian, ${filteredSummaries['White'].reduced}% are White, and ${filteredSummaries['All additional races and ethnicities'].reduced}% of people come from additional races or ethnicities.`
+                    Description: `People in ${currentLocation.label} are made up of the following races: ${filteredSummaries['Black or African American'].reduced}% of residents are Black or African American, ${filteredSummaries['Native American'].reduced}% are Native American or Indigenous, ${filteredSummaries['Asian'].reduced}% are Asian, ${filteredSummaries['White'].reduced}% are White, and ${filteredSummaries['All additional races and ethnicities'].reduced}% of people come from additional races.`
                   }]}
+                  // Hispanic or Latino Origin
                   tableProps={{
                     style: {
                       fontSize: '1rem'
