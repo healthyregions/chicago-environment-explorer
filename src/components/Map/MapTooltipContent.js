@@ -18,7 +18,16 @@ const MapTooltipContent = ({content}) => {
         urban_flood_suscep,
         ndvi,
         simpson,
-        topline_median
+        topline_median,
+        pct_asian,
+        pct_black,
+        pct_hisp,
+        pct_nativeam,
+        pct_other,
+        pct_pacis,
+        pct_white,
+        percentage_seniors,
+        percentage_children,
     } = content;
     const [speciesPlotInfo, setSpeciesPlotInfo] = useState({
         open: false,
@@ -56,6 +65,15 @@ const MapTooltipContent = ({content}) => {
                     <tr><td>Urban Flood Susceptibility Index</td><td> {urban_flood_suscep && urban_flood_suscep.toFixed(2)}</td></tr>
                     <tr><td>Vegetation Index (NDVI)</td><td> {ndvi && ndvi.toFixed(3)}</td></tr>
                     <tr><td>Plant Biodiversity</td><td>{simpson && simpson.toFixed(2)}</td></tr>
+                    <tr><td>Percent Seniors</td><td>{percentage_seniors && percentage_seniors.toFixed(2)}%</td></tr>
+                    <tr><td>Percent Children</td><td>{percentage_children && percentage_children.toFixed(2)}%</td></tr>
+                    <tr><td>Percent Identified as Asian</td><td>{pct_asian && pct_asian.toFixed(1)}%</td></tr>
+                    <tr><td>Percent Identified as Black or African American</td><td>{pct_black && pct_black.toFixed(1)}%</td></tr>
+                    <tr><td>Percent Identified as Native American or Indigenous</td><td>{pct_nativeam && pct_nativeam.toFixed(1)}%</td></tr>
+                    <tr><td>Percent Identified as Native Hawaiian or Other Pacific Islander</td><td>{pct_pacis && pct_pacis.toFixed(1)}%</td></tr>
+                    <tr><td>Percent Identified as White</td><td>{pct_white && pct_white.toFixed(1)}%</td></tr>
+                    <tr><td>Percent Identified as other races</td><td>{pct_other && pct_other.toFixed(1)}%</td></tr>
+                    <tr><td>Percent Identified as Hispanic or Latinx</td><td>{pct_hisp && pct_hisp.toFixed(1)}%</td></tr>
                 </tbody>
             </table>
             <Button variant="contained" onClick={handleSpeciesPlot} style={{marginTop:'.5em', fontFamily:'"Lato", sans-serif', background:colors.forest}}>Open Species Tree</Button>
