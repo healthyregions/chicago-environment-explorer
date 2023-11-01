@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import booleanWithin from "@turf/boolean-within";
-import { quantileRank } from "simple-statistics";
+import { quantileRank } from 'simple-statistics'
 // import { nicelyFormatNumber } from "../../utils";
 import { colors } from "../../config";
-import bbox from "@turf/bbox";
+import bbox from '@turf/bbox';
 
 import {
   Gutter,
@@ -12,7 +12,7 @@ import {
   Footer,
   // Pm25Report,
   // Table,
-  PolarSpeciesPlot,
+  PolarSpeciesPlot
 } from "../../components"; //  Scaleable, Draggable, InfoBox, TopPanel, Preloader,
 import useFilterData from "../../hooks/useFilterData";
 import useProcessData from "../../hooks/useProcessData";
@@ -20,35 +20,28 @@ import styled from "styled-components";
 
 import { ContentContainer } from "../../styled_components";
 import Autocomplete from "@mui/material/Autocomplete";
-import {
-  Box,
-  TextField,
-  Button,
-  ButtonGroup,
-  Typography,
-  Grid,
-} from "@mui/material";
+import { Box, TextField, Button, ButtonGroup, Typography, Grid } from "@mui/material";
 import TableComponent from "../Layout/Table";
-import { MapSection } from "../../components";
-import { fitBounds } from "@math.gl/web-mercator";
+import {MapSection} from "../../components";
+import { fitBounds } from '@math.gl/web-mercator';
 import { useChivesData } from "../../hooks/useChivesData";
 
 const CommunityPage = styled.div`
   background: white;
   h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    border-bottom: 2px solid #e83f6f;
+    font-size:1.5rem;
+    font-weight:bold;
+    border-bottom:2px solid #e83f6f;
   }
 `;
 
 const StyledAutocomplete = styled(Autocomplete)`
-  opacity: ${({ usingGeolocate }) => (usingGeolocate ? 0.5 : 1)};
-  transition: 250ms opacity;
+  opacity: ${({ usingGeolocate }) => usingGeolocate ? 0.5 : 1};
+  transition:250ms opacity;
   &:hover {
-    opacity: 1;
+    opacity:1;
   }
-`;
+`
 
 const typeTranslation = {
   zip_code: "Zip Code",
@@ -116,9 +109,9 @@ const metricsToParse = [
   // },
   {
     name: "density",
-    accessor: (row) => row.properties.acs_population / row.properties.aland,
+    accessor: (row) => row.properties.acs_population / (row.properties.aland),
     accumulator: (prev, curr) => prev + curr,
-    reducer: (data) => data.accumulated / data.values.length,
+    reducer: (data) => (data.accumulated / data.values.length),
   },
   {
     name: "treeNumber",
@@ -160,13 +153,13 @@ const metricsToParse = [
     name: "simpson",
     accessor: (row) => row.properties.simpson,
     accumulator: (prev, curr) => prev + curr,
-    reducer: (data) => data.accumulated / data.values.length,
+    reducer: (data) => (data.accumulated / data.values.length),
   },
   {
     name: "ndvi",
     accessor: (row) => row.properties.ndvi,
     accumulator: (prev, curr) => prev + curr,
-    reducer: (data) => data.accumulated / data.values.length,
+    reducer: (data) => (data.accumulated / data.values.length),
   },
   // econ
   {
@@ -184,92 +177,36 @@ const metricsToParse = [
   // race
   {
     name: "White",
-    accessor: (row) => [
-      +row.properties.pct_white * +row.properties.acs_population || 0,
-      +row.properties.acs_population || 0,
-    ],
-    accumulator: ([prevVal, prevPop], [val, pop]) => [
-      prevVal + val,
-      prevPop + pop,
-    ],
+    accessor: (row) => [(+row.properties.pct_white * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
     name: "Black or African American",
-    accessor: (row) => [
-      +row.properties.pct_black * +row.properties.acs_population || 0,
-      +row.properties.acs_population || 0,
-    ],
-    accumulator: ([prevVal, prevPop], [val, pop]) => [
-      prevVal + val,
-      prevPop + pop,
-    ],
+    accessor: (row) => [(+row.properties.pct_black * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
     name: "Native American",
-    accessor: (row) => [
-      +row.properties.pct_nativeam * +row.properties.acs_population || 0,
-      +row.properties.acs_population || 0,
-    ],
-    accumulator: ([prevVal, prevPop], [val, pop]) => [
-      prevVal + val,
-      prevPop + pop,
-    ],
+    accessor: (row) => [(+row.properties.pct_nativeam * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
     name: "Asian",
-    accessor: (row) => [
-      +row.properties.pct_asian * +row.properties.acs_population || 0,
-      +row.properties.acs_population || 0,
-    ],
-    accumulator: ([prevVal, prevPop], [val, pop]) => [
-      prevVal + val,
-      prevPop + pop,
-    ],
+    accessor: (row) => [(+row.properties.pct_asian * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
   {
-    name: "Pacific Islander",
-    accessor: (row) => [
-      +row.properties.pct_pacis * +row.properties.acs_population || 0,
-      +row.properties.acs_population || 0,
-    ],
-    accumulator: ([prevVal, prevPop], [val, pop]) => [
-      prevVal + val,
-      prevPop + pop,
-    ],
-    reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
-    defaultAccumulated: [0, 0],
-  },
-  {
-    name: "All additional races",
-    accessor: (row) => [
-      +row.properties.pct_other * +row.properties.acs_population || 0,
-      +row.properties.acs_population || 0,
-    ],
-    accumulator: ([prevVal, prevPop], [val, pop]) => [
-      prevVal + val,
-      prevPop + pop,
-    ],
-    reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
-    defaultAccumulated: [0, 0],
-  },
-  {
-    name: "Latinx",
-    accessor: (row) => [
-      +row.properties.pct_hisp * +row.properties.acs_population || 0,
-      +row.properties.acs_population || 0,
-    ],
-    accumulator: ([prevVal, prevPop], [val, pop]) => [
-      prevVal + val,
-      prevPop + pop,
-    ],
+    name: "All additional races and ethnicities",
+    accessor: (row) => [(+row.properties.pct_other * +row.properties.acs_population) || 0, +(row.properties.acs_population) || 0],
+    accumulator: ([prevVal, prevPop], [val, pop]) => [prevVal + val, prevPop + pop],
     reducer: (data) => (data.accumulated[0] / data.accumulated[1]).toFixed(2),
     defaultAccumulated: [0, 0],
   },
@@ -330,72 +267,71 @@ const columnsToPresent = [
 
 const reportColumns = [
   {
-    Header: "",
-    accessor: "Label",
-    width: 900,
+    Header: '',
+    accessor: 'Label',
+    width: 900
   },
   {
-    Header: "",
-    accessor: "Value",
-    width: 120,
+    Header: '',
+    accessor: 'Value',
+    width: 120
   },
   {
-    Header: "",
-    accessor: "Description",
-    width: 150,
+    Header: '',
+    accessor: 'Description',
+    width: 150
   },
-];
+]
 
 const defaultBounds = fitBounds({
   width: window.innerWidth / 2,
   height: 400,
-  bounds: [
-    [-87.971649, 41.609282],
-    [-87.521896, 42.040624],
-  ],
-});
+  bounds: [[-87.971649, 41.609282], [-87.521896, 42.040624]]
+})
 
 const onlyUnique = (value, index, self) => self.indexOf(value) === index;
 const ColorSpan = styled.span`
-  color: ${(props) => props.color || "black"};
-  background-color: ${(props) => props.backgroundColor || "none"};
+  color: ${props => props.color || 'black'};
+  background-color: ${props => props.backgroundColor || 'none'};
   padding: 0.25em;
-`;
+`
 const ReportSection = styled.section`
   h2 {
     font-size: 1.5rem;
-    font-family: "Lora", serif;
+    font-family: 'Lora',serif;
   }
   ul {
     list-style: none;
-    padding-left: 0.5em;
+    padding-left:.5em;
     li {
       &::before {
         content: "-";
-        padding-right: 0.5em;
+        padding-right:.5em;
       }
     }
   }
 `;
 
 const StyledButton = styled(Button)`
-  border-color: black;
-  color: black;
+  border-color:black;
+  color:black;
   &.MuiButton-containedPrimary {
     background: ${colors.forest};
     color: white;
   }
   &.Mui-disabled {
-    background: none;
-    color: #ddd;
-    border: 1px solid #ddd;
+    background:none;
+    color:#ddd;
+    border:1px solid #ddd;
   }
-`;
+`
 
 const GeolocateSection = styled.section``;
 
 function App() {
-  const { features } = useChivesData();
+  const {
+    features
+  } = useChivesData()
 
   // local state
   const [currentLocation, setCurrentLocation] = useState({});
@@ -405,7 +341,7 @@ function App() {
     } else {
       return [];
     } // eslint-disable-next-line
-  }, [features && features.length]);
+  }, [features && features.length]); 
   // geolocation
   const [geolocateType, setGeolocateType] = useState("Zip Code");
   const [geolocatingStatus, setGeolocatingStatus] = useState({
@@ -418,7 +354,7 @@ function App() {
     } else {
       setGeolocatingStatus({
         status: "error",
-        message: `Geolocation service not available`,
+        message: `Geolocation service not available`
       });
     }
     navigator.geolocation.getCurrentPosition(
@@ -438,9 +374,8 @@ function App() {
         if (intersectingFeature) {
           setGeolocatingStatus({
             status: "success",
-            message: `Successfully located you at ${
-              Math.round(1000 * position.coords.latitude) / 1000
-            }, ${Math.round(1000 * position.coords.longitude) / 1000}`,
+            message: `Successfully located you at ${Math.round(1000 * position.coords.latitude) / 1000
+              }, ${Math.round(1000 * position.coords.longitude) / 1000}`,
             data: intersectingFeature,
           });
           const locationInfo = {
@@ -449,8 +384,8 @@ function App() {
               geolocateType === "Zip Code"
                 ? intersectingFeature.properties.zip_code
                 : geolocateType === "Community"
-                ? titleCase(intersectingFeature.properties.community)
-                : intersectingFeature.properties.geoid,
+                  ? titleCase(intersectingFeature.properties.community)
+                  : intersectingFeature.properties.geoid,
           };
           setCurrentLocation(locationInfo);
         } else {
@@ -471,21 +406,21 @@ function App() {
   };
   const [speciesPlotInfo, setSpeciesPlotInfo] = useState({
     geoid: 0,
-    open: false,
-  });
+    open: false
+  })
 
   const handleSpeciesPlot = (geoid) => {
     setSpeciesPlotInfo({
       open: true,
-      geoid: +geoid,
+      geoid: +geoid
     });
-  };
+  }
   const handleSetOpen = (bool) => {
-    setSpeciesPlotInfo((prev) => ({
+    setSpeciesPlotInfo(prev => ({
       ...prev,
-      open: bool,
-    }));
-  };
+      open: bool
+    }))
+  }
 
   useEffect(() => {
     if (geolocatingStatus.data) {
@@ -496,8 +431,8 @@ function App() {
           geolocateType === "Zip Code"
             ? intersectingFeature.properties.zip_code
             : geolocateType === "Community"
-            ? titleCase(intersectingFeature.properties.community)
-            : intersectingFeature.properties.geoid,
+              ? titleCase(intersectingFeature.properties.community)
+              : intersectingFeature.properties.geoid,
       });
     }
     // eslint-disable-next-line
@@ -509,8 +444,8 @@ function App() {
       currentLocation.type === "Zip Code"
         ? (f) => f.properties.zip_code === currentLocation.label
         : currentLocation.type === "Community"
-        ? (f) => f.properties.community === currentLocation.label.toUpperCase()
-        : (f) => f.properties.geoid === currentLocation.label,
+          ? (f) => f.properties.community === currentLocation.label.toUpperCase()
+          : (f) => f.properties.geoid === currentLocation.label,
     // eslint-disable-next-line
     [JSON.stringify(currentLocation)]
   );
@@ -522,16 +457,16 @@ function App() {
   });
   const currGeoids = filteredFeatures.map((f) => +f.properties.geoid);
 
+
+
   // summarize data
-  const [summaries] = useProcessData({
-    //summariesTimestamp
+  const [summaries] = useProcessData({ //summariesTimestamp
     data: features,
     metrics: metricsToParse,
     updateTrigger: features.length,
   });
 
-  const [filteredSummaries] = useProcessData({
-    //filteredSummariesTimestamp
+  const [filteredSummaries] = useProcessData({ //filteredSummariesTimestamp
     data: filteredFeatures,
     metrics: metricsToParse,
     updateTrigger: filteredFeatures.length && JSON.stringify(currGeoids),
@@ -540,26 +475,23 @@ function App() {
   const filteredViewport = useMemo(() => {
     const bounds = bbox({
       type: "FeatureCollection",
-      features: filteredFeatures,
-    });
+      features: filteredFeatures
+    })
     if (bounds[0] === Infinity) {
-      return defaultBounds;
+      return defaultBounds
     }
     const viewport = fitBounds({
       width: window.innerWidth / 2,
       height: 400,
-      bounds: [
-        [bounds[0], bounds[1]],
-        [bounds[2], bounds[3]],
-      ],
-      padding: 20,
-    });
+      bounds: [[bounds[0],bounds[1]],[bounds[2],bounds[3]]],
+      padding:20
+    })
     return {
       ...viewport,
-      pitch: 0,
-      bearing: 0,
-    };
-  }, [filteredFeatures.length && JSON.stringify(currGeoids)]); // eslint-disable-line
+      pitch:0,
+      bearing:0
+    }
+  },[filteredFeatures.length && JSON.stringify(currGeoids)])  // eslint-disable-line
 
   const transposedData = columnsToPresent.map(
     ({ name, accessor, vals }, id) => ({
@@ -578,28 +510,10 @@ function App() {
     transposedData[0][currentLocation.label] !== undefined;
 
   // metadata helpers
-  const racialMajority = [
-    "White",
-    "Black or African American",
-    "Native American",
-    "Asian",
-    "Pacific Islander",
-    "All additional races",
-  ].find((raceEthnicity) =>
-    filteredSummaries[raceEthnicity]
-      ? filteredSummaries[raceEthnicity].reduced > 50
-      : false
-  );
-
-  const ethnicMajority = filteredSummaries["Latinx"].reduced > 50 ? "Hispanic/Latinx" : "Not Hispanic/Latinx";
-
-  const densityPercentile =
-    dataReady &&
-    quantileRank(summaries.density.values, filteredSummaries.density.reduced);
+  const ethnicMajority = ["White", "Black or African American", "Native American", "Asian", "All additional races and ethnicities"].find(raceEthnicity => filteredSummaries[raceEthnicity] ? filteredSummaries[raceEthnicity].reduced > 50 : false)
+  const densityPercentile = dataReady && quantileRank(summaries.density.values, filteredSummaries.density.reduced)
   // const ageAdjAsthmaPct = dataReady && quantileRank(summaries.asthmaAgeAdj.values, filteredSummaries.asthmaAgeAdj.reduced)
-  const hardshipPercentile =
-    dataReady &&
-    quantileRank(summaries.hardship.values, filteredSummaries.hardship.reduced);
+  const hardshipPercentile = dataReady && quantileRank(summaries.hardship.values, filteredSummaries.hardship.reduced)
 
   return (
     <CommunityPage>
@@ -634,12 +548,11 @@ function App() {
             </Box>
           )}
           onChange={(e, value) => {
-            ![null, undefined].includes(value) && setCurrentLocation(value);
-            ![null, undefined].includes(value) &&
-              setGeolocatingStatus({
-                status: "passive",
-                message: "",
-              });
+            !([null, undefined].includes(value)) && setCurrentLocation(value)
+            !([null, undefined].includes(value)) && setGeolocatingStatus({
+              status: "passive",
+              message: "",
+            })
           }}
         />
         <GeolocateSection>
@@ -695,7 +608,7 @@ function App() {
                 {currentLocation.type === "Zip Code" && (
                   <h2>
                     Your zip code:{" "}
-                    <ColorSpan color={"#e83f6f"}>
+                    <ColorSpan color={'#e83f6f'}>
                       {currentLocation.label}, part of{" "}
                       {filteredFeatures
                         .map((f) => titleCase(f.properties.community))
@@ -708,7 +621,7 @@ function App() {
                 {currentLocation.type === "Community" && (
                   <h2>
                     Your community:{" "}
-                    <ColorSpan color={"#e83f6f"}>
+                    <ColorSpan color={'#e83f6f'}>
                       {currentLocation.label}, including zip codes{" "}
                       {filteredFeatures
                         .map((f) => f.properties.zip_code)
@@ -721,7 +634,7 @@ function App() {
                 {currentLocation.type === "Census Tract" && (
                   <h2>
                     Your census tract:{" "}
-                    <ColorSpan color={"#e83f6f"}>
+                    <ColorSpan color={'#e83f6f'}>
                       {currentLocation.label}, located in{" "}
                       {filteredFeatures
                         .map((f) => titleCase(f.properties.community))
@@ -740,316 +653,166 @@ function App() {
             </Grid>
             <Grid item xs={12} md={12} lg={7} xl={7}>
               <ReportSection>
-                <h3>
-                  <ColorSpan color={"#e83f6f"}>
-                    Environmental Indicators in {currentLocation.label}
-                  </ColorSpan>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  Environmental Indicators in {currentLocation.label}
+                </ColorSpan>
                 </h3>
                 <TableComponent
                   columns={reportColumns}
-                  data={[
-                    {
-                      Label: "Average Air Polution (PM2.5)",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.pm25?.reduced !== undefined &&
-                            filteredSummaries.pm25.reduced.toFixed(1)}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "Presence of particulates in the air, smaller than 2.5 microns in size. Estimated during January through August over 2014-2018.",
-                    },
-                    {
-                      Label: "Heat Island Effect",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.heatIsland?.reduced !==
-                            undefined &&
-                            filteredSummaries.heatIsland.reduced.toFixed(1)}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "The surface heat on a scale of 0-100, where 100 is the hottest in Chicago and 0 is the coldest.",
-                    },
-                    {
-                      Label: "Urban Flood Susceptibility",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.floodSusceptibility?.reduced !==
-                            undefined &&
-                            filteredSummaries.floodSusceptibility.reduced.toFixed(
-                              1
-                            )}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "A FEMA index, where 0 is less susceptible and 10 is more susceptible.",
-                    },
-                    {
-                      Label: "Average Traffic Volume",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.traffic?.reduced !== undefined &&
-                            filteredSummaries.traffic.reduced.toFixed(1)}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "The average daily traffic count per road segment over a year, scaled logarithmically.",
-                    },
-                    {
-                      Label: "Tree Crown Density",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.treeDensity?.reduced !==
-                            undefined &&
-                            filteredSummaries.treeDensity.reduced.toFixed(1)}
-                        </ColorSpan>
-                      ),
-                      Description: "Percent of the area covered by trees.",
-                    },
-                    {
-                      Label: "Average Plant Biodiversity",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.simpson?.reduced !== undefined &&
-                            filteredSummaries.simpson.reduced.toFixed(1)}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "Ranging from 0 to 1, a number representing the average diversity of plants observed by volunteers in your area.",
-                    },
-                    {
-                      Label: "Average Vegetation Index (NDVI)",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.ndvi?.reduced !== undefined &&
-                            filteredSummaries.ndvi.reduced.toFixed(3)}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "From -1 to 1, a number representing the average coverage of vegetation seen from satellites.",
-                    },
-                  ]}
+                  data={[{
+                    Label: 'Average Air Polution (PM2.5)',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.pm25?.reduced !== undefined && filteredSummaries.pm25.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'Presence of particulates in the air, smaller than 2.5 microns in size. Estimated during January through August over 2014-2018.'
+                  }, {
+                    Label: 'Heat Island Effect',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.heatIsland?.reduced !== undefined && filteredSummaries.heatIsland.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'The surface heat on a scale of 0-100, where 100 is the hottest in Chicago and 0 is the coldest.'
+                  }, {
+                    Label: 'Urban Flood Susceptibility',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.floodSusceptibility?.reduced !== undefined && filteredSummaries.floodSusceptibility.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'A FEMA index, where 0 is less susceptible and 10 is more susceptible.'
+                  }, {
+                    Label: 'Average Traffic Volume',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.traffic?.reduced !== undefined && filteredSummaries.traffic.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'The average daily traffic count per road segment over a year, scaled logarithmically.'
+                  }, {
+                    Label: 'Tree Crown Density',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.treeDensity?.reduced !== undefined && filteredSummaries.treeDensity.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'Percent of the area covered by trees.'
+                  }, {
+                    Label: 'Average Plant Biodiversity',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.simpson?.reduced !== undefined && filteredSummaries.simpson.reduced.toFixed(1)}</ColorSpan>,
+                    Description: 'Ranging from 0 to 1, a number representing the average diversity of plants observed by volunteers in your area.'
+                  }, {
+                    Label: 'Average Vegetation Index (NDVI)',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.ndvi?.reduced !== undefined && filteredSummaries.ndvi.reduced.toFixed(3)}</ColorSpan>,
+                    Description: 'From -1 to 1, a number representing the average coverage of vegetation seen from satellites.'
+                  }]}
                   tableProps={{
                     style: {
-                      fontSize: "1rem",
-                    },
+                      fontSize: '1rem'
+                    }
                   }}
                   rowProps={{
                     style: {
-                      padding: ".5em",
-                    },
+                      padding: '.5em',
+                    }
                   }}
                 />
               </ReportSection>
               <Gutter height="2em" />
               <ReportSection>
-                <h3>
-                  <ColorSpan color={"#e83f6f"}>
-                    People living in {currentLocation.label}
-                  </ColorSpan>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  People living in {currentLocation.label}
+                </ColorSpan>
                 </h3>
                 <TableComponent
                   columns={reportColumns}
-                  data={[
-                    {
-                      Label: "Residents",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.population?.reduced !== undefined
-                            ? Math.round(
-                                filteredSummaries.population.reduced
-                              ).toLocaleString()
-                            : "No Data"}
-                        </ColorSpan>
-                      ),
-                      Description: "The number of people living in the area.",
-                    },
-                    {
-                      Label: "Population Density",
-                      Value: (
-                        <>
-                          <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                            {filteredSummaries?.density?.reduced !== undefined
-                              ? Math.round(
-                                  filteredSummaries.density.reduced * 1e6
-                                ).toLocaleString()
-                              : "No Data"}
-                          </ColorSpan>{" "}
-                          people per square kilometer
-                        </>
-                      ),
-                      Description: `
-                  About the density of ${
-                    filteredSummaries?.density?.reduced !== undefined
-                      ? Math.round(
-                          filteredSummaries.density.reduced * 2e4
-                        ).toLocaleString()
-                      : "No Data"
-                  } people in 
-                  a downtown city block. ${
-                    currentLocation.label
-                  } is denser than ${Math.round(
-                        densityPercentile * 100
-                      )}% of Chicago.`,
-                    },
-                    {
-                      Label: "Self-Identified Race",
-                      Value: racialMajority
-                        ? `Majority ${racialMajority}`
-                        : "Diverse",
-                      Description: `People in ${currentLocation.label} are of the following races: ${filteredSummaries["Black or African American"].reduced}% of residents are Black or African American, ${filteredSummaries["Native American"].reduced}% are Native American or Indigenous, ${filteredSummaries["Asian"].reduced}% are Asian, ${filteredSummaries["White"].reduced}% are White, ${filteredSummaries["Pacific Islander"].reduced}% are Native Hawaiian or Other Pacific Islander, and ${filteredSummaries["All additional races"].reduced}% of people come from additional races.`,
-                    },
-                    {
-                      Label: "Ethnicity",
-                      Value: `Majority ${ethnicMajority}`,
-                      Description: `${filteredSummaries["Latinx"].reduced}% of residents in ${currentLocation.label} identify themselves as Hispanic/Latinx.`,
-                    },
-                  ]}
+                  data={[{
+                    Label: 'Residents',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.population?.reduced !== undefined ? Math.round(filteredSummaries.population.reduced).toLocaleString() : "No Data"}</ColorSpan>,
+                    Description: 'The number of people living in the area.'
+                  }, {
+                    Label: 'Population Density',
+                    Value: <><ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 1e6).toLocaleString() : "No Data"}</ColorSpan> people per square kilometer</>,
+                    Description: `
+                  About the density of ${filteredSummaries?.density?.reduced !== undefined ? Math.round(filteredSummaries.density.reduced * 2e4).toLocaleString() : "No Data"} people in 
+                  a downtown city block. ${currentLocation.label} is denser than ${Math.round(densityPercentile * 100)}% of Chicago.`
+                  }, {
+                    Label: 'Race and Ethnicity',
+                    Value: ethnicMajority ? `Majority ${ethnicMajority}` : 'Diverse',
+                    Description: `People in ${currentLocation.label} are made up of the following races and ethnicities: ${filteredSummaries['Black or African American'].reduced}% of residents are Black or African American, ${filteredSummaries['Native American'].reduced}% are Native American or Indigenous, ${filteredSummaries['Asian'].reduced}% are Asian, ${filteredSummaries['White'].reduced}% are White, and ${filteredSummaries['All additional races and ethnicities'].reduced}% of people come from additional races or ethnicities.`
+                  }]}
                   tableProps={{
                     style: {
-                      fontSize: "1rem",
-                    },
+                      fontSize: '1rem'
+                    }
                   }}
                   rowProps={{
                     style: {
-                      padding: ".5em",
-                    },
+                      padding: '.5em',
+                    }
                   }}
                 />
               </ReportSection>
               <Gutter height="2em" />
               <ReportSection>
-                <h3>
-                  <ColorSpan color={"#e83f6f"}>
-                    Health Outcomes in {currentLocation.label}
-                  </ColorSpan>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  Health Outcomes in {currentLocation.label}
+                </ColorSpan>
                 </h3>
                 <TableComponent
                   columns={reportColumns}
-                  data={[
-                    {
-                      Label: "Childhood Asthma ED Visits",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.asthmaEdVisits?.reduced !==
-                          undefined
-                            ? filteredSummaries.asthmaEdVisits.reduced.toFixed(
-                                2
-                              )
-                            : "No Data"}
-                        </ColorSpan>
-                      ),
-                      Description: `The number of childhood emergency room visits between 2013 and 2017.`,
-                    },
-                    {
-                      Label: "Childhood Asthma Rate",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.asthmaAgeAdj?.reduced !==
-                          undefined
-                            ? filteredSummaries.asthmaAgeAdj.reduced.toFixed(2)
-                            : "No Data"}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "The rate of childhood emergency room visits for asthma per 10,000 people.",
-                    },
-                    // {
-                    //   Label: 'COPD Prevalence',
-                    //   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined ? filteredSummaries.copd.reduced.toFixed(2) : "No Data"}</ColorSpan>,
-                    //   Description: 'The percentage of people who have COPD.'
-                    // },
-                  ]}
+                  data={[{
+                    Label: 'Childhood Asthma ED Visits',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaEdVisits?.reduced !== undefined ? filteredSummaries.asthmaEdVisits.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: `The number of childhood emergency room visits between 2013 and 2017.`
+                  }, {
+                    Label: 'Childhood Asthma Rate',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.asthmaAgeAdj?.reduced !== undefined ? filteredSummaries.asthmaAgeAdj.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: 'The rate of childhood emergency room visits for asthma per 10,000 people.'
+                  }, 
+                  // {
+                  //   Label: 'COPD Prevalence',
+                  //   Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.copd?.reduced !== undefined ? filteredSummaries.copd.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                  //   Description: 'The percentage of people who have COPD.'
+                  // },
+                ]}
                   tableProps={{
                     style: {
-                      fontSize: "1rem",
-                    },
+                      fontSize: '1rem'
+                    }
                   }}
                   rowProps={{
                     style: {
-                      padding: ".5em",
-                    },
+                      padding: '.5em',
+                    }
                   }}
                 />
               </ReportSection>
               <Gutter height="2em" />
               <ReportSection>
-                <h3>
-                  <ColorSpan color={"#e83f6f"}>
-                    Social and Economic Indicators in {currentLocation.label}
-                  </ColorSpan>
+                <h3><ColorSpan color={'#e83f6f'}>
+                  Social and Economic Indicators in {currentLocation.label}
+                </ColorSpan>
                 </h3>
                 <TableComponent
                   columns={reportColumns}
-                  data={[
-                    {
-                      Label: "Economic Hardship Index",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.hardship?.reduced !== undefined
-                            ? filteredSummaries?.hardship?.reduced.toFixed(2)
-                            : "No Data"}
-                        </ColorSpan>
-                      ),
-                      Description: `An index the reflects a combination of unemployment, dependency, and education, income, crowded housing, and poverty for people living here. In ${
-                        currentLocation.label
-                      }, this is higher than ${Math.round(
-                        hardshipPercentile * 100
-                      )}% of all Chicago.`,
-                    },
-                    {
-                      Label: "Social Vulnerability Index",
-                      Value: (
-                        <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>
-                          {filteredSummaries?.svi?.reduced !== undefined
-                            ? filteredSummaries.svi.reduced.toFixed(2)
-                            : "No Data"}
-                        </ColorSpan>
-                      ),
-                      Description:
-                        "A national index of overall social vulnerability.",
-                    },
-                  ]}
+                  data={[{
+                    Label: 'Economic Hardship Index',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.hardship?.reduced !== undefined ? filteredSummaries?.hardship?.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: `An index the reflects a combination of unemployment, dependency, and education, income, crowded housing, and poverty for people living here. In ${currentLocation.label}, this is higher than ${Math.round(hardshipPercentile * 100)}% of all Chicago.`
+                  }, {
+                    Label: 'Social Vulnerability Index',
+                    Value: <ColorSpan backgroundColor={"rgba(0,0,0,0.1)"}>{filteredSummaries?.svi?.reduced !== undefined ? filteredSummaries.svi.reduced.toFixed(2) : "No Data"}</ColorSpan>,
+                    Description: 'A national index of overall social vulnerability.'
+                  }]}
                   tableProps={{
                     style: {
-                      fontSize: "1rem",
-                    },
+                      fontSize: '1rem'
+                    }
                   }}
                   rowProps={{
                     style: {
-                      padding: ".5em",
-                    },
+                      padding: '.5em',
+                    }
                   }}
                 />
               </ReportSection>
             </Grid>
             <Grid item xs={12} md={12} lg={5} xl={5}>
-              <div style={{ position: "relative", width: "100%", height: 400 }}>
+              <div style={{ position: 'relative', width: '100%', height: 400 }}>
                 <MapSection bounds={filteredViewport} geoids={currGeoids} />
               </div>
               <Gutter h={40} />
-              {currGeoids.length && (
-                <ReportSection>
-                  <p>
-                    <b>Species in census tracts near you</b>
-                    <br />
-                    Click to see species tree
-                  </p>
-                  {currGeoids.map((geoid, i) => (
-                    <StyledButton
-                      onClick={() => handleSpeciesPlot(geoid)}
-                      variant="outlined"
-                      style={{
-                        margin: ".5em .5em 0 0",
-                        fontFamily: '"Lato", sans-serif',
-                      }}
-                    >
-                      {geoid}
-                    </StyledButton>
-                  ))}
-                </ReportSection>
-              )}
+              {currGeoids.length && <ReportSection>
+                <p>
+                  <b>Species in census tracts near you</b><br />
+                  Click to see species tree
+                </p>
+                {currGeoids.map((geoid, i) => <StyledButton onClick={() => handleSpeciesPlot(geoid)} variant="outlined" style={{ margin: '.5em .5em 0 0', fontFamily: '"Lato", sans-serif' }}>{geoid}</StyledButton>
+                )}
+              </ReportSection>}
             </Grid>
           </Grid>
         )}

@@ -1,6 +1,8 @@
-import React, { Suspense  } from 'react';
+import React, { useEffect, Suspense  } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import ReactGA from 'react-ga'
+import { createBrowserHistory } from "history";
 import {Home, LoadingMessage, ErrorPage} from './components/';
 import { ThemeProvider, StyledEngineProvider, createTheme } from '@mui/material/styles';
 
@@ -21,10 +23,22 @@ const Contact = React.lazy(() => import('./components/Pages/Contact'));
 const Community = React.lazy(() => import('./components/Pages/Community'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
 
+ReactGA.initialize('UA-213370928-1');
+
 export default function App() {
+    const history = createBrowserHistory();
+
+    history.listen(location => {
+      ReactGA.set({ page: location.pathname });
+      ReactGA.pageview(location.pathname);
+    });
+
+    useEffect(() => {
+        ReactGA.pageview(window.location.pathname + window.location.search)
+    }, [history])
 
     return (
-      <Router basename={process.env.PUBLIC_URL}>
+      <Router basename={process.env.PUBLIC_URL} history={history}>
       <div>
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
