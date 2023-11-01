@@ -278,12 +278,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   useEffect(() => {
     let handler = (e) => {
       if (!hoverRef.current.contains(e.target)) {
-        setHoverInfo({x: null, y: null, object: null});
+        setHoverInfo({ x: null, y: null, object: null });
       }
-    }
-
+    };
     document.addEventListener("mousedown", handler);
-  })
+  });
   const GetMapView = () => {
     try {
       const currView = viewRef.current;
@@ -316,7 +315,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
   const handleGeolocate = async () => {
     navigator.geolocation.getCurrentPosition((position) => {
+      const currMapView = GetMapView();
       handlePanMap({
+        ...currMapView,
         longitude: position.coords.longitude,
         latitude: position.coords.latitude,
         zoom: 14,
@@ -332,7 +333,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
     });
   };
   const handleTilt = () => {
-    console.log(mapRef?.current);
     const currMapView = GetMapView();
     handlePanMap({
       ...currMapView,
@@ -375,21 +375,10 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         longitude: center[0],
         latitude: center[1],
         zoom: zoom,
+        bearing: 0,
+        pitch: 0,
       });
     }
-  }, []);
-
-  // on initial render, navigate to lon/lat if provided
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    if (urlParams.has("lat") && urlParams.has("lon")) {
-      const center = [+urlParams.get("lon"), +urlParams.get("lat")];
-      handleGeocoder({
-        center,
-      });
-    }
-    // eslint-disable-next-line
   }, []);
 
   const COLOR_SCALE = (x) =>
@@ -424,7 +413,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   const DISPLACEMENT_COLOR_SCALE = {
     lower_cost: [100, 100, 172],
     moderate_cost: [92, 108, 92],
-    high_cost: [172, 92, 92]
+    high_cost: [172, 92, 92],
   };
 
   const isVisible = (feature, filters) => {
@@ -458,9 +447,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       case variableName.includes("plant diversity"):
         return [...color, feature.properties.specCt > 7 ? 255 : 75];
       case variableName.includes("redlining"):
-        return REDLINING_COLOR_SCALE[feature.properties["primary_grade_4levels"]] || [0, 0, 0];
+        return (
+          REDLINING_COLOR_SCALE[
+            feature.properties["primary_grade_4levels"]
+          ] || [0, 0, 0]
+        );
       case variableName.includes("displacement"):
-        return DISPLACEMENT_COLOR_SCALE[feature.properties["HPRICETIER"]] || [0, 0, 0];
+        return (
+          DISPLACEMENT_COLOR_SCALE[feature.properties["HPRICETIER"]] || [
+            0, 0, 0,
+          ]
+        );
       default:
         return color;
     }
@@ -829,6 +826,16 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
             width: window.innerWidth,
             height: window.innerHeight,
           });
+        }}
+        onLoad={(e) => {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          if (urlParams.has("lat") && urlParams.has("lon")) {
+            const center = [+urlParams.get("lon"), +urlParams.get("lat")];
+            handleGeocoder({
+              center,
+            });
+          }
         }}
       >
         <DeckGLOverlay
