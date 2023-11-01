@@ -371,7 +371,7 @@ const RaceColumnsToChart = [
   {
     'column':'pct_asian',
     'name':'% Identified as Asian',
-    'color':colors.red,
+    'color':colors.pink,
     'preset':'',
   },
   {
@@ -389,19 +389,19 @@ const RaceColumnsToChart = [
   {
     'column':'pct_pacis',
     'name':'% Identified as Native Hawaiian/Other Pacific Islander',
-    'color':colors.gray,
+    'color':colors.blue,
     'preset':'',
   },
   {
     'column':'pct_white',
     'name':'% Identified as White',
-    'color':colors.pink,
+    'color':colors.paleyellow,
     'preset':'',
   },
   {
     'column':'pct_other',
     'name':'% Identified as other races',
-    'color':colors.fuschia,
+    'color':colors.green,
     'preset':'',
   },
 ]
@@ -410,7 +410,7 @@ const EthnicityColumnsToChart = [
   {
     'column':'pct_hisp',
     'name':'% Identified as Hispanic/Latinx',
-    'color':colors.chicagoLightBlue,
+    'color':colors.orange,
     'preset':'',
   },
 ]
@@ -425,7 +425,7 @@ const AgeColumnsToChart = [
   {
     'column':'percentage_children',
     'name':'% Children',
-    'color':colors.darkgray,
+    'color':colors.gray,
     'preset':'',
   },
 ]
