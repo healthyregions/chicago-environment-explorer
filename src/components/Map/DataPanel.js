@@ -367,6 +367,69 @@ const SocialColumnsToChart = [
   },
 ]
 
+const RaceColumnsToChart = [
+  {
+    'column':'pct_asian',
+    'name':'% Identified as Asian',
+    'color':colors.pink,
+    'preset':'',
+  },
+  {
+    'column':'pct_black',
+    'name':'% Identified as Black/African American',
+    'color':colors.lightblue,
+    'preset':'',
+  },
+  {
+    'column':'pct_nativeam',
+    'name':'% Identified as Native American/Indigenous',
+    'color':colors.strongOrange,
+    'preset':'',
+  },
+  {
+    'column':'pct_pacis',
+    'name':'% Identified as Native Hawaiian/Other Pacific Islander',
+    'color':colors.blue,
+    'preset':'',
+  },
+  {
+    'column':'pct_white',
+    'name':'% Identified as White',
+    'color':colors.paleyellow,
+    'preset':'',
+  },
+  {
+    'column':'pct_other',
+    'name':'% Identified as other races',
+    'color':colors.green,
+    'preset':'',
+  },
+]
+
+const EthnicityColumnsToChart = [
+  {
+    'column':'pct_hisp',
+    'name':'% Identified as Hispanic/Latinx',
+    'color':colors.orange,
+    'preset':'',
+  },
+]
+
+const AgeColumnsToChart = [
+  {
+    'column':'percentage_seniors',
+    'name':'% Seniors',
+    'color':colors.skyblue,
+    'preset':'',
+  },
+  {
+    'column':'percentage_children',
+    'name':'% Children',
+    'color':colors.gray,
+    'preset':'',
+  },
+]
+
 // DataPanel Function Component
 const DataPanel = () => {
 
@@ -404,7 +467,7 @@ const DataPanel = () => {
                 <h2>Filters</h2>
                 <br/>
                 <p style={{padding:0}}>
-                  These charts show the distribution of variables in the tracts on your screen. Click to filter the map.
+                  These charts show the distribution of variables in the tracts on your screen. Adjust the sliders to filter the map.
                 </p>
                 <Gutter height="1em" />                
                 <h3 className="sectionHeader">Environmental</h3>
@@ -433,6 +496,51 @@ const DataPanel = () => {
                       range={ranges[column]} 
                       color={color}
                       key={`distribution-2-${i}`}
+                    />
+                  )
+                }
+                <Gutter height="1em" />
+                <h3 className="sectionHeader">Race</h3>
+                {
+                  RaceColumnsToChart.map(({name, column, color}, i) => 
+                    <Histogram 
+                      name={name} 
+                      column={column}
+                      histCounts={selectionData.histCounts[column]} 
+                      density={selectionData.densities[column]} 
+                      range={ranges[column]} 
+                      color={color}
+                      key={`distribution-3-${i}`}
+                    />
+                  )
+                }
+                <Gutter height="1em" />
+                <h3 className="sectionHeader">Ethnicity</h3>
+                {
+                  EthnicityColumnsToChart.map(({name, column, color}, i) => 
+                    <Histogram 
+                      name={name} 
+                      column={column}
+                      histCounts={selectionData.histCounts[column]} 
+                      density={selectionData.densities[column]} 
+                      range={ranges[column]} 
+                      color={color}
+                      key={`distribution-4-${i}`}
+                    />
+                  )
+                }
+                <Gutter height="1em" />
+                <h3 className="sectionHeader">Age Demographics</h3>
+                {
+                  AgeColumnsToChart.map(({name, column, color}, i) => 
+                    <Histogram 
+                      name={name} 
+                      column={column}
+                      histCounts={selectionData.histCounts[column]} 
+                      density={selectionData.densities[column]} 
+                      range={ranges[column]} 
+                      color={color}
+                      key={`distribution-5-${i}`}
                     />
                   )
                 }
