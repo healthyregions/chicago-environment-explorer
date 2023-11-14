@@ -77,4 +77,4 @@ See [Data](https://chichives.com/data) page.
 
 ## Local Build
 
-See the development [docs][./docs] for how to build and run this application.
+See the development [docs](./docs) for how to build and run this application.
