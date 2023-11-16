@@ -70,12 +70,22 @@ const getUniqueList = (features, cols) => {
   for (let j = 0; j < cols.length; j++) {
     for (let i = 0; i < features.length; i++) {
       const entry = features[i].properties[cols[j]];
-      if (!cacheList.includes(entry) && !!entry) {
-        cacheList.push(entry);
-        returnList.push({
-          label: titleCase(entry),
-          type: typeTranslation[cols[j]],
-        });
+      let entryList = [];
+      if (!!entry && entry.constructor === Array) {
+        for (let k = 0; k < entry.length; k++) {
+          entryList.push(entry[k]);
+        }
+      } else {
+        entryList.push(entry);
+      }
+      for (let k = 0; k < entryList.length; k++) {
+        if (!cacheList.includes(entryList[k]) && !!entryList[k]) {
+          cacheList.push(entryList[k]);
+          returnList.push({
+            label: titleCase(entryList[k]),
+            type: typeTranslation[cols[j]],
+          });
+        }
       }
     }
   }
@@ -507,7 +517,7 @@ function App() {
   const filterFunc = useMemo(
     () =>
       currentLocation.type === "Zip Code"
-        ? (f) => f.properties.zip_code === currentLocation.label
+        ? (f) => f.properties.zip_code.includes(currentLocation.label)
         : currentLocation.type === "Community"
         ? (f) => f.properties.community === currentLocation.label.toUpperCase()
         : (f) => f.properties.geoid === currentLocation.label,
@@ -591,7 +601,10 @@ function App() {
       : false
   );
 
-  const ethnicMajority = filteredSummaries["Latinx"].reduced > 50 ? "Hispanic/Latinx" : "Not Hispanic/Latinx";
+  const ethnicMajority =
+    filteredSummaries["Latinx"].reduced > 50
+      ? "Hispanic/Latinx"
+      : "Not Hispanic/Latinx";
 
   const densityPercentile =
     dataReady &&
@@ -711,7 +724,9 @@ function App() {
                     <ColorSpan color={"#e83f6f"}>
                       {currentLocation.label}, including zip codes{" "}
                       {filteredFeatures
-                        .map((f) => f.properties.zip_code)
+                        .flatMap((f) => {
+                          return f.properties.zip_code;
+                        })
                         .filter(onlyUnique)
                         .join(", ")}
                       , and {filteredFeatures.length} census tracts.
@@ -729,7 +744,7 @@ function App() {
                         .join(", ")}{" "}
                       and zip code{" "}
                       {filteredFeatures
-                        .map((f) => f.properties.zip_code)
+                        .flatMap((f) => f.properties.zip_code)
                         .filter(onlyUnique)
                         .join(", ")}
                       .
