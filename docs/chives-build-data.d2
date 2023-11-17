@@ -1,0 +1,156 @@
+direction: right
+classes: {
+    result: {
+        shape: circle
+        width: 125
+    }
+    result: {
+        shape: stored_data
+        width: 125
+    }
+    input: {
+        shape: page
+    }
+}
+
+outputs.*.class: result
+
+
+# define all inputs
+gdrive: ""
+gdrive.text: |md
+# Google Drive
+Individual sheets for each dataset,<br/>
+stored in different folders for each institution|
+
+base-geo: Base GeoJSON\n(geometries + basic data)
+logos: Logo image files\nstored in main repo
+
+inputs: ""
+inputs.text: |md
+# Google Sheet
+
+_Data Dictionary and Variables.xlsx_<br/>
+on Google Drive has 6 sheets<br/>
+each with contain configurations or<br/>
+descriptions of data and variables, etc.|
+inputs.data-sheets: ""
+inputs.data-sheets.text: |md
+## Data Sheets
+- Name
+- Manager
+- URL for data sheet
+- Metadatalink|
+inputs.data-sheets.class: input
+inputs.cols: ""
+inputs.cols.class: input
+inputs.cols.text: |md 
+## Columns
+Description of all columns|
+inputs.variables: ""
+inputs.variables.class: input
+inputs.variables.text: |md 
+## Variables
+- Description
+- Column
+- Units
+- Bins (quantile, default, etc.)|
+inputs.baselayers: ""
+inputs.baselayers.class: input
+inputs.baselayers.text: |md 
+## BaseLayers
+Basemap layer definitions and credits|
+inputs.logos: ""
+inputs.logos.class: input
+inputs.logos.text: |md 
+## Contributor Logos
+- Path within repo, etc.|
+inputs.resources: ""
+inputs.resources.class: input
+inputs.resources.text: |md 
+## Resources
+- Title
+- Link
+- Description, etc.|
+
+gdrive -- inputs.data-sheets {
+    style: {
+        stroke-dash: 2
+    }
+}
+
+# define all outputs
+outputs: Public Data
+outputs.resources: Resources
+outputs.mapvars: Map Variables
+outputs.data: GeoJSON\nCSV\nDownloadable SHP
+outputs.docs: Documentation
+
+ybd: ''
+ybd.text: |md
+# yarn build:data
+
+(happens pre-build)|
+
+
+ybd.tab-join: Tabular Join\n(GEOID)
+ybd.tab-join.shape: step
+
+inputs.data-sheets -> ybd.tab-join
+base-geo -> ybd.tab-join -> outputs.data
+
+# set 2
+ybd.clean: Clean and build\ntree for frontend\nlist.
+ybd.clean.shape: step
+
+inputs.variables -> ybd.clean -> outputs.mapvars
+
+# set 3
+ybd.agg: |md
+Aggregate
+- column description
+- variable description
+- link to metadata
+- basemap layer info|
+ybd.agg.shape: step
+
+inputs.baselayers -> ybd.agg
+inputs.cols -> ybd.agg
+inputs.variables -> ybd.agg
+inputs.data-sheets -> ybd.agg
+ybd.agg -> outputs.docs
+
+# set 4
+ybd.agg2: |md
+Aggregate
+- resources: title link, text
+- logo path and info|
+ybd.agg2.shape: step
+
+logos -> inputs.logos
+inputs.logos -> ybd.agg2
+inputs.resources -> ybd.agg2
+ybd.agg2 -> outputs.resources
+
+
+idw-repo: air-quality-idw\nGH repo with workflow\nfetch, process, push data\n(inactive)
+idw-repo -> aq-bucket {
+    style: {
+        stroke-dash: 2
+    }
+}
+aq-bucket: MS Air Quality Data\ns3 bucket\nms-aq-data2.s3.us-east-2.amazonaws.com
+aq-join: MS AQ data joined\nduring runtime load
+aq-join.shape: step
+aq-bucket -> aq-join
+
+site: Public Website\nchichives.com
+site.map: /map
+site.docs: /docs
+site.guide: /resources
+
+outputs.docs -> site.docs
+outputs.resources -> site.guide
+outputs.mapvars -> site.map
+outputs.data -> aq-join -> site.map
+
