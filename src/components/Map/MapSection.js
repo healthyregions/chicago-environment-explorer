@@ -792,7 +792,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       <MapboxGLMap
         ref={mapRef}
         mapStyle={
-          "mapbox://styles/csds-hiplab/ckmuv80qn2b6o17ltels6z7ub?fresh=true"
+          "mapbox://styles/herop-lab/cloho6j71001s01ns3fna60uj"
         }
         preventStyleDiffing={true}
         mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
