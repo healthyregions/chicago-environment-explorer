@@ -228,10 +228,9 @@ export default function About(){
     
                 <p>This project is brought to you by the <b>Healthy Regions & Policies Lab (HeRoP)</b>, housed at the Department of Geography & GIScience within the 
                 University of Illinois at Urbana-Champaign, in collaboration with the <b>Department of Geography</b> at DePaul University. The original <i>ChiVes</i>
-                emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago. <i>Chives</i> is funded in part by NASA, with a new inititative starting in 2022 led by Drs. Stuhlmacher, Curran, and Kolak. 
+                emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago. <i>ChiVes</i> is funded in part by NASA, with a new initiative starting in 2022 led by Drs. Stuhlmacher, Curran, and Kolak. 
                 <br/><br/>
                     Explore current and past core contributors below.
-
                 </p>
                 <br/><br/>
 
@@ -247,9 +246,9 @@ export default function About(){
                    Background  
                 </h3>
                 <br/>
-                <p> The original <i>ChiVes</i> application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently
-integrated within <i>ChiVes</i> was gathered, calculated, and standardized from 2018-2021. The current application was refactored in 2022 by Dylan Halpern, adopting a new web architecture. Explore some of the original 
-projects that inspired <i>Chives</i> below:  </p>
+                <p> The original ChiVes application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently
+integrated within ChiVes was gathered, calculated, and standardized from 2018-2021. The current application was refactored in 2022 by Dylan Halpern, adopting a new web architecture. Explore some of the original 
+projects that inspired ChiVes below:  </p>
                 <br/>
 
                 <Accordion entries={accordionContent} initialTab={-1} />
