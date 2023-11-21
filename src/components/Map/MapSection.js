@@ -174,7 +174,7 @@ const NavInlineButton = styled.button`
 
 const GeocoderContainer = styled.div`
   position: fixed;
-  left: 12em;
+  left: 14em;
   top: 7px;
   z-index: 500;
   width: 230px;
@@ -277,7 +277,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
   useEffect(() => {
     let handler = (e) => {
-      if (!hoverRef.current.contains(e.target)) {
+      if (hoverRef.current && !hoverRef.current.contains(e.target)) {
         setHoverInfo({ x: null, y: null, object: null });
       }
     };
@@ -792,7 +792,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       <MapboxGLMap
         ref={mapRef}
         mapStyle={
-          "mapbox://styles/csds-hiplab/ckmuv80qn2b6o17ltels6z7ub?fresh=true"
+          "mapbox://styles/herop-lab/cloho6j71001s01ns3fna60uj"
         }
         preventStyleDiffing={true}
         mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
@@ -911,7 +911,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       {!geoids.length && (
         <LogoContainer infoPanel={panelState.info}>
           <a
-            href="https://herop.ssd.uchicago.edu/"
+            href="https://healthyregions.org/"
             target="_blank"
             rel="noopener noreferrer"
           >
