@@ -118,7 +118,7 @@ const accordionContent = [
         content: <p>
             The US Covid Atlas is a visualization tool led by HeRoP and the Center for Spatial Data Science that helspc onnects COVID case data with community indicaotrs across the United States from the beginning of the pandemic until today. 
             The Atlas works to understand, archive, and represent the often unequal impact of the COVID-19 pandemic in the United States.
-            <a href="https://theuscovidatlas.org/"> Learn more</a>.
+            <a href="https://uscovidatlas.org/"> Learn more</a>.
         </p>
     },
 
@@ -127,7 +127,7 @@ const accordionContent = [
         content: <p>The Opioid Environment Policy Scan (OEPS) is an open-source data warehouse to help characterize the multi-dimensional risk environment impacting opioid use and health outcomes across the United States.
             The OEPS provides access to data at multiple spatial scales - from U.S. states down to Census tracts - and is designed to support research seeking to study environments impacting and impacted by opioid use and opioid use disorder (OUD), inform public policy, and reduce harm in communities nationwide.
             This project was developed as part of the Lab's work with Justice Community Opioid Innovation Network (JCOIN), an NIH-HEAL Initiative, as part of the Methodology and Advanced Analytics Resource Center (MAARC).
-            <a href="https://oeps.ssd.uchicago.edu/"> Learn more</a>.
+            <a href="https://oeps.healthyregions.org/"> Learn more</a>.
             </p>
     },
 
@@ -152,7 +152,7 @@ const accordionContent = [
         label: "Chicago Tree Tool (2022)",
         content: (<p>
                     Before <i>ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool </a></b> as 
-                    an extension of  ongoing work on understanding <a href="https://herop.ssd.uchicago.edu/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using 
+                    an extension of  ongoing work on understanding <a href="https://healthyregions.org/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using 
                      <a href="https://carto.com/" target="_blank" rel="noopener noreferrer"> Carto</a> to facilitate rapid development and prototyping. This tool followed years of iterative process and design and dozens
                      of previous dashboard iterations, highlighting the winding process of agile application development. The final tool went through dozens of additional
                      rounds of refinement and editing across multiple city and community stakeholders.
