@@ -121,3 +121,12 @@ export const facebook = <svg viewBox="0 0 1024 1024">
 </svg>
 
 export const embed = <svg viewBox="0 0 512 512"><path d="M288 368l48 48 160-160-160-160-48 48 112 112z"></path><path d="M224 144l-48-48-160 160 160 160 48-48-112-112z"></path></svg>
+
+export const hamburger = <svg height="24px" width="24px" viewBox="0 0 24 24">
+    <g>
+        <rect id="Rectangle" fill-rule="nonzero" fill="none" x="0" y="0" width="24" height="24"></rect>
+        <line x1="5" y1="7" x2="19" y2="7" id="Path" stroke="#2e7d32" stroke-width="1.5"></line>
+        <line x1="5" y1="17" x2="19" y2="17" id="Path" stroke="#2e7d32" stroke-width="1.5"></line>
+        <line x1="5" y1="12" x2="19" y2="12" id="Path" stroke="#2e7d32" stroke-width="1.5"></line>
+</g>
+</svg>

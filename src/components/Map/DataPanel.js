@@ -177,7 +177,7 @@ const DataPanelContainer = styled.div`
 `
 // Scrollable Wrapper for main report information
 const ReportWrapper = styled.div`
-  height:100vh;
+  height:100%;
   overflow-y:scroll;
 
   ::-webkit-scrollbar {
