@@ -911,7 +911,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       {!geoids.length && (
         <LogoContainer infoPanel={panelState.info}>
           <a
-            href="https://herop.ssd.uchicago.edu/"
+            href="https://healthyregions.org/"
             target="_blank"
             rel="noopener noreferrer"
           >
