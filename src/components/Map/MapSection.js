@@ -277,7 +277,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
   useEffect(() => {
     let handler = (e) => {
-      if (!hoverRef.current.contains(e.target)) {
+      if (hoverRef.current && !hoverRef.current.contains(e.target)) {
         setHoverInfo({ x: null, y: null, object: null });
       }
     };
