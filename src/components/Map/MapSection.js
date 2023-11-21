@@ -174,7 +174,7 @@ const NavInlineButton = styled.button`
 
 const GeocoderContainer = styled.div`
   position: fixed;
-  left: 12em;
+  left: 14em;
   top: 7px;
   z-index: 500;
   width: 230px;
