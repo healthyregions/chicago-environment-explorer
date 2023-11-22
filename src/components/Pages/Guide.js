@@ -50,7 +50,7 @@ const Guide = () => {
                     Add your resource guide by submitting the official <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform?usp=sf_link" target='_blank' rel="noopener noreferrer">Resource Guide Form.</a>
                     <Gutter height={20}/>
                 </p>
-                <Gutter height={20}/>
+                <Gutter height={60}/>
                 {ResourceList.map((entry, index) => <ResourceGuideRow entry={entry} key={index} />)}
             </ContentContainer>
             <Footer />

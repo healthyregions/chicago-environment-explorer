@@ -149,7 +149,7 @@ export default function ContactForm(){
             </SuccessMessage>
         }
         <ContactFormContainer className={isSubmitting ? 'locked' : ''} onSubmit={handleSubmit}>
-            <h2>CONTACT FORM</h2>
+            <h2>Send us a message</h2>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
                     <InputBlock>
