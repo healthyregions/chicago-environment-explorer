@@ -156,7 +156,7 @@ const Footer = (props) => {
           </Grid>
           <Grid item xs={12}>
             <p className="copyright" style={{marginTop: "20px"}}>
-              Copyright ChiVes Contributors, Healthy Regions and Polices Lab
+              Copyright ChiVes Contributors, Healthy Regions & Policies Lab
               <br />
               Website Licensed GPL, Data Licensed CC NC Attribution
             </p>
