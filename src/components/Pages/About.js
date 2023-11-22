@@ -182,7 +182,7 @@ export default function About(){
 
                <p>
 
-               ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the neighborhood level. It’s a partnership of researchers, community organizations, and civic groups. 
+               ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the neighborhood level. It is a partnership of researchers, community organizations, and civic groups. 
                 Organizations and individuals can participate in ChiVes in multiple ways:
 
                 <br/><br/>
