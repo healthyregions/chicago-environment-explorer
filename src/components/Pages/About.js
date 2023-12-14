@@ -57,7 +57,7 @@ const projectTeam = [
     {
         name: 'Shubham Kumar',
         link: 'https://healthyregions.org/team/',
-        degrees: 'MLIS',
+        degrees: 'MSIM',
         img: `shubham.jpeg`,
         affiliation: '(HEROP)',
         title: 'Product Designer, 2023-2024'
