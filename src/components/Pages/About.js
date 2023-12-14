@@ -280,7 +280,7 @@ export default function About(){
 
                     <p>
 
-                    The Data Collaborative provides insight, direction, and relavent environmental data to the Chicago community. The group advises on ChiVes data standards and needs,
+                    The Data Collaborative provides insight, direction, and relevant environmental data to the Chicago community. The group advises on ChiVes data standards and needs,
                     and includes the following members:
 
                     <br/><br/>
