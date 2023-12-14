@@ -140,6 +140,14 @@ const pastTeam = [
         title: 'Developer, Data Integration, 2023'
     },
     {
+        name:'Isaac Rand',
+        link:'#',
+        degrees: 'BS student',
+        img: `avatar.png`,
+        affiliation:'(HEROP)',
+        title:'Data Integration, 2021-2022',
+    },
+    {
                 name:'Dylan Halpern',
                 link:'https://dylanhalpern.com/',
                 degrees: 'MCP',
@@ -276,27 +284,39 @@ export default function About(){
                 <br/><br/>
                 <hr></hr>
 
-                <h2>Data Collaborative Members </h2>
+                <h2>Data Collaborative Members </h2>                   
+                    
+                    <h3>Data Contributions </h3>
 
-                    <p>
+                    <p> 
+                    The following individuals and organizations have added data to the ChiVes collective:
+                    <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Negaunee Institute for Plant Conservation Science and Action, Chicago Botanic Gardens </li>
+                    <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research & the Eclipse Project </li>
+                    <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
+                    <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li>
+                    <li> <a href="http://healthyregions.org">The Heatlhy Regions & Policies Lab,</a> University of Illinois at Urbana-Champaign (formerly at the University of Chicago)</li>
+                    <br></br>
 
-                    The Data Collaborative provides insight, direction, and relevant environmental data to the Chicago community. The group advises on ChiVes data standards and needs,
-                    and includes the following members:
+                    
+                    <h3>Data & Design Decision-Making </h3>
+                    In addition to data contributions above, collaborative members have also provided invaluable insight and direction throughout the project. Data Collective members have advised on ChiVes data standards and needs, 
+                    as well as provided feedback on visualization and user experience goals. 
+                    <br></br>
+                    <br></br>
+                    We would like to extend special thanks to <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a>, <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> and <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a> for their past work on the data collaborative team.
+                    We are also grateful to the <b>Nature Conservancy</b> and <b>Audubon Society</b> for their insights and support.
 
-                    <br/><br/>
-                    <li>  <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, Lake Michigan Air Directors Consortium </li>
-                    <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Chicago Botanic Gardens </li>
-                    <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research </li>
+                    {/* <li>  <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, Lake Michigan Air Directors Consortium </li>
+                    {/* <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Chicago Botanic Gardens </li>
+                    {/* <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research </li>
                     {/* <li> <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, Environmental Law & Policy Center </li> */}
                     {/* <li> <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a>, Mansueto Institute, University of Chicago </li> */}
                     {/* <li> <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a> & <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, Department of Geophysical Sciences, University of Chicago </li> */}
-                    <li> <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, Unite Us, Illinois </li>
-                    <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
+                    {/* <li> <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, Unite Us, Illinois </li>
                     {/* <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li> */}
                     {/* <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li> */}
-                    <br/>
-                    We are also grateful to the <b>Nature Conservancy</b> and <b>Audubon Society</b> for their insights and support.
-                    Finally, a thanks to <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> and <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a> for their past work on the data collaborative team.
+
+                   
                     <br/><br/>                               
                     </p>
 

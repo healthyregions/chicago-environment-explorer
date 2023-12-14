@@ -139,11 +139,11 @@ export const ContentContainer = styled.div`
     margin-bottom:20px;
   }
   h3 {
-    font-family: 'Roboto', sans-serif;
-    font-size: 16px;
+    font-family: 'Lora', sans-serif;
+    font-size: 24px;
     line-height: 1.5;
-    font-weight: 300;
-    font-stretch: normal;
+    font-weight: 500;
+    font-stretch: wide;
     margin-bottom:20px;
   }
   p, a, ul li, ol li {
