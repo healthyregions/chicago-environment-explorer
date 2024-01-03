@@ -1,11 +1,20 @@
 # Development Documentation
 
+This application is build from [WebGeoDa](https://docs.webgeoda.org/).
+
 ## Required Environment Variables
-The below are required environmnent variables. These should be available in `.env` or `.env.local` in your repo root. Don't commit them to Github.
-REACT_APP_MAPBOX_TOKEN=pk....
-- Your mapbox token
+The below are required environmnent variables. These should be available in `.env` or `.env.local` in your repo root. Don't commit them to Github. You can copy `.env.example` to `.env` and fill in the blank values.
+
+```
+# mapbox token for map
+REACT_APP_MAPBOX_TOKEN=pk...
+
+# air quality endpoint
 REACT_APP_AQ_ENDPOINT=https:...
-- Your air quality API endpoint
+
+# submission url for google form
+REACT_APP_EMAIL_FORM_URL=
+```
 
 ## Installing and Running the App
 
