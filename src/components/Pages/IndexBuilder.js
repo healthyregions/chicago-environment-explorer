@@ -9,7 +9,7 @@ import {
     Stepper,
     Step,
     StepLabel,
-    Divider
+    Divider, Stack
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -171,7 +171,7 @@ const IndicatorsPage = ({ selections, setSelections }) => {
                           onClick={(e) => setSelectedDetails(selections.find(i => i.name === variableName)) || e.stopPropagation()}></FaInfoCircle>
             <Grid container spacing={3}>
                 <Grid style={{ textAlign: 'left' }} item xs>
-                    {variableName}
+                    <Typography variant={'body2'}>{variableName}</Typography>
                 </Grid>
             </Grid>
         </ToggleButton>
@@ -275,64 +275,75 @@ const WeightsPage = ({ selections, setSelections }) => {
                             <div key={`div-${index}`}>
                                 <h3 key={`label-${index}`}>{selection.name}</h3>
 
-                                <TextField key={`input-${index}`}
-                                           variant={'outlined'}
-                                           size={'small'}
-                                           type={'number'}
-                                           value={selection.value}
-                                           onChange={(event) => {
-                                               // Parse text value
-                                               let value = parseInt(event.target.value, 10);
 
-                                               // Min / max boundaries
-                                               if (value > max) {
-                                                   value = max;
-                                               } else if (value < min) {
-                                                   value = min;
-                                               }
+                                <Grid>
+                                    <Grid item>
+                                        <Stack spacing={2} direction="row" sx={{ mb: 1 }} alignItems="center">
+                                            <TextField key={`input-${index}`}
+                                                       variant={'outlined'}
+                                                       size={'small'}
+                                                       type={'number'}
+                                                       value={selection.value}
+                                                       style={{ marginRight: '15px'}}
+                                                       onChange={(event) => {
+                                                           // Parse text value
+                                                           let value = parseInt(event.target.value, 10);
 
-                                               // Locate existing item
-                                               const found = selections.find(s => s.name === selection.name);
-                                               const index = selections.indexOf(found);
+                                                           // Min / max boundaries
+                                                           if (value > max) {
+                                                               value = max;
+                                                           } else if (value < min) {
+                                                               value = min;
+                                                           }
 
-                                               // Update existing item
-                                               const sels = [...selections];
-                                               sels[index] = {...selection, value};
-                                               setSelections(sels);
-                                           }}></TextField>
+                                                           // Locate existing item
+                                                           const found = selections.find(s => s.name === selection.name);
+                                                           const index = selections.indexOf(found);
 
-                                <Slider
-                                    key={`slider-${index}`}
-                                    min={0}
-                                    max={10}
-                                    getAriaLabel={() => selection.name}
-                                    valueLabelDisplay="auto"
-                                    value={selection.value}
-                                    onChange={(event, value) => {
-                                        // Min / max boundaries
-                                        if (value > max) {
-                                            value = max;
-                                        } else if (value < min) {
-                                            value = min;
-                                        }
+                                                           // Update existing item
+                                                           const sels = [...selections];
+                                                           sels[index] = {...selection, value};
+                                                           setSelections(sels);
+                                                       }}></TextField>
+                                            <Typography variant={'caption'}>Less Important</Typography>
+                                            <Slider
+                                                key={`slider-${index}`}
+                                                min={0}
+                                                max={10}
+                                                style={{ margin: '15px', color: COLORS[index] }}
+                                                getAriaLabel={() => selection.name}
+                                                valueLabelDisplay="auto"
+                                                value={selection.value}
+                                                onChange={(event, value) => {
+                                                    // Min / max boundaries
+                                                    if (value > max) {
+                                                        value = max;
+                                                    } else if (value < min) {
+                                                        value = min;
+                                                    }
 
-                                        // Locate existing item
-                                        const found = selections.find(s => s.name === selection.name);
-                                        const index = selections.indexOf(found);
+                                                    // Locate existing item
+                                                    const found = selections.find(s => s.name === selection.name);
+                                                    const index = selections.indexOf(found);
 
-                                        // Update existing item
-                                        const sels = [...selections];
-                                        sels[index] = {...selection, value};
-                                        setSelections(sels);
-                                    }}
-                                />
+                                                    // Update existing item
+                                                    const sels = [...selections];
+                                                    sels[index] = {...selection, value};
+                                                    setSelections(sels);
+                                                }}
+                                            />
+                                            <Typography variant={'caption'}>More Important</Typography>
+                                        </Stack>
+                                    </Grid>
+                                </Grid>
                             </div>
                         );
                     })
                 }
             </Grid>
             <Grid item xs={2}>
-                <PieChart width={400} height={400}>
+                <Typography variant={'h4'}>Custom Index</Typography>
+                <PieChart width={200} height={200}>
                     <Pie
                         data={selections}
                         cx="50%"
@@ -344,7 +355,7 @@ const WeightsPage = ({ selections, setSelections }) => {
                         dataKey="value"
                     >
                         {selections.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                         ))}
                     </Pie>
                 </PieChart>
