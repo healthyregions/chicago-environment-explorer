@@ -35,7 +35,7 @@ const BLUE = 'rgb(0, 88, 153)';
 const MAGENTA = 'rgba(228, 0, 43, 0.6)';
 
 */
-const COLORS = [colors.forest, colors.green, colors.teal, colors.blue, colors.lightblue, colors.pink, colors.red];
+const COLORS = [ colors.pink, colors.red, colors.orange, colors.yellow, colors.paleyellow, colors.forest, colors.green, colors.chicagoDarkBlue, colors.blue, colors.lightblue, colors.purple ];
 //const COLORS = ['#888888','#008888','#888800','#880088','#FF8888','#8888FF','#88FF88','#88FFFF','#FFFF88','#FFFFFF',];
 
 const RADIAN = Math.PI / 180;
@@ -310,7 +310,7 @@ const WeightsPage = ({ selections, setSelections }) => {
                                                 key={`slider-${index}`}
                                                 min={0}
                                                 max={10}
-                                                style={{ margin: '15px', color: COLORS[index] }}
+                                                style={{ margin: '15px', color: COLORS[index % COLORS.length] }}
                                                 getAriaLabel={() => selection.name}
                                                 valueLabelDisplay="auto"
                                                 value={selection.value}
