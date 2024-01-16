@@ -40,6 +40,8 @@ const COLORS = [colors.forest, colors.green, colors.teal, colors.blue, colors.li
 
 const RADIAN = Math.PI / 180;
 
+// TODO: Convert style={{ }} to styled-components
+
 
 /** Given a set of possible indicators (separated into categories), allow user to select one or more indicators */
 const IndicatorsPage = ({ selections, setSelections }) => {
@@ -156,8 +158,11 @@ const IndicatorsPage = ({ selections, setSelections }) => {
         <ToggleButton style={{
             width: '8rem',
             height: '8rem',
-            color: selections.find(i => i.name === variableName) ? colors.white : colors.black,
+            color: selections.find(i => i.name === variableName) ? colors.white : colors.forest,
             background: selections.find(i => i.name === variableName) ? colors.forest : colors.white,
+            borderColor: colors.forest,
+            borderWidth: '2px',
+            marginTop: '10px',
             marginRight: '10px',
             padding: '0'
         }} onClick={() => toggleSelection(variableName)} value={variableName}>
