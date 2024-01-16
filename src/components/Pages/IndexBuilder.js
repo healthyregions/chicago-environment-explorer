@@ -78,7 +78,7 @@ const IndicatorsPage = ({ categories, selections, setSelections }) => {
                 <Grid>
                     <Grid item xs={8}>
                         <Stepper orientation={'vertical'}>
-                            <Step key={'indicator-step1'}>
+                            <Step key={'indicator-step1'} active={true}>
                                 <StepLabel>
                                     <Typography variant="subtitle">
                                         Select the indicators from the options on the right. If you want to know more
@@ -87,7 +87,7 @@ const IndicatorsPage = ({ categories, selections, setSelections }) => {
                                     </Typography>
                                 </StepLabel>
                             </Step>
-                            <Step key={'indicator-step2'}>
+                            <Step key={'indicator-step2'} active={true}>
                                 <StepLabel>
                                     <Typography variant="subtitle">
                                         In the next step, set importance for each indicator you've selected to create
@@ -95,7 +95,7 @@ const IndicatorsPage = ({ categories, selections, setSelections }) => {
                                     </Typography>
                                 </StepLabel>
                             </Step>
-                            <Step key={'indicator-step3'}>
+                            <Step key={'indicator-step3'} active={true}>
                                 <StepLabel>
                                     <Typography variant="subtitle">
                                         Preview the summary of the selected indicators with their weights and the map
