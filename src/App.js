@@ -20,6 +20,7 @@ const Guide = React.lazy(() => import('./components/Pages/Guide'));
 const Contact = React.lazy(() => import('./components/Pages/Contact'));
 const Community = React.lazy(() => import('./components/Pages/Community'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
+const IndexBuilder = React.lazy(() => import('./components/Pages/IndexBuilder'));
 
 export default function App() {
 
@@ -40,16 +41,18 @@ export default function App() {
                 <Route path="/contact" component={Contact}/>
                 <Route path="/contact.html" component={Contact}/>
                 <Route path="/community" component={Community}/>
-                <Route path="/community.html" component={Community}/>              
+                <Route path="/community.html" component={Community}/>
                 <Route path="/data" component={Data}/>
                 <Route path="/data.html" component={Data}/>
+                <Route path="/builder" component={IndexBuilder} />
+                <Route path="/builder.html" component={IndexBuilder} />
                 <Route component={ErrorPage} />
                 <Route />
             </Switch>
           </Suspense>
           </ThemeProvider>
       </StyledEngineProvider>
-      </div> 
+      </div>
     </Router>
     );
 }
