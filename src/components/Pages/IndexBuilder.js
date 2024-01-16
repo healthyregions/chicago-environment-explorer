@@ -18,6 +18,8 @@ import Slider from "@mui/material/Slider";
 import {Cell, Pie, PieChart} from "recharts";
 import {FaHashtag} from "@react-icons/all-files/fa/FaHashtag";
 import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
+import {variablePresets} from "../../config";
+import {NavBar} from "../index";
 
 const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
@@ -38,38 +40,35 @@ const RADIAN = Math.PI / 180;
 
 
 /** Given a set of possible indicators (separated into categories), allow user to select one or more indicators */
-const IndicatorsPage = ({ categories, selections, setSelections }) => {
+const IndicatorsPage = ({ selections, setSelections }) => {
 
     // User's last-clicked tooltip icon
     const [selectedDetails, setSelectedDetails] = useState(undefined);
 
-    const toggleSelection = (item) => {
+    const toggleSelection = (variableName) => {
         const localCopy = [...selections];
 
-        //const value = 100 / (localCopy.length + 1)
-
-        // or item.key for complex objects
-        if (localCopy.includes(item)) {
+        // Check if item is selected
+        const existing = localCopy.find(i => i.name === variableName);
+        if (existing) {
             // Item is selected - de-select it
-            const index = selections.indexOf(item);
+            const index = selections.indexOf(existing);
             localCopy.splice(index, 1);
             setSelections(localCopy);
-            console.log('Removed - selection is now: ', localCopy);
         } else {
-            //item.value = value;
-            //localCopy.forEach(i => i.value = value)
-            const appended = localCopy.concat([item]);
-
             // Item is not selected - select it
-            setSelections(appended);
-            console.log('Added - selection is now: ', appended);
+            setSelections(localCopy.concat([{
+                name: variableName,
+                description: loremIpsum,
+                value: 10
+            }]));
         }
     };
 
     const IndicatorsHelperText = () =>
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
-                <Typography variant="h4" color="text.secondary" gutterBottom>
+                <Typography variant="h4" gutterBottom>
                     Let's create your <strong>Custom Index</strong>
                 </Typography>
                 <Typography component="div">
@@ -112,16 +111,13 @@ const IndicatorsPage = ({ categories, selections, setSelections }) => {
     const IndicatorsDetails = ({ item }) =>
         <>
             <Button onClick={() => setSelectedDetails(undefined)}>&larr; Back to instructions</Button>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            <Typography variant="h4" gutterBottom>
                 {item?.name}
             </Typography>
             <div>
                 <Button>More &rarr;</Button>
                 <Button>Map &rarr;</Button>
             </div>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                {item?.details}
-            </Typography>
             <Grid>
                 <Grid item xs>
                     <Typography component="div">
@@ -132,39 +128,46 @@ const IndicatorsPage = ({ categories, selections, setSelections }) => {
         </>
 
 
-    const IndicatorsCategory = ({ selections, category }) =>
+    const IndicatorsList = ({ selections }) =>
         <>
-            <h2><i className={category?.icon}></i> {category?.name}</h2>
-            {
-                category?.indicators?.map((item) =>
-                    <IndicatorsSelectableItem selections={selections} item={item} key={item.name}></IndicatorsSelectableItem>
-                )
-            }
+            {Object.keys(variablePresets).map((variable,i) => (
+                variable.includes("HEADER::")
+                    ? <h2 key={`list-header-${i}`}>
+                        {
+                            /*
+                            TODO: How do we place the correct icon?
+                            <i className={category?.icon}></i>
+                            */
+                        }
+                        {variable.split("HEADER::")[1]}
+                    </h2>
+                    : <IndicatorsSelectableItem key={'variable-selectable-item-'+variable} selections={selections} variableName={variable}></IndicatorsSelectableItem>
+            ))}
             <Divider style={{ width: '20%', margin: '10px', fontWeight: 'bold' }}></Divider>
         </>
 
-    const IndicatorsSelectableItem = ({ selections, item }) =>
+    const IndicatorsSelectableItem = ({ selections, variableName }) =>
         <ToggleButton style={{
             width: '8rem',
             height: '8rem',
-            color: selections.includes(item) ? WHITE : BLACK,
-            background: selections.includes(item) ? GREEN : WHITE,
+            color: selections.find(i => i.name === variableName) ? WHITE : BLACK,
+            background: selections.find(i => i.name === variableName) ? GREEN : WHITE,
             marginRight: '10px',
             padding: '0'
-        }} onClick={() => toggleSelection(item)} value={item?.name}>
+        }} onClick={() => toggleSelection(variableName)} value={variableName}>
             <FaInfoCircle style={{ right: '-6.5rem', top: '-3rem', position: 'relative', cursor: 'pointer' }}
                           color={LIGHTGREEN}
-                          onClick={(e) => setSelectedDetails(item) || e.stopPropagation()}></FaInfoCircle>
+                          onClick={(e) => setSelectedDetails(selections.find(i => i.name === variableName)) || e.stopPropagation()}></FaInfoCircle>
             <Grid container spacing={3}>
                 <Grid style={{ textAlign: 'left' }} item xs>
-                    {item?.name}
+                    {variableName}
                 </Grid>
             </Grid>
         </ToggleButton>
 
 
     return (
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ paddingTop: '5vh' }}>
             <Grid item xs={6}>
                 {
                     !selectedDetails && <IndicatorsHelperText></IndicatorsHelperText>
@@ -174,11 +177,7 @@ const IndicatorsPage = ({ categories, selections, setSelections }) => {
                 }
             </Grid>
             <Grid item xs>
-                {
-                    categories?.map((category) =>
-                        <IndicatorsCategory selections={selections} category={category} key={category.name}></IndicatorsCategory>
-                    )
-                }
+                <IndicatorsList selections={selections}></IndicatorsList>
             </Grid>
         </Grid>
     );
@@ -191,7 +190,7 @@ const WeightsPage = ({ selections, setSelections }) => {
     const IndexBuilderStepIcon = ({ color, stepNumber, background }) => {
         switch(stepNumber) {
             case 1: return (<div>
-                <FaMousePointer style={{ color, background,paddingLeft: '6px', paddingRight: '4px' }} />
+                <FaMousePointer style={{ color, background, paddingLeft: '6px', paddingRight: '4px' }} />
             </div>)
             case 2: return (<div>
                 <FaHashtag style={{ color, background }} />
@@ -215,7 +214,8 @@ const WeightsPage = ({ selections, setSelections }) => {
                     <Grid item xs={8}>
                         <Stepper orientation={'vertical'}>
                             <Step key={'weights-step1'} active={true}>
-                                <StepLabel StepIconComponent={IndexBuilderStepIcon} StepIconProps={FirstIconProps}>
+                                <StepLabel StepIconComponent={IndexBuilderStepIcon}
+                                           StepIconProps={FirstIconProps}>
                                     <Typography variant="subtitle">
                                         Drag and move the horizontal separators to alter the weights. You can see the
                                         weights altering in percentage on the right, or
@@ -223,7 +223,8 @@ const WeightsPage = ({ selections, setSelections }) => {
                                 </StepLabel>
                             </Step>
                             <Step key={'weights-step2'} active={true}>
-                                <StepLabel StepIconComponent={IndexBuilderStepIcon} StepIconProps={SecondIconProps}>
+                                <StepLabel StepIconComponent={IndexBuilderStepIcon}
+                                           StepIconProps={SecondIconProps}>
                                     <Typography variant="subtitle">
                                         You can also change the weights by typing the percentage values in the input box
                                         next to the indicators.
@@ -351,60 +352,32 @@ export default function IndexBuilder() {
     const [steps] = useState(['indicators', 'weights', 'summary']);
     const [currentStep, setCurrentStep] = useState(steps[0]);
 
-    // User's category/indicator selections
+    // User's indicator/variable selections
     // TODO: Default selections?
     const [selections, setSelections] = useState([]);
 
-    // User's weight selections for each indicator
-    //const [weights, setWeights] = useState([]);
-
-    // All choices that user can make for selections
-    const [categories] = useState([
-        {
-            // Insert/populate known categories here
-            name: 'Ecology and Greenness',
-            icon: 'fa fas fa-tree',
-            indicators: [
-                { name: 'Community Sampled Plant Diversity', details: loremIpsum, value: 10 },
-                { name: 'Tree Crown Density', details: loremIpsum, value: 10 },
-                { name: 'Vegetation Index', details: loremIpsum, value: 10 },
-            ]
-        },
-        {
-            name: 'Demographic',
-            icon: 'fa fas fa-users',
-            indicators: [
-                { name: 'Average Household Size', details: loremIpsum, value: 10 },
-                { name: 'Percentage Children', details: loremIpsum, value: 10 },
-                { name: 'Percentage Family Household', details: loremIpsum, value: 10 },
-            ]
-        },
-        {
-            name: 'Health',
-            icon: 'fa fas fa-heartline',
-            indicators: [
-                { name: 'Adult Asthma Rate', details: loremIpsum, value: 10 },
-                { name: 'Cancer Rate', details: loremIpsum, value: 10 },
-                { name: 'Childhood Asthma ED Visits', details: loremIpsum, value: 10 },
-            ]
-        }
-    ]);
-
     return (
         <>
-            <Button onClick={() => setCurrentStep('indicators')}>Indicators</Button>
-            <Button onClick={() => setCurrentStep('weights')}>Weights</Button>
-            {
-                currentStep === 'indicators' && <IndicatorsPage categories={categories} selections={selections} setSelections={setSelections}></IndicatorsPage>
-            }
-            {
-                currentStep === 'weights' && <WeightsPage selections={selections} setSelections={setSelections}></WeightsPage>
-            }
+            <Grid container>
+                <Grid item xs={2}>
+                    <NavBar />
+                </Grid>
+                <Grid item xs>
+                    <Button onClick={() => setCurrentStep('indicators')}>Indicators</Button>
+                    <Button onClick={() => setCurrentStep('weights')}>Weights</Button>
+                </Grid>
+            </Grid>
 
             <Grid>
-                <Grid item>
-                    <pre>{JSON.stringify(selections, null, 2)}</pre>
-                </Grid>
+                {
+                    currentStep === 'indicators' && <IndicatorsPage selections={selections} setSelections={setSelections}></IndicatorsPage>
+                }
+                {
+                    currentStep === 'weights' && <WeightsPage selections={selections} setSelections={setSelections}></WeightsPage>
+                }
+            </Grid>
+            <Grid>
+                <pre>{JSON.stringify(selections, null, 2)}</pre>
             </Grid>
         </>
     );
