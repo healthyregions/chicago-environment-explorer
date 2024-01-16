@@ -213,8 +213,8 @@ const WeightsPage = ({ selections, setSelections }) => {
                 </Typography>
                 <Grid>
                     <Grid item xs={8}>
-                        <Stepper orientation={'vertical'} activeStep={2}>
-                            <Step key={'weights-step1'}>
+                        <Stepper orientation={'vertical'}>
+                            <Step key={'weights-step1'} active={true}>
                                 <StepLabel StepIconComponent={IndexBuilderStepIcon} StepIconProps={FirstIconProps}>
                                     <Typography variant="subtitle">
                                         Drag and move the horizontal separators to alter the weights. You can see the
@@ -222,7 +222,7 @@ const WeightsPage = ({ selections, setSelections }) => {
                                     </Typography>
                                 </StepLabel>
                             </Step>
-                            <Step key={'weights-step2'}>
+                            <Step key={'weights-step2'} active={true}>
                                 <StepLabel StepIconComponent={IndexBuilderStepIcon} StepIconProps={SecondIconProps}>
                                     <Typography variant="subtitle">
                                         You can also change the weights by typing the percentage values in the input box
