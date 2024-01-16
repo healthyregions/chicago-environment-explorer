@@ -135,11 +135,11 @@ export default function Nav({
   bounds,
   setViewState
 }) {
-  
+
   const dispatch = useDispatch();
   const panelState = useSelector(state => state.panelState);
   const handleOpenClose = (panel) => dispatch(setPanelState({ [panel]: panelState[panel] ? false : true }))
-  
+
   // const handleGeolocate = async () => {
   //   navigator.geolocation.getCurrentPosition(position => {
   //       setViewport({
@@ -187,6 +187,7 @@ export default function Nav({
             <NavItems>
               <li><Button href="#" onClick={() => handleOpenClose('variables')}>{SVG.settings} Variables Panel</Button></li>
               <li><Button href="#" onClick={() => handleOpenClose('info')}>{SVG.report}Data View</Button></li>
+              <li><Button href="/builder">{SVG.plus}Index Builder</Button></li>
               {/* <li><a onClick={() => setViewState({
                 ...bounds,
                 bearing:0,
