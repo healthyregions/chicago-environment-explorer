@@ -13,6 +13,25 @@ body {
   color: rgba(228, 0, 43, 0.6) !important;
 }
 
+.MuiSvgIcon-root > .MuiStepLabel-root > .MuiStepLabel-iconContainer {
+  background: rgba(228, 0, 43, 0.6) !important;
+}
+
+.MuiStepLabel-iconContainer > div > svg {
+  border-radius: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 6px;
+  padding-right: 4px;
+  height: 24px;
+  width: 24px;
+}
+
+.MuiStepLabel-iconContainer > div > svg:last-of-type {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
 .MuiStepConnector-root > .MuiStepConnector-line {
   border-color: rgba(228, 0, 43, 0.6) !important;
 }
