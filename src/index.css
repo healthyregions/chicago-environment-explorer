@@ -10,11 +10,11 @@ body {
 }
 
 .MuiSvgIcon-root, .MuiStepLabel-iconContainer {
-  color: rgba(228, 0, 43, 0.6) !important;
+  color: #e83e8c !important;
 }
 
 .MuiSvgIcon-root > .MuiStepLabel-root > .MuiStepLabel-iconContainer {
-  background: rgba(228, 0, 43, 0.6) !important;
+  background: #e83e8c !important;
 }
 
 .MuiStepLabel-iconContainer > div > svg {
@@ -33,7 +33,7 @@ body {
 }
 
 .MuiStepConnector-root > .MuiStepConnector-line {
-  border-color: rgba(228, 0, 43, 0.6) !important;
+  border-color: #e83e8c !important;
 }
 
 .fa-svg-icon {

@@ -18,11 +18,12 @@ import Slider from "@mui/material/Slider";
 import {Cell, Pie, PieChart} from "recharts";
 import {FaHashtag} from "@react-icons/all-files/fa/FaHashtag";
 import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
-import {variablePresets} from "../../config";
+import {variablePresets, colors} from "../../config";
 import {NavBar} from "../index";
 
 const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
+/*
 const GREEN = 'rgb(46, 125, 50)';
 const WHITE = 'white';
 const BLACK = 'black';
@@ -33,7 +34,8 @@ const LIGHTBLUE = 'rgb(193, 235, 235)';
 const BLUE = 'rgb(0, 88, 153)';
 const MAGENTA = 'rgba(228, 0, 43, 0.6)';
 
-const COLORS = [GREEN, LIGHTGREEN, CYAN, BLUE, LIGHTBLUE, MAGENTA, RED];
+*/
+const COLORS = [colors.forest, colors.green, colors.teal, colors.blue, colors.lightblue, colors.pink, colors.red];
 //const COLORS = ['#888888','#008888','#888800','#880088','#FF8888','#8888FF','#88FF88','#88FFFF','#FFFF88','#FFFFFF',];
 
 const RADIAN = Math.PI / 180;
@@ -132,31 +134,35 @@ const IndicatorsPage = ({ selections, setSelections }) => {
         <>
             {Object.keys(variablePresets).map((variable,i) => (
                 variable.includes("HEADER::")
-                    ? <h2 key={`list-header-${i}`}>
+                    ? <div key={`list-header-${i}`}>
                         {
-                            /*
-                            TODO: How do we place the correct icon?
-                            <i className={category?.icon}></i>
-                            */
+                            i > 0 && <Divider style={{ width: '20%', margin: '10px', fontWeight: 'bold' }}></Divider>
                         }
-                        {variable.split("HEADER::")[1]}
-                    </h2>
-                    : <IndicatorsSelectableItem key={'variable-selectable-item-'+variable} selections={selections} variableName={variable}></IndicatorsSelectableItem>
+                        <h2 style={{ paddingTop: '4vh' }}>
+                            {
+                                /*
+                                TODO: How do we place the correct icon?
+                                <i className={category?.icon}></i>
+                                */
+                            }
+                            {variable.split("HEADER::")[1]}
+                        </h2>
+                    </div>
+                    : <IndicatorsSelectableItem style={{ margin: '10px' }} key={'variable-selectable-item-'+variable} selections={selections} variableName={variable}></IndicatorsSelectableItem>
             ))}
-            <Divider style={{ width: '20%', margin: '10px', fontWeight: 'bold' }}></Divider>
         </>
 
     const IndicatorsSelectableItem = ({ selections, variableName }) =>
         <ToggleButton style={{
             width: '8rem',
             height: '8rem',
-            color: selections.find(i => i.name === variableName) ? WHITE : BLACK,
-            background: selections.find(i => i.name === variableName) ? GREEN : WHITE,
+            color: selections.find(i => i.name === variableName) ? colors.white : colors.black,
+            background: selections.find(i => i.name === variableName) ? colors.forest : colors.white,
             marginRight: '10px',
             padding: '0'
         }} onClick={() => toggleSelection(variableName)} value={variableName}>
             <FaInfoCircle style={{ right: '-6.5rem', top: '-3rem', position: 'relative', cursor: 'pointer' }}
-                          color={LIGHTGREEN}
+                          color={colors.green}
                           onClick={(e) => setSelectedDetails(selections.find(i => i.name === variableName)) || e.stopPropagation()}></FaInfoCircle>
             <Grid container spacing={3}>
                 <Grid style={{ textAlign: 'left' }} item xs>
@@ -186,7 +192,7 @@ const IndicatorsPage = ({ selections, setSelections }) => {
 
 /** Given a set of selected indicators, allow user to set a weight for each indicator */
 const WeightsPage = ({ selections, setSelections }) => {
-    const IconProps = { color: WHITE, background: MAGENTA };
+    const IconProps = { color: colors.white, background: colors.pink };
     const IndexBuilderStepIcon = ({ color, stepNumber, background }) => {
         switch(stepNumber) {
             case 1: return (<div>
@@ -333,7 +339,7 @@ const WeightsPage = ({ selections, setSelections }) => {
                         dataKey="value"
                     >
                         {selections.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
                         ))}
                     </Pie>
                 </PieChart>
