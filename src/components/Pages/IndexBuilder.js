@@ -13,15 +13,15 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Slider from "@mui/material/Slider";
-import {Cell, Pie, PieChart} from "recharts";
+
 import {FaHashtag} from "@react-icons/all-files/fa/FaHashtag";
 import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
 import {variablePresets, colors} from "../../config";
 import {NavBar} from "../index";
+import {PieChart} from "@mui/x-charts/PieChart";
 
 const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-const RADIAN = Math.PI / 180;
 const COLORS = [
     colors.pink,
     colors.red,
@@ -299,38 +299,26 @@ const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
 
             <Grid>
                 <Grid item>
-                    <PieChart width={200} height={200}>
-                        <Pie
-                            data={selections}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={false}
-                            label={renderCustomizedLabel}
-                            outerRadius={80}
-                            fill="#8884d8"
-                            dataKey="value"
-                        >
-                            {selections.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Pie>
-                    </PieChart>
+                    <PieChart
+                        colors={COLORS}
+                        series={[
+                            {
+                                data: selections.map((sel, index) => ({ ...sel, id: index + 1 })),
+                                highlightScope: { faded: 'global', highlighted: 'item' },
+                                faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+                                arcLabel: (item) => `${item.id}`,
+                                arcLabelMinAngle: 20,
+                                cy: 250,
+
+                            }
+                        ]}
+                        width={500}
+                        height={1200}
+                    />
                 </Grid>
             </Grid>
             <DebugInfo selections={selections}></DebugInfo>
         </>
-
-    const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
-        const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-        const x = cx + radius * Math.cos(-midAngle * RADIAN);
-        const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-        return (
-            <text x={x} y={y} fill="white" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
-                {`${(percent * 100).toFixed(0)}%`}
-            </text>
-        );
-    };
 
     const updateWeightValues = (event, selection, value) => {
         // Parse text value
@@ -338,9 +326,9 @@ const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
 
         // Min / max boundaries
         if (intValue > max) {
-            value = max;
+            intValue = max;
         } else if (value < min) {
-            value = min;
+            intValue = min;
         }
 
         // Locate existing item
@@ -349,7 +337,7 @@ const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
 
         // Update existing item
         const sels = [...selections];
-        sels[index] = {...selection, value};
+        sels[index] = {...selection, value: intValue};
         setSelections(sels);
     };
 
@@ -369,8 +357,7 @@ const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
                     selections.map((selection, index) => {
                         return (
                             <div key={`div-${index}`}>
-                                <h3 key={`label-${index}`}>{selection.name}</h3>
-
+                                <h3 key={`label-${index}`}>{index + 1} - {selection.name}</h3>
 
                                 <Grid>
                                     <Grid item>
@@ -380,7 +367,7 @@ const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
                                                        size={'small'}
                                                        type={'number'}
                                                        value={selection.value}
-                                                       style={{ marginRight: '15px', padding: '6px', width: '7vw' }}
+                                                       style={{ marginRight: '15px', padding: '6px', minWidth: '5vw' }}
                                                        onChange={(event) => updateWeightValues(event, selection)}></TextField>
                                             <Typography variant={'caption'}>Less Important</Typography>
                                             <Slider
