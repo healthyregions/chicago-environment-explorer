@@ -43,7 +43,7 @@ const COLORS = [
 const DEBUG = false;
 const DebugInfo = ({ selections }) => {
     if (!DEBUG) { return (<></>); }
-    
+
     return(
         <Grid>
             <Grid item xs={12}>
@@ -391,7 +391,7 @@ export default function IndexBuilder() {
                 </Grid>
                 <Grid item xs>
                     <Button onClick={() => setCurrentStep('indicators')}>Indicators</Button>
-                    <Button onClick={() => setCurrentStep('weights')}>Weights</Button>
+                    <Button disabled={selections.length === 0} onClick={() => setCurrentStep('weights')}>Weights</Button>
                 </Grid>
             </Grid>
 
