@@ -127,7 +127,7 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
                 <i className={category?.icon}></i>
                 */
             }
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h5" gutterBottom>
                 {item?.name}
             </Typography>
             <div>
@@ -135,8 +135,8 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
                 <Button>Map &rarr;</Button>
             </div>
             <Grid>
-                <Grid item xs>
-                    <Typography component="div">
+                <Grid item xs={9}>
+                    <Typography variant={'body2'}>
                         {item?.description}
                     </Typography>
                 </Grid>
