@@ -136,7 +136,7 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
             </div>
             <Grid>
                 <Grid item xs={9}>
-                    <Typography variant={'body2'}>
+                    <Typography variant={'caption'}>
                         {item?.description}
                     </Typography>
                 </Grid>
