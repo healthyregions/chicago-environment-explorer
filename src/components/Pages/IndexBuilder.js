@@ -280,12 +280,10 @@ const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
                                 faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
                                 arcLabel: (item) => `${item.id}`,
                                 arcLabelMinAngle: 20,
-                                cy: 250,
-
                             }
                         ]}
                         width={500}
-                        height={1200}
+                        height={500}
                     />
                 </Grid>
             </Grid>
@@ -386,10 +384,10 @@ export default function IndexBuilder() {
                 <Step onClick={() => setCurrentStep('indicators')}>
                     <StepLabel>Select Indicators</StepLabel>
                 </Step>
-                <Step disabled={selections.length === 0} onClick={() => setCurrentStep('weights')}>
+                <Step onClick={() => setCurrentStep('weights')}>
                     <StepLabel>Choose Weights</StepLabel>
                 </Step>
-                <Step disabled={selections.length === 0} onClick={() => setCurrentStep('summary')}>
+                <Step onClick={() => setCurrentStep('summary')}>
                     <StepLabel>Summary & Map</StepLabel>
                 </Step>
             </Stepper>
