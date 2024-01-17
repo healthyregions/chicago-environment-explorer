@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 
 import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 import {
-    Card,
-    CardContent,
     ToggleButton,
     TextField,
     Stepper,
@@ -54,8 +52,34 @@ const DebugInfo = ({ selections }) => {
     );
 }
 
+// TODO: Currently unused
+/** Given a set of possible indicators, parse them into a hierarchy of category -> indicator */
+const parseVariablesIntoCategories = () => {
+    const categories = [];
+    Object.keys(variablePresets).forEach(variable => {
+        if (variable.includes("HEADER::")) {
+            categories.push({
+                name: variable.split('HEADER::')[1],
+                description: loremIpsum,
+                icon: 'fa-question-circle',
+                indicators: []
+            });
+        } else {
+            const lastCategory = categories[categories.length - 1];
+            lastCategory.indicators.push({
+                name: variable,
+                description: loremIpsum,
+                // selected: false,
+                value: 10
+            });
+        }
+    });
+
+    return categories;
+}
+
 /** Given a set of possible indicators (separated into categories), allow user to select one or more indicators */
-const IndicatorsPage = ({ selections, setSelections }) => {
+const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
 
     // User's last-clicked tooltip icon
     const [selectedDetails, setSelectedDetails] = useState(undefined);
@@ -81,48 +105,46 @@ const IndicatorsPage = ({ selections, setSelections }) => {
     };
 
     const IndicatorsHelperText = () =>
-        <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-                <Typography variant="h4" gutterBottom>
-                    Let's create your <strong>Custom Index</strong>
-                </Typography>
-                <Typography component="div">
-                    Creating your custom index in 3 easy steps:
-                </Typography>
-                <Grid>
-                    <Grid item xs={8}>
-                        <Stepper orientation={'vertical'}>
-                            <Step key={'indicator-step1'} active={true}>
-                                <StepLabel>
-                                    <Typography variant="subtitle">
-                                        Select the indicators from the options on the right. If you want to know more
-                                        about each indicator, click on the tooltip <FaInfoCircle></FaInfoCircle> icon
-                                        to learn more about it.
-                                    </Typography>
-                                </StepLabel>
-                            </Step>
-                            <Step key={'indicator-step2'} active={true}>
-                                <StepLabel>
-                                    <Typography variant="subtitle">
-                                        In the next step, set importance for each indicator you've selected to create
-                                        an index that is tailored to your needs.
-                                    </Typography>
-                                </StepLabel>
-                            </Step>
-                            <Step key={'indicator-step3'} active={true}>
-                                <StepLabel>
-                                    <Typography variant="subtitle">
-                                        Preview the summary of the selected indicators with their weights and the map
-                                        preview with your selected criteria.
-                                    </Typography>
-                                </StepLabel>
-                            </Step>
-                        </Stepper>
-                    </Grid>
+        <>
+            <Typography variant="h4" gutterBottom>
+                Let's create your <strong>Custom Index</strong>
+            </Typography>
+            <Typography component="div">
+                Creating your custom index in 3 easy steps:
+            </Typography>
+            <Grid>
+                <Grid item xs={8}>
+                    <Stepper orientation={'vertical'}>
+                        <Step key={'indicator-step1'} active={true}>
+                            <StepLabel>
+                                <Typography variant="subtitle">
+                                    Select the indicators from the options on the right. If you want to know more
+                                    about each indicator, click on the tooltip <FaInfoCircle></FaInfoCircle> icon
+                                    to learn more about it.
+                                </Typography>
+                            </StepLabel>
+                        </Step>
+                        <Step key={'indicator-step2'} active={true}>
+                            <StepLabel>
+                                <Typography variant="subtitle">
+                                    In the next step, set importance for each indicator you've selected to create
+                                    an index that is tailored to your needs.
+                                </Typography>
+                            </StepLabel>
+                        </Step>
+                        <Step key={'indicator-step3'} active={true}>
+                            <StepLabel>
+                                <Typography variant="subtitle">
+                                    Preview the summary of the selected indicators with their weights and the map
+                                    preview with your selected criteria.
+                                </Typography>
+                            </StepLabel>
+                        </Step>
+                    </Stepper>
                 </Grid>
-                <DebugInfo selections={selections}></DebugInfo>
-            </CardContent>
-        </Card>
+            </Grid>
+            <DebugInfo selections={selections}></DebugInfo>
+        </>
 
     const IndicatorsDetails = ({ item }) =>
         <>
@@ -149,7 +171,6 @@ const IndicatorsPage = ({ selections, setSelections }) => {
             </Grid>
         </>
 
-
     const IndicatorsList = ({ selections }) =>
         <>
             {Object.keys(variablePresets).map((variable,i) => (
@@ -158,7 +179,7 @@ const IndicatorsPage = ({ selections, setSelections }) => {
                         {
                             i > 0 && <Divider style={{ width: '20%', margin: '10px', fontWeight: 'bold' }}></Divider>
                         }
-                        <h2 style={{ paddingTop: '4vh' }}>
+                        <h2>
                             {
                                 /*
                                 TODO: How do we place the correct icon?
@@ -184,9 +205,17 @@ const IndicatorsPage = ({ selections, setSelections }) => {
             marginRight: '10px',
             padding: '0'
         }} onClick={() => toggleSelection(variableName)} value={variableName}>
-            <FaInfoCircle style={{ right: '-6.5rem', top: '-3rem', position: 'relative', cursor: 'pointer' }}
+            <FaInfoCircle style={{ zIndex: 99, right: '-6.5rem', top: '-3rem', position: 'relative', cursor: 'pointer' }}
                           color={colors.green}
-                          onClick={(e) => setSelectedDetails(selections.find(i => i.name === variableName)) || e.stopPropagation()}></FaInfoCircle>
+                          onClick={(e) => {
+                              setSelectedDetails({
+                                  name: variableName,
+                                  description: loremIpsum,
+                                  value: 10
+                              });
+                              e.stopPropagation();
+                              e.preventDefault();
+                          }}></FaInfoCircle>
             <Grid container spacing={3}>
                 <Grid style={{ textAlign: 'left' }} item xs>
                     <Typography variant={'body2'}>{variableName}</Typography>
@@ -196,16 +225,21 @@ const IndicatorsPage = ({ selections, setSelections }) => {
 
 
     return (
-        <Grid container spacing={2} style={{ paddingTop: '5vh' }}>
+        <Grid container spacing={2}>
             <Grid item xs={6}>
                 {
-                    !selectedDetails && <IndicatorsHelperText></IndicatorsHelperText>
+                    !selectedDetails && <>
+                        <Button disabled={true}>&larr; Back</Button>
+                        <Button disabled={selections.length === 0} onClick={() => setCurrentStep('weights')}>Next &rarr;</Button>
+
+                        <IndicatorsHelperText></IndicatorsHelperText>
+                    </>
                 }
                 {
                     selectedDetails && <IndicatorsDetails item={selectedDetails}></IndicatorsDetails>
                 }
             </Grid>
-            <Grid item xs>
+            <Grid item xs style={{ paddingTop: '8vh' }}>
                 <IndicatorsList selections={selections}></IndicatorsList>
             </Grid>
         </Grid>
@@ -214,7 +248,7 @@ const IndicatorsPage = ({ selections, setSelections }) => {
 
 
 /** Given a set of selected indicators, allow user to set a weight for each indicator */
-const WeightsPage = ({ selections, setSelections }) => {
+const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
     const IconProps = { color: colors.white, background: colors.pink };
     const IndexBuilderStepIcon = ({ color, stepNumber, background }) => {
         switch(stepNumber) {
@@ -231,41 +265,60 @@ const WeightsPage = ({ selections, setSelections }) => {
     const SecondIconProps = {...IconProps, stepNumber: 2};
 
     const WeightsHelperText = () =>
-        <Card sx={{minWidth: 275}}>
-            <CardContent>
-                <Typography variant="h4" gutterBottom>
-                    Setting weights is <strong>important</strong>
-                </Typography>
-                <Typography component="div">
-                    Here's how you can adjust the weights for the individual indicators when creating the index:
-                </Typography>
-                <Grid>
-                    <Grid item xs={8}>
-                        <Stepper orientation={'vertical'}>
-                            <Step key={'weights-step1'} active={true}>
-                                <StepLabel StepIconComponent={IndexBuilderStepIcon}
-                                           StepIconProps={FirstIconProps}>
-                                    <Typography variant="subtitle">
-                                        Drag and move the horizontal separators to alter the weights. You can see the
-                                        weights altering in percentage on the right, or
-                                    </Typography>
-                                </StepLabel>
-                            </Step>
-                            <Step key={'weights-step2'} active={true}>
-                                <StepLabel StepIconComponent={IndexBuilderStepIcon}
-                                           StepIconProps={SecondIconProps}>
-                                    <Typography variant="subtitle">
-                                        You can also change the weights by typing the percentage values in the input box
-                                        next to the indicators.
-                                    </Typography>
-                                </StepLabel>
-                            </Step>
-                        </Stepper>
-                    </Grid>
+        <>
+            <Typography variant="h4" gutterBottom>
+                Setting weights is <strong>important</strong>
+            </Typography>
+            <Typography component="div">
+                Here's how you can adjust the weights for the individual indicators when creating the index:
+            </Typography>
+            <Grid>
+                <Grid item xs={8}>
+                    <Stepper orientation={'vertical'}>
+                        <Step key={'weights-step1'} active={true}>
+                            <StepLabel StepIconComponent={IndexBuilderStepIcon}
+                                       StepIconProps={FirstIconProps}>
+                                <Typography variant="subtitle">
+                                    Drag and move the horizontal separators to alter the weights. You can see the
+                                    weights altering in percentage on the right, or
+                                </Typography>
+                            </StepLabel>
+                        </Step>
+                        <Step key={'weights-step2'} active={true}>
+                            <StepLabel StepIconComponent={IndexBuilderStepIcon}
+                                       StepIconProps={SecondIconProps}>
+                                <Typography variant="subtitle">
+                                    You can also change the weights by typing the percentage values in the input box
+                                    next to the indicators.
+                                </Typography>
+                            </StepLabel>
+                        </Step>
+                    </Stepper>
                 </Grid>
-                <DebugInfo selections={selections}></DebugInfo>
-            </CardContent>
-        </Card>
+            </Grid>
+
+            <Grid>
+                <Grid item>
+                    <PieChart width={200} height={200}>
+                        <Pie
+                            data={selections}
+                            cx="50%"
+                            cy="50%"
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            outerRadius={80}
+                            fill="#8884d8"
+                            dataKey="value"
+                        >
+                            {selections.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                        </Pie>
+                    </PieChart>
+                </Grid>
+            </Grid>
+            <DebugInfo selections={selections}></DebugInfo>
+        </>
 
     const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index }) => {
         const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
@@ -305,10 +358,13 @@ const WeightsPage = ({ selections, setSelections }) => {
     const max = 10;
     return (
         <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={6} style={{ marginRight: '8vh' }}>
+                <Button onClick={() => setCurrentStep('indicators')}>&larr; Back</Button>
+                <Button onClick={() => setCurrentStep('summary')}>Next &rarr;</Button>
+
                 <WeightsHelperText></WeightsHelperText>
             </Grid>
-            <Grid item xs>
+            <Grid item xs style={{ paddingTop: '8vh' }}>
                 {
                     selections.map((selection, index) => {
                         return (
@@ -346,26 +402,6 @@ const WeightsPage = ({ selections, setSelections }) => {
                     })
                 }
             </Grid>
-            <Grid item xs={2}>
-                <Typography variant={'h4'}>Custom Index</Typography>
-                <PieChart width={200} height={200}>
-                    <Pie
-                        data={selections}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={renderCustomizedLabel}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                    >
-                        {selections.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                    </Pie>
-                </PieChart>
-            </Grid>
-
         </Grid>
 
 
@@ -384,28 +420,41 @@ export default function IndexBuilder() {
     const [selections, setSelections] = useState([]);
 
     return (
-        <>
-            <Grid container>
-                <Grid item xs={2}>
-                    <NavBar />
-                </Grid>
-                <Grid item xs>
-                    <Button onClick={() => setCurrentStep('indicators')}>Indicators</Button>
-                    <Button disabled={selections.length === 0} onClick={() => setCurrentStep('weights')}>Weights</Button>
-                </Grid>
-            </Grid>
+        <div style={{ paddingLeft: '15vw', paddingRight: '15vw' }}>
+            <NavBar />
+
+            <Stepper style={{ marginTop: '15px' }}>
+                <Step onClick={() => setCurrentStep('indicators')}>
+                    <StepLabel>Select Indicators</StepLabel>
+                </Step>
+                <Step disabled={selections.length === 0} onClick={() => setCurrentStep('weights')}>
+                    <StepLabel>Choose Weights</StepLabel>
+                </Step>
+                <Step disabled={selections.length === 0} onClick={() => setCurrentStep('summary')}>
+                    <StepLabel>Summary & Map</StepLabel>
+                </Step>
+            </Stepper>
 
             <Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} style={{ padding: '8vh' }}>
                     {
-                        currentStep === 'indicators' && <IndicatorsPage selections={selections} setSelections={setSelections}></IndicatorsPage>
+                        currentStep === 'indicators' && <>
+                            <IndicatorsPage selections={selections} setSelections={setSelections} setCurrentStep={setCurrentStep}></IndicatorsPage>
+                        </>
                     }
                     {
-                        currentStep === 'weights' && <WeightsPage selections={selections} setSelections={setSelections}></WeightsPage>
+                        currentStep === 'weights' && <>
+                            <WeightsPage selections={selections} setSelections={setSelections} setCurrentStep={setCurrentStep}></WeightsPage>
+                        </>
+                    }
+                    {
+                        currentStep === 'summary' && <>
+                            <Typography variant={'h3'}>TBD</Typography>
+                        </>
                     }
                 </Grid>
             </Grid>
-        </>
+        </div>
     );
 };
 
