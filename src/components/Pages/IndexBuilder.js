@@ -136,7 +136,7 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
                 {item?.name}
             </Typography>
             <div>
-                <Button onClick={() => history.push('/data#data-sources')}>More &rarr;</Button>
+                <Button onClick={() => history.push('/data')}>More &rarr;</Button>
                 <Button onClick={() => {
                     history.push('/map');
                     setTimeout(() => {

@@ -165,7 +165,7 @@ export default function Data() {
                     })}
                 </ul>
                 <Gutter h={40} />
-                <h2 id={'data-sources'}>Map Variables and Data Sources</h2>
+                <h2>Map Variables and Data Sources</h2>
                 <h3>
                     This table highlights the map variables and contributors,
                     as well as the data methodology documentation and sources.
