@@ -16,11 +16,9 @@ import Slider from "@mui/material/Slider";
 
 import {FaHashtag} from "@react-icons/all-files/fa/FaHashtag";
 import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
-import {variablePresets, colors} from "../../config";
+import {variablePresets, colors, dataDescriptions} from "../../config";
 import {NavBar} from "../index";
 import {PieChart} from "@mui/x-charts/PieChart";
-
-const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 const COLORS = [
     colors.pink,
@@ -52,32 +50,6 @@ const DebugInfo = ({ selections }) => {
     );
 }
 
-// TODO: Currently unused
-/** Given a set of possible indicators, parse them into a hierarchy of category -> indicator */
-const parseVariablesIntoCategories = () => {
-    const categories = [];
-    Object.keys(variablePresets).forEach(variable => {
-        if (variable.includes("HEADER::")) {
-            categories.push({
-                name: variable.split('HEADER::')[1],
-                description: loremIpsum,
-                icon: 'fa-question-circle',
-                indicators: []
-            });
-        } else {
-            const lastCategory = categories[categories.length - 1];
-            lastCategory.indicators.push({
-                name: variable,
-                description: loremIpsum,
-                // selected: false,
-                value: 10
-            });
-        }
-    });
-
-    return categories;
-}
-
 /** Given a set of possible indicators (separated into categories), allow user to select one or more indicators */
 const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
 
@@ -98,7 +70,7 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
             // Item is not selected - select it
             setSelections(localCopy.concat([{
                 name: variableName,
-                description: loremIpsum,
+                description: dataDescriptions[variableName],
                 value: 10
             }]));
         }
@@ -210,7 +182,7 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
                           onClick={(e) => {
                               setSelectedDetails({
                                   name: variableName,
-                                  description: loremIpsum,
+                                  description: dataDescriptions[variableName],
                                   value: 10
                               });
                               e.stopPropagation();
@@ -357,7 +329,7 @@ const WeightsPage = ({ selections, setSelections, setCurrentStep }) => {
                     selections.map((selection, index) => {
                         return (
                             <div key={`div-${index}`}>
-                                <h3 key={`label-${index}`}>{index + 1} - {selection.name}</h3>
+                                <h3 key={`label-${index}`}>{index + 1}) {selection.name}</h3>
 
                                 <Grid>
                                     <Grid item>
@@ -410,7 +382,7 @@ export default function IndexBuilder() {
         <div style={{ paddingLeft: '15vw', paddingRight: '15vw' }}>
             <NavBar />
 
-            <Stepper style={{ marginTop: '15px' }}>
+            <Stepper style={{ marginTop: '15px' }} activeStep={currentStep === 'indicators' ? 0 : currentStep === 'weights' ? 1 : 2}>
                 <Step onClick={() => setCurrentStep('indicators')}>
                     <StepLabel>Select Indicators</StepLabel>
                 </Step>
