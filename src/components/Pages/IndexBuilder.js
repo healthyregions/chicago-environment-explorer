@@ -19,6 +19,9 @@ import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
 import {variablePresets, colors, dataDescriptions} from "../../config";
 import {NavBar} from "../index";
 import {PieChart} from "@mui/x-charts/PieChart";
+import {changeVariable} from "../../actions";
+import {Redirect} from "react-router-dom";
+import {useDispatch} from "react-redux";
 
 const COLORS = [
     colors.pink,
@@ -52,6 +55,7 @@ const DebugInfo = ({ selections }) => {
 
 /** Given a set of possible indicators (separated into categories), allow user to select one or more indicators */
 const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
+    const dispatch = useDispatch();
 
     // User's last-clicked tooltip icon
     const [selectedDetails, setSelectedDetails] = useState(undefined);
@@ -118,8 +122,10 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
             <DebugInfo selections={selections}></DebugInfo>
         </>
 
+    const [redirect, setRedirect] = useState(undefined);
     const IndicatorsDetails = ({ item }) =>
-        <>
+        redirect ? <Redirect to={redirect}></Redirect>
+        : <>
             <Button onClick={() => setSelectedDetails(undefined)}>&larr; Back to instructions</Button>
             {
                 /*
@@ -131,8 +137,13 @@ const IndicatorsPage = ({ selections, setSelections, setCurrentStep }) => {
                 {item?.name}
             </Typography>
             <div>
-                <Button>More &rarr;</Button>
-                <Button>Map &rarr;</Button>
+                <Button onClick={() => setRedirect('/data#data-sources')}>More &rarr;</Button>
+                <Button onClick={() => {
+                    setRedirect('/map');
+                    setTimeout(() => {
+                        dispatch(changeVariable(variablePresets[selectedDetails.name]));
+                    }, 1500);
+                }}>Map &rarr;</Button>
             </div>
             <Grid>
                 <Grid item xs={9}>
