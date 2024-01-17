@@ -23,25 +23,36 @@ import {NavBar} from "../index";
 
 const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
-/*
-const GREEN = 'rgb(46, 125, 50)';
-const WHITE = 'white';
-const BLACK = 'black';
-const LIGHTGREEN = 'rgb(151, 219, 79)';
-const RED = 'rgb(228, 0, 43)';
-const CYAN = 'rgb(65, 182, 230)';
-const LIGHTBLUE = 'rgb(193, 235, 235)';
-const BLUE = 'rgb(0, 88, 153)';
-const MAGENTA = 'rgba(228, 0, 43, 0.6)';
-
-*/
-const COLORS = [ colors.pink, colors.red, colors.orange, colors.yellow, colors.paleyellow, colors.forest, colors.green, colors.chicagoDarkBlue, colors.blue, colors.lightblue, colors.purple ];
-//const COLORS = ['#888888','#008888','#888800','#880088','#FF8888','#8888FF','#88FF88','#88FFFF','#FFFF88','#FFFFFF',];
-
 const RADIAN = Math.PI / 180;
+const COLORS = [
+    colors.pink,
+    colors.red,
+    colors.orange,
+    colors.yellow,
+    colors.paleyellow,
+    colors.forest,
+    colors.green,
+    colors.chicagoDarkBlue,
+    colors.blue,
+    colors.lightblue,
+    colors.purple
+];
 
 // TODO: Convert style={{ }} to styled-components
 
+const DEBUG = false;
+const DebugInfo = ({ selections }) => {
+    if (!DEBUG) { return (<></>); }
+    
+    return(
+        <Grid>
+            <Grid item xs={12}>
+                <h2>DEBUG</h2>
+                <pre>{JSON.stringify(selections, null, 2)}</pre>
+            </Grid>
+        </Grid>
+    );
+}
 
 /** Given a set of possible indicators (separated into categories), allow user to select one or more indicators */
 const IndicatorsPage = ({ selections, setSelections }) => {
@@ -109,12 +120,19 @@ const IndicatorsPage = ({ selections, setSelections }) => {
                         </Stepper>
                     </Grid>
                 </Grid>
+                <DebugInfo selections={selections}></DebugInfo>
             </CardContent>
         </Card>
 
     const IndicatorsDetails = ({ item }) =>
         <>
             <Button onClick={() => setSelectedDetails(undefined)}>&larr; Back to instructions</Button>
+            {
+                /*
+                TODO: How do we place the correct icon?
+                <i className={category?.icon}></i>
+                */
+            }
             <Typography variant="h4" gutterBottom>
                 {item?.name}
             </Typography>
@@ -215,7 +233,7 @@ const WeightsPage = ({ selections, setSelections }) => {
     const WeightsHelperText = () =>
         <Card sx={{minWidth: 275}}>
             <CardContent>
-                <Typography variant="h4" color="text.secondary" gutterBottom>
+                <Typography variant="h4" gutterBottom>
                     Setting weights is <strong>important</strong>
                 </Typography>
                 <Typography component="div">
@@ -245,6 +263,7 @@ const WeightsPage = ({ selections, setSelections }) => {
                         </Stepper>
                     </Grid>
                 </Grid>
+                <DebugInfo selections={selections}></DebugInfo>
             </CardContent>
         </Card>
 
@@ -258,6 +277,27 @@ const WeightsPage = ({ selections, setSelections }) => {
                 {`${(percent * 100).toFixed(0)}%`}
             </text>
         );
+    };
+
+    const updateWeightValues = (event, selection, value) => {
+        // Parse text value
+        let intValue = parseInt(value || event.target.value, 10);
+
+        // Min / max boundaries
+        if (intValue > max) {
+            value = max;
+        } else if (value < min) {
+            value = min;
+        }
+
+        // Locate existing item
+        const found = selections.find(s => s.name === selection.name);
+        const index = selections.indexOf(found);
+
+        // Update existing item
+        const sels = [...selections];
+        sels[index] = {...selection, value};
+        setSelections(sels);
     };
 
 
@@ -284,27 +324,8 @@ const WeightsPage = ({ selections, setSelections }) => {
                                                        size={'small'}
                                                        type={'number'}
                                                        value={selection.value}
-                                                       style={{ marginRight: '15px'}}
-                                                       onChange={(event) => {
-                                                           // Parse text value
-                                                           let value = parseInt(event.target.value, 10);
-
-                                                           // Min / max boundaries
-                                                           if (value > max) {
-                                                               value = max;
-                                                           } else if (value < min) {
-                                                               value = min;
-                                                           }
-
-                                                           // Locate existing item
-                                                           const found = selections.find(s => s.name === selection.name);
-                                                           const index = selections.indexOf(found);
-
-                                                           // Update existing item
-                                                           const sels = [...selections];
-                                                           sels[index] = {...selection, value};
-                                                           setSelections(sels);
-                                                       }}></TextField>
+                                                       style={{ marginRight: '15px', padding: '6px', width: '7vw' }}
+                                                       onChange={(event) => updateWeightValues(event, selection)}></TextField>
                                             <Typography variant={'caption'}>Less Important</Typography>
                                             <Slider
                                                 key={`slider-${index}`}
@@ -314,23 +335,7 @@ const WeightsPage = ({ selections, setSelections }) => {
                                                 getAriaLabel={() => selection.name}
                                                 valueLabelDisplay="auto"
                                                 value={selection.value}
-                                                onChange={(event, value) => {
-                                                    // Min / max boundaries
-                                                    if (value > max) {
-                                                        value = max;
-                                                    } else if (value < min) {
-                                                        value = min;
-                                                    }
-
-                                                    // Locate existing item
-                                                    const found = selections.find(s => s.name === selection.name);
-                                                    const index = selections.indexOf(found);
-
-                                                    // Update existing item
-                                                    const sels = [...selections];
-                                                    sels[index] = {...selection, value};
-                                                    setSelections(sels);
-                                                }}
+                                                onChange={(event, value) => updateWeightValues(event, selection, value)}
                                             />
                                             <Typography variant={'caption'}>More Important</Typography>
                                         </Stack>
@@ -391,15 +396,14 @@ export default function IndexBuilder() {
             </Grid>
 
             <Grid>
-                {
-                    currentStep === 'indicators' && <IndicatorsPage selections={selections} setSelections={setSelections}></IndicatorsPage>
-                }
-                {
-                    currentStep === 'weights' && <WeightsPage selections={selections} setSelections={setSelections}></WeightsPage>
-                }
-            </Grid>
-            <Grid>
-                <pre>{JSON.stringify(selections, null, 2)}</pre>
+                <Grid item xs={12}>
+                    {
+                        currentStep === 'indicators' && <IndicatorsPage selections={selections} setSelections={setSelections}></IndicatorsPage>
+                    }
+                    {
+                        currentStep === 'weights' && <WeightsPage selections={selections} setSelections={setSelections}></WeightsPage>
+                    }
+                </Grid>
             </Grid>
         </>
     );
