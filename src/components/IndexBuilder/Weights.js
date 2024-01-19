@@ -1,14 +1,11 @@
-import {colors} from "../../config";
-import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
-import {FaHashtag} from "@react-icons/all-files/fa/FaHashtag";
+import {colors, dataDescriptions} from "../../config";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
-import {Stack, Step, StepLabel, Stepper, TextField} from "@mui/material";
+import {Stack, TextField} from "@mui/material";
 import {pieArcLabelClasses, PieChart} from "@mui/x-charts/PieChart";
-import Button from "@mui/material/Button";
 import Slider from "@mui/material/Slider";
 import React from "react";
-import DebugInfo from "./DebugInfo";
+import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 
 /** Minimum/maximum value for sliders */
 const SLIDER_MIN = 0;
@@ -30,7 +27,8 @@ const COLORS = [
     //colors.paleyellow,
 ];
 
-const WeightsSliders = ({ selections, setSelections }) => {
+/** Given a set of selected indicators, allow user to set a weight for each indicator */
+export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }) => {
 
     const updateWeightValues = (event, selection, inputValue) => {
         // Parse text value (fallback to event target if not defined)
@@ -83,6 +81,17 @@ const WeightsSliders = ({ selections, setSelections }) => {
                                             onChange={(event, value) => updateWeightValues(event, selection, value)}
                                         />
                                         <Typography variant={'caption'}>More Important</Typography>
+                                        <FaInfoCircle style={{ marginLeft: '2rem', width: '2rem', height: '2rem', cursor: 'pointer' }}
+                                                      color={COLORS[index % COLORS.length]}
+                                                      onClick={(e) => {
+                                                          setSelectedDetails({
+                                                              name: selection.name,
+                                                              description: dataDescriptions[selection.name],
+                                                              value: 5
+                                                          });
+                                                          e.stopPropagation();
+                                                          e.preventDefault();
+                                                      }}></FaInfoCircle>
                                     </Stack>
                                 </Grid>
                             </Grid>
@@ -94,62 +103,8 @@ const WeightsSliders = ({ selections, setSelections }) => {
     );
 }
 
-/** Weights page uses custom icons instead of numerical badges for the Steps */
-const IndexBuilderStepIcon = ({ color, stepNumber, background }) => {
-    switch(stepNumber) {
-        case 1: return (<div>
-            <FaMousePointer style={{ color, background, paddingLeft: '6px', paddingRight: '4px' }} />
-        </div>)
-        case 2: return (<div>
-            <FaHashtag style={{ color, background }} />
-        </div>)
-        default: return (<></>)
-    }
-};
-
-const WeightsHelperText = ({ selections }) => {
-    const IconProps = { color: colors.white, background: colors.pink };
-    const FirstIconProps = {...IconProps, stepNumber: 1};
-    const SecondIconProps = {...IconProps, stepNumber: 2};
-
-    return (
-        <>
-            <Typography variant="h4" gutterBottom>
-                Setting weights is <strong>important</strong>
-            </Typography>
-            <Typography component="div">
-                Here's how you can adjust the weights for the individual indicators when creating the index:
-            </Typography>
-            <Grid style={{ marginBottom: '5vh' }}>
-                <Grid item xs={8}>
-                    <Stepper orientation={'vertical'}>
-                        <Step key={'weights-step1'} active={true}>
-                            <StepLabel StepIconComponent={IndexBuilderStepIcon}
-                                       StepIconProps={FirstIconProps}>
-                                <Typography variant="subtitle">
-                                    Drag and move the horizontal separators to alter the weights. You can see the
-                                    weights altering in percentage below, or
-                                </Typography>
-                            </StepLabel>
-                        </Step>
-                        <Step key={'weights-step2'} active={true}>
-                            <StepLabel StepIconComponent={IndexBuilderStepIcon}
-                                       StepIconProps={SecondIconProps}>
-                                <Typography variant="subtitle">
-                                    You can also change the weights by typing the weight values (0-10) in the input box
-                                    next to the indicators.
-                                </Typography>
-                            </StepLabel>
-                        </Step>
-                    </Stepper>
-                </Grid>
-            </Grid>
-            <DebugInfo data={selections}></DebugInfo>
-        </>
-    );
-}
-
-const WeightsPieChart = ({ selections }) =>
+/** Given a set of selected indicators, display the weight distribution for all indicators */
+export const WeightsPieChart = ({ selections }) =>
     <PieChart
         skipAnimation
         colors={COLORS}
@@ -177,19 +132,3 @@ const WeightsPieChart = ({ selections }) =>
         height={300}
     />
 
-/** Given a set of selected indicators, allow user to set a weight for each indicator */
-const WeightsStep = ({ selections, setSelections, setCurrentStep }) =>
-    <Grid container spacing={2}>
-        <Grid item xs={6} style={{ marginRight: '8vh' }}>
-            <Button onClick={() => setCurrentStep('indicators')}>&larr; Back</Button>
-            <Button onClick={() => setCurrentStep('summary')}>Next &rarr;</Button>
-
-            <WeightsHelperText></WeightsHelperText>
-            <WeightsPieChart selections={selections}></WeightsPieChart>
-        </Grid>
-        <Grid item xs style={{ paddingTop: '8vh' }}>
-            <WeightsSliders selections={selections} setSelections={setSelections}></WeightsSliders>
-        </Grid>
-    </Grid>
-
-export default WeightsStep;

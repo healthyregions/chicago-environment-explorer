@@ -1,16 +1,14 @@
 import React, {useState} from 'react';
-import {
-    Stepper,
-    Step,
-    StepLabel,
-} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+
 import {NavBar} from "../index";
 
-import IndicatorsStep from "../IndexBuilder/IndicatorsStep";
-import WeightsStep from "../IndexBuilder/WeightsStep";
-
+import IndicatorsList from "../IndexBuilder/Indicators";
+import IndicatorDetails from "../IndexBuilder/IndicatorDetails";
+import IndexBuilderFooter from "../IndexBuilder/IndexBuilderFooter";
+import {WeightsSliders, WeightsPieChart} from "../IndexBuilder/Weights";
+import {IndicatorsHelperText, WeightsHelperText} from "../IndexBuilder/HelperText";
 
 // TODO: Convert style={{ }} to styled-components
 
@@ -21,36 +19,53 @@ export default function IndexBuilder() {
     const [steps] = useState(['indicators', 'weights', 'summary']);
     const [currentStep, setCurrentStep] = useState(steps[0]);
 
+    // User's last-clicked tooltip icon
+    const [selectedDetails, setSelectedDetails] = useState(undefined);
+
     // User's indicator/variable selections
     // TODO: Default selections?
     const [selections, setSelections] = useState([]);
 
     return (
-        <div style={{ paddingLeft: '15vw', paddingRight: '15vw' }}>
+        <>
             <NavBar />
 
-            <Stepper style={{ marginTop: '15px' }} activeStep={currentStep === 'indicators' ? 0 : currentStep === 'weights' ? 1 : 2}>
-                <Step onClick={() => setCurrentStep('indicators')}>
-                    <StepLabel>Select Indicators</StepLabel>
-                </Step>
-                <Step onClick={() => setCurrentStep('weights')}>
-                    <StepLabel>Choose Weights</StepLabel>
-                </Step>
-                <Step onClick={() => setCurrentStep('summary')}>
-                    <StepLabel>Summary & Map</StepLabel>
-                </Step>
-            </Stepper>
-
-            <Grid>
-                <Grid item xs={12} style={{ padding: '8vh' }}>
+            <Grid container spacing={2} style={{ marginTop:'4vh', marginBottom:'10vh', paddingLeft: '15vw', paddingRight: '15vw' }}>
+                <Grid item xs={6}>
+                    {
+                        currentStep === 'indicators' && !selectedDetails &&
+                            <IndicatorsHelperText />
+                    }
+                    {
+                        currentStep === 'weights' && !selectedDetails && <>
+                            <WeightsHelperText />
+                            <WeightsPieChart selections={selections} />
+                        </>
+                    }
+                    {
+                        !!selectedDetails && <>
+                            <IndicatorDetails selectedDetails={selectedDetails}
+                                              setSelectedDetails={setSelectedDetails} />
+                            {
+                                currentStep === 'weights' && <WeightsPieChart selections={selections} />
+                            }
+                        </>
+                    }
+                </Grid>
+                <Grid item xs style={{ paddingTop: '8vh' }}>
                     {
                         currentStep === 'indicators' && <>
-                            <IndicatorsStep selections={selections} setSelections={setSelections} setCurrentStep={setCurrentStep}></IndicatorsStep>
+                            <IndicatorsList selections={selections}
+                                            setSelections={setSelections}
+                                            setCurrentStep={setCurrentStep}
+                                            setSelectedDetails={setSelectedDetails} />
                         </>
                     }
                     {
                         currentStep === 'weights' && <>
-                            <WeightsStep selections={selections} setSelections={setSelections} setCurrentStep={setCurrentStep}></WeightsStep>
+                            <WeightsSliders selections={selections}
+                                            setSelections={setSelections}
+                                            setSelectedDetails={setSelectedDetails} />
                         </>
                     }
                     {
@@ -60,7 +75,9 @@ export default function IndexBuilder() {
                     }
                 </Grid>
             </Grid>
-        </div>
+
+            <IndexBuilderFooter currentStep={currentStep} setCurrentStep={setCurrentStep} setSelections={setSelections} setSelectedDetails={setSelectedDetails}></IndexBuilderFooter>
+        </>
     );
 };
 
