@@ -17,17 +17,17 @@ const SLIDER_MAX = 10;
 
 /** The set of shared color palette to use for Sliders + PieChart slices */
 const COLORS = [
-    colors.pink,
-    colors.red,
-    colors.orange,
-    colors.yellow,
-    //colors.paleyellow,
     colors.forest,
     colors.green,
     colors.chicagoDarkBlue,
     colors.blue,
     colors.lightblue,
-    //colors.purple
+    //colors.purple,
+    colors.pink,
+    colors.red,
+    colors.orange,
+    colors.yellow,
+    //colors.paleyellow,
 ];
 
 const WeightsSliders = ({ selections, setSelections }) => {
