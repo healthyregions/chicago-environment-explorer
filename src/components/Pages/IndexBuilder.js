@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
-import {NavBar} from "../index";
+import {DataPanel, Legend, MapSection, NavBar, VariablePanel} from "../index";
 
 import IndicatorsList from "../IndexBuilder/Indicators";
 import IndicatorDetails from "../IndexBuilder/IndicatorDetails";
@@ -10,7 +10,12 @@ import IndexBuilderFooter from "../IndexBuilder/IndexBuilderFooter";
 import {WeightsSliders, WeightsPieChart} from "../IndexBuilder/Weights";
 import {IndicatorsHelperText, WeightsHelperText} from "../IndexBuilder/HelperText";
 
+import * as InteractiveMap from '../Pages/Map';
+import {useSelector} from "react-redux";
+import {defaultBounds} from "../Pages/Map";
+
 // TODO: Convert style={{ }} to styled-components
+
 
 /** Paged wizard-like component to present indicators for selection + allow user to set the weights */
 export default function IndexBuilder() {
@@ -26,9 +31,11 @@ export default function IndexBuilder() {
     // TODO: Default selections?
     const [selections, setSelections] = useState([]);
 
+    const mapParams = useSelector((state) => state.mapParams);
+
     return (
         <>
-            <NavBar />
+            <NavBar showMapControls={true} bounds={defaultBounds} />
 
             <Grid container spacing={2} style={{ marginTop:'4vh', marginBottom:'10vh', paddingLeft: '15vw', paddingRight: '15vw' }}>
                 <Grid item xs={6}>
@@ -68,13 +75,27 @@ export default function IndexBuilder() {
                                             setSelectedDetails={setSelectedDetails} />
                         </>
                     }
-                    {
-                        currentStep === 'summary' && <>
-                            <Typography variant={'h3'}>TBD</Typography>
-                        </>
-                    }
                 </Grid>
             </Grid>
+
+            {
+                currentStep === 'summary' && <>
+                    <div id="mainContainer">
+                        <MapSection bounds={defaultBounds} />
+                        <Legend
+                            bottomMargin={true}
+                            variableName={`${mapParams.variableName} ${
+                                mapParams.units ? `(${mapParams.units})` : ""
+                            }`}
+                            colorScale={mapParams.colorScale}
+                            bins={mapParams.bins}
+                        />
+                        <VariablePanel />
+                        <DataPanel />
+                        {/* <Popover />     */}
+                    </div>
+                </>
+            }
 
             <IndexBuilderFooter currentStep={currentStep} setCurrentStep={setCurrentStep} setSelections={setSelections} setSelectedDetails={setSelectedDetails}></IndexBuilderFooter>
         </>

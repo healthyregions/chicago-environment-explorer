@@ -7,10 +7,10 @@ import {
   VariablePanel,
   Legend,
   DataPanel,
-} from "../../components"; 
+} from "../../components";
 
 // US bounds
-const defaultBounds = fitBounds({
+export const defaultBounds = fitBounds({
   width: window.innerWidth,
   height: window.innerHeight,
   bounds: [
