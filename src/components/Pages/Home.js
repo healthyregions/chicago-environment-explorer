@@ -383,7 +383,7 @@ export default function Home() {
               <br />
               <br />
               <p>
-                ChiVes is a data collaborative and community mapping application
+               <span translate="no"> ChiVes </span>is a data collaborative and community mapping application
                 that brings data on Chicago’s environment together at the
                 neighborhood level.
                 <br />
@@ -417,7 +417,7 @@ export default function Home() {
             </Grid>
           </Grid>
           <LogoScroll logoList={logoList} />
-          <h2 className="logoScrollText">Thanks to ChiVes Contributors!</h2>
+          <h2 className="logoScrollText">Thanks to<span translate="no"> ChiVes </span>Contributors!</h2>
         </Hero>
       </HomePageContent>
       <Gutter h={60} />

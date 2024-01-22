@@ -36,9 +36,11 @@ const googleTranslateElementInit = () => {
 const useStyles = makeStyles((theme) => ({
 	googleTranslateElement: {
 		position: "fixed",
-		bottom: "10px",
-		left: "10px",
+		bottom: "4em",
+		left: "0.5em", //same left margin as the Nav Menu
 		zIndex: "1000",
+    backgroundColor: "rgba(255,255,255,0.75)",
+    padding: "15px" //same padding as the Nav Menu
 	},
 }));
 

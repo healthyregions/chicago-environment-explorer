@@ -620,7 +620,7 @@ function App() {
       <ContentContainer>
         <h1>Community</h1>
         <p>
-          ChiVes community reports provide information and context about your
+         <span translate="no"> ChiVes </span>community reports provide information and context about your
           community, zip code, or census tract. To start, search for your
           location or use your current location.
         </p>
