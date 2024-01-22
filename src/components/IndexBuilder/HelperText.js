@@ -6,20 +6,7 @@ import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
 import {FaHashtag} from "@react-icons/all-files/fa/FaHashtag";
 import {colors} from "../../config";
 import React from "react";
-
-const DEBUG = false;
-const DebugInfo = ({ data }) => {
-    if (!DEBUG) { return (<></>); }
-
-    return(
-        <Grid>
-            <Grid item xs={12}>
-                <h2>DEBUG</h2>
-                <pre>{JSON.stringify(data, null, 2)}</pre>
-            </Grid>
-        </Grid>
-    );
-}
+import DebugInfo from "./DebugInfo";
 
 export const IndicatorsHelperText = ({ selections }) =>
     <>

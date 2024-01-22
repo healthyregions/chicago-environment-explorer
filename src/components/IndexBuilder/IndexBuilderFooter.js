@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import React from "react";
+import {colors} from "../../config";
 
 const IndexBuilderFooter = ({ currentStep, setCurrentStep, setSelections, setSelectedDetails }) => {
     const reset = () => {
@@ -22,24 +23,26 @@ const IndexBuilderFooter = ({ currentStep, setCurrentStep, setSelections, setSel
     }
     return (
         <footer style={{
+            // Sticky footer
+            background: 'lightgrey',
             position: "fixed",
             bottom: 0,
-            height: '2.5rem',
+
+            // TODO: container
             width: '100%',
-            background: 'lightgrey',
             paddingLeft: '15vw',
             paddingRight: '15vw',
         }}>
             <center>
-                <Button style={{ marginRight: '25vw' }}
+                <Button style={{ marginRight: '25vw', color: colors.forest }}
                         onClick={() => step('prev')}>
                     &larr; Back
                 </Button>
-                <Button style={{ textAlign: 'center' }}
+                <Button style={{ textAlign: 'center', color: colors.forest }}
                         onClick={() => reset()}>
                     Reset
                 </Button>
-                <Button style={{ marginLeft:'25vw' }}
+                <Button style={{ marginBottom: '0.5rem', marginTop: '0.5rem', marginLeft:'25vw', backgroundColor: colors.forest, color: colors.white }}
                         onClick={() => step('next')}>
                     Next &rarr;
                 </Button>

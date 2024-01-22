@@ -150,7 +150,7 @@ const Legend =  ({
 }) => {
 
     return (
-        <BottomPanel id="bottomPanel" style={{ bottom: bottomMargin ? '2.5rem' : 0 }}>
+        <BottomPanel id="bottomPanel" style={{ bottom: bottomMargin ? '3rem' : 0 }}>
             {!!bins && !!colorScale && <LegendContainer>
                 <Grid container spacing={2} id='legend-bins-container'>
                     <Grid item xs={12}>
