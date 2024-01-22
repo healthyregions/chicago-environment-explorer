@@ -7,6 +7,7 @@
 body {
   background:#ffffff;
   font-family: 'Roboto', sans-serif;
+  top: 0px !important;
 }
 
 /* div#view-default-view, div#view-MapView {
@@ -153,3 +154,6 @@ button.mapboxgl-ctrl-attrib-button {
   border:1px solid green;
   border-radius:0;
 }
+
+/* Hide Google Analytics Top Bar so it won't overlap with Menu */
+iframe.skiptranslate { visibility: hidden !important; }
