@@ -444,7 +444,7 @@ const DataPanel = ({ bottomMargin = false }) => {
 
   return (
     <DataPanelContainer className={panelState.info ? 'open' : ''} id="data-panel" otherPanels={panelState.variables}
-                        style={{ maxHeight: bottomMargin ? '85%' : 'auto' }}
+                        style={{ maxHeight: bottomMargin ? '93vh' : 'auto' }}
     >
     {selectionData.success &&
         <ReportWrapper>
