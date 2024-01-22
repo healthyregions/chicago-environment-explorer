@@ -431,7 +431,7 @@ const AgeColumnsToChart = [
 ]
 
 // DataPanel Function Component
-const DataPanel = () => {
+const DataPanel = ({ bottomMargin = false }) => {
 
   const dispatch = useDispatch();
   const selectionData = useSelector(state => state.selectionData);
@@ -443,8 +443,10 @@ const DataPanel = () => {
   const handleOpenClose = () => dispatch(setPanelState({info:panelState.info ? false : true}))
 
   return (
-    <DataPanelContainer className={panelState.info ? 'open' : ''} id="data-panel"  otherPanels={panelState.variables}> 
-    {selectionData.success && 
+    <DataPanelContainer className={panelState.info ? 'open' : ''} id="data-panel" otherPanels={panelState.variables}
+                        style={{ maxHeight: bottomMargin ? '85%' : 'auto' }}
+    >
+    {selectionData.success &&
         <ReportWrapper>
             <ReportContainer>
                 <h1>Current View</h1>
@@ -458,7 +460,7 @@ const DataPanel = () => {
                         <div className='h3'>{selectionData.heatIsland.toFixed(1)}</div>
                     </div>
                     <p>Averaged over {selectionData.sums.count} census tracts</p>
-                    {/* <NeighborhoodCounts 
+                    {/* <NeighborhoodCounts
                       counts={selectionData.communityCounts}
                       activeCommunities={filterValues.community}
                     /> */}
@@ -469,16 +471,16 @@ const DataPanel = () => {
                 <p style={{padding:0}}>
                   These charts show the distribution of variables in the tracts on your screen. Adjust the sliders to filter the map.
                 </p>
-                <Gutter height="1em" />                
+                <Gutter height="1em" />
                 <h3 className="sectionHeader">Environmental</h3>
                 {
-                  EnvironmentalColumnsToChart.map(({name, column, color}, i) => 
-                    <Histogram 
-                      name={name} 
+                  EnvironmentalColumnsToChart.map(({name, column, color}, i) =>
+                    <Histogram
+                      name={name}
                       column={column}
-                      histCounts={selectionData.histCounts[column]} 
-                      density={selectionData.densities[column]} 
-                      range={ranges[column]} 
+                      histCounts={selectionData.histCounts[column]}
+                      density={selectionData.densities[column]}
+                      range={ranges[column]}
                       color={color}
                       key={`distribution-${i}`}
                     />
@@ -487,13 +489,13 @@ const DataPanel = () => {
                 <Gutter height="1em" />
                 <h3 className="sectionHeader">Socio-Economic</h3>
                 {
-                  SocialColumnsToChart.map(({name, column, color}, i) => 
-                    <Histogram 
-                      name={name} 
+                  SocialColumnsToChart.map(({name, column, color}, i) =>
+                    <Histogram
+                      name={name}
                       column={column}
-                      histCounts={selectionData.histCounts[column]} 
-                      density={selectionData.densities[column]} 
-                      range={ranges[column]} 
+                      histCounts={selectionData.histCounts[column]}
+                      density={selectionData.densities[column]}
+                      range={ranges[column]}
                       color={color}
                       key={`distribution-2-${i}`}
                     />
@@ -502,13 +504,13 @@ const DataPanel = () => {
                 <Gutter height="1em" />
                 <h3 className="sectionHeader">Race</h3>
                 {
-                  RaceColumnsToChart.map(({name, column, color}, i) => 
-                    <Histogram 
-                      name={name} 
+                  RaceColumnsToChart.map(({name, column, color}, i) =>
+                    <Histogram
+                      name={name}
                       column={column}
-                      histCounts={selectionData.histCounts[column]} 
-                      density={selectionData.densities[column]} 
-                      range={ranges[column]} 
+                      histCounts={selectionData.histCounts[column]}
+                      density={selectionData.densities[column]}
+                      range={ranges[column]}
                       color={color}
                       key={`distribution-3-${i}`}
                     />
@@ -517,13 +519,13 @@ const DataPanel = () => {
                 <Gutter height="1em" />
                 <h3 className="sectionHeader">Ethnicity</h3>
                 {
-                  EthnicityColumnsToChart.map(({name, column, color}, i) => 
-                    <Histogram 
-                      name={name} 
+                  EthnicityColumnsToChart.map(({name, column, color}, i) =>
+                    <Histogram
+                      name={name}
                       column={column}
-                      histCounts={selectionData.histCounts[column]} 
-                      density={selectionData.densities[column]} 
-                      range={ranges[column]} 
+                      histCounts={selectionData.histCounts[column]}
+                      density={selectionData.densities[column]}
+                      range={ranges[column]}
                       color={color}
                       key={`distribution-4-${i}`}
                     />
@@ -532,13 +534,13 @@ const DataPanel = () => {
                 <Gutter height="1em" />
                 <h3 className="sectionHeader">Age Demographics</h3>
                 {
-                  AgeColumnsToChart.map(({name, column, color}, i) => 
-                    <Histogram 
-                      name={name} 
+                  AgeColumnsToChart.map(({name, column, color}, i) =>
+                    <Histogram
+                      name={name}
                       column={column}
-                      histCounts={selectionData.histCounts[column]} 
-                      density={selectionData.densities[column]} 
-                      range={ranges[column]} 
+                      histCounts={selectionData.histCounts[column]}
+                      density={selectionData.densities[column]}
+                      range={ranges[column]}
                       color={color}
                       key={`distribution-5-${i}`}
                     />
@@ -547,7 +549,7 @@ const DataPanel = () => {
             </ReportContainer>
         </ReportWrapper>
     }
-      
+
       <button onClick={handleOpenClose} id="showHideRight" className={panelState.info ? 'active' : 'hidden'}>{report}</button>
     </DataPanelContainer>
   );

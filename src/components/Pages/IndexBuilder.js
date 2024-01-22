@@ -81,7 +81,7 @@ export default function IndexBuilder() {
             {
                 currentStep === 'summary' && <>
                     <div id="mainContainer">
-                        <MapSection bounds={defaultBounds} />
+                        <MapSection bounds={defaultBounds} bottomMargin={true} />
                         <Legend
                             bottomMargin={true}
                             variableName={`${mapParams.variableName} ${
@@ -91,7 +91,7 @@ export default function IndexBuilder() {
                             bins={mapParams.bins}
                         />
                         <VariablePanel />
-                        <DataPanel />
+                        <DataPanel bottomMargin={true} />
                         {/* <Popover />     */}
                     </div>
                 </>
