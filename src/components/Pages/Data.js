@@ -74,7 +74,7 @@ const NewTabLink = ({ link, text }) => <a href={link} target="_blank" rel="noope
 const columns = [
     {
         Header: 'Variable',
-        accessor: 'Variable Name',
+        accessor: f => <span translate="no">{f['Variable Name']}</span>,
     },
     {
         Header: "Contributor",
@@ -155,7 +155,7 @@ export default function Data() {
                         return (
                         <li key={i}>
                             <p>
-                            <b>{Column}:</b> {Description}
+                            <b translate="no">{Column}:</b> {Description}
                             </p>
                         </li>
                         );
