@@ -74,7 +74,7 @@ const NewTabLink = ({ link, text }) => <a href={link} target="_blank" rel="noope
 const columns = [
     {
         Header: 'Variable',
-        accessor: 'Variable Name',
+        accessor: f => <span translate="no">{f['Variable Name']}</span>,
     },
     {
         Header: "Contributor",
@@ -106,14 +106,14 @@ export default function Data() {
                 <h1>Data</h1> <hr/>
                 <Gutter h={10} />
                 <p>
-                    <i>ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics,
+                    <i translate="no">ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics,
                     surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate
                     matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018).
                     Read more on our <a href="/About">About</a> page.
                     <br /><br />
 
                     Data is added and updated through a collaborative partnership of researchers, community organizations, and civic groups. Organizations
-                    and individuals can participate in <i>ChiVes</i> in multiple ways:
+                    and individuals can participate in <i translate="no">ChiVes</i> in multiple ways:
 
                     <br /><br />
                     <li> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform">Data Collaborative.</a> Integrate
@@ -121,7 +121,7 @@ export default function Data() {
 
 
                     <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform">Resource Guide.</a> Share your
-                        web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards. </li>
+                        web-based or print media resource on the Chicago environment. Resources must meet<span translate="no"> ChiVes </span>standards. </li>
 
 
                     <li><a href="https://github.com/GeoDaCenter/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the ChiVes
@@ -143,7 +143,7 @@ export default function Data() {
                     <p className="license-description">
                         This data is licensed under a <a href="https://creativecommons.org/licenses/by-nc/2.0/" target='_blank' rel="noopener noreferrer">Creative Commons Attribution Non-Commercial license.</a>
                         <br /><br />
-                        {/* Cite this data as <i>ChiVes Data Contributors</i> */}
+                        {/* Cite this data as <i translate="no">ChiVes Data Contributors</i> */}
                     </p>
                 </Hero>
 
@@ -155,7 +155,7 @@ export default function Data() {
                         return (
                         <li key={i}>
                             <p>
-                            <b>{Column}:</b> {Description}
+                            <b translate="no">{Column}:</b> {Description}
                             </p>
                         </li>
                         );

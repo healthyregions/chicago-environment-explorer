@@ -47,7 +47,7 @@ export default function Contact(){
                 </a>
                 <hr/>
                 <p>
-                    Contact the <i>ChiVes</i> leadership team directly through this form if you have any questions about the project or media inquiries.
+                    Contact the <i translate="no">ChiVes</i> leadership team directly through this form if you have any questions about the project or media inquiries.
                 </p>
                 
                 <ContactForm />

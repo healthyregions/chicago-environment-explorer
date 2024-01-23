@@ -239,7 +239,7 @@ const accordionContent = [
         {
         label: "Chicago Tree Tool (2022)",
         content: (<p>
-                    Before <i>ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool </a></b> as 
+                    Before <i translate="no">ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool </a></b> as 
                     an extension of  ongoing work on understanding <a href="https://healthyregions.org/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using 
                      <a href="https://carto.com/" target="_blank" rel="noopener noreferrer"> Carto</a> to facilitate rapid development and prototyping. This tool followed years of iterative process and design and dozens
                      of previous dashboard iterations, highlighting the winding process of agile application development. The final tool went through dozens of additional
@@ -270,13 +270,13 @@ export default function About(){
 
                <p>
 
-               ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the neighborhood level. It is a partnership of researchers, community organizations, and civic groups. 
-                Organizations and individuals can participate in ChiVes in multiple ways:
+              <span translate="no"> ChiVes </span>is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the neighborhood level. It is a partnership of researchers, community organizations, and civic groups. 
+                Organizations and individuals can participate in<span translate="no"> ChiVes </span>in multiple ways:
 
                 <br/><br/>
                 <li> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform">Data Collaborative.</a> Integrate your data directly. Members agree that the final, integrated data will meet Collaborative standards. </li>
-                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform">Resource Guide.</a> Share your web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards. </li>
-                <li><a href="https://github.com/GeoDaCenter/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.</li>
+                <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform">Resource Guide.</a> Share your web-based or print media resource on the Chicago environment. Resources must meet<span translate="no"> ChiVes </span>standards. </li>
+                <li><a href="https://github.com/GeoDaCenter/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the<span translate="no"> ChiVes </span>website, make changes, and submit for review.</li>
                  
                 <br/>
                 View our <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">Standards and Submission Guidelines</a>. These guidelines are evaluated on a regular basis by members of the Data Collaborative.  
@@ -289,7 +289,7 @@ export default function About(){
                     <h3>Data Contributions </h3>
 
                     <p> 
-                    The following individuals and organizations have added data to the ChiVes collective:
+                    The following individuals and organizations have added data to the<span translate="no"> ChiVes </span>collective:
                     <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Negaunee Institute for Plant Conservation Science and Action, Chicago Botanic Gardens </li>
                     <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research & the Eclipse Project </li>
                     <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
@@ -299,7 +299,7 @@ export default function About(){
 
                     
                     <h3>Data & Design Decision-Making </h3>
-                    In addition to data contributions above, collaborative members have also provided invaluable insight and direction throughout the project. Data Collective members have advised on ChiVes data standards and needs, 
+                    In addition to data contributions above, collaborative members have also provided invaluable insight and direction throughout the project. Data Collective members have advised on<span translate="no"> ChiVes </span>data standards and needs, 
                     as well as provided feedback on visualization and user experience goals. 
                     <br></br>
                     <br></br>
@@ -326,10 +326,10 @@ export default function About(){
                    Core Project Team
                 </h2>
     
-                <p>This project is brought to you by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at <b>DePaul University</b>. The original ChiVes emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago. 
+                <p>This project is brought to you by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at <b>DePaul University</b>. The original<span translate="no"> ChiVes </span>emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago. 
                   <br/><br/>
 
-                ChiVes is funded in part by <b>NASA</b> with a new initiative starting in 2022 led by Drs. Stuhlmacher, Curran, and Kolak (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and 
+               <span translate="no"> ChiVes </span>is funded in part by <b>NASA</b> with a new initiative starting in 2022 led by Drs. Stuhlmacher, Curran, and Kolak (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and 
                 <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).
 
                 </p>
@@ -364,7 +364,7 @@ export default function About(){
                 <h2> 
                    Background  
                 </h2>
-                <p> The original ChiVes application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently integrated within ChiVes was gathered, calculated, and standardized from 2018-2021. The current application was refactored in 2022 by <a href="https://dylanhalpern.com/">Dylan Halpern</a>, adopting a new web architecture. Explore some of the original projects that inspired ChiVes below:  </p>
+                <p> The original<span translate="no"> ChiVes </span>application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently integrated within<span translate="no"> ChiVes </span>was gathered, calculated, and standardized from 2018-2021. The current application was refactored in 2022 by <a href="https://dylanhalpern.com/">Dylan Halpern</a>, adopting a new web architecture. Explore some of the original projects that inspired<span translate="no"> ChiVes </span>below:  </p>
                 <br/>
 
                 <Accordion entries={accordionContent} initialTab={-1} />

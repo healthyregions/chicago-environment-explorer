@@ -167,7 +167,7 @@ export default function Nav({
     <NavContainer>
       <LogoButtonContainer aria-describedby={id} variant="outlined" onClick={handleClick} title={id} color="success">
         <SvgLogo colors={[colors.green, colors.chicagoBlue, colors.skyblue, colors.chicagoDarkBlue, colors.chicagoRed]}></SvgLogo>
-        <Typography><span style={{fontWeight:"bold", color:"#2e7d32"}}> ChiVes</span></Typography>
+        <Typography><span style={{fontWeight:"bold", color:"#2e7d32"}} translate="no"> ChiVes</span></Typography>
         {SVG.hamburger}
       </LogoButtonContainer>
       <Popover
