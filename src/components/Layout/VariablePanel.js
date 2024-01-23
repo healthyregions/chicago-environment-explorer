@@ -348,6 +348,9 @@ const VariablePanel = (props) => {
             <MenuItem value={"redlining"} key={"redlining"}>
               Historical Redlining
             </MenuItem>
+            <MenuItem value={"non-res"} key={"non-res"}>
+              Industrial & Non-Residential Areas
+            </MenuItem>
           </Select>
         </FormControl>
         {mapParams.overlay === "redlining" && <RedliningLegend />}
