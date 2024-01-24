@@ -431,7 +431,7 @@ const AgeColumnsToChart = [
 ]
 
 // DataPanel Function Component
-const DataPanel = ({ bottomMargin = false }) => {
+const DataPanel = () => {
 
   const dispatch = useDispatch();
   const selectionData = useSelector(state => state.selectionData);
@@ -443,9 +443,7 @@ const DataPanel = ({ bottomMargin = false }) => {
   const handleOpenClose = () => dispatch(setPanelState({info:panelState.info ? false : true}))
 
   return (
-    <DataPanelContainer className={panelState.info ? 'open' : ''} id="data-panel" otherPanels={panelState.variables}
-                        style={{ maxHeight: bottomMargin ? '93vh' : 'auto' }}
-    >
+    <DataPanelContainer className={panelState.info ? 'open' : ''} id="data-panel" otherPanels={panelState.variables}>
     {selectionData.success &&
         <ReportWrapper>
             <ReportContainer>

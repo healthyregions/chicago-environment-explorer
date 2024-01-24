@@ -56,13 +56,14 @@ export default function App() {
 		window.googleTranslateElementInit = googleTranslateElementInit;
 	}, []);
 
+	const location = useLocation();
 	return (
 		<div>
 			<div
 				id="google_translate_element"
 				className={classes.googleTranslateElement}
 				style={
-					useLocation().pathname.indexOf("map") > -1
+					location.pathname.indexOf("map") > -1 || location.pathname.indexOf("builder") > -1
 						? { bottom: "4em" } //if on map page, move up to avoid overlapping with map controls
 						: { bottom: "0.5em" }
 				}

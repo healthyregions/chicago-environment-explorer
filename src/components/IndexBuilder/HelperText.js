@@ -8,6 +8,41 @@ import {colors} from "../../config";
 import React from "react";
 import DebugInfo from "./DebugInfo";
 
+/*
+
+
+.MuiSvgIcon-root, .MuiStepLabel-iconContainer {
+  color: #e83e8c !important;
+}
+
+.MuiSvgIcon-root > .MuiStepLabel-root > .MuiStepLabel-iconContainer {
+  background: #e83e8c !important;
+}
+
+.MuiStepLabel-iconContainer > div > svg {
+  border-radius: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 6px;
+  padding-right: 4px;
+  height: 24px;
+  width: 24px;
+}
+
+.MuiStepLabel-iconContainer > div > svg:last-of-type {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.MuiStepConnector-root > .MuiStepConnector-line {
+  border-color: #e83e8c !important;
+}
+
+ */
+
+
+
+
 export const IndicatorsHelperText = ({ selections }) =>
     <>
         <Typography variant="h4" gutterBottom>

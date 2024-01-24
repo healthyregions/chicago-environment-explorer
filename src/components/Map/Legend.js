@@ -145,12 +145,11 @@ const BinLabel = (obj, bins) => {
 const Legend =  ({
     variableName,
     bins,
-    colorScale,
-    bottomMargin = false
+    colorScale
 }) => {
 
     return (
-        <BottomPanel id="bottomPanel" style={{ bottom: bottomMargin ? '3rem' : 0 }}>
+        <BottomPanel id="bottomPanel">
             {!!bins && !!colorScale && <LegendContainer>
                 <Grid container spacing={2} id='legend-bins-container'>
                     <Grid item xs={12}>

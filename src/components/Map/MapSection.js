@@ -100,7 +100,7 @@ const MapButtonContainer = styled.div`
   position: absolute;
   right: ${(props) =>
     props.infoPanel ? `calc(${getRightMargin()}px)` : "0.75em"};
-  bottom: ${props => props.bottomMargin ? '3rem' : 0};
+  bottom: 0;
   z-index: 10;
   transition: 250ms all;
   @media (max-width: 1000px) {
@@ -205,7 +205,7 @@ const LogoContainer = styled.div`
   }
 `;
 
-function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], bottomMargin = false, }) {
+function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   // fetch pieces of state from store
   const { storedGeojson } = useChivesData();
   const panelState = useSelector((state) => state.panelState);
@@ -788,7 +788,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], bottomMarg
   const view = new MapView({ repeat: true });
 
   return (
-    <MapContainer infoPanel={panelState.info} ref={mapContainerRef} style={{ paddingBottom: bottomMargin ? '3.5rem' : 0 }}>
+    <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
       <MapboxGLMap
         ref={mapRef}
         mapStyle={
@@ -846,7 +846,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], bottomMarg
         />
       </MapboxGLMap>
       {!geoids.length && (
-        <MapButtonContainer infoPanel={panelState.info} bottomMargin={bottomMargin}>
+        <MapButtonContainer infoPanel={panelState.info}>
           <NavInlineButtonGroup>
             <NavInlineButton
               title="Geolocate"
@@ -909,7 +909,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], bottomMarg
         </HoverDiv>
       )}
       {!geoids.length && (
-        <LogoContainer infoPanel={panelState.info} style={{ bottom: bottomMargin ? '3.5rem' : 0 }}>
+        <LogoContainer infoPanel={panelState.info}>
           <a
             href="https://healthyregions.org/"
             target="_blank"

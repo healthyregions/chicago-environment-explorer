@@ -81,9 +81,8 @@ export default function IndexBuilder() {
             {
                 currentStep === 'summary' && <>
                     <div id="mainContainer">
-                        <MapSection bounds={defaultBounds} bottomMargin={true} />
+                        <MapSection bounds={defaultBounds} />
                         <Legend
-                            bottomMargin={true}
                             variableName={`${mapParams.variableName} ${
                                 mapParams.units ? `(${mapParams.units})` : ""
                             }`}
@@ -91,13 +90,14 @@ export default function IndexBuilder() {
                             bins={mapParams.bins}
                         />
                         <VariablePanel />
-                        <DataPanel bottomMargin={true} />
+                        <DataPanel />
                         {/* <Popover />     */}
                     </div>
                 </>
             }
-
-            <IndexBuilderFooter currentStep={currentStep} setCurrentStep={setCurrentStep} setSelections={setSelections} setSelectedDetails={setSelectedDetails}></IndexBuilderFooter>
+            {
+                currentStep !== 'summary' && <IndexBuilderFooter currentStep={currentStep} setCurrentStep={setCurrentStep} setSelections={setSelections} setSelectedDetails={setSelectedDetails}></IndexBuilderFooter>
+            }
         </>
     );
 };
