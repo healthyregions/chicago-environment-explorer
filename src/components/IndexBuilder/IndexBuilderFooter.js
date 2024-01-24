@@ -21,6 +21,12 @@ const Footer = styled.footer`
 const PrimaryButton = styled(Button)`
   background-color: ${props => `rgba(61, 96, 23, ${props.canNext ? 100 : 30})`};
   color: ${colors.white};
+  &:active {
+    background-color: ${props => `rgba(61, 96, 23, ${props.canNext ? 100 : 30})`};
+  }
+  &:hover {
+    background-color: ${props => `rgba(61, 96, 23, ${props.canNext ? 100 : 30})`};
+  }
 `;
 const LinkButton = styled(Button)`
   color: ${colors.forest};
