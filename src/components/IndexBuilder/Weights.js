@@ -1,4 +1,4 @@
-import {colors, dataDescriptions} from "../../config";
+import {dataDescriptions} from "../../config";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import {Stack, TextField} from "@mui/material";
@@ -11,20 +11,18 @@ import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 const SLIDER_MIN = 0;
 const SLIDER_MAX = 10;
 
-
 /** The set of shared color palette to use for Sliders + PieChart slices */
 const COLORS = [
-    colors.forest,
-    colors.green,
-    colors.chicagoDarkBlue,
-    colors.blue,
-    colors.lightblue,
-    //colors.purple,
-    colors.pink,
-    colors.red,
-    colors.orange,
-    colors.yellow,
-    //colors.paleyellow,
+    '#3D6017', // PrimaryGreen,
+    '#E83F6F', // PrimaryPink,
+    '#F1BF6C', // Cream,
+    '#786335', // Olive,
+    '#4D838B', // Sea,
+    '#85EE8D', // Mint,
+    '#591944', // Burgundy,
+    '#E16B2B', // Orange,
+    '#492416', // Brown,
+    '#05245E', // Ink,
 ];
 
 /** Given a set of selected indicators, allow user to set a weight for each indicator */
@@ -52,7 +50,7 @@ export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }
     };
 
     return (
-        <>
+        <div style={{ marginBottom: '4rem' }}>
             {
                 selections.map((selection, index) => {
                     return (
@@ -99,24 +97,32 @@ export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }
                     );
                 })
             }
-        </>
+        </div>
     );
 }
 
 /** Given a set of selected indicators, display the weight distribution for all indicators */
-export const WeightsPieChart = ({ selections }) =>
+export const WeightsPieChart = ({ selections, width = 500, height = 200 }) =>
     <PieChart
         skipAnimation
+        slotProps={{
+            legend: {
+                hidden: true,
+            },
+        }}
         colors={COLORS}
         sx={{
-            [`& .${pieArcLabelClasses.root}`]: {fill: 'white' },
+            [`& .${pieArcLabelClasses.root}`]: {
+                fill: 'white',
+                fontSize: 14,
+            },
         }}
         series={[
             {
                 data: selections.map((sel, index) => ({
                     ...sel,
                     id: `pie-slice-${index + 1}`,
-                    label: `${index + 1}`
+                    label: `${index + 1}. ${sel.name}`
                 })),
                 highlightScope: { faded: 'global', highlighted: 'item' },
                 faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
@@ -124,11 +130,10 @@ export const WeightsPieChart = ({ selections }) =>
                     const total = selections.reduce((total, currentValue) => total + currentValue.value, 0);
                     return total > 0 ? `${(100 * item.value / total).toFixed(0)}%` : ''
                 },
-                cx: 200,
                 arcLabelMinAngle: 20,
             }
         ]}
-        width={500}
-        height={300}
+        width={width}
+        height={height}
     />
 

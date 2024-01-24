@@ -6,6 +6,12 @@ import {changeVariable} from "../../actions";
 import {variablePresets} from "../../config";
 import Grid from "@mui/material/Grid";
 import React from "react";
+import styled from "styled-components";
+import { colors } from '../../config';
+
+const GreenLinkButton = styled(Button)`
+  color: ${colors.forest};
+`;
 
 const IndicatorDetails = ({ selectedDetails, setSelectedDetails }) => {
     const history = useHistory();
@@ -13,7 +19,7 @@ const IndicatorDetails = ({ selectedDetails, setSelectedDetails }) => {
 
     return (
         <>
-            <Button onClick={() => setSelectedDetails(undefined)}>&larr; Back to instructions</Button>
+            <GreenLinkButton onClick={() => setSelectedDetails(undefined)}>&larr; Back to instructions</GreenLinkButton>
             {
                 /*
                 TODO: How do we choose the correct icon?
@@ -24,13 +30,13 @@ const IndicatorDetails = ({ selectedDetails, setSelectedDetails }) => {
                 {selectedDetails?.name}
             </Typography>
             <div>
-                <Button onClick={() => history.push('/data')}>More &rarr;</Button>
-                <Button onClick={() => {
+                <GreenLinkButton onClick={() => history.push('/data')}>More &rarr;</GreenLinkButton>
+                <GreenLinkButton onClick={() => {
                     history.push('/map');
                     setTimeout(() => {
                         dispatch(changeVariable(variablePresets[selectedDetails.name]));
                     }, 1500);
-                }}>Map &rarr;</Button>
+                }}>Map &rarr;</GreenLinkButton>
             </div>
             <Grid>
                 <Grid item xs={9}>

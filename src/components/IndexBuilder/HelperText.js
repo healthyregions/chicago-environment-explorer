@@ -11,10 +11,10 @@ import DebugInfo from "./DebugInfo";
 
 export const IndicatorsHelperText = ({ selections }) =>
     <>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h6" gutterBottom>
             Let's create your <strong>Custom Index</strong>
         </Typography>
-        <Typography component="div">
+        <Typography variant="subtitle2">
             Creating your custom index in 3 easy steps:
         </Typography>
         <Grid>
@@ -22,7 +22,7 @@ export const IndicatorsHelperText = ({ selections }) =>
                 <Stepper orientation={'vertical'}>
                     <Step key={'indicator-step1'} active={true}>
                         <StepLabel>
-                            <Typography variant="subtitle">
+                            <Typography variant="body2">
                                 Select the indicators from the options on the right. If you want to know more
                                 about each indicator, click on the tooltip <FaInfoCircle></FaInfoCircle> icon
                                 to learn more about it.
@@ -31,7 +31,7 @@ export const IndicatorsHelperText = ({ selections }) =>
                     </Step>
                     <Step key={'indicator-step2'} active={true}>
                         <StepLabel>
-                            <Typography variant="subtitle">
+                            <Typography variant="body2">
                                 In the next step, set importance for each indicator you've selected to create
                                 an index that is tailored to your needs.
                             </Typography>
@@ -39,7 +39,7 @@ export const IndicatorsHelperText = ({ selections }) =>
                     </Step>
                     <Step key={'indicator-step3'} active={true}>
                         <StepLabel>
-                            <Typography variant="subtitle">
+                            <Typography variant="body2">
                                 Preview the summary of the selected indicators with their weights and the map
                                 preview with your selected criteria.
                             </Typography>
@@ -71,10 +71,10 @@ export const WeightsHelperText = ({ selections }) => {
 
     return (
         <>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant="h6" gutterBottom>
                 Setting weights is <strong>important</strong>
             </Typography>
-            <Typography component="div">
+            <Typography variant="subtitle2">
                 Here's how you can adjust the weights for the individual indicators when creating the index:
             </Typography>
             <Grid style={{ marginBottom: '5vh' }}>
@@ -83,7 +83,7 @@ export const WeightsHelperText = ({ selections }) => {
                         <Step key={'weights-step1'} active={true}>
                             <StepLabel StepIconComponent={IndexBuilderStepIcon}
                                        StepIconProps={FirstIconProps}>
-                                <Typography variant="subtitle">
+                                <Typography variant="body2">
                                     Drag and move the horizontal separators to alter the weights. You can see the
                                     weights altering in percentage below, or
                                 </Typography>
@@ -92,7 +92,7 @@ export const WeightsHelperText = ({ selections }) => {
                         <Step key={'weights-step2'} active={true}>
                             <StepLabel StepIconComponent={IndexBuilderStepIcon}
                                        StepIconProps={SecondIconProps}>
-                                <Typography variant="subtitle">
+                                <Typography variant="body2">
                                     You can also change the weights by typing the weight values (0-10) in the input box
                                     next to the indicators.
                                 </Typography>
