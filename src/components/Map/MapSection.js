@@ -205,7 +205,7 @@ const LogoContainer = styled.div`
   }
 `;
 
-function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
+function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch = true }) {
   // fetch pieces of state from store
   const { storedGeojson } = useChivesData();
   const panelState = useSelector((state) => state.panelState);
@@ -883,7 +883,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
           </NavInlineButtonGroup>
         </MapButtonContainer>
       )}
-      {!geoids.length && (
+      {!geoids.length && showSearch && (
         <GeocoderContainer>
           <Geocoder
             id="Geocoder"
