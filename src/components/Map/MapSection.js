@@ -460,7 +460,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         );
       case variableName.toLowerCase().includes("displacement index"):
         const indexKey = String(feature.properties["HPRICETIER"]).toLowerCase();
-        console.log("Displacement Index: ", indexKey);
         return (
           DISPLACEMENT_COLOR_SCALE[indexKey] || [
             0, 0, 0,
@@ -468,7 +467,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
         );
       case variableName.toLowerCase().includes("displacement pressure"):
         const pressureKey = String(feature.properties["VUL_PRICE"]).toLowerCase();
-        console.log("Displacement Pressure: ", pressureKey);
         return (
             DISPLACEMENT_COLOR_SCALE[pressureKey] || [
               0, 0, 0,
