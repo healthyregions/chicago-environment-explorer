@@ -411,9 +411,15 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   };
 
   const DISPLACEMENT_COLOR_SCALE = {
-    lower_cost: [100, 100, 172],
-    moderate_cost: [92, 108, 92],
-    high_cost: [172, 92, 92],
+    // Displacement Index
+    'lower-cost': [100, 100, 172],
+    'moderate-cost': [92, 108, 92],
+    'high-cost': [172, 92, 92],
+
+    // Displacement Pressure
+    '0': [100, 100, 172],
+    'vulnerable, prices not rising': [92, 108, 92],
+    'vulnerable, prices rising':  [172, 92, 92]
   };
 
   const isVisible = (feature, filters) => {
@@ -452,11 +458,21 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
             feature.properties["primary_grade_4levels"]
           ] || [0, 0, 0]
         );
-      case variableName.includes("displacement"):
+      case variableName.toLowerCase().includes("displacement index"):
+        const indexKey = String(feature.properties["HPRICETIER"]).toLowerCase();
+        console.log("Displacement Index: ", indexKey);
         return (
-          DISPLACEMENT_COLOR_SCALE[feature.properties["HPRICETIER"]] || [
+          DISPLACEMENT_COLOR_SCALE[indexKey] || [
             0, 0, 0,
           ]
+        );
+      case variableName.toLowerCase().includes("displacement pressure"):
+        const pressureKey = String(feature.properties["VUL_PRICE"]).toLowerCase();
+        console.log("Displacement Pressure: ", pressureKey);
+        return (
+            DISPLACEMENT_COLOR_SCALE[pressureKey] || [
+              0, 0, 0,
+            ]
         );
       default:
         return color;

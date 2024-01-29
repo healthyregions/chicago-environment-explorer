@@ -133,6 +133,14 @@ const BinLabel = (obj, bins) => {
                     <div key={'color-label2'} className='bin labe'>{"High-cost"}</div>
                 </BinLabels> 
             );
+        case "Displacement Pressure":
+            return (
+                <BinLabels>
+                    <div key={'color-label0'} className='bin labe'>{"0"}</div>
+                    <div key={'color-label1'} className='bin labe'>{"Vulnerable, Prices Not Rising"}</div>
+                    <div key={'color-label2'} className='bin labe'>{"Vulnerable, Prices Rising"}</div>
+                </BinLabels>
+            );
         default:
             return (
                 <BinLabels binLength={bins.length}> 
