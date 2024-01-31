@@ -257,7 +257,7 @@ const VariablePanel = (props) => {
     if (mapParams.variableName === 'Displacement Pressure') {
       dispatch(setMapParams({ overlay: 'non-res' }));
     }
-  }, [mapParams.variableName]);
+  }, [mapParams.variableName, dispatch]);
 
   const handleMapOverlay = (event) => {
     dispatch(
