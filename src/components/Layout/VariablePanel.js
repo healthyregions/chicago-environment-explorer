@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -252,6 +252,13 @@ const VariablePanel = (props) => {
   const panelState = useSelector((state) => state.panelState);
   const aqLastUpdated = useSelector((state) => state.aqLastUpdated);
 
+  useEffect(() => {
+    // If user selects Displacement Pressure, automatically apply the Non-residential Overlay
+    if (mapParams.variableName === 'Displacement Pressure') {
+      dispatch(setMapParams({ overlay: 'non-res' }));
+    }
+  }, [mapParams.variableName]);
+
   const handleMapOverlay = (event) => {
     dispatch(
       setMapParams({
@@ -270,7 +277,7 @@ const VariablePanel = (props) => {
 
   const handleVariable = (e) =>
     dispatch(changeVariable(variablePresets[e.target.value]));
-    
+
   return (
     <VariablePanelContainer
       className={panelState.variables ? "" : "hidden"}
@@ -287,7 +294,7 @@ const VariablePanel = (props) => {
             MenuProps={{ id: "variableMenu" }}
           >
             {Object.keys(variablePresets).map((variable,i) => (
-              variable.includes("HEADER::")  
+              variable.includes("HEADER::")
                ? <ListSubheader key={`list-header-${i}`}>{variable.split("HEADER::")[1]}</ListSubheader>
                : <MenuItem value={variable} key={`variable-menu-item-${i}`}>
                 {variable}
@@ -301,28 +308,28 @@ const VariablePanel = (props) => {
           {mapParams.custom === 'aq_grid' && <>
           <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
           </>}
-          
+
         {mapParams.custom === 'aq_grid' && <>
           <p>
             To see the source data grid, click the switch below.
           </p>
           <Stack direction="row" spacing={1} alignItems="center">
-          
+
           <p>Aggregated by Tract</p>
           <AntSwitch checked={mapParams.useCustom}  onClick={() => dispatch(toggleCustom())} inputProps={{ 'aria-label': 'ant design' }} />
           <p>Source Data</p>
         </Stack>
           <Stack direction="row" spacing={1} alignItems="center" sx={{opacity: mapParams.useCustom ? 1 : 0.25}}>
-          
+
           <p>2D Map</p>
           <AntSwitch checked={use3d}  onClick={() => dispatch(toggle3d())} disabled={!mapParams.useCustom} inputProps={{ 'aria-label': 'ant design' }} />
           <p>3D Map</p>
-        </Stack> 
+        </Stack>
         </>
         }
           {dataDescriptions[mapParams.variableName]}
         </p>
-        
+
 
         <Gutter h={20} />
         <h2>Data Overlay</h2>
@@ -330,6 +337,7 @@ const VariablePanel = (props) => {
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
             id="overlay-select"
+            disabled={mapParams.variableName === 'Displacement Pressure'}
             value={mapParams.overlay}
             onChange={handleMapOverlay}
           >

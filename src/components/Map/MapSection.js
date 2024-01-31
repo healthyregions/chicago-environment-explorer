@@ -412,7 +412,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
 
   const DISPLACEMENT_COLOR_SCALE = {
     // Displacement Pressure
-    '0': [254,224,210],
+    '0': [225,225,225],
     'vulnerable, prices not rising': [252,146,114],
     'vulnerable, prices rising':  [222,45,38]
   };
