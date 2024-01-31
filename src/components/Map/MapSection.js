@@ -729,7 +729,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       pickable: false,
       stroked: true,
       filled: true,
-      getFillColor: [200, 200, 200, 100],
+      getFillColor: [200, 200, 200, 150],
       lineWidthScale: 1,
       lineWidthMinPixels: 1,
       lineWidthMaxPixels: 4,
