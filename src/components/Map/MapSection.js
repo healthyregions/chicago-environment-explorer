@@ -411,15 +411,10 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
   };
 
   const DISPLACEMENT_COLOR_SCALE = {
-    // Displacement Index
-    'lower-cost': [100, 100, 172],
-    'moderate-cost': [92, 108, 92],
-    'high-cost': [172, 92, 92],
-
     // Displacement Pressure
-    '0': [100, 100, 172],
-    'vulnerable, prices not rising': [92, 108, 92],
-    'vulnerable, prices rising':  [172, 92, 92]
+    '0': [254,224,210],
+    'vulnerable, prices not rising': [252,146,114],
+    'vulnerable, prices rising':  [222,45,38]
   };
 
   const isVisible = (feature, filters) => {
@@ -734,12 +729,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [] }) {
       pickable: false,
       stroked: true,
       filled: true,
-      getFillColor: [175, 0, 0, 150],
+      getFillColor: [200, 200, 200, 100],
       lineWidthScale: 1,
       lineWidthMinPixels: 1,
       lineWidthMaxPixels: 4,
       getLineWidth: 1,
-      getLineColor: [200, 0, 0, 255],
+      getLineColor: [150, 150, 150, 100],
       visible: mapParams.overlay === "non-res",
       updateTriggers: {
         visible: [mapParams.overlay],
