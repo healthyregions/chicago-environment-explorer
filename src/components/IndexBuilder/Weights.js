@@ -8,8 +8,9 @@ import React from "react";
 import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 
 /** Minimum/maximum value for sliders */
-const SLIDER_MIN = 0;
-const SLIDER_MAX = 10;
+export const SLIDER_MIN = 0;
+export const SLIDER_MAX = 100;
+export const SLIDER_DEFAULT = 50;
 
 /** The set of shared color palette to use for Sliders + PieChart slices */
 const COLORS = [
@@ -70,8 +71,8 @@ export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }
                                         <Typography variant={'caption'}>Less Important</Typography>
                                         <Slider
                                             key={`slider-${index}`}
-                                            min={0}
-                                            max={10}
+                                            min={SLIDER_MIN}
+                                            max={SLIDER_MAX}
                                             style={{ margin: '15px', color: COLORS[index % COLORS.length] }}
                                             getAriaLabel={() => selection.name}
                                             valueLabelDisplay="auto"
@@ -85,7 +86,7 @@ export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }
                                                           setSelectedDetails({
                                                               name: selection.name,
                                                               description: dataDescriptions[selection.name],
-                                                              value: 5
+                                                              value: SLIDER_DEFAULT
                                                           });
                                                           e.stopPropagation();
                                                           e.preventDefault();

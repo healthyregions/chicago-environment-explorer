@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import {Divider, ToggleButton} from "@mui/material";
 import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
+import {SLIDER_DEFAULT} from "./Weights";
 
 const IndicatorsCategory = ({ variableName, index }) => {
     return(
@@ -43,7 +44,7 @@ const IndicatorsSelectableItem = ({ selections, variableName, toggleSelection, s
                           setSelectedDetails({
                               name: variableName,
                               description: dataDescriptions[variableName],
-                              value: 5
+                              value: SLIDER_DEFAULT
                           });
                           e.stopPropagation();
                           e.preventDefault();
@@ -98,7 +99,7 @@ class IndicatorsList extends React.Component {
             this.props.setSelections(localCopy.concat([{
                 name: variableName,
                 description: dataDescriptions[variableName],
-                value: 5
+                value: SLIDER_DEFAULT
             }]));
         }
     };
