@@ -190,31 +190,25 @@ export default function IndexBuilder() {
             feature.properties["CUSTOM_INDEX"] /= selections.length;
         });
 
-        console.log("Modified GeoJSON: ", storedGeojson);
-
-        if (!('CUSTOM_INDEX' in variablePresets)) {
-            variablePresets['HEADER::Custom'] = {};
-            variablePresets['Custom Index'] = {
-                'Added By': 'You',
-                Bins: null,
-                Column: 'CUSTOM_INDEX',
-                'Data Source': 'You',
-                'Data Year': null,
-                Description: `Custom index with ${selections.length} variables`,
-                'Metadata Doc': null,
-                'Original Scale': '0 - 100',
-                'Variable Name': 'Custom Index',
-                accessor: (feature) => feature.properties['CUSTOM_INDEX'],
-                bins: null,
-                colorScale: [[237, 248, 251], [191, 211, 230], [158, 188, 218], [140, 150, 198], [136, 86, 167], [129, 15, 124]],
-                custom: 1,
-                units: '',
-                listGroup: 'Custom',
-                variableName: 'Custom Index'
-            };
-
-            console.log("Variable Presets: ", variablePresets);
-        }
+        variablePresets['HEADER::Custom'] = {};
+        variablePresets['Custom Index'] = {
+            'Added By': 'You',
+            Bins: null,
+            Column: 'CUSTOM_INDEX',
+            'Data Source': 'You',
+            'Data Year': null,
+            Description: `Custom index with ${selections.length} variables`,
+            'Metadata Doc': null,
+            'Original Scale': '0 - 100',
+            'Variable Name': 'Custom Index',
+            accessor: (feature) => feature.properties['CUSTOM_INDEX'],
+            bins: null,
+            colorScale: [[237, 248, 251], [191, 211, 230], [158, 188, 218], [140, 150, 198], [136, 86, 167], [129, 15, 124]],
+            custom: 1,
+            units: '',
+            listGroup: 'Custom',
+            variableName: 'Custom Index'
+        };
 
         if (mapParams.variableName !== 'Custom Index') {
             dispatch(changeVariable(variablePresets['Custom Index']));
