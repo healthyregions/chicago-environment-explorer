@@ -411,9 +411,10 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   };
 
   const DISPLACEMENT_COLOR_SCALE = {
-    lower_cost: [100, 100, 172],
-    moderate_cost: [92, 108, 92],
-    high_cost: [172, 92, 92],
+    // Displacement Pressure
+    '0': [225,225,225],
+    'vulnerable, prices not rising': [252,146,114],
+    'vulnerable, prices rising':  [222,45,38]
   };
 
   const isVisible = (feature, filters) => {
@@ -452,11 +453,19 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
             feature.properties["primary_grade_4levels"]
           ] || [0, 0, 0]
         );
-      case variableName.includes("displacement"):
+      case variableName.toLowerCase().includes("displacement index"):
+        const indexKey = String(feature.properties["HPRICETIER"]).toLowerCase();
         return (
-          DISPLACEMENT_COLOR_SCALE[feature.properties["HPRICETIER"]] || [
+          DISPLACEMENT_COLOR_SCALE[indexKey] || [
             0, 0, 0,
           ]
+        );
+      case variableName.toLowerCase().includes("displacement pressure"):
+        const pressureKey = String(feature.properties["VUL_PRICE"]).toLowerCase();
+        return (
+            DISPLACEMENT_COLOR_SCALE[pressureKey] || [
+              0, 0, 0,
+            ]
         );
       default:
         return color;
@@ -715,17 +724,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     new GeoJsonLayer({
       id: "non-res",
       data: `${process.env.PUBLIC_URL}/geojson/non-res-mdp.geojson`,
-      opacity: 0.8,
+      opacity: 1.0,
       material: false,
       pickable: false,
       stroked: true,
       filled: true,
-      getFillColor: [175, 0, 0, 150],
+      getFillColor: [200, 200, 200, 255],
       lineWidthScale: 1,
       lineWidthMinPixels: 1,
       lineWidthMaxPixels: 4,
       getLineWidth: 1,
-      getLineColor: [200, 0, 0, 255],
+      getLineColor: [150, 150, 150, 100],
       visible: mapParams.overlay === "non-res",
       updateTriggers: {
         visible: [mapParams.overlay],

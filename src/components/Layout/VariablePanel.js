@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -38,6 +38,22 @@ const RedliningLegend = () => (
       </div>
     ))}
   </div>
+);
+
+const NonResidentialLegend = () => (
+    <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+      <div style={{ display: "flex", margin:'.25em 0' }}>
+        <span
+            style={{
+              backgroundColor: `rgba(200, 200, 200, 255)`,
+              borderColor: `rgba(150, 150, 150, 100)`,
+              width: 16,
+              height: 16,
+            }}
+        ></span>
+            <p style={{padding:0, margin:'0 0 0 .25em'}}>Industrial or Non-Residential Area</p>
+      </div>
+    </div>
 );
 
 const VariablePanelContainer = styled.div`
@@ -252,6 +268,13 @@ const VariablePanel = (props) => {
   const panelState = useSelector((state) => state.panelState);
   const aqLastUpdated = useSelector((state) => state.aqLastUpdated);
 
+  useEffect(() => {
+    // If user selects Displacement Pressure, automatically apply the Non-residential Overlay
+    if (mapParams.variableName === 'Displacement Pressure') {
+      dispatch(setMapParams({ overlay: 'non-res' }));
+    }
+  }, [mapParams.variableName, dispatch]);
+
   const handleMapOverlay = (event) => {
     dispatch(
       setMapParams({
@@ -354,6 +377,7 @@ const VariablePanel = (props) => {
           </Select>
         </FormControl>
         {mapParams.overlay === "redlining" && <RedliningLegend />}
+        {mapParams.overlay === "non-res" && <NonResidentialLegend />}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}
