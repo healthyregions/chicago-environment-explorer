@@ -123,20 +123,20 @@ const BinLabel = (obj, bins) => {
                     <div key={'color-label1'} className='bin labe'>{"B"}</div>
                     <div key={'color-label2'} className='bin labe'>{"C"}</div>
                     <div key={'color-label3'} className='bin labe'>{"D"}</div>
-                </BinLabels> 
+                </BinLabels>
             );
-        case "Displacement Index":
+        case "Displacement Pressure":
             return (
                 <BinLabels>
-                    <div key={'color-label0'} className='bin labe'>{"Lower-cost"}</div>
-                    <div key={'color-label1'} className='bin labe'>{"Moderate-cost"}</div>
-                    <div key={'color-label2'} className='bin labe'>{"High-cost"}</div>
-                </BinLabels> 
+                    <div key={'color-label0'} className='bin labe'>{"Not Vulnerable"}</div>
+                    <div key={'color-label1'} className='bin labe'>{"Vulnerable, Prices Not Rising"}</div>
+                    <div key={'color-label2'} className='bin labe'>{"Vulnerable, Prices Rising"}</div>
+                </BinLabels>
             );
         default:
             return (
-                <BinLabels binLength={bins.length}> 
-                    {obj["bins"].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}                                   
+                <BinLabels binLength={bins.length}>
+                    {obj["bins"].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}
                 </BinLabels>
             );
     }
@@ -147,7 +147,7 @@ const Legend =  ({
     bins,
     colorScale
 }) => {
-    
+
     return (
         <BottomPanel id="bottomPanel">
             {!!bins && !!colorScale && <LegendContainer>
@@ -158,7 +158,7 @@ const Legend =  ({
                         </LegendTitle>
                     </Grid>
                     <Grid item xs={12}>
-                        {colorScale !== undefined &&  
+                        {colorScale !== undefined &&
                             <span>
                                 <BinBars>
                                     {colorScale.map((color, i) => <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
