@@ -109,84 +109,57 @@ export default function IndexBuilder() {
         handleClose();
     };
 
+    // Computes the sum of an array of numbers
+    // Optionally, use accessor for complex objects
+    const sum = (values, accessor = (f) => f) => {
+        return values.reduce((acc, curr) => acc + accessor(curr), 0);
+    }
 
-    if (selections.length > 0) {
-        console.log("Variable Presets: ", variablePresets);
+    // Compute the average of an array of numbers
+    const average = (values) => {
+        return sum(values) / values.length;
+    }
 
-        const mins = {};
-        const maxes = {};
-        const means = {};
-        storedGeojson.features.forEach((feature, index) => {
-            selections.forEach(sel => {
-                const variable = variablePresets[sel.name];
-                const column = variable.Column;
-                const val = feature.properties[column];
+    // Compute the standard deviation (RMS) of an array of numbers
+    const standardDeviation = (values) => {
+        const mean = average(values);
 
-                //console.log(`Checking ${index} for ${column}: `, val);
-                if (val == null) { return; }
-
-                // Accumulate min / max for each selected variable while looping
-                if (!(sel.name in maxes) || val > maxes[sel.name]) {
-                    //console.log(`Found larger max for ${column}: ${val} > ${maxs[sel.name]}`);
-                    maxes[sel.name] = val;
-                }
-                if (!(sel.name in mins) || val < mins[sel.name]) {
-                    //console.log(`Found smaller min for ${column}: ${val} < ${mins[sel.name]}`);
-                    mins[sel.name] = val;
-                }
-
-                // Accumulate mean for each selected variable while looping
-                if (sel.name in means) {
-                    means[sel.name] += val
-                } else {
-                    means[sel.name] = val;
-                }
-            });
+        // Assigning (value - mean) ^ 2 to every array item
+        values = values.map((value) => {
+            return (value - mean) ** 2
         });
 
-        const length = storedGeojson.features.length;
-        selections.forEach(sel => {
-            means[sel.name] /= length;
-        })
+        // Compute and return the standard deviation
+        return Math.sqrt(sum(values) / values.length);
+    }
 
-        console.log('Mins:', mins);
-        console.log('Maxes:', maxes);
-        console.log('Means:', means);
+    if (selections.length > 0) {
+        // Compute weight maximums
+        const weightMax = sum(selections, (sel) => sel.value);
 
-        // Now that we have min/max/mean values, we use this to normalize our values
-        const normalize = (val, mean, min_val, max_val) => {
-            return (val - mean) / (max_val - min_val);
-        };
-
-        const weightMax = selections.reduce((acc, sel) => acc += sel.value, 0);
-
-        // One last loop to normalize values
-        // Normalize each value
-        storedGeojson.features.forEach((feature, index) => {
-            // Initialize / reset a new accumulator
+        // Initialize / reset a new accumulator
+        storedGeojson.features.forEach((feature) => {
             feature.properties["CUSTOM_INDEX"] = 0;
 
-            // Normalize all related values
             selections.forEach(sel => {
-                // Read column name, use that to find value
+                // Determine column name and value
                 const variable = variablePresets[sel.name];
-                const value = feature.properties[variable.Column];
+                const column = variable.Column;
+                const value = feature.properties[column];
 
+                // Get all values, use them to determine mean and standard deviation
+                const values = storedGeojson.features.map(f => f.properties[column]);
+                const mean = average(values);
+                const sd = standardDeviation(values);
+
+                // Scale (RMS) the value using mean and standard deviation
                 // TODO: how do we know whether +/- needs to be inverted?
+                const scaled = (value - mean) / sd;
 
-                // Read min/max for this value and normalize
-                const [min, max, mean] = [ mins[sel.name], maxes[sel.name], means[sel.name] ];
-                const normalized = normalize(value, mean, min, max);
-                //console.log(`Min/Max (${index}): ${min} / ${max}`);
-
-                const customValue = ((sel.value / weightMax) * normalized);
-
-                // Weight and sum as a new property
-                feature.properties["CUSTOM_INDEX"] += customValue;
-                //console.log(`Custom value (${index}): `, customValue);
+                // Apply weights and accumulate total scaled value
+                feature.properties["CUSTOM_INDEX"] += ((sel.value / weightMax) * scaled);
             });
 
-            // Finally, compute weighted average
             feature.properties["CUSTOM_INDEX"] /= selections.length;
         });
 
