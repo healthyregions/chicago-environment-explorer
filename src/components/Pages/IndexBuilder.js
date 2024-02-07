@@ -9,19 +9,19 @@ import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-import {DataPanel, Legend, MapSection, VariablePanel} from "../index";
+import {Legend, MapSection} from "../index";
 
 import IndicatorsList from "../IndexBuilder/Indicators";
 import IndicatorDetails from "../IndexBuilder/IndicatorDetails";
 import IndexBuilderFooter from "../IndexBuilder/IndexBuilderFooter";
-import {WeightsSliders, WeightsPieChart, SLIDER_MAX} from "../IndexBuilder/Weights";
+import {WeightsSliders, WeightsPieChart} from "../IndexBuilder/Weights";
 import {IndicatorsHelperText, WeightsHelperText} from "../IndexBuilder/HelperText";
 
 import {defaultBounds} from "./Map";
 import {colors, variablePresets} from "../../config";
 import {FaArrowCircleLeft} from "@react-icons/all-files/fa/FaArrowCircleLeft";
 
-import {changeVariable, setMapParams, setPanelState} from "../../actions";
+import {changeVariable, setPanelState} from "../../actions";
 import {FaCaretDown} from "@react-icons/all-files/fa/FaCaretDown";
 import {useChivesData} from "../../hooks/useChivesData";
 
