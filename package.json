@@ -72,6 +72,7 @@
     "shapefile": "^0.6.6",
     "simple-statistics": "^7.7.3",
     "styled-components": "^5.2.1",
+    "use-react-screenshot": "^4.0.0",
     "web-vitals": "^0.2.4",
     "webfontloader": "^1.6.28"
   },

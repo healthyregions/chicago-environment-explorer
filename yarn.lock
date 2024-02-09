@@ -19680,6 +19680,11 @@ urlpattern-polyfill@8.0.2:
   resolved "https://registry.yarnpkg.com/urlpattern-polyfill/-/urlpattern-polyfill-8.0.2.tgz#99f096e35eff8bf4b5a2aa7d58a1523d6ebc7ce5"
   integrity sha512-Qp95D4TPJl1kC9SKigDcqgyM2VDVO4RiJc2d4qe5GrYm+zbIQCWWKAFaJNQ4BhdFeDGwBmAxqJBwWSJDb9T3BQ==
 
+use-react-screenshot@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/use-react-screenshot/-/use-react-screenshot-4.0.0.tgz#8be533e0790e75c8fd72174ed523c2ed86c967fc"
+  integrity sha512-4UZIORp7iCklfNOS/dPJab9SPeGdS0nFyIi3qA1rfMyYf/em/KfodYhrOlSHAHWvfdeCrS67Jjk6H4M4oLYSWg==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"

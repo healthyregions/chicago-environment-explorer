@@ -823,6 +823,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         mapStyle={
           "mapbox://styles/herop-lab/cloho6j71001s01ns3fna60uj"
         }
+        preserveDrawingBuffer={true}
         preventStyleDiffing={true}
         mapboxAccessToken={MAPBOX_ACCESS_TOKEN}
         initialViewState={viewState}

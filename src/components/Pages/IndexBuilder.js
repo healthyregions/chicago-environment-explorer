@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 
-import html2canvas from 'html2canvas';
+import { useScreenshot, createFileName } from "use-react-screenshot";
 import styled from "styled-components";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -90,7 +90,13 @@ export default function IndexBuilder() {
 
     const mapParams = useSelector((state) => state.mapParams);
 
+    const [image, takeScreenshot] = useScreenshot({
+        type: "image/png",
+        quality: 1.0
+    });
+
     const normalized = {...storedGeojson};
+    const mapRef = useRef(null);
 
     // Hide margin from DataPanel (hidden)
     dispatch(setPanelState({info: false}));
@@ -103,17 +109,14 @@ export default function IndexBuilder() {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const download = (downloadData, filename) => {
-        // Create an invisible link pointing to this data
-        // Click the link to download the data
-        const link = document.createElement("a");
-        link.setAttribute("download", filename);
-        link.setAttribute("href", downloadData);
-        link.click();
+    const download = (dataURL, { name = "chives-custom-index", extension = "png" } = {}) => {
+        const a = document.createElement("a");
+        a.href = dataURL;
+        a.download = createFileName(extension, name);
+        a.click();
     };
     const downloadCsv = (event) => {
-        console.log('Downloading CSV...');
-
+        // Convert map data to CSV
         const rows = [];
         normalized.features.forEach((feature, index) => {
             const keys = Object.keys(feature.properties);
@@ -129,76 +132,46 @@ export default function IndexBuilder() {
             + rows.map(r => r.join(",")).join("\r\n");
 
         const csvData = encodeURI(csvContent);
-        download(csvData, "chives-custom-index.csv");
+        download(csvData,{ extension: "csv" });
 
         handleClose();
     };
 
     const downloadPng = (event) => {
-        console.log('Downloading PNG...');
-
-        // Select the element that you want to capture
-        const captureElement = document.querySelector("#mainContainer");
-
-        // Call the html2canvas function and pass the element as an argument
-        const promise = html2canvas(captureElement);
-
-        // Wait for render, then download image data
-        setTimeout(() => {
-            promise.then((canvas) => {
-                // Get the image data as a base64-encoded string
-                const imageData = canvas.toDataURL("image/png");
-
-                // Download the image data
-                download(imageData, "chives-custom-index.png");
-            });
-        }, 5000);
+        // Call the takeScreenshot function to capture our ref
+        // This should include the loaded map data / viewport
+        takeScreenshot(mapRef.current).then(download);
 
         handleClose();
     };
 
-    // Computes the sum of an array of numbers
-    // Optionally, use accessor for complex objects
-    const sum = (values, accessor = (f) => f) => {
-        return values.reduce((acc, curr) => acc + accessor(curr), 0);
-    }
+    useEffect(() => {
+        if (selections.length === 0) {
+            // short-circuit if no indicators selected
+            return;
+        }
 
-    // Compute the average of an array of numbers
-    const average = (values) => {
-        return sum(values) / values.length;
-    }
-
-    // Compute the standard deviation (RMS) of an array of numbers
-    const standardDeviation = (values) => {
-        const mean = average(values);
-
-        // Assigning (value - mean) ^ 2 to every array item
-        values = values.map((value) => {
-            return (value - mean) ** 2
-        });
-
-        // Compute and return the standard deviation
-        return Math.sqrt(sum(values) / (values.length - 1));
-    }
-
-    if (selections.length > 0) {
         // Compute weight maximums
         const weightMax = sum(selections, (sel) => sel.value);
 
         // Initialize / reset a new accumulator
-        storedGeojson.features.forEach((feature, index) => {
-            feature.properties["CUSTOM_INDEX"] = 0;
+        selections.forEach(sel => {
+            // Determine column name and value
+            const variable = variablePresets[sel.name];
+            const columnName = variable.Column;
 
-            selections.forEach(sel => {
-                // Determine column name and value
-                const variable = variablePresets[sel.name];
-                const columnName = variable.Column;
+            // Get all values, use them to determine mean and standard deviation
+            const values = storedGeojson.features.map(f => f.properties[columnName]);
+            if (values.length !== storedGeojson.features.length) {
+                console.log(`Warning: length mismatch with ${columnName}`);
+            }
+            const mean = average(values);
+            const sd = standardDeviation(values);
+
+            storedGeojson.features.forEach((feature, index) => {
+                feature.properties["CUSTOM_INDEX"] = 0;
+
                 const value = feature.properties[columnName];
-
-                // Get all values, use them to determine mean and standard deviation
-                const values = storedGeojson.features.map(f => f.properties[columnName]);
-                const mean = average(values);
-                const sd = standardDeviation(values);
 
                 // Scale the value using mean and standard deviation
                 // TODO: how do we know whether +/- needs to be inverted?
@@ -254,6 +227,30 @@ export default function IndexBuilder() {
         if (mapParams.variableName !== 'Custom Index') {
             dispatch(changeVariable(variablePresets['Custom Index']));
         }
+    }, [selections]);
+
+    // Computes the sum of an array of numbers
+    // Optionally, use accessor for complex objects
+    const sum = (values, accessor = (f) => f) => {
+        return values.reduce((acc, curr) => acc + accessor(curr), 0);
+    }
+
+    // Compute the average of an array of numbers
+    const average = (values) => {
+        return sum(values) / values.length;
+    }
+
+    // Compute the standard deviation (RMS) of an array of numbers
+    const standardDeviation = (values) => {
+        const mean = average(values);
+
+        // Assigning (value - mean) ^ 2 to every array item
+        values = values.map((value) => {
+            return (value - mean) ** 2
+        });
+
+        // Compute and return the standard deviation
+        return Math.sqrt(sum(values) / (values.length - 1));
     }
 
     return (
@@ -319,7 +316,8 @@ export default function IndexBuilder() {
                         <FaArrowCircleLeft onClick={() => setCurrentStep('weights')} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
                         3. Summary & Map
                     </FloatingPanel>
-                    <div id="mainContainer" style={{ position: 'fixed' }}>
+
+                    <div id="mainContainer" style={{ position: 'fixed' }} ref={mapRef}>
                         <MapSection bounds={defaultBounds} showSearch={false} />
                         <Legend
                             variableName={`${mapParams.variableName} ${
