@@ -201,25 +201,25 @@ export default function IndexBuilder() {
         a.click();
     };
     const downloadCsv = (event) => {
-        // Assume that first row contains values for all possible keys
-        const keys = Object.keys(normalized.features[0].properties).filter(key => {
-            // Always include geoid column, otherwise only include keys from our selection of indicators
-            return key === 'geoid' || selections.find(sel => key === variablePresets[sel.name].Column);
-        });
+        // Determine keys
+        // Always include geoid column, include columns selected by the user
+        const keys = ['geoid'];
+        selections.map(sel => keys.push(variablePresets[sel.name].Column));
 
-        // Convert all data values to CSV
+        // Parse to collect all user-selected variable values
         const rows = [keys];
         normalized.features.forEach((feature, index) => {
             // Add row value data for each selected indicator
             rows.push(keys.map(key => feature.properties[key]));
         });
 
+        // Convert collected data to CSV
         const csvContent = "data:text/csv;charset=utf-8,"
-            + rows.map(r => r.map(r => {
+            + rows.map(r =>
                 // Use empty string for null/undefined
                 // Surround valid values with double-quote (e.g. "Vulnerable, Prices Rising")
-                return (r === null || r === undefined) ? "" : `"${r}"`;
-            }).join(",")).join("\r\n");
+                r.map(r => (r === null || r === undefined) ? "" : `"${r}"`
+            ).join(",")).join("\r\n");
 
         // Download as a CSV file - open in Excel for viewing
         download(encodeURI(csvContent),{ extension: "csv" });
@@ -246,7 +246,7 @@ export default function IndexBuilder() {
         return sum(values) / values.length;
     }
 
-    // Compute the standard deviation (RMS) of an array of numbers
+    // Compute the standard deviation of an array of numbers
     const standardDeviation = (values) => {
         const mean = average(values);
 
