@@ -118,18 +118,21 @@ export default function IndexBuilder() {
     const downloadCsv = (event) => {
         // Convert map data to CSV
         const rows = [];
-        normalized.features.forEach((feature, index) => {
-            const keys = Object.keys(feature.properties);
 
+        const keys = Object.keys(normalized.features[0].properties);
+
+        normalized.features.forEach((feature, index) => {
             // Add keys as headers on first pass
             index === 0 && rows.push(keys);
 
+            const values = keys.map(key => feature.properties[key]);
+
             // Add row value data
-            rows.push(keys.map(key => feature.properties[key]))
+            rows.push(values)
         });
 
         const csvContent = "data:text/csv;charset=utf-8,"
-            + rows.map(r => r.join(",")).join("\r\n");
+            + rows.map(r => r.join(";")).join("\r\n");
 
         const csvData = encodeURI(csvContent);
         download(csvData,{ extension: "csv" });
@@ -138,8 +141,8 @@ export default function IndexBuilder() {
     };
 
     const downloadPng = (event) => {
-        // Call the takeScreenshot function to capture our ref
-        // This should include the loaded map data / viewport
+        // Call the takeScreenshot function to capture the map
+        // This should include the loaded map data / viewport + Legend + description panel
         takeScreenshot(mapRef.current).then(download);
 
         handleClose();
