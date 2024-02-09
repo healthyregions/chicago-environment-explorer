@@ -103,48 +103,6 @@ export default function IndexBuilder() {
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-    const download = (dataURL, { name = "chives-custom-index", extension = "png" } = {}) => {
-        const a = document.createElement("a");
-        a.href = dataURL;
-        a.download = createFileName(extension, name);
-        a.click();
-    };
-    const downloadCsv = (event) => {
-        // Convert map data to CSV
-        const rows = [];
-
-        // Assume that first row contains values for all keys
-        const keys = Object.keys(normalized.features[0].properties);
-        normalized.features.forEach((feature, index) => {
-            // Add keys as headers on first pass
-            index === 0 && rows.push(keys);
-
-            // Add row value data
-            rows.push(keys.map(key => feature.properties[key]));
-        });
-
-        const csvContent = "data:text/csv;charset=utf-8,"
-            + rows.map(r => r.map(r => `"${r}"`).join(",")).join("\r\n");
-
-        const csvData = encodeURI(csvContent);
-        download(csvData,{ extension: "csv" });
-
-        handleClose();
-    };
-
-    const downloadPng = (event) => {
-        // Call the takeScreenshot function to capture the map
-        // This should include the loaded map data / viewport + Legend + description panel
-        takeScreenshot(mapRef.current).then(download);
-
-        handleClose();
-    };
 
     useEffect(() => {
         if (selections.length === 0) {
@@ -205,6 +163,7 @@ export default function IndexBuilder() {
         console.log('Custom Mean (should be ~ 0): ', average(customValues));
         console.log('Custom Standard Deviation: ', standardDeviation(customValues));
 
+        // Insert a new pseudo-variable for our Custom Index
         variablePresets['HEADER::Custom'] = {};
         variablePresets['Custom Index'] = {
             'Added By': 'You',
@@ -229,6 +188,52 @@ export default function IndexBuilder() {
             dispatch(changeVariable(variablePresets['Custom Index']));
         }
     }, [selections]);
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const download = (dataURL, { name = "chives-custom-index", extension = "png" } = {}) => {
+        const a = document.createElement("a");
+        a.href = dataURL;
+        a.download = createFileName(extension, name);
+        a.click();
+    };
+    const downloadCsv = (event) => {
+        // Assume that first row contains values for all possible keys
+        const keys = Object.keys(normalized.features[0].properties).filter(key => {
+            // Always include geoid column, otherwise only include keys from our selection of indicators
+            return key === 'geoid' || selections.find(sel => key === variablePresets[sel.name].Column);
+        });
+
+        // Convert all data values to CSV
+        const rows = [keys];
+        normalized.features.forEach((feature, index) => {
+            // Add row value data for each selected indicator
+            rows.push(keys.map(key => feature.properties[key]));
+        });
+
+        const csvContent = "data:text/csv;charset=utf-8,"
+            + rows.map(r => r.map(r => {
+                // Use empty string for null/undefined
+                // Surround valid values with double-quote (e.g. "Vulnerable, Prices Rising")
+                return (r === null || r === undefined) ? "" : `"${r}"`;
+            }).join(",")).join("\r\n");
+
+        // Download as a CSV file - open in Excel for viewing
+        download(encodeURI(csvContent),{ extension: "csv" });
+
+        handleClose();
+    };
+
+    const downloadPng = (event) => {
+        // Call the takeScreenshot function to capture the map
+        // This should include the loaded map data / viewport + Legend + description panel
+        takeScreenshot(mapRef.current).then(download);
+
+        handleClose();
+    };
 
     // Computes the sum of an array of numbers
     // Optionally, use accessor for complex objects
