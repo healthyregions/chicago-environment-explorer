@@ -49,6 +49,7 @@
     "geobuf": "^3.0.2",
     "geojson2shp": "^0.5.0",
     "history": "^5.1.0",
+    "html2canvas": "^1.4.1",
     "lodash": "^4.17.20",
     "mapbox-gl": "2.12.1",
     "netlify-cli": "^13.1.2",

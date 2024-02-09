@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useHistory} from "react-router-dom";
 
+import html2canvas from 'html2canvas';
 import styled from "styled-components";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -89,6 +90,8 @@ export default function IndexBuilder() {
 
     const mapParams = useSelector((state) => state.mapParams);
 
+    const normalized = {...storedGeojson};
+
     // Hide margin from DataPanel (hidden)
     dispatch(setPanelState({info: false}));
 
@@ -100,12 +103,57 @@ export default function IndexBuilder() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const download = (downloadData, filename) => {
+        // Create an invisible link pointing to this data
+        // Click the link to download the data
+        const link = document.createElement("a");
+        link.setAttribute("download", filename);
+        link.setAttribute("href", downloadData);
+        link.click();
+    };
     const downloadCsv = (event) => {
         console.log('Downloading CSV...');
+
+        const rows = [];
+        normalized.features.forEach((feature, index) => {
+            const keys = Object.keys(feature.properties);
+
+            // Add keys as headers on first pass
+            index === 0 && rows.push(keys);
+
+            // Add row value data
+            rows.push(keys.map(key => feature.properties[key]))
+        });
+
+        const csvContent = "data:text/csv;charset=utf-8,"
+            + rows.map(r => r.join(",")).join("\r\n");
+
+        const csvData = encodeURI(csvContent);
+        download(csvData, "chives-custom-index.csv");
+
         handleClose();
     };
+
     const downloadPng = (event) => {
         console.log('Downloading PNG...');
+
+        // Select the element that you want to capture
+        const captureElement = document.querySelector("#mainContainer");
+
+        // Call the html2canvas function and pass the element as an argument
+        const promise = html2canvas(captureElement);
+
+        // Wait for render, then download image data
+        setTimeout(() => {
+            promise.then((canvas) => {
+                // Get the image data as a base64-encoded string
+                const imageData = canvas.toDataURL("image/png");
+
+                // Download the image data
+                download(imageData, "chives-custom-index.png");
+            });
+        }, 5000);
+
         handleClose();
     };
 
@@ -130,7 +178,7 @@ export default function IndexBuilder() {
         });
 
         // Compute and return the standard deviation
-        return Math.sqrt(sum(values) / values.length);
+        return Math.sqrt(sum(values) / (values.length - 1));
     }
 
     if (selections.length > 0) {
@@ -138,30 +186,50 @@ export default function IndexBuilder() {
         const weightMax = sum(selections, (sel) => sel.value);
 
         // Initialize / reset a new accumulator
-        storedGeojson.features.forEach((feature) => {
+        storedGeojson.features.forEach((feature, index) => {
             feature.properties["CUSTOM_INDEX"] = 0;
 
             selections.forEach(sel => {
                 // Determine column name and value
                 const variable = variablePresets[sel.name];
-                const column = variable.Column;
-                const value = feature.properties[column];
+                const columnName = variable.Column;
+                const value = feature.properties[columnName];
 
                 // Get all values, use them to determine mean and standard deviation
-                const values = storedGeojson.features.map(f => f.properties[column]);
+                const values = storedGeojson.features.map(f => f.properties[columnName]);
                 const mean = average(values);
                 const sd = standardDeviation(values);
 
-                // Scale (RMS) the value using mean and standard deviation
+                // Scale the value using mean and standard deviation
                 // TODO: how do we know whether +/- needs to be inverted?
+                // TODO: how to handle non-numeric variables? exclude them?
                 const scaled = (value - mean) / sd;
-
+                index === 0 && console.log(`Computing scaled value: (${value} - ${mean}) / ${sd} = ${value} -> ${scaled}`);
                 // Apply weights and accumulate total scaled value
-                feature.properties["CUSTOM_INDEX"] += ((sel.value / weightMax) * scaled);
-            });
+                const weighted = ((sel.value / weightMax) * scaled);
+                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${scaled} = ${weighted}`);
+                normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
-            feature.properties["CUSTOM_INDEX"] /= selections.length;
+                // FIXME: Sanity check
+                normalized.features[index].properties[`${columnName}_SCALED`] = scaled;
+                normalized.features[index].properties[`${columnName}_WEIGHTED`] = weighted;
+            });
         });
+
+        // FIXME: Sanity check with first selected indicator
+        const variable = variablePresets[selections[0].name];
+        const columnName = variable.Column;
+        const scaledValues = normalized.features.map(f => f.properties[`${columnName}_SCALED`]);
+        console.log('Scaled Mean (should be ~ 0): ', average(scaledValues));
+        console.log('Scaled Standard Deviation (should be ~ 1): ', standardDeviation(scaledValues));
+        const weightedValues = normalized.features.map(f => f.properties[`${columnName}_WEIGHTED`]);
+        console.log('Weighted Mean (should be ~ 0): ', average(weightedValues));
+        console.log('Weighted Standard Deviation: ', standardDeviation(weightedValues));
+
+        // FIXME: Sanity check with overall
+        const customValues = normalized.features.map(f => f.properties['CUSTOM_INDEX']);
+        console.log('Custom Mean (should be ~ 0): ', average(customValues));
+        console.log('Custom Standard Deviation: ', standardDeviation(customValues));
 
         variablePresets['HEADER::Custom'] = {};
         variablePresets['Custom Index'] = {
@@ -310,10 +378,10 @@ export default function IndexBuilder() {
                                               anchorEl={anchorEl}
                                               open={open}
                                               onClose={handleClose}>
-                                            <MenuItem disabled={true} onClick={() => downloadCsv()} disableRipple>
+                                            <MenuItem onClick={() => downloadCsv()} disableRipple>
                                                  <FaCsvIcon /> CSV
                                             </MenuItem>
-                                            <MenuItem disabled={true} onClick={() => downloadPng()} disableRipple>
+                                            <MenuItem onClick={() => downloadPng()} disableRipple>
                                                  <FaPngIcon /> PNG
                                             </MenuItem>
                                         </Menu>
