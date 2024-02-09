@@ -119,20 +119,18 @@ export default function IndexBuilder() {
         // Convert map data to CSV
         const rows = [];
 
+        // Assume that first row contains values for all keys
         const keys = Object.keys(normalized.features[0].properties);
-
         normalized.features.forEach((feature, index) => {
             // Add keys as headers on first pass
             index === 0 && rows.push(keys);
 
-            const values = keys.map(key => feature.properties[key]);
-
             // Add row value data
-            rows.push(values)
+            rows.push(keys.map(key => feature.properties[key]));
         });
 
         const csvContent = "data:text/csv;charset=utf-8,"
-            + rows.map(r => r.join(";")).join("\r\n");
+            + rows.map(r => r.map(r => `"${r}"`).join(",")).join("\r\n");
 
         const csvData = encodeURI(csvContent);
         download(csvData,{ extension: "csv" });
