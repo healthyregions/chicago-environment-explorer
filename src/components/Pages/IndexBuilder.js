@@ -25,6 +25,7 @@ import {FaArrowCircleLeft} from "@react-icons/all-files/fa/FaArrowCircleLeft";
 import {changeVariable, setPanelState} from "../../actions";
 import {FaCaretDown} from "@react-icons/all-files/fa/FaCaretDown";
 import {useChivesData} from "../../hooks/useChivesData";
+import {sampleStandardDeviation, sum, mean, zScore} from "simple-statistics";
 
 // TODO: Convert style={{ }} to styled-components
 
@@ -75,7 +76,7 @@ const FaPngIcon = () =>
 export default function IndexBuilder() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { storedGeojson } = useChivesData();
+    const { storedGeojson } = Object.freeze(useChivesData());
 
     /** for example, see components/IndexBuilder/IndicatorsStep */
     const [steps] = useState(['indicators', 'weights', 'summary']);
@@ -111,57 +112,62 @@ export default function IndexBuilder() {
         }
 
         // Compute weight maximums
-        const weightMax = sum(selections, (sel) => sel.value);
+        const weightMax = sum(selections.map(s => s.value));
 
         // Initialize / reset a new accumulator
         selections.forEach(sel => {
             // Determine column name and value
             const variable = variablePresets[sel.name];
             const columnName = variable.Column;
+            console.log('Column Name: ', columnName);
 
             // Get all values, use them to determine mean and standard deviation
             const values = storedGeojson.features.map(f => f.properties[columnName]);
             if (values.length !== storedGeojson.features.length) {
                 console.log(`Warning: length mismatch with ${columnName}`);
             }
-            const mean = average(values);
-            const sd = standardDeviation(values);
+            const m = mean(values);
+            const sd = sampleStandardDeviation(values);
 
             storedGeojson.features.forEach((feature, index) => {
-                feature.properties["CUSTOM_INDEX"] = 0;
+                normalized.features[index].properties["CUSTOM_INDEX"] = 0;
 
                 const value = feature.properties[columnName];
 
-                // Scale the value using mean and standard deviation
+                // Compute zScore using mean and standard deviation
                 // TODO: how do we know whether +/- needs to be inverted?
                 // TODO: how to handle non-numeric variables? exclude them?
-                const scaled = (value - mean) / sd;
-                index === 0 && console.log(`Computing scaled value: (${value} - ${mean}) / ${sd} = ${value} -> ${scaled}`);
-                // Apply weights and accumulate total scaled value
-                const weighted = ((sel.value / weightMax) * scaled);
-                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${scaled} = ${weighted}`);
+                const zScoreValue = zScore(value, m, sd);
+                index === 0 && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
+
+                // Apply weights and accumulate total
+                const weighted = ((sel.value / weightMax) * zScoreValue);
+                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${zScoreValue} = ${weighted}`);
                 normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
-                // FIXME: Sanity check
-                normalized.features[index].properties[`${columnName}_SCALED`] = scaled;
-                normalized.features[index].properties[`${columnName}_WEIGHTED`] = weighted;
+                // Store these for CSV download later
+                const weightPct = Math.round(100 * (sel.value / weightMax));
+                normalized.features[index].properties[`${columnName}_weight${weightPct}pct`] = weighted;
+                normalized.features[index].properties[`${columnName}_zscore`] = zScoreValue;
             });
         });
 
         // FIXME: Sanity check with first selected indicator
-        const variable = variablePresets[selections[0].name];
+        const firstSelection = selections[0];
+        const variable = variablePresets[firstSelection.name];
         const columnName = variable.Column;
-        const scaledValues = normalized.features.map(f => f.properties[`${columnName}_SCALED`]);
-        console.log('Scaled Mean (should be ~ 0): ', average(scaledValues));
-        console.log('Scaled Standard Deviation (should be ~ 1): ', standardDeviation(scaledValues));
-        const weightedValues = normalized.features.map(f => f.properties[`${columnName}_WEIGHTED`]);
-        console.log('Weighted Mean (should be ~ 0): ', average(weightedValues));
-        console.log('Weighted Standard Deviation: ', standardDeviation(weightedValues));
+
+        const zScoreValues = normalized.features.map(f => f.properties[`${columnName}_zscore`]);
+        console.log('Scaled Mean (should be ~ 0): ', mean(zScoreValues));
+        console.log('Scaled Standard Deviation (should be ~ 1): ', sampleStandardDeviation(zScoreValues));
+        const weightedValues = normalized.features.map(f => f.properties[`${columnName}_weight`]);
+        console.log('Weighted Mean (should be ~ 0): ', mean(weightedValues));
+        console.log('Weighted Standard Deviation: ', sampleStandardDeviation(weightedValues));
 
         // FIXME: Sanity check with overall
         const customValues = normalized.features.map(f => f.properties['CUSTOM_INDEX']);
-        console.log('Custom Mean (should be ~ 0): ', average(customValues));
-        console.log('Custom Standard Deviation: ', standardDeviation(customValues));
+        console.log('Custom Mean (should be ~ 0): ', mean(customValues));
+        console.log('Custom Standard Deviation: ', sampleStandardDeviation(customValues));
 
         // Insert a new pseudo-variable for our Custom Index
         variablePresets['HEADER::Custom'] = {};
@@ -204,11 +210,20 @@ export default function IndexBuilder() {
         // Determine keys
         // Always include geoid column, include columns selected by the user
         const keys = ['geoid'];
-        selections.map(sel => keys.push(variablePresets[sel.name].Column));
+        const weightMax = sum(selections.map(s => s.value));
+        selections.map(sel => {
+            const columnName = variablePresets[sel.name].Column;
+            keys.push(columnName);
+            keys.push(`${columnName}_zscore`);
 
+            const weightPct = Math.round(100 * (sel.value / weightMax));
+            keys.push(`${columnName}_weight${weightPct}pct`);
+        });
+
+        console.log("Normalized: ", normalized);
         // Parse to collect all user-selected variable values
         const rows = [keys];
-        normalized.features.forEach((feature, index) => {
+        normalized.features.forEach((feature) => {
             // Add row value data for each selected indicator
             rows.push(keys.map(key => feature.properties[key]));
         });
@@ -234,30 +249,6 @@ export default function IndexBuilder() {
 
         handleClose();
     };
-
-    // Computes the sum of an array of numbers
-    // Optionally, use accessor for complex objects
-    const sum = (values, accessor = (f) => f) => {
-        return values.reduce((acc, curr) => acc + accessor(curr), 0);
-    }
-
-    // Compute the average of an array of numbers
-    const average = (values) => {
-        return sum(values) / values.length;
-    }
-
-    // Compute the standard deviation of an array of numbers
-    const standardDeviation = (values) => {
-        const mean = average(values);
-
-        // Assigning (value - mean) ^ 2 to every array item
-        values = values.map((value) => {
-            return (value - mean) ** 2
-        });
-
-        // Compute and return the standard deviation
-        return Math.sqrt(sum(values) / (values.length - 1));
-    }
 
     return (
         <>
