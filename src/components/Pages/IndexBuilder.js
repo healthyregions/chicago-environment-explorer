@@ -119,7 +119,7 @@ export default function IndexBuilder() {
             // Determine column name and value
             const variable = variablePresets[sel.name];
             const columnName = variable.Column;
-            console.log('Column Name: ', columnName);
+            const scaling = variable.scaling || 1;
 
             // Get all values, use them to determine mean and standard deviation
             const values = storedGeojson.features.map(f => f.properties[columnName]);
@@ -132,12 +132,12 @@ export default function IndexBuilder() {
             storedGeojson.features.forEach((feature, index) => {
                 normalized.features[index].properties["CUSTOM_INDEX"] = 0;
 
-                const value = feature.properties[columnName];
-
-                // Compute zScore using mean and standard deviation
-                // TODO: how do we know whether +/- needs to be inverted?
                 // TODO: how to handle non-numeric variables? exclude them?
-                const zScoreValue = zScore(value, m, sd);
+
+                // Compute zScore using value, mean, and standard deviation
+                // Use scaling to determine whether +/- needs to be inverted
+                const value = feature.properties[columnName];
+                const zScoreValue = scaling * zScore(value, m, sd);
                 index === 0 && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
 
                 // Apply weights and accumulate total
@@ -145,29 +145,12 @@ export default function IndexBuilder() {
                 index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${zScoreValue} = ${weighted}`);
                 normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
-                // Store these for CSV download later
+                // Store these for later CSV download
                 const weightPct = Math.round(100 * (sel.value / weightMax));
                 normalized.features[index].properties[`${columnName}_weight${weightPct}pct`] = weighted;
                 normalized.features[index].properties[`${columnName}_zscore`] = zScoreValue;
             });
         });
-
-        // FIXME: Sanity check with first selected indicator
-        const firstSelection = selections[0];
-        const variable = variablePresets[firstSelection.name];
-        const columnName = variable.Column;
-
-        const zScoreValues = normalized.features.map(f => f.properties[`${columnName}_zscore`]);
-        console.log('Scaled Mean (should be ~ 0): ', mean(zScoreValues));
-        console.log('Scaled Standard Deviation (should be ~ 1): ', sampleStandardDeviation(zScoreValues));
-        const weightedValues = normalized.features.map(f => f.properties[`${columnName}_weight`]);
-        console.log('Weighted Mean (should be ~ 0): ', mean(weightedValues));
-        console.log('Weighted Standard Deviation: ', sampleStandardDeviation(weightedValues));
-
-        // FIXME: Sanity check with overall
-        const customValues = normalized.features.map(f => f.properties['CUSTOM_INDEX']);
-        console.log('Custom Mean (should be ~ 0): ', mean(customValues));
-        console.log('Custom Standard Deviation: ', sampleStandardDeviation(customValues));
 
         // Insert a new pseudo-variable for our Custom Index
         variablePresets['HEADER::Custom'] = {};
@@ -182,6 +165,7 @@ export default function IndexBuilder() {
             'Original Scale': '0 - 100',
             'Variable Name': 'Custom Index',
             accessor: (feature) => feature.properties['CUSTOM_INDEX'],
+            scaling: 1,
             bins: null,
             colorScale: [[237, 248, 251], [191, 211, 230], [158, 188, 218], [140, 150, 198], [136, 86, 167], [129, 15, 124]],
             custom: 1,
@@ -220,7 +204,6 @@ export default function IndexBuilder() {
             keys.push(`${columnName}_weight${weightPct}pct`);
         });
 
-        console.log("Normalized: ", normalized);
         // Parse to collect all user-selected variable values
         const rows = [keys];
         normalized.features.forEach((feature) => {
