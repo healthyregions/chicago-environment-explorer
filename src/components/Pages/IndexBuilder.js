@@ -25,7 +25,7 @@ import {FaArrowCircleLeft} from "@react-icons/all-files/fa/FaArrowCircleLeft";
 import {changeVariable, setPanelState} from "../../actions";
 import {FaCaretDown} from "@react-icons/all-files/fa/FaCaretDown";
 import {useChivesData} from "../../hooks/useChivesData";
-import {sampleStandardDeviation, sum, mean, zScore} from "simple-statistics";
+import {sampleStandardDeviation, sum, mean, zScore, min, max} from "simple-statistics";
 
 // TODO: Convert style={{ }} to styled-components
 
@@ -140,15 +140,19 @@ export default function IndexBuilder() {
                 const zScoreValue = scaling * zScore(value, m, sd);
                 index === 0 && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
 
+                const scaledValue = (zScoreValue + 1) / 2;
+                index === 0 && console.log(`Computing scaled value: (${zScoreValue} + 1) / 2 = ${zScoreValue} -> ${scaledValue}`);
+
                 // Apply weights and accumulate total
-                const weighted = ((sel.value / weightMax) * zScoreValue);
-                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${zScoreValue} = ${weighted}`);
+                const weighted = ((sel.value / weightMax) * scaledValue);
+                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${scaledValue} = ${scaledValue} -> ${weighted}`);
                 normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
                 // Store these for later CSV download
                 const weightPct = Math.round(100 * (sel.value / weightMax));
                 normalized.features[index].properties[`${columnName}_weight${weightPct}pct`] = weighted;
                 normalized.features[index].properties[`${columnName}_zscore`] = zScoreValue;
+                normalized.features[index].properties[`${columnName}_scaled`] = scaledValue;
             });
         });
 
@@ -162,7 +166,7 @@ export default function IndexBuilder() {
             'Data Year': null,
             Description: `Custom index with ${selections.length} variables`,
             'Metadata Doc': null,
-            'Original Scale': '0 - 100',
+            'Original Scale': '0 - 1',
             'Variable Name': 'Custom Index',
             accessor: (feature) => feature.properties['CUSTOM_INDEX'],
             scaling: 1,
@@ -199,6 +203,7 @@ export default function IndexBuilder() {
             const columnName = variablePresets[sel.name].Column;
             keys.push(columnName);
             keys.push(`${columnName}_zscore`);
+            keys.push(`${columnName}_scaled`);
 
             const weightPct = Math.round(100 * (sel.value / weightMax));
             keys.push(`${columnName}_weight${weightPct}pct`);
