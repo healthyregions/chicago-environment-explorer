@@ -25,7 +25,7 @@ import {FaArrowCircleLeft} from "@react-icons/all-files/fa/FaArrowCircleLeft";
 import {changeVariable, setPanelState} from "../../actions";
 import {FaCaretDown} from "@react-icons/all-files/fa/FaCaretDown";
 import {useChivesData} from "../../hooks/useChivesData";
-import {sampleStandardDeviation, sum, mean, zScore, min, max} from "simple-statistics";
+import {sampleStandardDeviation, sum, mean, quantile, zScore, min, max} from "simple-statistics";
 
 // TODO: Convert style={{ }} to styled-components
 
@@ -89,7 +89,7 @@ export default function IndexBuilder() {
     // TODO: Default selections?
     const [selections, setSelections] = useState([]);
 
-    const mapParams = useSelector((state) => state.mapParams);
+    const colorScale = [[237, 248, 251], [158, 188, 218], [140, 150, 198], [129, 15, 124]];
 
     const [image, takeScreenshot] = useScreenshot({
         type: "image/png",
@@ -114,45 +114,45 @@ export default function IndexBuilder() {
         // Compute weight maximums
         const weightMax = sum(selections.map(s => s.value));
 
-        // Initialize / reset a new accumulator
-        selections.forEach(sel => {
-            // Determine column name and value
-            const variable = variablePresets[sel.name];
-            const columnName = variable.Column;
-            const scaling = variable.scaling || 1;
+        storedGeojson.features.forEach((feature, index) => {
+            // Initialize / reset a new accumulator for this feature/index
+            normalized.features[index].properties["CUSTOM_INDEX"] = 0;
 
-            // Get all values, use them to determine mean and standard deviation
-            const values = storedGeojson.features.map(f => f.properties[columnName]);
-            if (values.length !== storedGeojson.features.length) {
-                console.log(`Warning: length mismatch with ${columnName}`);
-            }
-            const m = mean(values);
-            const sd = sampleStandardDeviation(values);
+            selections.forEach(sel => {
+                // Determine column name and value
+                const variable = variablePresets[sel.name];
+                const columnName = variable.Column;
+                const scaling = variable.scaling || 1;
 
-            storedGeojson.features.forEach((feature, index) => {
-                normalized.features[index].properties["CUSTOM_INDEX"] = 0;
+                // Get all values, use them to determine mean and standard deviation
+                const values = storedGeojson.features.map(f => f.properties[columnName]);
+                if (index === 0 && values.length !== storedGeojson.features.length) {
+                    console.warn(`Warning: length mismatch with ${columnName}`);
+                }
+
+                const m = mean(values);
+                const sd = sampleStandardDeviation(values);
+
+                //const [min_val, max_val]  = [min(values), max(values)];
+                //index === 0 && console.log(`Mean=${m}  STD=${sd}  Min=${min_val}  Max=${max_val}`);
 
                 // TODO: how to handle non-numeric variables? exclude them?
+                const value = feature.properties[columnName];
 
                 // Compute zScore using value, mean, and standard deviation
                 // Use scaling to determine whether +/- needs to be inverted
-                const value = feature.properties[columnName];
-                const zScoreValue = scaling * zScore(value, m, sd);
+                const zScoreValue = zScore(value, m, sd);
                 index === 0 && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
 
-                const scaledValue = (zScoreValue + 1) / 2;
-                index === 0 && console.log(`Computing scaled value: (${zScoreValue} + 1) / 2 = ${zScoreValue} -> ${scaledValue}`);
-
                 // Apply weights and accumulate total
-                const weighted = ((sel.value / weightMax) * scaledValue);
-                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${scaledValue} = ${scaledValue} -> ${weighted}`);
+                const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
+                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
                 normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
                 // Store these for later CSV download
                 const weightPct = Math.round(100 * (sel.value / weightMax));
                 normalized.features[index].properties[`${columnName}_weight${weightPct}pct`] = weighted;
                 normalized.features[index].properties[`${columnName}_zscore`] = zScoreValue;
-                normalized.features[index].properties[`${columnName}_scaled`] = scaledValue;
             });
         });
 
@@ -160,8 +160,8 @@ export default function IndexBuilder() {
         variablePresets['HEADER::Custom'] = {};
         variablePresets['Custom Index'] = {
             'Added By': 'You',
-            Bins: null,
-            Column: 'CUSTOM_INDEX',
+            Bins: quan,
+            Column: 'CUSTOM_INDEX_scaled',
             'Data Source': 'You',
             'Data Year': null,
             Description: `Custom index with ${selections.length} variables`,
@@ -170,17 +170,13 @@ export default function IndexBuilder() {
             'Variable Name': 'Custom Index',
             accessor: (feature) => feature.properties['CUSTOM_INDEX'],
             scaling: 1,
-            bins: null,
-            colorScale: [[237, 248, 251], [191, 211, 230], [158, 188, 218], [140, 150, 198], [136, 86, 167], [129, 15, 124]],
+            bins: quan,
+            colorScale: colorScale,
             custom: 1,
             units: '',
             listGroup: 'Custom',
             variableName: 'Custom Index'
         };
-
-        if (mapParams.variableName !== 'Custom Index') {
-            dispatch(changeVariable(variablePresets['Custom Index']));
-        }
     }, [selections]);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -202,7 +198,7 @@ export default function IndexBuilder() {
         selections.map(sel => {
             const columnName = variablePresets[sel.name].Column;
             keys.push(columnName);
-            keys.push(`${columnName}_zscore`);
+            //keys.push(`${columnName}_zscore`);
             keys.push(`${columnName}_scaled`);
 
             const weightPct = Math.round(100 * (sel.value / weightMax));
@@ -237,6 +233,24 @@ export default function IndexBuilder() {
 
         handleClose();
     };
+
+    // Finally, scale Custom Index values from 0 to 1
+    const values = normalized.features.map(f => f.properties[`CUSTOM_INDEX`]).filter(f => f || f === 0);
+    const [min_val, max_val] = [min(values), max(values)];
+    const scaledValues = normalized.features.map((f, index) => {
+        const value = f.properties[`CUSTOM_INDEX`];
+        const scaledValue = (value - min_val) / (max_val - min_val);
+        normalized.features[index].properties[`CUSTOM_INDEX_scaled`] = scaledValue;
+
+        return scaledValue;
+    }).sort((v1, v2) => v1 > v2 ? 1 : (v1 < v2 ? -1 : 0));
+    console.log(`Scaled Values: `, scaledValues);
+    const [min_scaled_val, max_scaled_val] = [min(scaledValues), max(scaledValues)];
+    console.log(`${min_scaled_val} < x < ${max_scaled_val}`);
+
+    // Classify into quantile bins
+    const quan = quantile(scaledValues, [0.25, 0.5, 0.75]).map(v => v.toFixed(2));
+    console.log(`quantile=${quan}`);
 
     return (
         <>
@@ -305,11 +319,9 @@ export default function IndexBuilder() {
                     <div id="mainContainer" style={{ position: 'fixed' }} ref={mapRef}>
                         <MapSection bounds={defaultBounds} showSearch={false} />
                         <Legend
-                            variableName={`${mapParams.variableName} ${
-                                mapParams.units ? `(${mapParams.units})` : ""
-                            }`}
-                            colorScale={mapParams.colorScale}
-                            bins={mapParams.bins}
+                            variableName={'Custom Index'}
+                            colorScale={colorScale}
+                            bins={quan}
                         />
                         <FloatingPanel style={{ top: '75px', left: '20px' }}>
                             <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
