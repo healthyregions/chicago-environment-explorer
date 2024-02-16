@@ -100,7 +100,7 @@ const SummaryMapPage = ({ selections }) => {
     const downloadCsv = (event) => {
         // Determine keys
         // Always include geoid column, include columns selected by the user
-        const keys = ['geoid'];
+        const keys = ['geoid', 'CUSTOM_INDEX', 'CUSTOM_INDEX_scaled'];
         const weightMax = sum(selections.map(s => s.value));
         selections.map(sel => {
             const columnName = variablePresets[sel.name].Column;
@@ -176,7 +176,7 @@ const SummaryMapPage = ({ selections }) => {
 
             // Apply weights and accumulate total
             const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
-            index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
+            index === 0 && console.log(`Applying weight to ${sel.name}: ${scaling} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
             normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
             // Store these for later CSV download
