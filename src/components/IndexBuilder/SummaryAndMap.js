@@ -248,6 +248,11 @@ const SummaryMapPage = ({ selections }) => {
         dispatch(changeVariable(variablePresets['Custom Index']));
     }
 
+    const getGroups = () => {
+        return selections.map(sel => variablePresets[sel.name].listGroup)
+            .filter((value, index, array) => array.indexOf(value) === index);
+    }
+
     return (
         <>
             <div id="mainContainer" style={{ position: 'fixed' }} ref={mapRef}>
@@ -261,20 +266,18 @@ const SummaryMapPage = ({ selections }) => {
                     <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
                         <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Index</Typography>
                         <Typography variant={'body2'} style={{ marginBottom: '2rem' }}>
-                            <p>The custom index you created has themes:</p>
+                            <p>The custom index you created has theme{getGroups().length > 1 && <>s</>}:</p>
                             <p>
                                 {
-                                    selections.map(sel => variablePresets[sel.name].listGroup)
-                                        .filter((value, index, array) => array.indexOf(value) === index)
-                                        .map((group, index, array) => <>
-                                            {
-                                                index > 0 && array.length > 2 && <>, </>
-                                            }
-                                            {
-                                                index !== 0 && index === (array.length - 1) && <> and </>
-                                            }
-                                            <BoldedPinkText>{group}</BoldedPinkText>
-                                        </>)
+                                    getGroups().map((group, index, array) => <>
+                                        {
+                                            index > 0 && array.length > 2 && <>, </>
+                                        }
+                                        {
+                                            index !== 0 && index === (array.length - 1) && <> and </>
+                                        }
+                                        <BoldedPinkText>{group}</BoldedPinkText>
+                                    </>)
                                 }.
                                 With an additional focus on social indicators, the custom index
                                 will be useful for house management and family planning policy makers.
