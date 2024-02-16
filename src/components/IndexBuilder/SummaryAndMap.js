@@ -158,7 +158,7 @@ const SummaryMapPage = ({ selections }) => {
             const scaling = variable.scaling || 1;
 
             // Get all values, use them to determine mean and standard deviation
-            const values = storedGeojson.features.map(f => f.properties[columnName]);
+            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || f === 0);
             if (index === 0 && values.length !== storedGeojson.features.length) {
                 console.warn(`Warning: length mismatch with ${columnName}`);
             }
