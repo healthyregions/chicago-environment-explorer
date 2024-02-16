@@ -158,7 +158,7 @@ const SummaryMapPage = ({ selections }) => {
             const scaling = variable.scaling || 1;
 
             // Get all values, use them to determine mean and standard deviation
-            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || f === 0);
+            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || (!variable['ignore_0'] && f === 0));
             if (index === 0 && values.length !== storedGeojson.features.length) {
                 console.warn(`Warning: length mismatch with ${columnName}`);
             }
@@ -168,15 +168,19 @@ const SummaryMapPage = ({ selections }) => {
 
             // TODO: how to handle non-numeric variables? exclude them?
             const value = feature.properties[columnName];
+            if (variable['ignore_0'] && value === 0) {
+                // If this value is zero and we should ignore zero for this variable, then ignore it
+                return;
+            }
 
             // Compute zScore using value, mean, and standard deviation
             // Use scaling to determine whether +/- needs to be inverted
             const zScoreValue = zScore(value, m, sd);
-            index === 0 && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
+            feature.properties['geoid'] === '17031030104' && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
 
             // Apply weights and accumulate total
             const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
-            index === 0 && console.log(`Applying weight to ${sel.name}: ${scaling} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
+            feature.properties['geoid'] === '17031030104' && console.log(`Applying weight to ${sel.name}: ${scaling} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
             normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
             // Store these for later CSV download
@@ -240,7 +244,8 @@ const SummaryMapPage = ({ selections }) => {
         custom: 1,
         units: '',
         listGroup: 'Custom',
-        variableName: 'Custom Index'
+        variableName: 'Custom Index',
+        'ignore_0': false
     }
 
     if (mapParams.variableName !== 'Custom Index') {
