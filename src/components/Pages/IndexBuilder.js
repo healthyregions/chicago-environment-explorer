@@ -108,77 +108,6 @@ export default function IndexBuilder() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-    useEffect(() => {
-        // Compute weight maximums
-        const weightMax = sum(selections.map(s => s.value));
-
-        storedGeojson?.features?.forEach((feature, index) => {
-            // Initialize / reset a new accumulator for this feature/index
-            normalized.features[index].properties["CUSTOM_INDEX"] = 0;
-
-            selections.forEach(sel => {
-                // Determine column name and value
-                const variable = variablePresets[sel.name];
-                const columnName = variable.Column;
-                const scaling = variable.scaling || 1;
-
-                // Get all values, use them to determine mean and standard deviation
-                const values = storedGeojson.features.map(f => f.properties[columnName]);
-                if (index === 0 && values.length !== storedGeojson.features.length) {
-                    console.warn(`Warning: length mismatch with ${columnName}`);
-                }
-
-                const m = mean(values);
-                const sd = sampleStandardDeviation(values);
-
-                // TODO: how to handle non-numeric variables? exclude them?
-                const value = feature.properties[columnName];
-
-                // Compute zScore using value, mean, and standard deviation
-                // Use scaling to determine whether +/- needs to be inverted
-                const zScoreValue = zScore(value, m, sd);
-                index === 0 && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
-
-                // Apply weights and accumulate total
-                const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
-                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
-                normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
-
-                // Store these for later CSV download
-                const weightPct = Math.round(100 * (sel.value / weightMax));
-                normalized.features[index].properties[`${columnName}_weight${weightPct}pct`] = weighted;
-                normalized.features[index].properties[`${columnName}_zscore`] = zScoreValue;
-            });
-        });
-
-
-        // Insert a new pseudo-variable for our Custom Index
-        variablePresets['HEADER::Custom'] = {};
-        variablePresets['Custom Index'] = {
-            'Added By': 'You',
-            Bins: bins,
-            Column: 'CUSTOM_INDEX_scaled',
-            'Data Source': 'You',
-            'Data Year': null,
-            Description: `Custom index with ${selections.length} variables`,
-            'Metadata Doc': null,
-            'Original Scale': '0 - 1',
-            'Variable Name': 'Custom Index',
-            accessor: (feature) => feature.properties['CUSTOM_INDEX'],
-            scaling: 1,
-            bins: bins,
-            colorScale: colorScale,
-            custom: 1,
-            units: '',
-            listGroup: 'Custom',
-            variableName: 'Custom Index'
-        }
-
-
-        if (mapParams.variableName !== 'Custom Index') {
-            dispatch(changeVariable(variablePresets['Custom Index']));
-        }
-    }, [selections]);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -236,41 +165,113 @@ export default function IndexBuilder() {
         handleClose();
     };
 
-    //const [bins, setBins] = useState([]);
+    //useEffect(() => {
 
-    // Finally, scale Custom Index values from 0 to 1
-    const values = normalized?.features?.map(f => f.properties[`CUSTOM_INDEX`]).filter(f => f || f === 0);
-    if (!values?.length) {
-        // Short-circuit
-        return (<></>);
+    let bins = [];
+    const rebuildIndex = () => {
+        // Compute weight maximums
+        const weightMax = sum(selections.map(s => s.value));
+
+        storedGeojson?.features?.forEach((feature, index) => {
+            // Initialize / reset a new accumulator for this feature/index
+            normalized.features[index].properties["CUSTOM_INDEX"] = 0;
+
+            selections.forEach(sel => {
+                // Determine column name and value
+                const variable = variablePresets[sel.name];
+                const columnName = variable.Column;
+                const scaling = variable.scaling || 1;
+
+                // Get all values, use them to determine mean and standard deviation
+                const values = storedGeojson.features.map(f => f.properties[columnName]);
+                if (index === 0 && values.length !== storedGeojson.features.length) {
+                    console.warn(`Warning: length mismatch with ${columnName}`);
+                }
+
+                const m = mean(values);
+                const sd = sampleStandardDeviation(values);
+
+                // TODO: how to handle non-numeric variables? exclude them?
+                const value = feature.properties[columnName];
+
+                // Compute zScore using value, mean, and standard deviation
+                // Use scaling to determine whether +/- needs to be inverted
+                const zScoreValue = zScore(value, m, sd);
+                index === 0 && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
+
+                // Apply weights and accumulate total
+                const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
+                index === 0 && console.log(`Applying weight to ${sel.name}: (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
+                normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
+
+                // Store these for later CSV download
+                const weightPct = Math.round(100 * (sel.value / weightMax));
+                normalized.features[index].properties[`${columnName}_weight${weightPct}pct`] = weighted;
+                normalized.features[index].properties[`${columnName}_zscore`] = zScoreValue;
+            });
+        });
+        //}, [selections]);
+
+        // Finally, scale Custom Index values from 0 to 1
+        const values = normalized?.features?.map(f => f.properties[`CUSTOM_INDEX`]).filter(f => f || f === 0);
+
+        const [min_val, max_val] = [min(values), max(values)];
+        const scaledValues = normalized.features.map((f, index) => {
+            const value = f.properties[`CUSTOM_INDEX`];
+            const scaledValue = (value - min_val) / (max_val - min_val);
+            normalized.features[index].properties[`CUSTOM_INDEX_scaled`] = scaledValue;
+
+            return scaledValue;
+        });
+
+        // Classify into quantile bins
+        bins = (quantile(scaledValues, [0.25, 0.5, 0.75]).map(v => v.toFixed(2)));
+        console.log(`quantile=${bins}`);
+
+        // Sanity check
+        console.log(`Scaled Values: `, scaledValues.sort((v1, v2) => v1 > v2 ? 1 : (v1 < v2 ? -1 : 0)));
+        const [min_scaled_val, max_scaled_val] = [min(scaledValues), max(scaledValues)];
+        console.log(`${min_scaled_val} < x < ${max_scaled_val}`);
+
+        // Determine rank of each value and include that for CSV download
+        normalized.features.map((f, index) => {
+            const scaledValue = f.properties['CUSTOM_INDEX_scaled'];
+            const rank = quantileRank(scaledValues, scaledValue);
+            index < 10 && console.log('Rank: ', rank);
+            f.properties['CUSTOM_INDEX_rank'] = rank;
+            return rank;
+        });
+
+        // Insert a new pseudo-variable for our Custom Index
+        variablePresets['HEADER::Custom'] = {};
+        variablePresets['Custom Index'] = {
+            'Added By': 'You',
+            Bins: bins,
+            Column: 'CUSTOM_INDEX_scaled',
+            'Data Source': 'You',
+            'Data Year': null,
+            Description: `Custom index with ${selections.length} variables`,
+            'Metadata Doc': null,
+            'Original Scale': '0 - 1',
+            'Variable Name': 'Custom Index',
+            accessor: (feature) => feature.properties['CUSTOM_INDEX'],
+            scaling: 1,
+            bins: bins,
+            colorScale: colorScale,
+            custom: 1,
+            units: '',
+            listGroup: 'Custom',
+            variableName: 'Custom Index'
+        }
+
+        if (mapParams.variableName !== 'Custom Index') {
+            dispatch(changeVariable(variablePresets['Custom Index']));
+        }
     }
 
-    const [min_val, max_val] = [min(values), max(values)];
-    const scaledValues = normalized.features.map((f, index) => {
-        const value = f.properties[`CUSTOM_INDEX`];
-        const scaledValue = (value - min_val) / (max_val - min_val);
-        normalized.features[index].properties[`CUSTOM_INDEX_scaled`] = scaledValue;
-
-        return scaledValue;
-    });
-
-    // Classify into quantile bins
-    const bins = (quantile(scaledValues, [0.25, 0.5, 0.75]).map(v => v.toFixed(2)));
-    console.log(`quantile=${bins}`);
-
-    // Sanity check
-    console.log(`Scaled Values: `, scaledValues.sort((v1, v2) => v1 > v2 ? 1 : (v1 < v2 ? -1 : 0)));
-    const [min_scaled_val, max_scaled_val] = [min(scaledValues), max(scaledValues)];
-    console.log(`${min_scaled_val} < x < ${max_scaled_val}`);
-
-    // Determine rank of each value and include that for CSV download
-    normalized.features.map((f, index) => {
-        const scaledValue = f.properties['CUSTOM_INDEX_scaled'];
-        const rank = quantileRank(scaledValues, scaledValue);
-        index < 10 && console.log('Rank: ', rank);
-        f.properties['CUSTOM_INDEX_rank'] = rank;
-        return rank;
-    });
+    if (selections.length > 0) {
+        rebuildIndex();
+    }
 
     return (
         <>
