@@ -25,7 +25,7 @@ import {FaArrowCircleLeft} from "@react-icons/all-files/fa/FaArrowCircleLeft";
 import {changeVariable, setPanelState} from "../../actions";
 import {FaCaretDown} from "@react-icons/all-files/fa/FaCaretDown";
 import {useChivesData} from "../../hooks/useChivesData";
-import {sampleStandardDeviation, sum, mean, quantile, zScore, min, max} from "simple-statistics";
+import {sampleStandardDeviation, sum, mean, quantile, zScore, min, max, quantileRank} from "simple-statistics";
 
 // TODO: Convert style={{ }} to styled-components
 
@@ -76,7 +76,9 @@ const FaPngIcon = () =>
 export default function IndexBuilder() {
     const history = useHistory();
     const dispatch = useDispatch();
-    const { storedGeojson } = Object.freeze(useChivesData());
+    const { storedGeojson } = useChivesData();
+
+    console.log('Stored GeoJSON: ', storedGeojson);
 
     /** for example, see components/IndexBuilder/IndicatorsStep */
     const [steps] = useState(['indicators', 'weights', 'summary']);
@@ -89,6 +91,7 @@ export default function IndexBuilder() {
     // TODO: Default selections?
     const [selections, setSelections] = useState([]);
 
+    const mapParams = useSelector((state) => state.mapParams);
     const colorScale = [[237, 248, 251], [158, 188, 218], [140, 150, 198], [129, 15, 124]];
 
     const [image, takeScreenshot] = useScreenshot({
@@ -106,15 +109,10 @@ export default function IndexBuilder() {
     const open = Boolean(anchorEl);
 
     useEffect(() => {
-        if (selections.length === 0) {
-            // short-circuit if no indicators selected
-            return;
-        }
-
         // Compute weight maximums
         const weightMax = sum(selections.map(s => s.value));
 
-        storedGeojson.features.forEach((feature, index) => {
+        storedGeojson?.features?.forEach((feature, index) => {
             // Initialize / reset a new accumulator for this feature/index
             normalized.features[index].properties["CUSTOM_INDEX"] = 0;
 
@@ -132,9 +130,6 @@ export default function IndexBuilder() {
 
                 const m = mean(values);
                 const sd = sampleStandardDeviation(values);
-
-                //const [min_val, max_val]  = [min(values), max(values)];
-                //index === 0 && console.log(`Mean=${m}  STD=${sd}  Min=${min_val}  Max=${max_val}`);
 
                 // TODO: how to handle non-numeric variables? exclude them?
                 const value = feature.properties[columnName];
@@ -156,11 +151,12 @@ export default function IndexBuilder() {
             });
         });
 
+
         // Insert a new pseudo-variable for our Custom Index
         variablePresets['HEADER::Custom'] = {};
         variablePresets['Custom Index'] = {
             'Added By': 'You',
-            Bins: quan,
+            Bins: bins,
             Column: 'CUSTOM_INDEX_scaled',
             'Data Source': 'You',
             'Data Year': null,
@@ -170,14 +166,20 @@ export default function IndexBuilder() {
             'Variable Name': 'Custom Index',
             accessor: (feature) => feature.properties['CUSTOM_INDEX'],
             scaling: 1,
-            bins: quan,
+            bins: bins,
             colorScale: colorScale,
             custom: 1,
             units: '',
             listGroup: 'Custom',
             variableName: 'Custom Index'
-        };
+        }
+
+
+        if (mapParams.variableName !== 'Custom Index') {
+            dispatch(changeVariable(variablePresets['Custom Index']));
+        }
     }, [selections]);
+
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -198,11 +200,11 @@ export default function IndexBuilder() {
         selections.map(sel => {
             const columnName = variablePresets[sel.name].Column;
             keys.push(columnName);
-            //keys.push(`${columnName}_zscore`);
-            keys.push(`${columnName}_scaled`);
+            keys.push(`${columnName}_zscore`);
 
             const weightPct = Math.round(100 * (sel.value / weightMax));
             keys.push(`${columnName}_weight${weightPct}pct`);
+            return weightPct;
         });
 
         // Parse to collect all user-selected variable values
@@ -234,8 +236,15 @@ export default function IndexBuilder() {
         handleClose();
     };
 
+    //const [bins, setBins] = useState([]);
+
     // Finally, scale Custom Index values from 0 to 1
-    const values = normalized.features.map(f => f.properties[`CUSTOM_INDEX`]).filter(f => f || f === 0);
+    const values = normalized?.features?.map(f => f.properties[`CUSTOM_INDEX`]).filter(f => f || f === 0);
+    if (!values?.length) {
+        // Short-circuit
+        return (<></>);
+    }
+
     const [min_val, max_val] = [min(values), max(values)];
     const scaledValues = normalized.features.map((f, index) => {
         const value = f.properties[`CUSTOM_INDEX`];
@@ -243,14 +252,25 @@ export default function IndexBuilder() {
         normalized.features[index].properties[`CUSTOM_INDEX_scaled`] = scaledValue;
 
         return scaledValue;
-    }).sort((v1, v2) => v1 > v2 ? 1 : (v1 < v2 ? -1 : 0));
-    console.log(`Scaled Values: `, scaledValues);
+    });
+
+    // Classify into quantile bins
+    const bins = (quantile(scaledValues, [0.25, 0.5, 0.75]).map(v => v.toFixed(2)));
+    console.log(`quantile=${bins}`);
+
+    // Sanity check
+    console.log(`Scaled Values: `, scaledValues.sort((v1, v2) => v1 > v2 ? 1 : (v1 < v2 ? -1 : 0)));
     const [min_scaled_val, max_scaled_val] = [min(scaledValues), max(scaledValues)];
     console.log(`${min_scaled_val} < x < ${max_scaled_val}`);
 
-    // Classify into quantile bins
-    const quan = quantile(scaledValues, [0.25, 0.5, 0.75]).map(v => v.toFixed(2));
-    console.log(`quantile=${quan}`);
+    // Determine rank of each value and include that for CSV download
+    normalized.features.map((f, index) => {
+        const scaledValue = f.properties['CUSTOM_INDEX_scaled'];
+        const rank = quantileRank(scaledValues, scaledValue);
+        index < 10 && console.log('Rank: ', rank);
+        f.properties['CUSTOM_INDEX_rank'] = rank;
+        return rank;
+    });
 
     return (
         <>
@@ -321,7 +341,7 @@ export default function IndexBuilder() {
                         <Legend
                             variableName={'Custom Index'}
                             colorScale={colorScale}
-                            bins={quan}
+                            bins={bins}
                         />
                         <FloatingPanel style={{ top: '75px', left: '20px' }}>
                             <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
