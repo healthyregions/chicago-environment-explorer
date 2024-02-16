@@ -141,9 +141,6 @@ const SummaryMapPage = ({ selections }) => {
         handleClose();
     };
 
-
-    //useEffect(() => {
-
     // Compute weight maximums
     const weightMax = sum(selections.map(s => s.value));
 
@@ -189,7 +186,6 @@ const SummaryMapPage = ({ selections }) => {
             normalized.features[index].properties[`${columnName}_zscore`] = zScoreValue;
         });
     });
-    //}, [selections]);
 
     // Finally, scale Custom Index values from 0 to 1
     const values = normalized?.features?.map(f => f.properties[`CUSTOM_INDEX`]).filter(f => f || f === 0);
@@ -267,10 +263,19 @@ const SummaryMapPage = ({ selections }) => {
                         <Typography variant={'body2'} style={{ marginBottom: '2rem' }}>
                             <p>The custom index you created has themes:</p>
                             <p>
-                                <BoldedPinkText>Ecology & Greenness</BoldedPinkText>,
-                                <BoldedPinkText> Demographic</BoldedPinkText>,
-                                <BoldedPinkText> Health</BoldedPinkText>, and
-                                <BoldedPinkText> Social</BoldedPinkText>.
+                                {
+                                    selections.map(sel => variablePresets[sel.name].listGroup)
+                                        .filter((value, index, array) => array.indexOf(value) === index)
+                                        .map((group, index, array) => <>
+                                            {
+                                                index > 0 && <>, </>
+                                            }
+                                            {
+                                                index !== 0 && index === (array.length - 1) && <> and </>
+                                            }
+                                            <BoldedPinkText>{group}</BoldedPinkText>
+                                        </>)
+                                }.
                                 With an additional focus on social indicators, the custom index
                                 will be useful for house management and family planning policy makers.
                             </p>
@@ -322,10 +327,6 @@ const SummaryMapPage = ({ selections }) => {
                         </Grid>
                     </div>
                 </FloatingPanel>
-
-                { /*<VariablePanel />*/ }
-                {/* <DataPanel /> */}
-                {/* <Popover /> */}
             </div>
         </>
     );
