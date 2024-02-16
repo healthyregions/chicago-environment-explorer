@@ -268,7 +268,7 @@ const SummaryMapPage = ({ selections }) => {
                                         .filter((value, index, array) => array.indexOf(value) === index)
                                         .map((group, index, array) => <>
                                             {
-                                                index > 0 && <>, </>
+                                                index > 0 && array.length > 2 && <>, </>
                                             }
                                             {
                                                 index !== 0 && index === (array.length - 1) && <> and </>
