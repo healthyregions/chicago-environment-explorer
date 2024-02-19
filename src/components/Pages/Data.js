@@ -173,12 +173,12 @@ export default function Data() {
                 </h3>
 
 
-                
+
                     <Gutter h={20} />
                     <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'])} />
                     <Gutter h={40} />
-               
-                    
+
+
 
                 <h2>Basemap Layers and Data</h2>
                 <h3>The variables below are represented in the map as base layers.</h3>
