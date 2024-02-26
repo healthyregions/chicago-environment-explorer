@@ -233,7 +233,7 @@ const SummaryMapPage = ({ selections }) => {
         'Metadata Doc': null,
         'Original Scale': '0 - 1',
         'Variable Name': 'Custom Index',
-        accessor: (feature) => feature.properties['CUSTOM_INDEX'],
+        accessor: (feature) => feature.properties['CUSTOM_INDEX_scaled'],
         scaling: 1,
         bins: bins,
         colorScale: colorScale,
@@ -297,7 +297,7 @@ const SummaryMapPage = ({ selections }) => {
     return (
         <>
             <div id="mainContainer" style={{ position: 'fixed' }} ref={mapRef}>
-                <MapSection bounds={defaultBounds} showSearch={false} />
+                <MapSection bounds={defaultBounds} showSearch={false} showCustom={true} />
                 <Legend
                     variableName={'Custom Index'}
                     colorScale={colorScale}
@@ -311,7 +311,7 @@ const SummaryMapPage = ({ selections }) => {
                             <p>
                                 {
                                     getUniqueGroupNames()
-                                        .map((group, index, array) => <>
+                                        .map((group, index, array) => <div key={`${group}-${index}`}>
                                         {
                                             index > 0 && array.length > 2 && <>, </>
                                         }
@@ -319,7 +319,7 @@ const SummaryMapPage = ({ selections }) => {
                                             index !== 0 && index === (array.length - 1) && <> and </>
                                         }
                                         <BoldedPinkText>{group}</BoldedPinkText>
-                                    </>)
+                                    </div>)
                                 }.
                                 With an additional focus on {getMaxGroupWeight().name} indicators, the custom index
                                 will be useful for {renderCustomDescription()}.
