@@ -11,7 +11,7 @@ import React, {useRef} from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import {createFileName, useScreenshot} from "use-react-screenshot";
-import {max, mean, min, quantile, quantileRank, sampleStandardDeviation, sum, zScore} from "simple-statistics";
+import {jenks, max, mean, min, quantile, quantileRank, sampleStandardDeviation, sum, zScore} from "simple-statistics";
 import {useDispatch, useSelector} from "react-redux";
 import {changeVariable, setPanelState} from "../../actions";
 import {useChivesData} from "../../hooks/useChivesData";
@@ -203,14 +203,19 @@ const SummaryMapPage = ({ selections }) => {
         return scaledValue;
     });
 
-    // Classify into quantile bins
-    const bins = quantile(scaledValues, [0.25, 0.5, 0.75]).map(v => v.toFixed(2));
-    console.log(`quantile=${bins}`);
+    // Determine natural breaks
+    const breaks = jenks(scaledValues, colorScale.length).slice(1, colorScale.length).map(v => Number(v.toFixed(3)));
+    console.log(`jenks=${breaks}`);
 
-    // Sanity check
-    console.log(`Scaled Values: `, scaledValues.sort((v1, v2) => v1 > v2 ? 1 : (v1 < v2 ? -1 : 0)));
-    const [min_scaled_val, max_scaled_val] = [min(scaledValues), max(scaledValues)];
-    console.log(`${min_scaled_val} < x < ${max_scaled_val}`);
+    // Calculate percentiles based on colorScale
+    const percentiles = [];
+    colorScale.forEach((color, index) => {
+        index !== 0 && percentiles.push(index / colorScale.length);
+    });
+
+    // Classify into quantile bins
+    const bins = quantile(scaledValues, percentiles).map(v => Number(v.toFixed(3)));
+    console.log(`quantile=${bins}`);
 
     // Determine rank of each value and include that for CSV download
     normalized.features.map((f, index) => {
@@ -221,11 +226,15 @@ const SummaryMapPage = ({ selections }) => {
         return rank;
     });
 
+    // Choose between quantile bins or natural breaks
+    const legend = breaks;
+    console.log('Using natural breaks: ', breaks);
+
     // Insert a new pseudo-variable for our Custom Index
     variablePresets['HEADER::Custom'] = {};
     variablePresets['Custom Index'] = {
         'Added By': 'You',
-        Bins: bins,
+        Bins: legend,
         Column: 'CUSTOM_INDEX_scaled',
         'Data Source': 'You',
         'Data Year': null,
@@ -235,7 +244,7 @@ const SummaryMapPage = ({ selections }) => {
         'Variable Name': 'Custom Index',
         accessor: (feature) => feature.properties['CUSTOM_INDEX_scaled'],
         scaling: 1,
-        bins: bins,
+        bins: legend,
         colorScale: colorScale,
         custom: 1,
         units: '',
@@ -301,7 +310,7 @@ const SummaryMapPage = ({ selections }) => {
                 <Legend
                     variableName={'Custom Index'}
                     colorScale={colorScale}
-                    bins={bins}
+                    bins={legend}
                 />
                 <FloatingPanel style={{ top: '75px', left: '20px' }}>
                     <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
