@@ -205,7 +205,7 @@ const LogoContainer = styled.div`
   }
 `;
 
-function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch = true }) {
+function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch = true, showCustom = false }) {
   // fetch pieces of state from store
   const { storedGeojson } = useChivesData();
   const panelState = useSelector((state) => state.panelState);
@@ -224,6 +224,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
   const mapRef = useRef(null);
 
+  console.log('rendering map');
   const handlePanMap = (viewState) => {
     mapRef?.current?.flyTo({
       center: [viewState.longitude, viewState.latitude],
@@ -935,7 +936,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           }}
           ref={hoverRef}
         >
-          <MapTooltipContent content={hoverInfo.object} />
+          <MapTooltipContent content={hoverInfo.object} showCustom={showCustom} />
         </HoverDiv>
       )}
       {!geoids.length && (
