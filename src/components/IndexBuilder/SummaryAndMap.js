@@ -201,7 +201,9 @@ const SummaryMapPage = ({ selections }) => {
         normalized.features[index].properties[`CUSTOM_INDEX_scaled`] = scaledValue;
 
         return scaledValue;
-    });
+    }).filter((f) => !Number.isNaN(f));
+
+    console.log('Scaled values: ', scaledValues);
 
     // Determine natural breaks
     const breaks = jenks(scaledValues, colorScale.length).slice(1, colorScale.length).map(v => Number(v.toFixed(3)));
