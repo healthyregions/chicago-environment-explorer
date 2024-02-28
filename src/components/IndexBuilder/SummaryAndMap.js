@@ -11,12 +11,14 @@ import React, {useRef} from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import {createFileName, useScreenshot} from "use-react-screenshot";
-import {jenks, max, mean, min, quantile, quantileRank, sampleStandardDeviation, sum, zScore} from "simple-statistics";
+import {jenks, max, mean, min, quantile, sampleStandardDeviation, sum, zScore} from "simple-statistics";
 import {useDispatch, useSelector} from "react-redux";
 import {changeVariable, setPanelState} from "../../actions";
 import {useChivesData} from "../../hooks/useChivesData";
 import {useHistory} from "react-router-dom";
+import JSZip from 'jszip';
 
+const DEBUG = false;
 
 export const FloatingPanel = styled.h1`
   font-weight: normal;
@@ -70,7 +72,8 @@ const SummaryMapPage = ({ selections }) => {
     const mapParams = useSelector((state) => state.mapParams);
     const colorScale = [[237, 248, 251], [158, 188, 218], [140, 150, 198], [129, 15, 124]];
 
-    const [image, takeScreenshot] = useScreenshot({
+    // We don't need the actual image data, only takeScreenshot
+    const [/* image */, takeScreenshot] = useScreenshot({
         type: "image/png",
         quality: 1.0
     });
@@ -84,20 +87,48 @@ const SummaryMapPage = ({ selections }) => {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
 
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    // Compute weight maximums
+    const weightMax = sum(selections.map(s => s.value));
+
+    const readmeText = "This ZIP archive contains CSV data used to " +
+        "build a Custom Index in the Chicago Environment Explorer (ChiVes). \r\n\r\n" +
+        "This Custom Index was created using the following Indicators and Weights: \r\n" +
+        selections.map((sel) => `   * ${sel.name}: ${100 * sel.value / weightMax}%\r\n`) +
+        "\r\nThe process to compute this Custom Index is as follows: \r\n" +
+        "    1. Loop over all geoJson features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
+        "    2. For each geoJson feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
+        "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
+        "    4. Use scaled values to determine Jenks natural breaks and/or quantile bins - right now the code assumes there are always 3 partitions (aka 4 bins)\r\n" +
+        "    5. Now that we have our scaled values and the bins/breaks, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
+
     const download = (dataURL, { name = "chives-custom-index", extension = "png" } = {}) => {
         const a = document.createElement("a");
         a.href = dataURL;
         a.download = createFileName(extension, name);
         a.click();
     };
-    const downloadCsv = (event) => {
+
+    const downloadZip = () => {
+        const zip = new JSZip();
+        zip.file('README.txt', readmeText);
+        zip.file('chives-custom-index.csv', buildCsv());
+        zip.generateAsync({type: 'blob'}).then((blob) => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                download(e.target.result, { extension: 'zip' });
+            }
+            reader.readAsDataURL(blob);
+        })
+    }
+
+    const buildCsv = (event) => {
         // Determine keys
         // Always include geoid column, include columns selected by the user
         const keys = ['geoid', 'CUSTOM_INDEX', 'CUSTOM_INDEX_scaled'];
@@ -120,17 +151,11 @@ const SummaryMapPage = ({ selections }) => {
         });
 
         // Convert collected data to CSV
-        const csvContent = "data:text/csv;charset=utf-8,"
-            + rows.map(r =>
-                // Use empty string for null/undefined
-                // Surround valid values with double-quote (e.g. "Vulnerable, Prices Rising")
-                r.map(r => (r === null || r === undefined) ? "" : `"${r}"`
-                ).join(",")).join("\r\n");
-
-        // Download as a CSV file - open in Excel for viewing
-        download(encodeURI(csvContent),{ extension: "csv" });
-
-        handleClose();
+        return rows.map(r =>
+            // Use empty string for null/undefined
+            // Surround valid values with double-quote (e.g. "Vulnerable, Prices Rising")
+            r.map(r => (r === null || r === undefined) ? "" : `"${r}"`
+        ).join(",")).join("\r\n");
     };
 
     const downloadPng = (event) => {
@@ -140,9 +165,6 @@ const SummaryMapPage = ({ selections }) => {
 
         handleClose();
     };
-
-    // Compute weight maximums
-    const weightMax = sum(selections.map(s => s.value));
 
     storedGeojson?.features?.forEach((feature, index) => {
         // Initialize / reset a new accumulator for this feature/index
@@ -173,11 +195,11 @@ const SummaryMapPage = ({ selections }) => {
             // Compute zScore using value, mean, and standard deviation
             // Use scaling to determine whether +/- needs to be inverted
             const zScoreValue = zScore(value, m, sd);
-            feature.properties['geoid'] === '17031030104' && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
+            DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
 
             // Apply weights and accumulate total
             const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
-            feature.properties['geoid'] === '17031030104' && console.log(`Applying weight to ${sel.name}: ${scaling} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
+            DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Applying weight to ${sel.name}: ${scaling} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
             normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
             // Store these for later CSV download
@@ -203,11 +225,11 @@ const SummaryMapPage = ({ selections }) => {
         return scaledValue;
     }).filter((f) => !Number.isNaN(f));
 
-    console.log('Scaled values: ', scaledValues);
+    DEBUG && console.log('Scaled values: ', scaledValues);
 
     // Determine natural breaks
     const breaks = jenks(scaledValues, colorScale.length).slice(1, colorScale.length).map(v => Number(v.toFixed(3)));
-    console.log(`jenks=${breaks}`);
+    DEBUG && console.log(`jenks=${breaks}`);
 
     // Calculate percentiles based on colorScale
     const percentiles = [];
@@ -217,20 +239,11 @@ const SummaryMapPage = ({ selections }) => {
 
     // Classify into quantile bins
     const bins = quantile(scaledValues, percentiles).map(v => Number(v.toFixed(3)));
-    console.log(`quantile=${bins}`);
-
-    // Determine rank of each value and include that for CSV download
-    normalized.features.map((f, index) => {
-        const scaledValue = f.properties['CUSTOM_INDEX_scaled'];
-        const rank = quantileRank(scaledValues, scaledValue);
-        index < 10 && console.log('Rank: ', rank);
-        f.properties['CUSTOM_INDEX_rank'] = rank;
-        return rank;
-    });
+    DEBUG && console.log(`quantile=${bins}`);
 
     // Choose between quantile bins or natural breaks
     const legend = breaks;
-    console.log('Using natural breaks: ', breaks);
+    DEBUG && console.log('Using natural breaks: ', breaks);
 
     // Insert a new pseudo-variable for our Custom Index
     variablePresets['HEADER::Custom'] = {};
@@ -331,7 +344,9 @@ const SummaryMapPage = ({ selections }) => {
                                         }
                                         <BoldedPinkText>{group}</BoldedPinkText>
                                     </div>)
-                                }.
+                                }
+                            </p>
+                            <p>
                                 With an additional focus on {getMaxGroupWeight().name} indicators, the custom index
                                 will be useful for {renderCustomDescription()}.
                             </p>
@@ -372,7 +387,7 @@ const SummaryMapPage = ({ selections }) => {
                                       anchorEl={anchorEl}
                                       open={open}
                                       onClose={handleClose}>
-                                    <MenuItem onClick={() => downloadCsv()} disableRipple>
+                                    <MenuItem onClick={() => downloadZip()} disableRipple>
                                         <FaCsvIcon /> CSV
                                     </MenuItem>
                                     <MenuItem onClick={() => downloadPng()} disableRipple>
