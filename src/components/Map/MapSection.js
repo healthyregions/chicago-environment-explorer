@@ -224,7 +224,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
   const mapRef = useRef(null);
 
-  console.log('rendering map');
   const handlePanMap = (viewState) => {
     mapRef?.current?.flyTo({
       center: [viewState.longitude, viewState.latitude],
