@@ -18,7 +18,7 @@ import {useChivesData} from "../../hooks/useChivesData";
 import {useHistory} from "react-router-dom";
 import JSZip from 'jszip';
 
-const DEBUG = false;
+const DEBUG = process.env.REACT_APP_DEBUG?.toLowerCase()?.includes('t');
 
 export const FloatingPanel = styled.h1`
   font-weight: normal;
