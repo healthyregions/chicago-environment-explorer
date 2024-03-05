@@ -102,8 +102,8 @@ const SummaryMapPage = ({ selections }) => {
         "This Custom Index was created using the following Indicators and Weights: \r\n" +
         selections.map((sel) => `   * ${sel.name}: ${100 * sel.value / weightMax}%\r\n`) +
         "\r\nThe process to compute this Custom Index is as follows: \r\n" +
-        "    1. Loop over all geoJson features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
-        "    2. For each geoJson feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
+        "    1. Loop over all GeoJSON features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
+        "    2. For each GeoJSON feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
         "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
         "    4. Use scaled values to determine Jenks natural breaks and/or quantile bins - right now the code assumes there are always 3 partitions (aka 4 bins)\r\n" +
         "    5. Now that we have our scaled values and the bins/breaks, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
