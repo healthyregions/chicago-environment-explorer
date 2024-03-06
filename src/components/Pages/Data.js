@@ -175,7 +175,7 @@ export default function Data() {
 
 
                     <Gutter h={20} />
-                    <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'])} />
+                    <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'] && !!f['active'])} />
                     <Gutter h={40} />
 
 
