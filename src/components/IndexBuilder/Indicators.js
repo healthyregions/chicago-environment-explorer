@@ -19,7 +19,7 @@ const css = `
         filter: invert(0%) sepia(18%) saturate(0%) hue-rotate(222deg) brightness(0%) contrast(100%);
         height: 1.5rem;
         width: 1.5rem;
-        margin-right: 1rem;
+        margin-right: 0.25rem;
         vertical-align: middle;
     }
     
