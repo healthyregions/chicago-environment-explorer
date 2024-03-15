@@ -10,9 +10,11 @@ import {WeightsSliders, WeightsPieChart} from "../IndexBuilder/Weights";
 import {IndicatorsHelperText, WeightsHelperText} from "../IndexBuilder/HelperText";
 import SummaryMapPage, {FloatingPanel} from '../IndexBuilder/SummaryAndMap';
 
-import {colors} from "../../config";
+import {colors, defaultVariable, variablePresets} from "../../config";
 import {FaArrowCircleLeft} from "@react-icons/all-files/fa/FaArrowCircleLeft";
 import styled from "styled-components";
+import {changeVariable} from "../../actions";
+import {useDispatch} from "react-redux";
 
 // TODO: Convert style={{ }} to styled-components
 
@@ -27,6 +29,7 @@ const HeaderText = styled.h1`
 /** Paged wizard-like component to present indicators for selection + allow user to set the weights */
 export default function IndexBuilder() {
     const history = useHistory();
+    const dispatch = useDispatch();
 
     /** for example, see components/IndexBuilder/IndicatorsStep */
     const [steps] = useState(['indicators', 'weights', 'summary']);
@@ -48,7 +51,12 @@ export default function IndexBuilder() {
                     {
                         currentStep === 'indicators' && !selectedDetails && <>
                             <HeaderText>
-                                <FaArrowCircleLeft onClick={() => history.push("/map")} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
+                                <FaArrowCircleLeft onClick={() => {
+                                    history.push("/map");
+                                    setTimeout(() => {
+                                        dispatch(changeVariable(variablePresets[defaultVariable]));
+                                    }, 1500);
+                                }} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
                                 1. Select Indicators
                             </HeaderText>
                             <div style={{ paddingLeft: '3rem' }}>
