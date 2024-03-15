@@ -72,11 +72,6 @@ export default function IndexBuilder() {
                         !!selectedDetails && <>
                             <IndicatorDetails selectedDetails={selectedDetails}
                                               setSelectedDetails={setSelectedDetails} />
-                            {
-                                currentStep === 'weights' && <WeightsPieChart selections={selections}
-                                                                              width={500}
-                                                                              height={300} />
-                            }
                         </>
                     }
                 </Grid>
@@ -93,9 +88,11 @@ export default function IndexBuilder() {
                         currentStep === 'weights' && <>
                             <WeightsPieChart selections={selections} width={650} height={200} cx={250} />
 
-                            <WeightsSliders selections={selections}
-                                            setSelections={setSelections}
-                                            setSelectedDetails={setSelectedDetails} />
+                            <div style={{ marginTop: '2rem' }}>
+                                <WeightsSliders selections={selections}
+                                                setSelections={setSelections}
+                                                setSelectedDetails={setSelectedDetails} />
+                            </div>
                         </>
                     }
                 </Grid>
