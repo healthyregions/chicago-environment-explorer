@@ -1,4 +1,4 @@
-import {dataDescriptions} from "../../config";
+import {dataDescriptions, variablePresets} from "../../config";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import {Stack, TextField} from "@mui/material";
@@ -6,6 +6,7 @@ import {pieArcLabelClasses, PieChart} from "@mui/x-charts/PieChart";
 import Slider from "@mui/material/Slider";
 import React from "react";
 import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
+import {colors} from '../../config';
 
 /** Minimum/maximum value for sliders */
 export const SLIDER_MIN = 0;
@@ -14,8 +15,8 @@ export const SLIDER_DEFAULT = 50;
 
 /** The set of shared color palette to use for Sliders + PieChart slices */
 const COLORS = [
-    '#3D6017', // PrimaryGreen,
-    '#E83F6F', // PrimaryPink,
+    //'#3D6017', // PrimaryGreen,
+    //'#E83F6F', // PrimaryPink,
     '#F1BF6C', // Cream,
     '#786335', // Olive,
     '#4D838B', // Sea,
@@ -25,6 +26,12 @@ const COLORS = [
     '#492416', // Brown,
     '#05245E', // Ink,
 ];
+
+const css = `
+    .MuiStepConnector-root.MuiStepConnector-vertical.Mui-active.Mui-disabled {
+        visibility: hidden;
+    }
+`;
 
 /** Given a set of selected indicators, allow user to set a weight for each indicator */
 export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }) => {
@@ -52,11 +59,25 @@ export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }
 
     return (
         <div style={{ marginBottom: '4rem' }}>
+            <style>{css}</style>
             {
                 selections.map((selection, index) => {
                     return (
                         <div key={`div-${index}`}>
-                            <h3 key={`label-${index}`}>{index + 1}. {selection.name}</h3>
+                            <h3 key={`label-${index}`}>{index + 1}. {selection.name}
+                                <FaInfoCircle style={{ marginLeft: '1rem', cursor: 'pointer' }}
+                                              color={colors.lightgray}
+                                              onClick={(e) => {
+                                                  setSelectedDetails({
+                                                      name: selection.name,
+                                                      categoryName: variablePresets[selection.name]?.listGroup,
+                                                      description: dataDescriptions[selection.name],
+                                                      value: SLIDER_DEFAULT
+                                                  });
+                                                  e.stopPropagation();
+                                                  e.preventDefault();
+                                              }}></FaInfoCircle>
+                            </h3>
 
                             <Grid>
                                 <Grid item>
@@ -80,17 +101,6 @@ export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }
                                             onChange={(event, value) => updateWeightValues(event, selection, value)}
                                         />
                                         <Typography variant={'caption'}>More Important</Typography>
-                                        <FaInfoCircle style={{ marginLeft: '2rem', width: '2rem', height: '2rem', cursor: 'pointer' }}
-                                                      color={COLORS[index % COLORS.length]}
-                                                      onClick={(e) => {
-                                                          setSelectedDetails({
-                                                              name: selection.name,
-                                                              description: dataDescriptions[selection.name],
-                                                              value: SLIDER_DEFAULT
-                                                          });
-                                                          e.stopPropagation();
-                                                          e.preventDefault();
-                                                      }}></FaInfoCircle>
                                     </Stack>
                                 </Grid>
                             </Grid>
@@ -103,12 +113,18 @@ export const WeightsSliders = ({ selections, setSelections, setSelectedDetails }
 }
 
 /** Given a set of selected indicators, display the weight distribution for all indicators */
-export const WeightsPieChart = ({ selections, width = 500, height = 200 }) =>
+export const WeightsPieChart = ({ selections, width = 500, height = 200, cx = 150, cy = 100, showLegend = true, legendDirection = 'column' }) =>
     <PieChart
         skipAnimation
         slotProps={{
             legend: {
-                hidden: true,
+                padding: 0,
+                hidden: !showLegend,
+                position: { vertical: 'top', horizontal: 'right'},
+                direction: legendDirection,
+                labelStyle: {
+                    fontSize: 10,
+                },
             },
         }}
         colors={COLORS}
@@ -131,6 +147,8 @@ export const WeightsPieChart = ({ selections, width = 500, height = 200 }) =>
                     const total = selections.reduce((total, currentValue) => total + currentValue.value, 0);
                     return total > 0 ? `${(100 * item.value / total).toFixed(0)}%` : ''
                 },
+                cx,
+                cy,
                 arcLabelMinAngle: 20,
             }
         ]}

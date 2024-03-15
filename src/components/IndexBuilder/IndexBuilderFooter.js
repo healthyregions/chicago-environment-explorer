@@ -9,7 +9,7 @@ const CenteredGrid = styled(Grid)`
 `;
 const Footer = styled.footer`
   // Sticky footer
-  background: lightgrey;
+  background: #ECECEC;
   position: fixed;
   bottom: 0;
 
@@ -39,6 +39,9 @@ const IndexBuilderFooter = ({ currentStep, setCurrentStep, setSelections, setSel
         setCurrentStep('indicators');
     }
     const step = (direction = 'next') => {
+        // Hide currently shown details, show instructions once again
+        setSelectedDetails(undefined);
+
         switch(currentStep) {
             case 'indicators': {
                 return direction === 'prev' ? null : setCurrentStep('weights');
@@ -56,7 +59,9 @@ const IndexBuilderFooter = ({ currentStep, setCurrentStep, setSelections, setSel
             <CenteredGrid container spacing={3}>
                 <Grid item xs={5} style={{ padding: 0 }} />
                 <Grid item xs style={{ padding: 0 }}>
-                    <LinkButton onClick={() => reset()}>Reset</LinkButton>
+                    <LinkButton onClick={() => reset()} style={{ fontWeight: 700 }}>
+                        Reset
+                    </LinkButton>
                 </Grid>
                 <Grid item xs={5} style={{ padding: 0 }} />
                 <Grid item xs style={{ padding: 0 }}>

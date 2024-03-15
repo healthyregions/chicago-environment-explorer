@@ -100,8 +100,8 @@ const SummaryMapPage = ({ selections }) => {
     const readmeText = "This ZIP archive contains CSV data used to " +
         "build a Custom Index in the Chicago Environment Explorer (ChiVes). \r\n\r\n" +
         "This Custom Index was created using the following Indicators and Weights: \r\n" +
-        selections.map((sel) => `   * ${sel.name}: ${100 * sel.value / weightMax}%\r\n`) +
-        "\r\nThe process to compute this Custom Index is as follows: \r\n" +
+        selections.map((sel) => `   * ${sel.name}: ${100 * sel.value / weightMax}%`).join('\r\n') +
+        "\r\n\r\nThe process to compute this Custom Index is as follows: \r\n" +
         "    1. Loop over all GeoJSON features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
         "    2. For each GeoJSON feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
         "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
@@ -327,7 +327,7 @@ const SummaryMapPage = ({ selections }) => {
                     colorScale={colorScale}
                     bins={legend}
                 />
-                <FloatingPanel style={{ top: '75px', left: '20px' }}>
+                <FloatingPanel style={{ top: '110px', left: '20px', minHeight: '30rem', maxHeight: '40rem' }}>
                     <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
                         <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Index</Typography>
                         <Typography variant={'body2'} style={{ marginBottom: '2rem' }}>
@@ -335,7 +335,7 @@ const SummaryMapPage = ({ selections }) => {
                             <p>
                                 {
                                     getUniqueGroupNames()
-                                        .map((group, index, array) => <div key={`${group}-${index}`}>
+                                        .map((group, index, array) => <span key={`${group}-${index}`}>
                                         {
                                             index > 0 && array.length > 2 && <>, </>
                                         }
@@ -343,28 +343,32 @@ const SummaryMapPage = ({ selections }) => {
                                             index !== 0 && index === (array.length - 1) && <> and </>
                                         }
                                         <BoldedPinkText>{group}</BoldedPinkText>
-                                    </div>)
+                                    </span>)
                                 }
                             </p>
-                            <p>
-                                With an additional focus on {getMaxGroupWeight().name} indicators, the custom index
-                                will be useful for {renderCustomDescription()}.
-                            </p>
+                            {
+                                /*<p>
+                                    With an additional focus on {getMaxGroupWeight().name} indicators, the custom index
+                                    will be useful for {renderCustomDescription()}.
+                                </p>*/
+                            }
 
                         </Typography>
                     </div>
                     <div style={{ marginBottom:'2rem', padding: '0 2rem 1rem 2rem' }}>
                         <WeightsPieChart selections={selections}
-                                         showLegend={false}
+                                         showLegend={true}
                                          cx={150}
-                                         width={350}
-                                         height={150} />
+                                         legendDirection={'row'}
+                                         width={325}
+                                         cy={250}
+                                         height={400} />
                     </div>
 
                     <div style={{ padding: '0.5rem', width: '100%', backgroundColor: 'lightgrey', position: 'absolute', bottom: 0, }}>
                         <Grid container spacing={0}>
                             <Grid item xs>
-                                <LinkButton size={'small'} onClick={() => history.goBack()}>Exit</LinkButton>
+                                <LinkButton style={{ fontWeight: 700 }} size={'small'} onClick={() => history.goBack()}>Exit</LinkButton>
                             </Grid>
                             <Grid item xs={5}>
                                 <PrimaryButton

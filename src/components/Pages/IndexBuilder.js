@@ -12,9 +12,17 @@ import SummaryMapPage, {FloatingPanel} from '../IndexBuilder/SummaryAndMap';
 
 import {colors} from "../../config";
 import {FaArrowCircleLeft} from "@react-icons/all-files/fa/FaArrowCircleLeft";
+import styled from "styled-components";
 
 // TODO: Convert style={{ }} to styled-components
 
+const HeaderText = styled.h1`
+  font-family: Lora, sans-serif !important;
+  font-weight: 200;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  font-size: 32px !important;
+`;
 
 /** Paged wizard-like component to present indicators for selection + allow user to set the weights */
 export default function IndexBuilder() {
@@ -39,22 +47,25 @@ export default function IndexBuilder() {
                 <Grid item xs={6}>
                     {
                         currentStep === 'indicators' && !selectedDetails && <>
-                            <h1 style={{ marginBottom: '2rem', fontWeight: 'normal' }}>
-                                <FaArrowCircleLeft onClick={() => history.goBack()} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
+                            <HeaderText>
+                                <FaArrowCircleLeft onClick={() => history.push("/map")} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
                                 1. Select Indicators
-                            </h1>
-                            <IndicatorsHelperText />
+                            </HeaderText>
+                            <div style={{ paddingLeft: '3rem' }}>
+                                <IndicatorsHelperText />
+                            </div>
                         </>
 
                     }
                     {
                         currentStep === 'weights' && !selectedDetails && <>
-                            <h1 style={{ marginBottom: '2rem', fontWeight: 'normal' }}>
+                            <HeaderText>
                                 <FaArrowCircleLeft onClick={() => setCurrentStep('indicators')} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
                                 2. Choose Weights
-                            </h1>
-                            <WeightsHelperText />
-                            <WeightsPieChart selections={selections} />
+                            </HeaderText>
+                            <div style={{ paddingLeft: '3rem' }}>
+                                <WeightsHelperText />
+                            </div>
                         </>
                     }
                     {
@@ -80,6 +91,8 @@ export default function IndexBuilder() {
                     }
                     {
                         currentStep === 'weights' && <>
+                            <WeightsPieChart selections={selections} width={650} height={200} cx={250} />
+
                             <WeightsSliders selections={selections}
                                             setSelections={setSelections}
                                             setSelectedDetails={setSelectedDetails} />
@@ -91,8 +104,10 @@ export default function IndexBuilder() {
             {
                 currentStep === 'summary' && <>
                     <FloatingPanel style={{ top: '25px', left: '20px' }}>
-                        <FaArrowCircleLeft onClick={() => setCurrentStep('weights')} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
-                        3. Summary & Map
+                        <HeaderText style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem' }}>
+                            <FaArrowCircleLeft onClick={() => setCurrentStep('weights')} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
+                            3. Summary & Map
+                        </HeaderText>
                     </FloatingPanel>
 
                     <SummaryMapPage selections={selections}></SummaryMapPage>

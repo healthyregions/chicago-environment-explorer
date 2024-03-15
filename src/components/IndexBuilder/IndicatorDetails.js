@@ -11,27 +11,64 @@ import { colors } from '../../config';
 
 const GreenLinkButton = styled(Button)`
   color: ${colors.forest};
+  text-transform: capitalize;
+`;
+
+const LargeIcon = styled.img`
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  height: 60px;
+  width: 60px;
 `;
 
 const IndicatorDetails = ({ selectedDetails, setSelectedDetails }) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const getLogo = (categoryName) => <>
+        {
+            (categoryName === 'Air Pollution' || categoryName === 'Air Quality') &&
+            <LargeIcon alt="" src={'/icons/index-builder/logo_factory.svg'} />
+        }
+        {
+            (categoryName === 'Demographic') &&
+            <LargeIcon alt="" src={'/icons/index-builder/logo_kid.svg'} />
+        }
+        {
+            (categoryName === 'Ecology & Greenness' || categoryName === 'Ecology and Greenness') &&
+            <LargeIcon alt="" src={'/icons/index-builder/logo_tree.svg'} />
+        }
+        {
+            (categoryName === 'Social') &&
+            <LargeIcon alt="" src={'/icons/index-builder/logo_people.svg'} />
+        }
+        {
+            (categoryName === 'Health') &&
+            <LargeIcon alt="" src={'/icons/index-builder/logo_heart.svg'} />
+        }
+        {
+            (categoryName === 'Environment') &&
+            <LargeIcon alt="" src={'/icons/index-builder/logo_flood.svg'} />
+        }
+        {
+            (categoryName === 'Built Environment') &&
+            <LargeIcon alt="" src={'/icons/index-builder/logo_traffic.svg'} />
+        }
+        {!categoryName && <pre>{JSON.stringify(selectedDetails?.categoryName)}</pre>}
+    </>
+
     return (
         <>
             <GreenLinkButton onClick={() => setSelectedDetails(undefined)}>&larr; Back to instructions</GreenLinkButton>
-            {
-                /*
-                TODO: How do we choose the correct icon?
-                <i className={category?.icon}></i>
-                */
-            }
+            <div>
+                {getLogo(selectedDetails?.categoryName)}
+            </div>
             <Typography variant="h5" gutterBottom>
                 {selectedDetails?.name}
             </Typography>
-            <div>
-                <GreenLinkButton onClick={() => history.push('/data')}>More &rarr;</GreenLinkButton>
-                <GreenLinkButton onClick={() => {
+            <div style={{ paddingBottom: '2rem' }}>
+                <GreenLinkButton onClick={() => history.push(`/data#:~:text=${selectedDetails?.name}`)}>More &rarr;</GreenLinkButton>
+                <GreenLinkButton style={{ paddingLeft: '10rem' }} onClick={() => {
                     history.push('/map');
                     setTimeout(() => {
                         dispatch(changeVariable(variablePresets[selectedDetails.name]));
