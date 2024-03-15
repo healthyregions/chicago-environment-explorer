@@ -118,7 +118,7 @@ export const WeightsHelperText = ({ selections }) => {
                             <StepLabel StepIconComponent={IndexBuilderStepIcon}
                                        StepIconProps={SecondIconProps}>
                                 <Typography variant="body2" style={{ fontWeight: 200 }}>
-                                    You can also change the weights by typing the weight values (0-10) in the input box
+                                    You can also change the weights by typing the weight values (0-100) in the input box
                                     next to the indicators.
                                 </Typography>
                             </StepLabel>
