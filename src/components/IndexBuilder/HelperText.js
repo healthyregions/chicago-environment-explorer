@@ -109,8 +109,8 @@ export const WeightsHelperText = ({ selections }) => {
                             <StepLabel StepIconComponent={IndexBuilderStepIcon}
                                        StepIconProps={FirstIconProps}>
                                 <Typography variant="body2" style={{ fontWeight: 200 }}>
-                                    Drag and move the horizontal separators to alter the weights. You can see the
-                                    weights altering in percentage below, or
+                                    Drag and move the sliders to alter the weights. You can see the
+                                    weights altering in percentage to the right, or
                                 </Typography>
                             </StepLabel>
                         </Step>
