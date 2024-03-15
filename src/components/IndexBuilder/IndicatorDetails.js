@@ -25,6 +25,8 @@ const IndicatorDetails = ({ selectedDetails, setSelectedDetails }) => {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const categoryName = variablePresets[selectedDetails?.name]?.listGroup;
+
     const getLogo = (categoryName) => <>
         {
             (categoryName === 'Air Pollution' || categoryName === 'Air Quality') &&
@@ -54,14 +56,13 @@ const IndicatorDetails = ({ selectedDetails, setSelectedDetails }) => {
             (categoryName === 'Built Environment') &&
             <LargeIcon alt="" src={'/icons/index-builder/logo_traffic.svg'} />
         }
-        {!categoryName && <pre>{JSON.stringify(selectedDetails?.categoryName)}</pre>}
     </>
 
     return (
         <>
             <GreenLinkButton onClick={() => setSelectedDetails(undefined)}>&larr; Back to instructions</GreenLinkButton>
             <div>
-                {getLogo(selectedDetails?.categoryName)}
+                {getLogo(categoryName)}
             </div>
             <Typography variant="h5" gutterBottom>
                 {selectedDetails?.name}
