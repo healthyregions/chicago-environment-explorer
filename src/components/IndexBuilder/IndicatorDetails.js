@@ -54,7 +54,7 @@ const IndicatorDetails = ({ selectedDetails, setSelectedDetails }) => {
         }
         {
             (categoryName === 'Built Environment') &&
-            <LargeIcon alt="" src={'/icons/index-builder/logo_traffic.svg'} />
+            <LargeIcon alt="" src={'/icons/index-builder/logo_traffic_light.svg'} />
         }
     </>
 
