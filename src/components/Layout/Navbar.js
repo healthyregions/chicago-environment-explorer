@@ -187,7 +187,6 @@ export default function Nav({
             <NavItems>
               <li><Button href="#" onClick={() => handleOpenClose('variables')}>{SVG.settings} Variables Panel</Button></li>
               <li><Button href="#" onClick={() => handleOpenClose('info')}>{SVG.report}Data View</Button></li>
-              <li><Button href="/builder">{SVG.plus}Index Builder</Button></li>
               {/* <li><a onClick={() => setViewState({
                 ...bounds,
                 bearing:0,
@@ -200,6 +199,7 @@ export default function Nav({
           <NavItems>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/map">Map</NavLink></li>
+            <li><NavLink to="/builder">Index Builder</NavLink></li>
             <li><NavLink to="/data">Data</NavLink></li>
             <li><NavLink to="/community">My Community</NavLink></li>
             <li><NavLink to="/guide">Resource Guide</NavLink></li>
