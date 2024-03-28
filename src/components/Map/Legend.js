@@ -83,8 +83,8 @@ const BinLabels = styled.div`
     box-sizing: border-box;
     padding-top: 2px;
     padding-bottom: 2px;
-    margin-left: -1.5rem;
-    margin-right: -1.5rem;
+    margin-left: -1.8rem;
+    margin-right: 0;
   
     .bin { 
         height:10px;
@@ -150,9 +150,9 @@ const BinLabel = (obj, bins) => {
             const min = Math.min(...values);
             const max = Math.max(...values);
             if (min === Infinity && max === -Infinity) {
-                return (<>
+                return (<div className={'bin labe'}>
                     Loading...
-                </>);
+                </div>);
             }
 
             return (
