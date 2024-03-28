@@ -2,7 +2,9 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import styled from 'styled-components';
 
-import { colors } from '../../config';
+import {colors, variablePresets} from '../../config';
+import {useChivesData} from "../../hooks/useChivesData";
+import {useSelector} from "react-redux";
 // import { Gutter } from '../styled_components';
 // import Tooltip from './tooltip';
 
@@ -75,11 +77,15 @@ const LegendTitle = styled.h3`
 `
 
 const BinLabels = styled.div`
-    width:100%;
+    width:110%;
     display: flex;
     margin-top:0px;
     box-sizing: border-box;
-    padding: 2px 8.3%;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  
     .bin { 
         height:10px;
         display: inline;
@@ -114,7 +120,14 @@ const BinBars = styled.div`
     }
 `
 const BinLabel = (obj, bins) => {
-    console.log(obj["obj"]);
+    const { storedGeojson } = useChivesData();
+    const mapParams = useSelector((state) => state.mapParams);
+    const { variableName } = mapParams;
+    const columnName = variablePresets[variableName].Column;
+
+    const values = storedGeojson?.features?.map(f => f.properties[columnName]) || [];
+
+    console.log(variableName);
     switch(obj["obj"].trim()) {
         case "Historical Redlining":
             return (
@@ -134,9 +147,17 @@ const BinLabel = (obj, bins) => {
                 </BinLabels>
             );
         default:
+            const min = Math.min(...values);
+            const max = Math.max(...values);
+            if (min === Infinity && max === -Infinity) {
+                return (<>
+                    Loading...
+                </>);
+            }
+
             return (
-                <BinLabels binLength={bins.length}>
-                    {obj["bins"].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}
+                <BinLabels binLength={bins.length + 2}>
+                    {[min, ...obj["bins"], max].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}
                 </BinLabels>
             );
     }
