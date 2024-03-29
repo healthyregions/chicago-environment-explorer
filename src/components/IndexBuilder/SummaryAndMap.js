@@ -174,10 +174,10 @@ const SummaryMapPage = ({ selections }) => {
             // Determine column name and value
             const variable = variablePresets[sel.name];
             const columnName = variable.Column;
-            const scaling = variable.scaling || 1;
+            const ibDefaultDirectionality = variable.ibDefaultDirectionality || 1;
 
             // Get all values, use them to determine mean and standard deviation
-            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || (!variable['ignore_0'] && f === 0));
+            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || (!variable['ibIgnoreZero'] && f === 0));
             if (index === 0 && values.length !== storedGeojson.features.length) {
                 console.warn(`Warning: length mismatch with ${columnName}`);
             }
@@ -187,19 +187,19 @@ const SummaryMapPage = ({ selections }) => {
 
             // TODO: how to handle non-numeric variables? exclude them?
             const value = feature.properties[columnName];
-            if (variable['ignore_0'] && value === 0) {
+            if (variable['ibIgnoreZero'] && value === 0) {
                 // If this value is zero and we should ignore zero for this variable, then ignore it
                 return;
             }
 
             // Compute zScore using value, mean, and standard deviation
-            // Use scaling to determine whether +/- needs to be inverted
+            // Use ibDefaultDirectionality to determine whether +/- needs to be inverted
             const zScoreValue = zScore(value, m, sd);
             DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
 
             // Apply weights and accumulate total
-            const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
-            DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Applying weight to ${sel.name}: ${scaling} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
+            const weighted = ibDefaultDirectionality * ((sel.value / weightMax) * zScoreValue);
+            DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Applying weight to ${sel.name}: ${ibDefaultDirectionality} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
             normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
             // Store these for later CSV download
@@ -258,14 +258,16 @@ const SummaryMapPage = ({ selections }) => {
         'Original Scale': '0 - 1',
         'Variable Name': 'Custom Index',
         accessor: (feature) => feature.properties['CUSTOM_INDEX_scaled'],
-        scaling: 1,
         bins: legend,
         colorScale: colorScale,
         custom: 1,
         units: '',
         listGroup: 'Custom',
         variableName: 'Custom Index',
-        'ignore_0': false
+        ibEnabled: false,
+        ibIgnoreZero: false,
+        ibDefaultDirectionality: 1,
+        ibExplanation: 'N/A',
     }
 
     if (mapParams.variableName !== 'Custom Index') {

@@ -187,8 +187,11 @@ class IndicatorsList extends React.Component {
     render() {
         return (
             <div style={{ overflowY: 'auto', maxHeight: '70vh' }} ref={this.listRef}>
-                {Object.keys(variablePresets).map((variable, i) => (
-                    variable.includes("HEADER::")
+                {Object.keys(variablePresets).filter(variable => {
+                    // Only show categories + enabled indicators
+                    return variable.includes("HEADER::") || variablePresets[variable].ibEnabled;
+                }).map((variable, i) => (
+                        variable.includes("HEADER::")
                         ? <IndicatorsCategory key={`list-header-${i}`}
                                               variableName={variable}
                                               selections={this.props.selections}
