@@ -105,8 +105,8 @@ const SummaryMapPage = ({ selections }) => {
         "    1. Loop over all GeoJSON features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
         "    2. For each GeoJSON feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
         "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
-        "    4. Use scaled values to determine Jenks natural breaks and/or quantile bins - right now the code assumes there are always 3 partitions (aka 4 bins)\r\n" +
-        "    5. Now that we have our scaled values and the bins/breaks, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
+        `    4. Use scaled values to determine quantile bins - right now the code assumes there are always ${colorScale.length - 1} partitions (aka ${colorScale.length} bins)\r\n` +
+        "    5. Now that we have our scaled values and the quantile bins, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
 
     const download = (dataURL, { name = "chives-custom-index", extension = "png" } = {}) => {
         const a = document.createElement("a");
