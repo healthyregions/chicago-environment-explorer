@@ -70,7 +70,7 @@ const SummaryMapPage = ({ selections }) => {
     const { storedGeojson } = useChivesData();
 
     const mapParams = useSelector((state) => state.mapParams);
-    const colorScale = [[237, 248, 251], [158, 188, 218], [140, 150, 198], [129, 15, 124]];
+    const colorScale = [[242,240,247],[218,218,235],[188,189,220],[158,154,200],[117,107,177],[84,39,143]];
 
     // We don't need the actual image data, only takeScreenshot
     const [/* image */, takeScreenshot] = useScreenshot({
@@ -242,7 +242,7 @@ const SummaryMapPage = ({ selections }) => {
     DEBUG && console.log(`quantile=${bins}`);
 
     // Choose between quantile bins or natural breaks
-    const legend = breaks;
+    const legend = bins;
     DEBUG && console.log('Using natural breaks: ', breaks);
 
     // Insert a new pseudo-variable for our Custom Index
