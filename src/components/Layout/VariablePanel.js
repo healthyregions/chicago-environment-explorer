@@ -14,6 +14,7 @@ import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } f
 import { colors, variablePresets, dataDescriptions } from "../../config";
 import * as SVG from "../../config/svg";
 import { FormControl, Switch, Stack } from "@mui/material";
+import {Link} from "react-router-dom";
 const REDLINING_COLOR_SCALE = {
   A: [115, 169, 77],
   B: [52, 172, 198],
@@ -317,6 +318,7 @@ const VariablePanel = (props) => {
               </MenuItem>
             ))}
           </Select>
+          <Link to='/builder'>Try with multiple variables</Link>
         </FormControl>
         <Gutter h={20} />
         <h2>Data Description</h2>
@@ -359,9 +361,9 @@ const VariablePanel = (props) => {
             <MenuItem value="None" key={"None"}>
               None
             </MenuItem>
-            <MenuItem value={"aq"} key={"aq"}>
+            {/*<MenuItem value={"aq"} key={"aq"}>
               Weekly PM2.5 Readings
-            </MenuItem>
+            </MenuItem>*/}
             <MenuItem value={"community_areas"} key={"community_areas"}>
               Community Areas
             </MenuItem>
