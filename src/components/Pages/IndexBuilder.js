@@ -83,7 +83,7 @@ export default function IndexBuilder() {
                         </>
                     }
                 </Grid>
-                <Grid item xs style={{ paddingTop: '8vh' }}>
+                <Grid item xs={6} style={{ paddingTop: '8vh' }}>
                     {
                         currentStep === 'indicators' && <>
                             <IndicatorsList selections={selections}

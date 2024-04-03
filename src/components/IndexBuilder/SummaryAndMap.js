@@ -70,7 +70,7 @@ const SummaryMapPage = ({ selections }) => {
     const { storedGeojson } = useChivesData();
 
     const mapParams = useSelector((state) => state.mapParams);
-    const colorScale = [[237, 248, 251], [158, 188, 218], [140, 150, 198], [129, 15, 124]];
+    const colorScale = [[242,240,247],[218,218,235],[188,189,220],[158,154,200],[117,107,177],[84,39,143]];
 
     // We don't need the actual image data, only takeScreenshot
     const [/* image */, takeScreenshot] = useScreenshot({
@@ -105,8 +105,8 @@ const SummaryMapPage = ({ selections }) => {
         "    1. Loop over all GeoJSON features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
         "    2. For each GeoJSON feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
         "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
-        "    4. Use scaled values to determine Jenks natural breaks and/or quantile bins - right now the code assumes there are always 3 partitions (aka 4 bins)\r\n" +
-        "    5. Now that we have our scaled values and the bins/breaks, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
+        `    4. Use scaled values to determine quantile bins - right now the code assumes there are always ${colorScale.length - 1} partitions (aka ${colorScale.length} bins)\r\n` +
+        "    5. Now that we have our scaled values and the quantile bins, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
 
     const download = (dataURL, { name = "chives-custom-index", extension = "png" } = {}) => {
         const a = document.createElement("a");
@@ -174,10 +174,10 @@ const SummaryMapPage = ({ selections }) => {
             // Determine column name and value
             const variable = variablePresets[sel.name];
             const columnName = variable.Column;
-            const scaling = variable.scaling || 1;
+            const ibDefaultDirectionality = variable.ibDefaultDirectionality || 1;
 
             // Get all values, use them to determine mean and standard deviation
-            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || (!variable['ignore_0'] && f === 0));
+            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || (!variable['ibIgnoreZero'] && f === 0));
             if (index === 0 && values.length !== storedGeojson.features.length) {
                 console.warn(`Warning: length mismatch with ${columnName}`);
             }
@@ -187,19 +187,19 @@ const SummaryMapPage = ({ selections }) => {
 
             // TODO: how to handle non-numeric variables? exclude them?
             const value = feature.properties[columnName];
-            if (variable['ignore_0'] && value === 0) {
+            if (variable['ibIgnoreZero'] && value === 0) {
                 // If this value is zero and we should ignore zero for this variable, then ignore it
                 return;
             }
 
             // Compute zScore using value, mean, and standard deviation
-            // Use scaling to determine whether +/- needs to be inverted
+            // Use ibDefaultDirectionality to determine whether +/- needs to be inverted
             const zScoreValue = zScore(value, m, sd);
             DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Computing zScore value: (${value} - ${m}) / ${sd} = ${value} -> ${zScoreValue}`);
 
             // Apply weights and accumulate total
-            const weighted = scaling * ((sel.value / weightMax) * zScoreValue);
-            DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Applying weight to ${sel.name}: ${scaling} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
+            const weighted = ibDefaultDirectionality * ((sel.value / weightMax) * zScoreValue);
+            DEBUG && feature.properties['geoid'] === '17031030104' && console.log(`Applying weight to ${sel.name}: ${ibDefaultDirectionality} * (${sel.value} / ${weightMax}) * ${zScoreValue} = ${zScoreValue} -> ${weighted}`);
             normalized.features[index].properties["CUSTOM_INDEX"] += weighted;
 
             // Store these for later CSV download
@@ -242,7 +242,7 @@ const SummaryMapPage = ({ selections }) => {
     DEBUG && console.log(`quantile=${bins}`);
 
     // Choose between quantile bins or natural breaks
-    const legend = breaks;
+    const legend = bins;
     DEBUG && console.log('Using natural breaks: ', breaks);
 
     // Insert a new pseudo-variable for our Custom Index
@@ -258,14 +258,16 @@ const SummaryMapPage = ({ selections }) => {
         'Original Scale': '0 - 1',
         'Variable Name': 'Custom Index',
         accessor: (feature) => feature.properties['CUSTOM_INDEX_scaled'],
-        scaling: 1,
         bins: legend,
         colorScale: colorScale,
         custom: 1,
         units: '',
         listGroup: 'Custom',
         variableName: 'Custom Index',
-        'ignore_0': false
+        ibEnabled: false,
+        ibIgnoreZero: false,
+        ibDefaultDirectionality: 1,
+        ibExplanation: 'N/A',
     }
 
     if (mapParams.variableName !== 'Custom Index') {
