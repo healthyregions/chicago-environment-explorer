@@ -135,7 +135,7 @@ export const WeightsHelperText = ({ selections }) => {
             </Grid>
             <Accordion>
                 <AccordionSummary id="panel-header" aria-controls="panel-content">
-                    How do we calculate the Custom Index?
+                    How are these weights used to calculate the Custom Index?
                 </AccordionSummary>
                 <AccordionDetails dangerouslySetInnerHTML={{
                     __html: readmeText([1,2,3,4,5,6]).replaceAll('\r\n', '<br /><br />')
