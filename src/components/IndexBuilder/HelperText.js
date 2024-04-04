@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import {Step, StepContent, StepLabel, Stepper} from "@mui/material";
+import {Accordion, AccordionDetails, AccordionSummary, Step, StepContent, StepLabel, Stepper} from "@mui/material";
 import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 import {FaMousePointer} from "@react-icons/all-files/fa/FaMousePointer";
 import {FaHashtag} from "@react-icons/all-files/fa/FaHashtag";
@@ -84,6 +84,13 @@ const IndexBuilderStepIcon = ({ color, stepNumber, background }) => {
     }
 };
 
+export const readmeText = (colorScale) => "The process to compute this Custom Index is as follows: \r\n" +
+    "    1. Loop over all GeoJSON features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
+    "    2. For each GeoJSON feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
+    "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
+    `    4. Use scaled values to determine quantile bins - right now the app assumes there are always ${colorScale.length - 1} partitions (aka ${colorScale.length} bins)\r\n` +
+    "    5. Now that we have our scaled values and the quantile bins, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
+
 export const WeightsHelperText = ({ selections }) => {
     const IconProps = { color: colors.white, background: colors.pink };
     const FirstIconProps = {...IconProps, stepNumber: 1};
@@ -126,6 +133,27 @@ export const WeightsHelperText = ({ selections }) => {
                     </Stepper>
                 </Grid>
             </Grid>
+            <Accordion>
+                <AccordionSummary id="panel-header" aria-controls="panel-content">
+                    How do we calculate the Custom Index?
+                </AccordionSummary>
+                <AccordionDetails dangerouslySetInnerHTML={{
+                    __html: readmeText([1,2,3,4,5,6]).replaceAll('\r\n', '<br /><br />')
+                }} />
+            </Accordion>
+
+            <Accordion>
+                <AccordionSummary id="panel-header" aria-controls="panel-content">
+                    Why is there a difference between numerical weight and the percentage applied?
+                </AccordionSummary>
+                <AccordionDetails>
+                    Numerical weights may not add up to 100, so these may differ from the actual percentages.
+                    <br /><br />
+                    For example: suppose we have 3 weights of 10, 10, and 10 - these will add up to a total of 30.
+                    <br />
+                    10 / 30 = 1 / 3 = ~33.3333%
+                </AccordionDetails>
+            </Accordion>
             <DebugInfo data={selections}></DebugInfo>
         </>
     );
