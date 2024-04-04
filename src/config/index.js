@@ -1,7 +1,11 @@
 import rawVariables from './variables.json';
+import rawCategories from './categories.json';
 
 export const defaultData = 'chives-data.geojson';
 export const defaultVariable = "Surface Temperature";
+
+// No further processing needed
+export const variableCategories = rawCategories;
 
 export const variablePresets = rawVariables.reduce(
   (obj, row) => Object.assign(obj,
