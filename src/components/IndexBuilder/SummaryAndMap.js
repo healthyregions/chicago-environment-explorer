@@ -17,6 +17,7 @@ import {changeVariable, setPanelState} from "../../actions";
 import {useChivesData} from "../../hooks/useChivesData";
 import {useHistory} from "react-router-dom";
 import JSZip from 'jszip';
+import {readmeText} from "./HelperText";
 
 const DEBUG = process.env.REACT_APP_DEBUG?.toLowerCase()?.includes('t');
 
@@ -63,6 +64,12 @@ const FaPngIcon = () =>
         <path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM64 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm152 32c5.3 0 10.2 2.6 13.2 6.9l88 128c3.4 4.9 3.7 11.3 1 16.5s-8.2 8.6-14.2 8.6H216 176 128 80c-5.8 0-11.1-3.1-13.9-8.1s-2.8-11.2 .2-16.1l48-80c2.9-4.8 8.1-7.8 13.7-7.8s10.8 2.9 13.7 7.8l12.8 21.4 48.3-70.2c3-4.3 7.9-6.9 13.2-6.9z"/>
     </svg>
 
+const getReadmeText = (selections, weightMax, colorScale) => "This ZIP archive contains CSV data used to " +
+    "build a Custom Index in the Chicago Environment Explorer (ChiVes). \r\n\r\n" +
+    "This Custom Index was created using the following Indicators and Weights: \r\n" +
+    selections.map((sel) => `   * ${sel.name}: ${100 * sel.value / weightMax}%`).join('\r\n') +
+    + readmeText(colorScale)
+
 const SummaryMapPage = ({ selections }) => {
 
     const history = useHistory();
@@ -97,17 +104,6 @@ const SummaryMapPage = ({ selections }) => {
     // Compute weight maximums
     const weightMax = sum(selections.map(s => s.value));
 
-    const readmeText = "This ZIP archive contains CSV data used to " +
-        "build a Custom Index in the Chicago Environment Explorer (ChiVes). \r\n\r\n" +
-        "This Custom Index was created using the following Indicators and Weights: \r\n" +
-        selections.map((sel) => `   * ${sel.name}: ${100 * sel.value / weightMax}%`).join('\r\n') +
-        "\r\n\r\nThe process to compute this Custom Index is as follows: \r\n" +
-        "    1. Loop over all GeoJSON features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
-        "    2. For each GeoJSON feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
-        "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
-        `    4. Use scaled values to determine quantile bins - right now the code assumes there are always ${colorScale.length - 1} partitions (aka ${colorScale.length} bins)\r\n` +
-        "    5. Now that we have our scaled values and the quantile bins, we use the map to visualize the data contained in CUSTOM_INDEX_scaled\r\n";
-
     const download = (dataURL, { name = "chives-custom-index", extension = "png" } = {}) => {
         const a = document.createElement("a");
         a.href = dataURL;
@@ -117,7 +113,7 @@ const SummaryMapPage = ({ selections }) => {
 
     const downloadZip = () => {
         const zip = new JSZip();
-        zip.file('README.txt', readmeText);
+        zip.file('README.txt', getReadmeText(selections, weightMax, colorScale));
         zip.file('chives-custom-index.csv', buildCsv());
         zip.generateAsync({type: 'blob'}).then((blob) => {
             const reader = new FileReader();
