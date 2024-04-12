@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {colors, variablePresets} from '../../config';
 import {useChivesData} from "../../hooks/useChivesData";
 import {useSelector} from "react-redux";
+import { indexOf } from 'lodash';
 // import { Gutter } from '../styled_components';
 // import Tooltip from './tooltip';
 
@@ -104,30 +105,48 @@ const BinLabels = styled.div`
     }
 `
 const BinBars = styled.div`
-    width:100%;
-    display: flex;
     margin-top:3px;
     box-sizing: border-box;
-    .bin { 
+    .color-bars {
+        width:100%;
+        display: flex;
+    }
+    .color-bars.with-labels {
+        margin-bottom: 15px;
+    }
+    .bin {
         height:5px;
         display: inline;
         flex:1;
         border:0;
         margin:0;
     }
+    .bin.min { 
+        max-width: 1px;
+    }
+    .bin.max { 
+        max-width: 1px;
+        translate: -20px;
+    }
+    .bin > .label {
+        font-size:10px;
+        translate: -50%;
+        margin-top: 5px;
+        text-align: center;
+    }
     .bin:nth-of-type(1) {
         transform: ${props => props.firstBinZero ? 'scaleX(0.35)' : 'none'};
     }
 `
+
 const BinLabel = (obj, bins) => {
-    const { storedGeojson } = useChivesData();
-    const mapParams = useSelector((state) => state.mapParams);
-    const { variableName } = mapParams;
-    const columnName = variablePresets[variableName].Column;
+    // const { storedGeojson } = useChivesData();
+    // const mapParams = useSelector((state) => state.mapParams);
+    // const { variableName } = mapParams;
+    // const columnName = variablePresets[variableName].Column;
 
-    const values = storedGeojson?.features?.map(f => f.properties[columnName]) || [];
+    // const values = storedGeojson?.features?.map(f => f.properties[columnName]) || [];
 
-    console.log(variableName);
     switch(obj["obj"].trim()) {
         case "Historical Redlining":
             return (
@@ -147,28 +166,35 @@ const BinLabel = (obj, bins) => {
                 </BinLabels>
             );
         default:
-            const min = Math.min(...values.filter(v => Number(v) && !Number.isNaN(v)));
-            const max = Math.max(...values.filter(v => Number(v) && !Number.isNaN(v)));
-            if (min === Infinity && max === -Infinity) {
-                return (<div className={'bin labe'}>
-                    Loading...
-                </div>);
-            }
+            return null
+        // default:
+        //     const min = Math.min(...values.filter(v => Number(v) && !Number.isNaN(v)));
+        //     const max = Math.max(...values.filter(v => Number(v) && !Number.isNaN(v)));
+        //     if (min === Infinity && max === -Infinity) {
+        //         return (<div className={'bin labe'}>
+        //             Loading...
+        //         </div>);
+        //     }
 
-            return (
-                <BinLabels binLength={bins.length + 2}>
-                    {[min, ...obj["bins"], max].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}
-                </BinLabels>
-            );
+        //     return (
+        //         <BinLabels binLength={bins.length + 2}>
+        //             {[min, ...obj["bins"], max].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}
+        //         </BinLabels>
+        //     );
     }
 }
 
-const Legend =  ({
+const Legend = ({
     variableName,
     bins,
     colorScale
 }) => {
 
+    // replace with real min/max values
+    const min = "min";
+    const max = "max";
+
+    const categorical = ["Historical Redlining", "Displacement Pressure"].includes(variableName.trim());
     return (
         <BottomPanel id="bottomPanel">
             {!!bins && !!colorScale && <LegendContainer>
@@ -179,13 +205,34 @@ const Legend =  ({
                         </LegendTitle>
                     </Grid>
                     <Grid item xs={12}>
-                        {colorScale !== undefined &&
-                            <span>
+                        {colorScale !== undefined && !categorical &&
+                            <div>
+                                <BinBars height={20}>
+                                    <div className="color-bars with-labels">
+                                        <div className="bin min">
+                                            <div className="label">{min}</div>
+                                        </div>
+                                        {colorScale.map((color, i) => 
+                                            <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}>
+                                                {i > 0 && <div className="label">{Math.round(bins[i-1]*100)/100}</div>}
+                                            </div>
+                                        )}
+                                        <div className="bin max">
+                                            <div className="label">{max}</div>
+                                        </div>
+                                    </div>
+                                </BinBars>
+                            </div>
+                        }
+                        {colorScale !== undefined && categorical &&
+                            <div>
                                 <BinBars>
-                                    {colorScale.map((color, i) => <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
+                                    <div className="color-bars">
+                                        {colorScale.map((color, i) => <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
+                                    </div>
                                 </BinBars>
                                 <BinLabel obj={variableName} bins={bins}></BinLabel>
-                            </span>
+                            </div>
                         }
                     </Grid>
                 </Grid>
