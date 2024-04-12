@@ -147,8 +147,8 @@ const BinLabel = (obj, bins) => {
                 </BinLabels>
             );
         default:
-            const min = Math.min(...values);
-            const max = Math.max(...values);
+            const min = Math.min(...values.filter(v => Number(v) && !Number.isNaN(v)));
+            const max = Math.max(...values.filter(v => Number(v) && !Number.isNaN(v)));
             if (min === Infinity && max === -Infinity) {
                 return (<div className={'bin labe'}>
                     Loading...
