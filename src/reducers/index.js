@@ -9,7 +9,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         ? action.payload.bins
         : generateQuantileBins(
             action.payload.geojsonData,
-            6,
+              state.mapParams.colorScale,
             { ...state.mapParams }["accessor"],
             state.mapParams
           );
@@ -86,7 +86,7 @@ export default function reducer(state = INITIAL_STATE, action) {
         ? action.payload.params.bins
         : generateQuantileBins(
             state.storedGeojson,
-            6,
+              action.payload.params.colorScale || state.mapParams.colorScale,
             { ...state.mapParams, ...action.payload.params }["accessor"],
             action.payload.params
           );
