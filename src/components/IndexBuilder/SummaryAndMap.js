@@ -321,7 +321,7 @@ const SummaryMapPage = ({ selections }) => {
             <div id="mainContainer" style={{ position: 'fixed' }} ref={mapRef}>
                 <MapSection bounds={defaultBounds} showSearch={false} showCustom={true} />
                 <Legend
-                    variableName={'Custom Index'}
+                    label={'Custom Index'}
                     colorScale={colorScale}
                     bins={legend}
                 />

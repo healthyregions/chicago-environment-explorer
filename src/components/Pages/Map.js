@@ -28,7 +28,7 @@ function App() {
       <div id="mainContainer">
         <MapSection bounds={defaultBounds} />
         <Legend
-          variableName={`${mapParams.variableName} ${
+          label={`${mapParams.variableName} ${
             mapParams.units ? `(${mapParams.units})` : ""
           }`}
           colorScale={mapParams.colorScale}

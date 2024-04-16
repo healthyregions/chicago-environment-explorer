@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import {colors, variablePresets} from '../../config';
 import {useChivesData} from "../../hooks/useChivesData";
 import {useSelector} from "react-redux";
-import { indexOf } from 'lodash';
 // import { Gutter } from '../styled_components';
 // import Tooltip from './tooltip';
 
@@ -139,15 +138,8 @@ const BinBars = styled.div`
     }
 `
 
-const BinLabel = (obj, bins) => {
-    // const { storedGeojson } = useChivesData();
-    // const mapParams = useSelector((state) => state.mapParams);
-    // const { variableName } = mapParams;
-    // const columnName = variablePresets[variableName].Column;
-
-    // const values = storedGeojson?.features?.map(f => f.properties[columnName]) || [];
-
-    switch(obj["obj"].trim()) {
+const BinLabel = ({ label }) => {
+    switch(label.trim()) {
         case "Historical Redlining":
             return (
                 <BinLabels>
@@ -167,41 +159,35 @@ const BinLabel = (obj, bins) => {
             );
         default:
             return null
-        // default:
-        //     const min = Math.min(...values.filter(v => Number(v) && !Number.isNaN(v)));
-        //     const max = Math.max(...values.filter(v => Number(v) && !Number.isNaN(v)));
-        //     if (min === Infinity && max === -Infinity) {
-        //         return (<div className={'bin labe'}>
-        //             Loading...
-        //         </div>);
-        //     }
-
-        //     return (
-        //         <BinLabels binLength={bins.length + 2}>
-        //             {[min, ...obj["bins"], max].map((bin, i) => <div key={'color-label' + i} className='bin labe'>{Math.round(bin*100)/100}</div>)}
-        //         </BinLabels>
-        //     );
     }
 }
 
 const Legend = ({
-    variableName,
+    label,
     bins,
-    colorScale
+    colorScale,
+    precision
 }) => {
+    const { storedGeojson } = useChivesData();
+    const mapParams = useSelector((state) => state.mapParams);
 
-    // replace with real min/max values
-    const min = "min";
-    const max = "max";
+    // Note that "label" above and variableName here are similar, but not always the same
+    const columnName = variablePresets[mapParams.variableName].Column;
 
-    const categorical = ["Historical Redlining", "Displacement Pressure"].includes(variableName.trim());
+    const values = storedGeojson?.features?.map(f => f.properties[columnName]) || [];
+
+    const min = Math.min(...values.filter(v => Number(v) && !Number.isNaN(v)));
+    const max = Math.max(...values.filter(v => Number(v) && !Number.isNaN(v)));
+
+    const categorical = ["Historical Redlining", "Displacement Pressure"].includes(label.trim());
+
     return (
         <BottomPanel id="bottomPanel">
             {!!bins && !!colorScale && <LegendContainer>
                 <Grid container spacing={2} id='legend-bins-container'>
                     <Grid item xs={12}>
                         <LegendTitle>
-                            {variableName}
+                            {label}
                         </LegendTitle>
                     </Grid>
                     <Grid item xs={12}>
@@ -210,15 +196,15 @@ const Legend = ({
                                 <BinBars height={20}>
                                     <div className="color-bars with-labels">
                                         <div className="bin min">
-                                            <div className="label">{min}</div>
+                                            <div className="label">{min.toFixed(precision || 2)}</div>
                                         </div>
-                                        {colorScale.map((color, i) => 
+                                        {colorScale.map((color, i) =>
                                             <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}>
                                                 {i > 0 && <div className="label">{Math.round(bins[i-1]*100)/100}</div>}
                                             </div>
                                         )}
                                         <div className="bin max">
-                                            <div className="label">{max}</div>
+                                            <div className="label">{max.toFixed(precision || 2)}</div>
                                         </div>
                                     </div>
                                 </BinBars>
@@ -231,7 +217,7 @@ const Legend = ({
                                         {colorScale.map((color, i) => <div key={'color-bar' + i} className="bin color" style={{backgroundColor:`rgb(${color[0]},${color[1]},${color[2]})`}}></div>)}
                                     </div>
                                 </BinBars>
-                                <BinLabel obj={variableName} bins={bins}></BinLabel>
+                                <BinLabel label={label}></BinLabel>
                             </div>
                         }
                     </Grid>
