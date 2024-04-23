@@ -385,14 +385,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     scaleColor(x, mapParams.bins, mapParams.colorScale);
 
   const AQ_SCALE = scaleThreshold()
-    .domain([5, 7.5, 10, 12, 12.5, 15])
+    .domain([9.5, 10, 10.5, 11, 11.5])
     .range([
-      "rgb(1,152,189)",
-      "rgb(73,227,206)",
-      "rgb(216,254,181)",
-      "rgb(254,237,177)",
-      "rgb(254,173,84)",
-      "rgb(209,55,78)",
+      "rgb(70, 50, 127)",
+      "rgb(54, 92, 141)",
+      "rgb(39, 127, 142)",
+      "rgb(31, 161, 135)",
+      "rgb(74, 194, 109)",
+      "rgb(159, 218, 58)",
     ]);
 
   const getAqColor = (val) => {
@@ -632,6 +632,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     //     visible: [mapParams.custom, mapParams.variableName],
     //   }
     // }),
+
+    /* This layer displays when Source Data is toggled on for Observed PM2.5 */
     new ColumnLayer({
       id: "aq_data_grid",
       data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
@@ -721,6 +723,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       },
       beforeId: "state-label",
     }),
+
+    /* This layer displays when the Non-residential overly is selected */
+    // TODO: is this the box around the numerical values (see below)
     new GeoJsonLayer({
       id: "non-res",
       data: `${process.env.PUBLIC_URL}/geojson/non-res-mdp.geojson`,
@@ -741,6 +746,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       },
       beforeId: "state-label",
     }),
+
+    /* This layer displays when the Weekly PM2.5 overlay is selected */
     new LineLayer({
       id: "aq-line-layer",
       data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
@@ -767,6 +774,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       },
       beforeId: "state-label",
     }),
+
+    /* This text is displayed when the Weekly PM2.5 overlay is selected */
     new TextLayer({
       id: "aq-text-layer",
       data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
