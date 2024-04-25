@@ -47,7 +47,7 @@ export default function IndexBuilder() {
             { /*<NavBar showMapControls={true} bounds={defaultBounds} />*/ }
 
             <Grid container spacing={2} style={{ marginTop:'4vh', marginBottom:'10vh', paddingLeft: '15vw', paddingRight: '15vw' }}>
-                <Grid item xs={6}>
+                <Grid item xs={12} lg={6}>
                     {
                         currentStep === 'indicators' && !selectedDetails && <>
                             <HeaderText>
@@ -71,7 +71,7 @@ export default function IndexBuilder() {
                                 <FaArrowCircleLeft onClick={() => setCurrentStep('indicators')} style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} />
                                 2. Choose Weights
                             </HeaderText>
-                            <div style={{ paddingLeft: '3rem' }}>
+                            <div style={{ paddingLeft: '3rem', marginBottom: '4rem' }}>
                                 <WeightsHelperText />
                             </div>
                         </>
@@ -83,7 +83,7 @@ export default function IndexBuilder() {
                         </>
                     }
                 </Grid>
-                <Grid item xs={6} style={{ paddingTop: '8vh' }}>
+                <Grid item xs={12} lg={6} style={{ paddingTop: '8vh', marginBottom: '10rem' }}>
                     {
                         currentStep === 'indicators' && <>
                             <IndicatorsList selections={selections}
