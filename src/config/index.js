@@ -2,7 +2,7 @@ import rawVariables from './variables.json';
 import rawCategories from './categories.json';
 
 export const defaultData = 'chives-data.geojson';
-export const defaultVariable = "Surface Temperature";
+export const defaultVariable = "Heat Index (Maximum)";
 
 // No further processing needed
 export const variableCategories = rawCategories;
