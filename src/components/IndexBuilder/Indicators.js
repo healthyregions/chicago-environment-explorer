@@ -141,7 +141,7 @@ const StackedList = styled.div`
     overflow-y: auto;
     max-height: 70vh;
   }
-  @media(max-height: 400px) {
+  @media(max-height: 900px) {
     overflow-y: none;
     max-height: none;
   }
