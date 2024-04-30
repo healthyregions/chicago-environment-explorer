@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import {Divider, ToggleButton} from "@mui/material";
 import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 import {SLIDER_DEFAULT} from "./Weights";
+import styled from "styled-components";
 
 const css = `
     .MuiGrid-container.MuiGrid-root {
@@ -135,6 +136,17 @@ const IndicatorsSelectableItem = ({ categoryName, selections, variableName, togg
         </Grid>
     </ToggleButton>
 
+const StackedList = styled.div`
+  @media(max-height: 1024px) {
+    overflow-y: auto;
+    max-height: 70vh;
+  }
+  @media(max-height: 400px) {
+    overflow-y: none;
+    max-height: none;
+  }
+`;
+
 /** Renders a list of toggle buttons that allow each variable/indicator to be selected */
 // NOTE: There is no equivalent of getSnapshotBeforeUpdate using React hooks, so we are forced to use a Class component here
 class IndicatorsList extends React.Component {
@@ -186,7 +198,7 @@ class IndicatorsList extends React.Component {
 
     render() {
         return (
-            <div style={{ overflowY: 'auto', maxHeight: '70vh' }} ref={this.listRef}>
+            <StackedList ref={this.listRef}>
                 {Object.keys(variablePresets).filter(variable => {
                     // Only show categories + enabled indicators
                     return variable.includes("HEADER::") || variablePresets[variable].ibEnabled;
@@ -204,7 +216,7 @@ class IndicatorsList extends React.Component {
                                                     toggleSelection={() => this.toggleSelection(variable, variable.listGroup)}>
                         </IndicatorsSelectableItem>
                 ))}
-            </div>
+            </StackedList>
         );
     }
 }
