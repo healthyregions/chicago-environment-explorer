@@ -53,14 +53,12 @@ const PrimaryButton = styled(Button)`
 `;
 
 const VariablePanelContainer = styled.div`
-
-
   @media (max-height: 1024px) {
-    max-height: 40vw;
-    min-height: 30vw;
+    max-height: 60vh;
+    min-height: 30vh;
   }
   @media (max-height: 400px) {
-    max-height: 30vw;
+    max-height: 30vh;
   }
   position: fixed;
   left: 10px;
@@ -97,11 +95,7 @@ const VariablePanelContainer = styled.div`
     font-family: "Lora", serif;
     margin: 10px 0;
   }
-  @media (max-width: 1024px) {
-    min-width: 50vw;
-  }
   @media (max-width: 600px) {
-    width: calc(100% - 6em);
     top: calc(1em + 45px);
     height: calc(100% - 6em);
     left: 0.5em;
@@ -180,7 +174,7 @@ const ShowHideButton = styled.button`
   :after {
     opacity: 1;
   }
-`
+`;
 
 const ControlsContainer = styled.div`
   max-height: 60vh;
@@ -521,7 +515,7 @@ const SummaryMapPage = ({ selections }) => {
                 </ShowHideButton>
                 <VariablePanelContainer
                     className={showPanel ? "" : "hidden"}
-                    style={{ top: '110px', left: '20px', maxHeight: '40vh', overflowY: 'auto' }}>
+                    style={{ top: '110px', left: '20px', width: '375px', overflowY: 'auto' }}>
                     <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
                         <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Index</Typography>
                         <Typography variant={'body2'} style={{ marginBottom: '2rem' }}>
