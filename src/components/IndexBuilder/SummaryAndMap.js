@@ -54,7 +54,7 @@ const PrimaryButton = styled(Button)`
 
 const VariablePanelContainer = styled.div`
   @media (max-height: 1024px) {
-    max-height: 60vh;
+    max-height: 70vh;
     min-height: 30vh;
   }
   @media (max-height: 400px) {
@@ -101,6 +101,10 @@ const VariablePanelContainer = styled.div`
     left: 0.5em;
     display: ${(props) => (props.otherPanels ? "none" : "initial")};
     padding-top: 2em;
+  }
+  button#showHideLeft.hidden {
+    left: calc(100% + 20px);
+    z-index: 9999;
   }
   button#showHideLeft {
     position: absolute;
@@ -161,24 +165,9 @@ const VariablePanelContainer = styled.div`
   user-select: none;
 `;
 
-const ShowHideButton = styled.button`
-  left: calc(100% + 20px);
-  @media (max-width: 600px) {
-    left: calc(100% + 2.5em);
-  }
-  height: 2rem;
-  width: 2rem;
-  svg {
-    transform: rotate(0deg);
-  }
-  :after {
-    opacity: 1;
-  }
-`;
-
 const ControlsContainer = styled.div`
   max-height: 60vh;
-  overflow-y: scroll;
+  //overflow-y: scroll;
   padding: 20px;
 
   @media (max-height: 899px) {
@@ -505,20 +494,12 @@ const SummaryMapPage = ({ selections }) => {
                     colorScale={colorScale}
                     bins={legend}
                 />
-                <ShowHideButton
-                    onClick={handleOpenClose}
-                    id="showHideLeft"
-                    style={{ top: '100vh', position: 'sticky', zIndex: '9999' }}
-                    className={showPanel ? "active" : "hidden"}
-                >
-                    {SVG.info}
-                </ShowHideButton>
                 <VariablePanelContainer
                     className={showPanel ? "" : "hidden"}
-                    style={{ top: '110px', left: '20px', width: '375px', overflowY: 'auto' }}>
+                    style={{ top: '110px', left: '20px', width: '375px' }}>
                     <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
                         <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Index</Typography>
-                        <Typography variant={'body2'} style={{ marginBottom: '2rem' }}>
+                        <Typography variant={'body2'}>
                             <p>The custom index you created has theme{getUniqueGroupNames().length > 1 && <>s</>}:</p>
                             <p>
                                 {
@@ -543,7 +524,7 @@ const SummaryMapPage = ({ selections }) => {
 
                         </Typography>
                     </div>
-                    <div style={{ marginBottom:'2rem', padding: '0 2rem 1rem 2rem' }}>
+                    <div style={{ padding: '0 2rem 1rem 2rem' }}>
                         <WeightsPieChart selections={selections}
                                          showLegend={true}
                                          cx={150}
@@ -589,6 +570,13 @@ const SummaryMapPage = ({ selections }) => {
                             </Grid>
                         </Grid>
                     </ControlsContainer>
+                    <button
+                        onClick={handleOpenClose}
+                        id="showHideLeft"
+                        className={showPanel ? "active" : "hidden"}
+                    >
+                        {SVG.settings}
+                    </button>
                 </VariablePanelContainer>
             </div>
         </>
