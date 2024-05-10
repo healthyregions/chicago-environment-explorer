@@ -165,6 +165,12 @@ const VariablePanelContainer = styled.div`
   user-select: none;
 `;
 
+const SummaryMenuFooterBar = styled(Grid)`
+  @media (max-height: 500px) {
+    display: none;
+  }
+`;
+
 const ControlsContainer = styled.div`
   max-height: 60vh;
   //overflow-y: scroll;
@@ -172,6 +178,10 @@ const ControlsContainer = styled.div`
 
   @media (max-height: 899px) {
     padding: 20px 20px 10vh 20px;
+  }
+  
+  @media (max-height: 500px) {
+    display: none;
   }
 
   @media (max-width: 600px) {
