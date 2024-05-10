@@ -42,6 +42,10 @@ export default function IndexBuilder() {
     // TODO: Default selections?
     const [selections, setSelections] = useState([]);
 
+    if (currentStep === "summary") {
+        document.getElementById('google_translate_element').style['display'] = "none";
+    }
+
     return (
         <>
             { /*<NavBar showMapControls={true} bounds={defaultBounds} />*/ }
