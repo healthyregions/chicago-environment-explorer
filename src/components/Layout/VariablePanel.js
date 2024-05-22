@@ -22,6 +22,15 @@ const REDLINING_COLOR_SCALE = {
   D: [226, 77, 90],
 };
 
+const CC_COLOR_SCALE = {
+  'Chicago Community College': [163,50,0],
+  'Community Service Center': [195,0,140],
+  'Library': [249,141,39],
+  'Park District Spray Feature': [253,255,172],
+  'Regional Senior Center': [49,167,90],
+  'Satellite Senior Center': [152,210,119]
+};
+
 const RedliningLegend = () => (
   <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
     <h3>HOLC Grading</h3>
@@ -39,6 +48,25 @@ const RedliningLegend = () => (
       </div>
     ))}
   </div>
+);
+
+const CoolingCentersLegend = () => (
+    <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+      <h3>Cooling Site Types</h3>
+      {Object.entries(CC_COLOR_SCALE).map(([key, color]) => (
+          <div style={{ display: "flex", margin:'.25em 0' }}>
+        <span
+            key={key}
+            style={{
+              backgroundColor: `rgb(${color.join(",")})`,
+              width: 16,
+              height: 16,
+            }}
+        ></span>
+            <p style={{padding:0, margin:'0 0 0 .25em'}}>{key}</p>
+          </div>
+      ))}
+    </div>
 );
 
 const NonResidentialLegend = () => (
@@ -373,11 +401,15 @@ const VariablePanel = (props) => {
             <MenuItem value={"redlining"} key={"redlining"}>
               Historical Redlining
             </MenuItem>
+            <MenuItem value={"cooling-centers"} key={"cooling-centers"}>
+              Cooling Centers
+            </MenuItem>
             <MenuItem value={"non-res"} key={"non-res"}>
               Industrial & Non-Residential Areas
             </MenuItem>
           </Select>
         </FormControl>
+        {mapParams.overlay === "cooling-centers" && <CoolingCentersLegend />}
         {mapParams.overlay === "redlining" && <RedliningLegend />}
         {mapParams.overlay === "non-res" && <NonResidentialLegend />}
       </ControlsContainer>
