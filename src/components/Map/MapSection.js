@@ -987,7 +987,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           width={"100%"}
           height={"100%"}
           layers={allLayers}
-          getTooltip={({object}) => object && (object.properties.name)}
         />
       </MapboxGLMap>
       {!geoids.length && (
