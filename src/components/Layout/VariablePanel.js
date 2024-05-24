@@ -71,6 +71,7 @@ const CoolingCentersLegend = () => (
 
 const NonResidentialLegend = () => (
     <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+      <h3>Industrial Areas</h3>
       <div style={{ display: "flex", margin:'.25em 0' }}>
         <span
             style={{
