@@ -23,12 +23,12 @@ const REDLINING_COLOR_SCALE = {
 };
 
 const CC_COLOR_SCALE = {
-  'Chicago Community College': [0,0,255],
-  'Community Service Center': [106,106,243],
-  'Library': [0,157,255],
-  'Park District Spray Feature': [0,255,255],
-  'Regional Senior Center': [61,253,253,0.49],
-  'Satellite Senior Center': [86,253,248,0.29]
+  'Chicago Community College': [8,81,156],
+  'Community Service Center': [49,130,189],
+  'Library': [107,174,214],
+  'Park District Spray Feature': [158,202,225],
+  'Regional Senior Center': [198,219,239],
+  'Satellite Senior Center': [239,243,255]
 };
 
 const RedliningLegend = () => (
