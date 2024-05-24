@@ -418,12 +418,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   };
 
   const CC_COLOR_SCALE = {
-    'Chicago Community College': [163,50,0],
-    'Community Service Center': [195,0,140],
-    'Library': [249,141,39],
-    'Park District Spray Feature': [253,255,172],
-    'Regional Senior Center': [49,167,90],
-    'Satellite Senior Center': [152,210,119]
+    'Chicago Community College': [0,0,255],
+    'Community Service Center': [106,106,243],
+    'Library': [0,157,255],
+    'Park District Spray Feature': [0,255,255],
+    'Regional Senior Center': [61,253,253,0.49],
+    'Satellite Senior Center': [86,253,248,0.29]
   };
 
   const getCcColor = (site_type) => {
@@ -930,6 +930,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
   const view = new MapView({ repeat: true });
 
+  const getCoolingCenterTooltip = ({object}) => {
+    return object && (object.properties.site_name) &&
+        (`${object.properties.site_type}: ${object.properties.site_name}\n` +
+            (object.properties.address ? object.properties.address + '\n' : '') +
+            (object.properties.phone ? object.properties.phone + '\n' : '') +
+            (object.properties.hours_of_operation ? object.properties.hours_of_operation : ''));
+  }
+
   return (
     <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
       <MapboxGLMap
@@ -987,6 +995,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           width={"100%"}
           height={"100%"}
           layers={allLayers}
+          getTooltip={getCoolingCenterTooltip}
         />
       </MapboxGLMap>
       {!geoids.length && (
