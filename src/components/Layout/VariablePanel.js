@@ -425,9 +425,9 @@ const VariablePanel = (props) => {
             </MenuItem>
           </Select>
         </FormControl>
-        {"cooling-centers" in mapParams.overlays  && <CoolingCentersLegend />}
-        {"redlining" in mapParams.overlays && <RedliningLegend />}
-        {"non-res" in mapParams.overlays && <NonResidentialLegend />}
+        {mapParams.overlays.includes("cooling-centers") && <CoolingCentersLegend />}
+        {mapParams.overlays.includes("redlining") && <RedliningLegend />}
+        {mapParams.overlays.includes("non-res") && <NonResidentialLegend />}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}
