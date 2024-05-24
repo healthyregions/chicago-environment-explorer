@@ -305,9 +305,23 @@ const VariablePanel = (props) => {
   }, [mapParams.variableName, dispatch]);
 
   const handleMapOverlay = (event) => {
+    let prevOverlays = mapParams.overlays;
+    let overlays = event.target.value;
+
+    // If "None" is clicked, remove all other overlays
+    if (!prevOverlays.includes('None') && overlays.includes('None')) {
+      overlays = ['None'];
+    }
+
+    // If "None" was previously selected and something else is chosen, then de-select "None"
+    if (prevOverlays.includes('None') && overlays.find((o) => o !== 'None')) {
+      overlays.splice(overlays.indexOf('None'), 1);
+    }
+
     dispatch(
       setMapParams({
         overlay: event.target.value,
+        overlays: overlays,
       })
     );
   };
@@ -383,8 +397,10 @@ const VariablePanel = (props) => {
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
             id="overlay-select"
-            value={mapParams.overlay}
+            value={mapParams.overlays}
             onChange={handleMapOverlay}
+            multiple={true}
+            style={{ maxWidth: '300px' }}
           >
             <MenuItem value="None" key={"None"}>
               None
@@ -409,9 +425,9 @@ const VariablePanel = (props) => {
             </MenuItem>
           </Select>
         </FormControl>
-        {mapParams.overlay === "cooling-centers" && <CoolingCentersLegend />}
-        {mapParams.overlay === "redlining" && <RedliningLegend />}
-        {mapParams.overlay === "non-res" && <NonResidentialLegend />}
+        {"cooling-centers" in mapParams.overlays  && <CoolingCentersLegend />}
+        {"redlining" in mapParams.overlays && <RedliningLegend />}
+        {"non-res" in mapParams.overlays && <NonResidentialLegend />}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}
