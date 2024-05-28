@@ -310,7 +310,7 @@ const VariablePanel = (props) => {
     let overlays = event.target.value;
 
     // If "None" is clicked, remove all other overlays
-    if (!prevOverlays.includes('None') && overlays.includes('None')) {
+    if ((!prevOverlays.includes('None') && overlays.includes('None')) || !overlays.length) {
       overlays = ['None'];
     }
 
