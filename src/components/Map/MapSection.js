@@ -917,7 +917,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         <GeocoderContainer>
           <Geocoder
             id="Geocoder"
-            placeholder={"Search by location"}
+            placeholder={"Search for address..."}
             API_KEY={MAPBOX_ACCESS_TOKEN}
             onChange={handleGeocoder}
             height={45}
