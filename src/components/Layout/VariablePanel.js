@@ -54,7 +54,7 @@ const CoolingCentersLegend = () => (
     <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
       <h3>Cooling Site Types</h3>
       {Object.entries(CC_COLOR_SCALE).map(([key, color]) => (
-          <div style={{ display: "flex", margin:'.25em 0' }}>
+          <div key={'cc-'+key} style={{ display: "flex", margin:'.25em 0' }}>
         <span
             key={key}
             style={{
