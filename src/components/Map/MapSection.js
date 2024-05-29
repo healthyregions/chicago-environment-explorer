@@ -818,7 +818,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       // pointRadiusScale: 1,
       pointRadiusUnits: 'pixels',
       pointType: 'circle+text',
-      stroked: false,
+      stroked: true,
       // textBackground: false,
       // textBackgroundPadding: [0, 0, 0, 0],
       // textBillboard: true,
