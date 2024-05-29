@@ -30,6 +30,7 @@ import { useChivesData } from "../../hooks/useChivesData";
 import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
+import MapCoolingCenterTooltipContent from "./MapCoolingCenterTooltipContent";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
@@ -221,6 +222,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     object: null,
   });
   const [hoverGeog, setHoverGeog] = useState(null);
+  const [hoverCc, setHoverCc] = useState({
+    x: null,
+    y: null,
+    object: null,
+  });
 
   const mapRef = useRef(null);
 
@@ -233,6 +239,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     });
   };
   const hoverRef = useRef();
+  const hoverCcRef = useRef();
   const viewRef = useRef(null);
   const mapContainerRef = useRef(null);
   // map view location
@@ -303,10 +310,27 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   });
   const { queryViewport } = useChivesWorkerQuery(deckRef);
 
+  const handleCcPointClick = ({ x, y, object }) => {
+    // Hide census tract popup
+    setHoverGeog(null);
+    setHoverInfo({ x: null, y: null, object: null });
+
+    // Show/hide cooling center popup
+    if (object?.properties) {
+      setHoverCc({x, y, object: object.properties});
+    } else {
+      setHoverCc({ x: null, y: null, object: null });
+    }
+  };
+
   const handleMapClick = ({ x, y, object }) => {
-    if (object && object.properties) {
+    // Hide cooling center popup
+    setHoverCc({ x: null, y: null, object: null });
+
+    // Show/hide census tract popup
+    if (object?.properties) {
       setHoverGeog(object.properties.geoid);
-      setHoverInfo({ x, y, object: object.properties });
+      setHoverInfo({x, y, object: object.properties});
     } else {
       setHoverGeog(null);
       setHoverInfo({ x: null, y: null, object: null });
@@ -764,7 +788,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     new GeoJsonLayer({
       id: 'cooling-centers',
       data: `${process.env.PUBLIC_URL}/geojson/cooling-centers.geojson`,
-
+      onClick: handleCcPointClick,
       // elevationScale: 1,
       extruded: true,
       filled: true,
@@ -970,6 +994,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           });
           viewRef.current = e.viewState;
 
+          hoverCc.object &&
+            handleCcPointClick({ x: null, y: null, object: null });
           hoverInfo.object &&
             handleMapClick({ x: null, y: null, object: null });
         }}
@@ -1062,6 +1088,21 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           <MapTooltipContent content={hoverInfo.object} showCustom={showCustom} />
         </HoverDiv>
       )}
+
+      {hoverCc.object && (
+          <HoverDiv
+              style={{
+                position: "absolute",
+                zIndex: 1,
+                left: hoverCc.x,
+                top: hoverCc.y,
+              }}
+              ref={hoverCcRef}
+          >
+            <MapCoolingCenterTooltipContent content={hoverCc.object} />
+          </HoverDiv>
+      )}
+
       {!geoids.length && (
         <LogoContainer infoPanel={panelState.info}>
           <a
