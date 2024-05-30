@@ -1,0 +1,4037 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.723772026,41.757456 ]
+    },
+    "properties": {
+    "site_type":"Chicago Community College",
+    "site_name":"Daley College",
+    "hours_of_operation":"M-F 7am - 8:30 pm; SA-SU CLOSED",
+    "address":"7500 S. Pulaski",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60652,
+    "phone":"773-838-7500",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.627021981,41.886060001 ]
+    },
+    "properties": {
+    "site_type":"Chicago Community College",
+    "site_name":"Harold Washington College",
+    "hours_of_operation":"M-F 8 am - 4pm; SA-SU CLOSED",
+    "address":"30 E. Lake St.",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60601,
+    "phone":"312-553-5600",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.643598033,41.77833398 ]
+    },
+    "properties": {
+    "site_type":"Chicago Community College",
+    "site_name":"Kennedy-King College",
+    "hours_of_operation":"M-F 10 am - 5pm; SA-SU CLOSED",
+    "address":"6301 S. Halsted",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60621,
+    "phone":"773-602-5000",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.674724985,41.878107 ]
+    },
+    "properties": {
+    "site_type":"Chicago Community College",
+    "site_name":"Malcolm X College",
+    "hours_of_operation":"M-F 7 am - 10 pm; SA 7 am -5 pm; SU CLOSED",
+    "address":"1900 W. Jackson",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60612,
+    "phone":"312-850-7000",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.589178024,41.709960993 ]
+    },
+    "properties": {
+    "site_type":"Chicago Community College",
+    "site_name":"Olive-Harvey College",
+    "hours_of_operation":"M-F 9 am - 5 pm; SA-SU CLOSED",
+    "address":"10001 S Woodlawn Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60628,
+    "phone":"773-291-6100",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.65903599,41.964512017 ]
+    },
+    "properties": {
+    "site_type":"Chicago Community College",
+    "site_name":"Truman College",
+    "hours_of_operation":"M-F 8 am - 6 pm; SA-SU CLOSED",
+    "address":"1145 W. Wilson Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60640,
+    "phone":"773-907-4000",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.788288038,41.95886802 ]
+    },
+    "properties": {
+    "site_type":"Chicago Community College",
+    "site_name":"Wright College",
+    "hours_of_operation":"M-F 7 am - 4 pm; SA-SU CLOSED",
+    "address":"4300 N. Narragansett Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60634,
+    "phone":"773-777-7900",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.653076038,41.75072399 ]
+    },
+    "properties": {
+    "site_type":"Community Service Center",
+    "site_name":"Englewood Center",
+    "hours_of_operation":"M-F 9am-5pm",
+    "address":"1140 W. 79th Street",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60620,
+    "phone":"312-747-0200",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.706716027,41.880468015 ]
+    },
+    "properties": {
+    "site_type":"Community Service Center",
+    "site_name":"Garfield Center",
+    "hours_of_operation":"M-F 9am-5pm",
+    "address":"10 S. Kedzie Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60612,
+    "phone":"312-746-5400",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.607178999,41.816225002 ]
+    },
+    "properties": {
+    "site_type":"Community Service Center",
+    "site_name":"King Center",
+    "hours_of_operation":"M-F 9am-5pm",
+    "address":"4314 S. Cottage Grove",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60653,
+    "phone":"312-747-2300",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.651991,41.965136007 ]
+    },
+    "properties": {
+    "site_type":"Community Service Center",
+    "site_name":"North Area Center",
+    "hours_of_operation":"M-F 9am-5pm",
+    "address":"845 W. Wilson Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60640,
+    "phone":"312-744-2580",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.551847039,41.738211988 ]
+    },
+    "properties": {
+    "site_type":"Community Service Center",
+    "site_name":"South Chicago Center",
+    "hours_of_operation":"M-F 9am-5pm",
+    "address":"8650 S. Commercial Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60617,
+    "phone":"312-747-0500",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.734240729,41.909847303 ]
+    },
+    "properties": {
+    "site_type":"Community Service Center",
+    "site_name":"Trina Davila Center",
+    "hours_of_operation":"M-F 9am-5pm",
+    "address":"4312 W. North Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60639,
+    "phone":"312-744-2014",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.714061005,41.975447006 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Albany Park",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3401 W. Foster Ave.",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60625,
+    "phone":"(773) 539-5450",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.5985899,41.657217043 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Altgeld",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"955 E. 131st Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60827,
+    "phone":"(312) 747-3270",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.726678032,41.800891986 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Archer Heights",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5055 S. Archer Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60632,
+    "phone":"(312) 747-9241",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.765813976,41.88902598 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Austin",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5615 W. Race Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60644,
+    "phone":"(312) 746-5038",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.779555017,41.953195986 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Austin-Irving",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6100 W. Irving Park Road",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60634,
+    "phone":"(312) 744-6222",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.586262965,41.746330993 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Avalon",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"8148 S. Stony Island Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60617,
+    "phone":"(312) 747-5234",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.678143963,41.807980981 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Back of the Yards",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"2111 W. 47th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60609,
+    "phone":"(312) 747-9595",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.672148974,41.721352 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Beverly",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1962 W. 95th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60643,
+    "phone":"(312) 747-9673",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.660752017,41.971581984 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Bezazian",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1226 W. Ainslie Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60640,
+    "phone":"(312) 744-0019",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.590339001,41.805839991 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Blackstone",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4904 S. Lake Park Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60615,
+    "phone":"(312) 747-0511",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.65773998,41.732529016 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Brainerd",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1350 W. 89th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60620,
+    "phone":"(312) 747-6291",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.703195041,41.815067 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Brighton Park",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4314 S. Archer Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60632,
+    "phone":"(312) 747-0666",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.680352008,41.912560017 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Bucktown-Wicker Park",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1701 N. Milwaukee Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60647,
+    "phone":"(312) 744-6022",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.696332022,41.983373017 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Budlong Woods",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5630 N. Lincoln Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60659,
+    "phone":"(312) 742-9590",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.642596982,41.81648899 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Canaryville",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"642 W. 43rd Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60609,
+    "phone":"(312) 747-0644",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.626229975,41.828173991 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Chicago Bee",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3647 S. State Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60609,
+    "phone":"(312) 747-6872",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.703539034,41.78196699 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Chicago Lawn",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6120 S. Kedzie Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60629,
+    "phone":"(312) 747-0639",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.632128991,41.853762014 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Chinatown",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"2100 S. Wentworth Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60616,
+    "phone":"(312) 747-8013",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.78226497,41.776457984 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Clearing",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6423 W. 63rd Place",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60638,
+    "phone":"(312) 747-5657",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.606835006,41.780134999 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Coleman",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"731 E. 63rd Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60637,
+    "phone":"(312) 747-7760",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.646464979,41.832637983 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Daley, Richard J.-Bridgeport",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3400 S. Halsted Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60608,
+    "phone":"(312) 747-8990",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.706459033,41.894687736 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Daley, Richard M.-W Humboldt",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"733 N. Kedzie Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60612,
+    "phone":"(312) 743-0555",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.709678054,41.864482714 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Douglass",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3353 W. 13th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60623,
+    "phone":"(312) 747-3725",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.813799762,41.943288933 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Dunning",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"7455 W. Cornelia Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60634,
+    "phone":"(312) 743-0480",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.762086963,41.997127008 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Edgebrook",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5331 W. Devon Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60646,
+    "phone":"(312) 744-8313",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.660388597,41.990936199 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Edgewater",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6000 N. Broadway",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60660,
+    "phone":"(312) 742-1945",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.694177035,41.793441019 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Gage Park",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"2807 W. 55th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60632,
+    "phone":"(312) 747-0032",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.780219031,41.792989989 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Garfield Ridge",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6348 S. Archer Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60638,
+    "phone":"(312) 747-6094",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.600424023,41.762564015 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Greater Grand Crossing",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1000 East 73rd Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60619,
+    "phone":"(312) 745-1608",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.62227598,41.807196015 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Hall",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4801 S. Michigan Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60615,
+    "phone":"(312) 747-2541",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.628394015,41.876313985 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Harold Washington-HWLC",
+    "hours_of_operation":"M-TH: 9AM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"400 S. State Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60605,
+    "phone":"(312) 747-4300",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.548928963,41.659408981 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Hegewisch",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3048 E. 130th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60633,
+    "phone":"(312) 747-0046",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.705306023,41.910454986 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Humboldt Park",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1605 N. Troy St.",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60647,
+    "phone":"(312) 744-2244",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.720335027,41.954129982 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Independence",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4024 N. Elston Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60618,
+    "phone":"(312) 744-0900",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.761986967,41.967361989 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Jefferson Park",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5363 W. Lawrence Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60630,
+    "phone":"(312) 744-1998",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.565532004,41.713237018 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Jeffery Manor",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"2401 E. 100th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60617,
+    "phone":"(312) 747-6479",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.637248993,41.781998003 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Kelly",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6151 S. Normal Boulevard",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60621,
+    "phone":"(312) 747-8418",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.61740245,41.83221959 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"King",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3436 S. King Drive",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60616,
+    "phone":"(312) 747-7543",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.725276997,41.879315 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Legler Regional",
+    "hours_of_operation":"M-TH: 9AM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"115 S. Pulaski Road",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60624,
+    "phone":"(312) 746-7730",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.67089303,41.940323981 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Lincoln Belmont",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1659 W. Melrose Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60657,
+    "phone":"(312) 744-0166",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.658148011,41.925597019 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Lincoln Park",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1150 W. Fullerton Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60614,
+    "phone":"(312) 744-1926",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.660522962,41.869428203 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Little Italy",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1336 W. Taylor Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60607,
+    "phone":"(312) 746-5656",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.704825992,41.849640003 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Little Village",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"2311 S. Kedzie Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60623,
+    "phone":"(312) 745-1862",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.703494023,41.925085011 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Logan Square",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3030 W. Fullerton Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60647,
+    "phone":"(312) 744-5295",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.660929965,41.857622006 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Lozano",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1805 S. Loomis Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60608,
+    "phone":"(312) 746-4329",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.679589003,41.881057011 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Manning",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6 S. Hoyne Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60612,
+    "phone":"(312) 746-6800",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.738195019,41.968392 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Mayfair",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4400 W. Lawrence Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60630,
+    "phone":"(312) 744-1254",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.673593009,41.830171985 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"McKinley Park",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1915 W. 35th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60609,
+    "phone":"(312) 747-6082",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.64621897,41.94032 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Merlo",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"644 W. Belmont Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60657,
+    "phone":"(312) 744-1139",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.701221019,41.693149997 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Mount Greenwood",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"11010 S. Kedzie Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60655,
+    "phone":"(312) 747-2805",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.636579027,41.904139012 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Near North",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"310 W. Division Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60610,
+    "phone":"(312) 744-0991",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.768897008,41.909612018 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"North Austin",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5724 W. North Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60639,
+    "phone":"(312) 746-4233",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.733982023,41.910143011 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"North Pulaski",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4300 W. North Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60639,
+    "phone":"(312) 744-9573",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.690425966,42.005475006 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Northtown",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6800 N. Western Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60645,
+    "phone":"(312) 744-2292",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.813854016,41.978383983 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Oriole Park",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"7454 W. Balmoral Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60656,
+    "phone":"(312) 744-1965",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.754936026,41.938944991 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Portage-Cragin",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5108 W. Belmont Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60641,
+    "phone":"(312) 744-0152",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.617958965,41.694371994 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Pullman",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"11001 S. Indiana Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60628,
+    "phone":"(312) 747-2033",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.798020014,41.992153983 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Roden",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6083 N. Northwest Highway",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60631,
+    "phone":"(312) 744-1478",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.673358664,42.006785587 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Rogers Park",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"6907 N. Clark Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60626,
+    "phone":"(312) 744-0156",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.72458197,41.749175015 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Scottsdale",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4101 W. 79th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60652,
+    "phone":"(312) 747-0193",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.655146032,41.794848005 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Sherman Park",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"5440 S. Racine Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60609,
+    "phone":"(312) 747-0477",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.54953598,41.730379016 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"South Chicago",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"9055 S. Houston Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60617,
+    "phone":"(312) 747-8065",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.563717993,41.762449016 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"South Shore",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"2505 E. 73rd Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60649,
+    "phone":"(312) 747-5281",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.68438999,41.962757014 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Sulzer Regional",
+    "hours_of_operation":"M-TH: 9AM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4455 N. Lincoln Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60625,
+    "phone":"(312) 744-7616",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.654376993,41.757374989 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Thurgood Marshall",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"7506 S. Racine Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60620,
+    "phone":"(312) 747-5927",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.724872989,41.842066996 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Toman",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"2708 S. Pulaski Road",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60623,
+    "phone":"(312) 745-1660",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.654211031,41.958200988 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Uptown",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"929 W. Buena Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60613,
+    "phone":"(312) 744-8400",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.533530988,41.702956991 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Vodak-East Side",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3710 E. 106th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60617,
+    "phone":"(312) 747-5500",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.673802975,41.692205985 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Walker",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"11071 S. Hoyne Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60643,
+    "phone":"(312) 747-1920",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.786199016,41.936736988 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"West Belmont",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"3104 N. Narragansett Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60634,
+    "phone":"(312) 746-5142",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.747994972,41.895320998 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"West Chicago Avenue",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4856 W. Chicago Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60651,
+    "phone":"(312) 743-0260",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.668384997,41.779079005 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"West Englewood",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1745 W. 63rd Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60636,
+    "phone":"(312) 747-3481",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.723808991,41.778908014 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"West Lawn",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"4020 W. 63rd Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60629,
+    "phone":"(312) 747-7381",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.654757028,41.883784985 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"West Loop",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"122 N. Aberdeen Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60607,
+    "phone":"(312) 744-2995",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.643096963,41.678082017 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"West Pullman",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"830 W. 119th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60643,
+    "phone":"(312) 747-1425",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.668502008,41.895782003 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"West Town",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"1625 W. Chicago Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60622,
+    "phone":"(312) 743-0450",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.614246033,41.750935005 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Whitney M. Young, Jr.",
+    "hours_of_operation":"M, W: 10AM-6PM;  TU, TH: 12PM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"415 E. 79th Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60619,
+    "phone":"(312) 747-0039",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.642804015,41.720866981 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Woodson Regional",
+    "hours_of_operation":"M-TH: 9AM-8PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"9525 S. Halsted Street",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60628,
+    "phone":"(312) 747-6900",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.702504037,41.737648012 ]
+    },
+    "properties": {
+    "site_type":"Library",
+    "site_name":"Wrightwood-Ashburn",
+    "hours_of_operation":"M, W: 12PM-8PM; TU, TH: 10AM-6PM; F, SA: 9AM-5PM; SU: 1PM-5PM",
+    "address":"8530 S. Kedzie Avenue",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60652,
+    "phone":"(312) 747-2696",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.622287966,41.721003983 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Abbott (Robert)",
+    "hours_of_operation":"",
+    "address":"49 E 95Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.65601599,41.688408983 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Ada (Sawyer Garrett)",
+    "hours_of_operation":"",
+    "address":"11250 S Ada St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.717006992,41.946730019 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Athletic Field",
+    "hours_of_operation":"",
+    "address":"3546 W Addison St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.594176991,41.743639983 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Avalon",
+    "hours_of_operation":"",
+    "address":"1215 E 83Rd St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.657642404,41.804375216 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Back Of The Yards",
+    "hours_of_operation":"",
+    "address":"4920 S Throop St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.591685973,41.782573001 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Beehive",
+    "hours_of_operation":"",
+    "address":"6156 S Dorchester Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.556535959,41.732886001 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Bessemer (Henry)",
+    "hours_of_operation":"",
+    "address":"8930 S Muskegon Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.683199167,41.708262705 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Beverly",
+    "hours_of_operation":"",
+    "address":"2460 W 102Nd St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.654903963,41.727252985 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Brainerd",
+    "hours_of_operation":"",
+    "address":"1246 W 92Nd St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.660842937,41.962792715 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Broncho Billy",
+    "hours_of_operation":"",
+    "address":"4437 N Magnolia Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.597369903,41.72407488 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Burnside (Ambrose)",
+    "hours_of_operation":"",
+    "address":"9400 S Greenwood Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.697348999,41.951387004 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"California",
+    "hours_of_operation":"",
+    "address":"3843 N California Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.727962978,41.814188995 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Catalpa",
+    "hours_of_operation":"",
+    "address":"4330 S Kedvale Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.657712947,41.978624379 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Cedar",
+    "hours_of_operation":"",
+    "address":"5315 N Winthrop Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.76241897,41.943183007 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Chopin (Frederic)",
+    "hours_of_operation":"",
+    "address":"3420 N Long Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.674151998,41.896645004 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Commercial Club Pgd. Of Chicago",
+    "hours_of_operation":"",
+    "address":"1845 W Rice St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.669940023,41.803022702 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Cornell (Paul) Square",
+    "hours_of_operation":"",
+    "address":"1809 W 50Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.758493977,41.928115991 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Cragin",
+    "hours_of_operation":"",
+    "address":"2611 N Lockwood Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.666507032,41.813100982 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Davis (Dr. Nathan) Square",
+    "hours_of_operation":"",
+    "address":"4430 S Marshfield Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.673141778,41.747224202 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Dawes (Charles G.)",
+    "hours_of_operation":"",
+    "address":"8052 S Damen Av",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.752163526,41.955359732 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Dickinson (Arthur)",
+    "hours_of_operation":"",
+    "address":"4117 N Lavergne Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.699674977,41.862406019 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Douglas (Stephen)",
+    "hours_of_operation":"",
+    "address":"1401 S Sacramento",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.782441996,41.965946998 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Dunham (Robert)",
+    "hours_of_operation":"",
+    "address":"4640 N Melvina Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.729436014,41.739159982 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Durkin (Martin)",
+    "hours_of_operation":"",
+    "address":"8445 S Kolin Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.610324314,41.830436001 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Ellis (Samuel)",
+    "hours_of_operation":"",
+    "address":"3520 S Cottage Grove",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.678525945,41.939637299 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Fellger (Charles)",
+    "hours_of_operation":"",
+    "address":"2012 W Belmont Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.638566963,41.704289001 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Fernwood",
+    "hours_of_operation":"",
+    "address":"10436 S Wallace St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.722127032,41.973728226 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Field (Eugene)",
+    "hours_of_operation":"",
+    "address":"5100 N Ridgeway Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.691831386,41.914857292 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Flower (Lucy)",
+    "hours_of_operation":"",
+    "address":"2554 W Moffat St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.65876841,41.864780679 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Fosco (Peter)",
+    "hours_of_operation":"",
+    "address":"1313 S Throop St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.634596959,41.812057016 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Fuller (Melville)",
+    "hours_of_operation":"",
+    "address":"331 W 45Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.76898703,41.912432989 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Galewood",
+    "hours_of_operation":"",
+    "address":"5729 W Bloomingdale Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.611282024,41.657735995 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Golden Gate",
+    "hours_of_operation":"",
+    "address":"13000 S Eberhart Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.600445984,41.755801999 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Grand Crossing",
+    "hours_of_operation":"",
+    "address":"7655 S Ingleside Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.733770157,41.911664849 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Greenebaum (Henry)",
+    "hours_of_operation":"",
+    "address":"4300 W Wabansia Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.695343042,41.92516401 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Haas (Joseph)",
+    "hours_of_operation":"",
+    "address":"2402 N Washtenaw Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.637670016,41.76278601 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Hamilton (Alexander)",
+    "hours_of_operation":"",
+    "address":"513 W 72Nd St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.697081029,41.739009987 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Hayes (Francis)",
+    "hours_of_operation":"",
+    "address":"2936 W 85Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.66847703,41.787214983 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Hermitage",
+    "hours_of_operation":"",
+    "address":"5839 S Wood St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.827414008,41.943710983 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Hiawatha",
+    "hours_of_operation":"",
+    "address":"8029 W Forest Preserve Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.603184694,41.820828734 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Holly",
+    "hours_of_operation":"",
+    "address":"4052 S Ellis Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.702944003,41.907100003 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Humboldt (Alexander Von)",
+    "hours_of_operation":"",
+    "address":"1400 N Humboldt Dr",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.692581037,42.008978013 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Indian Boundary",
+    "hours_of_operation":"",
+    "address":"2500 W Lunt Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.778433015,41.992929979 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Indian Road",
+    "hours_of_operation":"",
+    "address":"6010 W Matson Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.762832031,41.968666004 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Jefferson (Thomas) Meml.",
+    "hours_of_operation":"",
+    "address":"4822 N Long Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.66655973,41.948639038 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Juniper",
+    "hours_of_operation":"",
+    "address":"3656 N Greenview Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.730332294,41.906264679 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Kedvale",
+    "hours_of_operation":"",
+    "address":"4140 W Hirsch St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.73815202,41.929092986 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Kelvyn (William)",
+    "hours_of_operation":"",
+    "address":"4438 W Wrightwood Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.681754971,41.68707098 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Kennedy (Dennis)",
+    "hours_of_operation":"",
+    "address":"11320 S Western Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.594213033,41.804908007 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Kenwood Comm.",
+    "hours_of_operation":"",
+    "address":"1330 E 50Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.653908071,41.754186345 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"King (Martin Luther, Jr.)",
+    "hours_of_operation":"",
+    "address":"1200 W 77Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.536526727,41.702910395 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Krause (Francis Vernon)",
+    "hours_of_operation":"",
+    "address":"10558 S Avenue L",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.700055374,41.83957159 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"La Villita",
+    "hours_of_operation":"",
+    "address":"2800 S Sacramento",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.751800021,41.776737981 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Lawler (Michael)",
+    "hours_of_operation":"",
+    "address":"5210 W 64Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.711285295,41.847521517 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Limas (Juliann Hope)",
+    "hours_of_operation":"",
+    "address":"2410 S Trumbull Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.552676672,41.657292713 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Mann (James)",
+    "hours_of_operation":"",
+    "address":"2949 E 131St St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.703050938,41.771424043 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Marquette (Jacques)",
+    "hours_of_operation":"",
+    "address":"6734 S Kedzie Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.702893128,41.988973127 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Mather (Stephen Tyng)",
+    "hours_of_operation":"",
+    "address":"5941 N Richmond St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.742037056,41.962667291 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Mayfair",
+    "hours_of_operation":"",
+    "address":"4550 W Sunnyside Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.702490039,41.69836002 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Mckiernan (David)",
+    "hours_of_operation":"",
+    "address":"10714 S Sawyer Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.677914591,41.796939107 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Micek (Frank)",
+    "hours_of_operation":"",
+    "address":"5311 S Hamilton Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.752736028,41.878053021 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Moore (Maurice)",
+    "hours_of_operation":"",
+    "address":"5085 W Adams St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.71376504,41.690999997 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Mount Greenwood",
+    "hours_of_operation":"",
+    "address":"3721 W 111Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.666263628,41.836409546 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Mulberry",
+    "hours_of_operation":"",
+    "address":"3150 S Robinson Ct",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.723582009,41.861080002 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Ninebark",
+    "hours_of_operation":"",
+    "address":"1447-1453 S Harding Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.743933739,41.891451456 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Ohio",
+    "hours_of_operation":"",
+    "address":"4712 W Ohio St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.81481299,41.978604008 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Oriole",
+    "hours_of_operation":"",
+    "address":"5430 N Olcott Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.573940981,41.735315999 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Owens (Jesse)",
+    "hours_of_operation":"",
+    "address":"8800 S Clyde",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.616413006,41.691907002 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Palmer (Potter)",
+    "hours_of_operation":"",
+    "address":"201 E 111Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.706032772,41.874972598 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Park No. 422",
+    "hours_of_operation":"",
+    "address":"3200 W Congress Pkwy",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.712820833,41.86404444 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Park No. 534",
+    "hours_of_operation":"",
+    "address":"1301 S St Louis Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.616790625,41.885572369 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Park No. 546",
+    "hours_of_operation":"",
+    "address":"450 E Benton Place",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.689880529,41.877614979 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Park No. 574",
+    "hours_of_operation":"",
+    "address":"2554 W Jackson Blvd",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.744583035,41.938599992 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Parsons (Lucy)",
+    "hours_of_operation":"",
+    "address":"4701 W Belmont Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.618259825,41.814991324 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Pendleton (Hadiya)",
+    "hours_of_operation":"",
+    "address":"4347 S Calumet Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.627863075,41.774595991 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Periwinkle",
+    "hours_of_operation":"",
+    "address":"30 W 66Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.678117979,42.015163019 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Pottawattomie",
+    "hours_of_operation":"",
+    "address":"7340 N Rogers Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.701960973,41.973981011 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"River",
+    "hours_of_operation":"",
+    "address":"5100 N Francisco Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.577293209,41.75890729 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Rosenblum (J. Leslie)",
+    "hours_of_operation":"",
+    "address":"7547 S Euclid Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.537345005,41.684945999 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Rowan (William)",
+    "hours_of_operation":"",
+    "address":"11546 S Avenue L",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.797316476,41.921091352 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Rutherford Sayre",
+    "hours_of_operation":"",
+    "address":"6871 W Belden Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.713539991,41.887551395 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Saint Louis",
+    "hours_of_operation":"",
+    "address":"347 N St Louis Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.669417642,41.999067298 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Schreiber",
+    "hours_of_operation":"",
+    "address":"1552 W Schreiber Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.710881057,41.790292707 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Senka (Edward \"Duke\")",
+    "hours_of_operation":"",
+    "address":"5656 S St Louis Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.668479384,41.988850726 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Senn (Nicholas)",
+    "hours_of_operation":"",
+    "address":"5887 N Ridge Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.800282961,41.945350986 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Shabbona",
+    "hours_of_operation":"",
+    "address":"6935 W Addison",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.657417025,41.798425988 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Sherman (John)",
+    "hours_of_operation":"",
+    "address":"1301 W 52Nd St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.633657012,41.790598003 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Sherwood (Jesse)",
+    "hours_of_operation":"",
+    "address":"5705 S Shields Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.660337649,41.880206015 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Skinner (Mark)",
+    "hours_of_operation":"",
+    "address":"1331 W  Monroe St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.689953981,41.891946989 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Smith (Joseph Higgins)",
+    "hours_of_operation":"",
+    "address":"2526 W Grand Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.643705881,41.905111172 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Stanton (Edwin)",
+    "hours_of_operation":"",
+    "address":"618 W Scott St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.797897873,41.798713438 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Stars & Stripes",
+    "hours_of_operation":"",
+    "address":"5100 S Nordica Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.732401028,41.794833002 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Strohacker (Howard)",
+    "hours_of_operation":"",
+    "address":"4347 W 54Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.658753036,41.857449167 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Throop (Amos Gager)",
+    "hours_of_operation":"",
+    "address":"1811 S Throop St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.735555204,41.885760469 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Tilton (George)",
+    "hours_of_operation":"",
+    "address":"305 N Kostner",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.564322999,41.705687019 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Trumbull (Lyman)",
+    "hours_of_operation":"",
+    "address":"2400 E 105Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.611297028,41.729884987 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Tuley (Murray)",
+    "hours_of_operation":"",
+    "address":"501 E 90Th Pl",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.555848978,41.717668991 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Veterans' Memorial",
+    "hours_of_operation":"",
+    "address":"2820 E 98Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.728680008,41.869107314 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Violet",
+    "hours_of_operation":"",
+    "address":"4120 W Taylor St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.748213991,41.802439998 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Vittum (Harriet Elizabeth)",
+    "hours_of_operation":"",
+    "address":"5010 W 50Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.641547006,41.893557432 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Ward (A. Montgomery)",
+    "hours_of_operation":"",
+    "address":"630 N Kingsbury Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.651604836,41.935341117 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Weisman (Albert)",
+    "hours_of_operation":"",
+    "address":"901 W Oakdale Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.68659904,41.962792008 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Welles (Gideon)",
+    "hours_of_operation":"",
+    "address":"2333 W Sunnyside Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.77920316,41.790455638 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Wentworth (John)",
+    "hours_of_operation":"",
+    "address":"5625 S Mobile Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.631062981,41.744288994 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"West Chatham",
+    "hours_of_operation":"",
+    "address":"8223 S Princeton Ave",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.728293175,41.774862693 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"West Lawn",
+    "hours_of_operation":"",
+    "address":"4233 W 65Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.632250026,41.670046999 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"West Pullman",
+    "hours_of_operation":"",
+    "address":"401 W 123Rd St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.650387039,41.672690987 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"White (Edward)",
+    "hours_of_operation":"",
+    "address":"1120 W 122Nd St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.626953593,41.842857493 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Williams (Daniel Hale)",
+    "hours_of_operation":"",
+    "address":"2820 S State St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.654442036,41.831721003 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Wilson (John)",
+    "hours_of_operation":"",
+    "address":"1122 W 34Th Pl",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.543169003,41.698966996 ]
+    },
+    "properties": {
+    "site_type":"Park District Spray Feature",
+    "site_name":"Wolfe (Richard)",
+    "hours_of_operation":"",
+    "address":"3325 E 108Th St",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":null,
+    "phone":"",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.678986009,41.870998015 ]
+    },
+    "properties": {
+    "site_type":"Regional Senior Center",
+    "site_name":"Central West",
+    "hours_of_operation":"M-F: 8:30 a.m. to 4:30 p.m.",
+    "address":"2102 W. Ogden Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60612,
+    "phone":"312-744-0784",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.679800982,41.968477998 ]
+    },
+    "properties": {
+    "site_type":"Regional Senior Center",
+    "site_name":"Northeast",
+    "hours_of_operation":"M-F: 8:30 a.m. to 4:30 p.m.",
+    "address":"2019 W. Lawrence Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60625,
+    "phone":"312-744-6681",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.722804,41.938132994 ]
+    },
+    "properties": {
+    "site_type":"Regional Senior Center",
+    "site_name":"Northwest",
+    "hours_of_operation":"M-F: 8:30 a.m. to 4:30 p.m.",
+    "address":"3160 N. Milwaukee Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60618,
+    "phone":"312-747-0189",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.624971013,41.883870983 ]
+    },
+    "properties": {
+    "site_type":"Regional Senior Center",
+    "site_name":"Renaissance Court",
+    "hours_of_operation":"M-F: 10:00 a.m. to 4:30 p.m.",
+    "address":"78 E. Washington Street",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60602,
+    "phone":"312-744-4550",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.580420024,41.751297983 ]
+    },
+    "properties": {
+    "site_type":"Regional Senior Center",
+    "site_name":"Southeast",
+    "hours_of_operation":"M-F: 8:30 a.m. to 4:30 p.m.",
+    "address":"1767 E. 79th Street",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60649,
+    "phone":"312-747-0440",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.702930005,41.78211799 ]
+    },
+    "properties": {
+    "site_type":"Regional Senior Center",
+    "site_name":"Southwest",
+    "hours_of_operation":"M-F: 8:30 a.m. to 4:30 p.m.",
+    "address":"6117 S. Kedzie Avenue",
+    "city":"Chicago",
+    "state":"IL",
+    "zip":60629,
+    "phone":"312-746-5300",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.622287966,41.721003983 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Abbott Park Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"49 East 95th St.",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60619,
+    "phone":"312-745-3493",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.650368289,41.750594699 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Auburn Gresham Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"1040 West 79th St.",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60620,
+    "phone":"312-745-4797",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.752415001,41.873753984 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Austin Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"5071 West Congress",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60644,
+    "phone":"312-743-1538",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.605428019,41.74366098 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Chatham Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"8300 South Cottage Grove",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60619,
+    "phone":"312-745-0401",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.660162881,41.98913272 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Edgewater Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"5917 North Broadway",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60621,
+    "phone":"312-742-5323",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.642208984,41.779525006 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Englewood Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"653-657 West 63rd St.",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60621,
+    "phone":"312-745-3328",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.753053032,41.797436002 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Garfield Ridge Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"5674-B South Archer",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60638,
+    "phone":"312-745-4255",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.746200994,41.930033016 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Kelvyn Park Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"2715 North Cicero",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60639,
+    "phone":"312-744-3350",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.686688978,41.955200979 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"North Center Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"4040 North Oakley",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60618,
+    "phone":"312-744-4015",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.793505018,41.986687012 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Norwood Park Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"5801 North Natoma",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60631,
+    "phone":"773-775-6071",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.651360173,41.853737669 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Pilsen Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"2121 South Morgan",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60608,
+    "phone":"312-743-0493",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.728962017,41.91016602 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Portage Park Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"4100 North Long",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60639,
+    "phone":"312-744-9022",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.621065968,41.704589995 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"Roseland Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"10426 South Michigan",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60628,
+    "phone":"312-745-1500",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.545272022,41.727379007 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"South Chicago Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"9233 South Burley",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60617,
+    "phone":"312-745-1282",
+    "location/type":"Point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ -87.66799197,41.895784015 ]
+    },
+    "properties": {
+    "site_type":"Satellite Senior Center",
+    "site_name":"West Town Satellite",
+    "hours_of_operation":"M-F 8:30 a.m. - 4:30 p.m.",
+    "address":"1615 West Chicago Ave.",
+    "city":"CHICAGO",
+    "state":"IL",
+    "zip":60622,
+    "phone":"312-743-1016",
+    "location/type":"Point"
+    }
+  }
+]
+}

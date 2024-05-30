@@ -22,6 +22,15 @@ const REDLINING_COLOR_SCALE = {
   D: [226, 77, 90],
 };
 
+const CC_COLOR_SCALE = {
+  'Chicago Community College': [8,81,156],
+  'Community Service Center': [49,130,189],
+  'Library': [107,174,214],
+  'Park District Spray Feature': [158,202,225],
+  'Regional Senior Center': [198,219,239],
+  'Satellite Senior Center': [239,243,255]
+};
+
 const RedliningLegend = () => (
   <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
     <h3>HOLC Grading</h3>
@@ -41,8 +50,28 @@ const RedliningLegend = () => (
   </div>
 );
 
+const CoolingCentersLegend = () => (
+    <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+      <h3>Cooling Site Types</h3>
+      {Object.entries(CC_COLOR_SCALE).map(([key, color]) => (
+          <div key={'cc-'+key} style={{ display: "flex", margin:'.25em 0' }}>
+        <span
+            key={key}
+            style={{
+              backgroundColor: `rgb(${color.join(",")})`,
+              width: 16,
+              height: 16,
+            }}
+        ></span>
+            <p style={{padding:0, margin:'0 0 0 .25em'}}>{key}</p>
+          </div>
+      ))}
+    </div>
+);
+
 const NonResidentialLegend = () => (
     <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+      <h3>Industrial Areas</h3>
       <div style={{ display: "flex", margin:'.25em 0' }}>
         <span
             style={{
@@ -277,9 +306,23 @@ const VariablePanel = (props) => {
   }, [mapParams.variableName, dispatch]);
 
   const handleMapOverlay = (event) => {
+    let prevOverlays = mapParams.overlays;
+    let overlays = event.target.value;
+
+    // If "None" is clicked, remove all other overlays
+    if ((!prevOverlays.includes('None') && overlays.includes('None')) || !overlays.length) {
+      overlays = ['None'];
+    }
+
+    // If "None" was previously selected and something else is chosen, then de-select "None"
+    if (prevOverlays.includes('None') && overlays.find((o) => o !== 'None')) {
+      overlays.splice(overlays.indexOf('None'), 1);
+    }
+
     dispatch(
       setMapParams({
         overlay: event.target.value,
+        overlays: overlays,
       })
     );
   };
@@ -355,8 +398,10 @@ const VariablePanel = (props) => {
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
             id="overlay-select"
-            value={mapParams.overlay}
+            value={mapParams.overlays}
             onChange={handleMapOverlay}
+            multiple={true}
+            style={{ maxWidth: '300px' }}
           >
             <MenuItem value="None" key={"None"}>
               None
@@ -373,13 +418,17 @@ const VariablePanel = (props) => {
             <MenuItem value={"redlining"} key={"redlining"}>
               Historical Redlining
             </MenuItem>
+            <MenuItem value={"cooling-centers"} key={"cooling-centers"}>
+              Cooling Centers
+            </MenuItem>
             <MenuItem value={"non-res"} key={"non-res"}>
               Industrial & Non-Residential Areas
             </MenuItem>
           </Select>
         </FormControl>
-        {mapParams.overlay === "redlining" && <RedliningLegend />}
-        {mapParams.overlay === "non-res" && <NonResidentialLegend />}
+        {mapParams.overlays.includes("cooling-centers") && <CoolingCentersLegend />}
+        {mapParams.overlays.includes("redlining") && <RedliningLegend />}
+        {mapParams.overlays.includes("non-res") && <NonResidentialLegend />}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}
