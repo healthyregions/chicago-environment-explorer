@@ -106,12 +106,12 @@ const columns = [
 
 // bring the Downloadable field from the Columns data directly into the dataSources list
 const downloadableLookup = {};
-dataSources.forEach( function (col) {
+dataColumns.forEach( function (col) {
     downloadableLookup[col.Column] = col.Downloadable
 })
 
 const dataSourcesAnnotated = dataSources.map(s => {
-    if (!s['HEADER']) { s['Downloadable'] = downloadableLookup[s.Column] }
+    if (!s['HEADER']) { s.Downloadable = downloadableLookup[s.Column] }
     return s
 })
 
