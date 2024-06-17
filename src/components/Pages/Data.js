@@ -153,10 +153,10 @@ export default function Data() {
                 </p>
 
                 <Hero>
-                    <h2> Current Data Release (4-21-2023)</h2>
-                    <a href={`${process.env.PUBLIC_URL}/TEMP_DATA/chives-data-minusNU.zip`} id="button-search" download>ShapeFile</a>
-                    <a href={`${process.env.PUBLIC_URL}/TEMP_DATA/chives-data-minusNU.geojson`} id="button-search" download>GeoJSON</a>
-                    <a href={`${process.env.PUBLIC_URL}/TEMP_DATA/chives-data-minusNU.csv`} id="button-search" download>CSV / Excel</a>
+                    <h2> Current Data Release (6-17-2024)</h2>
+                    <a href={`${process.env.PUBLIC_URL}/shp/chives-data-public.zip`} id="button-search" download>ShapeFile</a>
+                    <a href={`${process.env.PUBLIC_URL}/geojson/chives-data-public.geojson`} id="button-search" download>GeoJSON</a>
+                    <a href={`${process.env.PUBLIC_URL}/csv/chives-data-public.csv`} id="button-search" download>CSV / Excel</a>
                     <p className="license-description">
                         This data is licensed under a <a href="https://creativecommons.org/licenses/by-nc/2.0/" target='_blank' rel="noopener noreferrer">Creative Commons Attribution Non-Commercial license.</a>
                         <br /><br />
