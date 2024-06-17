@@ -95,8 +95,25 @@ const columns = [
     {
         Header: 'Original Scale',
         accessor: 'Original Scale',
+    },
+    {
+        Header: 'Downloadable',
+        accessor: 'Downloadable',
+        tooltip: 'Some variables are not available in the download package.',
     }
+
 ]
+
+// bring the Downloadable field from the Columns data directly into the dataSources list
+const downloadableLookup = {};
+dataSources.forEach( function (col) {
+    downloadableLookup[col.Column] = col.Downloadable
+})
+
+const dataSourcesAnnotated = dataSources.map(s => {
+    if (!s['HEADER']) { s['Downloadable'] = downloadableLookup[s.Column] }
+    return s
+})
 
 export default function Data() {
     return (
@@ -150,8 +167,8 @@ export default function Data() {
                 <Gutter h={20} />
                 <h2>Data Dictionary</h2>
                 <ul>
-                    {dataColumns.map(({ Column, Description }, i) => {
-                    if (Column !== "CMAQ_NO2" && Column !== "CMAQ_O3" && Column !== "CMAQ_PM25") {
+                    {dataColumns.map(({ Column, Description, Downloadable }, i) => {
+                    if (Downloadable === "Yes") {
                         return (
                         <li key={i}>
                             <p>
@@ -175,7 +192,7 @@ export default function Data() {
 
 
                     <Gutter h={20} />
-                    <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'] && !!f['active'])} />
+                    <Table columns={columns} data={dataSourcesAnnotated.filter(f => !!f['Variable Name'] && !!f['active'])} />
                     <Gutter h={40} />
 
 
