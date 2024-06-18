@@ -71,7 +71,7 @@ const Hero = styled.div`
 `
 const NewTabLink = ({ link, text }) => <a href={link} target="_blank" rel="noopener noreferrer">{text}</a>
 
-const columns = [
+const variableTableColumns = [
     {
         Header: 'Variable',
         accessor: f => <span translate="no">{f['Variable Name']}</span>,
@@ -100,9 +100,10 @@ const columns = [
         Header: 'Downloadable',
         accessor: 'Downloadable',
         tooltip: 'Some variables are not available in the download package.',
-    }
-
+    },
 ]
+
+const basemapTableColumns = variableTableColumns.filter(c => c.Header !== "Downloadable");
 
 // bring the Downloadable field from the Columns data directly into the dataSources list
 const downloadableLookup = {};
@@ -168,7 +169,7 @@ export default function Data() {
                 <h2>Data Dictionary</h2>
                 <ul>
                     {dataColumns.map(({ Column, Description, Downloadable }, i) => {
-                    if (Downloadable === "Yes") {
+                    if (Downloadable.toLocaleLowerCase() === "yes") {
                         return (
                         <li key={i}>
                             <p>
@@ -192,7 +193,7 @@ export default function Data() {
 
 
                     <Gutter h={20} />
-                    <Table columns={columns} data={dataSourcesAnnotated.filter(f => !!f['Variable Name'] && !!f['active'])} />
+                    <Table columns={variableTableColumns} data={dataSourcesAnnotated.filter(f => !!f['Variable Name'] && !!f['active'])} />
                     <Gutter h={40} />
 
 
@@ -200,7 +201,7 @@ export default function Data() {
                 <h2>Basemap Layers and Data</h2>
                 <h3>The variables below are represented in the map as base layers.</h3>
                 <Gutter h={20} />
-                <Table columns={columns} data={baseLayers} />
+                <Table columns={basemapTableColumns} data={baseLayers} />
             </ContentContainer>
             <Footer />
         </DataPage >
