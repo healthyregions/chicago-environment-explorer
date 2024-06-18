@@ -38,7 +38,9 @@ This process is shown in context in the following diagram.
 
 ![](./chives-build-data.png "Data diagram")
 
-Data is pulled from the data management 
+*Dev note: use `d2 docs/chives-build-data.d2 docs/chives-build-data.png --pad 20` to regenerate this diagram. [learn more about D2](https://d2lang.com/)*
+
+Data is pulled from the data management document described in the [Content Management System](#content-management-system) section below.
 
 #### `yarn start`
 

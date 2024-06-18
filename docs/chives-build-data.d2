@@ -28,15 +28,13 @@ logos: Logo image files\nstored in main repo
 
 inputs: ""
 inputs.text: |md
-# Google Sheet
+## Data Dictionary and Variables.xlsx
 
-_Data Dictionary and Variables.xlsx_<br/>
-on Google Drive has 6 sheets<br/>
-each with contain configurations or<br/>
-descriptions of data and variables, etc.|
+A Google Sheets file with 7 sheets, each contain<br/>
+configurations or descriptions of data and variables.|
 inputs.data-sheets: ""
 inputs.data-sheets.text: |md
-## Data Sheets
+### Data Sheets
 - Name
 - Manager
 - URL for data sheet
@@ -45,12 +43,12 @@ inputs.data-sheets.class: input
 inputs.cols: ""
 inputs.cols.class: input
 inputs.cols.text: |md 
-## Columns
+### Columns
 Description of all columns|
 inputs.variables: ""
 inputs.variables.class: input
 inputs.variables.text: |md 
-## Variables
+### Variables
 - Description
 - Column
 - Units
@@ -58,17 +56,17 @@ inputs.variables.text: |md
 inputs.baselayers: ""
 inputs.baselayers.class: input
 inputs.baselayers.text: |md 
-## BaseLayers
+### BaseLayers
 Basemap layer definitions and credits|
 inputs.logos: ""
 inputs.logos.class: input
 inputs.logos.text: |md 
-## Contributor Logos
+### Contributor Logos
 - Path within repo, etc.|
 inputs.resources: ""
 inputs.resources.class: input
 inputs.resources.text: |md 
-## Resources
+### Resources
 - Title
 - Link
 - Description, etc.|
@@ -81,7 +79,6 @@ gdrive -- inputs.data-sheets {
 
 # define all outputs
 outputs: Public Data
-outputs.resources: Resources
 outputs.mapvars: Map Variables
 outputs.data: GeoJSON\nCSV\nDownloadable SHP
 outputs.docs: Documentation
@@ -122,16 +119,20 @@ ybd.agg -> outputs.docs
 
 # set 4
 ybd.agg2: |md
-Aggregate
-- resources: title link, text
-- logo path and info|
+Write to file resources.json|
 ybd.agg2.shape: step
 
-logos -> inputs.logos
-inputs.logos -> ybd.agg2
 inputs.resources -> ybd.agg2
-ybd.agg2 -> outputs.resources
+ybd.agg2 -> site.guide
 
+# set 5
+ybd.agg3: |md
+Write to file logos.json|
+ybd.agg3.shape: step
+
+logos -> inputs.logos
+inputs.logos -> ybd.agg3
+ybd.agg3 -> site.Home Page
 
 idw-repo: air-quality-idw\nGH repo with workflow\nfetch, process, push data\n(inactive)
 idw-repo -> aq-bucket {
@@ -146,11 +147,10 @@ aq-bucket -> aq-join
 
 site: Public Website\nchichives.com
 site.map: /map
-site.docs: /docs
+site.docs: /data
 site.guide: /resources
 
 outputs.docs -> site.docs
-outputs.resources -> site.guide
 outputs.mapvars -> site.map
 outputs.data -> aq-join -> site.map
 
