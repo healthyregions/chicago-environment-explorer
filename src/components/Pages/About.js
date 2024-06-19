@@ -95,9 +95,6 @@ const projectTeam = [
         affiliation: '(DePaul)',
         title: 'NASA Project PI, 2022-2024'
     }
-
-
-
 ]
 
 
@@ -289,11 +286,17 @@ export default function About(){
               <br/><br/>
 
 
-              To cite the first release of Chives, use the following:
+              To cite the latest release of Chives (<i>Earth Day 2023 </i> Launch), use the following:              </p>
                 <br/>
-                XXXXX
+                Dylan Halpern, Susan Paykin, James Keane, Sparshdeep Singh, Sarvagnya Vijay, Adam Cox, Mukesh Chugani, Winifred Curran, 
+                Michelle Stuhlmacher, & Marynia Kolak. (2023). Chives: A Chicago Environmental Justice Geospatial Dashboard (v2.0.0). 
+                Zenodo. <a href="https://doi.org/10.5281/zenodo.8212065">https://doi.org/10.5281/zenodo.8212065</a>.
+                <br/><br/>
+                <p> The next release is planned for August 2024. <a href="/contact">Contact</a> us with any questions, or post an issue on 
+                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer/issues"> Github.</a></p>
 
-                </p>
+
+
                 <br/><br/>
 
               <hr></hr>
@@ -338,13 +341,15 @@ export default function About(){
                 In the second release of Chives focused on expanding focus in <b>Environmental Justice Communitites</b>, we are grateful to the following individuals and organizations who informed improvements in the 
                 mapping application and new index builder, as well as suggested new data and design concepts.
                 <br/><br/>
-                    <li>Multiple team members and students of <a href="#">Instituto del Progreso Latino</a> </li>
-                    <li>John Paul Jones, <a href="#">Grow Greater Englewood</a></li>
-                    <li>Lonette Simms and Howard Ehrmann of the <a href="#">People's Response Network</a></li>
+                    <li>John Paul Jones, <a href="https://www.growgreater.org/">Grow Greater Englewood</a></li>
+                    <li>Lonette Simms, Dulce Garduño, and Howard Ehrmann of the <a href="https://peoplesresponsenetworktocovid19.wordpress.com/">People's Response Network</a></li>
                     <li>Margarita Reina, Chicago Department of Public Health</li>
-
+                    <li>Multiple team members and students of <a href="https://www.institutochicago.org/">Instituto del Progreso Latino</a>, especially Karina Ayala-Bermejo,
+                    Maribel Arellano, Arturo Galan, and Evelyn Barragan </li>
+                    <li>Claudia Galeno-Sanchez, <a href="https://www.workingfamilysolidarity.org/">Working Family Solidarity</a></li>
                     <br/>
-                In addition, we thank Christian Diaz, Amena Karim, and students in DePaul's GIS XXX course for their feedback.
+                In addition, we thank Christian Diaz, Amena Karim, and students in Dr. Curran's DePaul's GIS course for their feedback. Finally,
+                we are thankful for additional guidance by Rolando Favela in response to community needs.
                 </p>
 
                 <br/><br/>
