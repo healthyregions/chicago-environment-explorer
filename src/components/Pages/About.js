@@ -15,100 +15,85 @@ const AboutPage = styled.div`
 // `
 const projectTeam = [
     {
-        name: 'Marynia Kolak',
-        link: 'https://healthyregions.org/team/',
-        degrees: 'MS, MFA, PhD',
-        img: `mk.jpg`,
-        affiliation: '(HEROP)',
-        title: 'Project PI, 2018-2022; NASA Technical Lead, 2022-2024'
-    },
-    {
-        name: 'Winifred Curran',
-        link: 'https://www.linkedin.com/in/winifred-curran-6026525',
-        degrees: 'BA, MA, PhD',
-        img: `curran.jpg`,
-        affiliation: '(DePaul)',
-        title: 'NASA Community Lead, 2022-2024'
-    },
-    {
-        name: 'Michelle Stuhlmacher',
-        link: 'https://www.linkedin.com/in/michellestuhlmacher',
-        degrees: 'MA, PhD',
-        img: `stuhlmacher.jpg`,
-        affiliation: '(DePaul)',
-        title: 'NASA Project PI, 2022-2024'
-    },
-    {
-        name: 'Adam Cox',
-        link: 'https://www.linkedin.com/in/mradamcox/',
-        degrees: 'MS, MLIS',
-        img: `adam_cox.jpg`,
-        affiliation: '(HEROP)',
-        title: 'Research Software Engineer, Dev-Ops, 2023-2024'
-    },
-    {
         name: 'Marc Astacio-Palmer',
         link: 'https://healthyregions.org/team/',
-        degrees: 'BS',
+        degrees: 'Illinois',
         img: `marc-astacio.webp`,
         affiliation: '(HEROP)',
         title: 'Research Coordinator, 2023-2024'
     },
     {
-        name: 'Shubham Kumar',
-        link: 'https://healthyregions.org/team/',
-        degrees: 'MSIM',
-        img: `shubham.jpeg`,
-        affiliation: '(HEROP)',
-        title: 'Product Designer, 2023-2024'
-    },
-    {
         name: 'José Alavez',
         link: 'https://healthyregions.org/team/',
-        degrees: 'PhD',
+        degrees: 'Illinois',
         img: `jose.png`,
         affiliation: '(HEROP)',
         title: 'Postdoctoral Scholar, 2023-2024'
     },
     {
-        name: 'Dajoin Williams',
-        link: 'https://www.linkedin.com/in/dajoinwilliams',
-        degrees: 'MA Student',
-        img: `dajoin.jpeg`,
+        name: 'Adam Cox',
+        link: 'https://www.linkedin.com/in/mradamcox/',
+        degrees: 'Illinois',
+        img: `adam_cox.jpg`,
         affiliation: '(HEROP)',
-        title: 'NASA Research Assistant, 2023-2024'
+        title: 'Research Software Engineer, Dev-Ops, 2023-2024'
     },
     {
-        name: 'Chris Impellizeri',
-        link: 'https://www.linkedin.com/in/christopher-impellizeri-a91194242/',
-        degrees: 'BS Student',
-        img: `chris.jpg`,
-        affiliation: '(HEROP)',
-        title: 'NASA Research Assistant, 2023-2024'
+        name: 'Winifred Curran',
+        link: 'https://www.linkedin.com/in/winifred-curran-6026525',
+        degrees: 'DePaul',
+        img: `curran.jpg`,
+        affiliation: '(DePaul)',
+        title: 'NASA Co-Lead, 2022-2024'
     },
     {
-        name: 'Laila Ismail',
+        name: 'Marynia Kolak',
         link: 'https://healthyregions.org/team/',
-        degrees: 'BS Student',
-        img: `laila.png`,
+        degrees: 'Illinois',
+        img: `mk.jpg`,
         affiliation: '(HEROP)',
-        title: 'NASA Research Assistant, 2024'
+        title: 'Project PI, 2018-2022; NASA Co-Lead, 2022-2024'
     },
+    {
+        name: 'Shubham Kumar',
+        link: 'https://healthyregions.org/team/',
+        degrees: 'Illinois',
+        img: `shubham.jpeg`,
+        affiliation: '(HEROP)',
+        title: 'UX Audit, 2023-2024'
+    },
+
     {
         name: 'Sara Lambert',
         link: 'https://healthyregions.org/team/',
-        degrees: 'BS',
+        degrees: 'NCSA, Illinois',
         img: `sara.png`,
         affiliation: '(HEROP)',
         title: 'Sr Research Software Engineer, Front-End, 2024'
     },
     {
-        name: 'Jack Vincent Lia',
-        link: '#',
-        degrees: 'BS Student',
+        name: 'Student',
+        link: 'https://healthyregions.org/team/',
+        degrees: 'DePaul',
         img: `avatar.png`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2024'
+    },
+    {
+        name: 'Student',
+        link: 'https://healthyregions.org/team/',
+        degrees: 'DePaul',
+        img: `avatar.png`,
+        affiliation: '(HEROP)',
+        title: 'NASA Research Assistant, 2024'
+    },
+    {
+        name: 'Michelle Stuhlmacher',
+        link: 'https://www.linkedin.com/in/michellestuhlmacher',
+        degrees: 'DePaul',
+        img: `stuhlmacher.jpg`,
+        affiliation: '(DePaul)',
+        title: 'NASA Project PI, 2022-2024'
     }
 
 
@@ -117,10 +102,35 @@ const projectTeam = [
 
 
 const pastTeam = [
+
+    {
+        name: 'Dajoin Williams',
+        link: 'https://www.linkedin.com/in/dajoinwilliams',
+        degrees: 'DePaul',
+        img: `dajoin.jpeg`,
+        affiliation: '(HEROP)',
+        title: 'NASA Research Assistant, 2023-2024'
+    },
+    {
+        name: 'Chris Impellizeri',
+        link: 'https://www.linkedin.com/in/christopher-impellizeri-a91194242/',
+        degrees: 'DePaul',
+        img: `chris.jpg`,
+        affiliation: '(HEROP)',
+        title: 'NASA Research Assistant, 2023-2024'
+    },
+    {
+        name: 'Jack Vincent Lia',
+        link: '#',
+        degrees: 'Illinois',
+        img: `avatar.png`,
+        affiliation: '(HEROP)',
+        title: 'NASA Research Assistant: Data Integration, 2024'
+    },
     {
         name: 'Mukesh Chugani',
         link: '#',
-        degrees: 'MS, MLIS',
+        degrees: 'Illinois',
         img: `mukesh.webp`,
         affiliation: '(HEROP)',
         title: 'Research Software Engineer, Front-End, 2023'
@@ -128,22 +138,22 @@ const pastTeam = [
     {
         name: 'Sparshdeep Singh',
         link: 'https://www.linkedin.com/in/sparshdeep-singh-08a07b221',
-        degrees: 'BS Student',
+        degrees: 'Illinois',
         img: `sparshdeepsingh.jpg`,
         affiliation: '(HEROP)',
-        title: 'Developer, Data Integration, 2023'
+        title: 'Student Developer, Data Integration, 2023'
     }, {
         name: 'Sarvagnya Vijay',
         link: 'https://www.linkedin.com/in/sarvagnya-vijay-54640421b',
-        degrees: 'BS Student',
+        degrees: 'Illinois',
         img: `sarvagnya_vijay.jpg`,
         affiliation: '(HEROP)',
-        title: 'Developer, Data Integration, 2023'
+        title: 'Student Developer, Data Integration, 2023'
     },
     {
         name:'Isaac Rand',
         link:'#',
-        degrees: 'BS student',
+        degrees: 'UChicago',
         img: `avatar.png`,
         affiliation:'(HEROP)',
         title:'Data Integration, 2021-2022',
@@ -151,7 +161,7 @@ const pastTeam = [
     {
                 name:'Dylan Halpern',
                 link:'https://dylanhalpern.com/',
-                degrees: 'MCP',
+                degrees: 'UChicago',
                 img: `dylan.png`,
                 affiliation:'(HEROP)',
                 title:'Core Data Engineer & Developer, 2021-2022',
@@ -159,7 +169,7 @@ const pastTeam = [
                 {
                 name:'Susan Paykin',
                 link:'https://www.linkedin.com/in/susanpaykin/',
-                degrees: 'MPP',
+                degrees: 'UChicago',
                 img: `SPaykin.jpg`,
                 affiliation:'(HEROP)',
                 title:'Community Engagement, 2021-2022',
@@ -167,7 +177,7 @@ const pastTeam = [
             {
                 name: 'James Keane',
                 link: 'https://www.linkedin.com/in/james-keane-678863b7/',
-                degrees: 'BS, MS',
+                degrees: 'UChicago',
                 img: 'keane.jpeg',
                 affiliation: '(HEROP)',
                 title: 'Data Visualization, 2021-2022',
@@ -175,7 +185,7 @@ const pastTeam = [
         {
                name: 'Isaac Kamber',
                link: 'https://www.linkedin.com/in/isaac-kamber/',
-               degrees: 'BS student',
+               degrees: 'UChicago',
                img: `isaac.png`,
                affiliation: '(HEROP)',
                title: 'Data Integration, 2018-2021'
@@ -183,7 +193,7 @@ const pastTeam = [
            {
                name:'Lorenz Menendez',
                link:'https://www.linkedin.com/in/lorenzmenendez/',
-               degrees: 'BS student',
+               degrees: 'UChicago',
                img: `Menendez_Lorenz.jpeg`,
                affiliation:'(HEROP)',
                title: 'Data Integration, 2018-2021'
@@ -268,38 +278,28 @@ export default function About(){
            <ContentContainer>
                <h1>About </h1>
                <hr/>
-
-               <p>
               <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the 
                 neighborhood level. It’s a partnership of researchers, community organizations, and civic groups. It's been used for teaching
                 about the basics of mapping and spatial analysis, as well as learning about air quality patterns in Chicago. </p>
                 <br/>
               <p>With ChiVes, we harmonize 
                 & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list 
-                of resources on the Chicago Environment, cultivated by a community of curators. </p>
-                <br/>
-                <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions 
-                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, 
-                in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at 
-                 <b> DePaul University</b> From 2022-2024, it is funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and
-                <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>). 
-                </p>
-                 
+                of resources on the Chicago Environment, cultivated by a community of curators.
+            
               <br/><br/>
+
+
+              To cite the first release of Chives, use the following:
+                <br/>
+                XXXXX
+
+                </p>
+                <br/><br/>
+
               <hr></hr>
 
-              <h3>Data Contributions </h3>
-
-              The following individuals and organizations have added data to the<span translate="no"> ChiVes </span> data collective:
-                    <br/><br/>
-                    <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Negaunee Institute for Plant Conservation Science and Action, Chicago Botanic Gardens </li>
-                    <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research & the Eclipse Project </li>
-                    <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
-                    <li> Multiple team members at the Department of Geography, DePaul University, led by <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>. </li>
-                    <li> Multiple team members at the <a href="http://healthyregions.org">Heatlhy Regions & Policies Lab,</a> University of Illinois at Urbana-Champaign, led by M. Kolak</li>
-                    <br></br>
-
-              <h2>Contribute </h2>
+              <h2>Get Involved </h2>
+              <p>
                 Organizations and individuals can participate in<span translate="no"> ChiVes </span>in multiple ways:
 
                 <br/><br/>
@@ -309,47 +309,59 @@ export default function About(){
 
                 <br/>
                 View our <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">Standards and Submission Guidelines</a>. These guidelines are evaluated on a regular basis by members of the Data Collaborative.
+
                 </p>
                 <br/><br/>
-                <hr></hr>
 
-                <h2>Data Collaborative Members </h2>
+                <h2> Collective Contributors </h2>
+                <p>
+                <p> The following individuals and organizations have added data to the<span translate="no"> ChiVes </span> data collective: </p>
+                <br/>
 
-
-                    <p>
-                    
-
-
-                    <h3>Data & Design Decision-Making </h3>
-                    In addition to data contributions above, collaborative members have also provided invaluable insight and direction throughout the project. Data Collective members have advised on<span translate="no"> ChiVes </span>data standards and needs,
-                    as well as provided feedback on visualization and user experience goals.
+                    <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Negaunee Institute for Plant Conservation Science and Action, Chicago Botanic Gardens </li>
+                    <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research & the Eclipse Project </li>
+                    <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
+                    <li> Multiple team members at the Department of Geography, DePaul University, led by <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>. </li>
+                    <li> Multiple team members at the <a href="http://healthyregions.org">Heatlhy Regions & Policies Lab,</a> University of Illinois at Urbana-Champaign, led by M. Kolak</li>
                     <br></br>
-                    <br></br>
-                    We would like to extend special thanks to <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a>, <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> and <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a> for their past work on the data collaborative team.
-                    We are also grateful to the <b>Nature Conservancy</b> and <b>Audubon Society</b> for their insights and support.
 
-                    {/* <li>  <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, Lake Michigan Air Directors Consortium </li>
-                    {/* <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Chicago Botanic Gardens </li>
-                    {/* <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research </li>
-                    {/* <li> <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a>, Environmental Law & Policy Center </li> */}
-                    {/* <li> <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a>, Mansueto Institute, University of Chicago </li> */}
-                    {/* <li> <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a> & <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, Department of Geophysical Sciences, University of Chicago </li> */}
-                    {/* <li> <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, Unite Us, Illinois </li>
-                    {/* <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li> */}
-                    {/* <li> <a href="https://www.linkedin.com/in/james-keane-678863b7/">James Keane</a>, *Dylan Halpern, *Marynia Kolak, *Susan Paykin, Healthy Regions & Policies Lab, Center for Spatial Data Science, University of Chicago </li> */}
+                <h3> Data Standards Refinement  </h3>
 
+                We would like to extend special thanks to <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, <a href="https://illinois.uniteus.com/team//">Amena Karim</a>, 
+                <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a>, <a href="https://geosci.uchicago.edu/people/haynes-stephens/">Haynes Stephens</a>, 
+                <a href="https://elpc.org/team/tiffany-werner/">Tiffany Werner</a> and <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a> for their past work on 
+                the data collaborative team in the first release of Chives. We are also grateful to the <b>Nature Conservancy</b> and <b>Audubon Society</b> for their insights and support.
+                <br/><br/>
 
-                    <br/><br/>
-                    </p>
+                <h3> Application Co-Design  </h3>
 
-                    <hr></hr>
-                    <br></br>
+                In the second release of Chives focused on expanding focus in <b>Environmental Justice Communitites</b>, we are grateful to the following individuals and organizations who informed improvements in the 
+                mapping application and new index builder, as well as suggested new data and design concepts.
+                <br/><br/>
+                    <li>Multiple team members and students of <a href="#">Instituto del Progreso Latino</a> </li>
+                    <li>John Paul Jones, <a href="#">Grow Greater Englewood</a></li>
+                    <li>Lonette Simms and Howard Ehrmann of the <a href="#">People's Response Network</a></li>
+                    <li>Margarita Reina, Chicago Department of Public Health</li>
+
+                    <br/>
+                In addition, we thank Christian Diaz, Amena Karim, and students in DePaul's GIS XXX course for their feedback.
+                </p>
+
+                <br/><br/>
+              <hr></hr>
+              <br/><br/>
+
                 <h2>
-                   Core Project Team
+                   Active Project Team 
                 </h2>
 
-                
-
+                <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions 
+                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, 
+                in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at 
+                 <b> DePaul University</b> From 2022-2024, it is funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and
+                <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>). 
+                </p>
+                <br></br>                <br></br>
 
                       <MemberGrid
                         members={projectTeam}
@@ -363,9 +375,8 @@ export default function About(){
                 <br/><br/>
 
                 <h2>
-                    Past Contributors
+                    Past Project Team
                 </h2>
-
                         <MemberGrid
                             members={pastTeam}
                             columns={{
