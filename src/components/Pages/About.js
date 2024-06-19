@@ -270,8 +270,36 @@ export default function About(){
                <hr/>
 
                <p>
+              <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the 
+                neighborhood level. It’s a partnership of researchers, community organizations, and civic groups. It's been used for teaching
+                about the basics of mapping and spatial analysis, as well as learning about air quality patterns in Chicago. </p>
+                <br/>
+              <p>With ChiVes, we harmonize 
+                & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list 
+                of resources on the Chicago Environment, cultivated by a community of curators. </p>
+                <br/>
+                <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions 
+                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, 
+                in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at 
+                 <b> DePaul University</b> From 2022-2024, it is funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and
+                <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>). 
+                </p>
+                 
+              <br/><br/>
+              <hr></hr>
 
-              <span translate="no"> ChiVes </span>is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago’s environment together at the neighborhood level. It is a partnership of researchers, community organizations, and civic groups.
+              <h3>Data Contributions </h3>
+
+              The following individuals and organizations have added data to the<span translate="no"> ChiVes </span> data collective:
+                    <br/><br/>
+                    <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Negaunee Institute for Plant Conservation Science and Action, Chicago Botanic Gardens </li>
+                    <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research & the Eclipse Project </li>
+                    <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
+                    <li> Multiple team members at the Department of Geography, DePaul University, led by <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>. </li>
+                    <li> Multiple team members at the <a href="http://healthyregions.org">Heatlhy Regions & Policies Lab,</a> University of Illinois at Urbana-Champaign, led by M. Kolak</li>
+                    <br></br>
+
+              <h2>Contribute </h2>
                 Organizations and individuals can participate in<span translate="no"> ChiVes </span>in multiple ways:
 
                 <br/><br/>
@@ -287,16 +315,9 @@ export default function About(){
 
                 <h2>Data Collaborative Members </h2>
 
-                    <h3>Data Contributions </h3>
 
                     <p>
-                    The following individuals and organizations have added data to the<span translate="no"> ChiVes </span>collective:
-                    <li> <a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & <a href="https://www.chicagobotanic.org/research/staff/taddeo">Sophie Taddeo</a>, Negaunee Institute for Plant Conservation Science and Action, Chicago Botanic Gardens </li>
-                    <li> <a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research & the Eclipse Project </li>
-                    <li> <a href="https://sites.northwestern.edu/danethan/anastasia-montgomery-bio/">Anastasia (Stacy) Montgomery</a>, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
-                    <li> <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a>, Department of Geography, DePaul University </li>
-                    <li> <a href="http://healthyregions.org">The Heatlhy Regions & Policies Lab,</a> University of Illinois at Urbana-Champaign (formerly at the University of Chicago)</li>
-                    <br></br>
+                    
 
 
                     <h3>Data & Design Decision-Making </h3>
@@ -327,15 +348,7 @@ export default function About(){
                    Core Project Team
                 </h2>
 
-                <p>This project is brought to you by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at <b>DePaul University</b>. The original<span translate="no"> ChiVes </span>emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago.
-                  <br/><br/>
-
-               <span translate="no"> ChiVes </span>is funded in part by <b>NASA</b> with a new initiative starting in 2022 led by Drs. Stuhlmacher, Curran, and Kolak (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and
-                <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).
-
-                </p>
-
-                <br/><br/>
+                
 
 
                       <MemberGrid
