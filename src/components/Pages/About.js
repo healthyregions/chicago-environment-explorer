@@ -31,6 +31,14 @@ const projectTeam = [
         title: 'Postdoctoral Scholar, 2023-2024'
     },
     {
+        name: 'Karina Ayala-Bermejo',
+        link: 'https://www.institutochicago.org/apps/pages/index.jsp?uREC_ID=372458&type=d&pREC_ID=837883',
+        degrees: 'Instituto del Progreso Latino',
+        img: `karina.jpg`,
+        affiliation: '(HEROP)',
+        title: 'Community Partner, 2023-2024'
+    },
+    {
         name: 'Adam Cox',
         link: 'https://www.linkedin.com/in/mradamcox/',
         degrees: 'Illinois',
@@ -55,12 +63,20 @@ const projectTeam = [
         title: 'Project PI, 2018-2022; NASA Co-Lead, 2022-2024'
     },
     {
+        name: 'Erin Koster',
+        link: '#',
+        degrees: 'DePaul',
+        img: `avatar.png`,
+        affiliation: '(HEROP)',
+        title: 'NASA Research Assistant, 2024'
+    },
+    {
         name: 'Shubham Kumar',
         link: 'https://healthyregions.org/team/',
         degrees: 'Illinois',
         img: `shubham.jpeg`,
         affiliation: '(HEROP)',
-        title: 'UX Audit, 2023-2024'
+        title: 'UI/UX Audit, 2023-2024'
     },
 
     {
@@ -72,20 +88,28 @@ const projectTeam = [
         title: 'Sr Research Software Engineer, Front-End, 2024'
     },
     {
-        name: 'Student',
-        link: 'https://healthyregions.org/team/',
+        name: 'Claudia Galeno Sanchez',
+        link: '#',
+        degrees: 'Working Family Solidarity',
+        img: `claudia.jpg`,
+        affiliation: '(HEROP)',
+        title: 'Community Partner, 2023-2024'
+    },
+    {
+        name: 'Salise Sepulveda',
+        link: '#',
         degrees: 'DePaul',
         img: `avatar.png`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2024'
     },
     {
-        name: 'Student',
-        link: 'https://healthyregions.org/team/',
-        degrees: 'DePaul',
-        img: `avatar.png`,
+        name: 'Lonette Simms',
+        link: '#',
+        degrees: 'Peoples Response Network',
+        img: `lonette.jpg`,
         affiliation: '(HEROP)',
-        title: 'NASA Research Assistant, 2024'
+        title: 'Community Partner, 2023-2024'
     },
     {
         name: 'Michelle Stuhlmacher',
@@ -122,7 +146,7 @@ const pastTeam = [
         degrees: 'Illinois',
         img: `avatar.png`,
         affiliation: '(HEROP)',
-        title: 'NASA Research Assistant: Data Integration, 2024'
+        title: 'NASA Research Assistant: Data Integration, Spring 2024'
     },
     {
         name: 'Mukesh Chugani',
@@ -130,7 +154,7 @@ const pastTeam = [
         degrees: 'Illinois',
         img: `mukesh.webp`,
         affiliation: '(HEROP)',
-        title: 'Research Software Engineer, Front-End, 2023'
+        title: 'Research Software Engineer, Front-End, Fall 2023'
     },
     {
         name: 'Sparshdeep Singh',
@@ -138,14 +162,14 @@ const pastTeam = [
         degrees: 'Illinois',
         img: `sparshdeepsingh.jpg`,
         affiliation: '(HEROP)',
-        title: 'Student Developer, Data Integration, 2023'
+        title: 'Student Developer, Data Integration, Spring 2023'
     }, {
         name: 'Sarvagnya Vijay',
         link: 'https://www.linkedin.com/in/sarvagnya-vijay-54640421b',
         degrees: 'Illinois',
         img: `sarvagnya_vijay.jpg`,
         affiliation: '(HEROP)',
-        title: 'Student Developer, Data Integration, 2023'
+        title: 'Student Developer, Data Integration, Spring 2023'
     },
     {
         name:'Isaac Rand',
@@ -344,7 +368,7 @@ export default function About(){
                     <li>John Paul Jones, <a href="https://www.growgreater.org/">Grow Greater Englewood</a></li>
                     <li>Lonette Simms, Dulce Garduño, and Howard Ehrmann of the <a href="https://peoplesresponsenetworktocovid19.wordpress.com/">People's Response Network</a></li>
                     <li>Margarita Reina, Chicago Department of Public Health</li>
-                    <li>Multiple team members and students of <a href="https://www.institutochicago.org/">Instituto del Progreso Latino</a>, especially Karina Ayala-Bermejo,
+                    <li>Leadership, teachers, & students of <a href="https://www.institutochicago.org/">Instituto del Progreso Latino</a>, especially Karina Ayala-Bermejo,
                     Maribel Arellano, Arturo Galan, and Evelyn Barragan </li>
                     <li>Claudia Galeno-Sanchez, <a href="https://www.workingfamilysolidarity.org/">Working Family Solidarity</a></li>
                     <br/>
@@ -394,7 +418,8 @@ export default function About(){
                 <h2>
                    Background
                 </h2>
-                <p> The original<span translate="no"> ChiVes </span>application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently integrated within<span translate="no"> ChiVes </span>was gathered, calculated, and standardized from 2018-2021. The current application was refactored in 2022 by <a href="https://dylanhalpern.com/">Dylan Halpern</a>, adopting a new web architecture. Explore some of the original projects that inspired<span translate="no"> ChiVes </span>below:  </p>
+                <p> The original<span translate="no"> ChiVes </span>application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently integrated within<span translate="no"> ChiVes </span>was gathered, calculated, and standardized from 2018-2021,
+                when the HEROP Lab was housed at the Center for Spatial Data Science at the University of Chicago. The current application was refactored in 2022 by <a href="https://dylanhalpern.com/">Dylan Halpern</a>, adopting a new web architecture. Explore some of the original projects that inspired<span translate="no"> ChiVes </span>below:  </p>
                 <br/>
 
                 <Accordion entries={accordionContent} initialTab={-1} />
