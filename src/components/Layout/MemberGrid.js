@@ -45,7 +45,7 @@ const CoreMemberBio = ({member, columns}) =>
         <img src={`${process.env.PUBLIC_URL}/img/people/${member.img}`} alt={`${member.name}`}/>
         <span>
             <h4><a href={member.link}>{member.name}</a></h4>
-            <h6>{member.degrees}</h6>
+            <h6>{member.org}</h6>
             <h5>{member.title}</h5>
             {!!member.bio && <p>{member.bio}</p>}
         </span>

@@ -17,7 +17,7 @@ const projectTeam = [
     {
         name: 'Marc Astacio-Palmer',
         link: 'https://healthyregions.org/team/',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `marc-astacio.webp`,
         affiliation: '(HEROP)',
         title: 'Research Coordinator, 2023-2024'
@@ -25,7 +25,7 @@ const projectTeam = [
     {
         name: 'José Alavez',
         link: 'https://healthyregions.org/team/',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `jose.png`,
         affiliation: '(HEROP)',
         title: 'Postdoctoral Scholar, 2023-2024'
@@ -33,7 +33,7 @@ const projectTeam = [
     {
         name: 'Karina Ayala-Bermejo',
         link: 'https://www.institutochicago.org/apps/pages/index.jsp?uREC_ID=372458&type=d&pREC_ID=837883',
-        degrees: 'Instituto del Progreso Latino',
+        org: 'Instituto del Progreso Latino',
         img: `karina.jpg`,
         affiliation: '(HEROP)',
         title: 'Community Partner, 2023-2024'
@@ -41,7 +41,7 @@ const projectTeam = [
     {
         name: 'Adam Cox',
         link: 'https://www.linkedin.com/in/mradamcox/',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `adam_cox.jpg`,
         affiliation: '(HEROP)',
         title: 'Research Software Engineer, Dev-Ops, 2023-2024'
@@ -49,7 +49,7 @@ const projectTeam = [
     {
         name: 'Winifred Curran',
         link: 'https://www.linkedin.com/in/winifred-curran-6026525',
-        degrees: 'DePaul',
+        org: 'DePaul',
         img: `curran.jpg`,
         affiliation: '(DePaul)',
         title: 'NASA Co-Lead, 2022-2024'
@@ -57,7 +57,7 @@ const projectTeam = [
     {
         name: 'Marynia Kolak',
         link: 'https://healthyregions.org/team/',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `mk.jpg`,
         affiliation: '(HEROP)',
         title: 'Project PI, 2018-2022; NASA Co-Lead, 2022-2024'
@@ -65,7 +65,7 @@ const projectTeam = [
     {
         name: 'Erin Koster',
         link: '#',
-        degrees: 'DePaul',
+        org: 'DePaul',
         img: `avatar.png`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2024'
@@ -73,7 +73,7 @@ const projectTeam = [
     {
         name: 'Shubham Kumar',
         link: 'https://healthyregions.org/team/',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `shubham.jpeg`,
         affiliation: '(HEROP)',
         title: 'UI/UX Audit, 2023-2024'
@@ -82,7 +82,7 @@ const projectTeam = [
     {
         name: 'Sara Lambert',
         link: 'https://healthyregions.org/team/',
-        degrees: 'NCSA, Illinois',
+        org: 'NCSA, Illinois',
         img: `sara.png`,
         affiliation: '(HEROP)',
         title: 'Sr Research Software Engineer, Front-End, 2024'
@@ -90,7 +90,7 @@ const projectTeam = [
     {
         name: 'Claudia Galeno Sanchez',
         link: '#',
-        degrees: 'Working Family Solidarity',
+        org: 'Working Family Solidarity',
         img: `claudia.jpg`,
         affiliation: '(HEROP)',
         title: 'Community Partner, 2023-2024'
@@ -98,7 +98,7 @@ const projectTeam = [
     {
         name: 'Salise Sepulveda',
         link: '#',
-        degrees: 'DePaul',
+        org: 'DePaul',
         img: `avatar.png`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2024'
@@ -106,7 +106,7 @@ const projectTeam = [
     {
         name: 'Lonette Simms',
         link: '#',
-        degrees: 'Peoples Response Network',
+        org: 'Peoples Response Network',
         img: `lonette.jpg`,
         affiliation: '(HEROP)',
         title: 'Community Partner, 2023-2024'
@@ -114,7 +114,7 @@ const projectTeam = [
     {
         name: 'Michelle Stuhlmacher',
         link: 'https://www.linkedin.com/in/michellestuhlmacher',
-        degrees: 'DePaul',
+        org: 'DePaul',
         img: `stuhlmacher.jpg`,
         affiliation: '(DePaul)',
         title: 'NASA Project PI, 2022-2024'
@@ -127,7 +127,7 @@ const pastTeam = [
     {
         name: 'Dajoin Williams',
         link: 'https://www.linkedin.com/in/dajoinwilliams',
-        degrees: 'DePaul',
+        org: 'DePaul',
         img: `dajoin.jpeg`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2023-2024'
@@ -135,7 +135,7 @@ const pastTeam = [
     {
         name: 'Chris Impellizeri',
         link: 'https://www.linkedin.com/in/christopher-impellizeri-a91194242/',
-        degrees: 'DePaul',
+        org: 'DePaul',
         img: `chris.jpg`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2023-2024'
@@ -143,7 +143,7 @@ const pastTeam = [
     {
         name: 'Jack Vincent Lia',
         link: '#',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `avatar.png`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant: Data Integration, Spring 2024'
@@ -151,7 +151,7 @@ const pastTeam = [
     {
         name: 'Mukesh Chugani',
         link: '#',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `mukesh.webp`,
         affiliation: '(HEROP)',
         title: 'Research Software Engineer, Front-End, Fall 2023'
@@ -159,14 +159,14 @@ const pastTeam = [
     {
         name: 'Sparshdeep Singh',
         link: 'https://www.linkedin.com/in/sparshdeep-singh-08a07b221',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `sparshdeepsingh.jpg`,
         affiliation: '(HEROP)',
         title: 'Student Developer, Data Integration, Spring 2023'
     }, {
         name: 'Sarvagnya Vijay',
         link: 'https://www.linkedin.com/in/sarvagnya-vijay-54640421b',
-        degrees: 'Illinois',
+        org: 'Illinois',
         img: `sarvagnya_vijay.jpg`,
         affiliation: '(HEROP)',
         title: 'Student Developer, Data Integration, Spring 2023'
@@ -174,7 +174,7 @@ const pastTeam = [
     {
         name:'Isaac Rand',
         link:'#',
-        degrees: 'UChicago',
+        org: 'UChicago',
         img: `avatar.png`,
         affiliation:'(HEROP)',
         title:'Data Integration, 2021-2022',
@@ -182,7 +182,7 @@ const pastTeam = [
     {
                 name:'Dylan Halpern',
                 link:'https://dylanhalpern.com/',
-                degrees: 'UChicago',
+                org: 'UChicago',
                 img: `dylan.png`,
                 affiliation:'(HEROP)',
                 title:'Core Data Engineer & Developer, 2021-2022',
@@ -190,7 +190,7 @@ const pastTeam = [
                 {
                 name:'Susan Paykin',
                 link:'https://www.linkedin.com/in/susanpaykin/',
-                degrees: 'UChicago',
+                org: 'UChicago',
                 img: `SPaykin.jpg`,
                 affiliation:'(HEROP)',
                 title:'Community Engagement, 2021-2022',
@@ -198,7 +198,7 @@ const pastTeam = [
             {
                 name: 'James Keane',
                 link: 'https://www.linkedin.com/in/james-keane-678863b7/',
-                degrees: 'UChicago',
+                org: 'UChicago',
                 img: 'keane.jpeg',
                 affiliation: '(HEROP)',
                 title: 'Data Visualization, 2021-2022',
@@ -206,7 +206,7 @@ const pastTeam = [
         {
                name: 'Isaac Kamber',
                link: 'https://www.linkedin.com/in/isaac-kamber/',
-               degrees: 'UChicago',
+               org: 'UChicago',
                img: `isaac.png`,
                affiliation: '(HEROP)',
                title: 'Data Integration, 2018-2021'
@@ -214,7 +214,7 @@ const pastTeam = [
            {
                name:'Lorenz Menendez',
                link:'https://www.linkedin.com/in/lorenzmenendez/',
-               degrees: 'UChicago',
+               org: 'UChicago',
                img: `Menendez_Lorenz.jpeg`,
                affiliation:'(HEROP)',
                title: 'Data Integration, 2018-2021'
