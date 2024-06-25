@@ -327,7 +327,7 @@ export default function About(){
                    Core Project Team
                 </h2>
 
-                <p>This project is brought to you by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at <b>DePaul University</b>. The original<span translate="no"> ChiVes </span>emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago.
+                <p>This project is brought to you by the <a href="https://healthyregions.org/" target="_blank" rel="noopener noreferrer">Healthy Regions & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank" rel="noopener noreferrer">Department of Geography</a> at <b>DePaul University</b>. The original<span translate="no"> ChiVes </span>emerged from HeRoP while at the Center for Spatial Data Science within the University of Chicago.
                   <br/><br/>
 
                <span translate="no"> ChiVes </span>is funded in part by <b>NASA</b> with a new initiative starting in 2022 led by Drs. Stuhlmacher, Curran, and Kolak (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and
