@@ -218,7 +218,7 @@ const ControlsContainer = styled.div`
     max-height: 100%;
     padding: 0 10px 25vh 10px;
   }
-  p.data-description {
+  div.data-description {
     max-width: 40ch;
     line-height: 1.3;
   }
@@ -365,7 +365,7 @@ const VariablePanel = (props) => {
         </FormControl>
         <Gutter h={20} />
         <h2>Data Description</h2>
-        <p className="data-description">
+        <div className="data-description">
           {mapParams.custom === 'aq_grid' && <>
           <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
           </>}
@@ -389,7 +389,7 @@ const VariablePanel = (props) => {
         </>
         }
           {dataDescriptions[mapParams.variableName]}
-        </p>
+        </div>
 
 
         <Gutter h={20} />
