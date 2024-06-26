@@ -50,7 +50,6 @@ const FooterContainer = styled.footer`
     &.depaul {
       width: 7rem;
       height: 6rem;
-      filter: grayscale(1) invert(1);
     }
   }
   hr {
@@ -152,7 +151,7 @@ const Footer = (props) => {
                 >
                   <img
                       className="logo depaul"
-                      src={`${process.env.PUBLIC_URL}/img/logos/depaul.png`}
+                      src={`${process.env.PUBLIC_URL}/depaul_light_logo.png`}
                       alt="DePaul University"
                   />
                 </a>
