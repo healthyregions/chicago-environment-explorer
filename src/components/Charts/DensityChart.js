@@ -26,8 +26,8 @@ export default function BarChartComponent({data, dataKey, color}){
           }}
         >
             <CartesianGrid horizontal={false}/>
-          <XAxis dataKey="value" tickCount={5} padding={0} minTickGap={1} tickFormatter={tickFormatter}/>
-          <YAxis dataKey="density" domain={yRange} ticks={false} hide/>
+          <XAxis dataKey="value" tickCount={5} padding={{ top: 0, bottom: 0, left:0, right:0 }} minTickGap={1} tickFormatter={tickFormatter}/>
+          <YAxis dataKey="density" domain={yRange} ticks={[]} hide/>
           <defs>
             <linearGradient 
                 id={`splitColor${color}`}

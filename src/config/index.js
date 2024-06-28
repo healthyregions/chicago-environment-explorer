@@ -1,18 +1,22 @@
 import rawVariables from './variables.json';
+import rawCategories from './categories.json';
 
 export const defaultData = 'chives-data.geojson';
-export const defaultVariable = "Surface Temperature";
+export const defaultVariable = "Heat Index (Maximum)";
+
+// No further processing needed
+export const variableCategories = rawCategories;
 
 export const variablePresets = rawVariables.reduce(
-  (obj, row) => Object.assign(obj, 
-    "HEADER" in row 
+  (obj, row) => Object.assign(obj,
+    "HEADER" in row
       ? { ['HEADER::' + row['HEADER']]: { } }
-      : { [row['Variable Name']]: { ...row, accessor: feature => feature.properties[row.Column] } }
+      : row['active'] ? { [row['Variable Name']]: { ...row, accessor: feature => feature.properties[row.Column] } } : {}
     ), {});
-    
+
 export const dataDescriptions = rawVariables.reduce(
-  (obj, row) => Object.assign(obj, { 
-    [row['Variable Name']]: 
+  (obj, row) => Object.assign(obj, {
+    [row['Variable Name']]:
     <div>
       <span dangerouslySetInnerHTML={{ __html: row.Description }}></span>
       <br /><br />
@@ -59,5 +63,6 @@ export const colors = {
   chicagoBlue: '#41B6E6',
   chicagoDarkBlue: '#005899',
   chicagoLightBlue: "#E1F3F8",
-  chicagoRed: "#E4002B"
+  chicagoRed: "#E4002B",
+  paleyellow: "#F0C016",
 }

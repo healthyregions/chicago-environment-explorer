@@ -24,9 +24,9 @@ const Guide = () => {
                     The resource guide provides information about relevant websites, toolkits, 
                     and related items that relate to the Chicago environment at a local scale.
                     The Guide includes information from featured partners, as well as a 
-                    curated list of other resources.
+                    curated list of additional resources discovered & recommended.
                     <Gutter height={20}/>
-                    Resources are <i> featured </i> if the original author confirms that is is:
+                    Resources are included that are:
                     <Gutter height={20}/>
                     <ul>
                         <li>
@@ -47,10 +47,10 @@ const Guide = () => {
                         </li>
                     </ul>
                     <Gutter height={20}/>
-                    Add your resource guide by submitting the official <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform?usp=sf_link" target='_blank' rel="noopener noreferrer">Resource Guide Form.</a>
+                    Add or recommend a resource by submitting the official <a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform?usp=sf_link" target='_blank' rel="noopener noreferrer">Resource Guide Form.</a>
                     <Gutter height={20}/>
                 </p>
-                <Gutter height={20}/>
+                <Gutter height={60}/>
                 {ResourceList.map((entry, index) => <ResourceGuideRow entry={entry} key={index} />)}
             </ContentContainer>
             <Footer />

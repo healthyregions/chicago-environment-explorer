@@ -7,10 +7,10 @@ import {
   VariablePanel,
   Legend,
   DataPanel,
-} from "../../components"; 
+} from "../../components";
 
 // US bounds
-const defaultBounds = fitBounds({
+export const defaultBounds = fitBounds({
   width: window.innerWidth,
   height: window.innerHeight,
   bounds: [
@@ -28,7 +28,7 @@ function App() {
       <div id="mainContainer">
         <MapSection bounds={defaultBounds} />
         <Legend
-          variableName={`${mapParams.variableName} ${
+          label={`${mapParams.variableName} ${
             mapParams.units ? `(${mapParams.units})` : ""
           }`}
           colorScale={mapParams.colorScale}

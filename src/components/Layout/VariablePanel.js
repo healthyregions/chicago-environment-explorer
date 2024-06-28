@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -14,11 +14,21 @@ import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } f
 import { colors, variablePresets, dataDescriptions } from "../../config";
 import * as SVG from "../../config/svg";
 import { FormControl, Switch, Stack } from "@mui/material";
+import {Link} from "react-router-dom";
 const REDLINING_COLOR_SCALE = {
   A: [115, 169, 77],
   B: [52, 172, 198],
   C: [219, 207, 0],
   D: [226, 77, 90],
+};
+
+const CC_COLOR_SCALE = {
+  'Community Service Center': [8,81,156],
+  'Regional Senior Center': [49,130,189],
+  'Satellite Senior Center': [107,174,214],
+  'Library': [158,202,225],
+  'Chicago Community College': [198,219,239],
+  'Park District Spray Feature': [239,243,255],
 };
 
 const RedliningLegend = () => (
@@ -38,6 +48,42 @@ const RedliningLegend = () => (
       </div>
     ))}
   </div>
+);
+
+const CoolingCentersLegend = () => (
+    <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+      <h3>Cooling Site Types</h3>
+      {Object.entries(CC_COLOR_SCALE).map(([key, color]) => (
+          <div key={'cc-'+key} style={{ display: "flex", margin:'.25em 0' }}>
+        <span
+            key={key}
+            style={{
+              backgroundColor: `rgb(${color.join(",")})`,
+              width: 16,
+              height: 16,
+            }}
+        ></span>
+            <p style={{padding:0, margin:'0 0 0 .25em'}}>{key}</p>
+          </div>
+      ))}
+    </div>
+);
+
+const NonResidentialLegend = () => (
+    <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+      <h3>Industrial Areas</h3>
+      <div style={{ display: "flex", margin:'.25em 0' }}>
+        <span
+            style={{
+              backgroundColor: `rgba(200, 200, 200, 255)`,
+              borderColor: `rgba(150, 150, 150, 100)`,
+              width: 16,
+              height: 16,
+            }}
+        ></span>
+            <p style={{padding:0, margin:'0 0 0 .25em'}}>Industrial or Non-Residential Area</p>
+      </div>
+    </div>
 );
 
 const VariablePanelContainer = styled.div`
@@ -159,7 +205,7 @@ const VariablePanelContainer = styled.div`
 `;
 
 const ControlsContainer = styled.div`
-  max-height: 60vh;
+  max-height: 80vh;
   overflow-y: scroll;
   padding: 20px;
 
@@ -172,7 +218,7 @@ const ControlsContainer = styled.div`
     max-height: 100%;
     padding: 0 10px 25vh 10px;
   }
-  p.data-description {
+  div.data-description {
     max-width: 40ch;
     line-height: 1.3;
   }
@@ -252,10 +298,39 @@ const VariablePanel = (props) => {
   const panelState = useSelector((state) => state.panelState);
   const aqLastUpdated = useSelector((state) => state.aqLastUpdated);
 
+  useEffect(() => {
+    // If user selects Displacement Pressure, automatically apply the Non-residential Overlay
+    if (mapParams.variableName?.includes('temperature') || mapParams.variableName?.toLowerCase().includes('heat index')) {
+      if (!mapParams.overlays?.includes('cooling-centers')) {
+        dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'cooling-centers' ]}));
+      }
+    }
+    // If user selects one of the Heat Indicator variables, automatically apply the Cooling Centers Overlay
+    if (mapParams.variableName === 'Displacement Pressure') {
+      if (!mapParams.overlays?.includes('non-res')) {
+        dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'non-res' ]}));
+      }
+    }
+  }, [mapParams.variableName, dispatch]);
+
   const handleMapOverlay = (event) => {
+    let prevOverlays = mapParams.overlays;
+    let overlays = event.target.value;
+
+    // If "None" is clicked, remove all other overlays
+    if ((!prevOverlays.includes('None') && overlays.includes('None')) || !overlays.length) {
+      overlays = ['None'];
+    }
+
+    // If "None" was previously selected and something else is chosen, then de-select "None"
+    if (prevOverlays.includes('None') && overlays.find((o) => o !== 'None')) {
+      overlays.splice(overlays.indexOf('None'), 1);
+    }
+
     dispatch(
       setMapParams({
         overlay: event.target.value,
+        overlays: overlays,
       })
     );
   };
@@ -270,7 +345,7 @@ const VariablePanel = (props) => {
 
   const handleVariable = (e) =>
     dispatch(changeVariable(variablePresets[e.target.value]));
-    
+
   return (
     <VariablePanelContainer
       className={panelState.variables ? "" : "hidden"}
@@ -287,42 +362,53 @@ const VariablePanel = (props) => {
             MenuProps={{ id: "variableMenu" }}
           >
             {Object.keys(variablePresets).map((variable,i) => (
-              variable.includes("HEADER::")  
+              variable.includes("HEADER::")
                ? <ListSubheader key={`list-header-${i}`}>{variable.split("HEADER::")[1]}</ListSubheader>
                : <MenuItem value={variable} key={`variable-menu-item-${i}`}>
                 {variable}
               </MenuItem>
             ))}
           </Select>
+          <div style={{ marginBottom: '10px' }}>
+            {mapParams.overlays?.map(overlay => <div  key={'overlay-description-' + overlay}>
+              { overlay === 'non-res' && <>+ Non-residential or Industrial Areas</> }
+              { overlay === 'cooling-centers' && <>+ Cooling Centers in the Area</> }
+              { overlay === 'redlining' && <>+ Historical Redlining</> }
+              { overlay === 'wards' && <>+ Area Wards</> }
+              { overlay === 'community_areas' && <>+ Community Areas</> }
+            </div>)}
+          </div>
+
+          <Link to='/builder'>Try with multiple variables</Link>
         </FormControl>
         <Gutter h={20} />
         <h2>Data Description</h2>
-        <p className="data-description">
+        <div className="data-description">
           {mapParams.custom === 'aq_grid' && <>
           <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
           </>}
-          
+
         {mapParams.custom === 'aq_grid' && <>
           <p>
             To see the source data grid, click the switch below.
           </p>
           <Stack direction="row" spacing={1} alignItems="center">
-          
+
           <p>Aggregated by Tract</p>
           <AntSwitch checked={mapParams.useCustom}  onClick={() => dispatch(toggleCustom())} inputProps={{ 'aria-label': 'ant design' }} />
           <p>Source Data</p>
         </Stack>
           <Stack direction="row" spacing={1} alignItems="center" sx={{opacity: mapParams.useCustom ? 1 : 0.25}}>
-          
+
           <p>2D Map</p>
           <AntSwitch checked={use3d}  onClick={() => dispatch(toggle3d())} disabled={!mapParams.useCustom} inputProps={{ 'aria-label': 'ant design' }} />
           <p>3D Map</p>
-        </Stack> 
+        </Stack>
         </>
         }
           {dataDescriptions[mapParams.variableName]}
-        </p>
-        
+        </div>
+
 
         <Gutter h={20} />
         <h2>Data Overlay</h2>
@@ -330,15 +416,17 @@ const VariablePanel = (props) => {
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
             id="overlay-select"
-            value={mapParams.overlay}
+            value={mapParams.overlays}
             onChange={handleMapOverlay}
+            multiple={true}
+            style={{ maxWidth: '300px' }}
           >
             <MenuItem value="None" key={"None"}>
               None
             </MenuItem>
-            <MenuItem value={"aq"} key={"aq"}>
+            {/*<MenuItem value={"aq"} key={"aq"}>
               Weekly PM2.5 Readings
-            </MenuItem>
+            </MenuItem>*/}
             <MenuItem value={"community_areas"} key={"community_areas"}>
               Community Areas
             </MenuItem>
@@ -348,9 +436,17 @@ const VariablePanel = (props) => {
             <MenuItem value={"redlining"} key={"redlining"}>
               Historical Redlining
             </MenuItem>
+            <MenuItem value={"cooling-centers"} key={"cooling-centers"}>
+              Cooling Centers
+            </MenuItem>
+            <MenuItem value={"non-res"} key={"non-res"}>
+              Industrial & Non-Residential Areas
+            </MenuItem>
           </Select>
         </FormControl>
-        {mapParams.overlay === "redlining" && <RedliningLegend />}
+        {mapParams.overlays.includes("cooling-centers") && <CoolingCentersLegend />}
+        {mapParams.overlays.includes("redlining") && <RedliningLegend />}
+        {mapParams.overlays.includes("non-res") && <NonResidentialLegend />}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}

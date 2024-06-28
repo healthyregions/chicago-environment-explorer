@@ -44,7 +44,7 @@ export default function TableComponent({ columns, data, tableProps, rowProps, ov
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                  <th title={column.tooltip} {...column.getHeaderProps()}>{column.render('Header')}</th>
                 ))}
               </tr>
             ))}

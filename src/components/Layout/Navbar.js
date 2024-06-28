@@ -135,11 +135,11 @@ export default function Nav({
   bounds,
   setViewState
 }) {
-  
+
   const dispatch = useDispatch();
   const panelState = useSelector(state => state.panelState);
   const handleOpenClose = (panel) => dispatch(setPanelState({ [panel]: panelState[panel] ? false : true }))
-  
+
   // const handleGeolocate = async () => {
   //   navigator.geolocation.getCurrentPosition(position => {
   //       setViewport({
@@ -167,7 +167,8 @@ export default function Nav({
     <NavContainer>
       <LogoButtonContainer aria-describedby={id} variant="outlined" onClick={handleClick} title={id} color="success">
         <SvgLogo colors={[colors.green, colors.chicagoBlue, colors.skyblue, colors.chicagoDarkBlue, colors.chicagoRed]}></SvgLogo>
-        <Typography><span style={{fontWeight:"bold"}}>ChiVes</span></Typography>
+        <Typography><span style={{fontWeight:"bold", color:"#2e7d32"}} translate="no"> ChiVes</span></Typography>
+        {SVG.hamburger}
       </LogoButtonContainer>
       <Popover
         id="nav-container"
@@ -198,6 +199,7 @@ export default function Nav({
           <NavItems>
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/map">Map</NavLink></li>
+            <li><NavLink to="/builder">Index Builder</NavLink></li>
             <li><NavLink to="/data">Data</NavLink></li>
             <li><NavLink to="/community">My Community</NavLink></li>
             <li><NavLink to="/guide">Resource Guide</NavLink></li>

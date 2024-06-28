@@ -42,12 +42,12 @@ export default function Contact(){
                 <a href="https://twitter.com/healthyregions" target="_blank" rel="noopener noreferrer" className="social-icon">
                     <img src={`${process.env.PUBLIC_URL}/icons/twitter-icon-dark.png`} alt="Twitter Icon" />
                 </a>
-                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <a href="https://github.com/healthyregions/chicago-environment-explorer" target="_blank" rel="noopener noreferrer" className="social-icon">
                     <img src={`${process.env.PUBLIC_URL}/icons/github-icon-dark.png`} alt="Twitter Icon" />
                 </a>
                 <hr/>
                 <p>
-                    Contact the <i>ChiVes</i> leadership team directly through this form if you have any questions about the project or media inquiries.
+                    Contact the <i translate="no">ChiVes</i> leadership team directly through this form if you have any questions about the project or media inquiries.
                 </p>
                 
                 <ContactForm />

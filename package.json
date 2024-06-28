@@ -5,12 +5,12 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeoDaCenter/chicago-environment-explorer.git"
+    "url": "git+https://github.com/healthyregions/chicago-environment-explorer.git"
   },
   "author": "Spatial@UChicago <spatial@uchicago.edu>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/GeoDaCenter/chicago-environment-explorer/issues"
+    "url": "https://github.com/healthyregions/chicago-environment-explorer/issues"
   },
   "homepage": "https://chichives.com",
   "dependencies": {
@@ -30,6 +30,7 @@
     "@maticoapp/matico_charts": "^0.0.1",
     "@mui/material": "^5.4.2",
     "@mui/styles": "^5.4.2",
+    "@mui/x-charts": "^6.18.7",
     "@mui/x-data-grid": "^5.5.1",
     "@react-icons/all-files": "^4.1.0",
     "@turf/bbox": "^6.5.0",
@@ -48,8 +49,10 @@
     "geobuf": "^3.0.2",
     "geojson2shp": "^0.5.0",
     "history": "^5.1.0",
+    "html2canvas": "^1.4.1",
+    "jszip": "^3.10.1",
     "lodash": "^4.17.20",
-    "mapbox-gl": "1.13.2",
+    "mapbox-gl": "2.12.1",
     "netlify-cli": "^13.1.2",
     "object-resolve-path": "^1.1.1",
     "pbf": "^3.2.1",
@@ -70,6 +73,7 @@
     "shapefile": "^0.6.6",
     "simple-statistics": "^7.7.3",
     "styled-components": "^5.2.1",
+    "use-react-screenshot": "^4.0.0",
     "web-vitals": "^0.2.4",
     "webfontloader": "^1.6.28"
   },

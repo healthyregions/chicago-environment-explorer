@@ -10,8 +10,6 @@ import baseLayers from '../../config/baseLayers.json';
 const DataPage = styled.div`
     background:white;
 
-`
-
 // const TableStyle  = styled.div`
 //     a {
 //         font-family: 'Lora', sans-serif;
@@ -73,10 +71,10 @@ const Hero = styled.div`
 `
 const NewTabLink = ({ link, text }) => <a href={link} target="_blank" rel="noopener noreferrer">{text}</a>
 
-const columns = [
+const variableTableColumns = [
     {
         Header: 'Variable',
-        accessor: 'Variable Name',
+        accessor: f => <span translate="no">{f['Variable Name']}</span>,
     },
     {
         Header: "Contributor",
@@ -97,8 +95,27 @@ const columns = [
     {
         Header: 'Original Scale',
         accessor: 'Original Scale',
-    }
+    },
+    {
+        Header: 'Downloadable',
+        accessor: 'Downloadable',
+        tooltip: 'Some variables are not available in the download package.',
+    },
 ]
+
+const basemapTableColumns = variableTableColumns.filter(c => c.Header !== "Downloadable");
+
+// create a lookup for whether each variable is downloadable based on whether an Export Name is defined for
+// it in the Columns sheet.
+const downloadableLookup = {};
+dataColumns.forEach( function (col) {
+    downloadableLookup[col.Column] = col['Export Name'] ? true : false;
+})
+
+const dataSourcesAnnotated = dataSources.map(s => {
+    if (!s['HEADER']) { s.Downloadable = downloadableLookup[s.Column] ? "Yes" : "No" }
+    return s
+})
 
 export default function Data() {
     return (
@@ -108,14 +125,14 @@ export default function Data() {
                 <h1>Data</h1> <hr/>
                 <Gutter h={10} />
                 <p>
-                    <i>ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics,
+                    <i translate="no">ChiVes</i> uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics,
                     surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate
                     matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018).
                     Read more on our <a href="/About">About</a> page.
                     <br /><br />
 
                     Data is added and updated through a collaborative partnership of researchers, community organizations, and civic groups. Organizations
-                    and individuals can participate in <i>ChiVes</i> in multiple ways:
+                    and individuals can participate in <i translate="no">ChiVes</i> in multiple ways:
 
                     <br /><br />
                     <li> <a href="https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform">Data Collaborative.</a> Integrate
@@ -123,10 +140,10 @@ export default function Data() {
 
 
                     <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform">Resource Guide.</a> Share your
-                        web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards. </li>
+                        web-based or print media resource on the Chicago environment. Resources must meet<span translate="no"> ChiVes </span>standards. </li>
 
 
-                    <li><a href="https://github.com/GeoDaCenter/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the ChiVes
+                    <li><a href="https://github.com/healthyregions/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the ChiVes
                         website, make changes, and submit for review.</li>
 
                     <br />
@@ -138,21 +155,31 @@ export default function Data() {
                 </p>
 
                 <Hero>
-                    <h2> Current Data Release (4-22-2022)</h2>
-                    <a href={`${process.env.PUBLIC_URL}/shp/chives-data.zip`} id="button-search" download>ShapeFile</a>
-                    <a href={`${process.env.PUBLIC_URL}/geojson/chives-data.geojson`} id="button-search" download>GeoJSON</a>
-                    <a href={`${process.env.PUBLIC_URL}/csv/chives-data.csv`} id="button-search" download>CSV / Excel</a>
+                    <h2> Current Data Release (6-17-2024)</h2>
+                    <a href={`${process.env.PUBLIC_URL}/shp/chives-data-public.zip`} id="button-search" download>ShapeFile</a>
+                    <a href={`${process.env.PUBLIC_URL}/geojson/chives-data-public.geojson`} id="button-search" download>GeoJSON</a>
+                    <a href={`${process.env.PUBLIC_URL}/csv/chives-data-public.csv`} id="button-search" download>CSV / Excel</a>
                     <p className="license-description">
                         This data is licensed under a <a href="https://creativecommons.org/licenses/by-nc/2.0/" target='_blank' rel="noopener noreferrer">Creative Commons Attribution Non-Commercial license.</a>
                         <br /><br />
-                        {/* Cite this data as <i>ChiVes Data Contributors</i> */}
+                        {/* Cite this data as <i translate="no">ChiVes Data Contributors</i> */}
                     </p>
                 </Hero>
 
                 <Gutter h={20} />
                 <h2>Data Dictionary</h2>
                 <ul>
-                    {dataColumns.map(({ Column, Description },i) => <li key={i}><p><b>{Column}:</b> {Description}</p></li>)}
+                    {dataColumns.map(i => {
+                    if (i['Export Name']) {
+                        return (
+                        <li key={i}>
+                            <p>
+                            <b translate="no">{i['Export Name']}:</b> {i.Description}
+                            </p>
+                        </li>
+                        );
+                    }
+                    })}
                 </ul>
                 <Gutter h={40} />
                 <h2>Map Variables and Data Sources</h2>
@@ -163,17 +190,17 @@ export default function Data() {
                 </h3>
 
 
-                
+
                     <Gutter h={20} />
-                    <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'])} />
+                    <Table columns={variableTableColumns} data={dataSourcesAnnotated.filter(f => !!f['Variable Name'] && !!f['active'])} />
                     <Gutter h={40} />
-               
-                    
+
+
 
                 <h2>Basemap Layers and Data</h2>
                 <h3>The variables below are represented in the map as base layers.</h3>
                 <Gutter h={20} />
-                <Table columns={columns} data={baseLayers} />
+                <Table columns={basemapTableColumns} data={baseLayers} />
             </ContentContainer>
             <Footer />
         </DataPage >

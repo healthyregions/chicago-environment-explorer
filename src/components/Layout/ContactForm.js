@@ -143,13 +143,13 @@ export default function ContactForm(){
         {submitted && 
             <SuccessMessage>
                 <p>
-                    Thanks for your message! Our team will review your message and get back with you as soon as possible. We value your feedback and engagement as we work to improve the ChiVes explorer!
+                    Thanks for your message! Our team will review your message and get back with you as soon as possible. We value your feedback and engagement as we work to improve the<span translate="no"> ChiVes </span>explorer!
                 </p>
                 <button onClick={() => setSubmitted(false)}>×</button>
             </SuccessMessage>
         }
         <ContactFormContainer className={isSubmitting ? 'locked' : ''} onSubmit={handleSubmit}>
-            <h2>CONTACT FORM</h2>
+            <h2>Send us a message</h2>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
                     <InputBlock>
