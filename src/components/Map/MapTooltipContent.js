@@ -72,10 +72,10 @@ const MapTooltipContent = ({content, showCustom = false}) => {
                     <tr><td>Urban Flood Susceptibility Index</td><td> {urban_flood_suscep && urban_flood_suscep.toFixed(2)}</td></tr>
                     <tr><td>Vegetation Index (NDVI)</td><td> {ndvi && ndvi.toFixed(3)}</td></tr>
                     <tr><td>Plant Biodiversity</td><td>{simpson && simpson.toFixed(2)}</td></tr>
-                    <tr><td>Proportion HOLC Grade A</td><td> {proportionA && proportionA.toFixed(2)}</td></tr>
-                    <tr><td>Proportion HOLC Grade B</td><td> {proportionB && proportionB.toFixed(2)}</td></tr>
-                    <tr><td>Proportion HOLC Grade C</td><td> {proportionC && proportionC.toFixed(2)}</td></tr>
-                    <tr><td>Proportion HOLC Grade D</td><td> {proportionD && proportionD.toFixed(2)}</td></tr>
+                    <tr><td>Proportion HOLC Grade A</td><td> {proportionA && proportionA.toFixed(2)*100}%</td></tr>
+                    <tr><td>Proportion HOLC Grade B</td><td> {proportionB && proportionB.toFixed(2)*100}%</td></tr>
+                    <tr><td>Proportion HOLC Grade C</td><td> {proportionC && proportionC.toFixed(2)*100}%</td></tr>
+                    <tr><td>Proportion HOLC Grade D</td><td> {proportionD && proportionD.toFixed(2)*100}%</td></tr>
                     <tr><td>Percent Seniors</td><td>{percentage_seniors && percentage_seniors.toFixed(2)}%</td></tr>
                     <tr><td>Percent Children</td><td>{percentage_children && percentage_children.toFixed(2)}%</td></tr>
                     <tr><td>Percent Identified as Asian</td><td>{pct_asian && pct_asian.toFixed(1)}%</td></tr>
