@@ -42,7 +42,7 @@ export default function Contact(){
                 <a href="https://twitter.com/healthyregions" target="_blank" rel="noopener noreferrer" className="social-icon">
                     <img src={`${process.env.PUBLIC_URL}/icons/twitter-icon-dark.png`} alt="Twitter Icon" />
                 </a>
-                <a href="https://github.com/GeoDaCenter/chicago-environment-explorer" target="_blank" rel="noopener noreferrer" className="social-icon">
+                <a href="https://github.com/healthyregions/chicago-environment-explorer" target="_blank" rel="noopener noreferrer" className="social-icon">
                     <img src={`${process.env.PUBLIC_URL}/icons/github-icon-dark.png`} alt="Twitter Icon" />
                 </a>
                 <hr/>

@@ -4,6 +4,10 @@
   margin:0;
 }
 
+p, ol, ul {
+  margin-bottom: 1em;
+}
+
 body {
   background:#ffffff;
   font-family: 'Roboto', sans-serif;
