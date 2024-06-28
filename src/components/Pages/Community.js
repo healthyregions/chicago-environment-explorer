@@ -678,6 +678,7 @@ function App() {
           >
             {["Zip Code", "Community", "Census Tract"].map((type) => (
               <StyledButton
+                key={type}
                 variant={geolocateType === type ? "contained" : "outlined"}
                 onClick={() => setGeolocateType(type)}
                 disabled={geolocatingStatus.status !== "success"}

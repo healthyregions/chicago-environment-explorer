@@ -293,9 +293,7 @@ export default function About(){
                 <p>With ChiVes, we harmonize & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.</p>
                 <p>To cite the latest release of Chives (<i>Earth Day 2023 </i> Launch), use the following:</p>
                 <ul>
-                    <li>Dylan Halpern, Susan Paykin, James Keane, Sparshdeep Singh, Sarvagnya Vijay, Adam Cox, Mukesh Chugani, Winifred Curran, 
-                Michelle Stuhlmacher, & Marynia Kolak. (2023). Chives: A Chicago Environmental Justice Geospatial Dashboard (v2.0.0). 
-                Zenodo. <a href="https://doi.org/10.5281/zenodo.8212065">https://doi.org/10.5281/zenodo.8212065</a>.</li>
+                    <li>Dylan Halpern, Susan Paykin, James Keane, Sparshdeep Singh, Sarvagnya Vijay, Adam Cox, Mukesh Chugani, Winifred Curran, Michelle Stuhlmacher, & Marynia Kolak. (2023). Chives: A Chicago Environmental Justice Geospatial Dashboard (v2.0.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.8212065">https://doi.org/10.5281/zenodo.8212065</a>.</li>
                 </ul>
                 <p>The next release is planned for August 2024. <a href="/contact">Contact</a> us with any questions, or post an issue on <a href="https://github.com/healthyregions/chicago-environment-explorer/issues">Github.</a></p>
                 <hr/>

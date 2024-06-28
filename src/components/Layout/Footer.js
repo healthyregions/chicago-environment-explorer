@@ -47,6 +47,10 @@ const FooterContainer = styled.footer`
       margin: 2rem auto;
       max-width: 35%;
     }
+    &.depaul {
+      width: 7rem;
+      height: 6rem;
+    }
   }
   hr {
     margin: 20px 0;
@@ -139,6 +143,19 @@ const Footer = (props) => {
           <Grid item xs={12} md={6} alignContent="center" alignItems="center">
             <Grid container spacing={0}>
 
+              <Grid item xs={6}>
+                <a
+                    href="https://las.depaul.edu/academics/geography/Pages/default.aspx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                  <img
+                      className="logo depaul"
+                      src={`${process.env.PUBLIC_URL}/depaul_light_logo.png`}
+                      alt="DePaul University"
+                  />
+                </a>
+              </Grid>
               <Grid item xs={6}>
                 <a
                   href="https://www.healthyregions.org"
