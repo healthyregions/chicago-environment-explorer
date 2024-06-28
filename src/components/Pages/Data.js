@@ -71,7 +71,7 @@ const Hero = styled.div`
 `
 const NewTabLink = ({ link, text }) => <a href={link} target="_blank" rel="noopener noreferrer">{text}</a>
 
-const columns = [
+const variableTableColumns = [
     {
         Header: 'Variable',
         accessor: f => <span translate="no">{f['Variable Name']}</span>,
@@ -95,8 +95,27 @@ const columns = [
     {
         Header: 'Original Scale',
         accessor: 'Original Scale',
-    }
+    },
+    {
+        Header: 'Downloadable',
+        accessor: 'Downloadable',
+        tooltip: 'Some variables are not available in the download package.',
+    },
 ]
+
+const basemapTableColumns = variableTableColumns.filter(c => c.Header !== "Downloadable");
+
+// create a lookup for whether each variable is downloadable based on whether an Export Name is defined for
+// it in the Columns sheet.
+const downloadableLookup = {};
+dataColumns.forEach( function (col) {
+    downloadableLookup[col.Column] = col['Export Name'] ? true : false;
+})
+
+const dataSourcesAnnotated = dataSources.map(s => {
+    if (!s['HEADER']) { s.Downloadable = downloadableLookup[s.Column] ? "Yes" : "No" }
+    return s
+})
 
 export default function Data() {
     return (
@@ -136,10 +155,10 @@ export default function Data() {
                 </p>
 
                 <Hero>
-                    <h2> Current Data Release (4-21-2023)</h2>
-                    <a href={`${process.env.PUBLIC_URL}/TEMP_DATA/chives-data-minusNU.zip`} id="button-search" download>ShapeFile</a>
-                    <a href={`${process.env.PUBLIC_URL}/TEMP_DATA/chives-data-minusNU.geojson`} id="button-search" download>GeoJSON</a>
-                    <a href={`${process.env.PUBLIC_URL}/TEMP_DATA/chives-data-minusNU.csv`} id="button-search" download>CSV / Excel</a>
+                    <h2> Current Data Release (6-17-2024)</h2>
+                    <a href={`${process.env.PUBLIC_URL}/shp/chives-data-public.zip`} id="button-search" download>ShapeFile</a>
+                    <a href={`${process.env.PUBLIC_URL}/geojson/chives-data-public.geojson`} id="button-search" download>GeoJSON</a>
+                    <a href={`${process.env.PUBLIC_URL}/csv/chives-data-public.csv`} id="button-search" download>CSV / Excel</a>
                     <p className="license-description">
                         This data is licensed under a <a href="https://creativecommons.org/licenses/by-nc/2.0/" target='_blank' rel="noopener noreferrer">Creative Commons Attribution Non-Commercial license.</a>
                         <br /><br />
@@ -150,17 +169,15 @@ export default function Data() {
                 <Gutter h={20} />
                 <h2>Data Dictionary</h2>
                 <ul>
-                    {dataColumns.map(({ Column, Description }, i) => {
-                    if (Column !== "CMAQ_NO2" && Column !== "CMAQ_O3" && Column !== "CMAQ_PM25") {
+                    {dataColumns.map(i => {
+                    if (i['Export Name']) {
                         return (
                         <li key={i}>
                             <p>
-                            <b translate="no">{Column}:</b> {Description}
+                            <b translate="no">{i['Export Name']}:</b> {i.Description}
                             </p>
                         </li>
                         );
-                    } else {
-                        return null;
                     }
                     })}
                 </ul>
@@ -175,7 +192,7 @@ export default function Data() {
 
 
                     <Gutter h={20} />
-                    <Table columns={columns} data={dataSources.filter(f => !!f['Variable Name'] && !!f['active'])} />
+                    <Table columns={variableTableColumns} data={dataSourcesAnnotated.filter(f => !!f['Variable Name'] && !!f['active'])} />
                     <Gutter h={40} />
 
 
@@ -183,7 +200,7 @@ export default function Data() {
                 <h2>Basemap Layers and Data</h2>
                 <h3>The variables below are represented in the map as base layers.</h3>
                 <Gutter h={20} />
-                <Table columns={columns} data={baseLayers} />
+                <Table columns={basemapTableColumns} data={baseLayers} />
             </ContentContainer>
             <Footer />
         </DataPage >
