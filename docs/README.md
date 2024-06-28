@@ -48,6 +48,7 @@ Data is pulled from the data management spreadsheets which contains the followin
 
 *Columns*
 - Column: column name in data
+- Export Name: Name to use for this variable in exported public file. Must be camelCase and ten or less characters long. **If no Export Name is provided, this variable will be removed from the public export file.**
 - Description: Text description of data
 
 *Variables*
