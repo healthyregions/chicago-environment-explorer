@@ -300,8 +300,16 @@ const VariablePanel = (props) => {
 
   useEffect(() => {
     // If user selects Displacement Pressure, automatically apply the Non-residential Overlay
+    if (mapParams.variableName?.includes('temperature') || mapParams.variableName?.toLowerCase().includes('heat index')) {
+      if (!mapParams.overlays?.includes('cooling-centers')) {
+        dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'cooling-centers' ]}));
+      }
+    }
+    // If user selects one of the Heat Indicator variables, automatically apply the Cooling Centers Overlay
     if (mapParams.variableName === 'Displacement Pressure') {
-      dispatch(setMapParams({ overlay: 'non-res' }));
+      if (!mapParams.overlays?.includes('non-res')) {
+        dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'non-res' ]}));
+      }
     }
   }, [mapParams.variableName, dispatch]);
 
