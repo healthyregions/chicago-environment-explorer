@@ -5,12 +5,12 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeoDaCenter/chicago-environment-explorer.git"
+    "url": "git+https://github.com/healthyregions/chicago-environment-explorer.git"
   },
   "author": "Spatial@UChicago <spatial@uchicago.edu>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/GeoDaCenter/chicago-environment-explorer/issues"
+    "url": "https://github.com/healthyregions/chicago-environment-explorer/issues"
   },
   "homepage": "https://chichives.com",
   "dependencies": {

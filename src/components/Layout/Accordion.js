@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import MuiAccordion from "@material-ui/core/Accordion";
 import MuiAccordionSummary from "@material-ui/core/AccordionSummary";
 import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
+import {FaChevronDown} from "@react-icons/all-files/fa/FaChevronDown";
 import styled from "styled-components";
 // import { colors } from "../config";
 
@@ -52,6 +53,7 @@ function Accordion({ entries = [], initialTab = -1 }) {
             onChange={() => setOpenTab((prev) => (prev === index ? -1 : index))}
           >
             <AccordionSummary
+              expandIcon={<FaChevronDown />}
               aria-controls={`panel${label}-${index}d-content`}
               id={`panel${label}-${index}d-header`}
             >
