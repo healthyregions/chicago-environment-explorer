@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import { Button } from '@mui/material';
 import {colors} from '../../config'
 const PolarSpeciesPlot = React.lazy(() => import('../Charts/PolarSpeciesPlot.js'));
@@ -19,6 +20,10 @@ const MapTooltipContent = ({content, showCustom = false}) => {
         ndvi,
         simpson,
         topline_median,
+        proportionA,
+        proportionB,
+        proportionC,
+        proportionD,
         pct_asian,
         pct_black,
         pct_hisp,
@@ -53,6 +58,7 @@ const MapTooltipContent = ({content, showCustom = false}) => {
             <h2>Tract {geoid}</h2>
             {content && <div style={{overflowY:'scroll', height:'250px'}}><span><table>
                 <tbody>
+                    
                     <tr><td>Population</td><td> {acs_population && acs_population.toLocaleString('en')}</td></tr>
                     <tr><td>Number of Trees</td><td> {trees_n && trees_n.toLocaleString('en')}</td></tr>
                     <tr><td>Percent Canopy Cover</td><td> {trees_crown_den && trees_crown_den.toFixed(2)}%</td></tr>
@@ -66,6 +72,10 @@ const MapTooltipContent = ({content, showCustom = false}) => {
                     <tr><td>Urban Flood Susceptibility Index</td><td> {urban_flood_suscep && urban_flood_suscep.toFixed(2)}</td></tr>
                     <tr><td>Vegetation Index (NDVI)</td><td> {ndvi && ndvi.toFixed(3)}</td></tr>
                     <tr><td>Plant Biodiversity</td><td>{simpson && simpson.toFixed(2)}</td></tr>
+                    <tr><td>Percent HOLC Grade A</td><td> {proportionA && proportionA.toFixed(2)*100}%</td></tr>
+                    <tr><td>Percent HOLC Grade B</td><td> {proportionB && proportionB.toFixed(2)*100}%</td></tr>
+                    <tr><td>Percent HOLC Grade C</td><td> {proportionC && proportionC.toFixed(2)*100}%</td></tr>
+                    <tr><td>Percent HOLC Grade D</td><td> {proportionD && proportionD.toFixed(2)*100}%</td></tr>
                     <tr><td>Percent Seniors</td><td>{percentage_seniors && percentage_seniors.toFixed(2)}%</td></tr>
                     <tr><td>Percent Children</td><td>{percentage_children && percentage_children.toFixed(2)}%</td></tr>
                     <tr><td>Percent Identified as Asian</td><td>{pct_asian && pct_asian.toFixed(1)}%</td></tr>
@@ -78,6 +88,7 @@ const MapTooltipContent = ({content, showCustom = false}) => {
                     {showCustom && <tr><td>Custom Index</td><td>{CUSTOM_INDEX_scaled && CUSTOM_INDEX_scaled.toFixed(3)}</td></tr>}
                 </tbody>
             </table>
+            
             <Button variant="contained" onClick={handleSpeciesPlot} style={{marginTop:'.5em', fontFamily:'"Lato", sans-serif', background:colors.forest}}>Open Species Tree</Button>
             <PolarSpeciesPlot
                 geoid={speciesPlotInfo.geoid}
