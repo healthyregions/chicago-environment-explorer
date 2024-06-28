@@ -105,14 +105,15 @@ const variableTableColumns = [
 
 const basemapTableColumns = variableTableColumns.filter(c => c.Header !== "Downloadable");
 
-// bring the Downloadable field from the Columns data directly into the dataSources list
+// create a lookup for whether each variable is downloadable based on whether an Export Name is defined for
+// it in the Columns sheet.
 const downloadableLookup = {};
 dataColumns.forEach( function (col) {
-    downloadableLookup[col.Column] = col.Downloadable
+    downloadableLookup[col.Column] = col['Export Name'] ? true : false;
 })
 
 const dataSourcesAnnotated = dataSources.map(s => {
-    if (!s['HEADER']) { s.Downloadable = downloadableLookup[s.Column] }
+    if (!s['HEADER']) { s.Downloadable = downloadableLookup[s.Column] ? "Yes" : "No" }
     return s
 })
 
@@ -168,17 +169,15 @@ export default function Data() {
                 <Gutter h={20} />
                 <h2>Data Dictionary</h2>
                 <ul>
-                    {dataColumns.map(({ Column, Description, Downloadable }, i) => {
-                    if (Downloadable.toLocaleLowerCase() === "yes") {
+                    {dataColumns.map(i => {
+                    if (i['Export Name']) {
                         return (
                         <li key={i}>
                             <p>
-                            <b translate="no">{Column}:</b> {Description}
+                            <b translate="no">{i['Export Name']}:</b> {i.Description}
                             </p>
                         </li>
                         );
-                    } else {
-                        return null;
                     }
                     })}
                 </ul>
