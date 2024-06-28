@@ -55,10 +55,18 @@ const projectTeam = [
         title: 'NASA Co-Lead, 2022-2024'
     },
     {
+        name: 'Howard Ehrman',
+        link: null,
+        org: 'Peoples Response Network',
+        img: `avatar.png`,
+        affiliation: null,
+        title: 'Community Partner, 2024'
+    },
+    {
         name: 'Marynia Kolak',
         link: 'https://www.linkedin.com/in/maryniakolak',
         org: 'Illinois',
-        img: `mk.jpg`,
+        img: `marynia.jpeg`,
         affiliation: '(HEROP)',
         title: 'Project PI, 2018-2022; NASA Co-Lead, 2022-2024'
     },
@@ -66,7 +74,7 @@ const projectTeam = [
         name: 'Erin Koster',
         link: null,
         org: 'DePaul',
-        img: `avatar.png`,
+        img: `koster.jpeg`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2024'
     },
@@ -103,8 +111,8 @@ const projectTeam = [
         title: 'NASA Research Assistant, 2024'
     },
     {
-        name: 'Lonette Simms',
-        link: null,
+        name: 'Lonette Sims',
+        link: 'mailto:prncoalition@gmail.com',
         org: 'Peoples Response Network',
         img: `lonette.jpg`,
         affiliation: '(HEROP)',
@@ -143,13 +151,13 @@ const pastTeam = [
         name: 'Jack Vincent Lia',
         link: null,
         org: 'Illinois',
-        img: `avatar.png`,
+        img: `jack.jpg`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant: Data Integration, Spring 2024'
     },
     {
         name: 'Mukesh Chugani',
-        link: null,
+        link: 'https://www.linkedin.com/in/mukesh-chugani',
         org: 'Illinois',
         img: `mukesh.webp`,
         affiliation: '(HEROP)',
@@ -172,9 +180,9 @@ const pastTeam = [
     },
     {
         name:'Isaac Rand',
-        link: null,
+        link: 'https://www.linkedin.com/in/isaac-rand-760990185',
         org: 'UChicago',
-        img: `avatar.png`,
+        img: `isaac.jpeg`,
         affiliation:'(HEROP)',
         title:'Data Integration, 2021-2022',
     },
@@ -321,7 +329,7 @@ export default function About(){
                 <p>In the second release of Chives focused on expanding focus in <b>Environmental Justice Communities</b>, we are grateful to the following individuals and organizations who informed improvements in the mapping application and new index builder, as well as suggested new data and design concepts.</p>
                 <ul>
                     <li>John Paul Jones, <a href="https://www.growgreater.org/">Grow Greater Englewood</a></li>
-                    <li>Lonette Simms, Dulce Garduño, and Howard Ehrmann of the <a href="https://peoplesresponsenetworktocovid19.wordpress.com/">People's Response Network</a></li>
+                    <li>Lonette Simms, Dulce Garduño, and Howard Ehrmann of the <a href="mailto:prncoalition@gmail.com">People's Response Network</a></li>
                     <li>Margarita Reina, Chicago Department of Public Health</li>
                     <li>Leadership, teachers, & students of <a href="https://www.institutochicago.org/">Instituto del Progreso Latino</a>, especially Karina Ayala-Bermejo, Maribel Arellano, Arturo Galan, and Evelyn Barragan</li>
                     <li>Claudia Galeno-Sanchez, <a href="https://www.workingfamilysolidarity.org/">Working Family Solidarity</a></li>
