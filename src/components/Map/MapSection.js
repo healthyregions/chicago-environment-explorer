@@ -442,12 +442,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   };
 
   const CC_COLOR_SCALE = {
-    'Chicago Community College': [8,81,156],
-    'Community Service Center': [49,130,189],
-    'Library': [107,174,214],
-    'Park District Spray Feature': [158,202,225],
-    'Regional Senior Center': [198,219,239],
-    'Satellite Senior Center': [239,243,255]
+    'Community Service Center': [8,81,156],
+    'Regional Senior Center': [49,130,189],
+    'Satellite Senior Center': [107,174,214],
+    'Library': [158,202,225],
+    'Chicago Community College': [198,219,239],
+    'Park District Spray Feature': [239,243,255],
   };
 
   const getCcColor = (site_type) => {
@@ -792,7 +792,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       // elevationScale: 1,
       extruded: true,
       filled: true,
-      getElevation: 30,
+      getElevation: 20,
       getFillColor: (feature) => {
         const site_type = feature.properties['site_type'];
         return getCcColor(site_type);
@@ -806,7 +806,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         // convert to RGB
         return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
       },
-      getLineWidth: 10,
+      //getLineWidth: 5,
       getPointRadius: 5,
       getText: f => f.properties.name,
       // getTextAlignmentBaseline: 'center',
@@ -831,7 +831,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       // lineJointRounded: false,
       // lineMiterLimit: 4,
       // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
-      lineWidthMinPixels: 2,
+      lineWidthMinPixels: 1,
       // lineWidthScale: 1,
       // lineWidthUnits: 'meters',
       // material: true,
