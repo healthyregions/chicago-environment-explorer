@@ -361,14 +361,15 @@ const VariablePanel = (props) => {
               </MenuItem>
             ))}
           </Select>
-          {mapParams.overlays.map(overlay => <>
-            <br/>
-            { overlay === 'non-res' && <>+ Non-residential or Industrial Areas</> }
-            { overlay === 'cooling-centers' && <>+ Cooling Centers in the Area</> }
-            { overlay === 'redlining areas' && <>+ Historical Redlining</> }
-            { overlay === 'wards' && <>+ Area Wards</> }
-            { overlay === 'community areas' && <>+ Community Areas</> }
-          </>)}
+          <div style={{ marginBottom: '10px' }}>
+            {mapParams.overlays?.map(overlay => <div  key={'overlay-description-' + overlay}>
+              { overlay === 'non-res' && <>+ Non-residential or Industrial Areas</> }
+              { overlay === 'cooling-centers' && <>+ Cooling Centers in the Area</> }
+              { overlay === 'redlining' && <>+ Historical Redlining</> }
+              { overlay === 'wards' && <>+ Area Wards</> }
+              { overlay === 'community_areas' && <>+ Community Areas</> }
+            </div>)}
+          </div>
 
           <Link to='/builder'>Try with multiple variables</Link>
         </FormControl>
