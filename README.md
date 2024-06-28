@@ -19,7 +19,7 @@ Organizations and individuals can participate in ChiVes in multiple ways:
 
 * [Data Collaborative](https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform). Integrate your data directly. Members agree that the final, integrated data will meet Collaborative standards.
 * [Resource Guide](https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform). Share your web-based or print media resource on the Chicago environment. Resources must meet ChiVes standards.
-* [Web Development](https://github.com/GeoDaCenter/chicago-environment-explorer). Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.
+* [Web Development](https://github.com/healthyregions/chicago-environment-explorer). Developers and code-enthusiasts can fork the ChiVes website, make changes, and submit for review.
 
 View our [Standards and Submission Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing) for more information. These guidelines are evaluated on a regular basis by members of the Data Collaborative.
 

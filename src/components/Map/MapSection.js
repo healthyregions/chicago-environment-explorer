@@ -806,8 +806,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         // convert to RGB
         return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
       },
-      getLineWidth: 20,
-      getPointRadius: 4,
+      getLineWidth: 10,
+      getPointRadius: 5,
       getText: f => f.properties.name,
       // getTextAlignmentBaseline: 'center',
       // getTextAnchor: 'middle',
