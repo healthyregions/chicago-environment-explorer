@@ -23,12 +23,12 @@ const REDLINING_COLOR_SCALE = {
 };
 
 const CC_COLOR_SCALE = {
-  'Chicago Community College': [8,81,156],
-  'Community Service Center': [49,130,189],
-  'Library': [107,174,214],
-  'Park District Spray Feature': [158,202,225],
-  'Regional Senior Center': [198,219,239],
-  'Satellite Senior Center': [239,243,255]
+  'Community Service Center': [8,81,156],
+  'Regional Senior Center': [49,130,189],
+  'Satellite Senior Center': [107,174,214],
+  'Library': [158,202,225],
+  'Chicago Community College': [198,219,239],
+  'Park District Spray Feature': [239,243,255],
 };
 
 const RedliningLegend = () => (
@@ -369,6 +369,16 @@ const VariablePanel = (props) => {
               </MenuItem>
             ))}
           </Select>
+          <div style={{ marginBottom: '10px' }}>
+            {mapParams.overlays?.map(overlay => <div  key={'overlay-description-' + overlay}>
+              { overlay === 'non-res' && <>+ Non-residential or Industrial Areas</> }
+              { overlay === 'cooling-centers' && <>+ Cooling Centers in the Area</> }
+              { overlay === 'redlining' && <>+ Historical Redlining</> }
+              { overlay === 'wards' && <>+ Area Wards</> }
+              { overlay === 'community_areas' && <>+ Community Areas</> }
+            </div>)}
+          </div>
+
           <Link to='/builder'>Try with multiple variables</Link>
         </FormControl>
         <Gutter h={20} />
