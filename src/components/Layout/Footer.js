@@ -43,11 +43,15 @@ const FooterContainer = styled.footer`
   img.logo {
     margin: 0 auto 2rem 0;
     display: block;
+
+    width: 18rem;
+    height: 4rem;
     @media (max-width: 900px) {
       margin: 2rem auto;
       max-width: 35%;
     }
     &.depaul {
+      float: right;
       width: 7rem;
       height: 6rem;
     }
@@ -142,8 +146,8 @@ const Footer = (props) => {
           </Grid>
           <Grid item xs={12} md={6} alignContent="center" alignItems="center">
             <Grid container spacing={0}>
-
-              <Grid item xs={6}>
+              <Grid item xs={4}></Grid>
+              <Grid item xs={3}>
                 <a
                     href="https://las.depaul.edu/academics/geography/Pages/default.aspx"
                     target="_blank"
@@ -154,18 +158,17 @@ const Footer = (props) => {
                       src={`${process.env.PUBLIC_URL}/depaul_light_logo.png`}
                       alt="DePaul University"
                   />
-                </a>
-              </Grid>
-              <Grid item xs={6}>
+                </a></Grid>
+              <Grid item xs={3} alignContent="right" alignItems="right">
                 <a
-                  href="https://www.healthyregions.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                    href="https://www.healthyregions.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
                 >
                   <img
-                    className="logo"
-                    src={`${process.env.PUBLIC_URL}/herop_light_logo.png`}
-                    alt="Healthy Regions & Policies Lab"
+                      className="logo"
+                      src={`${process.env.PUBLIC_URL}/herop_light_logo.png`}
+                      alt="Healthy Regions & Policies Lab"
                   />
                 </a>
               </Grid>
