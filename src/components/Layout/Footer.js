@@ -51,9 +51,9 @@ const FooterContainer = styled.footer`
       max-width: 35%;
     }
     &.depaul {
-      float: right;
-      width: 7rem;
-      height: 6rem;
+      margin: auto 4rem;
+      width: 8rem;
+      height: 8rem;
     }
   }
   hr {
@@ -144,22 +144,10 @@ const Footer = (props) => {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12} md={6} alignContent="center" alignItems="center">
-            <Grid container spacing={0}>
-              <Grid item xs={4}></Grid>
-              <Grid item xs={3}>
-                <a
-                    href="https://las.depaul.edu/academics/geography/Pages/default.aspx"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                  <img
-                      className="logo depaul"
-                      src={`${process.env.PUBLIC_URL}/depaul_light_logo.png`}
-                      alt="DePaul University"
-                  />
-                </a></Grid>
-              <Grid item xs={3} alignContent="right" alignItems="right">
+          <Grid item xs={12} md={6} justifyContent="center" alignItems="center">
+            <Grid container padding={0} spacing={0} justifyContent="flex-end" alignItems="flex-end">
+              <Grid item md={2} xs={0}></Grid>
+              <Grid item md={5} xs={7}>
                 <a
                     href="https://www.healthyregions.org"
                     target="_blank"
@@ -169,6 +157,19 @@ const Footer = (props) => {
                       className="logo"
                       src={`${process.env.PUBLIC_URL}/herop_light_logo.png`}
                       alt="Healthy Regions & Policies Lab"
+                  />
+                </a>
+              </Grid>
+              <Grid item md={5} xs={5}>
+                <a
+                    href="https://las.depaul.edu/academics/geography/Pages/default.aspx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                  <img
+                      className="logo depaul"
+                      src={`${process.env.PUBLIC_URL}/depaul_light_logo_alt.png`}
+                      alt="DePaul University"
                   />
                 </a>
               </Grid>
