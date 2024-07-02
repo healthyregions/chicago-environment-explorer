@@ -45,7 +45,7 @@ const FooterContainer = styled.footer`
     display: block;
 
     width: 18rem;
-    height: 4rem;
+    max-height: 4rem;
     @media (max-width: 900px) {
       margin: 2rem auto;
       max-width: 35%;
@@ -53,7 +53,7 @@ const FooterContainer = styled.footer`
     &.depaul {
       margin: auto 4rem;
       width: 8rem;
-      height: 8rem;
+      max-height: 8rem;
     }
   }
   hr {
