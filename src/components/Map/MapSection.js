@@ -707,6 +707,104 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     }),
   ];
 
+  // Layers parsed from newer pattern for storing Data Overlays
+  // See https://github.com/healthyregions/chicago-environment-explorer/issues/168
+  const parsedOverlays = [
+    // Each overlay data sheet can be parsed into an object like this one:
+    {
+      id: 'public-housing',            // layer IS (must be unique)
+      displayName:' Public Housing',   // display name in the UI
+      description: 'Public Housing ' + // Description (shown somewhere in the UI)
+          'available in Chicago',
+      dataSource: 'public-housing.geojson', // path to the GeoJSON data
+      geometryType: 'polygon',         // polygon or point
+      symbolProp: 'property_type',     // property name (path?) that determines symbol color
+      lineColor: [0,0,230],               // Outline color for point/circle/polygon
+      lineWidth: '3',                  // Width of the outline for point/circle/polygon
+
+      //fillColor: [115, 169, 77],     // If no symbolProp, this can be a single color
+      fillColor: {                     // if symbolProp provided, map each value to a different color
+        // To produce this list, we can use something like this example in bash:
+        //      grep 'property_type' public/geojson/public-housing.geojson | sort | uniq
+
+        // TODO: Assign colors to these categories
+
+        // Top-level categoories
+        'ARO': [],
+        'SRO': [],
+        'Inter-generational': [],
+        'People with Disabilities': [],
+        'Multifamily': [],
+        'Supportive': [],
+        'Seniors': [],
+        'Veterans': [],
+
+        // Typos (that should match top-level?)
+        'Multfamily': [],           // This is a typo that exists in one or more data points
+        'Mutifamily': [],           // This is a typo that exists in one or more data points
+        'Senior': [],               // This is a typo that exists in one or more data points
+
+        'Disabled/Homeless': [],
+
+        // Crossover categories
+        'SRO/Supportive': [],
+        'Supportive/Veterans': [],
+        '65+/Supportive': [],
+        'Senior Supportive Living': [],
+        'Multifamily/Artists': [],  // TODO: Is this a different color from "Multifamily"? (above)
+
+        // Subcategories
+        // TODO: Are these individual colors? Subcategories?
+        'Senior HUD 202': [],       // TODO: Is this a different color from "Senior"? (above)
+        'Senior LGBTQ': [],
+
+        'Supportive Housing': [],   // TODO: Is this a different color from "Supportive"? (above)
+        "Women's Supportive": [],
+        'Supportive/Kinship Families': [],
+        'Supportive/Teenage Moms': [],
+        'Supportive/Males 18-24yrs': [],
+        'Supportive/Youth/Kinship Families': [],
+        'Supportive/HIV/AIDS': [],
+
+        'Artists & Families': [],
+        'Artist Live/Work Space': [],
+        'Artist/Family': [],
+        'Artist Housing': [],
+      }
+    }
+  ]
+
+  const parsedLayers = parsedOverlays.map((parsedData) =>
+      new GeoJsonLayer({
+        // Accounting
+        id: parsedData.id,
+        data: parsedData.dataSource,
+
+        // Behavior
+        pickable: parsedData.geometryType === 'point',    // TODO: point data should be clickable (optionally?)
+
+        // Look & Feel
+        opacity: 0.8,
+        material: false,
+        stroked: false,
+        filled: true,
+        getFillColor: Array.isArray(parsedData.fillColor) ? parsedData.fillColor :
+            (d) => {
+                const { symbolProp } = parsedData;
+                const symbolKey = d[symbolProp];
+                return parsedData.fillColor[symbolKey];
+            },
+
+        // Visibility, when to update visibility
+        visible: mapParams.overlays.includes(parsedData.id),
+        updateTriggers: {
+          visible: [mapParams.overlay, mapParams.overlays],
+        },
+        beforeId: "state-label",
+      }));
+
+  // LEGACY: this is the old way of adding Data Overlays
+  // Prefer using the pattern above to parse these overlays programmatically from Google Sheets
   const overlayLayers = [
 
     new GeoJsonLayer({
@@ -943,7 +1041,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     }),
   ];
 
-  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
+  const allLayers = [...baseLayers, ...customLayers, ...parsedLayers, ...overlayLayers];
 
   useEffect(() => {
     if (use3d) {
