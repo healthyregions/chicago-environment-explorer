@@ -23,7 +23,7 @@ import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from "..";
 import { scaleColor } from "../../utils";
-import { colors } from "../../config";
+import {colors, parsedOverlays} from "../../config";
 import * as SVG from "../../config/svg";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useChivesData } from "../../hooks/useChivesData";
@@ -709,17 +709,22 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
   // Layers parsed from newer pattern for storing Data Overlays
   // See https://github.com/healthyregions/chicago-environment-explorer/issues/168
-  const parsedOverlays = [
+  //const parsedOverlays =
+
+
+  const exampleOverlays = [
     // Each overlay data sheet can be parsed into an object like this one:
     {
-      id: 'public-housing',            // layer IS (must be unique)
-      displayName:' Public Housing',   // display name in the UI
-      description: 'Public Housing ' + // Description (shown somewhere in the UI)
+      id: 'cooling-centers',            // layer IS (must be unique)
+      displayName: 'Cooling Centers',   // display name in the UI
+      description: 'Cooling Centers ' + // Description (shown somewhere in the UI?)
           'available in Chicago',
-      dataSource: 'public-housing.geojson', // path to the GeoJSON data
-      geometryType: 'polygon',         // polygon or point
-      symbolProp: 'property_type',     // property name (path?) that determines symbol color
-      lineColor: [0,0,230],               // Outline color for point/circle/polygon
+      //dataSource: `${process.env.PUBLIC_URL}/geojson/cooling-centers.geojson`,
+      dataSource: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSZMoD-YWcwuotECaOmHWKQPQjqAlu7nzbGlLxdW57sBWXvNyf1LJXYs8sVg4cjoEt4gZeq8NKAst9-/pub?output=csv', // path to the CSV data
+      data: [],                      // data that has been pre-fetched from sheets
+      geometryType: 'point',         // polygon or point
+      symbolProp: 'site_type',     // property name (path?) that determines symbol color
+      lineColor: [0,0,230],            // Outline color for point/circle/polygon
       lineWidth: '3',                  // Width of the outline for point/circle/polygon
 
       //fillColor: [115, 169, 77],     // If no symbolProp, this can be a single color
@@ -729,7 +734,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
         // TODO: Assign colors to these categories
 
-        // Top-level categoories
+        // Top-level categories
         'ARO': [],
         'SRO': [],
         'Inter-generational': [],
@@ -770,38 +775,83 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         'Artist Live/Work Space': [],
         'Artist/Family': [],
         'Artist Housing': [],
+
+        "Community Service Center": [8,81,156],
+        "Regional Senior Center": [49,130,189],
+        "Satellite Senior Center": [107,174,214],
+        "Library": [158,202,225],
+        "Chicago Community College": [198,219,239],
+        "Park District Spray Feature": [239,243,255],
       }
     }
   ]
 
-  const parsedLayers = parsedOverlays.map((parsedData) =>
-      new GeoJsonLayer({
-        // Accounting
-        id: parsedData.id,
-        data: parsedData.dataSource,
+  const parsedLayers = parsedOverlays
+      .filter(({ id }) => mapParams.overlays.includes(id))
+      .map((parsedOverlay) => {
+    const layer = new GeoJsonLayer({
+      // Accounting
+      id: parsedOverlay.id,
+      data: parsedOverlay.data,
 
-        // Behavior
-        pickable: parsedData.geometryType === 'point',    // TODO: point data should be clickable (optionally?)
+      // Behavior
+      pickable: parsedOverlay.geometryType === 'point',    // TODO: point data should be clickable (optionally?)
+      lineWidthMinPixels: parsedOverlay.lineWidth,
+      onClick: handleCcPointClick,
 
-        // Look & Feel
-        opacity: 0.8,
-        material: false,
-        stroked: false,
-        filled: true,
-        getFillColor: Array.isArray(parsedData.fillColor) ? parsedData.fillColor :
-            (d) => {
-                const { symbolProp } = parsedData;
-                const symbolKey = d[symbolProp];
-                return parsedData.fillColor[symbolKey];
-            },
+      // Look & Feel
+      opacity: 0.8,
+      material: false,
+      stroked: false,
+      filled: true,
+      extruded: true,
+      getElevation: 20,
+      //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
+      getText: f => f.properties.name,
+      getFillColor: (feature) => {
+        const colors = JSON.parse(parsedOverlay.fillColor);
+        if (Array.isArray(colors)) {
+          return colors;
+        }
 
-        // Visibility, when to update visibility
-        visible: mapParams.overlays.includes(parsedData.id),
-        updateTriggers: {
-          visible: [mapParams.overlay, mapParams.overlays],
-        },
-        beforeId: "state-label",
-      }));
+        const { symbolProp } = parsedOverlay;
+        const symbolKey = feature.properties[symbolProp];
+        const color = colors[symbolKey];
+        console.log('Color chosen: ', color);
+        return color;
+      },
+      getLineColor: f => {
+        const hex = f.properties.color;
+        // convert to RGB
+        return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
+      },
+
+      getPointRadius: 5,
+      getTextSize: 12,
+      pointRadiusUnits: 'pixels',
+      pointType: 'circle+text',
+
+      // Visibility
+      visible: true,
+      //visible: mapParams.overlays.includes(parsedOverlay.id),
+      updateTriggers: {
+        visible: [mapParams.overlay, mapParams.overlays],
+      },
+      beforeId: "state-label",
+    });
+
+    if (parsedOverlay.geometryType === 'point') {
+      layer.getPointRadius = 5;
+      layer.getTextSize = 12;
+      layer.pointRadiusUnits = 'pixels';
+      layer.pointType = 'circle+text';
+
+      // TODO: support hover text?
+      //layer.getText = f => f.properties.name;
+    }
+
+    return layer;
+  });
 
   // LEGACY: this is the old way of adding Data Overlays
   // Prefer using the pattern above to parse these overlays programmatically from Google Sheets
@@ -883,7 +933,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     }),
 
     /* Point data */
-    new GeoJsonLayer({
+    /*new GeoJsonLayer({
       id: 'cooling-centers',
       data: `${process.env.PUBLIC_URL}/geojson/cooling-centers.geojson`,
       onClick: handleCcPointClick,
@@ -959,7 +1009,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       // textWordBreak: 'break-word',
       // wireframe: false,
 
-      /* props inherited from Layer class */
 
       // autoHighlight: false,
       // coordinateOrigin: [0, 0, 0],
@@ -975,7 +1024,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
-    }),
+    }),*/
 
     new LineLayer({
       id: "aq-line-layer",
@@ -1041,7 +1090,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     }),
   ];
 
-  const allLayers = [...baseLayers, ...customLayers, ...parsedLayers, ...overlayLayers];
+  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers, ...parsedLayers];
+
+  console.log('Parsed Overlays: ', parsedOverlays);
+  console.log('Parsed Layers: ', parsedLayers);
+  console.log('All Layers: ', allLayers);
 
   useEffect(() => {
     if (use3d) {

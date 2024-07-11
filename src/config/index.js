@@ -1,11 +1,13 @@
 import rawVariables from './variables.json';
 import rawCategories from './categories.json';
+import rawOverlays from './overlays.json';
 
 export const defaultData = 'chives-data.geojson';
 export const defaultVariable = "Heat Index (Maximum)";
 
 // No further processing needed
 export const variableCategories = rawCategories;
+export const parsedOverlays = rawOverlays;
 
 export const variablePresets = rawVariables.reduce(
   (obj, row) => Object.assign(obj,
