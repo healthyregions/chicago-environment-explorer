@@ -709,392 +709,58 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
   // Layers parsed from newer pattern for storing Data Overlays
   // See https://github.com/healthyregions/chicago-environment-explorer/issues/168
-  //const parsedOverlays =
-
-
-  const exampleOverlays = [
-    // Each overlay data sheet can be parsed into an object like this one:
-    {
-      id: 'cooling-centers',            // layer IS (must be unique)
-      displayName: 'Cooling Centers',   // display name in the UI
-      description: 'Cooling Centers ' + // Description (shown somewhere in the UI?)
-          'available in Chicago',
-      //dataSource: `${process.env.PUBLIC_URL}/geojson/cooling-centers.geojson`,
-      dataSource: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSZMoD-YWcwuotECaOmHWKQPQjqAlu7nzbGlLxdW57sBWXvNyf1LJXYs8sVg4cjoEt4gZeq8NKAst9-/pub?output=csv', // path to the CSV data
-      data: [],                      // data that has been pre-fetched from sheets
-      geometryType: 'point',         // polygon or point
-      symbolProp: 'site_type',     // property name (path?) that determines symbol color
-      lineColor: [0,0,230],            // Outline color for point/circle/polygon
-      lineWidth: '3',                  // Width of the outline for point/circle/polygon
-
-      //fillColor: [115, 169, 77],     // If no symbolProp, this can be a single color
-      fillColor: {                     // if symbolProp provided, map each value to a different color
-        // To produce this list, we can use something like this example in bash:
-        //      grep 'property_type' public/geojson/public-housing.geojson | sort | uniq
-
-        // TODO: Assign colors to these categories
-
-        // Top-level categories
-        'ARO': [],
-        'SRO': [],
-        'Inter-generational': [],
-        'People with Disabilities': [],
-        'Multifamily': [],
-        'Supportive': [],
-        'Seniors': [],
-        'Veterans': [],
-
-        // Typos (that should match top-level?)
-        'Multfamily': [],           // This is a typo that exists in one or more data points
-        'Mutifamily': [],           // This is a typo that exists in one or more data points
-        'Senior': [],               // This is a typo that exists in one or more data points
-
-        'Disabled/Homeless': [],
-
-        // Crossover categories
-        'SRO/Supportive': [],
-        'Supportive/Veterans': [],
-        '65+/Supportive': [],
-        'Senior Supportive Living': [],
-        'Multifamily/Artists': [],  // TODO: Is this a different color from "Multifamily"? (above)
-
-        // Subcategories
-        // TODO: Are these individual colors? Subcategories?
-        'Senior HUD 202': [],       // TODO: Is this a different color from "Senior"? (above)
-        'Senior LGBTQ': [],
-
-        'Supportive Housing': [],   // TODO: Is this a different color from "Supportive"? (above)
-        "Women's Supportive": [],
-        'Supportive/Kinship Families': [],
-        'Supportive/Teenage Moms': [],
-        'Supportive/Males 18-24yrs': [],
-        'Supportive/Youth/Kinship Families': [],
-        'Supportive/HIV/AIDS': [],
-
-        'Artists & Families': [],
-        'Artist Live/Work Space': [],
-        'Artist/Family': [],
-        'Artist Housing': [],
-
-        "Community Service Center": [8,81,156],
-        "Regional Senior Center": [49,130,189],
-        "Satellite Senior Center": [107,174,214],
-        "Library": [158,202,225],
-        "Chicago Community College": [198,219,239],
-        "Park District Spray Feature": [239,243,255],
-      }
-    }
-  ]
-
-  const parsedLayers = parsedOverlays
+  const overlayLayers = parsedOverlays
       .filter(({ id }) => mapParams.overlays.includes(id))
       .map((parsedOverlay) => {
-    const layer = new GeoJsonLayer({
+    const colors = JSON.parse(parsedOverlay.fillColor);
+    return new GeoJsonLayer({
       // Accounting
       id: parsedOverlay.id,
       data: parsedOverlay.data,
 
       // Behavior
       pickable: parsedOverlay.geometryType === 'point',    // TODO: point data should be clickable (optionally?)
-      lineWidthMinPixels: parsedOverlay.lineWidth,
-      onClick: handleCcPointClick,
 
       // Look & Feel
-      opacity: 0.8,
+      opacity: (colors === [0,0,0,0] || colors === [0,0,0]) ? 1.0 : 0.8,
       material: false,
-      stroked: false,
-      filled: true,
-      extruded: true,
+      stroked: !!parsedOverlay.lineColor,
+      filled: !!parsedOverlay.fillColor,
+      extruded: parsedOverlay.geometryType === 'point',
       getElevation: 20,
       //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
-      getText: f => f.properties.name,
-      getFillColor: (feature) => {
-        const colors = JSON.parse(parsedOverlay.fillColor);
-        if (Array.isArray(colors)) {
-          return colors;
-        }
-
+      //getText: f => f.properties[parsedOverlay.symbolProp],
+      getFillColor: Array.isArray(colors) ? colors : (feature) => {
+        // If single color, use that color
+        // If mapping of colors, choose color based on symbolProp
         const { symbolProp } = parsedOverlay;
         const symbolKey = feature.properties[symbolProp];
-        const color = colors[symbolKey];
-        console.log('Color chosen: ', color);
-        return color;
-      },
-      getLineColor: f => {
-        const hex = f.properties.color;
-        // convert to RGB
-        return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
+        return colors[symbolKey];
       },
 
-      getPointRadius: 5,
+      lineWidthScale: 1,
+      lineWidthMinPixels: 1,
+      lineWidthMaxPixels: 4,
+
+      getLineWidth: 1,
+      getLineColor: Number(parsedOverlay.lineColor) || [0,0,0,255],
+
+      getPointRadius: 4,
       getTextSize: 12,
       pointRadiusUnits: 'pixels',
-      pointType: 'circle+text',
+      pointType: 'circle',
+      onClick: handleCcPointClick,
 
       // Visibility
-      visible: true,
-      //visible: mapParams.overlays.includes(parsedOverlay.id),
+      visible: mapParams.overlays.includes(parsedOverlay.id),
       updateTriggers: {
         visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
     });
-
-    if (parsedOverlay.geometryType === 'point') {
-      layer.getPointRadius = 5;
-      layer.getTextSize = 12;
-      layer.pointRadiusUnits = 'pixels';
-      layer.pointType = 'circle+text';
-
-      // TODO: support hover text?
-      //layer.getText = f => f.properties.name;
-    }
-
-    return layer;
   });
 
-  // LEGACY: this is the old way of adding Data Overlays
-  // Prefer using the pattern above to parse these overlays programmatically from Google Sheets
-  const overlayLayers = [
-
-    new GeoJsonLayer({
-      id: "redlining areas",
-      data: `${process.env.PUBLIC_URL}/geojson/redlining.geojson`,
-      opacity: 1,
-      material: false,
-      pickable: false,
-      stroked: false,
-      filled: true,
-      getFillColor: (d) =>
-        REDLINING_COLOR_SCALE[d.properties["holc_grade"]] || [0, 0, 0],
-      visible: mapParams.overlays.includes("redlining"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
-    new GeoJsonLayer({
-      id: "community areas",
-      data: `${process.env.PUBLIC_URL}/geojson/community_areas.geojson`,
-      opacity: 0.8,
-      material: false,
-      pickable: false,
-      stroked: true,
-      filled: false,
-      lineWidthScale: 1,
-      lineWidthMinPixels: 1,
-      lineWidthMaxPixels: 4,
-      getLineWidth: 1,
-      getLineColor: [0, 0, 0, 255],
-      visible: mapParams.overlays.includes("community_areas"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
-    new GeoJsonLayer({
-      id: "wards",
-      data: `${process.env.PUBLIC_URL}/geojson/boundaries_wards_2015_.geojson`,
-      opacity: 0.8,
-      material: false,
-      pickable: false,
-      stroked: true,
-      filled: false,
-      lineWidthScale: 1,
-      lineWidthMinPixels: 1,
-      lineWidthMaxPixels: 4,
-      getLineWidth: 1,
-      getLineColor: [0, 0, 0, 255],
-      visible: mapParams.overlays.includes("wards"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
-    new GeoJsonLayer({
-      id: "non-res",
-      data: `${process.env.PUBLIC_URL}/geojson/non-res-mdp.geojson`,
-      opacity: 1.0,
-      material: false,
-      pickable: false,
-      stroked: true,
-      filled: true,
-      getFillColor: [200, 200, 200, 255],
-      lineWidthScale: 1,
-      lineWidthMinPixels: 1,
-      lineWidthMaxPixels: 4,
-      getLineWidth: 1,
-      getLineColor: [150, 150, 150, 100],
-      visible: mapParams.overlays.includes("non-res"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
-
-    /* Point data */
-    /*new GeoJsonLayer({
-      id: 'cooling-centers',
-      data: `${process.env.PUBLIC_URL}/geojson/cooling-centers.geojson`,
-      onClick: handleCcPointClick,
-      // elevationScale: 1,
-      extruded: true,
-      filled: true,
-      getElevation: 20,
-      getFillColor: (feature) => {
-        const site_type = feature.properties['site_type'];
-        return getCcColor(site_type);
-      },
-      // getIconAngle: 0,
-      // getIconColor: [0, 0, 0, 255],
-      // getIconPixelOffset: [0, 0],
-      // getIconSize: 1,
-      getLineColor: f => {
-        const hex = f.properties.color;
-        // convert to RGB
-        return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
-      },
-      //getLineWidth: 5,
-      getPointRadius: 5,
-      getText: f => f.properties.name,
-      // getTextAlignmentBaseline: 'center',
-      // getTextAnchor: 'middle',
-      // getTextAngle: 0,
-      // getTextBackgroundColor: [255, 255, 255, 255],
-      // getTextBorderColor: [0, 0, 0, 255],
-      // getTextBorderWidth: 0,
-      // getTextColor: [0, 0, 0, 255],
-      // getTextPixelOffset: [0, 0],
-      getTextSize: 12,
-      // iconAlphaCutoff: 0.05,
-      // iconAtlas: null,
-      // iconBillboard: true,
-      // iconMapping: {},
-      // iconSizeMaxPixels: Number.MAX_SAFE_INTEGER,
-      // iconSizeMinPixels: 0,
-      // iconSizeScale: 1,
-      // iconSizeUnits: 'pixels',
-      // lineBillboard: false,
-      // lineCapRounded: false,
-      // lineJointRounded: false,
-      // lineMiterLimit: 4,
-      // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
-      lineWidthMinPixels: 1,
-      // lineWidthScale: 1,
-      // lineWidthUnits: 'meters',
-      // material: true,
-      // pointAntialiasing: true,
-      // pointBillboard: false,
-      // pointRadiusMaxPixels: Number.MAX_SAFE_INTEGER,
-      // pointRadiusMinPixels: 0,
-      // pointRadiusScale: 1,
-      pointRadiusUnits: 'pixels',
-      pointType: 'circle+text',
-      stroked: true,
-      // textBackground: false,
-      // textBackgroundPadding: [0, 0, 0, 0],
-      // textBillboard: true,
-      // textCharacterSet: [' ', '!', '"', '#', '$', '%', '&', ''', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', ''],
-      // textFontFamily: 'Monaco, monospace',
-      // textFontSettings: {},
-      // textFontWeight: 'normal',
-      // textLineHeight: 1,
-      // textMaxWidth: -1,
-      // textOutlineColor: [0, 0, 0, 255],
-      // textOutlineWidth: 0,
-      // textSizeMaxPixels: Number.MAX_SAFE_INTEGER,
-      // textSizeMinPixels: 0,
-      // textSizeScale: 1,
-      // textSizeUnits: 'pixels',
-      // textWordBreak: 'break-word',
-      // wireframe: false,
-
-
-      // autoHighlight: false,
-      // coordinateOrigin: [0, 0, 0],
-      // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
-      // highlightColor: [0, 0, 128, 128],
-      // modelMatrix: null,
-      // opacity: 1,
-      pickable: true,
-      // visible: true,
-      // wrapLongitude: false,
-      visible: mapParams.overlays.includes("cooling-centers"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),*/
-
-    new LineLayer({
-      id: "aq-line-layer",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
-      loaders: [CSVLoader],
-      loadOptions: {
-        csv: {
-          dynamicTyping: true,
-          skipEmptyLines: true,
-          header: true,
-        },
-      },
-      getSourcePosition: (feature) => [
-        feature.longitude,
-        feature.latitude,
-        feature["topline_median"] * 200 * use3d,
-      ],
-      getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
-      getColor: [0, 0, 0],
-      getWidth: 1,
-      visible: mapParams.overlays.includes("aq"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-        getSourcePosition: [use3d],
-      },
-      beforeId: "state-label",
-    }),
-    new TextLayer({
-      id: "aq-text-layer",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
-      loaders: [CSVLoader],
-      loadOptions: {
-        csv: {
-          dynamicTyping: true,
-          skipEmptyLines: true,
-          header: true,
-        },
-      },
-      getPosition: (feature) => [
-        feature.longitude,
-        feature.latitude,
-        feature["topline_median"] * 200 * use3d + 1,
-      ],
-      getText: (feature) =>
-        `${Math.round(feature["topline_median"] * 10) / 10}`,
-      getSize: zoom ** 2,
-      getAngle: 0,
-      getTextAnchor: "middle",
-      getAlignmentBaseline: "center",
-      sizeScale: 0.15,
-      background: true,
-      backgroundPadding: [5, 0, 5, 0],
-      getPixelOffset: [0, -10],
-      getBorderColor: [0, 0, 0],
-      getBorderWidth: 1,
-      visible: mapParams.overlays.includes("aq"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-        getPosition: [use3d],
-        getSize: [zoom],
-      },
-      beforeId: "state-label",
-    }),
-  ];
-
-  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers, ...parsedLayers];
-
-  console.log('Parsed Overlays: ', parsedOverlays);
-  console.log('Parsed Layers: ', parsedLayers);
-  console.log('All Layers: ', allLayers);
+  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
 
   useEffect(() => {
     if (use3d) {
