@@ -428,31 +428,13 @@ const VariablePanel = (props) => {
             {/*<MenuItem value={"aq"} key={"aq"}>
               Weekly PM2.5 Readings
             </MenuItem>*/}
-            <MenuItem value={"community_areas"} key={"community_areas"}>
-              Community Areas
-            </MenuItem>
-            <MenuItem value={"wards"} key={"wards"}>
-              Wards
-            </MenuItem>
-            <MenuItem value={"redlining"} key={"redlining"}>
-              Historical Redlining
-            </MenuItem>
-            <MenuItem value={"non-res"} key={"non-res"}>
-              Industrial & Non-Residential Areas
-            </MenuItem>
             {
               parsedOverlays?.map((overlay) =>
-                <MenuItem value={overlay.id} key={overlay.id}>
-                  {overlay.displayName}
-                </MenuItem>
+                  <MenuItem value={overlay.id} key={overlay.id}>
+                    {overlay.displayName}
+                  </MenuItem>
               )
             }
-            {/*<MenuItem value={"cooling-centers"} key={"cooling-centers"}>
-              Cooling Centers
-            </MenuItem>
-            <MenuItem value={"public-housing"} key={"public-housing"}>
-              Public Housing
-            </MenuItem>*/}
           </Select>
         </FormControl>
         {mapParams.overlays.includes("cooling-centers") && <CoolingCentersLegend />}
