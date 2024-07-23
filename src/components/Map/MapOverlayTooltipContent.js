@@ -14,7 +14,7 @@ const MapOverlayTooltipContent = ({content, overlay}) => {
         return result;
     };
 
-    /** Takes a variable name (e.g. site_name) and turns it into a human-readable label (eg. Site Name) */
+    /** Given a variable name (e.g. site_name), transform into a human-readable label (eg. Site Name) */
     const humanReadableName = (keyName) => {
         // Replace special chars with spaces
         const phrase = keyName.replace(/_/g, ' ').replace(/-/g, ' ')
