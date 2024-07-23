@@ -30,7 +30,7 @@ import { useChivesData } from "../../hooks/useChivesData";
 import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
-import MapCoolingCenterTooltipContent from "./MapCoolingCenterTooltipContent";
+import MapOverlayTooltipContent from "./MapOverlayTooltipContent";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
@@ -916,7 +916,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
               }}
               ref={hoverCcRef}
           >
-            <MapCoolingCenterTooltipContent content={hoverCc.object} overlay={hoverCc.overlay} />
+            <MapOverlayTooltipContent content={hoverCc.object} overlay={hoverCc.overlay} />
           </HoverDiv>
       )}
 

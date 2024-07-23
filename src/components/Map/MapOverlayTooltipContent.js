@@ -2,26 +2,15 @@ import React from 'react';
 
 // This component handles and formats the map tooltip info regarding Cooling Centers.
 // The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
-const MapCoolingCenterTooltipContent = ({content, overlay}) => {
-    const {
-        site_name,
-        site_type,
-        address,
-        city,
-        state,
-        zip,
-        phone,
-        hours_of_operation
-    } = content;
+const MapOverlayTooltipContent = ({content, overlay}) => {
 
-    const interpolatePopupTemplate = (content, overlay, template) => {
-        let result = template;
-        template.match(/({[a-zA-Z_-]*})/g).forEach(match => {
+    const interpolatePopupTitle = (content, overlay) => {
+        let result = overlay?.popupTitle;
+        overlay?.popupTitle.match(/({[a-zA-Z_-]*})/g).forEach(match => {
             const keyName = match.replace('{', '').replace('}', '');
             result = result.replace(match, content[keyName]);
         });
 
-        console.log('Result:', result);
         return result;
     };
 
@@ -38,7 +27,7 @@ const MapCoolingCenterTooltipContent = ({content, overlay}) => {
 
     return (
         <>
-            <h2>{interpolatePopupTemplate(content, overlay, overlay.popupTitle)}</h2>
+            <h2>{interpolatePopupTitle(content, overlay)}</h2>
             {content && <div style={{overflowY:'scroll', height:'150px'}}><span><table>
                 <tbody>
                     {JSON.parse(overlay?.popupContent)?.map(keyName => <>
@@ -52,4 +41,4 @@ const MapCoolingCenterTooltipContent = ({content, overlay}) => {
     )
 }
 
-export default MapCoolingCenterTooltipContent;
+export default MapOverlayTooltipContent;
