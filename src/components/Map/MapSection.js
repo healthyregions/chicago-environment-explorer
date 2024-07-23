@@ -310,14 +310,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   });
   const { queryViewport } = useChivesWorkerQuery(deckRef);
 
-  const handleCcPointClick = ({ x, y, object }) => {
+  const handleCcPointClick = ({ x, y, object }, overlay) => {
     // Hide census tract popup
     setHoverGeog(null);
     setHoverInfo({ x: null, y: null, object: null });
 
     // Show/hide cooling center popup
     if (object?.properties) {
-      setHoverCc({x, y, object: object.properties});
+      setHoverCc({x, y, object: object.properties, overlay: overlay});
     } else {
       setHoverCc({ x: null, y: null, object: null });
     }
@@ -325,7 +325,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
   const handleMapClick = ({ x, y, object }) => {
     // Hide cooling center popup
-    setHoverCc({ x: null, y: null, object: null });
+    setHoverCc({ x: null, y: null, object: null, overlay: null });
 
     // Show/hide census tract popup
     if (object?.properties) {
@@ -749,7 +749,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       getTextSize: 12,
       pointRadiusUnits: 'pixels',
       pointType: 'circle',
-      onClick: handleCcPointClick,
+      onClick: (feature) => handleCcPointClick(feature, parsedOverlay),
 
       // Visibility
       visible: mapParams.overlays.includes(parsedOverlay.id),
@@ -916,7 +916,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
               }}
               ref={hoverCcRef}
           >
-            <MapCoolingCenterTooltipContent content={hoverCc.object} />
+            <MapCoolingCenterTooltipContent content={hoverCc.object} overlay={hoverCc.overlay} />
           </HoverDiv>
       )}
 
