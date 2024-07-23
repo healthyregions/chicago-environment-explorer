@@ -222,7 +222,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     object: null,
   });
   const [hoverGeog, setHoverGeog] = useState(null);
-  const [hoverCc, setHoverCc] = useState({
+  const [overlayHover, setOverlayHover] = useState({
     x: null,
     y: null,
     object: null,
@@ -310,22 +310,22 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   });
   const { queryViewport } = useChivesWorkerQuery(deckRef);
 
-  const handleCcPointClick = ({ x, y, object }, overlay) => {
+  const handleOverlayPointClick = ({ x, y, object }, overlay) => {
     // Hide census tract popup
     setHoverGeog(null);
     setHoverInfo({ x: null, y: null, object: null });
 
-    // Show/hide cooling center popup
-    if (object?.properties) {
-      setHoverCc({x, y, object: object.properties, overlay: overlay});
-    } else {
-      setHoverCc({ x: null, y: null, object: null });
+    // Show/hide overlay popup
+    if (object?.properties && overlay?.popupContent) {
+      setOverlayHover({x, y, object: object.properties, overlay: overlay});
+    } else if (!object?.properties) {
+      setOverlayHover({ x: null, y: null, object: null }, null);
     }
   };
 
   const handleMapClick = ({ x, y, object }) => {
-    // Hide cooling center popup
-    setHoverCc({ x: null, y: null, object: null, overlay: null });
+    // Hide overlay click popup
+    setOverlayHover({ x: null, y: null, object: null, overlay: null });
 
     // Show/hide census tract popup
     if (object?.properties) {
@@ -749,7 +749,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       getTextSize: 12,
       pointRadiusUnits: 'pixels',
       pointType: 'circle',
-      onClick: (feature) => handleCcPointClick(feature, parsedOverlay),
+      onClick: (feature) => handleOverlayPointClick(feature, parsedOverlay),
 
       // Visibility
       visible: mapParams.overlays.includes(parsedOverlay.id),
@@ -811,8 +811,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           });
           viewRef.current = e.viewState;
 
-          hoverCc.object &&
-            handleCcPointClick({ x: null, y: null, object: null });
+          overlayHover.object &&
+            handleOverlayPointClick({ x: null, y: null, object: null }, null);
           hoverInfo.object &&
             handleMapClick({ x: null, y: null, object: null });
         }}
@@ -839,6 +839,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           width={"100%"}
           height={"100%"}
           layers={allLayers}
+          onClick={handleOverlayPointClick}
           getTooltip={getCoolingCenterTooltip}
         />
       </MapboxGLMap>
@@ -906,17 +907,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         </HoverDiv>
       )}
 
-      {hoverCc.object && (
+      {overlayHover.object && (
           <HoverDiv
               style={{
                 position: "absolute",
                 zIndex: 1,
-                left: hoverCc.x,
-                top: hoverCc.y,
+                left: overlayHover.x,
+                top: overlayHover.y,
               }}
               ref={hoverCcRef}
           >
-            <MapOverlayTooltipContent content={hoverCc.object} overlay={hoverCc.overlay} />
+            <MapOverlayTooltipContent content={overlayHover.object} overlay={overlayHover.overlay} />
           </HoverDiv>
       )}
 

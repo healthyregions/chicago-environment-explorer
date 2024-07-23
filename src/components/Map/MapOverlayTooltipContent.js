@@ -1,9 +1,9 @@
 import React from 'react';
 
-// This component handles and formats the map tooltip info regarding Cooling Centers.
-// The props passed to this component should contain an object of the hovered object (from deck, info.object by default)
+// This component handles and formats the map tooltip info regarding the clicked Overlay point.
+// The props passed to this component should contain an object of the hovered object (from deck, info.object by default),
+// as well as a reference to the overlay that was clicked
 const MapOverlayTooltipContent = ({content, overlay}) => {
-
     const interpolatePopupTitle = (content, overlay) => {
         let result = overlay?.popupTitle;
         overlay?.popupTitle.match(/({[a-zA-Z_-]*})/g).forEach(match => {
@@ -14,24 +14,16 @@ const MapOverlayTooltipContent = ({content, overlay}) => {
         return result;
     };
 
-    /** Given a variable name (e.g. site_name), transform into a human-readable label (eg. Site Name) */
-    const humanReadableName = (keyName) => {
-        // Replace special chars with spaces
-        const phrase = keyName.replace(/_/g, ' ').replace(/-/g, ' ')
-
-        // Capitalize each word in the phrase, then return
-        return phrase.split(' ').map(term =>
-            term[0].toUpperCase() + term.substring(1)
-        ).join(' ');
-    };
+    const popupFields = JSON.parse(overlay?.popupContent);
+    console.log(popupFields);
 
     return (
         <>
             <h2>{interpolatePopupTitle(content, overlay)}</h2>
             {content && <div style={{overflowY:'scroll', height:'150px'}}><span><table>
                 <tbody>
-                    {JSON.parse(overlay?.popupContent)?.map(keyName => <>
-                        {content[keyName] && <tr key={'popup-content-' + keyName}><td>{humanReadableName(keyName)}</td><td>{content[keyName]?.toLocaleString('en')}</td></tr>}
+                    {Object.keys(popupFields)?.map((keyName) => <>
+                        {content[keyName] && <tr key={'popup-content-' + keyName}><td>{popupFields[keyName]}</td><td>{content[keyName]}</td></tr>}
                     </>)}
                 </tbody>
             </table>
