@@ -425,7 +425,7 @@ const VariablePanel = (props) => {
               None
             </MenuItem>
             <MenuItem value={"aq"} key={"aq"}>
-              Weekly PM2.5 Readings
+              Microsoft PM2.5 Readings
             </MenuItem>
             <MenuItem value={"community_areas"} key={"community_areas"}>
               Community Areas

@@ -677,7 +677,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     /* This layer displays when Source Data is toggled on for Observed PM2.5 */
     new ColumnLayer({
       id: "aq_data_grid",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
+      data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
       loaders: [CSVLoader],
       loadOptions: {
         csv: {
@@ -687,12 +687,12 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         },
       },
       // material: null,
-      getPosition: (d) => [d.x, d.y],
+      getPosition: (d) => [d.longitude, d.latitude],
       opacity: 1,
       extruded: use3d,
-      getElevation: (d) => d["normalized_median"] - 1,
+      getElevation: 1,
       getFillColor: (feature) => {
-        const val = feature.topline_median;
+        const val = feature['pm_25'];
         return getAqColor(val);
       },
       diskResolution: 8,
