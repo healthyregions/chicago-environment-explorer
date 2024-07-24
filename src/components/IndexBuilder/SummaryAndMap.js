@@ -244,7 +244,8 @@ const SummaryMapPage = ({ selections }) => {
 
     const [showPanel, setShowPanel] = useState(false);
     const mapParams = useSelector((state) => state.mapParams);
-    const colorScale = [[242,240,247],[218,218,235],[188,189,220],[158,154,200],[117,107,177],[84,39,143]];
+    //const colorScale = [[242,240,247],[218,218,235],[188,189,220],[158,154,200],[117,107,177],[84,39,143]];
+    const colorScale = [[69,117,180],[145,191,219],[224,243,248],[254,224,144],[252,141,89],[215,48,39]];
 
     // We don't need the actual image data, only takeScreenshot
     const [/* image */, takeScreenshot] = useScreenshot({
