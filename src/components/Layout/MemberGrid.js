@@ -5,7 +5,8 @@ const TeamBio = styled(Grid)`
     display:flex;
     h4 {
     font-family: 'Lora', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1rem;
+    font-style: bold;
     line-height: 1.2;
     font-weight: 600;
     font-stretch: normal;
@@ -44,8 +45,8 @@ const CoreMemberBio = ({member, columns}) =>
     <TeamBio item xs={12} {...columns}>
         <img src={`${process.env.PUBLIC_URL}/img/people/${member.img}`} alt={`${member.name}`}/>
         <span>
-            <h4><a href={member.link}>{member.name}</a></h4>
-            <h6>{member.degrees}</h6>
+            <h4>{member.link ? <a href={member.link}>{member.name}</a> : member.name}</h4>
+            <h6>{member.org}</h6>
             <h5>{member.title}</h5>
             {!!member.bio && <p>{member.bio}</p>}
         </span>

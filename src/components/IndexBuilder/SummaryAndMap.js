@@ -166,7 +166,7 @@ const VariablePanelContainer = styled.div`
 `;
 
 const ControlsContainer = styled.div`
-  max-height: 60vh;
+  max-height: 80vh;
   //overflow-y: scroll;
   padding: 20px;
 
@@ -340,7 +340,9 @@ const SummaryMapPage = ({ selections }) => {
             const ibDefaultDirectionality = variable.ibDefaultDirectionality || 1;
 
             // Get all values, use them to determine mean and standard deviation
-            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || (!variable['ibIgnoreZero'] && f === 0));
+            const values = storedGeojson.features.map(f => f.properties[columnName])
+                .filter(f => !!Number(f))
+                .filter(f => f || (!variable['ibIgnoreZero'] && f === 0));
             if (index === 0 && values.length !== storedGeojson.features.length) {
                 console.warn(`Warning: length mismatch with ${columnName}`);
             }

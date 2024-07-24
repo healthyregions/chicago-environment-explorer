@@ -30,6 +30,7 @@ import { useChivesData } from "../../hooks/useChivesData";
 import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
+import MapCoolingCenterTooltipContent from "./MapCoolingCenterTooltipContent";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
@@ -221,6 +222,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     object: null,
   });
   const [hoverGeog, setHoverGeog] = useState(null);
+  const [hoverCc, setHoverCc] = useState({
+    x: null,
+    y: null,
+    object: null,
+  });
 
   const mapRef = useRef(null);
 
@@ -233,6 +239,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     });
   };
   const hoverRef = useRef();
+  const hoverCcRef = useRef();
   const viewRef = useRef(null);
   const mapContainerRef = useRef(null);
   // map view location
@@ -303,10 +310,27 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   });
   const { queryViewport } = useChivesWorkerQuery(deckRef);
 
+  const handleCcPointClick = ({ x, y, object }) => {
+    // Hide census tract popup
+    setHoverGeog(null);
+    setHoverInfo({ x: null, y: null, object: null });
+
+    // Show/hide cooling center popup
+    if (object?.properties) {
+      setHoverCc({x, y, object: object.properties});
+    } else {
+      setHoverCc({ x: null, y: null, object: null });
+    }
+  };
+
   const handleMapClick = ({ x, y, object }) => {
-    if (object && object.properties) {
+    // Hide cooling center popup
+    setHoverCc({ x: null, y: null, object: null });
+
+    // Show/hide census tract popup
+    if (object?.properties) {
       setHoverGeog(object.properties.geoid);
-      setHoverInfo({ x, y, object: object.properties });
+      setHoverInfo({x, y, object: object.properties});
     } else {
       setHoverGeog(null);
       setHoverInfo({ x: null, y: null, object: null });
@@ -415,6 +439,23 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     '0': [225,225,225],
     'vulnerable, prices not rising': [252,146,114],
     'vulnerable, prices rising':  [222,45,38]
+  };
+
+  const CC_COLOR_SCALE = {
+    'Community Service Center': [8,81,156],
+    'Regional Senior Center': [49,130,189],
+    'Satellite Senior Center': [107,174,214],
+    'Library': [158,202,225],
+    'Chicago Community College': [198,219,239],
+    'Park District Spray Feature': [239,243,255],
+  };
+
+  const getCcColor = (site_type) => {
+    if (site_type in CC_COLOR_SCALE) {
+      return CC_COLOR_SCALE[site_type];
+    } else {
+      return [150,150,150];
+    }
   };
 
   const isVisible = (feature, filters) => {
@@ -669,6 +710,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   ];
 
   const overlayLayers = [
+
     new GeoJsonLayer({
       id: "redlining areas",
       data: `${process.env.PUBLIC_URL}/geojson/redlining.geojson`,
@@ -679,9 +721,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       filled: true,
       getFillColor: (d) =>
         REDLINING_COLOR_SCALE[d.properties["holc_grade"]] || [0, 0, 0],
-      visible: mapParams.overlay === "redlining",
+      visible: mapParams.overlays.includes("redlining"),
       updateTriggers: {
-        visible: [mapParams.overlay],
+        visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
     }),
@@ -698,9 +740,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       lineWidthMaxPixels: 4,
       getLineWidth: 1,
       getLineColor: [0, 0, 0, 255],
-      visible: mapParams.overlay === "community_areas",
+      visible: mapParams.overlays.includes("community_areas"),
       updateTriggers: {
-        visible: [mapParams.overlay],
+        visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
     }),
@@ -717,9 +759,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       lineWidthMaxPixels: 4,
       getLineWidth: 1,
       getLineColor: [0, 0, 0, 255],
-      visible: mapParams.overlay === "wards",
+      visible: mapParams.overlays.includes("wards"),
       updateTriggers: {
-        visible: [mapParams.overlay],
+        visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
     }),
@@ -740,9 +782,104 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       lineWidthMaxPixels: 4,
       getLineWidth: 1,
       getLineColor: [150, 150, 150, 100],
-      visible: mapParams.overlay === "non-res",
+      visible: mapParams.overlays.includes("non-res"),
       updateTriggers: {
-        visible: [mapParams.overlay],
+        visible: [mapParams.overlay, mapParams.overlays],
+      },
+      beforeId: "state-label",
+    }),
+
+    /* Point data */
+    new GeoJsonLayer({
+      id: 'cooling-centers',
+      data: `${process.env.PUBLIC_URL}/geojson/cooling-centers.geojson`,
+      onClick: handleCcPointClick,
+      // elevationScale: 1,
+      extruded: true,
+      filled: true,
+      getElevation: 20,
+      getFillColor: (feature) => {
+        const site_type = feature.properties['site_type'];
+        return getCcColor(site_type);
+      },
+      // getIconAngle: 0,
+      // getIconColor: [0, 0, 0, 255],
+      // getIconPixelOffset: [0, 0],
+      // getIconSize: 1,
+      getLineColor: f => {
+        const hex = f.properties.color;
+        // convert to RGB
+        return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
+      },
+      //getLineWidth: 5,
+      getPointRadius: 5,
+      getText: f => f.properties.name,
+      // getTextAlignmentBaseline: 'center',
+      // getTextAnchor: 'middle',
+      // getTextAngle: 0,
+      // getTextBackgroundColor: [255, 255, 255, 255],
+      // getTextBorderColor: [0, 0, 0, 255],
+      // getTextBorderWidth: 0,
+      // getTextColor: [0, 0, 0, 255],
+      // getTextPixelOffset: [0, 0],
+      getTextSize: 12,
+      // iconAlphaCutoff: 0.05,
+      // iconAtlas: null,
+      // iconBillboard: true,
+      // iconMapping: {},
+      // iconSizeMaxPixels: Number.MAX_SAFE_INTEGER,
+      // iconSizeMinPixels: 0,
+      // iconSizeScale: 1,
+      // iconSizeUnits: 'pixels',
+      // lineBillboard: false,
+      // lineCapRounded: false,
+      // lineJointRounded: false,
+      // lineMiterLimit: 4,
+      // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
+      lineWidthMinPixels: 1,
+      // lineWidthScale: 1,
+      // lineWidthUnits: 'meters',
+      // material: true,
+      // pointAntialiasing: true,
+      // pointBillboard: false,
+      // pointRadiusMaxPixels: Number.MAX_SAFE_INTEGER,
+      // pointRadiusMinPixels: 0,
+      // pointRadiusScale: 1,
+      pointRadiusUnits: 'pixels',
+      pointType: 'circle+text',
+      stroked: true,
+      // textBackground: false,
+      // textBackgroundPadding: [0, 0, 0, 0],
+      // textBillboard: true,
+      // textCharacterSet: [' ', '!', '"', '#', '$', '%', '&', ''', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', ''],
+      // textFontFamily: 'Monaco, monospace',
+      // textFontSettings: {},
+      // textFontWeight: 'normal',
+      // textLineHeight: 1,
+      // textMaxWidth: -1,
+      // textOutlineColor: [0, 0, 0, 255],
+      // textOutlineWidth: 0,
+      // textSizeMaxPixels: Number.MAX_SAFE_INTEGER,
+      // textSizeMinPixels: 0,
+      // textSizeScale: 1,
+      // textSizeUnits: 'pixels',
+      // textWordBreak: 'break-word',
+      // wireframe: false,
+
+      /* props inherited from Layer class */
+
+      // autoHighlight: false,
+      // coordinateOrigin: [0, 0, 0],
+      // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
+      // highlightColor: [0, 0, 128, 128],
+      // modelMatrix: null,
+      // opacity: 1,
+      pickable: true,
+      // visible: true,
+      // wrapLongitude: false,
+      visible: mapParams.overlays.includes("cooling-centers"),
+      updateTriggers: {
+        visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
     }),
@@ -767,9 +904,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
       getColor: [0, 0, 0],
       getWidth: 1,
-      visible: mapParams.overlay === "aq",
+      visible: mapParams.overlays.includes("aq"),
       updateTriggers: {
-        visible: [mapParams.overlay],
+        visible: [mapParams.overlay, mapParams.overlays],
         getSourcePosition: [use3d],
       },
       beforeId: "state-label",
@@ -804,15 +941,16 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       getPixelOffset: [0, -10],
       getBorderColor: [0, 0, 0],
       getBorderWidth: 1,
-      visible: mapParams.overlay === "aq",
+      visible: mapParams.overlays.includes("aq"),
       updateTriggers: {
-        visible: [mapParams.overlay],
+        visible: [mapParams.overlay, mapParams.overlays],
         getPosition: [use3d],
         getSize: [zoom],
       },
       beforeId: "state-label",
     }),
   ];
+
   const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
 
   useEffect(() => {
@@ -824,6 +962,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   }, [use3d]);
 
   const view = new MapView({ repeat: true });
+
+  const getCoolingCenterTooltip = ({object}) => {
+    return object && (object.properties.site_name) &&
+        (`${object.properties.site_type}: ${object.properties.site_name}\n` +
+            (object.properties.address ? object.properties.address + '\n' : '') +
+            (object.properties.phone ? object.properties.phone + '\n' : '') +
+            (object.properties.hours_of_operation ? object.properties.hours_of_operation : ''));
+  }
 
   return (
     <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
@@ -856,6 +1002,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           });
           viewRef.current = e.viewState;
 
+          hoverCc.object &&
+            handleCcPointClick({ x: null, y: null, object: null });
           hoverInfo.object &&
             handleMapClick({ x: null, y: null, object: null });
         }}
@@ -882,6 +1030,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           width={"100%"}
           height={"100%"}
           layers={allLayers}
+          getTooltip={getCoolingCenterTooltip}
         />
       </MapboxGLMap>
       {!geoids.length && (
@@ -926,7 +1075,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         <GeocoderContainer>
           <Geocoder
             id="Geocoder"
-            placeholder={"Search by location"}
+            placeholder={"Search for address..."}
             API_KEY={MAPBOX_ACCESS_TOKEN}
             onChange={handleGeocoder}
             height={45}
@@ -947,6 +1096,21 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           <MapTooltipContent content={hoverInfo.object} showCustom={showCustom} />
         </HoverDiv>
       )}
+
+      {hoverCc.object && (
+          <HoverDiv
+              style={{
+                position: "absolute",
+                zIndex: 1,
+                left: hoverCc.x,
+                top: hoverCc.y,
+              }}
+              ref={hoverCcRef}
+          >
+            <MapCoolingCenterTooltipContent content={hoverCc.object} />
+          </HoverDiv>
+      )}
+
       {!geoids.length && (
         <LogoContainer infoPanel={panelState.info}>
           <a
