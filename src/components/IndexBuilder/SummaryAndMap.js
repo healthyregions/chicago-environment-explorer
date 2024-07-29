@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import {createFileName, useScreenshot} from "use-react-screenshot";
 import {jenks, max, mean, min, quantile, sampleStandardDeviation, sum, zScore} from "simple-statistics";
 import {useDispatch, useSelector} from "react-redux";
-import {changeVariable, setPanelState} from "../../actions";
+import {changeVariable, setMapParams, setPanelState} from "../../actions";
 import {useChivesData} from "../../hooks/useChivesData";
 import {useHistory} from "react-router-dom";
 import JSZip from 'jszip';
@@ -437,6 +437,7 @@ const SummaryMapPage = ({ selections }) => {
 
     if (mapParams.variableName !== 'Custom Index') {
         dispatch(changeVariable(variablePresets['Custom Index']));
+        dispatch(setMapParams({ overlays: ['community_areas'] }))
     }
 
     const getUniqueGroupNames = () => {
@@ -504,9 +505,9 @@ const SummaryMapPage = ({ selections }) => {
                     className={showPanel ? "" : "hidden"}
                     style={{ top: '110px', left: '20px', width: '375px' }}>
                     <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
-                        <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Index</Typography>
+                        <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Vulnerability Index</Typography>
                         <Typography variant={'body2'}>
-                            <p>The custom index you created has theme{getUniqueGroupNames().length > 1 && <>s</>}:</p>
+                            <p>The custom vulnerability index you created has theme{getUniqueGroupNames().length > 1 && <>s</>}:</p>
                             <p>
                                 {
                                     getUniqueGroupNames()
@@ -528,6 +529,7 @@ const SummaryMapPage = ({ selections }) => {
                                 </p>*/
                             }
 
+                            <p>Higher scores correspond to <i>increased</i> vulnerability. Lower scores correspond to less vulnerable areas.</p>
                         </Typography>
                     </div>
                     <div style={{ padding: '0 2rem 1rem 2rem' }}>
