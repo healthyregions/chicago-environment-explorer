@@ -9,9 +9,14 @@ import withStyles from '@mui/styles/withStyles';
 
 import DensityChart from './DensityChart';
 import { applyFilterValues, removeFilterValues } from '../../actions';
-import { colors } from '../../config';
+import {colors, variablePresets} from '../../config';
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import {IconButton} from "@mui/material";
+import {FaQuestionCircle} from "@react-icons/all-files/fa/FaQuestionCircle";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 
 const HistogramContainer = styled.div`
   position:relative;
@@ -208,10 +213,54 @@ export default function Histogram({
     setSliderValue([range.min, range.max]);
   }
 
+  const [popoverAnchorEl, setPopoverAncherEl] = React.useState(null);
+  const isPopoverOpen = Boolean(popoverAnchorEl)
+  const popoverId = isPopoverOpen ? 'simple-popover' : undefined;
+
+  const handleInfoOpen = (evt) => {
+    setPopoverAncherEl(evt.currentTarget);
+  };
+
+  const handleInfoClose = () => {
+    setPopoverAncherEl(null);
+  };
+
+  const getVariableDescription = (column) => {
+    return Object.values(variablePresets).find((variable) => variable.Column === column)?.Description
+  }
+
+  const description = getVariableDescription(column);
+
   return (
     <HistogramContainer>
-      <h4>{name}</h4>
-      <ResetButton onClick={() => resetFilter()}>reset</ResetButton>
+      <h4>
+        {name}
+        {description && <IconButton aria-label={name + ' additional info'}
+                    onClick={handleInfoOpen}
+                    style={{ marginLeft: '0.5rem', color: 'rgb(185, 209, 159)' }}
+                    size={'small'}>
+          <FaInfoCircle />
+        </IconButton>}
+      </h4>
+
+      <Popover
+          id={popoverId}
+          style={{ maxWidth: '75vw' }}
+          open={isPopoverOpen}
+          anchorEl={popoverAnchorEl}
+          onClose={handleInfoClose}
+          anchorPosition={'left'}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+      >
+        <Typography sx={{ p: 2 }}
+                    dangerouslySetInnerHTML={{ __html: description }}></Typography>
+      </Popover>
+
+      <ResetButton  style={{ marginTop: '1rem' }}
+                    onClick={() => resetFilter()}>reset</ResetButton>
 
       <ChartContainer>
         <DensityChart
