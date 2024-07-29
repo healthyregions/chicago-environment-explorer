@@ -218,7 +218,7 @@ const ControlsContainer = styled.div`
     max-height: 100%;
     padding: 0 10px 25vh 10px;
   }
-  div.data-description {
+  p.data-description {
     max-width: 40ch;
     line-height: 1.3;
   }
@@ -379,11 +379,11 @@ const VariablePanel = (props) => {
             </div>)}
           </div>
 
-          <Link to='/builder'>Try with multiple variables</Link>
+          <Link to='/builder'>Create a Custom Vulnerability Index using multiple variables</Link>
         </FormControl>
         <Gutter h={20} />
         <h2>Data Description</h2>
-        <div className="data-description">
+        <p className="data-description">
           {mapParams.custom === 'aq_grid' && <>
           <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
           </>}
@@ -407,7 +407,7 @@ const VariablePanel = (props) => {
         </>
         }
           {dataDescriptions[mapParams.variableName]}
-        </div>
+        </p>
 
 
         <Gutter h={20} />
