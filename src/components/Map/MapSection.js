@@ -409,14 +409,16 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     scaleColor(x, mapParams.bins, mapParams.colorScale);
 
   const AQ_SCALE = scaleThreshold()
-    .domain([9.5, 10, 10.5, 11, 11.5])
+    .domain([8.91, 9.6, 9.89, 10.12, 10.29, 10.49, 10.71, 11.1, 12.06])
     .range([
-      "rgb(70, 50, 127)",
-      "rgb(54, 92, 141)",
-      "rgb(39, 127, 142)",
-      "rgb(31, 161, 135)",
-      "rgb(74, 194, 109)",
-      "rgb(159, 218, 58)",
+      'rgb(255,255,229)',
+      'rgb(255,247,188)',
+      'rgb(254,227,145)',
+      'rgb(254,196,79)',
+      'rgb(254,153,41)',
+      'rgb(236,112,20)',
+      'rgb(204,76,2)',
+      'rgb(140,45,4)'
     ]);
 
   const getAqColor = (val) => {
