@@ -137,7 +137,7 @@ const StyledSlider = withStyles({
       top: 0,
       right: 0,
       borderStyle: 'solid',
-      borderRadius: 0, 
+      borderRadius: 0,
     },
     '&.second-thumb::after': {
       borderWidth: '10px 0 10px 10px',
@@ -179,7 +179,7 @@ export default function Histogram({
   range,
   color
 }){
-  
+
   const dispatch = useDispatch();
   const minDistanceBetweenThumbs = (range.max-range.min)/11;
   const [sliderValue, setSliderValue] = useState([range.min, range.max]);
@@ -207,18 +207,18 @@ export default function Histogram({
     dispatch(removeFilterValues(column));
     setSliderValue([range.min, range.max]);
   }
-  
+
   return (
     <HistogramContainer>
       <h4>{name}</h4>
       <ResetButton onClick={() => resetFilter()}>reset</ResetButton>
-      
+
       <ChartContainer>
-        <DensityChart 
+        <DensityChart
           data={density}
-          // density={density} 
-          xAxis={'max'} 
-          dataKey={'density'} 
+          // density={density}
+          xAxis={'max'}
+          dataKey={'density'}
           color={color}
         />
       </ChartContainer>
@@ -232,7 +232,7 @@ export default function Histogram({
         defaultValue={[range.min, range.max]}
         min={range.min}
         max={range.max}
-        step={(range.max-range.min)/10}
+        step={(range.max-range.min)/100}
         disableSwap
       />
 
