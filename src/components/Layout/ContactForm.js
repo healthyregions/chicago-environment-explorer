@@ -138,7 +138,7 @@ export default function ContactForm(){
 
     const handleChange = (e) => setFormData(prev => ({...prev, [e.target.name]: e.target.value}))
     const handleSelect = (e) => setFormData(prev => ({...prev, 'Category': e.target.value}))
-    
+    let netlifyAttrs = {'name': 'contact', 'data-netlify': 'true'}
     return <>
         {submitted && 
             <SuccessMessage>
@@ -148,7 +148,7 @@ export default function ContactForm(){
                 <button onClick={() => setSubmitted(false)}>×</button>
             </SuccessMessage>
         }
-        <ContactFormContainer className={isSubmitting ? 'locked' : ''} onSubmit={handleSubmit}>
+        <ContactFormContainer {...netlifyAttrs} className={isSubmitting ? 'locked' : ''} onSubmit={handleSubmit}>
             <h2>Send us a message</h2>
             <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
