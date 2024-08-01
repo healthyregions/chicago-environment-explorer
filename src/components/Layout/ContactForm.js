@@ -87,10 +87,11 @@ const SuccessMessage = styled.div`
 
 export default function ContactForm(){
     
-    const url =  `${process.env.REACT_APP_EMAIL_FORM_URL}`
+    const googleFormUrl = `${process.env.REACT_APP_EMAIL_FORM_URL}`
+    const slackFormUrl = `${process.env.REACT_APP_SLACK_FORM_SUBMISSION_URL}`
 
     const [formData, setFormData] = useState({
-        'Category': 'General (Tree)',
+        'Category': 'General',
         'Contact_Name': '',
         'Contact_Email': '',
         'Contact_Phone': '_',
@@ -106,8 +107,8 @@ export default function ContactForm(){
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitted, setSubmitted] = useState(false)
 
-    const generateURL = async (data, url) => {
-        let returnURL = `${url}?Date=${encodeURIComponent(new Date().toISOString().slice(0,10))}`
+    const generateURL = async (data, googleFormUrl) => {
+        let returnURL = `${googleFormUrl}?Date=${encodeURIComponent(new Date().toISOString().slice(0,10))}`
         for (const property in data){
             returnURL += `&${encodeURIComponent(property)}=${encodeURIComponent(data[property])}`
         }
@@ -126,9 +127,23 @@ export default function ContactForm(){
                 'Contact_Name': false,
                 'Contact_Email': false,
                 'Message': false})
-            
-            const submissionURL = await generateURL(formData, url);
-            await fetch(submissionURL, { method: 'GET' });
+
+            const gSheetURL = await generateURL(formData, googleFormUrl);
+            await fetch(gSheetURL, { method: 'GET' });
+
+            let slackText = `Submission from ${window.location.href}`
+            slackText += `\n*Name:* ${formData.Contact_Name}`
+            slackText += `\n*Email:* ${formData.Contact_Email}`
+            slackText += `\n*Phone:* ${formData.Contact_Phone}`
+            slackText += `\n*Message Category:* ${formData.Category}`
+            slackText += `\n---\n${formData.Message}`
+            await fetch(slackFormUrl, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                method: 'POST',
+                body: JSON.stringify({text: slackText})
+            });
     
             setIsSubmitting(false)
             setSubmitted(true)
@@ -161,12 +176,12 @@ export default function ContactForm(){
                             onChange={handleSelect}
                             
                         >
-                            <MenuItem value={'General (Tree)'}>General</MenuItem>
-                            <MenuItem value={'Bug (Tree)'}>Bug Report or Error</MenuItem>
-                            <MenuItem value={'DataQuestion (Tree)'}>Data Question</MenuItem>
-                            <MenuItem value={'FeatureRequest (Tree)'}>Feature Request</MenuItem>
-                            <MenuItem value={'TechOpenSource (Tree)'}>Technical or Open Source Questions</MenuItem>
-                            <MenuItem value={'Press (Tree)'}>Press or Media</MenuItem>
+                            <MenuItem value={'General'}>General</MenuItem>
+                            <MenuItem value={'Bug'}>Bug Report or Error</MenuItem>
+                            <MenuItem value={'DataQuestion'}>Data Question</MenuItem>
+                            <MenuItem value={'FeatureRequest'}>Feature Request</MenuItem>
+                            <MenuItem value={'TechOpenSource'}>Technical or Open Source Questions</MenuItem>
+                            <MenuItem value={'Press'}>Press or Media</MenuItem>
                         </Select>
                     </InputBlock>
 
