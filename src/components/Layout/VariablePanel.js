@@ -11,7 +11,7 @@ import styled from "styled-components";
 // import Tooltip from './tooltip';
 import { Gutter } from "../../styled_components";
 import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } from "../../actions"; //variableChangeZ, setNotification, storeMobilityData
-import { colors, variablePresets, dataDescriptions } from "../../config";
+import {colors, variablePresets, dataDescriptions, parsedOverlays} from "../../config";
 import * as SVG from "../../config/svg";
 import { FormControl, Switch, Stack } from "@mui/material";
 import {Link} from "react-router-dom";
@@ -35,7 +35,7 @@ const RedliningLegend = () => (
   <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
     <h3>HOLC Grading</h3>
     {Object.entries(REDLINING_COLOR_SCALE).map(([key, color]) => (
-      <div style={{ display: "flex", margin:'.25em 0' }}>
+      <div style={{ display: "flex", margin:'.25em 0' }} key={key}>
         <span
           key={key}
           style={{
@@ -218,7 +218,7 @@ const ControlsContainer = styled.div`
     max-height: 100%;
     padding: 0 10px 25vh 10px;
   }
-  div.data-description {
+  p.data-description {
     max-width: 40ch;
     line-height: 1.3;
   }
@@ -376,14 +376,19 @@ const VariablePanel = (props) => {
               { overlay === 'redlining' && <>+ Historical Redlining</> }
               { overlay === 'wards' && <>+ Area Wards</> }
               { overlay === 'community_areas' && <>+ Community Areas</> }
+              { overlay === 'public-housing' && <>+ Public Housing</> }
             </div>)}
           </div>
 
-          <Link to='/builder'>Try with multiple variables</Link>
+          <Link to='/builder'>Create a Custom Vulnerability Index using multiple variables</Link>
         </FormControl>
         <Gutter h={20} />
         <h2>Data Description</h2>
-        <div className="data-description">
+        <p className="data-description">
+          {mapParams.custom === 'aq_grid' && <>
+          <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
+          </>}
+
         {mapParams.custom === 'aq_grid' && <>
           <p>
             To see the source data grid, click the switch below.
@@ -403,7 +408,7 @@ const VariablePanel = (props) => {
         </>
         }
           {dataDescriptions[mapParams.variableName]}
-        </div>
+        </p>
 
 
         <Gutter h={20} />
@@ -420,23 +425,15 @@ const VariablePanel = (props) => {
             <MenuItem value="None" key={"None"}>
               None
             </MenuItem>
+            {
+              parsedOverlays?.map((overlay) =>
+                  <MenuItem value={overlay.id} key={overlay.id}>
+                    {overlay.displayName}
+                  </MenuItem>
+              )
+            }
             <MenuItem value={"aq"} key={"aq"}>
               Microsoft PM2.5 Readings
-            </MenuItem>
-            <MenuItem value={"community_areas"} key={"community_areas"}>
-              Community Areas
-            </MenuItem>
-            <MenuItem value={"wards"} key={"wards"}>
-              Wards
-            </MenuItem>
-            <MenuItem value={"redlining"} key={"redlining"}>
-              Historical Redlining
-            </MenuItem>
-            <MenuItem value={"cooling-centers"} key={"cooling-centers"}>
-              Cooling Centers
-            </MenuItem>
-            <MenuItem value={"non-res"} key={"non-res"}>
-              Industrial & Non-Residential Areas
             </MenuItem>
           </Select>
         </FormControl>
