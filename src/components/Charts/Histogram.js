@@ -56,17 +56,20 @@ const ChartContainer = styled.div`
 //   }
 // `
 
+const InfoBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size:0.65rem;
+`
+
 const ResetButton = styled.button`
   background:none;
   border:none;
   border-bottom:1px solid ${colors.darkgray};
-  position:absolute;
-  top:1rem;
-  right:1rem;
-  text-transform:uppercase;
   font-size:0.5rem;
-  padding:0.25rem;
   font-weight:bold;
+  padding:0.25rem;
   cursor:pointer;
   box-shadow: 0px 0px 0px ${colors.gray}00;
   transition:250ms all;
@@ -103,10 +106,10 @@ const StyledSlider = withStyles({
     marginLeft:'0px',
     width:'calc(100% - 42px)',
     boxSizing: 'border-box',
-    transform: 'translateY(-55px)'
+    transform: 'translateY(-30px)'
   },
   thumb: {
-    height: 95,
+    height: 75,
     width: 2,
     pointerEvents: "auto!important",
     // borderLeft: '6px solid rgba(0,0,0,0)',
@@ -258,10 +261,12 @@ export default function Histogram({
                     dangerouslySetInnerHTML={{ __html: description }}></Typography>
       </Popover>
 
-      <ResetButton  style={{ marginTop: '1rem' }}
-                    onClick={() => resetFilter()}>reset</ResetButton>
 
       <ChartContainer>
+      <InfoBar>
+        <span><strong>MIN:</strong> {Math.round(sliderValue[0]*100)/100}&nbsp;&nbsp;<strong>MAX:</strong> {Math.round(sliderValue[1]*100)/100}</span>
+        <ResetButton onClick={() => resetFilter()}>RESET</ResetButton>
+      </InfoBar>
         <DensityChart
           data={density}
           // density={density}
