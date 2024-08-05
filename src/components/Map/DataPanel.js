@@ -18,8 +18,12 @@ import Histogram from '../Charts/Histogram';
 import { Gutter } from '../Layout/Gutter';
 // import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../../actions';
-import { colors } from '../../config';
+import {colors, variablePresets} from '../../config';
 import { report } from '../../config/svg';
+import {IconButton} from "@mui/material";
+import {FaQuestionCircle} from "@react-icons/all-files/fa/FaQuestionCircle";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
 
 //// Styled components CSS
 // Main container for entire panel
@@ -204,12 +208,12 @@ const ReportWrapper = styled.div`
     background-position: center center;
     background-repeat: no-repeat, no-repeat;
     background-size: 50%, 100%; 
-  }
+  
 `
 
 // Inner container for report content
 const ReportContainer = styled.div`
-    padding:5px 0 200px 30px;
+    padding:10px 15px 200px 15px;
     box-sizing:border-box;
     overflow-x:visible;
     // Multi-column layout (NYI)
@@ -241,12 +245,6 @@ const ReportContainer = styled.div`
       margin:0;
       padding:0 !important;
     }
-
-    div.numberChartContainer {
-      width:100%;
-      display:flex;
-      align-items: center;
-    }
     div.numberContainer {
       display:flex;
     }
@@ -257,13 +255,10 @@ const ReportContainer = styled.div`
 `
 
 // Subsection of report
-const ReportSection = styled.span`
-    padding-right:20px;
-    box-sizing:border-box;
-    // width:100%;
-    // display:inline-block;
-    padding: 0;
-    margin: 0;
+const ReportSection = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 // // Toggle styling for condensed and expanded drop down
@@ -447,23 +442,18 @@ const DataPanel = () => {
     {selectionData.success &&
         <ReportWrapper>
             <ReportContainer>
-                <h1>Current View</h1>
                 <ReportSection>
+                    <h1>Current View</h1>
                     <p>Tree Canopy Coverage</p>
-                    <div className="numberChartContainer">
-                        <div className="h3">{selectionData.treeCoverage.toFixed(1)}%</div>
-                    </div>
+                    <h3>{selectionData.treeCoverage.toFixed(1)}%</h3>
                     <p>Heat Island Percentile</p>
-                    <div className="numberChartContainer">
-                        <div className='h3'>{selectionData.heatIsland.toFixed(1)}</div>
-                    </div>
-                    <p>Averaged over {selectionData.sums.count} census tracts</p>
-                    {/* <NeighborhoodCounts
+                    <h3>{selectionData.heatIsland.toFixed(1)}</h3>
+                    {/* <p>Averaged over {selectionData.sums.count} census tracts</p>
+                    <NeighborhoodCounts
                       counts={selectionData.communityCounts}
                       activeCommunities={filterValues.community}
                     /> */}
                 </ReportSection>
-                <Gutter height="1em" />
                 <h2>Filters</h2>
                 <br/>
                 <p style={{padding:0}}>
@@ -472,16 +462,17 @@ const DataPanel = () => {
                 <Gutter height="1em" />
                 <h3 className="sectionHeader">Environmental</h3>
                 {
-                  EnvironmentalColumnsToChart.map(({name, column, color}, i) =>
-                    <Histogram
-                      name={name}
-                      column={column}
-                      histCounts={selectionData.histCounts[column]}
-                      density={selectionData.densities[column]}
-                      range={ranges[column]}
-                      color={color}
-                      key={`distribution-${i}`}
-                    />
+                  EnvironmentalColumnsToChart.map(({name, column, color, description}, i) => <>
+                      <Histogram
+                        name={name}
+                        column={column}
+                        histCounts={selectionData.histCounts[column]}
+                        density={selectionData.densities[column]}
+                        range={ranges[column]}
+                        color={color}
+                        key={`distribution-${i}`}
+                      />
+                    </>
                   )
                 }
                 <Gutter height="1em" />
