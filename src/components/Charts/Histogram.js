@@ -32,7 +32,7 @@ const HistogramContainer = styled.div`
 const ChartContainer = styled.div`
   display:block;
   width:calc(100% - 1em);
-  margin-top:20px;
+  margin-top:5px;
   height:125px;
   cursor:crosshair !important;
   .recharts-cartesian-axis-tick {    
