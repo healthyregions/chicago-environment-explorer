@@ -409,14 +409,16 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     scaleColor(x, mapParams.bins, mapParams.colorScale);
 
   const AQ_SCALE = scaleThreshold()
-    .domain([5, 7.5, 10, 12, 12.5, 15])
+    .domain([8.91, 9.6, 9.89, 10.12, 10.29, 10.49, 10.71, 11.1, 12.06])
     .range([
-      "rgb(1,152,189)",
-      "rgb(73,227,206)",
-      "rgb(216,254,181)",
-      "rgb(254,237,177)",
-      "rgb(254,173,84)",
-      "rgb(209,55,78)",
+      'rgb(255,255,229)',
+      'rgb(255,247,188)',
+      'rgb(254,227,145)',
+      'rgb(254,196,79)',
+      'rgb(254,153,41)',
+      'rgb(236,112,20)',
+      'rgb(204,76,2)',
+      'rgb(140,45,4)'
     ]);
 
   const getAqColor = (val) => {
@@ -673,9 +675,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     //     visible: [mapParams.custom, mapParams.variableName],
     //   }
     // }),
+
+    /* This layer displays when Source Data is toggled on for Observed PM2.5 */
     new ColumnLayer({
       id: "aq_data_grid",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
+      data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
       loaders: [CSVLoader],
       loadOptions: {
         csv: {
@@ -684,18 +688,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           header: true,
         },
       },
-      // material: null,
-      getPosition: (d) => [d.x, d.y],
+      getPosition: (d) => [d.longitude, d.latitude],
       opacity: 1,
       extruded: use3d,
-      getElevation: (d) => d["normalized_median"] - 1,
+      getElevation: d => d.pm_25,
       getFillColor: (feature) => {
-        const val = feature.topline_median;
+        const val = feature.pm_25;
         return getAqColor(val);
       },
       diskResolution: 8,
       flatShading: true,
-      elevationScale: 3000,
+      elevationScale: 100,
       radius: 100,
       visible: mapParams.custom === "aq_grid" && mapParams.useCustom,
       updateTriggers: {
@@ -703,7 +706,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         getFillColor: [mapParams.variableName],
         extruded: use3d,
       },
-      beforeId: "water",
+      beforeId: "state-label",
     }),
   ];
 
@@ -757,8 +760,79 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
-    });
+    })
   });
+
+    overlayLayers.push(
+      /* This layer displays when the Weekly PM2.5 overlay is selected */
+      new LineLayer({
+        id: "aq-line-layer",
+        data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
+        loaders: [CSVLoader],
+        loadOptions: {
+          csv: {
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            header: true,
+          },
+        },
+        getSourcePosition: (feature) => [
+          feature.longitude,
+          feature.latitude,
+          feature["pm_25"] * 100 * use3d,
+        ],
+        getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
+        getColor: [0, 0, 0],
+        getWidth: 1,
+        visible: mapParams.overlays.includes("aq"),
+        updateTriggers: {
+          visible: [mapParams.overlay, mapParams.overlays],
+          getSourcePosition: [use3d],
+        },
+        beforeId: "country-label",
+      }),
+
+    )
+
+    /* This text is displayed when the Weekly PM2.5 overlay is selected */
+    overlayLayers.push(
+      new TextLayer({
+        id: "aq-text-layer",
+        data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
+        loaders: [CSVLoader],
+        loadOptions: {
+          csv: {
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            header: true,
+          },
+        },
+        getPosition: (feature) => [
+          feature.longitude,
+          feature.latitude,
+          feature["pm_25"] * 100 * use3d + 1,
+        ],
+        getText: (feature) =>
+          `${Math.round(feature["pm_25"] * 10) / 10}`,
+        getSize: zoom ** 2,
+        getAngle: 0,
+        getTextAnchor: "middle",
+        getAlignmentBaseline: "center",
+        sizeScale: 0.15,
+        background: true,
+        backgroundPadding: [5, 0, 5, 0],
+        getPixelOffset: [0, -10],
+        getBorderColor: [0, 0, 0],
+        getBorderWidth: 1,
+        visible: mapParams.overlays.includes("aq"),
+        updateTriggers: {
+          visible: [mapParams.overlay, mapParams.overlays],
+          getPosition: [use3d],
+          getSize: [zoom],
+        },
+        beforeId: "country-label",
+      })
+    );
 
   const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
 

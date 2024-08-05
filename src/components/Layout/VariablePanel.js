@@ -425,9 +425,6 @@ const VariablePanel = (props) => {
             <MenuItem value="None" key={"None"}>
               None
             </MenuItem>
-            {/*<MenuItem value={"aq"} key={"aq"}>
-              Weekly PM2.5 Readings
-            </MenuItem>*/}
             {
               parsedOverlays?.map((overlay) =>
                   <MenuItem value={overlay.id} key={overlay.id}>
@@ -435,6 +432,9 @@ const VariablePanel = (props) => {
                   </MenuItem>
               )
             }
+            <MenuItem value={"aq"} key={"aq"}>
+              Microsoft PM2.5 Readings
+            </MenuItem>
           </Select>
         </FormControl>
         {mapParams.overlays.includes("cooling-centers") && <CoolingCentersLegend />}
