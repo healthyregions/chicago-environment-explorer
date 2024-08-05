@@ -688,18 +688,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           header: true,
         },
       },
-      // material: null,
       getPosition: (d) => [d.longitude, d.latitude],
       opacity: 1,
       extruded: use3d,
-      getElevation: 1,
+      getElevation: d => d.pm_25,
       getFillColor: (feature) => {
-        const val = feature['pm_25'];
+        const val = feature.pm_25;
         return getAqColor(val);
       },
       diskResolution: 8,
       flatShading: true,
-      elevationScale: 3000,
+      elevationScale: 100,
       radius: 100,
       visible: mapParams.custom === "aq_grid" && mapParams.useCustom,
       updateTriggers: {
@@ -707,7 +706,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         getFillColor: [mapParams.variableName],
         extruded: use3d,
       },
-      beforeId: "water",
+      beforeId: "state-label",
     }),
   ];
 
@@ -889,7 +888,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     /* This layer displays when the Weekly PM2.5 overlay is selected */
     new LineLayer({
       id: "aq-line-layer",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
+      data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
       loaders: [CSVLoader],
       loadOptions: {
         csv: {
@@ -901,7 +900,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       getSourcePosition: (feature) => [
         feature.longitude,
         feature.latitude,
-        feature["topline_median"] * 200 * use3d,
+        feature["pm_25"] * 100 * use3d,
       ],
       getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
       getColor: [0, 0, 0],
@@ -911,13 +910,13 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         visible: [mapParams.overlay, mapParams.overlays],
         getSourcePosition: [use3d],
       },
-      beforeId: "state-label",
+      beforeId: "country-label",
     }),
 
     /* This text is displayed when the Weekly PM2.5 overlay is selected */
     new TextLayer({
       id: "aq-text-layer",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
+      data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
       loaders: [CSVLoader],
       loadOptions: {
         csv: {
@@ -929,10 +928,10 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       getPosition: (feature) => [
         feature.longitude,
         feature.latitude,
-        feature["topline_median"] * 200 * use3d + 1,
+        feature["pm_25"] * 100 * use3d + 1,
       ],
       getText: (feature) =>
-        `${Math.round(feature["topline_median"] * 10) / 10}`,
+        `${Math.round(feature["pm_25"] * 10) / 10}`,
       getSize: zoom ** 2,
       getAngle: 0,
       getTextAnchor: "middle",
@@ -949,7 +948,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         getPosition: [use3d],
         getSize: [zoom],
       },
-      beforeId: "state-label",
+      beforeId: "country-label",
     }),
   ];
 
