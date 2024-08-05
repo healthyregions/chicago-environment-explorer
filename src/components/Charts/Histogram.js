@@ -32,7 +32,7 @@ const HistogramContainer = styled.div`
 const ChartContainer = styled.div`
   display:block;
   width:calc(100% - 1em);
-  margin:20px auto 0 auto;
+  margin-top:20px;
   height:125px;
   cursor:crosshair !important;
   .recharts-cartesian-axis-tick {    
@@ -116,7 +116,6 @@ const StyledSlider = withStyles({
     borderLeft: '2px dotted #767676',
     position: 'absolute',
     marginTop: -35,
-    marginLeft: 10,
     boxShadow: '#00000044 0 2px 2px',
     borderRadius:0,
     '&:focus, &:hover, &$active': {
@@ -186,7 +185,7 @@ export default function Histogram({
 }){
 
   const dispatch = useDispatch();
-  const minDistanceBetweenThumbs = (range.max-range.min)/11;
+  const minDistanceBetweenThumbs = (range.max-range.min)/101;
   const [sliderValue, setSliderValue] = useState([range.min, range.max]);
 
   const valueChangeHandler = (e, newValues, activeThumb) => {
