@@ -384,10 +384,6 @@ const VariablePanel = (props) => {
         <Gutter h={20} />
         <h2>Data Description</h2>
         <div className="data-description">
-          {mapParams.custom === 'aq_grid' && <>
-          <code>Data from {aqLastUpdated.start?.slice(0,10)} to {aqLastUpdated.end?.slice(0,10)} </code>
-          </>}
-
         {mapParams.custom === 'aq_grid' && <>
           <p>
             To see the source data grid, click the switch below.
