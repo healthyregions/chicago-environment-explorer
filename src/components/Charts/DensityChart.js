@@ -18,7 +18,6 @@ export default function BarChartComponent({data, dataKey, color}){
           data={data}
           margin={{
             top: 20,
-            right: 10,
           }}
         >
             <CartesianGrid horizontal={false}/>

@@ -21,6 +21,7 @@ import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 const HistogramContainer = styled.div`
   position:relative;
   margin:1rem 0 0 0;
+  padding-right: 1rem;
   h4 {
     font-size:1rem;
     margin:0;
@@ -31,7 +32,6 @@ const HistogramContainer = styled.div`
 
 const ChartContainer = styled.div`
   display:block;
-  width:calc(100% - 1em);
   margin-top:5px;
   height:125px;
   cursor:crosshair !important;
@@ -103,10 +103,10 @@ const StyledSlider = withStyles({
     color: colors.cartoColors.gray,
     height: 0,
     padding: '0 25px 0 15px',
-    marginLeft:'0px',
-    width:'calc(100% - 42px)',
+    // marginLeft:'0px',
+    // width:'calc(100% - 42px)',
     boxSizing: 'border-box',
-    transform: 'translateY(-30px)'
+    transform: 'translateY(-28px)'
   },
   thumb: {
     height: 75,
