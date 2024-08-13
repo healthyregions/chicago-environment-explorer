@@ -311,7 +311,7 @@ const VariablePanel = (props) => {
         dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'non-res' ]}));
       }
     }
-  }, [mapParams.variableName, dispatch]);
+  }, [mapParams.variableName, dispatch, mapParams.overlays]);
 
   const handleMapOverlay = (event) => {
     let prevOverlays = mapParams.overlays;

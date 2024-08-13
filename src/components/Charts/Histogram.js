@@ -13,7 +13,6 @@ import {colors, variablePresets} from '../../config';
 import PropTypes from "prop-types";
 import clsx from "clsx";
 import {IconButton} from "@mui/material";
-import {FaQuestionCircle} from "@react-icons/all-files/fa/FaQuestionCircle";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
@@ -202,12 +201,12 @@ export default function Histogram({
 
   const filterChart = useMemo(
     () => debounce((newValues) => dispatch(applyFilterValues(column, newValues)), 250),
-    []
+    [column, dispatch]
   );
 
   useEffect(
     () => filterChart(sliderValue),
-    [sliderValue]
+    [sliderValue, filterChart]
   );
 
   const resetFilter = () => {
