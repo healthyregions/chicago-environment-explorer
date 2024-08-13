@@ -377,6 +377,7 @@ const VariablePanel = (props) => {
               { overlay === 'wards' && <>+ Area Wards</> }
               { overlay === 'community_areas' && <>+ Community Areas</> }
               { overlay === 'public-housing' && <>+ Public Housing</> }
+              { overlay === 'impervious-surfaces' && <>+ Impervious Surfaces</> }
             </div>)}
           </div>
 
