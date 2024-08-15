@@ -15,76 +15,6 @@ import {colors, variablePresets, dataDescriptions, parsedOverlays} from "../../c
 import * as SVG from "../../config/svg";
 import { FormControl, Switch, Stack } from "@mui/material";
 import {Link} from "react-router-dom";
-const REDLINING_COLOR_SCALE = {
-  A: [115, 169, 77],
-  B: [52, 172, 198],
-  C: [219, 207, 0],
-  D: [226, 77, 90],
-};
-
-const CC_COLOR_SCALE = {
-  'Community Service Center': [8,81,156],
-  'Regional Senior Center': [49,130,189],
-  'Satellite Senior Center': [107,174,214],
-  'Library': [158,202,225],
-  'Chicago Community College': [198,219,239],
-  'Park District Spray Feature': [239,243,255],
-};
-
-const RedliningLegend = () => (
-  <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
-    <h3>HOLC Grading</h3>
-    {Object.entries(REDLINING_COLOR_SCALE).map(([key, color]) => (
-      <div style={{ display: "flex", margin:'.25em 0' }} key={key}>
-        <span
-          key={key}
-          style={{
-            backgroundColor: `rgb(${color.join(",")})`,
-            width: 16,
-            height: 16,
-          }}
-        ></span>
-        <p style={{padding:0, margin:'0 0 0 .25em'}}>Grade {key}</p>
-      </div>
-    ))}
-  </div>
-);
-
-const CoolingCentersLegend = () => (
-    <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
-      <h3>Cooling Site Types</h3>
-      {Object.entries(CC_COLOR_SCALE).map(([key, color]) => (
-          <div key={'cc-'+key} style={{ display: "flex", margin:'.25em 0' }}>
-        <span
-            key={key}
-            style={{
-              backgroundColor: `rgb(${color.join(",")})`,
-              width: 16,
-              height: 16,
-            }}
-        ></span>
-            <p style={{padding:0, margin:'0 0 0 .25em'}}>{key}</p>
-          </div>
-      ))}
-    </div>
-);
-
-const NonResidentialLegend = () => (
-    <div style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
-      <h3>Industrial Areas</h3>
-      <div style={{ display: "flex", margin:'.25em 0' }}>
-        <span
-            style={{
-              backgroundColor: `rgba(200, 200, 200, 255)`,
-              borderColor: `rgba(150, 150, 150, 100)`,
-              width: 16,
-              height: 16,
-            }}
-        ></span>
-            <p style={{padding:0, margin:'0 0 0 .25em'}}>Industrial or Non-Residential Area</p>
-      </div>
-    </div>
-);
 
 const VariablePanelContainer = styled.div`
   position: fixed;
@@ -370,14 +300,11 @@ const VariablePanel = (props) => {
             ))}
           </Select>
           <div style={{ marginBottom: '10px' }}>
-            {mapParams.overlays?.map(overlay => <div  key={'overlay-description-' + overlay}>
-              { overlay === 'non-res' && <>+ Non-residential or Industrial Areas</> }
-              { overlay === 'cooling-centers' && <>+ Cooling Centers in the Area</> }
-              { overlay === 'redlining' && <>+ Historical Redlining</> }
-              { overlay === 'wards' && <>+ Area Wards</> }
-              { overlay === 'community_areas' && <>+ Community Areas</> }
-              { overlay === 'public-housing' && <>+ Public Housing</> }
-            </div>)}
+            {mapParams.overlays?.map(selectedOverlay => <>
+              {parsedOverlays.map(parsedOverlay => <>
+                { selectedOverlay === parsedOverlay?.id && <div key={`overlay-description-${selectedOverlay}`}>+ {parsedOverlay?.displayName}</div> }
+              </>)}
+            </>)}
           </div>
 
           <Link to='/builder'>Create a Custom Vulnerability Index using multiple variables</Link>
@@ -437,9 +364,38 @@ const VariablePanel = (props) => {
             </MenuItem>
           </Select>
         </FormControl>
-        {mapParams.overlays.includes("cooling-centers") && <CoolingCentersLegend />}
-        {mapParams.overlays.includes("redlining") && <RedliningLegend />}
-        {mapParams.overlays.includes("non-res") && <NonResidentialLegend />}
+        {mapParams.overlays.map(selectedOverlay => <>
+          {parsedOverlays.map(parsedOverlay => {
+            const fillColor = JSON.parse(parsedOverlay?.fillColor);
+            return (<>
+            { selectedOverlay === parsedOverlay?.id && parsedOverlay?.fillColor && <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+              <h3>{parsedOverlay?.description}</h3>
+            {parsedOverlay?.fillColor && !Array.isArray(fillColor) && Object.entries(fillColor).map(([key, color]) => (
+                <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", margin:'.25em 0' }}>
+                <span
+                    key={key}
+                    style={{
+                      backgroundColor: `rgb(${color.join(",")})`,
+                      width: 16,
+                      height: 16,
+                    }}
+                ></span>
+                  <p style={{padding:0, margin:'0 0 0 .25em'}}>{key}</p>
+                </div>
+            ))}
+              {parsedOverlay?.fillColor && Array.isArray(fillColor) && <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", margin:'.25em 0' }}>
+                 <span
+                     style={{
+                       backgroundColor: `rgb(${JSON.parse(parsedOverlay.fillColor)})`,
+                       width: 16,
+                       height: 16,
+                     }}
+                 ></span>
+                  <p style={{padding:0, margin:'0 0 0 .25em'}}>{parsedOverlay?.description}</p>
+              </div>}
+            </div>}
+          </>)})}
+        </>)}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}
