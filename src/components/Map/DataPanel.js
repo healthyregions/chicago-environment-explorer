@@ -18,12 +18,8 @@ import Histogram from '../Charts/Histogram';
 import { Gutter } from '../Layout/Gutter';
 // import NeighborhoodCounts from './NeighborhoodCounts';
 import { setPanelState } from '../../actions';
-import {colors, variablePresets} from '../../config';
+import {colors} from '../../config';
 import { report } from '../../config/svg';
-import {IconButton} from "@mui/material";
-import {FaQuestionCircle} from "@react-icons/all-files/fa/FaQuestionCircle";
-import Popover from "@mui/material/Popover";
-import Typography from "@mui/material/Typography";
 
 //// Styled components CSS
 // Main container for entire panel

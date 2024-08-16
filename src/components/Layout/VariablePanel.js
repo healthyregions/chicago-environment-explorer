@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import InputLabel from "@mui/material/InputLabel";
@@ -298,20 +298,25 @@ const VariablePanel = (props) => {
   const panelState = useSelector((state) => state.panelState);
   const aqLastUpdated = useSelector((state) => state.aqLastUpdated);
 
+  // Only update overlays when variable first changes
+  // This allows the user to disable the default overlays, if they desire
+  const [variableChanged, setVariableChanged] = useState(true);
+
   useEffect(() => {
+    setVariableChanged(false);
     // If user selects Displacement Pressure, automatically apply the Non-residential Overlay
-    if (mapParams.variableName?.includes('temperature') || mapParams.variableName?.toLowerCase().includes('heat index')) {
+    if (variableChanged && (mapParams.variableName?.toLowerCase().includes('temperature') || mapParams.variableName?.toLowerCase().includes('heat index'))) {
       if (!mapParams.overlays?.includes('cooling-centers')) {
         dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'cooling-centers' ]}));
       }
     }
     // If user selects one of the Heat Indicator variables, automatically apply the Cooling Centers Overlay
-    if (mapParams.variableName === 'Displacement Pressure') {
+    if (variableChanged && mapParams.variableName === 'Displacement Pressure') {
       if (!mapParams.overlays?.includes('non-res')) {
         dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'non-res' ]}));
       }
     }
-  }, [mapParams.variableName, dispatch]);
+  }, [mapParams, dispatch, variableChanged]);
 
   const handleMapOverlay = (event) => {
     let prevOverlays = mapParams.overlays;
@@ -343,8 +348,11 @@ const VariablePanel = (props) => {
     }
   };
 
-  const handleVariable = (e) =>
+  const handleVariable = (e) => {
+    setVariableChanged(true);
     dispatch(changeVariable(variablePresets[e.target.value]));
+  }
+
 
   return (
     <VariablePanelContainer
