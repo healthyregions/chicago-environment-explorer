@@ -2,7 +2,7 @@ import { defaultData } from "../config";
 import * as Papa from "papaparse";
 
 export const loadData = async () => {
-    const [data, aqTractData, aqLastUpdated] = await Promise.all([
+    const [data, aqTractData, /* aqLastUpdated */] = await Promise.all([
         fetch(
             `${process.env.PUBLIC_URL}/geojson/${defaultData}`
         ).then((r) => r.json()),
@@ -10,11 +10,11 @@ export const loadData = async () => {
             .then(r => r.text())
             .then(r => Object.assign({}, ...Papa.parse(r, { header: true }).data
             .map(({ Tract, topline_median }) => ({ [Tract]: +topline_median })))
-        ),        
+        ),
         fetch(process.env.REACT_APP_AQ_ENDPOINT + '_timestamp.json')
             .then(r => r.json())
     ])
-    
+
     const mergedData = {
         ...data,
         features: data.features.map((feature) => {
@@ -29,6 +29,6 @@ export const loadData = async () => {
             }
         })
     }
-    
+
     return mergedData
 };

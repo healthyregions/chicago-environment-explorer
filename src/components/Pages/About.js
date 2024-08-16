@@ -274,7 +274,7 @@ const accordionContent = [
         content: (<>
                     <p>
                     Before<i translate="no"> ChiVes</i>, HeRoP worked in joint partnership with the Chicago Department of Public Health to develop the <b> <a href="https://abc7chicago.com/chicago-trees-climate-change-tree-planting-lidar-scanner/11202738/?fbclid=IwAR0UxJhaeu_vMfES7H0owokO4y2ASs3uzZAGCYrWzfMpwS4rUiAB7kULLi0">Community Tree Equity Tool</a></b> as
-                    an extension of ongoing work on understanding <a href="https://healthyregions.org/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using 
+                    an extension of ongoing work on understanding <a href="https://healthyregions.org/research/open-airq/" target="_blank" rel="noopener noreferrer">air quality in Chicago</a>. The Tree Tool Research Pilot was developed using
                      <a href="https://carto.com/" target="_blank" rel="noopener noreferrer">Carto</a> to facilitate rapid development and prototyping. This tool followed years of iterative process and design and dozens of previous dashboard iterations, highlighting the winding process of agile application development. The final tool went through dozens of additional rounds of refinement and editing across multiple city and community stakeholders.
                     </p>
                     <p>In the Research Pilot Stage, The HeRoP team was led by Marynia Kolak, MS, MFA, PhD (Associate Director of Health Informatics) and supported by research assistants Isaac Kamber, Lorenz Menendez, Yuming Liu, and Jizhou Wang, with previous analytic work by graduate
@@ -295,7 +295,7 @@ export default function About(){
            <ContentContainer>
                <h1>About</h1>
                <hr/>
-                <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago's environment together at the 
+                <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago's environment together at the
                 neighborhood level. It's a partnership of researchers, community organizations, and civic groups. It's been used for teaching
                 about the basics of mapping and spatial analysis, as well as learning about air quality patterns in Chicago.</p>
                 <p>With ChiVes, we harmonize & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.</p>
@@ -338,9 +338,9 @@ export default function About(){
                 we are thankful for additional guidance by Rolando Favela in response to community needs.</p>
                 <hr/>
                 <h2>Active Project Team</h2>
-                <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank">Healthy Regions 
-                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>, 
-                in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank">Department of Geography</a> at <b>DePaul University</b>. From 2022-2024, it is funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).</p>
+                <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank" rel="noopener noreferrer">Healthy Regions
+                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>,
+                in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank" rel="noopener noreferrer">Department of Geography</a> at <b>DePaul University</b>. From 2022-2024, it is funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).</p>
                 <MemberGrid
                     members={projectTeam}
                     columns={{

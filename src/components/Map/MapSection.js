@@ -443,23 +443,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     'vulnerable, prices rising':  [222,45,38]
   };
 
-  const CC_COLOR_SCALE = {
-    'Community Service Center': [8,81,156],
-    'Regional Senior Center': [49,130,189],
-    'Satellite Senior Center': [107,174,214],
-    'Library': [158,202,225],
-    'Chicago Community College': [198,219,239],
-    'Park District Spray Feature': [239,243,255],
-  };
-
-  const getCcColor = (site_type) => {
-    if (site_type in CC_COLOR_SCALE) {
-      return CC_COLOR_SCALE[site_type];
-    } else {
-      return [150,150,150];
-    }
-  };
-
   const isVisible = (feature, filters) => {
     for (const property in filters) {
       if (typeof filters[property][0] === "string") {

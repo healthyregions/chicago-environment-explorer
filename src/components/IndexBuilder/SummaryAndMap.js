@@ -445,49 +445,6 @@ const SummaryMapPage = ({ selections }) => {
             .filter((value, index, array) => array.indexOf(value) === index);
     }
 
-    // TODO: currently unused
-    const getMaxGroupWeight = () => {
-        const groupWeights = [];
-        selections.map(sel => ({ name: sel.name, group: variablePresets[sel.name].listGroup, value: sel.value }))
-            .forEach(w => {
-                const existing = groupWeights.find(g => g.group === variablePresets[w.name].listGroup);
-                if (existing) {
-                    const index = groupWeights.indexOf(existing);
-                    const value = w.value + groupWeights[index].value;
-                    groupWeights[index] = { name: w.group, value }
-                } else {
-                    groupWeights.push({ name: w.group, value: w.value });
-                }
-            })
-
-        return groupWeights.reduce((prev, curr) => {
-                if (!prev || curr.value > prev.value) {
-                    return curr;
-                }
-                return prev;
-            }, undefined);
-    }
-
-    // TODO: tie-breaking behavior?
-    // TODO: currently unused
-    const renderCustomDescription = () => {
-        const maxWeightGroup = getMaxGroupWeight();
-        switch(maxWeightGroup.name) {
-            case 'Demographic':
-                return 'urban development policy makers';
-            case 'Air Pollution':
-            case 'Ecology & Greenness':
-            case 'Environment':
-                return 'environmentalists and environmental policy makers';
-            case 'Health':
-                return 'health management and medical policy makers';
-            case 'Social':
-                return 'house management and family planning policy makers';
-            default:
-                return `unknown: ${maxWeightGroup.name}`;
-        }
-    }
-
     const handleOpenClose = () => {
         setShowPanel(!showPanel);
     };
@@ -522,12 +479,6 @@ const SummaryMapPage = ({ selections }) => {
                                     </span>)
                                 }
                             </p>
-                            {
-                                /*<p>
-                                    With an additional focus on {getMaxGroupWeight().name} indicators, the custom index
-                                    will be useful for {renderCustomDescription()}.
-                                </p>*/
-                            }
 
                             <p>Higher scores correspond to <i>increased</i> vulnerability. Lower scores correspond to less vulnerable areas.</p>
                         </Typography>
