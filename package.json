@@ -59,7 +59,6 @@
     "react": "^17.0.1",
     "react-countup": "^4.3.3",
     "react-dom": "^17.0.1",
-    "react-ga": "^3.3.0",
     "react-map-gl": "7.0.19",
     "react-map-gl-geocoder": "2.1.6",
     "react-markdown": "^5.0.3",
