@@ -300,12 +300,12 @@ const VariablePanel = (props) => {
 
   // Only update overlays when variable first changes
   // This allows the user to disable the default overlays, if they desire
-  const [variableChanged, setVariableChanged] = useState(false);
+  const [variableChanged, setVariableChanged] = useState(true);
 
   useEffect(() => {
     setVariableChanged(false);
     // If user selects Displacement Pressure, automatically apply the Non-residential Overlay
-    if (variableChanged && (mapParams.variableName?.includes('temperature') || mapParams.variableName?.toLowerCase().includes('heat index'))) {
+    if (variableChanged && (mapParams.variableName?.toLowerCase().includes('temperature') || mapParams.variableName?.toLowerCase().includes('heat index'))) {
       if (!mapParams.overlays?.includes('cooling-centers')) {
         dispatch(setMapParams({ overlays: [ ...mapParams.overlays, 'cooling-centers' ]}));
       }
