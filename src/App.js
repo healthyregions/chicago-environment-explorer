@@ -23,6 +23,7 @@ const Contact = React.lazy(() => import('./components/Pages/Contact'));
 const Community = React.lazy(() => import('./components/Pages/Community'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
 const IndexBuilder = React.lazy(() => import('./components/Pages/IndexBuilder'));
+const Learn = React.lazy(() => import('./components/Pages/Learn'));
 
 /** Google Translation Widget */
 const googleTranslateElementInit = () => {
@@ -90,6 +91,8 @@ export default function App() {
 							<Route path="/data.html" component={Data} />
 							<Route path="/builder" component={IndexBuilder} />
 							<Route path="/builder.html" component={IndexBuilder} />
+							<Route path="/learn" component={Learn} />
+							<Route path="/learn.html" component={Learn} />
 							<Route component={ErrorPage} />
 							<Route />
 						</Switch>
