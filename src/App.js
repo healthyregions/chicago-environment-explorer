@@ -27,6 +27,7 @@ const Learn = React.lazy(() => import('./components/Pages/Learn'));
 const PRN = React.lazy(() => import('./components/Pages/PRN'));
 const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
 
+
 /** Google Translation Widget */
 const googleTranslateElementInit = () => {
 	new window.google.translate.TranslateElement(
