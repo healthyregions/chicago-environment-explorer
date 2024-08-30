@@ -265,7 +265,7 @@ export default function Instituto() {
       <NavBar />
       <InstitutoPageContent>
         <Hero>
-          <h1>Uncover the nature of Chicago's environment.</h1>
+          <h1>Instituto</h1>
           <p>
             Chicago's urban environment has profound impacts on the health of
             communities and individuals. A handful of key metrics―tree cover,
