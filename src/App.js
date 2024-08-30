@@ -24,6 +24,8 @@ const Community = React.lazy(() => import('./components/Pages/Community'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
 const IndexBuilder = React.lazy(() => import('./components/Pages/IndexBuilder'));
 const Learn = React.lazy(() => import('./components/Pages/Learn'));
+const PRN = React.lazy(() => import('./components/Pages/PRN'));
+const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
 
 /** Google Translation Widget */
 const googleTranslateElementInit = () => {
@@ -82,8 +84,8 @@ export default function App() {
 							<Route path="/guide.html" component={Guide} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/contact.html" component={Contact} />
-							<Route path="/community" component={Community} />
-							<Route
+							<Route exact path="/community" component={Community} />
+							<Route exact
 								path="/community.html"
 								component={Community}
 							/>
@@ -93,6 +95,14 @@ export default function App() {
 							<Route path="/builder.html" component={IndexBuilder} />
 							<Route path="/learn" component={Learn} />
 							<Route path="/learn.html" component={Learn} />
+							<Route path="/community/instituto" component={Instituto} />
+							<Route path="/community/instituto.html" component={Instituto} />
+							<Route path="/community/prn" component={PRN} />
+							<Route path="/community/prn.html" component={PRN} />
+							<Route path="/community/peoplesresponse" component={PRN} />
+							<Route path="/community/peoplesresponse.html" component={PRN} />
+							<Route path="/community/peoplesresponsenetwork" component={PRN} />
+							<Route path="/community/peoplesresponsenetwork.html" component={PRN} />
 							<Route component={ErrorPage} />
 							<Route />
 						</Switch>

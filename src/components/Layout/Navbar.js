@@ -202,6 +202,8 @@ export default function Nav({
             <li><NavLink to="/builder">Index Builder</NavLink></li>
             <li><NavLink to="/data">Data</NavLink></li>
             <li><NavLink to="/community">My Community</NavLink></li>
+            <li><NavLink to="/community/instituto">Instituto</NavLink></li>
+            <li><NavLink to="/community/prn">People's Response Network</NavLink></li>
             <li><NavLink to="/learn">Learn</NavLink></li>
             <li><NavLink to="/guide">Resource Guide</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
