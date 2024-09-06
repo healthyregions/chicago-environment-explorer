@@ -291,7 +291,7 @@ const accordionContent = [
 export default function LearnMapping101(){
     return (
        <LearnMapping101Page>
-           <NavBar />
+           <NavBar showLearnSubpages={true} />
            <ContentContainer>
                <h1>Learn: Mapping 101</h1>
                <hr/>
