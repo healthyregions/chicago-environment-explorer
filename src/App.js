@@ -24,6 +24,9 @@ const Community = React.lazy(() => import('./components/Pages/Community'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
 const IndexBuilder = React.lazy(() => import('./components/Pages/IndexBuilder'));
 const Learn = React.lazy(() => import('./components/Pages/Learn'));
+const LearnHistogramFilter = React.lazy(() => import('./components/Pages/LearnHistogramFilter'));
+const LearnMapping101 = React.lazy(() => import('./components/Pages/LearnMapping101'));
+const LearnIndexBuilder = React.lazy(() => import('./components/Pages/LearnIndexBuilder'));
 const PRN = React.lazy(() => import('./components/Pages/PRN'));
 const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
 
@@ -94,8 +97,14 @@ export default function App() {
 							<Route path="/data.html" component={Data} />
 							<Route path="/builder" component={IndexBuilder} />
 							<Route path="/builder.html" component={IndexBuilder} />
-							<Route path="/learn" component={Learn} />
-							<Route path="/learn.html" component={Learn} />
+							<Route exact path="/learn" component={Learn} />
+							<Route exact path="/learn.html" component={Learn} />
+							<Route path="/learn/mapping101" component={LearnMapping101} />
+							<Route path="/learn/mapping101.html" component={LearnMapping101} />
+							<Route path="/learn/histogram" component={LearnHistogramFilter} />
+							<Route path="/learn/histogram.html" component={LearnHistogramFilter} />
+							<Route path="/learn/indexBuilder" component={LearnIndexBuilder} />
+							<Route path="/learn/indexBuilder.html" component={LearnIndexBuilder} />
 							<Route path="/community/instituto" component={Instituto} />
 							<Route path="/community/instituto.html" component={Instituto} />
 							<Route path="/community/prn" component={PRN} />

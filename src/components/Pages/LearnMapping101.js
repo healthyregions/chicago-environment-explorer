@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ContentContainer } from '../../styled_components';
 import { Accordion, MemberGrid, NavBar, Footer } from '../../components';
 
-const LearnPage = styled.div`
+const LearnMapping101Page = styled.div`
     background:white;
 `
 // const BioSection = styled.div`
@@ -288,12 +288,12 @@ const accordionContent = [
     }
 ]
 
-export default function Learn(){
+export default function LearnMapping101(){
     return (
-       <LearnPage>
-           <NavBar showLearnSubpages={true} />
+       <LearnMapping101Page>
+           <NavBar />
            <ContentContainer>
-               <h1>Learn</h1>
+               <h1>Learn: Mapping 101</h1>
                <hr/>
                 <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago's environment together at the
                 neighborhood level. It's a partnership of researchers, community organizations, and civic groups. It's been used for teaching
@@ -362,6 +362,6 @@ export default function Learn(){
                 <Accordion entries={accordionContent} initialTab={-1} />
            </ContentContainer>
            <Footer/>
-       </LearnPage>
+       </LearnMapping101Page>
     );
 }
