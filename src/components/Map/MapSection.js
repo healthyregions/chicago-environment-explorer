@@ -23,14 +23,14 @@ import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from "..";
 import { scaleColor } from "../../utils";
-import { colors } from "../../config";
+import {colors, parsedOverlays} from "../../config";
 import * as SVG from "../../config/svg";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useChivesData } from "../../hooks/useChivesData";
 import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
-import MapCoolingCenterTooltipContent from "./MapCoolingCenterTooltipContent";
+import MapOverlayTooltipContent from "./MapOverlayTooltipContent";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
@@ -222,7 +222,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     object: null,
   });
   const [hoverGeog, setHoverGeog] = useState(null);
-  const [hoverCc, setHoverCc] = useState({
+  const [overlayHover, setOverlayHover] = useState({
     x: null,
     y: null,
     object: null,
@@ -310,28 +310,20 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   });
   const { queryViewport } = useChivesWorkerQuery(deckRef);
 
-  const handleCcPointClick = ({ x, y, object }) => {
-    // Hide census tract popup
-    setHoverGeog(null);
-    setHoverInfo({ x: null, y: null, object: null });
-
-    // Show/hide cooling center popup
-    if (object?.properties) {
-      setHoverCc({x, y, object: object.properties});
-    } else {
-      setHoverCc({ x: null, y: null, object: null });
-    }
-  };
-
-  const handleMapClick = ({ x, y, object }) => {
-    // Hide cooling center popup
-    setHoverCc({ x: null, y: null, object: null });
-
-    // Show/hide census tract popup
-    if (object?.properties) {
+  const handleMapClick = ({ x, y, object }, overlay) => {
+    if (overlay?.popupContent) {
+      // Overlay point was clicked - show overlay popup, hide census tract popup
+      setHoverGeog(null);
+      setHoverInfo({ x: null, y: null, object: null });
+      setOverlayHover({x, y, object: object.properties, overlay: overlay});
+    } else if (object?.properties?.geoid) {
+      // Non-point map section was clicked - hide overlay popup, show census tract popup
+      setOverlayHover({ x: null, y: null, object: null, overlay: null });
       setHoverGeog(object.properties.geoid);
       setHoverInfo({x, y, object: object.properties});
-    } else {
+    } else if (!object?.properties) {
+      // User clicked outside of the visualized map area - hide all popups
+      setOverlayHover({ x: null, y: null, object: null, overlay: null });
       setHoverGeog(null);
       setHoverInfo({ x: null, y: null, object: null });
     }
@@ -409,14 +401,16 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     scaleColor(x, mapParams.bins, mapParams.colorScale);
 
   const AQ_SCALE = scaleThreshold()
-    .domain([5, 7.5, 10, 12, 12.5, 15])
+    .domain([8.91, 9.6, 9.89, 10.12, 10.29, 10.49, 10.71, 11.1, 12.06])
     .range([
-      "rgb(1,152,189)",
-      "rgb(73,227,206)",
-      "rgb(216,254,181)",
-      "rgb(254,237,177)",
-      "rgb(254,173,84)",
-      "rgb(209,55,78)",
+      'rgb(255,255,229)',
+      'rgb(255,247,188)',
+      'rgb(254,227,145)',
+      'rgb(254,196,79)',
+      'rgb(254,153,41)',
+      'rgb(236,112,20)',
+      'rgb(204,76,2)',
+      'rgb(140,45,4)'
     ]);
 
   const getAqColor = (val) => {
@@ -439,23 +433,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     '0': [225,225,225],
     'vulnerable, prices not rising': [252,146,114],
     'vulnerable, prices rising':  [222,45,38]
-  };
-
-  const CC_COLOR_SCALE = {
-    'Community Service Center': [8,81,156],
-    'Regional Senior Center': [49,130,189],
-    'Satellite Senior Center': [107,174,214],
-    'Library': [158,202,225],
-    'Chicago Community College': [198,219,239],
-    'Park District Spray Feature': [239,243,255],
-  };
-
-  const getCcColor = (site_type) => {
-    if (site_type in CC_COLOR_SCALE) {
-      return CC_COLOR_SCALE[site_type];
-    } else {
-      return [150,150,150];
-    }
   };
 
   const isVisible = (feature, filters) => {
@@ -673,9 +650,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     //     visible: [mapParams.custom, mapParams.variableName],
     //   }
     // }),
+
+    /* This layer displays when Source Data is toggled on for Observed PM2.5 */
     new ColumnLayer({
       id: "aq_data_grid",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_processed_data.csv",
+      data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
       loaders: [CSVLoader],
       loadOptions: {
         csv: {
@@ -684,18 +663,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           header: true,
         },
       },
-      // material: null,
-      getPosition: (d) => [d.x, d.y],
+      getPosition: (d) => [d.longitude, d.latitude],
       opacity: 1,
       extruded: use3d,
-      getElevation: (d) => d["normalized_median"] - 1,
+      getElevation: d => d.pm_25,
       getFillColor: (feature) => {
-        const val = feature.topline_median;
+        const val = feature.pm_25;
         return getAqColor(val);
       },
       diskResolution: 8,
       flatShading: true,
-      elevationScale: 3000,
+      elevationScale: 100,
       radius: 100,
       visible: mapParams.custom === "aq_grid" && mapParams.useCustom,
       updateTriggers: {
@@ -703,245 +681,133 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         getFillColor: [mapParams.variableName],
         extruded: use3d,
       },
-      beforeId: "water",
+      beforeId: "state-label",
     }),
   ];
 
-  const overlayLayers = [
+  // Layers parsed from newer pattern for storing Data Overlays
+  // See https://github.com/healthyregions/chicago-environment-explorer/issues/168
+  const overlayLayers = parsedOverlays
+      .filter(({ id }) => mapParams.overlays.includes(id))
+      .map((parsedOverlay) => {
+    const colors = JSON.parse(parsedOverlay.fillColor);
+    return new GeoJsonLayer({
+      // Accounting
+      id: parsedOverlay.id,
+      data: parsedOverlay.data,
 
-    new GeoJsonLayer({
-      id: "redlining areas",
-      data: `${process.env.PUBLIC_URL}/geojson/redlining.geojson`,
-      opacity: 1,
-      material: false,
-      pickable: false,
-      stroked: false,
-      filled: true,
-      getFillColor: (d) =>
-        REDLINING_COLOR_SCALE[d.properties["holc_grade"]] || [0, 0, 0],
-      visible: mapParams.overlays.includes("redlining"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
-    new GeoJsonLayer({
-      id: "community areas",
-      data: `${process.env.PUBLIC_URL}/geojson/community_areas.geojson`,
-      opacity: 0.8,
-      material: false,
-      pickable: false,
-      stroked: true,
-      filled: false,
-      lineWidthScale: 1,
-      lineWidthMinPixels: 1,
-      lineWidthMaxPixels: 4,
-      getLineWidth: 1,
-      getLineColor: [0, 0, 0, 255],
-      visible: mapParams.overlays.includes("community_areas"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
-    new GeoJsonLayer({
-      id: "wards",
-      data: `${process.env.PUBLIC_URL}/geojson/boundaries_wards_2015_.geojson`,
-      opacity: 0.8,
-      material: false,
-      pickable: false,
-      stroked: true,
-      filled: false,
-      lineWidthScale: 1,
-      lineWidthMinPixels: 1,
-      lineWidthMaxPixels: 4,
-      getLineWidth: 1,
-      getLineColor: [0, 0, 0, 255],
-      visible: mapParams.overlays.includes("wards"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
-    new GeoJsonLayer({
-      id: "non-res",
-      data: `${process.env.PUBLIC_URL}/geojson/non-res-mdp.geojson`,
-      opacity: 1.0,
-      material: false,
-      pickable: false,
-      stroked: true,
-      filled: true,
-      getFillColor: [200, 200, 200, 255],
-      lineWidthScale: 1,
-      lineWidthMinPixels: 1,
-      lineWidthMaxPixels: 4,
-      getLineWidth: 1,
-      getLineColor: [150, 150, 150, 100],
-      visible: mapParams.overlays.includes("non-res"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-      },
-      beforeId: "state-label",
-    }),
+      // Behavior
+      pickable: parsedOverlay.geometryType === 'point',    // TODO: point data should be clickable (optionally?)
 
-    /* Point data */
-    new GeoJsonLayer({
-      id: 'cooling-centers',
-      data: `${process.env.PUBLIC_URL}/geojson/cooling-centers.geojson`,
-      onClick: handleCcPointClick,
-      // elevationScale: 1,
-      extruded: true,
-      filled: true,
+      // Look & Feel
+      opacity: (colors === [0,0,0,0] || colors === [0,0,0]) ? 1.0 : 0.8,
+      material: false,
+      stroked: !!parsedOverlay.lineColor,
+      filled: !!parsedOverlay.fillColor,
+      extruded: parsedOverlay.geometryType === 'point',
       getElevation: 20,
-      getFillColor: (feature) => {
-        const site_type = feature.properties['site_type'];
-        return getCcColor(site_type);
+      //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
+      //getText: f => f.properties[parsedOverlay.symbolProp],
+      getFillColor: Array.isArray(colors) ? colors : (feature) => {
+        // If single color, use that color
+        // If mapping of colors, choose color based on symbolProp
+        const { symbolProp } = parsedOverlay;
+        const symbolKey = feature.properties[symbolProp];
+        return colors[symbolKey];
       },
-      // getIconAngle: 0,
-      // getIconColor: [0, 0, 0, 255],
-      // getIconPixelOffset: [0, 0],
-      // getIconSize: 1,
-      getLineColor: f => {
-        const hex = f.properties.color;
-        // convert to RGB
-        return hex ? hex.match(/[0-9a-f]{2}/g).map(x => parseInt(x, 16)) : [0, 0, 0];
-      },
-      //getLineWidth: 5,
-      getPointRadius: 5,
-      getText: f => f.properties.name,
-      // getTextAlignmentBaseline: 'center',
-      // getTextAnchor: 'middle',
-      // getTextAngle: 0,
-      // getTextBackgroundColor: [255, 255, 255, 255],
-      // getTextBorderColor: [0, 0, 0, 255],
-      // getTextBorderWidth: 0,
-      // getTextColor: [0, 0, 0, 255],
-      // getTextPixelOffset: [0, 0],
-      getTextSize: 12,
-      // iconAlphaCutoff: 0.05,
-      // iconAtlas: null,
-      // iconBillboard: true,
-      // iconMapping: {},
-      // iconSizeMaxPixels: Number.MAX_SAFE_INTEGER,
-      // iconSizeMinPixels: 0,
-      // iconSizeScale: 1,
-      // iconSizeUnits: 'pixels',
-      // lineBillboard: false,
-      // lineCapRounded: false,
-      // lineJointRounded: false,
-      // lineMiterLimit: 4,
-      // lineWidthMaxPixels: Number.MAX_SAFE_INTEGER,
+
+      lineWidthScale: 1,
       lineWidthMinPixels: 1,
-      // lineWidthScale: 1,
-      // lineWidthUnits: 'meters',
-      // material: true,
-      // pointAntialiasing: true,
-      // pointBillboard: false,
-      // pointRadiusMaxPixels: Number.MAX_SAFE_INTEGER,
-      // pointRadiusMinPixels: 0,
-      // pointRadiusScale: 1,
+      lineWidthMaxPixels: 4,
+
+      getLineWidth: 1,
+      getLineColor: Number(parsedOverlay.lineColor) || [0,0,0,255],
+
+      getPointRadius: 4,
+      getTextSize: 12,
       pointRadiusUnits: 'pixels',
-      pointType: 'circle+text',
-      stroked: true,
-      // textBackground: false,
-      // textBackgroundPadding: [0, 0, 0, 0],
-      // textBillboard: true,
-      // textCharacterSet: [' ', '!', '"', '#', '$', '%', '&', ''', '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '<', '=', '>', '?', '@', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '[', '\', ']', '^', '_', '`', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '{', '|', '}', '~', ''],
-      // textFontFamily: 'Monaco, monospace',
-      // textFontSettings: {},
-      // textFontWeight: 'normal',
-      // textLineHeight: 1,
-      // textMaxWidth: -1,
-      // textOutlineColor: [0, 0, 0, 255],
-      // textOutlineWidth: 0,
-      // textSizeMaxPixels: Number.MAX_SAFE_INTEGER,
-      // textSizeMinPixels: 0,
-      // textSizeScale: 1,
-      // textSizeUnits: 'pixels',
-      // textWordBreak: 'break-word',
-      // wireframe: false,
+      pointType: 'circle',
+      onClick: (feature) => handleMapClick(feature, parsedOverlay),
 
-      /* props inherited from Layer class */
-
-      // autoHighlight: false,
-      // coordinateOrigin: [0, 0, 0],
-      // coordinateSystem: COORDINATE_SYSTEM.LNGLAT,
-      // highlightColor: [0, 0, 128, 128],
-      // modelMatrix: null,
-      // opacity: 1,
-      pickable: true,
-      // visible: true,
-      // wrapLongitude: false,
-      visible: mapParams.overlays.includes("cooling-centers"),
+      // Visibility
+      visible: mapParams.overlays.includes(parsedOverlay.id),
       updateTriggers: {
         visible: [mapParams.overlay, mapParams.overlays],
       },
       beforeId: "state-label",
-    }),
+    })
+  });
 
-    new LineLayer({
-      id: "aq-line-layer",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
-      loaders: [CSVLoader],
-      loadOptions: {
-        csv: {
-          dynamicTyping: true,
-          skipEmptyLines: true,
-          header: true,
+    overlayLayers.push(
+      /* This layer displays when the Weekly PM2.5 overlay is selected */
+      new LineLayer({
+        id: "aq-line-layer",
+        data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
+        loaders: [CSVLoader],
+        loadOptions: {
+          csv: {
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            header: true,
+          },
         },
-      },
-      getSourcePosition: (feature) => [
-        feature.longitude,
-        feature.latitude,
-        feature["topline_median"] * 200 * use3d,
-      ],
-      getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
-      getColor: [0, 0, 0],
-      getWidth: 1,
-      visible: mapParams.overlays.includes("aq"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-        getSourcePosition: [use3d],
-      },
-      beforeId: "state-label",
-    }),
-    new TextLayer({
-      id: "aq-text-layer",
-      data: process.env.REACT_APP_AQ_ENDPOINT + "_data_summary.csv",
-      loaders: [CSVLoader],
-      loadOptions: {
-        csv: {
-          dynamicTyping: true,
-          skipEmptyLines: true,
-          header: true,
+        getSourcePosition: (feature) => [
+          feature.longitude,
+          feature.latitude,
+          feature["pm_25"] * 100 * use3d,
+        ],
+        getTargetPosition: (feature) => [feature.longitude, feature.latitude, 0],
+        getColor: [0, 0, 0],
+        getWidth: 1,
+        visible: mapParams.overlays.includes("aq"),
+        updateTriggers: {
+          visible: [mapParams.overlay, mapParams.overlays],
+          getSourcePosition: [use3d],
         },
-      },
-      getPosition: (feature) => [
-        feature.longitude,
-        feature.latitude,
-        feature["topline_median"] * 200 * use3d + 1,
-      ],
-      getText: (feature) =>
-        `${Math.round(feature["topline_median"] * 10) / 10}`,
-      getSize: zoom ** 2,
-      getAngle: 0,
-      getTextAnchor: "middle",
-      getAlignmentBaseline: "center",
-      sizeScale: 0.15,
-      background: true,
-      backgroundPadding: [5, 0, 5, 0],
-      getPixelOffset: [0, -10],
-      getBorderColor: [0, 0, 0],
-      getBorderWidth: 1,
-      visible: mapParams.overlays.includes("aq"),
-      updateTriggers: {
-        visible: [mapParams.overlay, mapParams.overlays],
-        getPosition: [use3d],
-        getSize: [zoom],
-      },
-      beforeId: "state-label",
-    }),
-  ];
+        beforeId: "country-label",
+      }),
+
+    )
+
+    /* This text is displayed when the Weekly PM2.5 overlay is selected */
+    overlayLayers.push(
+      new TextLayer({
+        id: "aq-text-layer",
+        data: `${process.env.PUBLIC_URL}/csv/aq_source_data.csv`,
+        loaders: [CSVLoader],
+        loadOptions: {
+          csv: {
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            header: true,
+          },
+        },
+        getPosition: (feature) => [
+          feature.longitude,
+          feature.latitude,
+          feature["pm_25"] * 100 * use3d + 1,
+        ],
+        getText: (feature) =>
+          `${Math.round(feature["pm_25"] * 10) / 10}`,
+        getSize: zoom ** 2,
+        getAngle: 0,
+        getTextAnchor: "middle",
+        getAlignmentBaseline: "center",
+        sizeScale: 0.15,
+        background: true,
+        backgroundPadding: [5, 0, 5, 0],
+        getPixelOffset: [0, -10],
+        getBorderColor: [0, 0, 0],
+        getBorderWidth: 1,
+        visible: mapParams.overlays.includes("aq"),
+        updateTriggers: {
+          visible: [mapParams.overlay, mapParams.overlays],
+          getPosition: [use3d],
+          getSize: [zoom],
+        },
+        beforeId: "country-label",
+      })
+    );
 
   const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
 
@@ -994,10 +860,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           });
           viewRef.current = e.viewState;
 
-          hoverCc.object &&
-            handleCcPointClick({ x: null, y: null, object: null });
-          hoverInfo.object &&
-            handleMapClick({ x: null, y: null, object: null });
+          overlayHover.object &&
+            handleMapClick({ x: null, y: null, object: null }, null);
         }}
         onViewportLoad={(e) => {
           queryViewport({
@@ -1022,6 +886,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           width={"100%"}
           height={"100%"}
           layers={allLayers}
+          onClick={handleMapClick}
           getTooltip={getCoolingCenterTooltip}
         />
       </MapboxGLMap>
@@ -1089,17 +954,17 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         </HoverDiv>
       )}
 
-      {hoverCc.object && (
+      {overlayHover.object && (
           <HoverDiv
               style={{
                 position: "absolute",
                 zIndex: 1,
-                left: hoverCc.x,
-                top: hoverCc.y,
+                left: overlayHover.x,
+                top: overlayHover.y,
               }}
               ref={hoverCcRef}
           >
-            <MapCoolingCenterTooltipContent content={hoverCc.object} />
+            <MapOverlayTooltipContent content={overlayHover.object} overlay={overlayHover.overlay} />
           </HoverDiv>
       )}
 

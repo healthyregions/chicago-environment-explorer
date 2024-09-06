@@ -170,15 +170,13 @@ export default function Data() {
                 <h2>Data Dictionary</h2>
                 <ul>
                     {dataColumns.map(i => {
-                    if (i['Export Name']) {
-                        return (
+                        return i['Export Name'] ? (
                         <li key={i}>
                             <p>
                             <b translate="no">{i['Export Name']}:</b> {i.Description}
                             </p>
                         </li>
-                        );
-                    }
+                        ) : <></>;
                     })}
                 </ul>
                 <Gutter h={40} />

@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import {createFileName, useScreenshot} from "use-react-screenshot";
 import {jenks, max, mean, min, quantile, sampleStandardDeviation, sum, zScore} from "simple-statistics";
 import {useDispatch, useSelector} from "react-redux";
-import {changeVariable, setPanelState} from "../../actions";
+import {changeVariable, setMapParams, setPanelState} from "../../actions";
 import {useChivesData} from "../../hooks/useChivesData";
 import {useHistory} from "react-router-dom";
 import JSZip from 'jszip';
@@ -244,7 +244,7 @@ const SummaryMapPage = ({ selections }) => {
 
     const [showPanel, setShowPanel] = useState(false);
     const mapParams = useSelector((state) => state.mapParams);
-    const colorScale = [[242,240,247],[218,218,235],[188,189,220],[158,154,200],[117,107,177],[84,39,143]];
+    const colorScale = [[69,117,180],[145,191,219],[224,243,248],[254,224,144],[252,141,89],[215,48,39]];
 
     // We don't need the actual image data, only takeScreenshot
     const [/* image */, takeScreenshot] = useScreenshot({
@@ -340,7 +340,9 @@ const SummaryMapPage = ({ selections }) => {
             const ibDefaultDirectionality = variable.ibDefaultDirectionality || 1;
 
             // Get all values, use them to determine mean and standard deviation
-            const values = storedGeojson.features.map(f => f.properties[columnName]).filter(f => f || (!variable['ibIgnoreZero'] && f === 0));
+            const values = storedGeojson.features.map(f => f.properties[columnName])
+                .filter(f => !!Number(f))
+                .filter(f => f || (!variable['ibIgnoreZero'] && f === 0));
             if (index === 0 && values.length !== storedGeojson.features.length) {
                 console.warn(`Warning: length mismatch with ${columnName}`);
             }
@@ -435,54 +437,12 @@ const SummaryMapPage = ({ selections }) => {
 
     if (mapParams.variableName !== 'Custom Index') {
         dispatch(changeVariable(variablePresets['Custom Index']));
+        dispatch(setMapParams({ overlays: ['community_areas'] }))
     }
 
     const getUniqueGroupNames = () => {
         return selections.map(sel => variablePresets[sel.name].listGroup)
             .filter((value, index, array) => array.indexOf(value) === index);
-    }
-
-    // TODO: currently unused
-    const getMaxGroupWeight = () => {
-        const groupWeights = [];
-        selections.map(sel => ({ name: sel.name, group: variablePresets[sel.name].listGroup, value: sel.value }))
-            .forEach(w => {
-                const existing = groupWeights.find(g => g.group === variablePresets[w.name].listGroup);
-                if (existing) {
-                    const index = groupWeights.indexOf(existing);
-                    const value = w.value + groupWeights[index].value;
-                    groupWeights[index] = { name: w.group, value }
-                } else {
-                    groupWeights.push({ name: w.group, value: w.value });
-                }
-            })
-
-        return groupWeights.reduce((prev, curr) => {
-                if (!prev || curr.value > prev.value) {
-                    return curr;
-                }
-                return prev;
-            }, undefined);
-    }
-
-    // TODO: tie-breaking behavior?
-    // TODO: currently unused
-    const renderCustomDescription = () => {
-        const maxWeightGroup = getMaxGroupWeight();
-        switch(maxWeightGroup.name) {
-            case 'Demographic':
-                return 'urban development policy makers';
-            case 'Air Pollution':
-            case 'Ecology & Greenness':
-            case 'Environment':
-                return 'environmentalists and environmental policy makers';
-            case 'Health':
-                return 'health management and medical policy makers';
-            case 'Social':
-                return 'house management and family planning policy makers';
-            default:
-                return `unknown: ${maxWeightGroup.name}`;
-        }
     }
 
     const handleOpenClose = () => {
@@ -502,9 +462,9 @@ const SummaryMapPage = ({ selections }) => {
                     className={showPanel ? "" : "hidden"}
                     style={{ top: '110px', left: '20px', width: '375px' }}>
                     <div style={{ padding: '0 2rem', marginTop: '2rem' }}>
-                        <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Index</Typography>
+                        <Typography variant={'h6'} style={{ marginBottom: '1rem' }}>Custom Vulnerability Index</Typography>
                         <Typography variant={'body2'}>
-                            <p>The custom index you created has theme{getUniqueGroupNames().length > 1 && <>s</>}:</p>
+                            <p>The custom vulnerability index you created has theme{getUniqueGroupNames().length > 1 && <>s</>}:</p>
                             <p>
                                 {
                                     getUniqueGroupNames()
@@ -519,13 +479,8 @@ const SummaryMapPage = ({ selections }) => {
                                     </span>)
                                 }
                             </p>
-                            {
-                                /*<p>
-                                    With an additional focus on {getMaxGroupWeight().name} indicators, the custom index
-                                    will be useful for {renderCustomDescription()}.
-                                </p>*/
-                            }
 
+                            <p>Higher scores correspond to <i>increased</i> vulnerability. Lower scores correspond to less vulnerable areas.</p>
                         </Typography>
                     </div>
                     <div style={{ padding: '0 2rem 1rem 2rem' }}>

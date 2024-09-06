@@ -9,13 +9,18 @@ import withStyles from '@mui/styles/withStyles';
 
 import DensityChart from './DensityChart';
 import { applyFilterValues, removeFilterValues } from '../../actions';
-import { colors } from '../../config';
+import {colors, variablePresets} from '../../config';
 import PropTypes from "prop-types";
 import clsx from "clsx";
+import {IconButton} from "@mui/material";
+import Popover from "@mui/material/Popover";
+import Typography from "@mui/material/Typography";
+import {FaInfoCircle} from "@react-icons/all-files/fa/FaInfoCircle";
 
 const HistogramContainer = styled.div`
   position:relative;
   margin:1rem 0 0 0;
+  padding-right: 1rem;
   h4 {
     font-size:1rem;
     margin:0;
@@ -26,8 +31,7 @@ const HistogramContainer = styled.div`
 
 const ChartContainer = styled.div`
   display:block;
-  width:calc(100% - 1em);
-  margin:20px auto 0 auto;
+  margin-top:5px;
   height:125px;
   cursor:crosshair !important;
   .recharts-cartesian-axis-tick {    
@@ -51,17 +55,20 @@ const ChartContainer = styled.div`
 //   }
 // `
 
+const InfoBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size:0.65rem;
+`
+
 const ResetButton = styled.button`
   background:none;
   border:none;
   border-bottom:1px solid ${colors.darkgray};
-  position:absolute;
-  top:1rem;
-  right:1rem;
-  text-transform:uppercase;
   font-size:0.5rem;
-  padding:0.25rem;
   font-weight:bold;
+  padding:0.25rem;
   cursor:pointer;
   box-shadow: 0px 0px 0px ${colors.gray}00;
   transition:250ms all;
@@ -95,13 +102,13 @@ const StyledSlider = withStyles({
     color: colors.cartoColors.gray,
     height: 0,
     padding: '0 25px 0 15px',
-    marginLeft:'0px',
-    width:'calc(100% - 42px)',
+    // marginLeft:'0px',
+    // width:'calc(100% - 42px)',
     boxSizing: 'border-box',
-    transform: 'translateY(-55px)'
+    transform: 'translateY(-28px)'
   },
   thumb: {
-    height: 95,
+    height: 75,
     width: 2,
     pointerEvents: "auto!important",
     // borderLeft: '6px solid rgba(0,0,0,0)',
@@ -111,7 +118,6 @@ const StyledSlider = withStyles({
     borderLeft: '2px dotted #767676',
     position: 'absolute',
     marginTop: -35,
-    marginLeft: 10,
     boxShadow: '#00000044 0 2px 2px',
     borderRadius:0,
     '&:focus, &:hover, &$active': {
@@ -137,7 +143,7 @@ const StyledSlider = withStyles({
       top: 0,
       right: 0,
       borderStyle: 'solid',
-      borderRadius: 0, 
+      borderRadius: 0,
     },
     '&.second-thumb::after': {
       borderWidth: '10px 0 10px 10px',
@@ -179,9 +185,9 @@ export default function Histogram({
   range,
   color
 }){
-  
+
   const dispatch = useDispatch();
-  const minDistanceBetweenThumbs = (range.max-range.min)/11;
+  const minDistanceBetweenThumbs = (range.max-range.min)/101;
   const [sliderValue, setSliderValue] = useState([range.min, range.max]);
 
   const valueChangeHandler = (e, newValues, activeThumb) => {
@@ -195,30 +201,76 @@ export default function Histogram({
 
   const filterChart = useMemo(
     () => debounce((newValues) => dispatch(applyFilterValues(column, newValues)), 250),
-    []
+    [column, dispatch]
   );
 
   useEffect(
     () => filterChart(sliderValue),
-    [sliderValue]
+    [sliderValue, filterChart]
   );
 
   const resetFilter = () => {
     dispatch(removeFilterValues(column));
     setSliderValue([range.min, range.max]);
   }
-  
+
+  const [popoverAnchorEl, setPopoverAncherEl] = React.useState(null);
+  const isPopoverOpen = Boolean(popoverAnchorEl)
+  const popoverId = isPopoverOpen ? 'simple-popover' : undefined;
+
+  const handleInfoOpen = (evt) => {
+    setPopoverAncherEl(evt.currentTarget);
+  };
+
+  const handleInfoClose = () => {
+    setPopoverAncherEl(null);
+  };
+
+  const getVariableDescription = (column) => {
+    return Object.values(variablePresets).find((variable) => variable.Column === column)?.Description
+  }
+
+  const description = getVariableDescription(column);
+
   return (
     <HistogramContainer>
-      <h4>{name}</h4>
-      <ResetButton onClick={() => resetFilter()}>reset</ResetButton>
-      
+      <h4>
+        {name}
+        {description && <IconButton aria-label={name + ' additional info'}
+                    onClick={handleInfoOpen}
+                    style={{ marginLeft: '0.5rem', color: 'rgb(185, 209, 159)' }}
+                    size={'small'}>
+          <FaInfoCircle />
+        </IconButton>}
+      </h4>
+
+      <Popover
+          id={popoverId}
+          style={{ maxWidth: '75vw' }}
+          open={isPopoverOpen}
+          anchorEl={popoverAnchorEl}
+          onClose={handleInfoClose}
+          anchorPosition={'left'}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+      >
+        <Typography sx={{ p: 2 }}
+                    dangerouslySetInnerHTML={{ __html: description }}></Typography>
+      </Popover>
+
+
       <ChartContainer>
-        <DensityChart 
+      <InfoBar>
+        <span><strong>MIN:</strong> {Math.round(sliderValue[0]*100)/100}&nbsp;&nbsp;<strong>MAX:</strong> {Math.round(sliderValue[1]*100)/100}</span>
+        <ResetButton onClick={() => resetFilter()}>RESET</ResetButton>
+      </InfoBar>
+        <DensityChart
           data={density}
-          // density={density} 
-          xAxis={'max'} 
-          dataKey={'density'} 
+          // density={density}
+          xAxis={'max'}
+          dataKey={'density'}
           color={color}
         />
       </ChartContainer>
@@ -232,7 +284,7 @@ export default function Histogram({
         defaultValue={[range.min, range.max]}
         min={range.min}
         max={range.max}
-        step={(range.max-range.min)/10}
+        step={(range.max-range.min)/100}
         disableSwap
       />
 

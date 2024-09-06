@@ -12,14 +12,14 @@ const MapTooltipContent = ({content, showCustom = false}) => {
         trees_n,
         trees_crown_den,
         heatisl,
-        nn_q3_pm2_5,
+        // nn_q3_pm2_5,
         logtraf,
         svi_pecentile,
         asthma_age_adj_rate,
         urban_flood_suscep,
         ndvi,
         simpson,
-        topline_median,
+        // topline_median,
         proportionA,
         proportionB,
         proportionC,
@@ -58,7 +58,7 @@ const MapTooltipContent = ({content, showCustom = false}) => {
             <h2>Tract {geoid}</h2>
             {content && <div style={{overflowY:'scroll', height:'250px'}}><span><table>
                 <tbody>
-                    
+
                     <tr><td>Population</td><td> {acs_population && acs_population.toLocaleString('en')}</td></tr>
                     <tr><td>Number of Trees</td><td> {trees_n && trees_n.toLocaleString('en')}</td></tr>
                     <tr><td>Percent Canopy Cover</td><td> {trees_crown_den && trees_crown_den.toFixed(2)}%</td></tr>
@@ -88,7 +88,7 @@ const MapTooltipContent = ({content, showCustom = false}) => {
                     {showCustom && <tr><td>Custom Index</td><td>{CUSTOM_INDEX_scaled && CUSTOM_INDEX_scaled.toFixed(3)}</td></tr>}
                 </tbody>
             </table>
-            
+
             <Button variant="contained" onClick={handleSpeciesPlot} style={{marginTop:'.5em', fontFamily:'"Lato", sans-serif', background:colors.forest}}>Open Species Tree</Button>
             <PolarSpeciesPlot
                 geoid={speciesPlotInfo.geoid}

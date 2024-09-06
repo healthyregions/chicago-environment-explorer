@@ -35,10 +35,10 @@ export const IndicatorsHelperText = ({ selections }) =>
         <style>{css}</style>
         <IconBanner alt="" src={'/icons/index-builder/banner.svg'} />
         <Typography variant="h6" gutterBottom style={{ fontWeight: 200 }}>
-            Let's create your <strong>Custom Index</strong>
+            Let's create your <strong>Custom Vulnerability Index</strong>
         </Typography>
         <Typography variant="subtitle2" style={{ marginTop: '3rem', fontWeight: 200 }}>
-            Creating your custom index in 3 easy steps:
+            Creating your custom vulnerability index in 3 easy steps:
         </Typography>
         <Grid>
             <Grid item xs={8}>
@@ -84,7 +84,7 @@ const IndexBuilderStepIcon = ({ color, stepNumber, background }) => {
     }
 };
 
-export const readmeText = (colorScale) => "The process to compute this Custom Index is as follows: \r\n" +
+export const readmeText = (colorScale) => "The process to compute this Custom Vulnerability Index is as follows: \r\n" +
     "    1. Loop over all GeoJSON features and for each selected indicator, determine mean and sample standard deviation, and use mean and standard deviation to compute zScore for each value (NaN values should be filtered out)\r\n" +
     "    2. For each GeoJSON feature, apply weights as a percentage of zScore value, and accumulate sum for each feature in CUSTOM_INDEX\r\n" +
     "    3. After weighted sums are accumulated, we should now have all CUSTOM_INDEX values - use these to determine min/max and scale from 0 to 1\r\n" +
@@ -135,7 +135,7 @@ export const WeightsHelperText = ({ selections }) => {
             </Grid>
             <Accordion>
                 <AccordionSummary id="panel-header" aria-controls="panel-content">
-                    How are these weights used to calculate the Custom Index?
+                    How are these weights used to calculate the Custom Vulnerability Index?
                 </AccordionSummary>
                 <AccordionDetails dangerouslySetInnerHTML={{
                     __html: readmeText([1,2,3,4,5,6]).replaceAll('\r\n', '<br /><br />')
