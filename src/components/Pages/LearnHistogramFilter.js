@@ -291,7 +291,7 @@ const accordionContent = [
 export default function LearnHistogramFilter(){
     return (
        <LearnHistogramFilterPage>
-           <NavBar showLearnSubpages={true} />
+           <NavBar />
            <ContentContainer>
                <h1>Histogram Filter</h1>
                <hr/>

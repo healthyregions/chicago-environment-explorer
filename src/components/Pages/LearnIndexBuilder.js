@@ -16,7 +16,7 @@ const LearnPage = styled.div`
 export default function LearnIndexBuilderPage(){
     return (
        <LearnIndexBuilderPage>
-           <NavBar showLearnSubpages={true} />
+           <NavBar />
            <ContentContainer>
                <h1>Activity: Index Builder</h1>
                <hr/>
