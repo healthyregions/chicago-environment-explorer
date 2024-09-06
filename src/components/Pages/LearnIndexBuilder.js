@@ -175,11 +175,9 @@ export default function LearnIndexBuilder(){
 
 
 
-
-
            </ContentContainer>
            <Footer/>
-       </LearnPage>
+       </LearnIndexBuilderPage>
     );
 }
 
