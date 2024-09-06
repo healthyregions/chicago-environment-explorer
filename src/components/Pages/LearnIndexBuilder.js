@@ -13,10 +13,10 @@ const LearnPage = styled.div`
     background:white;
 `
 
-export default function LearnIndexBuilderPage(){
+export default function LearnIndexBuilder(){
     return (
        <LearnIndexBuilderPage>
-           <NavBar />
+           <NavBar showLearnSubpages={true} />
            <ContentContainer>
                <h1>Activity: Index Builder</h1>
                <hr/>
@@ -179,7 +179,7 @@ export default function LearnIndexBuilderPage(){
 
            </ContentContainer>
            <Footer/>
-       </LearnIndexBuilderPage>
+       </LearnPage>
     );
 }
 
