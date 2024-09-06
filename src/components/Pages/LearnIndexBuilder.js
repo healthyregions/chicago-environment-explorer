@@ -291,7 +291,7 @@ const accordionContent = [
 export default function LearnIndexBuilder(){
     return (
        <LearnIndexBuilderPage>
-           <NavBar />
+           <NavBar showLearnSubpages={true} />
            <ContentContainer>
                <h1>Learn: Index Builder</h1>
                <hr/>
