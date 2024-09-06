@@ -12,7 +12,7 @@ export default function
 (){
     return (
        <LearnPage>
-           <NavBar showLearnSubpages={true} />
+           <NavBar />
            <ContentContainer>
                <h1>Learn</h1>
                <hr/>

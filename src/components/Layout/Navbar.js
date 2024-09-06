@@ -132,7 +132,6 @@ const LogoButtonContainer = styled(Button)`
 
 export default function Nav({
   showMapControls = false,
-  showLearnSubpages = false,
   bounds,
   setViewState
 }) {
@@ -206,13 +205,6 @@ export default function Nav({
             <li><NavLink to="/community/instituto">Instituto</NavLink></li>
             <li><NavLink to="/community/prn">People's Response Network</NavLink></li>
             <li><NavLink to="/learn">Learn</NavLink></li>
-            {!!showLearnSubpages && <>
-              <NavItems>
-                <li><NavLink to="/learn/mapping101">Mapping 101</NavLink></li>
-                <li><NavLink to="/learn/histogram">Histogram Filter</NavLink></li>
-                <li><NavLink to="/learn/indexBuilder">Index Builder</NavLink></li>
-              </NavItems>
-            </>}
             <li><NavLink to="/guide">Resource Guide</NavLink></li>
             <li><NavLink to="/about">About</NavLink></li>
             <li><NavLink to="/contact">Contact</NavLink></li>
