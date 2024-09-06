@@ -293,7 +293,7 @@ export default function LearnHistogramFilter(){
        <LearnHistogramFilterPage>
            <NavBar showLearnSubpages={true} />
            <ContentContainer>
-               <h1>Histogram Filter</h1>
+               <h1>Learn: Histogram Filter</h1>
                <hr/>
                 <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago's environment together at the
                 neighborhood level. It's a partnership of researchers, community organizations, and civic groups. It's been used for teaching
