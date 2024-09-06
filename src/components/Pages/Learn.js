@@ -8,7 +8,8 @@ const LearnPage = styled.div`
 `
 
 
-export default function Learn(){
+export default function 
+(){
     return (
        <LearnPage>
            <NavBar showLearnSubpages={true} />

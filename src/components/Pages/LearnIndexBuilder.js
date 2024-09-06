@@ -13,7 +13,7 @@ const LearnPage = styled.div`
     background:white;
 `
 
-export default function Learn(){
+export default function LearnIndexBuilderPage(){
     return (
        <LearnIndexBuilderPage>
            <NavBar showLearnSubpages={true} />
