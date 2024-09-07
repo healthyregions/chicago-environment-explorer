@@ -6,14 +6,6 @@ import { Accordion, MemberGrid, NavBar, Footer } from '../../components';
 const LearnMapping101Page = styled.div`
     background:white;
 `
-// const BioSection = styled.div`
-//     padding:40px 0;
-//     // text-align:center;
-//     h3 {
-//         margin:2em 0 1em 0;
-//     }
-// `
-
 
 export default function LearnMapping101(){
     return (
@@ -68,25 +60,14 @@ export default function LearnMapping101(){
                 <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank" rel="noopener noreferrer">Healthy Regions
                 & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>,
                 in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank" rel="noopener noreferrer">Department of Geography</a> at <b>DePaul University</b>. From 2022-2024, it is funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).</p>
-                <MemberGrid
-                    members={projectTeam}
-                    columns={{
-                        md: 4
-                    }}
-                />
+  
                 <hr/>
                 <h2>Past Project Team</h2>
-                <MemberGrid
-                    members={pastTeam}
-                    columns={{
-                        md: 4
-                }}
-                />
+                
                 <hr/>
                 <h2>Background</h2>
                 <p>The original<span translate="no"> ChiVes </span>application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently integrated within<span translate="no"> ChiVes </span>was gathered, calculated, and standardized from 2018-2021,
                 when the HEROP Lab was housed at the Center for Spatial Data Science at the University of Chicago. The current application was refactored in 2022 by <a href="https://dylanhalpern.com/">Dylan Halpern</a>, adopting a new web architecture. Explore some of the original projects that inspired<span translate="no"> ChiVes </span>below:</p>
-                <Accordion entries={accordionContent} initialTab={-1} />
            </ContentContainer>
            <Footer/>
        </LearnMapping101Page>

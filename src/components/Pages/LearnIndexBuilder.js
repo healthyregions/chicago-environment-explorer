@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import {FaChevronDown} from "@react-icons/all-files/fa/FaChevronDown";
 
 
-const LearnPage = styled.div`
+const LearnIndexBuilderPage = styled.div`
     background:white;
 `
 
@@ -170,9 +170,6 @@ export default function LearnIndexBuilder(){
         <hr />
         <br />
         <p> This activity was written by <b>Erin Koster </b> (DePaul University) in 2024. </p>
-
-
-
 
 
            </ContentContainer>
