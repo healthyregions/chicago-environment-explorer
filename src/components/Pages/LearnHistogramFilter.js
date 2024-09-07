@@ -22,10 +22,10 @@ export default function LearnHistogramFilter(){
                <p>Histogram filters are a feature in the ChiVes mapping tool used to visualize the distribution of different variables on the map. You can set the histogram to only show a range of values or a specific numeric value, which will change the map to fit the criteria that you set. This activity will review how to use the histogram filters, as well as how to form your own questions and use the histogram filters to investigate them. 
                </p>
 
-               <p>Let’s begin with a scenario:
-               </p>
+               <h3>Let’s begin with a scenario.
+               </h3>
 
-               <p>A resolution was passed in IL legislature, HJR23, that calls for widening of I-55 particularly through Chicago’s South side & South Suburbs.
+               <p>A resolution was passed in IL legislature, <b>HJR23</b>, that calls for widening of I-55 particularly through Chicago’s South side & South Suburbs.
                </p>
 
                <p>You’re concerned that the increase in traffic volume and construction could pose additional environmental challenges on an already burdened community. But, you need to look at the data to investigate further & make a case.
