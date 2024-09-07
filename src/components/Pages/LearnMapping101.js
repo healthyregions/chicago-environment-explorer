@@ -1,7 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer } from '../../styled_components';
-import { Accordion, MemberGrid, NavBar, Footer } from '../../components';
+import { MemberGrid, NavBar, Footer } from '../../components';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import Typography from '@mui/material/Typography';
+import {FaChevronDown} from "@react-icons/all-files/fa/FaChevronDown";
+
+
 
 const LearnMapping101Page = styled.div`
     background:white;
@@ -12,63 +19,202 @@ export default function LearnMapping101(){
        <LearnMapping101Page>
            <NavBar />
            <ContentContainer>
-               <h1>Learn: Mapping 101</h1>
+               <h1>Mapping 101 with ChiVes</h1>
                <hr/>
-                <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago's environment together at the
-                neighborhood level. It's a partnership of researchers, community organizations, and civic groups. It's been used for teaching
-                about the basics of mapping and spatial analysis, as well as learning about air quality patterns in Chicago.</p>
-                <p>With ChiVes, we harmonize & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.</p>
-                <p>To cite the latest release of Chives (<i>Earth Day 2023 </i> Launch), use the following:</p>
-                <ul>
-                    <li>Dylan Halpern, Susan Paykin, James Keane, Sparshdeep Singh, Sarvagnya Vijay, Adam Cox, Mukesh Chugani, Winifred Curran, Michelle Stuhlmacher, & Marynia Kolak. (2023). Chives: A Chicago Environmental Justice Geospatial Dashboard (v2.0.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.8212065">https://doi.org/10.5281/zenodo.8212065</a>.</li>
-                </ul>
-                <p>The next release is planned for August 2024. <a href="/contact">Contact</a> us with any questions, or post an issue on <a href="https://github.com/healthyregions/chicago-environment-explorer/issues">Github.</a></p>
-                <hr/>
-                <h2>Get Involved </h2>
-                <p>Organizations and individuals can participate in<span translate="no"> ChiVes </span>in multiple ways:</p>
-                <ul>
-                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSdu5zCJcvLXp8eY0p3jLuCWPKSuGHjrw2auO3BsD57ssH4_wA/viewform">Data Collaborative.</a> Integrate your data directly. Members agree that the final, integrated data will meet Collaborative standards. </li>
-                    <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSd2gHSB7OKCKEBhB0weIM7ZsRBomVOAl7QhDHOeXu5B7ih_bQ/viewform">Resource Guide.</a> Share your web-based or print media resource on the Chicago environment. Resources must meet<span translate="no"> ChiVes </span>standards. </li>
-                    <li><a href="https://github.com/healthyregions/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the<span translate="no"> ChiVes </span>website, make changes, and submit for review.</li>
-                </ul>
-                <p>View our <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">Standards and Submission Guidelines</a>. These guidelines are evaluated on a regular basis by members of the Data Collaborative.</p>
-                <h2>Collective Contributors</h2>
-                <p>The following individuals and organizations have added data to the<span translate="no"> ChiVes </span>data collective:</p>
-                <ul>
-                    <li><a href="https://www.chicagobotanic.org/research/staff/anderson">Elsa Anderson</a> & Sophie Taddeo, Negaunee Institute for Plant Conservation Science and Action, Chicago Botanic Gardens</li>
-                    <li><a href="http://www.madeleinedaepp.com/">Madeleine Daepp</a>, Microsoft Research & the Eclipse Project</li>
-                    <li>Anastasia (Stacy) Montgomery, <a href="https://www.earth.northwestern.edu/our-people/post-doctoral-fellows/sara-camilleri.html">Sara Camilleri</a> & <a href="https://www.earth.northwestern.edu/our-people/faculty/horton-daniel.html">Dan Horton</a>, Climate Change Research Group, Northwestern University </li>
-                    <li> Multiple team members at the Department of Geography, DePaul University, led by <a href="https://las.depaul.edu/academics/geography/faculty/Pages/Michelle-Stuhlmacher.aspx">Michelle Stuhlmacher</a></li>
-                    <li> Multiple team members at the <a href="https://healthyregions.org">Healthy Regions & Policies Lab,</a> University of Illinois at Urbana-Champaign, led by M. Kolak</li>
-                </ul>
-                <h3>Data Standards Refinement</h3>
-                <p>We would like to extend special thanks to <a href="https://www.ladco.org/about-us/staff/zac-adelman/">Zac Adelman</a>, <a href="https://www.linkedin.com/in/amenakarim/">Amena Karim</a>, <a href="https://geosci.uchicago.edu/people/jim-franke/">Jim Franke</a>, Haynes Stephens, Tiffany Werner and <a href="https://www.linkedin.com/in/annedodge/">Anne Dodge</a> for their past work on the data collaborative team in the first release of Chives. We are also grateful to the <b>Nature Conservancy</b> and <b>Audubon Society</b> for their insights and support.
+
+                <p>ChiVes uses maps to explore different aspects of Chicago’s neighborhoods, such as air pollution or traffic. In this activity, we will explore different map elements and how to understand them.  
                 </p>
-                <h3>Application Co-Design</h3>
-                <p>In the second release of Chives focused on expanding focus in <b>Environmental Justice Communities</b>, we are grateful to the following individuals and organizations who informed improvements in the mapping application and new index builder, as well as suggested new data and design concepts.</p>
-                <ul>
-                    <li>John Paul Jones, <a href="https://www.growgreater.org/">Grow Greater Englewood</a></li>
-                    <li>Lonette Simms, Dulce Garduño, and Howard Ehrmann of the <a href="mailto:prncoalition@gmail.com">People's Response Network</a></li>
-                    <li>Margarita Reina, Chicago Department of Public Health</li>
-                    <li>Leadership, teachers, & students of <a href="https://www.institutochicago.org/">Instituto del Progreso Latino</a>, especially Karina Ayala-Bermejo, Maribel Arellano, Arturo Galan, and Evelyn Barragan</li>
-                    <li>Claudia Galeno-Sanchez, <a href="https://www.workingfamilysolidarity.org/">Working Family Solidarity</a></li>
-                </ul>
-                <p>In addition, we thank Christian Diaz, Amena Karim, and students in Dr. Curran's DePaul's GIS course for their feedback. Finally,
-                we are thankful for additional guidance by Rolando Favela in response to community needs.</p>
+
                 <hr/>
-                <h2>Active Project Team</h2>
-                <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank" rel="noopener noreferrer">Healthy Regions
-                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>,
-                in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank" rel="noopener noreferrer">Department of Geography</a> at <b>DePaul University</b>. From 2022-2024, it is funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).</p>
-  
-                <hr/>
-                <h2>Past Project Team</h2>
+
+                <h2>Approach</h2>
+                <h3>Part One: Choropleths and Legends
+                </h3>
+                <p>There are many different kinds of maps, but ChiVes primarily uses choropleths to display its data. Choropleths use colors to show different values of data. The legend assigns each color a specific data value. 
+                </p>
+                <p>Let's look at this map of traffic volume. 
+                </p>
+
+                <br />* Image * <br />
+
+                <p>Here is the legend for the map. Based on this legend, what is this map telling you?
+                </p>
+
+                <p>The numbers below the colors in the legend show that darker shaded areas have higher traffic volume scores (closer to 6.8), while lighter colored areas have a lower traffic volume score (closer to 2.9). In this map, darker colors indicate a higher value, and this is a common visualization method. Other maps may use a different color scheme, symbols, or graphs to convey information. Remember, always look at the legend to know which colors refer to which values.  
+                </p>
+
+                <Accordion>
+                    <AccordionSummary
+                    expandIcon={<FaChevronDown />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                    >
+                    <Typography><b>Comprehension question: </b> 
+                    Which areas have high values and which areas have low values? </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                    <Typography>
+                    Answer (non exhaustive): High value areas include Near South Side, Forest Glen, South Deering, and Jefferson Park. Low value areas include Humboldt Park, Hermosa, Montclare, West Pullman, Gage Park, Clearing, and South Lawndale.
+                    </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <br /> <br />
+
+                <h3>Part Two: Data Descriptions 
+                </h3>
+
+                <p>When reading a map, it is important to learn about the data presented in the map so you can understand what the map is showing. 
+                </p>
+
+                <p>Each of the maps in ChiVes will have a window on the left side of the screen. This window will tell you a bit more about the variable you are looking at, and how it was collected. Every data description in ChiVes will highlight who created the map (the data contributor), where the data came from (the data source), and when the data was collected (the data year). This activity will primarily focus on the data description section, but ChiVes also has a page dedicated to metadata. Metadata is often called “data about data”; it gives more detailed descriptions of data processing and calculation. 
+                </p>
+
+                <p>Let’s look at the data description for traffic volume score. 
+                </p>
+
+                <br />* Image * <br />
+
+                <p>Based on this description, we know that this traffic data is from 2019. The data originally came from the Illinois Department of Transportation and the Center for Spatial Data Science performed calculations to determine the traffic volume score. We also know that this data is based on annual average daily traffic counts. 
+                </p>
+
+                <p>Based on this, we can conclude that the map is showing us a general picture of traffic values in 2019. This map does not show us exact traffic at any given time or on a particular road, and it is important to remember that traffic patterns may have changed since 2019.
+                </p>
+
+                <p>If you want to learn more about a particular variable click on the i for a brief summary, or visit the metadata page for a more detailed explanation.
+                </p>
+
+                <Accordion>
+                    <AccordionSummary
+                    expandIcon={<FaChevronDown />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                    >
+                    <Typography><b>Comprehension question: </b> 
+                    Use the data description to figure out  what AADT stands for. </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                    <Typography>
+                    Answer: Annual Average Daily Traffic (Counts) 
+                    </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <br /> <br />
+
+
+                <h3>Part Three:  Other ways to explore ChiVes
+                </h3>
+
+                <p>ChiVes maps can show one variable at a time, such as our example with traffic score. They can also show a variable in different ways, or multiple variables at the same time.  For more information about how to display a variable in different ways, visit our Histogram activity. 
+                </p>
+
+                <p>ChiVes maps can show multiple variables as a single choropleth, or index. For more information about this, visit our Index Builder activity. 
+                </p>
+
+                <p>Another way you can see multiple variables at the same time is by layering them with the data overlay feature, found on the left side of the screen beneath the data description. You can select overlays such as wards, community areas, and industrial areas. 
+                </p>
+
+                * Image * 
+                <br />
+                <br />
+
+                <p>The following data overlay options are available in ChiVes: 
+                </p>
+
+                * Image * 
+                <br />
+                <br />
+
+                <p> Here is an example of how to display multiple variables, using “% Children” as our base map and “Public Housing”  as our data overlay. The green dots represent public housing locations, while the choropleth underneath represents % children.  
+                </p>
+
+                * Image * 
+                <br />
+                <br />
+
+                <Accordion>
+                    <AccordionSummary
+                    expandIcon={<FaChevronDown />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                    >
+                    <Typography><b>Comprehension question: </b> 
+                    Do you notice any patterns between these two variables?  </Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                    <Typography>
+                    Answer: There are many ways to answer and interpret this map. High concentrations of % children and public housing areas are seen in the northwest and southeast sides.   
+                    </Typography>
+                    </AccordionDetails>
+                </Accordion>
+
+                <br /> <br />
+
+                <hr /><br />
                 
-                <hr/>
-                <h2>Background</h2>
-                <p>The original<span translate="no"> ChiVes </span>application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently integrated within<span translate="no"> ChiVes </span>was gathered, calculated, and standardized from 2018-2021,
-                when the HEROP Lab was housed at the Center for Spatial Data Science at the University of Chicago. The current application was refactored in 2022 by <a href="https://dylanhalpern.com/">Dylan Halpern</a>, adopting a new web architecture. Explore some of the original projects that inspired<span translate="no"> ChiVes </span>below:</p>
+                <h2>Do It Yourself: Practicing Mapping Skills </h2>
+
+                <p>Understanding maps and their story is important to understanding different areas of the world and your own community. It can also improve your critical thinking skills and understanding of data as a whole. Here is a quick activity to help you practice. 
+                </p>
+                
+                <ol>
+                    <li>Select a variable that interests you. 
+                    </li>
+                        <ul>
+                        <li>Analyze the legend for your map. How does the color ramp change with the data values? 
+                        </li>
+                        <li>What areas of the map show high (or low) values of your selected variable?
+                        </li>
+                        </ul>
+                    <li>Read the data description of the variable you selected. 
+                    </li>
+                        <ul>
+                        <li>Who created the data you are looking at? What is the source? When was the data published?
+                        </li>
+                        <li>Is the data you are viewing raw data? Was it modeled, or had some other calculation performed on it for visualization?  
+                        </li>
+                        <li>What are the possible limitations of your data? For example, is your variable limited to a certain year or period of time? 
+                        </li>
+                        </ul>
+                    <li>Add another variable to your map with the data overlay.
+                    </li>
+                        <ul>
+                        <li>Are there any connections between your variable and the overlay? How might they be related or different? 
+                        </li>
+                        <li>Are there any spatial patterns in the variables? For example, are there high concentrations of one variable and not the other, or both at the same time? 
+                        </li>
+                        <li>Try adjusting your data with the histogram filters, or using the custom index builder. What changed? Are there any new patterns? 
+                        </li>
+                        </ul>
+                </ol>
+
+                <hr />
+                <br /><br />
+                <h2> Additional Resources 
+                </h2>
+
+                <p> If you are interested in learning more about mapping and geographic concepts, here are some additional resources to explore! 
+                </p>
+
+                <ul>
+                    <li>The UCGIS Book of Knowledge provides content on cartography, remote sensing, environmental science, and more. </li>
+                    <li>GeographyRealm’s What is a Map? Provides a basic overview of other important map elements such as projections and a history of maps. 
+                    .</li>
+                </ul>
+
+                
+
+                <br />
+        <hr />
+        <br />
+        <p> This activity was written by <b>Erin Koster </b> (DePaul University) in 2024. </p>
+
+
            </ContentContainer>
+
+
+
            <Footer/>
        </LearnMapping101Page>
     );
