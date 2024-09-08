@@ -40,7 +40,7 @@ export default function
                         <Grid item xs={9}>
 
                          <h2> Mapping 101 <i> with ChiVes</i></h2>
-                         <hr />
+                         
                          <p>ChiVes uses maps to explore different aspects of Chicago’s neighborhoods, such as air pollution or traffic. In this activity, we will explore different map elements and how to understand them.
 
                             </p>
@@ -64,7 +64,7 @@ export default function
                         <Grid item xs={9}>
 
                          <h2> <i> Activity:</i> Histogram</h2>
-                         <hr />
+                         
                          <p> Histogram filters are a feature in the ChiVes mapping tool used to visualize the distribution of different variables on the map. You can set the histogram to only show a range of values or a specific numeric value, which will change the map to fit the criteria that you set. This activity will review how to use the histogram filters, as well as how to form your own questions and use the histogram filters to investigate them.
                         </p>
 
@@ -87,7 +87,7 @@ export default function
                         <Grid item xs={9}>
 
                          <h2> <i> Activity:</i> Index Builder</h2>
-                         <hr />
+                         
                          <p> The index builder is a ChiVes tool to examine the impact of multiple variables on a given community, or community area, at once. This activity will review how to use the index builder, as well as how to form your own questions and use the index builder to investigate them.
                         </p>
 
