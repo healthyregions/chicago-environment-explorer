@@ -24,7 +24,8 @@ export default function LearnIndexBuilder(){
                 <h3>Let’s begin with a a scenario.</h3>
                 <p>Imagine you live in a neighborhood that is surrounded by factories and busy roads. You notice the air in your neighborhood seems different from other places; it often looks hazy or smells strange and seems to be hotter than surrounding neighborhoods. 
                 </p>
-                <p>You know that planting trees can help cool an area by providing shade and releasing moisture, and they can improve air quality by absorbing pollutants and releasing oxygen in return. Maybe planting trees could help with the heat and air pollution in your community too! 
+                <p>You know that planting trees can help cool an area by providing shade and releasing moisture, and they can improve air quality by absorbing pollutants and releasing oxygen in return. Maybe planting trees could help with the heat and air pollution in your community 
+                     <a href="https://www.chicago.gov/city/en/depts/streets/provdrs/forestry/svcs/tree_planting.html"> too</a>! 
                 </p>
                 <p>However, you want to plant trees in areas where they will have the most positive impact. To do this, you will need to use and understand data to identify the areas that would benefit most from new trees.   
                 </p>
@@ -52,7 +53,8 @@ export default function LearnIndexBuilder(){
                 <p>These variables are relevant to our question because planting trees can help improve air quality and cool neighborhoods. Particulate matter (PM 2.5) measures the amount of tiny particles like dirt and smoke in the air and is one type of air pollution. The maximum heat index measures temperature based on how the human body feels it, using afternoon readings when temperatures are highest. We’re including tree crown density because we want to prioritize planting trees in areas where there is currently less tree cover.
                 </p>
 
-                <p>If you want to learn more about a particular variable click on the i for a brief summary, or visit the metadata page for a more detailed explanation.
+                <p>If you want to learn more about a particular variable click on the i for a brief summary, or visit the 
+                    <a href="https://chichives.com/data"> metadata page</a> for a more detailed explanation.
                 </p>
 
 

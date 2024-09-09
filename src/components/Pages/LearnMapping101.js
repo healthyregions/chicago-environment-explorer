@@ -67,7 +67,8 @@ export default function LearnMapping101(){
                 <p>When reading a map, it is important to learn about the data presented in the map so you can understand what the map is showing. 
                 </p>
 
-                <p>Each of the maps in ChiVes will have a window on the left side of the screen. This window will tell you a bit more about the variable you are looking at, and how it was collected. Every data description in ChiVes will highlight who created the map (the data contributor), where the data came from (the data source), and when the data was collected (the data year). This activity will primarily focus on the data description section, but ChiVes also has a page dedicated to metadata. Metadata is often called “data about data”; it gives more detailed descriptions of data processing and calculation. 
+                <p>Each of the maps in ChiVes will have a window on the left side of the screen. This window will tell you a bit more about the variable you are looking at, and how it was collected. Every data description in ChiVes will highlight who created the map (the data contributor), where the data came from (the data source), and when the data was collected (the data year). This activity will primarily focus on the data description section, but ChiVes also has a page dedicated to 
+                    <a href="https://chichives.com/data"> metadata</a>. Metadata is often called “data about data”; it gives more detailed descriptions of data processing and calculation. 
                 </p>
 
                 <p>Let’s look at the data description for traffic volume score. 
@@ -81,7 +82,8 @@ export default function LearnMapping101(){
                 <p>Based on this, we can conclude that the map is showing us a general picture of traffic values in 2019. This map does not show us exact traffic at any given time or on a particular road, and it is important to remember that traffic patterns may have changed since 2019.
                 </p>
 
-                <p>If you want to learn more about a particular variable click on the i for a brief summary, or visit the metadata page for a more detailed explanation.
+                <p>If you want to learn more about a particular variable click on the i for a brief summary, or visit the 
+                <a href="https://chichives.com/data"> metadata page</a> for a more detailed explanation.
                 </p>
 
                 <Accordion>
@@ -188,7 +190,7 @@ export default function LearnMapping101(){
                         </li>
                         </ul>
                 </ol>
-
+                <br />
                 <hr />
                 <br /><br />
                 <h2> Additional Resources 
@@ -198,8 +200,8 @@ export default function LearnMapping101(){
                 </p>
 
                 <ul>
-                    <li>The UCGIS Book of Knowledge provides content on cartography, remote sensing, environmental science, and more. </li>
-                    <li>GeographyRealm’s What is a Map? Provides a basic overview of other important map elements such as projections and a history of maps. 
+                    <li>The <a href="https://www.ucgis.org/site/gis-t-body-of-knowledge"> UCGIS Book of Knowledge</a> provides content on cartography, remote sensing, environmental science, and more. </li>
+                    <li>GeographyRealm’s <a href="https://www.geographyrealm.com/map/"> What is a Map?</a> Provides a basic overview of other important map elements such as projections and a history of maps. 
                     .</li>
                 </ul>
 
