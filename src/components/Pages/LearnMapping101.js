@@ -1,14 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer } from '../../styled_components';
-import { MemberGrid, NavBar, Footer } from '../../components';
+import { NavBar, Footer } from '../../components';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
 import {FaChevronDown} from "@react-icons/all-files/fa/FaChevronDown";
-
-
 
 const LearnMapping101Page = styled.div`
     background:white;
@@ -190,7 +188,7 @@ export default function LearnMapping101(){
                         </li>
                         </ul>
                 </ol>
-                <br />
+                <br />œœ
                 <hr />
                 <br /><br />
                 <h2> Additional Resources 

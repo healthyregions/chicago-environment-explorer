@@ -18,12 +18,16 @@ const theme = createTheme();
 
 const Map = React.lazy(() => import('./components/Pages/Map'));
 const About = React.lazy(() => import('./components/Pages/About'));
+const Team = React.lazy(() => import('./components/Pages/Team'));
 const Guide = React.lazy(() => import('./components/Pages/Guide'));
 const Contact = React.lazy(() => import('./components/Pages/Contact'));
 const Community = React.lazy(() => import('./components/Pages/Community'));
 const Data = React.lazy(() => import('./components/Pages/Data'));
+const Explore = React.lazy(() => import('./components/Pages/Explore'));
 const IndexBuilder = React.lazy(() => import('./components/Pages/IndexBuilder'));
 const Learn = React.lazy(() => import('./components/Pages/Learn'));
+const News = React.lazy(() => import('./components/Pages/News'));
+
 
 const LearnHistogramFilter = React.lazy(() => import('./components/Pages/LearnHistogramFilter'));
 const LearnMapping101 = React.lazy(() => import('./components/Pages/LearnMapping101'));
@@ -85,8 +89,14 @@ export default function App() {
 							<Route path="/map.html" component={Map} />
 							<Route path="/about" component={About} />
 							<Route path="/about.html" component={About} />
+							<Route exact path="/team" component={Team} />
+							<Route path="/explore" component={Explore} />
+							<Route path="/explore.html" component={Explore} />
+							<Route exact path="/team.html" component={Team} />
 							<Route path="/guide" component={Guide} />
 							<Route path="/guide.html" component={Guide} />
+							<Route path="/news" component={News} />
+							<Route path="/news.html" component={News} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/contact.html" component={Contact} />
 							<Route exact path="/community" component={Community} />
@@ -107,14 +117,14 @@ export default function App() {
 							<Route path="/learn/indexBuilder" component={LearnIndexBuilder} />
 							<Route path="/learn/indexBuilder.html" component={LearnIndexBuilder} />
 
-							<Route path="/community/instituto" component={Instituto} />
+							{/* <Route path="/community/instituto" component={Instituto} />
 							<Route path="/community/instituto.html" component={Instituto} />
 							<Route path="/community/prn" component={PRN} />
 							<Route path="/community/prn.html" component={PRN} />
 							<Route path="/community/peoplesresponse" component={PRN} />
 							<Route path="/community/peoplesresponse.html" component={PRN} />
 							<Route path="/community/peoplesresponsenetwork" component={PRN} />
-							<Route path="/community/peoplesresponsenetwork.html" component={PRN} />
+							<Route path="/community/peoplesresponsenetwork.html" component={PRN} /> */}
 							<Route component={ErrorPage} />
 							<Route />
 						</Switch>

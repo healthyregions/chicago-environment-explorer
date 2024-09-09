@@ -198,16 +198,16 @@ export default function Nav({
           </>}
           {/* <Typography>Pages</Typography> */}
           <NavItems>
-            <li><NavLink to="/" color="red">Home</NavLink></li>
-            <li><NavLink to="/about">About</NavLink></li>
+            <li><NavLink to="/" style={{color:"#2685c4"}}>Home</NavLink></li>
+            <li><NavLink to="/about" style={{color:"#e3201d"}}>About</NavLink></li>
             {!!showLearnSubpages && <>
               <NavItems>
-              <li><NavLink to="#">Team</NavLink></li>
+              <li><NavLink to="/team">Team</NavLink></li>
               <li><NavLink to="/data">Data</NavLink></li>
-              <li><NavLink to="/#">News</NavLink></li>
+              <li><NavLink to="/news">News</NavLink></li>
               </NavItems>
             </>}
-            <li><NavLink to="/#">Explore</NavLink></li>
+            <li><NavLink to="/explore" style={{color:"#e3201d"}}>Explore</NavLink></li>
             {!!showLearnSubpages && <>
               <NavItems>
               <li><NavLink to="/map">Map</NavLink></li>
@@ -216,7 +216,7 @@ export default function Nav({
             <li><NavLink to="/guide">Resource Guide</NavLink></li>
               </NavItems>
             </>}
-            <li><NavLink to="/learn">Learn</NavLink></li>
+            <li><NavLink to="/learn" style={{color:"#e3201d"}}>Learn</NavLink></li>
             {!!showLearnSubpages && <>
               <NavItems>
                 <li><NavLink to="/learn/mapping101">Mapping 101</NavLink></li>

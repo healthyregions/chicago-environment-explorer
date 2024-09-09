@@ -8,13 +8,13 @@ import { NavLink } from 'react-router-dom';
 
 
 
-const LearnPage = styled.div`
+const ExplorePage = styled.div`
     background:white;
 `
 
-export default function Learn (){
+export default function Explore (){
     return (
-       <LearnPage>
+       <ExplorePage>
            <NavBar />
            <ContentContainer>
                <h1>Learn</h1>
@@ -97,6 +97,6 @@ export default function Learn (){
                 
            </ContentContainer>
            <Footer/>
-       </LearnPage>
+       </ExplorePage>
     );
 }
