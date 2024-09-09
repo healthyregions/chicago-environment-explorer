@@ -17,7 +17,7 @@ export default function Explore (){
        <ExplorePage>
            <NavBar />
            <ContentContainer>
-               <h1>Learn</h1>
+               <h1>Explore</h1>
                <hr/>
                 <p>Looking for inspiration or support in learning how to use ChiVes? Check out these
                     tutorials.
@@ -27,20 +27,21 @@ export default function Explore (){
 
                      <Grid container spacing={2} >
                         <Grid item xs={2}>
-                            <NavLink to="/learn/mapping101">
+                            <NavLink to="/map">
                                 <img
-                                    className="photo"
-                                    src={process.env.PUBLIC_URL + "/icons/noun-geospatial-analytics-6672680.png"}
-                                    loading="lazy"
-                                    width="150"
+                                className="photo"
+                                src={process.env.PUBLIC_URL + "/icons/tree-location.svg"}
+                                alt="Wild Onion"
+                                loading="lazy"
+                                width="150"
                                 />
                             </NavLink>
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> Mapping 101 <i> with ChiVes</i></h2>
+                         <h2> Neighborhood Map</h2>
                          
-                         <p>ChiVes uses maps to explore different aspects of Chicago’s neighborhoods, such as air pollution or traffic. In this activity, we will explore different map elements and how to understand them.
+                         <p>Explore dimensions of the environment across Chicago in an interactive map. Data comes from collaborators across the city.
 
                             </p>
 
@@ -50,30 +51,7 @@ export default function Explore (){
                     <br />
                     <Grid container spacing={2} >
                         <Grid item xs={2}>
-                            <NavLink to="/learn/histogram">
-                                <img
-                                    className="photo"
-                                    src={process.env.PUBLIC_URL + "/icons/noun-histogram-6696040.png"}
-                                    loading="lazy"
-                                    width="150"
-
-                                />
-                            </NavLink>
-                        </Grid>
-                        <Grid item xs={9}>
-
-                         <h2> <i> Activity:</i> Histogram</h2>
-                         
-                         <p> Histogram filters are a feature in the ChiVes mapping tool used to visualize the distribution of different variables on the map. You can set the histogram to only show a range of values or a specific numeric value, which will change the map to fit the criteria that you set. This activity will review how to use the histogram filters, as well as how to form your own questions and use the histogram filters to investigate them.
-                        </p>
-
-                        </Grid>
-                    </Grid>
-
-                    <br />
-                    <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <NavLink to="/learn/indexBuilder">
+                            <NavLink to="/indexBuilder">
                                 <img
                                     className="photo"
                                     src={process.env.PUBLIC_URL + "/icons/noun-switch-7088111.png"}
@@ -85,9 +63,55 @@ export default function Explore (){
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> <i> Activity:</i> Index Builder</h2>
+                         <h2> Index Builder </h2>
                          
-                         <p> The index builder is a ChiVes tool to examine the impact of multiple variables on a given community, or community area, at once. This activity will review how to use the index builder, as well as how to form your own questions and use the index builder to investigate them.
+                         <p> The index builder is a ChiVes tool to examine the impact of multiple variables on a given community, or community area, at once.
+                            </p>
+
+                        </Grid>
+                    </Grid>
+
+                    <br />
+                    <Grid container spacing={2}>
+                        <Grid item xs={2}>
+                            <NavLink to="/community">
+                                <img
+                                    className="photo"
+                                    src={process.env.PUBLIC_URL + "/icons/nature-book.png"}
+                                    loading="lazy"
+                                    width="150"
+                                />
+                            </NavLink>
+                        </Grid>
+                        <Grid item xs={9}>
+
+                         <h2> My Community </h2>
+                         
+                         <p> Get a dynamic report about key indicators and environmental
+                         metrics for your neighborhood. Search by your location.
+                        </p>
+
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={2}>
+                        <Grid item xs={2}>
+                            <NavLink to="/guide">
+                                <img
+                                    className="photo"
+                                    src={process.env.PUBLIC_URL + "/icons/resource_guide.png"}
+                                    loading="lazy"
+                                    width="150"
+                                />
+                            </NavLink>
+                        </Grid>
+                        <Grid item xs={9}>
+
+                         <h2> Resource Guide </h2>
+                         
+                         <p> Find other maps, data, and resources about the Chicago
+                environment from featured partners and a curated list of
+                resources.
                         </p>
 
                         </Grid>
