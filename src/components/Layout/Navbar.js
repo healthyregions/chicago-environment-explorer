@@ -196,15 +196,26 @@ export default function Nav({
               {/* <li><a onClick={handleGeolocate}>{SVG.locate}Find my location</a></li> */}
             </NavItems>
           </>}
-          <Typography>Pages</Typography>
+          {/* <Typography>Pages</Typography> */}
           <NavItems>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/map">Map</NavLink></li>
+            <li><NavLink to="/" color="red">Home</NavLink></li>
+            <li><NavLink to="/about">About</NavLink></li>
+            {!!showLearnSubpages && <>
+              <NavItems>
+              <li><NavLink to="#">Team</NavLink></li>
+              <li><NavLink to="/data">Data</NavLink></li>
+              <li><NavLink to="/#">News</NavLink></li>
+              </NavItems>
+            </>}
+            <li><NavLink to="/#">Explore</NavLink></li>
+            {!!showLearnSubpages && <>
+              <NavItems>
+              <li><NavLink to="/map">Map</NavLink></li>
             <li><NavLink to="/builder">Index Builder</NavLink></li>
-            <li><NavLink to="/data">Data</NavLink></li>
             <li><NavLink to="/community">My Community</NavLink></li>
-            <li><NavLink to="/community/instituto">Instituto</NavLink></li>
-            <li><NavLink to="/community/prn">People's Response Network</NavLink></li>
+            <li><NavLink to="/guide">Resource Guide</NavLink></li>
+              </NavItems>
+            </>}
             <li><NavLink to="/learn">Learn</NavLink></li>
             {!!showLearnSubpages && <>
               <NavItems>
@@ -212,9 +223,7 @@ export default function Nav({
                 <li><NavLink to="/learn/histogram">Histogram Filter</NavLink></li>
                 <li><NavLink to="/learn/indexBuilder">Index Builder</NavLink></li>
               </NavItems>
-            </>}
-            <li><NavLink to="/guide">Resource Guide</NavLink></li>
-            <li><NavLink to="/about">About</NavLink></li>
+            </>} 
             <li><NavLink to="/contact">Contact</NavLink></li>
           </NavItems>
         </NavInner>
