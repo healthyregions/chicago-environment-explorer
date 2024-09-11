@@ -19,7 +19,7 @@ export default function LearnHistogramFilter(){
                <h1>Activity: Histogram Filter</h1>
                <hr/>
 
-               <p>Histogram filters are a feature in the ChiVes mapping tool used to visualize the distribution of different variables on the map. You can set the histogram to only show a range of values or a specific numeric value, which will change the map to fit the criteria that you set. This activity will review how to use the histogram filters, as well as how to form your own questions and use the histogram filters to investigate them. 
+               <p>Histogram filters are a feature in the ChiVes mapping tool used to visualize the distribution of different variables on the map. You can set the histogram to only show a range of values or a specific numeric value, which will change the map to fit the criteria that you set. This activity will review how to use the histogram filters, as well as how to form your own questions and use the histogram filters to investigate them.
                </p>
 
                <h3>Let’s begin with a scenario.
@@ -39,7 +39,7 @@ export default function LearnHistogramFilter(){
                     <ul><li>How does it compare alongside highways?</li></ul> </li>
                 <li>How do these places coincide with air pollution in Chicago?
                     <ul><li> If not, what are the neighborhood assets that may be protective? </li></ul> </li>
-               <li>How do these places coincide with social vulnerability? 
+               <li>How do these places coincide with social vulnerability?
                     <ul><li>What about populations especially vulnerable to increases in pollution?</li></ul> </li>
                </ul>
 
@@ -49,11 +49,11 @@ export default function LearnHistogramFilter(){
 
                <h3>Step 1: Locate the Histogram Filters on the Chives website
                </h3>
-               
+
                <p>The histogram filters are located in the mapping section. We get to this section on the home screen by clicking “Start Mapping”. The histogram filters will then be located on the right section of the screen.
                </p>
 
-               IMAGE  <br /><br />
+               <img src={'/img/learning-activities/histogram-1.png'} alt={''} />  <br /><br />
 
                <h3>Step 2: Select Your Primary Map
                </h3>
@@ -61,9 +61,9 @@ export default function LearnHistogramFilter(){
                <p>You can select the primary variable on your map by going to the left section of the screen and clicking the box titled “Variable”. This then opens a drop down menu of different variables to choose from.
                </p>
 
-               IMAGE  <br /><br />
+               <img src={'/img/learning-activities/histogram-2.png'} alt={''} />   <br /><br />
 
-               <p>Given that our main concern is traffic volume, this will be our primary variable. We will find this by scrolling within the drop down menu and clicking “Traffic Volume Score”. 
+               <p>Given that our main concern is traffic volume, this will be our primary variable. We will find this by scrolling within the drop down menu and clicking “Traffic Volume Score”.
                </p>
 
                <p>You can learn all about what this variable means by reading the data description located in the box on the left side of the screen.
@@ -75,7 +75,7 @@ export default function LearnHistogramFilter(){
                <h3>Step 3: Filter the Histograms
                </h3>
 
-               <p>Our earlier questions involved additional air pollution and social vulnerability. We could easily add this to our map using the histogram filters located on the right side of the screen. We can scroll through the options to see what variables best fit what we are looking for. 
+               <p>Our earlier questions involved additional air pollution and social vulnerability. We could easily add this to our map using the histogram filters located on the right side of the screen. We can scroll through the options to see what variables best fit what we are looking for.
                </p>
 
                <p>For our example, we will use particulate matter (PM 2.5) which measures the amount of tiny particles like dirt and smoke in the air and is one type of air pollution. We will also use the social vulnerability which is a measurement of various factors (such as poverty, lack of access to transportation, and crowded housing) that show who in society is most vulnerable.
@@ -84,7 +84,7 @@ export default function LearnHistogramFilter(){
                <p>To begin filtering, we click on the left slider of the histogram graph and move it toward our desired location. We also do the same with the right slider on the histogram filter graph so that we can set a more specific criteria.
                </p>
 
-               IMAGE  <br /><br />
+               <img src={'/img/learning-activities/histogram-3.png'} alt={''} />   <br /><br />
 
                <p>How do we want to filter the PM 2.5 histogram? How do we want to filter social vulnerability? What happens if we do a low value? What is most fitting to our problem?
                </p>
@@ -98,7 +98,7 @@ export default function LearnHistogramFilter(){
                <p>The value for our Summer PM 2.5 will be at the highest available values, filtered between 10.02 to 11.9 The values for Social Vulnerability will also be at the highest values, filtered between 84.04 to 99.8.
                </p>
 
-               IMAGE  <br /><br />
+               <img src={'/img/learning-activities/histogram-4.png'} alt={''} />   <br /><br />
 
                <p>What do you notice? How does this relate to the traffic volume?
                </p>
@@ -109,7 +109,7 @@ export default function LearnHistogramFilter(){
                <p>The value for our Summer PM 2.5 will be at the lowest available values, filtered between 2.51 to 10.02. The values for Social Vulnerability will also be at the lowest values, filtered between the farthest spot on the left to 21.01.
                </p>
 
-               IMAGE  <br /><br />
+               <img src={'/img/learning-activities/histogram-5.png'} alt={''} />   <br /><br />
 
                 <p>What do you notice? How does this differ from the previous map?
                 </p>
@@ -118,7 +118,9 @@ export default function LearnHistogramFilter(){
                 </h3>
 
                 <p>Once you have filtered all of your variables accordingly, take a look at the map you have created.                </p>
-
+                <br />
+                <img src={'/img/learning-activities/histogram-6.png'} alt={''} />
+                <br />
                 <p>Some initial questions to help understand what the data means are:
                 </p>
 
@@ -149,7 +151,7 @@ export default function LearnHistogramFilter(){
                 <h3> Answer Community Environmental Justice Questions
                 </h3>
 
-                <p> We’ve gone through one example, but there are many different ways to use the index builder to explore Chicago’s natural and social environment. For example, you could: 
+                <p> We’ve gone through one example, but there are many different ways to use the index builder to explore Chicago’s natural and social environment. For example, you could:
                 </p>
 
                 <ul>
@@ -194,7 +196,7 @@ export default function LearnHistogramFilter(){
                         </li>
                         <li>What do you think should be done about this problem?
                         </li>
-                        <li>How can data inform your question, or the solution? 
+                        <li>How can data inform your question, or the solution?
                         </li>
                         </ul>
                     <li>Using the index builder:
@@ -202,7 +204,7 @@ export default function LearnHistogramFilter(){
                         <ul>
                         <li>What variables are relevant to your question?
                         </li>
-                        <li>Which of these variables is most important in your problem (i.e. what is the variable for your primary map? How will you decide where to put the slider on the histogram?, etc.). 
+                        <li>Which of these variables is most important in your problem (i.e. what is the variable for your primary map? How will you decide where to put the slider on the histogram?, etc.).
                         </li>
                         </ul>
                     <li>Interpreting your results:</li>

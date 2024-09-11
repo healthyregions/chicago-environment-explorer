@@ -22,12 +22,12 @@ export default function LearnIndexBuilder(){
                <hr/>
                 <p>The index builder is a ChiVes tool to examine the impact of multiple variables on a given community, or community area, at once. This activity will review how to use the index builder, as well as how to form your own questions and use the index builder to investigate them.</p>
                 <h3>Let’s begin with a a scenario.</h3>
-                <p>Imagine you live in a neighborhood that is surrounded by factories and busy roads. You notice the air in your neighborhood seems different from other places; it often looks hazy or smells strange and seems to be hotter than surrounding neighborhoods. 
+                <p>Imagine you live in a neighborhood that is surrounded by factories and busy roads. You notice the air in your neighborhood seems different from other places; it often looks hazy or smells strange and seems to be hotter than surrounding neighborhoods.
                 </p>
-                <p>You know that planting trees can help cool an area by providing shade and releasing moisture, and they can improve air quality by absorbing pollutants and releasing oxygen in return. Maybe planting trees could help with the heat and air pollution in your community 
-                     <a href="https://www.chicago.gov/city/en/depts/streets/provdrs/forestry/svcs/tree_planting.html"> too</a>! 
+                <p>You know that planting trees can help cool an area by providing shade and releasing moisture, and they can improve air quality by absorbing pollutants and releasing oxygen in return. Maybe planting trees could help with the heat and air pollution in your community
+                     <a href="https://www.chicago.gov/city/en/depts/streets/provdrs/forestry/svcs/tree_planting.html"> too</a>!
                 </p>
-                <p>However, you want to plant trees in areas where they will have the most positive impact. To do this, you will need to use and understand data to identify the areas that would benefit most from new trees.   
+                <p>However, you want to plant trees in areas where they will have the most positive impact. To do this, you will need to use and understand data to identify the areas that would benefit most from new trees.
                 </p>
                 <p><b>Your question:</b> In Chicago, where should trees be planted to reduce heat and improve air quality?
                 </p>
@@ -37,10 +37,10 @@ export default function LearnIndexBuilder(){
                 <h2>Approach</h2>
                 <h3>Step 1: Locate the index builder on the Chives website
                 </h3>
-                <p>The index builder is located in the main menu, shown here in the red box. 
+                <p>The index builder is located in the main menu, shown here in the red box.
                 </p>
                 <br />
-                * Image * 
+                <img src={'/img/learning-activities/indexbuilder-1.png'} alt={''} />
                 <br />
                 <br />
 
@@ -53,16 +53,16 @@ export default function LearnIndexBuilder(){
                 <p>These variables are relevant to our question because planting trees can help improve air quality and cool neighborhoods. Particulate matter (PM 2.5) measures the amount of tiny particles like dirt and smoke in the air and is one type of air pollution. The maximum heat index measures temperature based on how the human body feels it, using afternoon readings when temperatures are highest. We’re including tree crown density because we want to prioritize planting trees in areas where there is currently less tree cover.
                 </p>
 
-                <p>If you want to learn more about a particular variable click on the i for a brief summary, or visit the 
+                <p>If you want to learn more about a particular variable click on the i for a brief summary, or visit the
                     <a href="https://chichives.com/data"> metadata page</a> for a more detailed explanation.
                 </p>
 
 
-                * Image * 
+                <img src={'/img/learning-activities/indexbuilder-2.png'} alt={''} />
                 <br />
                 <br />
 
-                * Image * 
+                <img src={'/img/learning-activities/indexbuilder-3.png'} alt={''} />
                 <br />
                 <br />
 
@@ -73,18 +73,18 @@ export default function LearnIndexBuilder(){
                 </p>
 
 
-                * Image * 
+                <img src={'/img/learning-activities/indexbuilder-4.png'} alt={''} />
                 <br />
                 <br />
 
                 <h3>Step 4: View and interpret your results!
                 </h3>
 
-                <p>Once you have selected your variables, the index builder will create a custom index based on your variables and weights. No matter which variables you select, the index builder will automatically organize on a scale from zero to one, with higher (and visually darker) values reflecting areas of high vulnerability. For our example, this means values closer to one: have low tree canopy, high particulate matter (PM 2.5), and a high maximum heat index. 
+                <p>Once you have selected your variables, the index builder will create a custom index based on your variables and weights. No matter which variables you select, the index builder will automatically organize on a scale from zero to one, with higher (and visually darker) values reflecting areas of high vulnerability. For our example, this means values closer to one: have low tree canopy, high particulate matter (PM 2.5), and a high maximum heat index.
                 </p>
 
 
-                * Image * 
+                <img src={'/img/learning-activities/indexbuilder-5.png'} alt={''} />
                 <br />
                 <br />
 
@@ -111,7 +111,7 @@ export default function LearnIndexBuilder(){
                 <h3> How to use the index builder to answer your community environmental justice questions
                 </h3>
 
-                <p> We’ve gone through one example, but there are many different ways to use the index builder to explore Chicago’s natural and social environment. For example, you could: 
+                <p> We’ve gone through one example, but there are many different ways to use the index builder to explore Chicago’s natural and social environment. For example, you could:
                 </p>
 
                 <ul>
@@ -127,7 +127,7 @@ export default function LearnIndexBuilder(){
                     <li>Reducing poverty by targeting early education resources: economic hardship index (20%),  % children (40%), percentage four-year degree or higher (40%)</li>
                     <li>Correlation between housing affordability and green space inequity: Housing burdened (33%), NDVI (33%), Median rent (33%)
                     </li>
-                    <li>Targeting cancer treatment and health services: cancer rate (33%), lung cancer rate (33%),  adult asthma rate (33%) 
+                    <li>Targeting cancer treatment and health services: cancer rate (33%), lung cancer rate (33%),  adult asthma rate (33%)
                     </li>
                 </ul>
 
@@ -137,7 +137,7 @@ export default function LearnIndexBuilder(){
                 <h2>Independent Practice </h2>
                 <h3>Forming a Question and Using the Index Builder on Your Own</h3>
 
-                <p> We’ve gone through one example, but there are many different ways to use the index builder to explore Chicago’s natural and social environment. For example, you could: 
+                <p> We’ve gone through one example, but there are many different ways to use the index builder to explore Chicago’s natural and social environment. For example, you could:
                 </p>
 
                 <ol>
@@ -147,7 +147,7 @@ export default function LearnIndexBuilder(){
                         </li>
                         <li>What do you think should be done about this problem?
                         </li>
-                        <li>How can data inform your question, or the solution? 
+                        <li>How can data inform your question, or the solution?
                         </li>
                         </ul>
                     <li>Using the index builder:
@@ -155,7 +155,7 @@ export default function LearnIndexBuilder(){
                         <ul>
                         <li>What variables are relevant to your question?
                         </li>
-                        <li>Which of these variables is most important in your problem (i.e. how should the variables be weighted? Is one more important than the other, are they equally important, etc.). 
+                        <li>Which of these variables is most important in your problem (i.e. how should the variables be weighted? Is one more important than the other, are they equally important, etc.).
                         </li>
                         </ul>
                     <li>Interpreting your results:</li>
@@ -164,7 +164,7 @@ export default function LearnIndexBuilder(){
                         </li>
                         <li>In your areas of interest, consider how other factors may inform this data and your potential solution. For example, is one of your areas historically impacted by redlining? What is the cultural and demographic makeup of your area of interest? Are there any policies or community-based movements working to address this issue already?
                         </li>
-                        <li>How can you use your custom index data to inform a solution, policy, or further investigation? 
+                        <li>How can you use your custom index data to inform a solution, policy, or further investigation?
                         </li>
                         </ul>
                 </ol>
