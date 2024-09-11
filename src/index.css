@@ -15,11 +15,11 @@ body {
 }
 
 .MuiSvgIcon-root, .MuiStepLabel-iconContainer {
-  color: #e83e8c !important;
+  color: #3D6017 !important;
 }
 
 .MuiSvgIcon-root > .MuiStepLabel-root > .MuiStepLabel-iconContainer {
-  background: #e83e8c !important;
+  background: #3D6017 !important;
 }
 
 .MuiStepLabel-iconContainer > div > svg {
