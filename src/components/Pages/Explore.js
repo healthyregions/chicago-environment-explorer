@@ -10,7 +10,12 @@ import { NavLink } from 'react-router-dom';
 
 const ExplorePage = styled.div`
     background:white;
-`
+`;
+
+const NavTitle = styled.h2`
+    color: rgb(65, 182, 230) !important;
+    font-size: 32px;
+`;
 
 export default function Explore (){
     return (
@@ -22,8 +27,8 @@ export default function Explore (){
                 <p>Looking for inspiration or support in learning how to use ChiVes? Check out these
                     tutorials.
                 </p>
-                
- 
+
+
 
                      <Grid container spacing={2} >
                         <Grid item xs={2}>
@@ -39,8 +44,8 @@ export default function Explore (){
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> Neighborhood Map</h2>
-                         
+                         <NavLink to="/map"><NavTitle> Neighborhood Map</NavTitle></NavLink>
+
                          <p>Explore dimensions of the environment across Chicago in an interactive map. Data comes from collaborators across the city.
 
                             </p>
@@ -63,8 +68,8 @@ export default function Explore (){
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> Index Builder </h2>
-                         
+                        <NavLink to="/indexBuilder"><NavTitle> Index Builder </NavTitle></NavLink>
+
                          <p> The index builder is a ChiVes tool to examine the impact of multiple variables on a given community, or community area, at once.
                             </p>
 
@@ -85,8 +90,8 @@ export default function Explore (){
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> My Community </h2>
-                         
+                         <NavLink to="/community"><NavTitle> My Community </NavTitle></NavLink>
+
                          <p> Get a dynamic report about key indicators and environmental
                          metrics for your neighborhood. Search by your location.
                         </p>
@@ -107,8 +112,8 @@ export default function Explore (){
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> Resource Guide </h2>
-                         
+                            <NavLink to="/guide"><NavTitle> Resource Guide </NavTitle></NavLink>
+
                          <p> Find other maps, data, and resources about the Chicago
                 environment from featured partners and a curated list of
                 resources.
@@ -116,9 +121,9 @@ export default function Explore (){
 
                         </Grid>
                     </Grid>
-                        
 
-                
+
+
            </ContentContainer>
            <Footer/>
        </ExplorePage>
