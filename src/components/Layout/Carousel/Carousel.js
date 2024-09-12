@@ -132,13 +132,11 @@ class Showcase extends PureComponent {
     return (
       <div>
         
-        <CarouselText>
         <p>
           ChiVes is a data collaborative and community mapping application that 
         brings data on Chicago’s environment together at the neighborhood level. 
         A handful of key metrics help to reveal where in the city people face particular 
         challenges as we work towards a healthier Chicago.</p>
-        </CarouselText>
 
         <CarouselContainer>
 
