@@ -396,6 +396,8 @@ export default function Home() {
 
         <Grid item xs={12} sm={12} md={12}>
             <h2> Explore ChiVes </h2>
+            <br />
+
             </Grid>
 
           <ThreeUpGrid container spacing={0}>
@@ -474,8 +476,8 @@ export default function Home() {
 
           <Hero2 style={{ background: '#f2f6fc' }} >
 
-<GeocoderContainer container spacing={1} alignItems="center">
-    <Grid item xs={12} sm={12} md={7}>
+<GeocoderContainer container spacing={0} alignItems="center">
+    <Grid item xs={12} sm={12} md={6}>
     <br />
     <h2>Learn & Engage</h2>
       <p>From 2022-2024, DePaul University partnered with the University of Illinois at Urbana-Champaign
@@ -504,11 +506,11 @@ export default function Home() {
 
                                 />
         <br /><br />
-        <a href="learn"><b>Learn Resources</b></a> include three new tutorials and video walkthrough.
+        <a href="learn"><b>Learn Resources</b></a> include three new tutorials and a video tour.
         </p>
     </Grid>
 
-    <Grid item xs={12} sm={12} md={5}>
+    <Grid item xs={12} sm={12} md={6}>
     <img
             className="photo"
             src={process.env.PUBLIC_URL + "/img/report_Page_1.png"}
