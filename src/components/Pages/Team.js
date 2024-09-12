@@ -77,7 +77,7 @@ const projectTeam = [
         org: 'Illinois',
         img: `shubham.jpeg`,
         affiliation: '(HEROP)',
-        title: 'UI/UX Audit, 2023-2024'
+        title: 'Research Product Designer, 2023-2024'
     },
     {
         name: 'Sara Lambert',
