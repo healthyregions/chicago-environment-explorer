@@ -396,7 +396,7 @@ export default function Home() {
 
         <Grid item xs={12} sm={12} md={12}>
             <h2> Explore ChiVes </h2>
-            <br />
+            <br /> <br />
 
             </Grid>
 
