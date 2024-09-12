@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer } from '../../styled_components';
-import { Accordion, MemberGrid, NavBar, Footer } from '../../components';
+import { NavBar, Footer } from '../../components';
 import Grid from "@mui/material/Grid";
 import { colors } from "../../config";
 import { NavLink } from 'react-router-dom';
@@ -31,10 +31,6 @@ export default function Learn (){
                 <p>Looking for inspiration or support in learning how to use ChiVes? Check out these
                     tutorials.
                 </p>
-
-               <YouTubeEmbed id="ytplayer" type="text/html" width="640" height="480"
-                       src="https://www.youtube.com/embed/tSUBK-ZMXNs?origin=*"
-                       frameBorder="0"></YouTubeEmbed>
 
                      <Grid container spacing={2} >
                         <Grid item xs={2}>
@@ -100,11 +96,24 @@ export default function Learn (){
 
                          <p> The index builder is a ChiVes tool to examine the impact of multiple variables on a given community, or community area, at once. This activity will review how to use the index builder, as well as how to form your own questions and use the index builder to investigate them.
                         </p>
+                        <br /><br />
+
 
                         </Grid>
                     </Grid>
 
 
+        <Grid>
+            <br /><br />
+        <h2>Video Walkthrough</h2>
+               <hr/>
+                <p>In this video tour, you'll be taken through the a full orientation of the mapping application.
+                </p>
+
+        <YouTubeEmbed id="ytplayer" type="text/html" width="100%" height="800"
+                       src="https://www.youtube.com/embed/tSUBK-ZMXNs?origin=*"
+                       frameBorder="0"></YouTubeEmbed>
+        </Grid>
 
            </ContentContainer>
            <Footer/>

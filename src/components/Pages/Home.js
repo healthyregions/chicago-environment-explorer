@@ -506,7 +506,7 @@ export default function Home() {
 
                                 />
         <br /><br />
-        <a href="learn"><b>Learn Resources</b></a> include three new tutorials and a video tour.
+        <a href="learn">Learn Resources</a> include new tutorials and a video tour.
         </p>
     </Grid>
 
@@ -571,6 +571,7 @@ export default function Home() {
           </Grid>
 
           <Grid item xs={12} md={12}>
+          <br /><br />
           <p>A big thank you to <b><span translate="no"> ChiVes </span>Contributors</b>!
           Learn more about the team and sources supporting ChiVes in the <a href="/team"><i>Team</i></a> section.</p>
           <LogoScroll logoList={logoList} />
