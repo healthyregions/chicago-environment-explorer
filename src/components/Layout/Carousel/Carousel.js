@@ -26,7 +26,7 @@ import {media} from './CarouselStyle';
 import Carousel from './CarouselInner';
 
 const CarouselContainer = styled.div`
-  height: 360px;
+  height: 300px;
   margin-top:3rem;
   ${media.palm`
     height: 240px;
@@ -86,6 +86,8 @@ const NavIcon = styled.img`
 
 const CarouselExplainerText = styled.p`
   width:100%;
+  font-size: 13px;
+  font-family:"Lora", serif;
   text-align: center !important;
   padding:0 !important;
 `
@@ -93,10 +95,17 @@ const CarouselHeader = styled.h2`
   width:100%;
   text-align: center !important;
   color:black;
-  font-size:2rem;
+  font-size:4rem;
   font-family:"Lora", serif;
   font-weight:bold;
   padding:2rem 4rem;
+`
+
+const CarouselText = styled.h3`
+  width:100%;
+  font-size: 10px;
+  text-align: center !important;
+  padding:0 !important;
 `
 
 const Nav = ({items, selectedIndex, onClick}) => (
@@ -120,8 +129,12 @@ class Showcase extends PureComponent {
 
     return (
       <div>
-        <CarouselHeader>Understand more about Chicago's environment and society</CarouselHeader>
+        <p>
+          ChiVes is a data collaborative and community mapping application that 
+        brings data on Chicago’s environment together at the neighborhood level.</p>
+
         <CarouselContainer>
+
           <Carousel
             selectedIndex={this.state.selectedIndex}
             onChange={i => this.setState({selectedIndex: i})}
@@ -131,6 +144,7 @@ class Showcase extends PureComponent {
             ))}
           </Carousel>
         </CarouselContainer>
+
         <CarouselExplainerText>{explainerText}</CarouselExplainerText>
         <Nav
           items={SHOWCASE_ITEMS}

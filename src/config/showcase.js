@@ -1,16 +1,28 @@
 const BASE_URL = process.env.PUBLIC_URL
 export const SHOWCASE_ITEMS = [
     {
+        text: 'Heat',
+        image: BASE_URL + '/img/showcase/heat.png',
+        icon: BASE_URL + '/img/showcase/icons/pm25.png',
+        explainerText:"Heat"
+    },
+    {
+        text: 'Resources',
+        image: BASE_URL + '/img/showcase/cooling.png',
+        icon: BASE_URL + '/img/showcase/icons/pm25.png',
+        explainerText:"New Text"
+    },
+    {
         text: 'PM2.5',
         image: BASE_URL + '/img/showcase/pm25.jpg',
         icon: BASE_URL + '/img/showcase/icons/pm25.png',
-        explainerText:"This approximation of PM2.5 air pollution, or particulate matter sized 2.5 microns or smaller, comes from a predictive model using ground and satellite sensors. Check out the summer average, and look forward to new datasets in coming months!"
+        explainerText:"Approximations of PM2.5 air pollution, or particulate matter sized 2.5 microns or smaller, can vary across modeling approaches. Check out the summer average, and compare with other datasets from research teams!"
     },
     {
         text: 'Vegetation',
         image: BASE_URL + '/img/showcase/ndvi2.jpg',
         icon: BASE_URL + '/img/showcase/icons/ndvi.png',
-        explainerText:"How green is your community? The Vegetation Index, measured from satellite data, gives a measure of the abundance of vegetation for every tract in the City. Freshly made from DePaul University. Zoom in all the way to see individual trees!"
+        explainerText:"How green is your community? The Vegetation Index, measured from satellite data, gives a measure of the abundance of vegetation for every tract in the City. Freshly made from DePaul University. Zoom in all the way to see individual trees."
     },
     {
         text: 'Biodiversity',
@@ -22,7 +34,7 @@ export const SHOWCASE_ITEMS = [
         text: 'Traffic',
         image: BASE_URL + '/img/showcase/traffic.jpg',
         icon: BASE_URL + '/img/showcase/icons/traffic.png',
-        explainerText:"How bad is traffic in your area? We developed a score of traffic volume based on traffic estimates form the Illinois Department of Transportation. Zoom into the map, tile (using your control key), and explore!"
+        explainerText:"How bad is traffic in your area? We developed a score of traffic volume based on traffic estimates form the Illinois Department of Transportation. Zoom into the map, tile (using your control key), and explore."
     },
     {
         text: 'Redlining',
