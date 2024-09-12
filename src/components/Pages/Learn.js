@@ -17,6 +17,10 @@ const NavTitle = styled.h2`
     font-size: 32px;
 `;
 
+const YouTubeEmbed = styled.iframe`
+    margin-bottom: 3rem;
+`;
+
 export default function Learn (){
     return (
        <LearnPage>
@@ -27,8 +31,10 @@ export default function Learn (){
                 <p>Looking for inspiration or support in learning how to use ChiVes? Check out these
                     tutorials.
                 </p>
-               <iframe style={{ marginBottom: '3rem' }} src="https://depauledu-my.sharepoint.com/personal/ekoster1_depaul_edu/_layouts/15/embed.aspx?UniqueId=eddd6490-226f-4b7e-83bc-e8b5945ef8ab&embed=%7B%22ust%22%3Atrue%2C%22hv%22%3A%22CopyEmbedCode%22%7D&referrer=StreamWebApp&referrerScenario=EmbedDialog.Create" width="640" height="360" frameBorder="0" scrolling="no" allowFullScreen title="Chives_tutorial_eng.mp4"></iframe>
 
+               <YouTubeEmbed id="ytplayer" type="text/html" width="640" height="360"
+                       src="https://www.youtube.com/embed/tSUBK-ZMXNs?origin=*"
+                       frameBorder="0"></YouTubeEmbed>
 
                      <Grid container spacing={2} >
                         <Grid item xs={2}>
