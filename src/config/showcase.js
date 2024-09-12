@@ -1,16 +1,18 @@
+import { combineMeans } from "simple-statistics"
+
 const BASE_URL = process.env.PUBLIC_URL
 export const SHOWCASE_ITEMS = [
     {
         text: 'Heat',
         image: BASE_URL + '/img/showcase/heat.png',
-        icon: BASE_URL + '/img/showcase/icons/pm25.png',
-        explainerText:"Heat"
+        icon: BASE_URL + '/img/showcase/icons/heat.svg',
+        explainerText:"Extreme heat is a major challenge for health and well-being, and is dangerous when access to cool spaces is limited. We include several heat measures, including this heat index that takes into account humidity, generated in 2023 with data collected by community residents."
     },
     {
         text: 'Resources',
         image: BASE_URL + '/img/showcase/cooling.png',
-        icon: BASE_URL + '/img/showcase/icons/pm25.png',
-        explainerText:"New Text"
+        icon: BASE_URL + '/img/showcase/icons/green-building.svg',
+        explainerText:"To combat extreme heat, residents can access cooling centers, including community centers and libraries, across the city. In the latest version of Chives, a number of new resources have been added to explore alongside the data in the map, with more to come."
     },
     {
         text: 'PM2.5',
@@ -34,13 +36,13 @@ export const SHOWCASE_ITEMS = [
         text: 'Traffic',
         image: BASE_URL + '/img/showcase/traffic.jpg',
         icon: BASE_URL + '/img/showcase/icons/traffic.png',
-        explainerText:"How bad is traffic in your area? We developed a score of traffic volume based on traffic estimates form the Illinois Department of Transportation. Zoom into the map, tile (using your control key), and explore."
+        explainerText:"How bad is traffic in your area? We developed a score of traffic volume based on traffic estimates from the Illinois Department of Transportation. Zoom into the map tile (using your control key) to explore and assess local patterns."
     },
     {
         text: 'Redlining',
         image: BASE_URL + '/img/showcase/redlining.jpg',
         icon: BASE_URL + '/img/showcase/icons/redlining.png',
-        explainerText:"A legacy of redlining and racialized deinvestment is a part of Chicago's history. Overlay historic redlining areas to see how communities today may have been shaped from the past."
+        explainerText:"A legacy of redlining and racialized deinvestment is a part of Chicago's history. Overlay historic redlining areas to see how communities today may have been shaped from the past, or try an updated redlining variable on the map."
     },
     {
         text: 'Asthma',

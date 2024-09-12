@@ -51,14 +51,14 @@ const HomePage = styled.div`
     max-width: 1140px;
     margin: 6em auto;
     border: 0;
-    border-top: 1px solid ${colors.darkgray};
+    border-top: 1px solid ${colors.black};
   }
   p {
     font-family: "Roboto";
     font-size: 1rem;
     font-weight: 300;
     line-height: 1.5;
-    color: ${colors.darkgray};
+    color: ${colors.black};
   }
   a {
     color: ${colors.chicagoBlue};
@@ -290,12 +290,12 @@ const ContributersContainer = styled.div`
   position:relative;
   overflow:hidden;
   height:5rem;
-  margin:6rem 0 3rem 0;
+  margin:1rem 0 3rem 0;
   pointer-events:none;
   img {
     height:5rem;
     display:inline;
-    margin:0 2rem;
+    margin:0 1rem;
     float:left;
   }
 `
@@ -366,7 +366,6 @@ export default function Home() {
                  <a href="{process.env.PUBLIC_URL + /data}"> Data</a> comes from collaborators across the city and beyond. Read more about the 
                  <a href="{process.env.PUBLIC_URL + /about}"> project</a> and 
                  <a href="{process.env.PUBLIC_URL + /about/team}"> team</a>. </p>
-                 <Link to="/map">Start Mapping</Link>
             </Grid>
 
             <Grid item xs={12} sm={12} md={6}>
@@ -375,17 +374,13 @@ export default function Home() {
                     src={process.env.PUBLIC_URL + "/img/neighborhood-map.png"}
                     alt="Wild Onion"
                     loading="lazy"
-                    width="80%"
+                    width="100%"
                   />
               <br /> <br />
 
-                  <b> Search for an address to
-                  navigate directly to your neighborhood. </b>
-                  <br /><br />
-
               <Geocoder
                 id="Geocoder"
-                placeholder={"Find your location - eg. 1155 E 60th Street"}
+                placeholder={" Type in an address or zip code to start mapping, e.g. 60643"}
                 API_KEY={MAPBOX_ACCESS_TOKEN}
                 onChange={handleGeocoder}
               />
@@ -480,40 +475,47 @@ export default function Home() {
           <Hero2 style={{ background: '#f2f6fc' }} >
 
 <GeocoderContainer container spacing={1} alignItems="center">
-    <Grid item xs={12} sm={12} md={6}>
+    <Grid item xs={12} sm={12} md={7}>
     <br />
-    <h2>Neighborhood Map </h2>
-      <p>Explore dimensions of the environment across Chicago in an 
-        interactive map. Add community boundaries, resources, or industrial
-        areas as an "Overlay" to explore different aspects of environomental justice in Chicago. Filter the 
-        map using different data breakpoints. Click on the map for more data!<br /><br />
-        The map was co-designed with multiple community partners and organizations.
-         <a href="{process.env.PUBLIC_URL + /data}"> Data</a> comes from collaborators across the city and beyond. Read more about the 
-         <a href="{process.env.PUBLIC_URL + /about}"> project</a> and 
-         <a href="{process.env.PUBLIC_URL + /about/team}"> team</a>. </p>
-         <Link to="/map">Start Mapping</Link>
+    <h2>Learn & Engage</h2>
+      <p>From 2022-2024, DePaul University partnered with the University of Illinois at Urbana-Champaign
+        and multiple community organizations to expand ChiVes and make it more accessible. Thank to funding 
+        by NASA, the latest release of ChiVes includes expanded learning resources, new data,
+        and improved user experience. Read the final Community Report for an overview. <br /><br />
+        <img
+                                    className="photo"
+                                    justify
+                                    src={process.env.PUBLIC_URL + "/icons/noun-geospatial-analytics-6672680.png"}
+                                    loading="lazy"
+                                    width="150"
+                                />
+        <img
+                                    className="photo"
+                                    src={process.env.PUBLIC_URL + "/icons/noun-histogram-6696040.png"}
+                                    loading="lazy"
+                                    width="150"
+
+                                />
+         <img
+                                    className="photo"
+                                    src={process.env.PUBLIC_URL + "/icons/noun-switch-7088111.png"}
+                                    loading="lazy"
+                                    width="150"
+
+                                />
+        <br /><br />
+        <a href="learn"><b>Learn Resources</b></a> include three new tutorials and video walkthrough.
+        </p>
     </Grid>
 
-    <Grid item xs={12} sm={12} md={6}>
+    <Grid item xs={12} sm={12} md={5}>
     <img
             className="photo"
-            src={process.env.PUBLIC_URL + "/img/neighborhood-map.png"}
+            src={process.env.PUBLIC_URL + "/img/report_Page_1.png"}
             alt="Wild Onion"
             loading="lazy"
             width="80%"
           />
-      <br /> <br />
-
-          <b> Search for an address to
-          navigate directly to your neighborhood. </b>
-          <br /><br />
-
-      <Geocoder
-        id="Geocoder"
-        placeholder={"Find your location - eg. 1155 E 60th Street"}
-        API_KEY={MAPBOX_ACCESS_TOKEN}
-        onChange={handleGeocoder}
-      />
 
     </Grid>
   </GeocoderContainer>  
@@ -522,7 +524,6 @@ export default function Home() {
 
 
           <Hero>
-          <Gutter h={60} />
           <Grid container spacing={2}>
             <Grid item xs={12} md={4}>
               <img
@@ -533,14 +534,10 @@ export default function Home() {
               />
             </Grid>
             <Grid item xs={12} md={8}>
-              <br />
-              <br />
+              <h2>Open Data Access</h2>
               <p>
-               <span translate="no"> ChiVes </span>is a data collaborative and community mapping application
-                that brings data on Chicago’s environment together at the
-                neighborhood level.
-                <br />
-                <br />
+                All the data on the ChiVes platform is free and openly accessible. Download <a href="/data?">here</a> !
+                <br /><br />
                 Like the{" "}
                 <a href="https://www.illinoiswildflowers.info/woodland/plants/wild_leek.htm">
                   wild onion
@@ -559,7 +556,8 @@ export default function Home() {
                 <br />
                 <br />
                 Have data to add? A mapping resource to share or recommend?
-                Please <a href="/about">contribute</a> !
+                Please <a href="/about">contribute</a> ! For bigger projects, please reach out the Healthy Regions team
+                at UIUC to discuss future grant and funding collaborations using the <a href="/contact">Contact</a> page.
               </p>
               <h5>
                 Image of <i>Wild Onion, Allium acuminatum </i> by Margaret
@@ -570,14 +568,14 @@ export default function Home() {
             </Grid>
           </Grid>
 
-
-        </Hero>
-
+          <Grid item xs={12} md={12}>
+          <p>A big thank you to <b><span translate="no"> ChiVes </span>Contributors</b>!
+          Learn more about the team and sources supporting ChiVes in the <a href="/team"><i>Team</i></a> section.</p>
           <LogoScroll logoList={logoList} />
-          <h2 className="logoScrollText">Thanks to<span translate="no"> ChiVes </span>Contributors!</h2>
+          </Grid>
 
+          </Hero>
       </HomePageContent>
-      <Gutter h={60} />
       <Footer />
     </HomePage>
   );
