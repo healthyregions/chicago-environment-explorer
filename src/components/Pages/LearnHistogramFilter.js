@@ -53,7 +53,7 @@ export default function LearnHistogramFilter(){
                <p>The histogram filters are located in the mapping section. We get to this section on the home screen by clicking “Start Mapping”. The histogram filters will then be located on the right section of the screen.
                </p>
 
-               <img src={'/img/learning-activities/histogram-1.png'} alt={''} />  <br /><br />
+               <img src={'/img/learning-activities/histogram-1_cropped.png'} alt={''} width={800} height={450} />  <br /><br />
 
                <h3>Step 2: Select Your Primary Map
                </h3>
@@ -61,7 +61,7 @@ export default function LearnHistogramFilter(){
                <p>You can select the primary variable on your map by going to the left section of the screen and clicking the box titled “Variable”. This then opens a drop down menu of different variables to choose from.
                </p>
 
-               <img src={'/img/learning-activities/histogram-2.png'} alt={''} />   <br /><br />
+               <img src={'/img/learning-activities/histogram-2_cropped.png'} alt={''} width={800} height={450} />   <br /><br />
 
                <p>Given that our main concern is traffic volume, this will be our primary variable. We will find this by scrolling within the drop down menu and clicking “Traffic Volume Score”.
                </p>
@@ -95,21 +95,25 @@ export default function LearnHistogramFilter(){
                <p>We will first start off with creating a map showing high PM 2.5 and social vulnerability. To do this, I am going to move the left slide of the histogram toward the right, this is where the higher values are located and as we can see is also where most of the data is located.
                </p>
 
+               <img src={'/img/learning-activities/histogram-4.png'} alt={''} />   <br /><br />
+               <img src={'/img/learning-activities/histogram-5.png'} alt={''} />   <br /><br />
+
                <p>The value for our Summer PM 2.5 will be at the highest available values, filtered between 10.02 to 11.9 The values for Social Vulnerability will also be at the highest values, filtered between 84.04 to 99.8.
                </p>
 
-               <img src={'/img/learning-activities/histogram-4.png'} alt={''} />   <br /><br />
+               <img src={'/img/learning-activities/histogram-6.png'} alt={''} />   <br /><br />
 
                <p>What do you notice? How does this relate to the traffic volume?
                </p>
 
                <p>Now, let's create a map with low PM 2.5 and social vulnerability. These are the exact parameters I set for my filters.
                </p>
-
+               <img src={'/img/learning-activities/histogram-7.png'} alt={''} />   <br /><br />
+               <img src={'/img/learning-activities/histogram-8.png'} alt={''} />   <br /><br />
                <p>The value for our Summer PM 2.5 will be at the lowest available values, filtered between 2.51 to 10.02. The values for Social Vulnerability will also be at the lowest values, filtered between the farthest spot on the left to 21.01.
                </p>
 
-               <img src={'/img/learning-activities/histogram-5.png'} alt={''} />   <br /><br />
+                <img src={'/img/learning-activities/histogram-9.png'} alt={''} />   <br /><br />
 
                 <p>What do you notice? How does this differ from the previous map?
                 </p>
@@ -118,9 +122,8 @@ export default function LearnHistogramFilter(){
                 </h3>
 
                 <p>Once you have filtered all of your variables accordingly, take a look at the map you have created.                </p>
-                <br />
-                <img src={'/img/learning-activities/histogram-6.png'} alt={''} />
-                <br />
+
+
                 <p>Some initial questions to help understand what the data means are:
                 </p>
 
