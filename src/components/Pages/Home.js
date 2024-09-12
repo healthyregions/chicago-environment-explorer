@@ -369,13 +369,15 @@ export default function Home() {
             </Grid>
 
             <Grid item xs={12} sm={12} md={6}>
-            <img
-                    className="photo"
-                    src={process.env.PUBLIC_URL + "/img/neighborhood-map.png"}
-                    alt="Wild Onion"
-                    loading="lazy"
-                    width="100%"
-                  />
+              <a href="https://chichives.com/map">
+              <img
+                      className="photo"
+                      src={process.env.PUBLIC_URL + "/img/neighborhood-map.png"}
+                      alt="Wild Onion"
+                      loading="lazy"
+                      width="100%"
+                    />
+                  </a>
               <br /> <br />
 
               <Geocoder
@@ -511,6 +513,7 @@ export default function Home() {
     </Grid>
 
     <Grid item xs={12} sm={12} md={6}>
+      <a href="https://drive.google.com/file/d/1pe3grtQEo8m8zbt4eUOzxaziCilPGNWH/view?usp=sharing">
     <img
             className="photo"
             src={process.env.PUBLIC_URL + "/img/report_Page_1.png"}
@@ -518,6 +521,7 @@ export default function Home() {
             loading="lazy"
             width="80%"
           />
+          </a>
 
     </Grid>
   </GeocoderContainer>  
