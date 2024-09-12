@@ -32,7 +32,7 @@ export default function Learn (){
                     tutorials.
                 </p>
 
-               <YouTubeEmbed id="ytplayer" type="text/html" width="640" height="360"
+               <YouTubeEmbed id="ytplayer" type="text/html" width="640" height="480"
                        src="https://www.youtube.com/embed/tSUBK-ZMXNs?origin=*"
                        frameBorder="0"></YouTubeEmbed>
 
