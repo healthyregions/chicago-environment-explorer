@@ -5,13 +5,13 @@ export const SHOWCASE_ITEMS = [
     {
         text: 'Heat',
         image: BASE_URL + '/img/showcase/heat.png',
-        icon: BASE_URL + '/img/showcase/icons/heat.svg',
+        icon: BASE_URL + '/img/showcase/icons/H.png',
         explainerText:"Extreme heat is a major challenge for health and well-being, and is dangerous when access to cool spaces is limited. We include several heat measures, including this heat index that takes into account humidity, generated in 2023 with data collected by community residents."
     },
     {
         text: 'Resources',
         image: BASE_URL + '/img/showcase/cooling.png',
-        icon: BASE_URL + '/img/showcase/icons/green-building.svg',
+        icon: BASE_URL + '/img/showcase/icons/GB.png',
         explainerText:"To combat extreme heat, residents can access cooling centers, including community centers and libraries, across the city. In the latest version of Chives, a number of new resources have been added to explore alongside the data in the map, with more to come."
     },
     {
