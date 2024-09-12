@@ -161,6 +161,9 @@ const Hero = styled.div`
   color: ${colors.darkgray};
   margin: 0 auto;
   padding: 80px 10px 80px 10px;
+  h1 {
+    margin: auto;
+  }
   p {
     font-family: "Roboto";
     font-weight: 300;
@@ -358,13 +361,13 @@ export default function Home() {
             <Grid item xs={12} sm={12} md={6}>
             <br />
             <h2>Neighborhood Map </h2>
-              <p>Explore dimensions of the environment across Chicago in an 
+              <p>Explore dimensions of the environment across Chicago in an
                 interactive map. Add community boundaries, resources, or industrial
-                areas as an "Overlay" to explore different aspects of environomental justice in Chicago. Filter the 
+                areas as an "Overlay" to explore different aspects of environomental justice in Chicago. Filter the
                 map using different data breakpoints. Click on the map for more data!<br /><br />
                 The map was co-designed with multiple community partners and organizations.
-                 <a href="{process.env.PUBLIC_URL + /data}"> Data</a> comes from collaborators across the city and beyond. Read more about the 
-                 <a href="{process.env.PUBLIC_URL + /about}"> project</a> and 
+                 <a href="{process.env.PUBLIC_URL + /data}"> Data</a> comes from collaborators across the city and beyond. Read more about the
+                 <a href="{process.env.PUBLIC_URL + /about}"> project</a> and
                  <a href="{process.env.PUBLIC_URL + /about/team}"> team</a>. </p>
             </Grid>
 
@@ -388,7 +391,7 @@ export default function Home() {
               />
 
             </Grid>
-          </GeocoderContainer>  
+          </GeocoderContainer>
 
           </Hero2>
 
@@ -441,7 +444,7 @@ export default function Home() {
               </Grid>
 
               <p>
-                Select variables and apply weights to generate a new vulnerability index. Download the 
+                Select variables and apply weights to generate a new vulnerability index. Download the
                 findings, and explore your map.
               </p>
               <Link to="/map">Start Building</Link>
@@ -483,7 +486,7 @@ export default function Home() {
     <br />
     <h2>Learn & Engage</h2>
       <p>From 2022-2024, DePaul University partnered with the University of Illinois at Urbana-Champaign
-        and multiple community organizations to expand ChiVes and make it more accessible. Thank to funding 
+        and multiple community organizations to expand ChiVes and make it more accessible. Thank to funding
         by NASA, the latest release of ChiVes includes expanded learning resources, new data,
         and improved user experience. Read the final Community Report for an overview. <br /><br />
         <img
@@ -524,7 +527,7 @@ export default function Home() {
           </a>
 
     </Grid>
-  </GeocoderContainer>  
+  </GeocoderContainer>
 
   </Hero2>
 
