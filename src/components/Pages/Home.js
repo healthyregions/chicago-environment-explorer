@@ -383,7 +383,7 @@ export default function Home() {
                 map using different data breakpoints. Click on the map for more data!<br /><br />
                 The map was co-designed with multiple community partners and organizations.
                  <a href="{process.env.PUBLIC_URL + /data}"> Data</a> comes from collaborators across the city and beyond. Read more about the
-                 <a href="{process.env.PUBLIC_URL + /about}"> project</a> and
+                  <a href="{process.env.PUBLIC_URL + /about}"> project</a><span> and </span>
                  <a href="{process.env.PUBLIC_URL + /about/team}"> team</a>. </p>
             </Grid>
 
@@ -599,6 +599,7 @@ export default function Home() {
           Learn more about the team and sources supporting ChiVes in the <a href="/team"><i>Team</i></a> section.</p>
           <LogoScroll logoList={logoList} />
           </Grid>
+
 
           </Hero>
       </HomePageContent>
