@@ -385,10 +385,9 @@ export default function Home() {
                     map using different data breakpoints. Click on the map for more data!<br /><br />
                     The map was co-designed with multiple community partners and organizations.
                   </span>
-                  <a href="{process.env.PUBLIC_URL + /data}">Data</a>
-                  <span> comes from collaborators across the city and beyond. Read more about the </span>
+                  <span> <a href="{process.env.PUBLIC_URL + /data}">Data</a> comes from collaborators across the city and beyond. Read more about the </span>
                   <a href="{process.env.PUBLIC_URL + /about}">project</a><span> and </span>
-                 <a href="{process.env.PUBLIC_URL + /about/team}">team</a>. </p>
+                  <a href="{process.env.PUBLIC_URL + /about/team}">team</a>. </p>
             </Grid>
 
             <Grid item xs={12} sm={12} md={6}>
