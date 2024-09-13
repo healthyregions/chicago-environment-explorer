@@ -136,6 +136,7 @@ const VariablePanelContainer = styled.div`
 
 const ControlsContainer = styled.div`
   max-height: 80vh;
+  max-width: 25rem;
   overflow-y: scroll;
   padding: 20px;
 
