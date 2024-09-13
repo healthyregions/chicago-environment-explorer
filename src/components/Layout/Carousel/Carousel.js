@@ -86,7 +86,7 @@ const NavIcon = styled.img`
 
 const CarouselExplainerText = styled.p`
   width:100%;
-  font-size: 13px;
+  font-size: 13px !important;
   font-family: "Roboto";
   text-align: center !important;
   padding:0 !important;
@@ -125,17 +125,17 @@ class Showcase extends PureComponent {
   state = {
     selectedIndex: 0
   };
-  
+
   render() {
     const explainerText = SHOWCASE_ITEMS[this.state.selectedIndex].explainerText;
 
     return (
       <div>
-        
+
         <p>
-          ChiVes is a data collaborative and community mapping application that 
-        brings data on Chicago’s environment together at the neighborhood level. 
-        A handful of key metrics help to reveal where in the city people face particular 
+          ChiVes is a data collaborative and community mapping application that
+        brings data on Chicago’s environment together at the neighborhood level.
+        A handful of key metrics help to reveal where in the city people face particular
         challenges as we work towards a healthier Chicago.</p>
 
         <CarouselContainer>
@@ -152,7 +152,7 @@ class Showcase extends PureComponent {
         </CarouselContainer>
 
         <CarouselExplainerText>{explainerText}</CarouselExplainerText>
-        
+
         <Nav
           items={SHOWCASE_ITEMS}
           selectedIndex={this.state.selectedIndex}
