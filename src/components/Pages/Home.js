@@ -93,10 +93,18 @@ const Hero2 = styled.div`
   color: ${colors.darkgray};
   margin: 5px auto;
   padding: 80px 100px 80px 100px;
+  .font-sm {
+    font-size: 13px !important;
+  }
+  .font-md {
+    font-size: 1rem !important;
+  }
+  .font-lg {
+    font-size: 1.25rem !important;
+  }
   p {
     font-family: "Roboto";
     font-weight: 300;
-    font-size: 1.25rem;
     font-stretch: normal;
     text-align: left;
     font-style: normal;
@@ -164,10 +172,18 @@ const Hero = styled.div`
   h1 {
     margin: auto;
   }
+  .font-sm {
+    font-size: 13px !important;
+  }
+  .font-md {
+    font-size: 1rem !important;
+  }
+  .font-lg {
+    font-size: 1.25rem !important;
+  }
   p {
     font-family: "Roboto";
     font-weight: 300;
-    font-size: 1.25rem;
     font-stretch: normal;
     text-align: left;
     font-style: normal;
@@ -361,7 +377,7 @@ export default function Home() {
             <Grid item xs={12} sm={12} md={6}>
             <br />
             <h2>Neighborhood Map </h2>
-              <p>Explore dimensions of the environment across Chicago in an
+              <p className={'font-lg'}>Explore dimensions of the environment across Chicago in an
                 interactive map. Add community boundaries, resources, or industrial
                 areas as an "Overlay" to explore different aspects of environomental justice in Chicago. Filter the
                 map using different data breakpoints. Click on the map for more data!<br /><br />
@@ -421,7 +437,7 @@ export default function Home() {
                   <h2>Community <br /> Report</h2>
                 </Grid>
               </Grid>
-              <p>
+              <p className={'font-md'}>
                 Get a dynamic report about key indicators and environmental
                 metrics for your neighborhood. Search by your location.{" "}
               </p>
@@ -443,7 +459,7 @@ export default function Home() {
                 </Grid>
               </Grid>
 
-              <p>
+              <p className={'font-md'}>
                 Select variables and apply weights to generate a new vulnerability index. Download the
                 findings, and explore your map.
               </p>
@@ -467,7 +483,7 @@ export default function Home() {
                   </h2>
                 </Grid>
               </Grid>
-              <p>
+              <p className={'font-md'}>
                 {" "}
                 Find other maps, data, and resources about the Chicago
                 environment from featured partners and a curated list of
@@ -485,7 +501,7 @@ export default function Home() {
     <Grid item xs={12} sm={12} md={6}>
     <br />
     <h2>Learn & Engage</h2>
-      <p>From 2022-2024, DePaul University partnered with the University of Illinois at Urbana-Champaign
+      <p className={'font-lg'}>From 2022-2024, DePaul University partnered with the University of Illinois at Urbana-Champaign
         and multiple community organizations to expand ChiVes and make it more accessible. Thank to funding
         by NASA, the latest release of ChiVes includes expanded learning resources, new data,
         and improved user experience. Read the final Community Report for an overview. <br /><br />
@@ -544,7 +560,7 @@ export default function Home() {
             </Grid>
             <Grid item xs={12} md={8}>
               <h2>Open Data Access</h2>
-              <p>
+              <p className={'font-lg'}>
                 All the data on the ChiVes platform is free and openly accessible. Download <a href="/data?">here</a> !
                 <br /><br />
                 Like the{" "}
@@ -579,7 +595,7 @@ export default function Home() {
 
           <Grid item xs={12} md={12}>
           <br /><br />
-          <p>A big thank you to <b><span translate="no"> ChiVes </span>Contributors</b>!
+          <p className={'font-lg'}>A big thank you to <b><span translate="no"> ChiVes </span>Contributors</b>!
           Learn more about the team and sources supporting ChiVes in the <a href="/team"><i>Team</i></a> section.</p>
           <LogoScroll logoList={logoList} />
           </Grid>

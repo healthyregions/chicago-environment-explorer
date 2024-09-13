@@ -86,7 +86,6 @@ const NavIcon = styled.img`
 
 const CarouselExplainerText = styled.p`
   width:100%;
-  font-size: 13px !important;
   font-family: "Roboto";
   text-align: center !important;
   padding:0 !important;
@@ -132,7 +131,7 @@ class Showcase extends PureComponent {
     return (
       <div>
 
-        <p>
+        <p className={'font-lg'}>
           ChiVes is a data collaborative and community mapping application that
         brings data on Chicago’s environment together at the neighborhood level.
         A handful of key metrics help to reveal where in the city people face particular
@@ -151,7 +150,7 @@ class Showcase extends PureComponent {
 
         </CarouselContainer>
 
-        <CarouselExplainerText>{explainerText}</CarouselExplainerText>
+        <CarouselExplainerText className={'font-sm'}>{explainerText}</CarouselExplainerText>
 
         <Nav
           items={SHOWCASE_ITEMS}
