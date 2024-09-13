@@ -13,7 +13,6 @@ const ContactFormContainer = styled.form`
         pointer-events:none;
         opacity:0.5;
     }
-    border:1px solid black;
     padding:2rem;
     margin:20px 0;
 `
