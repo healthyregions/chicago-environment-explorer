@@ -377,18 +377,22 @@ export default function Home() {
             <Grid item xs={12} sm={12} md={6}>
             <br />
             <h2>Neighborhood Map </h2>
-              <p className={'font-lg'}>Explore dimensions of the environment across Chicago in an
-                interactive map. Add community boundaries, resources, or industrial
-                areas as an "Overlay" to explore different aspects of environomental justice in Chicago. Filter the
-                map using different data breakpoints. Click on the map for more data!<br /><br />
-                The map was co-designed with multiple community partners and organizations.
-                 <a href="{process.env.PUBLIC_URL + /data}"> Data</a> comes from collaborators across the city and beyond. Read more about the
-                  <a href="{process.env.PUBLIC_URL + /about}"> project</a><span> and </span>
-                 <a href="{process.env.PUBLIC_URL + /about/team}"> team</a>. </p>
+              <p className={'font-lg'}>
+                  <span>
+                    Explore dimensions of the environment across Chicago in an
+                    interactive map. Add community boundaries, resources, or industrial
+                    areas as an "Overlay" to explore different aspects of environmental justice in Chicago. Filter the
+                    map using different data breakpoints. Click on the map for more data!<br /><br />
+                    The map was co-designed with multiple community partners and organizations.
+                  </span>
+                  <a href="{process.env.PUBLIC_URL + /data}">Data</a>
+                  <span> comes from collaborators across the city and beyond. Read more about the </span>
+                  <a href="{process.env.PUBLIC_URL + /about}">project</a><span> and </span>
+                 <a href="{process.env.PUBLIC_URL + /about/team}">team</a>. </p>
             </Grid>
 
             <Grid item xs={12} sm={12} md={6}>
-              <a href="https://chichives.com/map">
+              <Link to="/map">
               <img
                       className="photo"
                       src={process.env.PUBLIC_URL + "/img/neighborhood-map.png"}
@@ -396,7 +400,7 @@ export default function Home() {
                       loading="lazy"
                       width="100%"
                     />
-                  </a>
+              </Link>
               <br /> <br />
 
               <Geocoder
