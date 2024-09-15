@@ -111,7 +111,7 @@ export default function Learn (){
                 </p>
 
         <YouTubeEmbed id="ytplayer" type="text/html" width="100%" height="800"
-                       src="https://www.youtube.com/embed/tSUBK-ZMXNs?origin=*"
+                       src="https://www.youtube.com/embed/2r3pz7-zbtU?origin=*"
                        frameBorder="0"></YouTubeEmbed>
         </Grid>
 
