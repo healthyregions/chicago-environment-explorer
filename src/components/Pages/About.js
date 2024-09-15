@@ -83,12 +83,22 @@ export default function About(){
                 <p>ChiVes is a <b>data collaborative</b> and <b>community mapping application</b> that brings data on Chicago's environment together at the
                 neighborhood level. It's a partnership of researchers, community organizations, and civic groups. It's been used for teaching
                 about the basics of mapping and spatial analysis, as well as learning about air quality patterns in Chicago.</p>
-                <p>With ChiVes, we harmonize & standardize environmental data across dozens of sources to make it accessible for full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.</p>
-                <p>To cite the latest release of Chives (<i>Earth Day 2023 </i> Launch), use the following:</p>
+                <p>With ChiVes, we harmonize & standardize environmental data across dozens of sources to make it accessible for 
+                    full exploration, alongside a growing list of resources on the Chicago Environment, cultivated by a community of curators.</p>
+
+
+                <h3>Citation & Release Information</h3>
+                
+                <p>You can cite all versions by using the DOI <a href="https://zenodo.org/records/8212065">10.5281/zenodo.8212064</a>. This DOI represents all stable versions released, and will always resolve to the latest one.
+                To cite the current and stable release of Chives (v3.0), use the following:</p>
                 <ul>
-                    <li>Dylan Halpern, Susan Paykin, James Keane, Sparshdeep Singh, Sarvagnya Vijay, Adam Cox, Mukesh Chugani, Winifred Curran, Michelle Stuhlmacher, & Marynia Kolak. (2023). Chives: A Chicago Environmental Justice Geospatial Dashboard (v2.0.0). Zenodo. <a href="https://doi.org/10.5281/zenodo.8212065">https://doi.org/10.5281/zenodo.8212065</a>.</li>
+                    <li>...</li>
                 </ul>
-                <p>The next release is planned for September 2024. <a href="/contact">Contact</a> us with any questions, or post an issue on <a href="https://github.com/healthyregions/chicago-environment-explorer/issues">Github.</a></p>
+        
+                <p> The earliest version of Chives (v0.5) can be found at <a href="https://zenodo.org/records/6359814">OpenAire</a>, 
+               though we recommend using the above citation instead.</p>
+    
+               
                 <hr/>
                 <h2>Get Involved </h2>
                 <p>Organizations and individuals can participate in<span translate="no"> ChiVes </span>in multiple ways:</p>
@@ -98,10 +108,20 @@ export default function About(){
                     <li><a href="https://github.com/healthyregions/chicago-environment-explorer">Web Development.</a> Developers and code-enthusiasts can fork the<span translate="no"> ChiVes </span>website, make changes, and submit for review.</li>
                 </ul>
                 <p>View our <a href="https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit?usp=sharing">Standards and Submission Guidelines</a>. These guidelines are evaluated on a regular basis by members of the Data Collaborative.</p>
+                <p>  <a href="/contact">Contact</a> us with any questions, or post an issue on <a href="https://github.com/healthyregions/chicago-environment-explorer/issues">Github.</a></p>
+
 
                 <hr/>
                 <h2>Background</h2>
-                <p>The original<span translate="no"> ChiVes </span>application built on multiple former projects from Healthy Regions & Policies Lab members, incorporating materials as well as lessons learned. Much of the data currently integrated within<span translate="no"> ChiVes </span>was gathered, calculated, and standardized from 2018-2021,
+                <p>The ChiVes project is managed by the Healthy Regions & Policies Lab team at University of Illinois at Urbana-Champaign (UIUC), in collaboration  
+                    with multiple partners and colleagues (see the <a href="/team">Team</a> page for more details). From 2022-2024, DePaul University received a NASA grant to collaborate with UIUC and multiple community organizations
+                    to expand ChiVes further and make it more accessible. Organizations included Grow Greater Englewood, Instituto del Progreso Latino, the People's Response Network,
+                    Mujeres for Espacios Verdes (Women For Green Spaces), Grow Greater Englewood, and the office of the 25th Ward. Engineering support included expanding 
+                    to work with the National Center for Supercomputing Applications (<a href="https://ncsa.illinois.edu">NCSA</a>) at Illinois. With this expanding network of contributors,
+                    the ChiVes application's direction and long-term development is increasingly shared as a collective or community.
+                <br /><br />
+                The original<span translate="no"> ChiVes </span>application was formalized at the University of Chicago in early 2022, but was built on multiple former projects from Healthy Regions & Policies Lab members, 
+                incorporating data, resources, materials, and lessons learned. Much of the data currently integrated within<span translate="no"> ChiVes </span>was gathered, calculated, and standardized from 2018-2021,
                 when the HEROP Lab was housed at the Center for Spatial Data Science at the University of Chicago. The current application was refactored in 2022 by <a href="https://dylanhalpern.com/">Dylan Halpern</a>, adopting a new web architecture. Explore some of the original projects that inspired<span translate="no"> ChiVes </span>below:</p>
                 <Accordion entries={accordionContent} initialTab={-1} />
            </ContentContainer>
