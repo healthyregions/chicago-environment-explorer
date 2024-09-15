@@ -91,8 +91,8 @@ const Hero2 = styled.div`
   width: 100%;
   text-align: center;
   color: ${colors.darkgray};
-  margin: 5px auto;
-  padding: 80px 100px 80px 100px;
+  margin: 0 auto;
+  padding: 40px 120px 40px 120px;
   .font-sm {
     font-size: 13px !important;
   }
