@@ -150,7 +150,7 @@ class Showcase extends PureComponent {
 
         </CarouselContainer>
 
-        <CarouselExplainerText className={'font-sm'}>{explainerText}</CarouselExplainerText>
+        <CarouselExplainerText className={'font-md'}>{explainerText}</CarouselExplainerText>
 
         <Nav
           items={SHOWCASE_ITEMS}

@@ -505,30 +505,11 @@ export default function Home() {
     <br />
     <h2>Learn & Engage</h2>
       <p className={'font-lg'}>From 2022-2024, DePaul University partnered with the University of Illinois at Urbana-Champaign
-        and multiple community organizations to expand ChiVes and make it more accessible. Thank to funding
-        by NASA, the latest release of ChiVes includes expanded learning resources, new data,
-        and improved user experience. Read the final Community Report for an overview. <br /><br />
-        <img
-                                    className="photo"
-                                    justify
-                                    src={process.env.PUBLIC_URL + "/icons/noun-geospatial-analytics-6672680.png"}
-                                    loading="lazy"
-                                    width="150"
-                                />
-        <img
-                                    className="photo"
-                                    src={process.env.PUBLIC_URL + "/icons/noun-histogram-6696040.png"}
-                                    loading="lazy"
-                                    width="150"
-
-                                />
-         <img
-                                    className="photo"
-                                    src={process.env.PUBLIC_URL + "/icons/noun-switch-7088111.png"}
-                                    loading="lazy"
-                                    width="150"
-
-                                />
+        and multiple community organizations to expand ChiVes and make it more accessible.
+        <br /><br />
+        Thanks to funding by NASA, the latest release of ChiVes includes expanded learning resources, new data, and improved user experience. 
+         Read the final Community Report for an overview (in <a href="https://drive.google.com/file/d/1pe3grtQEo8m8zbt4eUOzxaziCilPGNWH/view?usp=sharing">
+         English</a> and <a href="#">en Español</a>). 
         <br /><br />
         <a href="learn">Learn Resources</a> include new tutorials and a video tour.
         </p>
@@ -617,10 +598,10 @@ function LogoScroll({ logoList, autoscroll = true }) {
     <ContributersContainer>
       <ContributersContainerInner>
         {logoList.map(({ ImagePath }, i) =>
-          <img key={`logo-scroll-1-${i}`} src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
+          <img key={`logo-scroll-1-${i}`} src={process.env.PUBLIC_URL + ImagePath} alt="" loading="eager" />
         )}
         {logoList.map(({ ImagePath }, i) =>
-          <img key={`logo-scroll-2-${i}`} src={process.env.PUBLIC_URL + ImagePath} alt="" loading="lazy" />
+          <img key={`logo-scroll-2-${i}`} src={process.env.PUBLIC_URL + ImagePath} alt="" loading="eager" />
         )}
       </ContributersContainerInner>
     </ContributersContainer>
