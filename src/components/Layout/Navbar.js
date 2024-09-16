@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import {Link, NavLink, useLocation} from 'react-router-dom';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -10,8 +10,20 @@ import { Box } from '@mui/system';
 import { setPanelState } from '../../actions';
 import * as SVG from '../../config/svg';
 
+const SubNav = styled.li`
+  padding: 0 1.5rem;
+  a {
+    color: ${colors.chicagoBlue} !important;
+    &.active {
+      color: #3D6017 !important;
+    }
+  }
+  &:first-child {
+    border-top: 1px solid ${colors.lightgray};
+  }
+`;
+
 const NavItems = styled.ul`
-  border-top: 1px solid ${colors.lightgray};
   margin-top:.25em;
   margin-bottom:1em;
   background:none;
@@ -20,9 +32,12 @@ const NavItems = styled.ul`
   font-size:1rem;
   transition: 250ms all;
   li a, button {
+    &.active {
+      color: #3D6017;
+    }
     text-decoration:none;
     font-family:"Roboto", sans-serif;
-    color: ${colors.chicagoBlue};
+    color: #267FA4;
     transition:250ms all;
     cursor: pointer;
     text-transform:none;
@@ -69,7 +84,6 @@ const NavContainer = styled.div`
     padding-left: 15px;
     border: 1px solid #97DB4F;
   }
-
 `
 const SvgLogoContainer = styled.svg`
   height:2.5em;
@@ -162,6 +176,7 @@ export default function Nav({
 
   const open = Boolean(anchorEl);
   const id = open ? 'Close Menu' : 'Open Menu';
+  const loc = useLocation();
 
   return (
     <NavContainer>
@@ -195,15 +210,32 @@ export default function Nav({
               {/* <li><a onClick={handleGeolocate}>{SVG.locate}Find my location</a></li> */}
             </NavItems>
           </>}
-          <Typography>Pages</Typography>
+          {/* <Typography>Pages</Typography> */}
           <NavItems>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/map">Map</NavLink></li>
-            <li><NavLink to="/builder">Index Builder</NavLink></li>
-            <li><NavLink to="/data">Data</NavLink></li>
-            <li><NavLink to="/community">My Community</NavLink></li>
-            <li><NavLink to="/guide">Resource Guide</NavLink></li>
+            <li><Link to="/" className={loc.pathname === '/' ? 'active' : 'inactive'}>Home</Link></li>
+
             <li><NavLink to="/about">About</NavLink></li>
+            <NavItems>
+              <SubNav><NavLink to="/team">Team</NavLink></SubNav>
+              <SubNav><NavLink to="/data">Data</NavLink></SubNav>
+              <SubNav><NavLink to="/news">News</NavLink></SubNav>
+            </NavItems>
+
+            <li><NavLink to="/explore">Explore</NavLink></li>
+            <NavItems>
+              <SubNav><NavLink to="/map">Map</NavLink></SubNav>
+              <SubNav><NavLink to="/builder">Index Builder</NavLink></SubNav>
+              <SubNav><NavLink to="/community">My Community</NavLink></SubNav>
+              <SubNav><NavLink to="/guide">Resource Guide</NavLink></SubNav>
+            </NavItems>
+
+            <li><Link to="/learn" className={loc.pathname === '/learn' ? 'active' : 'inactive'}>Learn</Link></li>
+            <NavItems>
+              <SubNav><NavLink to="/learn/mapping101">Mapping 101</NavLink></SubNav>
+              <SubNav><NavLink to="/learn/histogram">Histogram Filter</NavLink></SubNav>
+              <SubNav><NavLink to="/learn/indexBuilder">Index Builder</NavLink></SubNav>
+            </NavItems>
+
             <li><NavLink to="/contact">Contact</NavLink></li>
           </NavItems>
         </NavInner>

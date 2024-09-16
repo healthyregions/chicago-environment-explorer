@@ -1,21 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer } from '../../styled_components';
-import { Accordion, MemberGrid, NavBar, Footer } from '../../components';
+import { NavBar, Footer } from '../../components';
 import Grid from "@mui/material/Grid";
 import { colors } from "../../config";
 import { NavLink } from 'react-router-dom';
 
 
 
-const ExplorePage = styled.div`
+const LearnPage = styled.div`
     background:white;
 `
 
-export default function 
-(){
+const NavTitle = styled.h2`
+    color: rgb(65, 182, 230) !important;
+    font-size: 32px;
+`;
+
+const YouTubeEmbed = styled.iframe`
+    margin-bottom: 3rem;
+`;
+
+export default function Learn (){
     return (
-       <ExplorePage>
+       <LearnPage>
            <NavBar />
            <ContentContainer>
                <h1>Learn</h1>
@@ -23,8 +31,6 @@ export default function
                 <p>Looking for inspiration or support in learning how to use ChiVes? Check out these
                     tutorials.
                 </p>
-                
- 
 
                      <Grid container spacing={2} >
                         <Grid item xs={2}>
@@ -39,8 +45,8 @@ export default function
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> Mapping 101 <i> with ChiVes</i></h2>
-                         
+                         <NavLink to="/learn/mapping101"><NavTitle>Mapping 101 <i> with ChiVes</i></NavTitle></NavLink>
+
                          <p>ChiVes uses maps to explore different aspects of Chicago’s neighborhoods, such as air pollution or traffic. In this activity, we will explore different map elements and how to understand them.
 
                             </p>
@@ -63,8 +69,8 @@ export default function
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> <i> Activity:</i> Histogram</h2>
-                         
+                         <NavLink to="/learn/histogram"><NavTitle><i> Activity:</i> Histogram</NavTitle></NavLink>
+
                          <p> Histogram filters are a feature in the ChiVes mapping tool used to visualize the distribution of different variables on the map. You can set the histogram to only show a range of values or a specific numeric value, which will change the map to fit the criteria that you set. This activity will review how to use the histogram filters, as well as how to form your own questions and use the histogram filters to investigate them.
                         </p>
 
@@ -86,18 +92,31 @@ export default function
                         </Grid>
                         <Grid item xs={9}>
 
-                         <h2> <i> Activity:</i> Index Builder</h2>
-                         
+                            <NavLink to="/learn/indexBuilder"><NavTitle><i> Activity:</i> Index Builder</NavTitle></NavLink>
+
                          <p> The index builder is a ChiVes tool to examine the impact of multiple variables on a given community, or community area, at once. This activity will review how to use the index builder, as well as how to form your own questions and use the index builder to investigate them.
                         </p>
+                        <br /><br />
+
 
                         </Grid>
                     </Grid>
-                        
 
-                
+
+        <Grid>
+            <br /><br />
+        <h2>Video Walkthrough</h2>
+               <hr/>
+                <p>In this video tour, you'll be taken through the a full orientation of the mapping application.
+                </p>
+
+        <YouTubeEmbed id="ytplayer" type="text/html" width="100%" height="800"
+                       src="https://www.youtube.com/embed/2r3pz7-zbtU?origin=*"
+                       frameBorder="0"></YouTubeEmbed>
+        </Grid>
+
            </ContentContainer>
            <Footer/>
-       </ExplorePage>
+       </LearnPage>
     );
 }

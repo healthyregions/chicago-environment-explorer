@@ -1,1 +1,18 @@
-[{"Contributor":"HEROP","Link":"https://healthyregions.org","ImagePath":"/img/logos/herop.png","AltText":"Healthy Regions and Policy Lab "},{"Contributor":"CSDS","Link":"https://spatial.uchicago.edu/","ImagePath":"/img/logos/csds.jpg","AltText":"Center for Spatial Data Science at University of Chicago"},{"Contributor":"Botanic Gardens","Link":"https://www.chicagobotanic.org/","ImagePath":"/img/logos/botanic.jpg","AltText":"Chicago Botanic Gardens"},{"Contributor":"Depaul","Link":"https://las.depaul.edu/academics/geography/Pages/default.aspx","ImagePath":"/img/logos/depaul.png","AltText":"Depaul University Department of Geography"},{"Contributor":"MS Research","Link":"https://www.microsoft.com/en-us/research/group/urban-innovation/","ImagePath":"/img/logos/ms.png","AltText":"Microsoft Research group for Urban Innovation"},{"Contributor":"TNC","Link":"https://www.nature.org/en-us/","ImagePath":"/img/logos/tnc.png","AltText":"The Nature Conservancy"}]
+[{"Contributor":"NASA","Link":"https://www.nasa.gov","ImagePath":"/img/logos/NASA_logo.png","AltText":"NASA"},
+{"Contributor":"GGIS","Link":"https://www.ggis.illinois.edu/","ImagePath":"/img/logos/ggis.png","AltText":"Dept of Geography & GIScience at UIUC"},
+{"Contributor":"Depaul","Link":"https://las.depaul.edu/academics/geography/Pages/default.aspx","ImagePath":"/img/logos/depaul.png","AltText":"Depaul University Department of Geography"},
+{"Contributor":"NCSA","Link":"https://www.ncsa.illinois.edu/","ImagePath":"/img/logos/ncsa.png","AltText":"National Center for Supercomputing Applications"},
+{"Contributor":"MEV","Link":"https://www.womenforgreenspaces.org/","ImagePath":"/img/logos/MEV.png","AltText":"Dept of Geography & GIScience at UIUC"},
+{"Contributor":"IDPL","Link":"https://www.institutochicago.org/","ImagePath":"/img/logos/instituto.png","AltText":"Dept of Geography & GIScience at UIUC"},
+{"Contributor":"Grow Greater","Link":"https://www.growgreater.org/","ImagePath":"/img/logos/grow-greater.png","AltText":"Dept of Geography & GIScience at UIUC"},
+{"Contributor":"25th Ward","Link":"https://25thward.org/","ImagePath":"/img/logos/25thWard.png","AltText":"Dept of Geography & GIScience at UIUC"},
+{"Contributor":"PRN","Link":"#","ImagePath":"/img/logos/PRN.png","AltText":"Dept of Geography & GIScience at UIUC"},
+{"Contributor":"CSDS","Link":"https://spatial.uchicago.edu/","ImagePath":"/img/logos/csds.jpg","AltText":"Center for Spatial Data Science at University of Chicago"},
+{"Contributor":"Northwestern","Link":"https://www.earth.northwestern.edu/","ImagePath":"/img/logos/nu.webp","AltText":"Northwestern University Earth Sciences"},
+{"Contributor":"MS Research","Link":"https://www.microsoft.com/en-us/research/group/urban-innovation/","ImagePath":"/img/logos/ms.png","AltText":"Microsoft Research group for Urban Innovation"},
+{"Contributor":"Botanic Gardens","Link":"https://www.chicagobotanic.org/","ImagePath":"/img/logos/botanic.jpg","AltText":"Chicago Botanic Gardens"},
+{"Contributor":"Audubon","Link":"https://www.audubon.org//","ImagePath":"/img/logos/audubon.png","AltText":"Audubon Society"},
+{"Contributor":"HEROP","Link":"https://healthyregions.org","ImagePath":"/img/logos/herop.png","AltText":"Healthy Regions and Policy Lab "},
+{"Contributor":"TNC","Link":"https://www.nature.org/en-us/","ImagePath":"/img/logos/tnc.png","AltText":"The Nature Conservancy"}]
+
+

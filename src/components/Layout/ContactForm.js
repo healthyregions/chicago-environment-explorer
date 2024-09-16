@@ -13,7 +13,6 @@ const ContactFormContainer = styled.form`
         pointer-events:none;
         opacity:0.5;
     }
-    border:1px solid black;
     padding:2rem;
     margin:20px 0;
 `
@@ -33,14 +32,18 @@ const InputBlock = styled.div`
             width:100%;
         }
     }
+    .MuiInputBase-multiline {
+        height: 12.4rem;
+    }
     button#submit-form {
         font-size: 16px;
         font-weight: 700;
         letter-spacing: 1.75px;
+        margin-top: 0.69rem;
         line-height:3;
         text-align: center;
         text-transform:uppercase;
-        background-color: ${colors.blue};
+        background-color: #3D6017;
         color: ${colors.white};
         padding: 0 20px;
         // border-radius: .3rem;
@@ -86,7 +89,7 @@ const SuccessMessage = styled.div`
 `
 
 export default function ContactForm(){
-    
+
     const googleFormUrl = `${process.env.REACT_APP_EMAIL_FORM_URL}`
     const slackFormUrl = `${process.env.REACT_APP_SLACK_FORM_SUBMISSION_URL}`
 
@@ -97,7 +100,7 @@ export default function ContactForm(){
         'Contact_Phone': '_',
         'Message': ''
     })
-    
+
     const [formErrors, setFormErrors] = useState({
         'Contact_Name': false,
         'Contact_Email': false,
@@ -123,7 +126,7 @@ export default function ContactForm(){
             if (formData.Message === '') setFormErrors(prev => ({...prev, 'Message':true}))
         } else {
             setIsSubmitting(true)
-            setFormErrors({       
+            setFormErrors({
                 'Contact_Name': false,
                 'Contact_Email': false,
                 'Message': false})
@@ -144,7 +147,7 @@ export default function ContactForm(){
                 method: 'POST',
                 body: JSON.stringify({text: slackText})
             });
-    
+
             setIsSubmitting(false)
             setSubmitted(true)
         }
@@ -155,7 +158,7 @@ export default function ContactForm(){
     const handleSelect = (e) => setFormData(prev => ({...prev, 'Category': e.target.value}))
     let netlifyAttrs = {'name': 'contact', 'data-netlify': 'true'}
     return <>
-        {submitted && 
+        {submitted &&
             <SuccessMessage>
                 <p>
                     Thanks for your message! Our team will review your message and get back with you as soon as possible. We value your feedback and engagement as we work to improve the<span translate="no"> ChiVes </span>explorer!
@@ -174,7 +177,7 @@ export default function ContactForm(){
                             id="Category"
                             value={formData['Category']}
                             onChange={handleSelect}
-                            
+
                         >
                             <MenuItem value={'General'}>General</MenuItem>
                             <MenuItem value={'Bug'}>Bug Report or Error</MenuItem>
@@ -186,27 +189,27 @@ export default function ContactForm(){
                     </InputBlock>
 
                     <InputBlock>
-                        <TextField 
-                            required 
-                            id="Contact_Name" 
-                            name="Contact_Name" 
-                            label="Name (Required)" 
-                            placeholder="Your Name" 
+                        <TextField
+                            required
+                            id="Contact_Name"
+                            name="Contact_Name"
+                            label="Name (Required)"
+                            placeholder="Your Name"
                             onChange={handleChange}
                             error={formErrors['Contact_Name']}
                             helperText={formErrors['Contact_Name'] && 'Please enter your name'}
                                 />
                     </InputBlock>
-                    
+
                     <InputBlock>
-                        <TextField 
-                            required 
-                            id="Contact_Email" 
-                            type="email" 
-                            name="Contact_Email" 
-                            label="Email (Required)" 
-                            placeholder="greetings@you.com" 
-                            onChange={handleChange} 
+                        <TextField
+                            required
+                            id="Contact_Email"
+                            type="email"
+                            name="Contact_Email"
+                            label="Email (Required)"
+                            placeholder="greetings@you.com"
+                            onChange={handleChange}
                             error={formErrors['Contact_Email']}
                             helperText={formErrors['Contact_Email'] && 'Please enter your email'}
                             />

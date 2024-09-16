@@ -26,7 +26,7 @@ import {media} from './CarouselStyle';
 import Carousel from './CarouselInner';
 
 const CarouselContainer = styled.div`
-  height: 360px;
+  height: 300px;
   margin-top:3rem;
   ${media.palm`
     height: 240px;
@@ -86,6 +86,7 @@ const NavIcon = styled.img`
 
 const CarouselExplainerText = styled.p`
   width:100%;
+  font-family: "Roboto";
   text-align: center !important;
   padding:0 !important;
 `
@@ -93,11 +94,20 @@ const CarouselHeader = styled.h2`
   width:100%;
   text-align: center !important;
   color:black;
-  font-size:2rem;
+  font-size:4rem;
   font-family:"Lora", serif;
   font-weight:bold;
   padding:2rem 4rem;
 `
+
+const CarouselText = styled.div`
+p {
+    font-family: "Roboto";
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+ `;
 
 const Nav = ({items, selectedIndex, onClick}) => (
   <NavContainer>
@@ -114,14 +124,21 @@ class Showcase extends PureComponent {
   state = {
     selectedIndex: 0
   };
-  
+
   render() {
     const explainerText = SHOWCASE_ITEMS[this.state.selectedIndex].explainerText;
 
     return (
       <div>
-        <CarouselHeader>Understand more about Chicago's environment and society</CarouselHeader>
+
+        <p className={'font-lg'}>
+          ChiVes is a data collaborative and community mapping application that
+        brings data on Chicago’s environment together at the neighborhood level.
+        A handful of key metrics help to reveal where in the city people face particular
+        challenges as we work towards a healthier Chicago.</p>
+
         <CarouselContainer>
+
           <Carousel
             selectedIndex={this.state.selectedIndex}
             onChange={i => this.setState({selectedIndex: i})}
@@ -130,8 +147,11 @@ class Showcase extends PureComponent {
               <Image key={`showcase-image-${i}`} src={image} />
             ))}
           </Carousel>
+
         </CarouselContainer>
-        <CarouselExplainerText>{explainerText}</CarouselExplainerText>
+
+        <CarouselExplainerText className={'font-md'}>{explainerText}</CarouselExplainerText>
+
         <Nav
           items={SHOWCASE_ITEMS}
           selectedIndex={this.state.selectedIndex}

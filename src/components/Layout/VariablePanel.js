@@ -136,6 +136,7 @@ const VariablePanelContainer = styled.div`
 
 const ControlsContainer = styled.div`
   max-height: 80vh;
+  max-width: 25rem;
   overflow-y: scroll;
   padding: 20px;
 
@@ -307,15 +308,16 @@ const VariablePanel = (props) => {
               </MenuItem>
             ))}
           </Select>
-          <div style={{ marginBottom: '10px' }}>
-            {mapParams.overlays?.map(selectedOverlay => <>
+          <div style={{ margin: '1rem 0' }}>
+            <span style={{ color: colors.pink }}>Overlays:</span> {mapParams.overlays?.map((selectedOverlay, index) => <>
               {parsedOverlays.map(parsedOverlay => <>
-                { selectedOverlay === parsedOverlay?.id && <div key={`overlay-description-${selectedOverlay}`}>+ {parsedOverlay?.displayName}</div> }
+                { selectedOverlay === parsedOverlay?.id && <span style={{ color: colors.darkgray }} key={`overlay-description-${selectedOverlay}`}>
+                  <span style={{ display: index === 0 ? 'none' : 'inline' }}>, </span>{parsedOverlay?.displayName}</span> }
               </>)}
             </>)}
           </div>
 
-          <Link to='/builder'>Create a Custom Vulnerability Index using multiple variables</Link>
+          <Link to='/builder' style={{ textDecoration: 'none', color: 'rgb(1 ,123, 255)' }}>Create a Custom Vulnerability Index with Multiple Variables</Link>
         </FormControl>
         <Gutter h={20} />
         <h2>Data Description</h2>
