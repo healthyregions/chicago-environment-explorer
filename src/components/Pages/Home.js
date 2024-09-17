@@ -96,6 +96,9 @@ const Hero2 = styled.div`
   margin: 0 auto;
   padding: 80px 10px 80px 10px;
   padding: 40px 120px 40px 120px;
+  @media (max-width: 960px) {
+      padding: 0
+  }
   .font-sm {
     font-size: 13px !important;
   }
