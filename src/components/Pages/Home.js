@@ -11,6 +11,13 @@ import logoList from '../../config/logos.json';
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
+
+const HomePageContent = styled.div`
+  width: 100%;
+  margin: 0 auto;
+`;
+
+
 const HomePage = styled.div`
   h1 {
     font-family: "Lora", serif;
@@ -81,18 +88,17 @@ const HomePage = styled.div`
   }
 `;
 
-const HomePageContent = styled.div`
-  width: 100%;
-  margin: 0 auto;
-`;
-
 
 const Hero2 = styled.div`
   width: 100%;
   text-align: center;
   color: ${colors.darkgray};
   margin: 0 auto;
+  padding: 80px 10px 80px 10px;
   padding: 40px 120px 40px 120px;
+  @media (max-width: 960px) {
+      padding: 0
+  }
   .font-sm {
     font-size: 13px !important;
   }
@@ -373,7 +379,7 @@ export default function Home() {
 
         <Hero2 style={{ background: '#f2f6fc' }} >
 
-        <GeocoderContainer container spacing={1} alignItems="center">
+        <GeocoderContainer container spacing={0} alignItems="center">
             <Grid item xs={12} sm={12} md={6}>
             <br />
             <h2>Neighborhood Map </h2>
