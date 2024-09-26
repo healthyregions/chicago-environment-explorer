@@ -99,7 +99,7 @@ const projectTeam = [
         name: 'Salise Sepulveda',
         link: null,
         org: 'DePaul',
-        img: `avatar.png`,
+        img: `salise.jpeg`,
         affiliation: '(HEROP)',
         title: 'NASA Research Assistant, 2024'
     },
