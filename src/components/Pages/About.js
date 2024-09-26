@@ -92,7 +92,7 @@ export default function About(){
                 <p>You can cite all versions by using the DOI <a href="https://zenodo.org/records/8212065">10.5281/zenodo.8212064</a>. This DOI represents all stable versions released, and will always resolve to the latest one.
                 To cite the current and stable release of Chives (v3.0), use the following:</p>
                 <ul>
-                    <li>...</li>
+                    <li>Lambert, S., Halpern, D., Cox, A., Paykin, S., Singh, S., Mukesh Chugani, Vijay, S., Shan, P., Curran, W., Stuhlmacher, M., & Kolak, M. (2024). Chives: An Environmental Justice Geospatial Dashboard for Chicago (v3.0.0). Zenodo. https://doi.org/10.5281/zenodo.13774077</li>
                 </ul>
         
                 <p> The earliest version of Chives (v0.5) can be found at <a href="https://zenodo.org/records/6359814">OpenAire</a>, 
