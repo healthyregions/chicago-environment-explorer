@@ -515,7 +515,7 @@ export default function Home() {
         <br /><br />
         Thanks to funding by NASA, the latest release of ChiVes includes expanded learning resources, new data, and improved user experience. 
          Read the final Community Report for an overview (in <a href="https://drive.google.com/file/d/1pe3grtQEo8m8zbt4eUOzxaziCilPGNWH/view?usp=sharing">
-         English</a> and <a href="#">en Español</a>). 
+         English</a> and <a href="https://drive.google.com/file/d/1KjXDWpj46NBOi1lq1puc8s3XFDf3Ucrv/view?usp=sharing">en Español</a>). 
         <br /><br />
         <a href="learn">Learn Resources</a> include new tutorials and a video tour.
         </p>
