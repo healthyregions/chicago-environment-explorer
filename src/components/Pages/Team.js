@@ -40,14 +40,6 @@ const projectTeam = [
         title: 'Research Software Engineer, 2023-2024'
     },
     {
-        name: 'Winifred Curran',
-        link: 'https://www.linkedin.com/in/winifred-curran-6026525',
-        org: 'DePaul',
-        img: `curran.jpg`,
-        affiliation: '(DePaul)',
-        title: 'NASA Co-Lead, 2022-2024'
-    },
-    {
         name: 'Howard Ehrman',
         link: null,
         org: 'Peoples Response Network',
@@ -62,14 +54,6 @@ const projectTeam = [
         img: `marynia.jpeg`,
         affiliation: '(HEROP)',
         title: 'Project PI, 2018-2022; NASA Co-Lead, 2022-2024'
-    },
-    {
-        name: 'Erin Koster',
-        link: null,
-        org: 'DePaul',
-        img: `koster.jpeg`,
-        affiliation: '(HEROP)',
-        title: 'NASA Research Assistant, 2024'
     },
     {
         name: 'Shubham Kumar',
@@ -96,6 +80,34 @@ const projectTeam = [
         title: 'Community Partner, 2023-2024'
     },
     {
+        name: 'Lonette Sims',
+        link: 'mailto:prncoalition@gmail.com',
+        org: 'Peoples Response Network',
+        img: `lonette.jpg`,
+        affiliation: '(HEROP)',
+        title: 'Community Partner, 2023-2024'
+    },
+]
+
+
+const pastTeam = [
+    {
+        name: 'Winifred Curran',
+        link: 'https://www.linkedin.com/in/winifred-curran-6026525',
+        org: 'DePaul',
+        img: `curran.jpg`,
+        affiliation: '(DePaul)',
+        title: 'NASA Co-Lead, 2022-2024'
+    },
+    {
+        name: 'Erin Koster',
+        link: null,
+        org: 'DePaul',
+        img: `koster.jpeg`,
+        affiliation: '(HEROP)',
+        title: 'NASA Research Assistant, 2024'
+    },
+    {
         name: 'Salise Sepulveda',
         link: null,
         org: 'DePaul',
@@ -104,26 +116,13 @@ const projectTeam = [
         title: 'NASA Research Assistant, 2024'
     },
     {
-        name: 'Lonette Sims',
-        link: 'mailto:prncoalition@gmail.com',
-        org: 'Peoples Response Network',
-        img: `lonette.jpg`,
-        affiliation: '(HEROP)',
-        title: 'Community Partner, 2023-2024'
-    },
-    {
         name: 'Michelle Stuhlmacher',
         link: 'https://www.linkedin.com/in/michellestuhlmacher',
         org: 'DePaul',
         img: `stuhlmacher.jpg`,
         affiliation: '(DePaul)',
         title: 'NASA Project PI, 2022-2024'
-    }
-]
-
-
-const pastTeam = [
-
+    },
     {
         name: 'Dajoin Williams',
         link: 'https://www.linkedin.com/in/dajoinwilliams',
