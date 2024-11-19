@@ -24,6 +24,14 @@ const projectTeam = [
         title: 'Postdoctoral Scholar, 2023-2024'
     },
     {
+    name: 'Maribel Arellano',
+    link: 'https://www.ijla.org/',
+    org: 'Instituto Justice and Leadership Academy',
+    img: `avatar.png`,
+    affiliation: null,
+    title: 'Community Partner, 2023-2024'
+    },      
+    {
         name: 'Karina Ayala-Bermejo',
         link: 'https://www.institutochicago.org/apps/pages/index.jsp?uREC_ID=372458&type=d&pREC_ID=837883',
         org: 'Instituto del Progreso Latino',
@@ -31,6 +39,14 @@ const projectTeam = [
         affiliation: '(HEROP)',
         title: 'Community Partner, 2023-2024'
     },
+    {
+        name: 'Evelyn Barragan',
+        link: 'https://www.ijla.org/',
+        org: 'Instituto Justice and Leadership Academy',
+        img: `avatar.png`,
+        affiliation: null,
+        title: 'Community Partner, 2023-2024'
+        },  
     {
         name: 'Adam Cox',
         link: 'https://www.linkedin.com/in/mradamcox/',
@@ -46,6 +62,14 @@ const projectTeam = [
         img: `avatar.png`,
         affiliation: null,
         title: 'Community Partner, 2024'
+    },
+    {
+        name: 'Arturo Galan',
+        link: 'https://www.ijla.org/',
+        org: 'Instituto Justice and Leadership Academy',
+        img: `avatar.png`,
+        affiliation: null,
+        title: 'Community Partner, 2023-2024'
     },
     {
         name: 'Marynia Kolak',
@@ -73,8 +97,8 @@ const projectTeam = [
     },
     {
         name: 'Claudia Galeno Sanchez',
-        link: null,
-        org: 'Working Family Solidarity',
+        link: 'https://www.womenforgreenspaces.org',
+        org: 'Mujeres por Espacios Verdes',
         img: `claudia.jpg`,
         affiliation: '(HEROP)',
         title: 'Community Partner, 2023-2024'
@@ -231,9 +255,10 @@ export default function Team (){
 
                 <h2>Active Project Team</h2>
                 <p>This project is managed by the <a href="https://healthyregions.org/" target="_blank" rel="noopener noreferrer">Healthy Regions
-                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>,
-                in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank" rel="noopener noreferrer">Department of Geography</a> at <b>DePaul University</b>. 
-                From 2022-2024, it was funded in part by NASA via a new initiative to support environmental justice communities in Chicago (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).</p>
+                & Policies Lab</a> (HeRoP), housed at the Department of Geography & GIScience within the <b>University of Illinois at Urbana-Champaign</b>.
+                The team continues to collaborate with community partners and residents to improve design, accessibility, and translation, charting the future
+                of ChiVes as a growing collaborative.
+                </p>
                 <br />
                 <MemberGrid
                     members={projectTeam}
@@ -243,6 +268,10 @@ export default function Team (){
                 />
                 <hr/>
                 <h2>Past Project Team</h2>
+                <p>
+                From 2022-2024, ChiVes was funded in part by NASA via a new initiative to support environmental justice communities in Chicago, in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank" rel="noopener noreferrer">Department of Geography</a> at <b>DePaul University</b> (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).
+                Prior to that, ChiVes emerged as a project from HEROP lab members at the University of Chicago.</p>
+                <br />
                 <MemberGrid
                     members={pastTeam}
                     columns={{
