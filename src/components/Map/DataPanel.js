@@ -296,7 +296,7 @@ const EnvironmentalColumnsToChart = [
   },
   {
     'column':'treeChng',
-    'name':'Tree CanopyChange',
+    'name':'Tree Canopy Change',
     'color':colors.pink,
     'preset':'',
   },
@@ -446,8 +446,8 @@ const DataPanel = () => {
             <ReportContainer>
                 <ReportSection>
                     <h1>Current View</h1>
-                    <p>Tree Canopy Coverage</p>
-                    <h3>{selectionData.treeCoverage.toFixed(1)}%</h3>
+{/*                     <p>Tree Canopy Coverage</p>
+                    <h3>{selectionData.treeCoverage.toFixed(1)}%</h3> */}
                     <p>Heat Island Percentile</p>
                     <h3>{selectionData.heatIsland.toFixed(1)}</h3>
                     {/* <p>Averaged over {selectionData.sums.count} census tracts</p>

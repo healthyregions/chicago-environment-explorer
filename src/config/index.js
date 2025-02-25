@@ -3,7 +3,7 @@ import rawCategories from './categories.json';
 import rawOverlays from './overlays.json';
 
 export const defaultData = 'chives-data.geojson';
-export const defaultVariable = "Heat Index (Maximum)";
+export const defaultVariable = "Tree Canopy Change";
 
 // No further processing needed
 export const variableCategories = rawCategories;
