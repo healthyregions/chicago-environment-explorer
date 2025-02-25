@@ -295,6 +295,12 @@ const EnvironmentalColumnsToChart = [
     'preset':'',
   },
   {
+    'column':'treeChng',
+    'name':'Tree CanopyChange',
+    'color':colors.pink,
+    'preset':'',
+  },
+  {
     'column':'heatisl',
     'name':'Temperature Percentile',
     'color':colors.orange,
