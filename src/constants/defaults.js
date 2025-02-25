@@ -18,6 +18,7 @@ export const INITIAL_STATE = {
     "trees_area",
     "trees_den",
     "trees_crown_den",
+    "treeChng",
     "asthma_5yr_avg",
     "asthma_age_adj_rate",
     "urban_flood_suscep",

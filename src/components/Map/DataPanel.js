@@ -290,7 +290,7 @@ const ReportSection = styled.div`
 const EnvironmentalColumnsToChart = [
   {
     'column':'trees_crown_den',
-    'name':'Tree Canopy Coverage %',
+    'name':'Tree Canopy % in 2010',
     'color':colors.green,
     'preset':'',
   },
