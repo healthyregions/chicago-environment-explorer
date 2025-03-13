@@ -391,9 +391,9 @@ export default function Home() {
                     map using different data breakpoints. Click on the map for more data!<br /><br />
                     The map was co-designed with multiple community partners and organizations.
                   </span>
-                  <span> <a href="{process.env.PUBLIC_URL + /data}">Data</a> comes from collaborators across the city and beyond. Read more about the </span>
-                  <a href="{process.env.PUBLIC_URL + /about}">project</a><span> and </span>
-                  <a href="{process.env.PUBLIC_URL + /about/team}">team</a>. </p>
+                  <span> <a href={`${process.env.PUBLIC_URL}/data`}>Data</a> comes from collaborators across the city and beyond. Read more about the </span>
+                  <a href={`${process.env.PUBLIC_URL}/about`}>project</a><span> and </span>
+                  <a href={`${process.env.PUBLIC_URL}/team`}>team</a>. </p>
             </Grid>
 
             <Grid item xs={12} sm={12} md={6}>
@@ -513,11 +513,11 @@ export default function Home() {
       <p className={'font-lg'}>From 2022-2024, DePaul University partnered with the University of Illinois at Urbana-Champaign
         and multiple community organizations to expand ChiVes and make it more accessible.
         <br /><br />
-        Thanks to funding by NASA, the latest release of ChiVes includes expanded learning resources, new data, and improved user experience. 
+        Thanks to funding by NASA, the latest release of ChiVes includes expanded learning resources, new data, and improved user experience.
          Read the final Community Report for an overview (in <a href="https://drive.google.com/file/d/1pe3grtQEo8m8zbt4eUOzxaziCilPGNWH/view?usp=sharing">
-         English</a> and <a href="https://drive.google.com/file/d/1KjXDWpj46NBOi1lq1puc8s3XFDf3Ucrv/view?usp=sharing">en Español</a>). 
+         English</a> and <a href="https://drive.google.com/file/d/1KjXDWpj46NBOi1lq1puc8s3XFDf3Ucrv/view?usp=sharing">en Español</a>).
         <br /><br />
-        <a href="learn">Learn Resources</a> include new tutorials and a video tour.
+        <a href="/learn">Learn Resources</a> include new tutorials and a video tour.
         </p>
     </Grid>
 
