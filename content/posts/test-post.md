@@ -6,7 +6,7 @@ slug: test-post
 ---
 Here is the text of the blog post
 
-<p style="text-align: center"><img src="/public/depaul_light_logo.png"></p>
+![](/public/img/NASA_logo.png)
 
 ```
 DFEEFIEFNEF
