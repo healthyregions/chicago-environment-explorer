@@ -18,9 +18,6 @@ content:
       - name: title
         label: Title
         type: string
-      - name: subtitle
-        label: Subtitle
-        type: string
       - name: body
         label: Body
         type: rich-text
