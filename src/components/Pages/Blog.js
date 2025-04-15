@@ -19,7 +19,7 @@ const Blog = ({}) => {
     const postsUrl = `/content/posts.json`;
     useEffect(() => {
         if (posts.length === 0) {
-            console.log(`FETCHING BLOGPOST: ${postsUrl}`);
+            console.log('FETCHING BLOGPOST:', postsUrl);
             try {
                 fetch(postsUrl)
                     .then(r => r.json())
@@ -27,23 +27,33 @@ const Blog = ({}) => {
                         setPosts(results);
                     });
             } catch (e) {
-                const errPost = { title: 'error fetching blog posts' };
-                setPosts([errPost]);
-                setPost(errPost);
+                setPosts([{ title: 'Error: failed to fetch blog posts' }]);
             }
         }
     });
 
     useEffect(() => {
-        setPost(slug ? posts.find(p => p.slug === slug) : undefined);
+        if (posts.length > 0 && slug) {
+            const post = posts?.find(p => p.slug === slug);
+            post ? setPost(post) : console.log(`Error: no post found with slug=${slug}`);
+        } else {
+            const errPost = {content: `## Error: no post found with slug=${slug}`};
+            setPost(errPost);
+        }
     }, [posts, slug])
 
     return (
        <>
            <NavBar />
            <ContentContainer>
-               {!post && <BlogList posts={posts} />}
-               {!!post && <BlogPost posts={posts} post={post} />}
+               {
+                   /* If we find a slug, attempt to render the Post that matches the slug */
+                   slug && <BlogPost posts={posts} post={post} />
+               }
+               {
+                   /* If we are not given a slug, render the list of Posts*/
+                   !slug && <BlogList posts={posts} />
+               }
            </ContentContainer>
            <Footer/>
        </>

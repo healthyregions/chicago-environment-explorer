@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
 
-const BlogPost = ({ post }) => {
+const BlogPost = ({ posts, post }) => {
     return (
        <>
            <NavLink to={'/posts'}>&lt; Back</NavLink>
