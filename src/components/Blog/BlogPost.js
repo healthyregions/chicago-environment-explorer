@@ -1,12 +1,8 @@
 import React from 'react';
-import { ContentContainer } from '../../styled_components';
-import { NavBar, Footer } from '../index';
 
 import remarkGfm from "remark-gfm";
-import remarkFrontmatter from 'remark-frontmatter';
 import ReactMarkdown from "react-markdown";
 import { NavLink } from "react-router-dom";
-
 
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js

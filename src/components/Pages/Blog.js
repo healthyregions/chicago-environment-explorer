@@ -3,11 +3,7 @@ import { useEffect } from 'react';
 import { ContentContainer } from '../../styled_components';
 import { NavBar, Footer } from '..';
 
-import remarkGfm from "remark-gfm";
-import remarkFrontmatter from 'remark-frontmatter';
-import ReactMarkdown from "react-markdown";
-import {NavLink, useParams} from "react-router-dom";
-import {IconButton} from "@mui/material";
+import { useParams } from "react-router-dom";
 import BlogList from "../Blog/BlogList";
 import BlogPost from "../Blog/BlogPost";
 

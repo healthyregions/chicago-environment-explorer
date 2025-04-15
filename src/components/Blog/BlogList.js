@@ -1,13 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import { ContentContainer } from '../../styled_components';
-import { NavBar, Footer } from '../index';
+import React from 'react';
 import Grid from "@mui/material/Grid";
 import {NavLink} from "react-router-dom";
-
-
-
-// see example of this pattern:
-// https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
 
 const BlogList = ({ posts }) => {
     return (
