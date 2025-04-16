@@ -96,8 +96,7 @@ export default function App() {
 							<Route exact path="/team.html" component={Team} />
 							<Route path="/guide" component={Guide} />
 							<Route path="/guide.html" component={Guide} />
-							<Route path="/news" component={News} />
-							<Route path="/news.html" component={News} />
+							<Route path="/news/:slug?" component={News} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/contact.html" component={Contact} />
 							<Route exact path="/community" component={Community} />
