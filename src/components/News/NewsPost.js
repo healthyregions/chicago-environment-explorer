@@ -12,7 +12,7 @@ import { FaArrowCircleLeft } from "@react-icons/all-files/fa/FaArrowCircleLeft";
 const NewsPost = ({ posts, post }) => {
     return (
        <>
-           <NavLink to={'/news'}>
+           <NavLink to={'/news'} style={{ color: 'rgb(61, 96, 23)' }}>
                <FaArrowCircleLeft style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} /> Back
            </NavLink>
            <h1>{post.title}</h1>
