@@ -32,7 +32,7 @@ const News = React.lazy(() => import('./components/Pages/News'));
 const LearnHistogramFilter = React.lazy(() => import('./components/Pages/LearnHistogramFilter'));
 const LearnMapping101 = React.lazy(() => import('./components/Pages/LearnMapping101'));
 const LearnIndexBuilder = React.lazy(() => import('./components/Pages/LearnIndexBuilder'));
-const Blog = React.lazy(() => import('./components/Pages/Blog'));
+const Blog = React.lazy(() => import('./components/Pages/News'));
 const PRN = React.lazy(() => import('./components/Pages/PRN'));
 const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
 
@@ -117,9 +117,6 @@ export default function App() {
 							<Route path="/learn/histogram.html" component={LearnHistogramFilter} />
 							<Route path="/learn/indexBuilder" component={LearnIndexBuilder} />
 							<Route path="/learn/indexBuilder.html" component={LearnIndexBuilder} />
-
-							<Route exact path="/posts" component={Blog} />
-							<Route exact path="/posts/:slug?" component={Blog} />
 
 							{/* <Route path="/community/instituto" component={Instituto} />
 							<Route path="/community/instituto.html" component={Instituto} />
