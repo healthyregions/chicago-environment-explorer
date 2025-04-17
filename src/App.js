@@ -26,7 +26,6 @@ const Data = React.lazy(() => import('./components/Pages/Data'));
 const Explore = React.lazy(() => import('./components/Pages/Explore'));
 const IndexBuilder = React.lazy(() => import('./components/Pages/IndexBuilder'));
 const Learn = React.lazy(() => import('./components/Pages/Learn'));
-const News = React.lazy(() => import('./components/Pages/News'));
 
 
 const LearnHistogramFilter = React.lazy(() => import('./components/Pages/LearnHistogramFilter'));
@@ -96,7 +95,7 @@ export default function App() {
 							<Route exact path="/team.html" component={Team} />
 							<Route path="/guide" component={Guide} />
 							<Route path="/guide.html" component={Guide} />
-							<Route path="/news/:slug?" component={News} />
+							<Route path="/blog/:slug?" component={Blog} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/contact.html" component={Contact} />
 							<Route exact path="/community" component={Community} />

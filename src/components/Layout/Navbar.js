@@ -218,7 +218,7 @@ export default function Nav({
             <NavItems>
               <SubNav><NavLink to="/team">Team</NavLink></SubNav>
               <SubNav><NavLink to="/data">Data</NavLink></SubNav>
-              <SubNav><NavLink to="/news">News</NavLink></SubNav>
+              <SubNav><NavLink to="/blog">Blog</NavLink></SubNav>
             </NavItems>
 
             <li><NavLink to="/explore">Explore</NavLink></li>

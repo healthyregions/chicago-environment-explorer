@@ -9,10 +9,10 @@ import { FaArrowCircleLeft } from "@react-icons/all-files/fa/FaArrowCircleLeft";
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
 
-const NewsPost = ({ posts, post }) => {
+const BlogPost = ({ posts, post }) => {
     return (
        <>
-           <NavLink to={'/news'} style={{ color: 'rgb(61, 96, 23)' }}>
+           <NavLink to={'/blog'} style={{ color: 'rgb(61, 96, 23)' }}>
                <FaArrowCircleLeft style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} /> Back
            </NavLink>
            <h1>{post.title}</h1>
@@ -24,5 +24,5 @@ const NewsPost = ({ posts, post }) => {
     );
 }
 
-export default NewsPost;
+export default BlogPost;
 

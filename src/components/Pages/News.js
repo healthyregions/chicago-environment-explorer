@@ -4,8 +4,8 @@ import { ContentContainer } from '../../styled_components';
 import { NavBar, Footer } from '..';
 
 import { useParams } from "react-router-dom";
-import NewsList from "../News/NewsList";
-import NewsPost from "../News/NewsPost";
+import BlogList from "../Blog/BlogList";
+import BlogPost from "../Blog/BlogPost";
 
 
 // see example of this pattern:
@@ -54,11 +54,11 @@ const NewsPage = ({}) => {
            <ContentContainer>
                {
                    /* If we find a slug, attempt to render the Post that matches the slug */
-                   slug && <NewsPost posts={posts} post={post} />
+                   slug && <BlogPost posts={posts} post={post} />
                }
                {
                    /* If we are not given a slug, render the list of Posts*/
-                   !slug && <NewsList posts={posts} />
+                   !slug && <BlogList posts={posts} />
                }
            </ContentContainer>
            <Footer/>
