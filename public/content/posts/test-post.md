@@ -6,8 +6,6 @@ slug: test-post
 ---
 Here is the text of the blog post
 
-![](/img/NASA_logo.png)
-
 ```
 DFEEFIEFNEF
 AEFAEFOIN 
