@@ -308,6 +308,11 @@ const BlogContainer = styled(Grid)`
   margin: 0rem 0;
   a {
     text-decoration: none;
+    .post-title {
+      text-decoration: underline;
+    }
+  }
+
   }
   p {
     padding: 0;
@@ -370,6 +375,7 @@ export default function Home() {
     }
   }, []);
 
+  const blogLimit = 3;
   useEffect(() => {
     if (posts.length === 0) {
       try {
@@ -410,18 +416,15 @@ export default function Home() {
                     <h2>Blog</h2>
                     <br />
                     <p className={'font-lg'}>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit, sed do eiusmod tempor incididunt ut labore et
-                        dolore magna aliqua. Ut enim ad minim veniam, quis
-                        nostrud exercitation ullamco laboris nisi ut aliquip
-                        ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate velit esse cillum dolore eu
-                        fugiat nulla pariatur.
+                        Visit our <Link to={'/blog'}>Blog</Link> to stay
+                        current on the latest news updates from the ChiVes
+                        project. Preview our {posts?.length > blogLimit ? blogLimit : posts?.length} most
+                        recently shared news item{posts?.length > 1 ? 's' : ''} here!
                     </p>
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={6}>
-                    <BlogList style={{ textDecoration: 'nounderline' }} posts={posts} limit={3} hideHeader={true} />
+                    <BlogList posts={posts} limit={blogLimit} hideHeader={true} />
                 </Grid>
             </BlogContainer>
         </Hero2>

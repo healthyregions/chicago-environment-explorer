@@ -35,7 +35,7 @@ const BlogList = ({ posts, limit, hideHeader }) => {
                                <TableCell component="th" scope="row">
                                    <NavLink to={`/blog/${post.slug}`}>
                                        <div item xs={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                           <Typography variant={'h5'} >{post.title}</Typography>
+                                           <Typography className={'post-title'} variant={'h5'} >{post.title}</Typography>
                                            <Typography variant={'subtitle2'} style={{ color: colors.darkgray }}>{post.date}</Typography>
                                        </div>
                                        <ReactMarkdown children={post.tagline} remarkPlugins={[remarkGfm]}></ReactMarkdown>
