@@ -11,7 +11,7 @@ import BlogPost from "../Blog/BlogPost";
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
 
-const NewsPage = ({}) => {
+const BlogPage = ({}) => {
     const { slug } = useParams();
     const [posts, setPosts] = useState([]);
     const [post, setPost] = useState({});
@@ -66,5 +66,5 @@ const NewsPage = ({}) => {
     );
 }
 
-export default NewsPage;
+export default BlogPage;
 

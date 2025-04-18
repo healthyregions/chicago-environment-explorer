@@ -31,7 +31,7 @@ const Learn = React.lazy(() => import('./components/Pages/Learn'));
 const LearnHistogramFilter = React.lazy(() => import('./components/Pages/LearnHistogramFilter'));
 const LearnMapping101 = React.lazy(() => import('./components/Pages/LearnMapping101'));
 const LearnIndexBuilder = React.lazy(() => import('./components/Pages/LearnIndexBuilder'));
-const Blog = React.lazy(() => import('./components/Pages/News'));
+const Blog = React.lazy(() => import('./components/Pages/Blog'));
 const PRN = React.lazy(() => import('./components/Pages/PRN'));
 const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
 

@@ -16,18 +16,19 @@ import Typography from '@mui/material/Typography';
 import {colors} from "../../config";
 import Divider from "@mui/material/Divider";
 
-const BlogList = ({ posts }) => {
+const BlogList = ({ posts, limit, hideHeader }) => {
     return (
        <>
-           <Typography variant={'h1'}>Blog</Typography>
-
-           <Divider style={{ marginBottom: 0, color: colors.forest }} />
+           {!hideHeader && <>
+               <Typography variant={'h1'}>Blog</Typography>
+               <Divider style={{ marginBottom: 0, color: colors.forest }} />
+           </>}
 
            <TableContainer>
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
                    <TableBody>
                        {
-                           posts?.map(post => <TableRow
+                           posts?.slice(0, limit)?.map(post => <TableRow
                                    key={`news-slug-${post.slug}`}
                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                >
