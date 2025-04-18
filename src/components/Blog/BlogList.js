@@ -13,12 +13,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
+import {colors} from "../../config";
+import Divider from "@mui/material/Divider";
 
 const BlogList = ({ posts }) => {
     return (
        <>
-           <h1>Blog</h1>
-           <hr/>
+           <Typography variant={'h1'}>Blog</Typography>
+
+           <Divider style={{ marginBottom: 0, color: colors.forest }} />
 
            <TableContainer>
                <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -30,9 +33,9 @@ const BlogList = ({ posts }) => {
                                >
                                <TableCell component="th" scope="row">
                                    <NavLink to={`/blog/${post.slug}`}>
-                                       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                                           <Typography variant={'h5'} noGutter >{post.title}</Typography>
-                                           <Typography variant={'subtitle1'}>{post.date}</Typography>
+                                       <div item xs={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+                                           <Typography variant={'h5'} >{post.title}</Typography>
+                                           <Typography variant={'subtitle2'} style={{ color: colors.darkgray }}>{post.date}</Typography>
                                        </div>
                                        <ReactMarkdown children={post.tagline} remarkPlugins={[remarkGfm]}></ReactMarkdown>
                                    </NavLink>
