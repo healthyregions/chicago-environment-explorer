@@ -26,12 +26,12 @@ const Data = React.lazy(() => import('./components/Pages/Data'));
 const Explore = React.lazy(() => import('./components/Pages/Explore'));
 const IndexBuilder = React.lazy(() => import('./components/Pages/IndexBuilder'));
 const Learn = React.lazy(() => import('./components/Pages/Learn'));
-const News = React.lazy(() => import('./components/Pages/News'));
 
 
 const LearnHistogramFilter = React.lazy(() => import('./components/Pages/LearnHistogramFilter'));
 const LearnMapping101 = React.lazy(() => import('./components/Pages/LearnMapping101'));
 const LearnIndexBuilder = React.lazy(() => import('./components/Pages/LearnIndexBuilder'));
+const Posts = React.lazy(() => import('./components/Pages/Posts'));
 const PRN = React.lazy(() => import('./components/Pages/PRN'));
 const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
 
@@ -95,8 +95,7 @@ export default function App() {
 							<Route exact path="/team.html" component={Team} />
 							<Route path="/guide" component={Guide} />
 							<Route path="/guide.html" component={Guide} />
-							<Route path="/news" component={News} />
-							<Route path="/news.html" component={News} />
+							<Route path="/posts/:slug?" component={Posts} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/contact.html" component={Contact} />
 							<Route exact path="/community" component={Community} />

@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
@@ -6,8 +6,8 @@ import Grid from "@mui/material/Grid";
 
 import { Geocoder, Showcase, NavBar, Footer } from "../../components";
 import { colors } from "../../config";
-import { Gutter } from "../../styled_components";
 import logoList from '../../config/logos.json';
+import PostList from "../Posts/PostList";
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -303,6 +303,24 @@ const ThreeUpGrid = styled(Grid)`
   }
 `;
 
+const PostContainer = styled(Grid)`
+  padding: 0 2rem;
+  margin: 0rem 0;
+  a {
+    text-decoration: none;
+    .post-title {
+      text-decoration: underline;
+    }
+  }
+
+  }
+  p {
+    padding: 0;
+    margin: 0;
+    max-width: 90%;
+  }
+`;
+
 const GeocoderContainer = styled(Grid)`
   padding: 0 2rem;
   margin: 0rem 0;
@@ -341,6 +359,8 @@ const ContributersContainerInner = styled.div`
 `
 
 export default function Home() {
+  const [posts, setPosts] = useState([]);
+
   const handleGeocoder = useCallback((location) => {
     if (location.center !== undefined) {
       let url = "";
@@ -354,6 +374,19 @@ export default function Home() {
       window.location.href = url;
     }
   }, []);
+
+  const postLimit = 3;
+  useEffect(() => {
+    if (posts.length === 0) {
+      try {
+        fetch('/content/posts.json')
+            .then(r => r.json())
+            .then(results => setPosts(results));
+      } catch (e) {
+        setPosts([{ title: 'Error: failed to fetch news posts' }]);
+      }
+    }
+  });
 
   return (
     <HomePage>
@@ -378,51 +411,66 @@ export default function Home() {
 
 
         <Hero2 style={{ background: '#f2f6fc' }} >
+            <PostContainer container spacing={2} alignItems="center">
+                <Grid item xs={12} sm={12} md={6}>
+                    <h2>Latest News</h2>
+                    <br />
+                    <p className={'font-lg'}>
+                        Visit our <Link to={'/posts'}>News page</Link> to stay
+                        current on the latest news updates from the ChiVes
+                        project. Preview our {posts?.length > postLimit ? postLimit : posts?.length} most
+                        recently shared news item{posts?.length > 1 ? 's' : ''} here!
+                    </p>
+                </Grid>
 
-        <GeocoderContainer container spacing={0} alignItems="center">
-            <Grid item xs={12} sm={12} md={6}>
-            <br />
-            <h2>Neighborhood Map </h2>
-              <p className={'font-lg'}>
-                  <span>
-                    Explore dimensions of the environment across Chicago in an
-                    interactive map. Add community boundaries, resources, or industrial
-                    areas as an "Overlay" to explore different aspects of environmental justice in Chicago. Filter the
-                    map using different data breakpoints. Click on the map for more data!<br /><br />
-                    The map was co-designed with multiple community partners and organizations.
-                  </span>
-                  <span> <a href={`${process.env.PUBLIC_URL}/data`}>Data</a> comes from collaborators across the city and beyond. Read more about the </span>
-                  <a href={`${process.env.PUBLIC_URL}/about`}>project</a><span> and </span>
-                  <a href={`${process.env.PUBLIC_URL}/team`}>team</a>. </p>
-            </Grid>
-
-            <Grid item xs={12} sm={12} md={6}>
-              <Link to="/map">
-              <img
-                      className="photo"
-                      src={process.env.PUBLIC_URL + "/img/neighborhood-map.png"}
-                      alt="Wild Onion"
-                      loading="lazy"
-                      width="100%"
-                    />
-              </Link>
-              <br /> <br />
-
-              <Geocoder
-                id="Geocoder"
-                placeholder={" Type in an address or zip code to start mapping, e.g. 60643"}
-                API_KEY={MAPBOX_ACCESS_TOKEN}
-                onChange={handleGeocoder}
-              />
-
-            </Grid>
-          </GeocoderContainer>
-
-          </Hero2>
+                <Grid item xs={12} sm={12} md={6}>
+                    <PostList posts={posts} limit={postLimit} hideHeader={true} />
+                </Grid>
+            </PostContainer>
+        </Hero2>
 
 
 
         <Hero>
+
+        <GeocoderContainer container spacing={0} alignItems="center">
+            <Grid item xs={12} sm={12} md={6}>
+                <br />
+                <h2>Neighborhood Map </h2>
+                <p className={'font-lg'}>
+              <span>
+                Explore dimensions of the environment across Chicago in an
+                interactive map. Add community boundaries, resources, or industrial
+                areas as an "Overlay" to explore different aspects of environmental justice in Chicago. Filter the
+                map using different data breakpoints. Click on the map for more data!<br /><br />
+                The map was co-designed with multiple community partners and organizations.
+              </span>
+                    <span> <a href={`${process.env.PUBLIC_URL}/data`}>Data</a> comes from collaborators across the city and beyond. Read more about the </span>
+                    <a href={`${process.env.PUBLIC_URL}/about`}>project</a><span> and </span>
+                    <a href={`${process.env.PUBLIC_URL}/team`}>team</a>. </p>
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={6}>
+                <Link to="/map">
+                    <img
+                        className="photo"
+                        src={process.env.PUBLIC_URL + "/img/neighborhood-map.png"}
+                        alt="Wild Onion"
+                        loading="lazy"
+                        width="100%"
+                    />
+                </Link>
+                <br /> <br />
+
+                <Geocoder
+                    id="Geocoder"
+                    placeholder={" Type in an address or zip code to start mapping, e.g. 60643"}
+                    API_KEY={MAPBOX_ACCESS_TOKEN}
+                    onChange={handleGeocoder}
+                />
+
+            </Grid>
+        </GeocoderContainer>
 
         <Grid item xs={12} sm={12} md={12}>
             <h2> Explore ChiVes </h2>
