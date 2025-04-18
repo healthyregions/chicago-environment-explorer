@@ -9,18 +9,16 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import {colors} from "../../config";
 import Divider from "@mui/material/Divider";
 
-const BlogList = ({ posts, limit, hideHeader }) => {
+const PostList = ({ posts, limit, hideHeader }) => {
     return (
        <>
            {!hideHeader && <>
-               <Typography variant={'h1'}>Blog</Typography>
+               <Typography variant={'h1'}>News</Typography>
                <Divider style={{ marginBottom: 0, color: colors.forest }} />
            </>}
 
@@ -33,7 +31,7 @@ const BlogList = ({ posts, limit, hideHeader }) => {
                                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                >
                                <TableCell component="th" scope="row">
-                                   <NavLink to={`/blog/${post.slug}`}>
+                                   <NavLink to={`/posts/${post.slug}`}>
                                        <div item xs={12} style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                                            <Typography className={'post-title'} variant={'h5'} >{post.title}</Typography>
                                            <Typography variant={'subtitle2'} style={{ color: colors.darkgray }}>{post.date}</Typography>
@@ -50,5 +48,5 @@ const BlogList = ({ posts, limit, hideHeader }) => {
     );
 }
 
-export default BlogList;
+export default PostList;
 

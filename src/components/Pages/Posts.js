@@ -4,14 +4,14 @@ import { ContentContainer } from '../../styled_components';
 import { NavBar, Footer } from '..';
 
 import { useParams } from "react-router-dom";
-import BlogList from "../Blog/BlogList";
-import BlogPost from "../Blog/BlogPost";
+import PostList from "../Posts/PostList";
+import Post from "../Posts/Post";
 
 
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
 
-const BlogPage = ({}) => {
+const PostsPage = ({}) => {
     const { slug } = useParams();
     const [posts, setPosts] = useState([]);
     const [post, setPost] = useState({});
@@ -54,11 +54,11 @@ const BlogPage = ({}) => {
            <ContentContainer>
                {
                    /* If we find a slug, attempt to render the Post that matches the slug */
-                   slug && <BlogPost posts={posts} post={post} />
+                   slug && <Post posts={posts} post={post} />
                }
                {
                    /* If we are not given a slug, render the list of Posts*/
-                   !slug && <BlogList posts={posts} />
+                   !slug && <PostList posts={posts} />
                }
            </ContentContainer>
            <Footer/>
@@ -66,5 +66,5 @@ const BlogPage = ({}) => {
     );
 }
 
-export default BlogPage;
+export default PostsPage;
 

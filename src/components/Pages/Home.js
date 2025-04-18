@@ -7,7 +7,7 @@ import Grid from "@mui/material/Grid";
 import { Geocoder, Showcase, NavBar, Footer } from "../../components";
 import { colors } from "../../config";
 import logoList from '../../config/logos.json';
-import BlogList from "../Blog/BlogList";
+import PostList from "../Posts/PostList";
 
 const MAPBOX_ACCESS_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN;
 
@@ -303,7 +303,7 @@ const ThreeUpGrid = styled(Grid)`
   }
 `;
 
-const BlogContainer = styled(Grid)`
+const PostContainer = styled(Grid)`
   padding: 0 2rem;
   margin: 0rem 0;
   a {
@@ -375,7 +375,7 @@ export default function Home() {
     }
   }, []);
 
-  const blogLimit = 3;
+  const postLimit = 3;
   useEffect(() => {
     if (posts.length === 0) {
       try {
@@ -411,22 +411,22 @@ export default function Home() {
 
 
         <Hero2 style={{ background: '#f2f6fc' }} >
-            <BlogContainer container spacing={2} alignItems="center">
+            <PostContainer container spacing={2} alignItems="center">
                 <Grid item xs={12} sm={12} md={6}>
-                    <h2>Blog</h2>
+                    <h2>Latest News</h2>
                     <br />
                     <p className={'font-lg'}>
-                        Visit our <Link to={'/blog'}>Blog</Link> to stay
+                        Visit our <Link to={'/posts'}>News page</Link> to stay
                         current on the latest news updates from the ChiVes
-                        project. Preview our {posts?.length > blogLimit ? blogLimit : posts?.length} most
+                        project. Preview our {posts?.length > postLimit ? postLimit : posts?.length} most
                         recently shared news item{posts?.length > 1 ? 's' : ''} here!
                     </p>
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={6}>
-                    <BlogList posts={posts} limit={blogLimit} hideHeader={true} />
+                    <PostList posts={posts} limit={postLimit} hideHeader={true} />
                 </Grid>
-            </BlogContainer>
+            </PostContainer>
         </Hero2>
 
 

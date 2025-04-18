@@ -12,10 +12,10 @@ import Divider from '@mui/material/Divider';
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
 
-const BlogPost = ({ posts, post }) => {
+const Post = ({ posts, post }) => {
     return (
        <>
-           <NavLink to={'/blog'} style={{ color: colors.forest }}>
+           <NavLink to={'/posts'} style={{ color: colors.forest }}>
                <FaArrowCircleLeft style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} /> Back
            </NavLink>
 
@@ -34,5 +34,5 @@ const BlogPost = ({ posts, post }) => {
     );
 }
 
-export default BlogPost;
+export default Post;
 
