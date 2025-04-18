@@ -54,7 +54,46 @@ Discover other maps, data, and resources about the Chicago environment from feat
 
 # Data
 
-ChiVes uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018). Learn more on the [Data](https://chichives.com/data) page. 
+ChiVes uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018). Learn more on the [Data](https://chichives.com/data) page.
+
+# Blog
+
+ChiVes incorporates a basic static blog setup, using [PagesCMS](https://pagescms.org).
+
+## How to create a new post
+
+### 1. Go to https://app.pagescms.org/healthyregions/chicago-environment-explorer/
+
+Log in with your GitHub credentials and you'll see something like this:
+
+![initial view of PageCMS in this repo](./docs/images/pagescms-home.png)
+
+This is a web UI that allows us to create and edit Markdown files directly in our repository
+
+### 2. Create a new branch for your post
+
+<video controls>
+<source src="./docs/images/create-branch-in-pagescms.webm" type="video/webm">
+</video>
+
+Using this branch workflow allows us to keep a cleaner repository change history.
+
+### 3. Create your post with Title, Date, and Body content.
+
+![editing a post](./docs/images/editing-a-post-in-pagescms.png)
+
+### 4. Set a Slug before clicking "Save".
+
+The Slug is used for the file name and url of this post. Use only lower-case letter, and hyphens instead of spaces.
+
+Example:
+
+```
+Title: Upcoming ChiVes Symposium
+Slug: upcoming-chives-symposium
+```
+
+Once your blog post is ready, let @mradamcox or @bodom0015 know and we'll make a Pull Request to publish the post on the main site.
 
 ## Data Standards & Submission Guidelines
 See the [Standards & Submissions Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit#heading=h.3v2r5cc9r630) for complete information. This resource includes information on:
