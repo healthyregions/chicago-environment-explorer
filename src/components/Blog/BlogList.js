@@ -25,7 +25,7 @@ const BlogList = ({ posts, limit, hideHeader }) => {
            </>}
 
            <TableContainer>
-               <Table sx={{ minWidth: 650 }} aria-label="simple table">
+               <Table aria-label="simple table">
                    <TableBody>
                        {
                            posts?.slice(0, limit)?.map(post => <TableRow
