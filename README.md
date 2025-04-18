@@ -68,12 +68,12 @@ Log in with your GitHub credentials and you'll see something like this:
 
 ![initial view of PageCMS in this repo](./docs/images/pagescms-home.png)
 
-This is a web UI that allows us to create and edit Markdown files directly in our repository
+PagesCMS provides a web UI that allows us to create and edit Markdown files directly in our repository
 
 ### 2. Create a new branch for your post
 
 <video controls>
-<source src="./docs/images/create-branch-in-pagescms.webm" type="video/webm">
+<source src="./docs/images/create-branch-in-pagescms.mp4" type="video/mp4">
 </video>
 
 Using this branch workflow allows us to keep a cleaner repository change history.
