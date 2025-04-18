@@ -72,9 +72,7 @@ PagesCMS provides a web UI that allows us to create and edit Markdown files dire
 
 ### 2. Create a new branch for your post
 
-<video controls>
-<source src="./docs/images/create-branch-in-pagescms.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/3ce8fa06-3f69-4b0d-9d32-3a78db600bfb
 
 Using this branch workflow allows us to keep a cleaner repository change history.
 
