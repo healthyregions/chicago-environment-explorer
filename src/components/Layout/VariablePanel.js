@@ -131,7 +131,7 @@ const VariablePanelContainer = styled.div`
       opacity: 1;
     }
   }
-  user-select: none;
+//   user-select: none;
 `;
 
 const ControlsContainer = styled.div`

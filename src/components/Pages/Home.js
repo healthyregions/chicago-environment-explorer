@@ -438,16 +438,16 @@ export default function Home() {
 
 
       <Hero2 style={{ background: '#f2f6fc' }} >
-            <PostContainer container spacing={2} alignItems="center">
+            <PostContainer container spacing={2} alignItems="start">
                 <Grid item xs={12} sm={12} md={6}>
                     <h2>Latest News</h2>
                     <br />
                     <p className={'font-lg'}>
                         Visit our <Link to={'/posts'}>News page</Link> to stay
-                        current on the latest news updates from the ChiVes
-                        project. Preview our {posts?.length > postLimit ? postLimit : posts?.length} most
-                        recently shared news item{posts?.length > 1 ? 's' : ''} here!
+                        current on the latest updates from the ChiVes
+                        project.
                     </p>
+                    <br/>
                     <a class="button" href="https://groups.webservices.illinois.edu/subscribe/200077">Subscribe to the Newsletter</a>
                 </Grid>
 
