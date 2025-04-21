@@ -70,7 +70,12 @@ const HomePage = styled.div`
   a {
     color: ${colors.chicagoBlue};
   }
-
+  hr {
+      border: 2px solid #f2f6fc;
+      width: 75%;
+      margin: 30px auto;
+  }
+            
   .photo2 {
     width: 100%;
     @media (max-width: 960px) {
@@ -407,10 +412,10 @@ export default function Home() {
                   </Grid>
 
               </Grid>
-        </Hero>
+      </Hero>
 
 
-        <Hero2 style={{ background: '#f2f6fc' }} >
+      <Hero2 style={{ background: '#f2f6fc' }} >
             <PostContainer container spacing={2} alignItems="center">
                 <Grid item xs={12} sm={12} md={6}>
                     <h2>Latest News</h2>
@@ -460,7 +465,7 @@ export default function Home() {
                         width="100%"
                     />
                 </Link>
-                <br /> <br />
+
 
                 <Geocoder
                     id="Geocoder"
@@ -471,8 +476,10 @@ export default function Home() {
 
             </Grid>
         </GeocoderContainer>
+        <hr color="red"></hr>
 
         <Grid item xs={12} sm={12} md={12}>
+            <br /><br />
             <h2> Explore ChiVes </h2>
             <br /> <br />
 
