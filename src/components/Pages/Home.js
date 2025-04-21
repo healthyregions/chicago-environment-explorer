@@ -499,7 +499,7 @@ export default function Home() {
 
             </Grid>
         </GeocoderContainer>
-        <hr color="red"></hr>
+        <hr></hr>
 
         <Grid item xs={12} sm={12} md={12}>
             <br /><br />
