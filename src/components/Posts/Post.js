@@ -29,7 +29,9 @@ const Post = ({ posts, post }) => {
            <Divider style={{ color: colors.forest }} />
 
            {/* // the rest of the markdown */}
-           <ReactMarkdown children={post.content} remarkPlugins={[remarkGfm]} />
+           <div class="post-content">
+               <ReactMarkdown children={post.content} remarkPlugins={[remarkGfm]}/>
+           </div>
        </>
     );
 }
