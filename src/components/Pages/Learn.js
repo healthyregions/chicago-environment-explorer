@@ -107,7 +107,11 @@ export default function Learn (){
             <br /><br />
         <h2>Video Walkthrough</h2>
                <hr/>
-                <p>In this video tour, you'll be taken through the a full orientation of the mapping application.
+                <p>In this video tour, you'll be taken through the a full orientation 
+                    of the mapping application.
+                    Mira este <a href="https://www.youtube.com/watch?v=kG2fSofKw0k">tutorial en español</a> en nuestra lista de reproducción 
+                    de Youtube.
+
                 </p>
 
         <YouTubeEmbed id="ytplayer" type="text/html" width="100%" height="800"
