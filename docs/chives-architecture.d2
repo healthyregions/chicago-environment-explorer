@@ -1,0 +1,84 @@
+# render this diagram with:
+# d2 chives-architecture.d2 chives-architecture.png -s -t 104 --pad 20
+
+direction: right
+grid-columns: 3
+grid-gap: 10
+classes: {
+    result: {
+        shape: circle
+        width: 125
+    }
+    result: {
+        shape: stored_data
+        width: 125
+    }
+    input: {
+        shape: page
+    }
+}
+
+c1: "" {
+    grid-columns: 1
+    style.opacity: 0
+}
+
+# c1.cb.text: |md 
+# ### ChiVes Code Base
+# healthyregions/chicago-environment-explorer|
+
+# define all inputs
+c1.g: Google Drive {
+    grid-columns: 1
+    height: 250
+}
+
+c1.g.config: ChiVes configuration
+
+c1.g.data: Contributed datasets
+
+c1.g.config -> c2.n.build
+c1.g.data -> c2.n.build
+
+c1.cb: ChiVes code base (GitHub)
+
+#  "ChiVes code base on GitHub\nhealthyregions/chicago-environment-explorer
+
+c2: "" {
+    grid-columns: 1
+    style.opacity: 0
+}
+
+c2.n: Netlify {
+    grid-columns: 1
+    height: 350
+}
+c2.n.build: ChiVes build process
+
+c2.n.site: chichives.com\n(Hosted website)
+c2.n.build -> c2.n.site
+
+c1.cb -> c2.n {
+    style.stroke-dash: 2
+}
+
+c3: "" {
+    grid-columns: 1
+    style.opacity: 0
+}
+
+# c3.filler: {
+#     height: 50
+#     style.opacity: 0
+# }
+c3.w: Public access {
+    grid-columns: 1
+    height: 350
+}
+c3.w.1: Explore map
+c3.w.2: Use index builder
+c3.w.3: Download data
+
+c3.w.1 -> c2.n.site
+c3.w.2 -> c2.n.site
+c3.w.3 -> c2.n.site
