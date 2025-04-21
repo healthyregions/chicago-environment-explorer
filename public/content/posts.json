@@ -1,18 +1,10 @@
 [
     {
         "published": true,
-        "date": "2025-04-17",
-        "title": "Another test post!",
-        "slug": "another-test",
-        "tagline": "Example text from a blog post...",
-        "content": "Example text from a blog post.\n\nHave a nice day!"
-    },
-    {
-        "published": true,
-        "date": "2025-04-10",
-        "title": "This is a test Post",
-        "slug": "test-post",
-        "tagline": "Here is ~the~ **text** of the _blog post_...",
-        "content": "Here is ~the~ **text** of the _blog post_\n\n![](../../img/NASA_logo.png)\n\n```\nDFEEFIEFNEF\nAEFAEFOIN \n\nefINAEFE\n```"
+        "date": "2025-04-18",
+        "title": "Welcome to the ChiVes Blog!",
+        "slug": "welcome",
+        "tagline": "We are happy to announce that moving forward we will have a blog here on the ChiVes site that will serve as place for news...",
+        "content": "We are happy to announce that moving forward we will have a blog here on the ChiVes site that will serve as place for news updates about the ChiVes platform, community partnerships, and future events."
     }
 ]
