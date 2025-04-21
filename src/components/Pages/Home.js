@@ -70,7 +70,12 @@ const HomePage = styled.div`
   a {
     color: ${colors.chicagoBlue};
   }
-
+  hr {
+      border: 2px solid #f2f6fc;
+      width: 75%;
+      margin: 30px auto;
+  }
+            
   .photo2 {
     width: 100%;
     @media (max-width: 960px) {
@@ -313,7 +318,29 @@ const PostContainer = styled(Grid)`
     }
   }
 
+  a.button {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: ${colors.forest};
+    color: white;
+    border-radius: 0.3rem;
+    margin: 0.5rem 1rem 0 0;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: bold;
+    display: table;
+    box-shadow: 5px 5px 20px ${colors.forest}55;
+    transition: 250ms all;
+    @media (max-width: 900px){
+      margin:1rem auto 2rem auto;
+      text-align:center;
+    }
+    &:hover {
+      background: ${colors.fuschia};
+      box-shadow: 5px 10px 20px ${colors.forest}88;
+    }
   }
+
   p {
     padding: 0;
     margin: 0;
@@ -407,10 +434,10 @@ export default function Home() {
                   </Grid>
 
               </Grid>
-        </Hero>
+      </Hero>
 
 
-        <Hero2 style={{ background: '#f2f6fc' }} >
+      <Hero2 style={{ background: '#f2f6fc' }} >
             <PostContainer container spacing={2} alignItems="center">
                 <Grid item xs={12} sm={12} md={6}>
                     <h2>Latest News</h2>
@@ -421,6 +448,7 @@ export default function Home() {
                         project. Preview our {posts?.length > postLimit ? postLimit : posts?.length} most
                         recently shared news item{posts?.length > 1 ? 's' : ''} here!
                     </p>
+                    <a class="button" href="https://groups.webservices.illinois.edu/subscribe/200077">Subscribe to the Newsletter</a>
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={6}>
@@ -460,7 +488,7 @@ export default function Home() {
                         width="100%"
                     />
                 </Link>
-                <br /> <br />
+
 
                 <Geocoder
                     id="Geocoder"
@@ -471,8 +499,10 @@ export default function Home() {
 
             </Grid>
         </GeocoderContainer>
+        <hr></hr>
 
         <Grid item xs={12} sm={12} md={12}>
+            <br /><br />
             <h2> Explore ChiVes </h2>
             <br /> <br />
 

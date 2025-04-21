@@ -194,3 +194,7 @@ button.mapboxgl-ctrl-attrib-button {
 
 /* Hide Google Analytics Top Bar so it won't overlap with Menu */
 iframe.skiptranslate { visibility: hidden !important; }
+
+.post-content img {
+    max-width: 100%;
+}
