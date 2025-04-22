@@ -8,7 +8,7 @@ On the 4th anniversary of ChiVes, we’re delighted to share some extra green up
 
 🌳 **Tree Canopy Data** - Check out brand new 2017 tree canopy data, a revised 2010 estimate, and canopy change over time. See how the policies of the 1990s impacted green infrastructure today. A big shoutout to [**_Lindsay Darling_**](https://mortonarb.org/science/staff/lindsay-darling/) at the **_Morton Arboretum_** for pioneering this dataset, and **_Cat Discenza_** at UIUC for aggregating to tract level. Expect some piping hot research coming out soon from this team…   
 
-🗞️ **News -** We also have a new [blog](https://chichives.com/posts) and [subscribe link](https://groups.webservices.illinois.edu/subscribe/200077!) for a quarterly newsletter.
+🗞️ **News -** We also have a new [blog](https://chichives.com/posts) and [subscribe link](https://groups.webservices.illinois.edu/subscribe/200077) for a quarterly newsletter.
 
 💬 **Tutorial en Espa**[**ñ**](https://www.youtube.com/watch?v=kG2fSofKw0k)**ol** - DePaul’s latest update includes a translated version of the ChiVes tutorial. Mira este [tutorial en español](https://www.youtube.com/watch?v=kG2fSofKw0k. ) en nuestra lista de reproducción de Youtube.
 
