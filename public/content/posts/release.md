@@ -14,7 +14,7 @@ On the 4th anniversary of ChiVes, we’re delighted to share some extra green up
 
 💡 Don’t forget that **multiple translations** are available for every page you view in ChiVes. Click on the “translate” option on the bottom left side of the page you need translated.
 
-🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with \*\*_Mujeres del Espacios Verde_\*\*s and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… 
+🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with **_Mujeres del Espacios Verde_s** and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… 
 
 Thanks to the phenomenal community who made [ChiVes](https://chichives.com/team) a dream come true! We’ll have to have a big party to celebrate five years in 2026. 🎂
 
