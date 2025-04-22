@@ -2,7 +2,7 @@
 published: true
 date: 2025-04-22
 title: Earth Day 2025 Release (v3.1.0)
-slug: release
+slug: earth-day-release-2025
 ---
 On the 4th anniversary of ChiVes ([**chichives.com**](http://chichives.com)), we’re delighted to share some extra green updates for Earth Day 2025 with Version 3.1.0 including new variables, features, and news:
 
