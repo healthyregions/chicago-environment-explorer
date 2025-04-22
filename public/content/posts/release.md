@@ -14,8 +14,8 @@ On the 4th anniversary of ChiVes ([**chichives.com**](http://chichives.com)), we
 
 💡 Don’t forget that **multiple translations** are available for every page you view in ChiVes. Click on the “translate” option on the bottom left side of the page you need translated.
 
-🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with **_Mujeres del Espacios Verde_**s and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… 
+🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with \*\*_Mujeres del Espacios Verde_\*\*s and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… 
 
 Thanks to the phenomenal community who made [ChiVes](https://chichives.com/team) a dream come true! We’ll have to have a big party to celebrate five years in 2026. 🎂
 
-<p style="text-align: center"><img src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXdY1mzkVr2L_6jZTDUvhoxJu7IRCk17BBk5isE3RGe5nXOsEMGDvHRltUot6nRjYS3JcEVWJYiHlBhSrTV-XggY2pd0Xpwc5my6oTKL8bPjiFmkYSSFLc5l4cmfifEGSb-VRoDdLQ?key=Lx-b6V5EM5uKOb2hljCOEYgF" style="margin-left:0px;margin-top:0px;" width="348" height="348"></p>
+![](../../ChiVes%20Earth%20Day%202025.gif)
