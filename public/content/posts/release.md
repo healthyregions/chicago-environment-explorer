@@ -10,11 +10,11 @@ On the 4th anniversary of ChiVes, we’re delighted to share some extra green up
 
 🗞️ **News -** We also have a new [blog](https://chichives.com/posts) and [subscribe link](https://groups.webservices.illinois.edu/subscribe/200077) for a quarterly newsletter.
 
-💬 **Tutorial en Espa**[**ñ**](https://www.youtube.com/watch?v=kG2fSofKw0k)**ol** - DePaul’s latest update includes a translated version of the ChiVes tutorial. Mira este [tutorial en español](https://www.youtube.com/watch?v=kG2fSofKw0k. ) en nuestra lista de reproducción de Youtube.
+💬 **Tutorial en Español** - DePaul’s latest update includes a translated version of the ChiVes tutorial. Mira este [tutorial en español](https://www.youtube.com/watch?v=kG2fSofKw0k.) en nuestra lista de reproducción de Youtube.
 
 💡 Don’t forget that **multiple translations** are available for every page you view in ChiVes. Click on the “translate” option on the bottom left side of the page you need translated.
 
-🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with **_Mujeres del Espacios Verde_s** and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… 
+🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with **\_Mujeres del Espacios Verde\_s** and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… 
 
 Thanks to the phenomenal community who made [ChiVes](https://chichives.com/team) a dream come true! We’ll have to have a big party to celebrate five years in 2026. 🎂
 
