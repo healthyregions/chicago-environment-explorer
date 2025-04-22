@@ -13,7 +13,7 @@ const projectTeam = [
         org: 'Illinois',
         img: `marc-astacio.webp`,
         affiliation: '(HEROP)',
-        title: 'Research Coordinator, 2023-2024'
+        title: 'Research Coordinator, 2023+'
     },
     {
         name: 'José Alavez',
@@ -21,39 +21,60 @@ const projectTeam = [
         org: 'Illinois',
         img: `jose.png`,
         affiliation: '(HEROP)',
-        title: 'Postdoctoral Scholar, 2023-2024'
+        title: 'Postdoctoral Scholar, 2023+'
     },
-    {
-    name: 'Maribel Arellano',
-    link: 'https://www.ijla.org/',
-    org: 'Instituto Justice and Leadership Academy',
-    img: `avatar.png`,
-    affiliation: null,
-    title: 'Community Partner, 2023-2024'
-    },      
-    {
-        name: 'Karina Ayala-Bermejo',
-        link: 'https://www.institutochicago.org/apps/pages/index.jsp?uREC_ID=372458&type=d&pREC_ID=837883',
-        org: 'Instituto del Progreso Latino',
-        img: `karina.jpg`,
-        affiliation: '(HEROP)',
-        title: 'Community Partner, 2023-2024'
-    },
-    {
-        name: 'Evelyn Barragan',
-        link: 'https://www.ijla.org/',
-        org: 'Instituto Justice and Leadership Academy',
-        img: `avatar.png`,
-        affiliation: null,
-        title: 'Community Partner, 2023-2024'
-        },  
     {
         name: 'Adam Cox',
         link: 'https://www.linkedin.com/in/mradamcox/',
         org: 'Illinois',
         img: `adam_cox.jpg`,
         affiliation: '(HEROP)',
-        title: 'Research Software Engineer, 2023-2024'
+        title: 'Software Engineer, 2023+'
+    },
+    {
+        name: 'Marynia Kolak',
+        link: 'https://www.linkedin.com/in/maryniakolak',
+        org: 'Illinois',
+        img: `marynia.jpeg`,
+        affiliation: '(HEROP)',
+        title: 'Project PI, 2018-2022, 2025+; NASA Co-I, 2022-2024'
+    },
+    {
+        name: 'Shubham Kumar',
+        link: 'https://www.linkedin.com/in/shubhamk008/',
+        org: 'Illinois',
+        img: `shubham.jpeg`,
+        affiliation: '(HEROP)',
+        title: 'Product Designer, 2023+'
+    },
+    {
+        name: 'Sara Lambert',
+        link: 'https://www.linkedin.com/in/sara-lambert-b4602b8a/',
+        org: 'NCSA, Illinois',
+        img: `sara.png`,
+        affiliation: '(HEROP)',
+        title: 'Sr Software Engineer, Front-End, 2024+'
+    },
+
+]
+
+
+const pastTeam = [
+    {
+        name: 'Claudia Galeno Sanchez',
+        link: 'https://www.womenforgreenspaces.org',
+        org: 'Mujeres por Espacios Verdes',
+        img: `claudia.jpg`,
+        affiliation: '(HEROP)',
+        title: 'Community Partner, 2023-2024'
+    },
+    {
+        name: 'Lonette Sims',
+        link: 'mailto:prncoalition@gmail.com',
+        org: 'Peoples Response Network',
+        img: `lonette.jpg`,
+        affiliation: '(HEROP)',
+        title: 'Community Partner, 2023-2024'
     },
     {
         name: 'Howard Ehrman',
@@ -72,49 +93,29 @@ const projectTeam = [
         title: 'Community Partner, 2023-2024'
     },
     {
-        name: 'Marynia Kolak',
-        link: 'https://www.linkedin.com/in/maryniakolak',
-        org: 'Illinois',
-        img: `marynia.jpeg`,
-        affiliation: '(HEROP)',
-        title: 'Project PI, 2018-2022; NASA Co-Lead, 2022-2024'
-    },
-    {
-        name: 'Shubham Kumar',
-        link: 'https://www.linkedin.com/in/shubhamk008/',
-        org: 'Illinois',
-        img: `shubham.jpeg`,
-        affiliation: '(HEROP)',
-        title: 'Research Product Designer, 2023-2024'
-    },
-    {
-        name: 'Sara Lambert',
-        link: 'https://www.linkedin.com/in/sara-lambert-b4602b8a/',
-        org: 'NCSA, Illinois',
-        img: `sara.png`,
-        affiliation: '(HEROP)',
-        title: 'Sr Research Software Engineer, Front-End, 2024'
-    },
-    {
-        name: 'Claudia Galeno Sanchez',
-        link: 'https://www.womenforgreenspaces.org',
-        org: 'Mujeres por Espacios Verdes',
-        img: `claudia.jpg`,
-        affiliation: '(HEROP)',
+        name: 'Maribel Arellano',
+        link: 'https://www.ijla.org/',
+        org: 'Instituto Justice and Leadership Academy',
+        img: `avatar.png`,
+        affiliation: null,
         title: 'Community Partner, 2023-2024'
-    },
-    {
-        name: 'Lonette Sims',
-        link: 'mailto:prncoalition@gmail.com',
-        org: 'Peoples Response Network',
-        img: `lonette.jpg`,
-        affiliation: '(HEROP)',
-        title: 'Community Partner, 2023-2024'
-    },
-]
-
-
-const pastTeam = [
+        },      
+        {
+            name: 'Karina Ayala-Bermejo',
+            link: 'https://www.institutochicago.org/apps/pages/index.jsp?uREC_ID=372458&type=d&pREC_ID=837883',
+            org: 'Instituto del Progreso Latino',
+            img: `karina.jpg`,
+            affiliation: '(HEROP)',
+            title: 'Community Partner, 2023-2024'
+        },
+        {
+            name: 'Evelyn Barragan',
+            link: 'https://www.ijla.org/',
+            org: 'Instituto Justice and Leadership Academy',
+            img: `avatar.png`,
+            affiliation: null,
+            title: 'Community Partner, 2023-2024'
+            },  
     {
         name: 'Winifred Curran',
         link: 'https://www.linkedin.com/in/winifred-curran-6026525',
@@ -270,7 +271,7 @@ export default function Team (){
                 <h2>Past Project Team</h2>
                 <p>
                 From 2022-2024, ChiVes was funded in part by NASA via a new initiative to support environmental justice communities in Chicago, in collaboration with the <a href="https://las.depaul.edu/academics/geography-gis/Pages/default.aspx" target="_blank" rel="noopener noreferrer">Department of Geography</a> at <b>DePaul University</b> (read more <a href="https://depauliaonline.com/64087/special-issues/research-team-seeks-to-expand-access-to-environmental-data-in-chicago-nasa-grant-provides-funding-for-research-expansion-of-chives-database/">here</a> and <a href="https://ggis.illinois.edu/news/2022-09-19t152513/prof-kolak-depaul-researchers-receive-nasa-grant-data-driven-environmental"> here</a>).
-                Prior to that, ChiVes emerged as a project from HEROP lab members at the University of Chicago.</p>
+                Prior to that, ChiVes emerged as a project from HEROP lab members at the Center for Spatial Data Science, at the University of Chicago.</p>
                 <br />
                 <MemberGrid
                     members={pastTeam}
