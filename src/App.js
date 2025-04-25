@@ -31,7 +31,10 @@ const Learn = React.lazy(() => import('./components/Pages/Learn'));
 const LearnHistogramFilter = React.lazy(() => import('./components/Pages/LearnHistogramFilter'));
 const LearnMapping101 = React.lazy(() => import('./components/Pages/LearnMapping101'));
 const LearnIndexBuilder = React.lazy(() => import('./components/Pages/LearnIndexBuilder'));
+
 const Posts = React.lazy(() => import('./components/Pages/Posts'));
+const Neighborhood = React.lazy(() => import('./components/Pages/Neighborhood'));
+
 const PRN = React.lazy(() => import('./components/Pages/PRN'));
 const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
 
@@ -84,37 +87,36 @@ export default function App() {
 				<ThemeProvider theme={theme}>
 					<Suspense fallback={<LoadingMessage />}>
 						<Switch>
-							<Route path="/" component={Home} exact />
-							<Route path="/map" component={Map} />
-							<Route path="/map.html" component={Map} />
-							<Route path="/about" component={About} />
-							<Route path="/about.html" component={About} />
+							<Route exact path="/" component={Home} exact />
+							<Route exact path="/map" component={Map} />
+							<Route exact path="/map.html" component={Map} />
+							<Route exact path="/about" component={About} />
+							<Route exact path="/about.html" component={About} />
 							<Route exact path="/team" component={Team} />
-							<Route path="/explore" component={Explore} />
-							<Route path="/explore.html" component={Explore} />
 							<Route exact path="/team.html" component={Team} />
 							<Route path="/guide" component={Guide} />
 							<Route path="/guide.html" component={Guide} />
 							<Route path="/posts/:slug?" component={Posts} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/contact.html" component={Contact} />
+							<Route path="/neighborhood*" component={Neighborhood} />
 							<Route exact path="/community" component={Community} />
 							<Route exact
 								path="/community.html"
 								component={Community}
 							/>
-							<Route path="/data" component={Data} />
-							<Route path="/data.html" component={Data} />
-							<Route path="/builder" component={IndexBuilder} />
-							<Route path="/builder.html" component={IndexBuilder} />
+							<Route exact path="/data" component={Data} />
+							<Route exact path="/data.html" component={Data} />
+							<Route exact path="/builder" component={IndexBuilder} />
+							<Route exact path="/builder.html" component={IndexBuilder} />
 							<Route exact path="/learn" component={Learn} />
 							<Route exact path="/learn.html" component={Learn} />
-							<Route path="/learn/mapping101" component={LearnMapping101} />
-							<Route path="/learn/mapping101.html" component={LearnMapping101} />
-							<Route path="/learn/histogram" component={LearnHistogramFilter} />
-							<Route path="/learn/histogram.html" component={LearnHistogramFilter} />
-							<Route path="/learn/indexBuilder" component={LearnIndexBuilder} />
-							<Route path="/learn/indexBuilder.html" component={LearnIndexBuilder} />
+							<Route exact path="/learn/mapping101" component={LearnMapping101} />
+							<Route exact path="/learn/mapping101.html" component={LearnMapping101} />
+							<Route exact path="/learn/histogram" component={LearnHistogramFilter} />
+							<Route exact path="/learn/histogram.html" component={LearnHistogramFilter} />
+							<Route exact path="/learn/indexBuilder" component={LearnIndexBuilder} />
+							<Route exact path="/learn/indexBuilder.html" component={LearnIndexBuilder} />
 
 							{/* <Route path="/community/instituto" component={Instituto} />
 							<Route path="/community/instituto.html" component={Instituto} />
@@ -125,7 +127,6 @@ export default function App() {
 							<Route path="/community/peoplesresponsenetwork" component={PRN} />
 							<Route path="/community/peoplesresponsenetwork.html" component={PRN} /> */}
 							<Route component={ErrorPage} />
-							<Route />
 						</Switch>
 					</Suspense>
 				</ThemeProvider>
