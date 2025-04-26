@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import { ContentContainer } from '../../styled_components';
 import { NavBar, Footer } from '../../components';
 import Grid from "@mui/material/Grid";
-import {ImageList, ImageListItem} from "@mui/material";
+import Carousel from "../Layout/Carousel/CarouselInner";
+import {media} from "../Layout/Carousel/CarouselStyle";
 
 
 
@@ -11,7 +12,7 @@ const NeighborhoodPage = styled.div`
     background:white;
 `;
 
-
+// TODO: Source these from CMS?
 const defaultImageList = [
   {
     url: '/img/logos/25thWard.png',
@@ -71,6 +72,20 @@ const defaultImageList = [
   },
 ];
 
+const CarouselContainer = styled.div`
+  ${media.palm`
+    width: 100%;
+  `} ${media.desk`
+    width: 50%;
+  `}
+`;
+
+const Image = styled.img`
+  width: 300px;
+  height: 180px;
+  border: solid black 2px;
+`;
+
 const defaultNeighborhoodName = 'Pilsen';
 const defaultMarkdownContents = 'Bordering the Chicago River, the Lower West Side neighborhood offers\n' +
   '            a combination of diverse areas including the Chicago Arts District in\n' +
@@ -91,22 +106,21 @@ const NeighborhoodComponent = ({
   nhLogoUrl = defaultLogoUrl,
   nhImageList = defaultImageList
 }) => {
+  const [selectedIndex, setSelectedIndex] = useState();
   return (
     <>
       <Grid container>
         <Grid item xs={12}>
-          <ImageList sx={{ width: 500, height: 450 }} variant="woven" cols={3} gap={8}>
-            {nhImageList.map((item) => (
-              <ImageListItem key={item.url}>
-                <img
-                  srcSet={`${item.url}?w=161&fit=crop&auto=format&dpr=2 2x`}
-                  src={`${item.url}?w=161&fit=crop&auto=format`}
-                  alt={item.title}
-                  loading="lazy"
-                />
-              </ImageListItem>
-            ))}
-          </ImageList>
+          <CarouselContainer>
+            <Carousel
+              selectedIndex={selectedIndex}
+              onChange={i => setSelectedIndex(i)}
+            >
+              {nhImageList.map((item, i) => (
+                <Image key={`showcase-image-${i}`} src={item.url} />
+              ))}
+            </Carousel>
+          </CarouselContainer>
         </Grid>
       </Grid>
 
