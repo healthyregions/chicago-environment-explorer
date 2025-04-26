@@ -5,6 +5,9 @@ import { NavBar, Footer } from '../../components';
 import Grid from "@mui/material/Grid";
 import Carousel from "../Layout/Carousel/CarouselInner";
 import {media} from "../Layout/Carousel/CarouselStyle";
+import {ImageList, ImageListItem, Tab, Tabs} from "@mui/material";
+import {Box} from "@mui/system";
+import {TabContext, TabList, TabPanel} from "@material-ui/lab";
 
 
 
@@ -99,6 +102,104 @@ const defaultResourceLinks = [
 ]
 const defaultLogoUrl = '/img/logos/neighborhoods/Pilsen.png';
 
+ /*const LabTabs = () => {
+
+  return (
+    <Box sx={{ width: '100%', typography: 'body1' }}>
+      <TabContext value={value}>
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <Tab label="Item One" value="1" />
+            <Tab label="Item Two" value="2" />
+            <Tab label="Item Three" value="3" />
+          </TabList>
+        </Box>
+        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="3">Item Three</TabPanel>
+      </TabContext>
+    </Box>
+  );
+}*/
+
+const NeighborhoodImageStyleTabs = ({ nhImageList }) => {
+  const [value, setValue] = React.useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <TabContext value={value}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <TabList value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Carousel" value="1" />
+          <Tab label="Standard"  value="2" />
+          <Tab label="Woven"  value="3" />
+          <Tab label="Quilted"  value="4" />
+          <Tab label="Masonry"  value="5" />
+        </TabList>
+      </Box>
+
+      <TabPanel value="1">
+        <h4>Option A: Interactive Carousel from the Home page</h4>
+        <NeighborhoodImageCarousel nhImageList={nhImageList} />
+      </TabPanel>
+
+      <TabPanel value="2">
+        <h4>Option B: Material UI Standard ImageList</h4>
+        <NeighborhoodImageList nhImageList={nhImageList} variant={'standard'} />
+      </TabPanel>
+
+      <TabPanel value="3">
+        <h4>Option C: Material UI Woven ImageList</h4>
+        <NeighborhoodImageList nhImageList={nhImageList} variant={'woven'} />
+      </TabPanel>
+
+      <TabPanel value="4">
+        <h4>Option D: Material UI Quilted ImageList</h4>
+        <NeighborhoodImageList nhImageList={nhImageList} variant={'quilted'} />
+      </TabPanel>
+
+      <TabPanel value="5">
+        <h4>Option E: Material UI Masonry ImageList</h4>
+        <NeighborhoodImageList nhImageList={nhImageList} variant={'masonry'} />
+      </TabPanel>
+    </TabContext>
+  );
+}
+
+const NeighborhoodImageList = ({ nhImageList, variant }) =>
+  <ImageList sx={{ width: 500, height: 450 }} variant={variant || 'standard'} cols={4} gap={8}>
+    {nhImageList.map((item) => (
+      <ImageListItem key={item.url}>
+        <img
+          srcSet={`${item.url}?w=161&fit=crop&auto=format&dpr=2 2x`}
+          src={`${item.url}?w=161&fit=crop&auto=format`}
+          alt={item.title}
+          loading="lazy"
+        />
+      </ImageListItem>
+    ))}
+  </ImageList>
+
+const NeighborhoodImageCarousel = ({nhImageList}) => {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  return (
+    <CarouselContainer>
+      <Carousel
+        selectedIndex={selectedIndex}
+        onChange={i => setSelectedIndex(i)}
+      >
+        {nhImageList.map((item, i) => (
+          <Image key={`showcase-image-${i}`} src={item.url} />
+        ))}
+      </Carousel>
+    </CarouselContainer>
+  );
+}
+
+
 const NeighborhoodComponent = ({
   nhName = defaultNeighborhoodName,
   nhMarkdownContents = defaultMarkdownContents,
@@ -106,21 +207,11 @@ const NeighborhoodComponent = ({
   nhLogoUrl = defaultLogoUrl,
   nhImageList = defaultImageList
 }) => {
-  const [selectedIndex, setSelectedIndex] = useState();
   return (
     <>
       <Grid container>
         <Grid item xs={12}>
-          <CarouselContainer>
-            <Carousel
-              selectedIndex={selectedIndex}
-              onChange={i => setSelectedIndex(i)}
-            >
-              {nhImageList.map((item, i) => (
-                <Image key={`showcase-image-${i}`} src={item.url} />
-              ))}
-            </Carousel>
-          </CarouselContainer>
+          <NeighborhoodImageStyleTabs nhImageList={nhImageList} />
         </Grid>
       </Grid>
 
