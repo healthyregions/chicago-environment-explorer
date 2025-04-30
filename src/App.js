@@ -33,7 +33,6 @@ const LearnMapping101 = React.lazy(() => import('./components/Pages/LearnMapping
 const LearnIndexBuilder = React.lazy(() => import('./components/Pages/LearnIndexBuilder'));
 
 const Posts = React.lazy(() => import('./components/Pages/Posts'));
-const Neighborhood = React.lazy(() => import('./components/Pages/Neighborhood'));
 
 const PRN = React.lazy(() => import('./components/Pages/PRN'));
 const Instituto = React.lazy(() => import('./components/Pages/Instituto'));
@@ -99,7 +98,6 @@ export default function App() {
 							<Route path="/posts/:slug?" component={Posts} />
 							<Route path="/contact" component={Contact} />
 							<Route path="/contact.html" component={Contact} />
-							<Route path="/neighborhood*" component={Neighborhood} />
 							<Route exact path="/community" component={Community} />
 							<Route exact
 								path="/community.html"

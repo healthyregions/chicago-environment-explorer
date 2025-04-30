@@ -31,6 +31,7 @@ import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
 import MapOverlayTooltipContent from "./MapOverlayTooltipContent";
+import MapBlogPostsTooltipContent from "./MapBlogPostsTooltipContent";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
@@ -67,6 +68,17 @@ const MapContainer = styled.div`
       transform: translate(30px, -60px);
     }
   }
+`;
+
+
+const BlogPostsHoverDiv = styled.div`
+  max-width: 50vh;
+  line-height: 1.5;
+  background: ${colors.white};
+  padding: 20px;
+  color: ${colors.black};
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
+  border-radius: 0 15px 15px 15px;
 `;
 
 const HoverDiv = styled.div`
@@ -689,6 +701,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   // See https://github.com/healthyregions/chicago-environment-explorer/issues/168
   const overlayLayers = parsedOverlays
       .filter(({ id }) => mapParams.overlays.includes(id))
+      .filter(({ id }) => id !== 'blog-posts')
       .map((parsedOverlay) => {
     const colors = JSON.parse(parsedOverlay.fillColor);
     return new GeoJsonLayer({
@@ -730,7 +743,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       onClick: (feature) => handleMapClick(feature, parsedOverlay),
 
       // Visibility
-      visible: mapParams.overlays.includes(parsedOverlay.id),
+      visible: mapParams.overlays.includes(parsedOverlay?.id),
       updateTriggers: {
         visible: [mapParams.overlay, mapParams.overlays],
       },
@@ -808,6 +821,59 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         beforeId: "country-label",
       })
     );
+
+  const blogSlug = 'blog-posts';
+  if (mapParams.overlays?.includes(blogSlug)) {
+    const parsedOverlay = parsedOverlays?.find(o => o?.id === blogSlug);
+    overlayLayers.push(
+      new GeoJsonLayer({
+        // Define Blog Posts Layer
+        id: blogSlug,
+        data: parsedOverlay.data,
+
+        // Behavior
+        pickable: parsedOverlay.geometryType === 'point',    // TODO: point data should be clickable (optionally?)
+
+        // Look & Feel
+        opacity: (colors === [0,0,0,0] || colors === [0,0,0]) ? 1.0 : 0.8,
+        material: false,
+        stroked: !!parsedOverlay.lineColor,
+        filled: !!parsedOverlay.fillColor,
+        extruded: parsedOverlay.geometryType === 'point',
+        getElevation: 20,
+        //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
+        //getText: f => f.properties[parsedOverlay.symbolProp],
+        getFillColor: Array.isArray(colors) ? colors : (feature) => {
+          // If single color, use that color
+          // If mapping of colors, choose color based on symbolProp
+          const { symbolProp } = parsedOverlay;
+          const symbolKey = feature.properties[symbolProp];
+          return colors[symbolKey];
+        },
+
+        lineWidthScale: 1,
+        lineWidthMinPixels: 1,
+        lineWidthMaxPixels: 4,
+
+        getLineWidth: 1,
+        getLineColor: Number(parsedOverlay.lineColor) || [0,0,0,255],
+
+        getPointRadius: 4,
+        getTextSize: 12,
+        pointRadiusUnits: 'pixels',
+        pointType: 'circle',
+        onClick: (feature) => handleMapClick(feature, parsedOverlay),
+
+        // Visibility
+        visible: mapParams.overlays.includes(parsedOverlay.id),
+        updateTriggers: {
+          visible: [mapParams.overlay, mapParams.overlays],
+        },
+        beforeId: "state-label",
+      })
+    );
+  }
+
 
   const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
 
@@ -953,8 +1019,22 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           <MapTooltipContent content={hoverInfo.object} showCustom={showCustom} />
         </HoverDiv>
       )}
-
-      {overlayHover.object && (
+      {
+        overlayHover.object && overlayHover?.overlay?.id === 'blog-posts' &&
+        <BlogPostsHoverDiv
+          style={{
+            position: "absolute",
+            zIndex: 1,
+            maxWidth: '40vw',
+            left: overlayHover.x,
+            top: overlayHover.y,
+          }}
+          ref={hoverCcRef}>
+          <MapBlogPostsTooltipContent content={overlayHover.object} overlay={overlayHover.overlay}></MapBlogPostsTooltipContent>
+        </BlogPostsHoverDiv>
+      }
+      {
+        overlayHover.object && overlayHover?.overlay?.id !== 'blog-posts' &&
           <HoverDiv
               style={{
                 position: "absolute",
@@ -964,9 +1044,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
               }}
               ref={hoverCcRef}
           >
-            <MapOverlayTooltipContent content={overlayHover.object} overlay={overlayHover.overlay} />
+           <MapOverlayTooltipContent content={overlayHover.object} overlay={overlayHover.overlay} />
           </HoverDiv>
-      )}
+      }
 
       {!geoids.length && (
         <LogoContainer infoPanel={panelState.info}>

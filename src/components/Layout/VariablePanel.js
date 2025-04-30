@@ -249,9 +249,8 @@ const VariablePanel = (props) => {
     }
   }, [mapParams, dispatch, variableChanged]);
 
-  const handleMapOverlay = (event) => {
+  const handleMapOverlay = (overlays) => {
     let prevOverlays = mapParams.overlays;
-    let overlays = event.target.value;
 
     // If "None" is clicked, remove all other overlays
     if ((!prevOverlays.includes('None') && overlays.includes('None')) || !overlays.length) {
@@ -265,7 +264,6 @@ const VariablePanel = (props) => {
 
     dispatch(
       setMapParams({
-        overlay: event.target.value,
         overlays: overlays,
       })
     );
@@ -284,6 +282,14 @@ const VariablePanel = (props) => {
     dispatch(changeVariable(variablePresets[e.target.value]));
   }
 
+  const handleShowBlogPosts = (e) => {
+    const slug = 'blog-posts';
+    if (e.target.checked) {
+      handleMapOverlay([...mapParams.overlays, slug]);
+    } else {
+      handleMapOverlay(mapParams.overlays.filter((o) => o !== slug));
+    }
+  };
 
   return (
     <VariablePanelContainer
@@ -317,6 +323,10 @@ const VariablePanel = (props) => {
             </>)}
           </div>
 
+          <p>Show Community Stickers</p>
+          <AntSwitch checked={mapParams.overlays?.includes('blog-posts')}
+                     onClick={(e) => handleShowBlogPosts(e)} />
+
           <Link to='/builder' style={{ textDecoration: 'none', color: 'rgb(1 ,123, 255)' }}>Create a Custom Vulnerability Index with Multiple Variables</Link>
         </FormControl>
         <Gutter h={20} />
@@ -349,13 +359,14 @@ const VariablePanel = (props) => {
 
 
         <Gutter h={20} />
+
         <h2>Data Overlay</h2>
         <FormControl variant="filled">
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
             id="overlay-select"
             value={mapParams.overlays}
-            onChange={handleMapOverlay}
+            onChange={(e) => handleMapOverlay(e.target.value)}
             multiple={true}
             style={{ maxWidth: '300px' }}
           >
@@ -363,7 +374,7 @@ const VariablePanel = (props) => {
               None
             </MenuItem>
             {
-              parsedOverlays?.map((overlay) =>
+              parsedOverlays?.filter((overlay) => overlay?.id !== 'blog-posts')?.map((overlay) =>
                   <MenuItem value={overlay.id} key={overlay.id}>
                     {overlay.displayName}
                   </MenuItem>

@@ -8,8 +8,13 @@ content:
     path: 'public/content/posts'
     filename: '{fields.slug}.md'
     view:
-      fields: [ title, published, date ]
+      fields: [ title, published, date, imageList ]
     fields:
+      - name: imageList
+        label: Images
+        type: image
+        multiple: true
+        required: false
       - name: published
         label: Published
         type: boolean
