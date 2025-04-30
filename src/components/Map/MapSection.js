@@ -825,6 +825,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   const blogSlug = 'blog-posts';
   if (mapParams.overlays?.includes(blogSlug)) {
     const parsedOverlay = parsedOverlays?.find(o => o?.id === blogSlug);
+    const colors = JSON.parse(parsedOverlay?.fillColor);
     overlayLayers.push(
       new GeoJsonLayer({
         // Define Blog Posts Layer
