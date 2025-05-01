@@ -827,20 +827,23 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     const parsedOverlay = parsedOverlays?.find(o => o?.id === blogSlug);
     const colors = JSON.parse(parsedOverlay?.fillColor);
     overlayLayers.push(
+
+      // TODO: Explore using custom map image/icons sourced from google sheet
+      //     https://docs.mapbox.com/mapbox-gl-js/example/custom-marker-icons/
       new GeoJsonLayer({
         // Define Blog Posts Layer
         id: blogSlug,
         data: parsedOverlay.data,
 
         // Behavior
-        pickable: parsedOverlay.geometryType === 'point',    // TODO: point data should be clickable (optionally?)
+        pickable: true,
 
         // Look & Feel
         opacity: (colors === [0,0,0,0] || colors === [0,0,0]) ? 1.0 : 0.8,
         material: false,
         stroked: !!parsedOverlay.lineColor,
         filled: !!parsedOverlay.fillColor,
-        extruded: parsedOverlay.geometryType === 'point',
+        extruded: true,
         getElevation: 20,
         //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
         //getText: f => f.properties[parsedOverlay.symbolProp],

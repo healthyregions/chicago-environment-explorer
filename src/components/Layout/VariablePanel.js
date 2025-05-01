@@ -316,7 +316,7 @@ const VariablePanel = (props) => {
           </Select>
           <div style={{ margin: '1rem 0' }}>
             <span style={{ color: colors.pink }}>Overlays:</span> {mapParams.overlays?.map((selectedOverlay, index) => <>
-              {parsedOverlays.map(parsedOverlay => <>
+              {parsedOverlays.filter((o) => o?.id !== 'blog-posts').map(parsedOverlay => <>
                 { selectedOverlay === parsedOverlay?.id && <span style={{ color: colors.darkgray }} key={`overlay-description-${selectedOverlay}`}>
                   <span style={{ display: index === 0 ? 'none' : 'inline' }}>, </span>{parsedOverlay?.displayName}</span> }
               </>)}
@@ -386,7 +386,7 @@ const VariablePanel = (props) => {
           </Select>
         </FormControl>
         {mapParams.overlays.map(selectedOverlay => <>
-          {parsedOverlays.map(parsedOverlay => {
+          {parsedOverlays.filter(o => o?.id !== 'blog-posts').map(parsedOverlay => {
             const fillColor = JSON.parse(parsedOverlay?.fillColor);
             return (<>
             { selectedOverlay === parsedOverlay?.id && parsedOverlay?.fillColor && <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
