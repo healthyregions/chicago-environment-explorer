@@ -153,7 +153,7 @@ const MapMarkerPopup = ({ sticker }) => {
 
                         <Grid item xs={9}>
                             {/* TODO: Truncate content if too long */}
-                            <p>{postMetadata.content}</p>
+                            <p>{postMetadata?.content}</p>
                         </Grid>
                     </Grid>
                 </ContentContainer>

@@ -38,9 +38,7 @@ import Pin from "./MapMarkerPin";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
-  if (overlay?.setProps) {
-    overlay.setProps(props);
-  }
+  overlay && overlay?.setProps(props);
   return null;
 }
 
@@ -830,56 +828,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   useEffect(async () => {
     setStickers(await loadStickers('/content/stickers/stickers.json'));
   }, []);
-  
-  const communityStickersLayer =
-    new GeoJsonLayer({
-      // Define Blog Posts Layer
-      id: 'community-stickers',
-      data: stickers?.map(sticker => ({
-        "type": "Feature",
-        "geometry": {
-          "type": "Point",
-          "coordinates": [sticker.longitude, sticker.latitude]
-        },
-        "properties": sticker
-      })),
 
-      // Behavior
-      pickable: true,
-
-      // Look & Feel
-      opacity: 1.0,
-      material: false,
-      stroked: true,
-      filled: true,
-      extruded: true,
-      getElevation: 20,
-      //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
-      //getText: f => f.properties[parsedOverlay.symbolProp],
-      getFillColor: [255,0,255,255],
-
-      lineWidthScale: 1,
-      lineWidthMinPixels: 1,
-      lineWidthMaxPixels: 4,
-
-      getLineWidth: 1,
-      getLineColor:  [255,0,255,255],
-
-      getPointRadius: 4,
-      getTextSize: 12,
-      pointRadiusUnits: 'pixels',
-      pointType: 'circle',
-      onClick: (feature) => handleMapClick(feature),
-
-      // Visibility
-      visible: mapParams.showCommunityStickers,
-      updateTriggers: {
-        visible: [mapParams.showCommunityStickers],
-      },
-      beforeId: "state-label",
-    });
-
-  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers, communityStickersLayer];
+  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
 
   useEffect(() => {
     if (use3d) {
@@ -900,7 +850,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   }
 
   const mapStickers = useMemo(() =>
-    stickers ? <>loading...</> : stickers?.map((sticker, index) => (
+    stickers?.map((sticker, index) => (
       <Marker
         key={`marker-${index}`}
         longitude={sticker.longitude}
@@ -971,7 +921,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           }
         }}
       >
-        {mapStickers}
+        {mapParams.showCommunityStickers && mapStickers}
         {popupInfo && (
           <Popup
             anchor="top"
@@ -979,8 +929,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
             latitude={Number(popupInfo.latitude)}
             onClose={() => setPopupInfo(null)}
           >
-            <Pin />
-            {/*<MapMarkerPopup sticker={popupInfo} />*/}
+            <MapMarkerPopup sticker={popupInfo} />
           </Popup>
         )}
         <DeckGLOverlay
