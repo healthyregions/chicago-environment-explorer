@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Earth Day 2025 Release",
+    "subtitle": "Lower West",
+    "logo": "butterfly_large_text.png",
+    "icon": "butterfly_small.png",
+    "blog_slug": "earth-day-release-2025",
+    "x_coordinate": 1158984.036,
+    "y_coordinate": 1915825.244,
+    "latitude": 41.92475626,
+    "longitude": -87.69124357,
+    "location": "{'latitude': '41.9247562570513', 'longitude': '-87.6912435686367'}"
+  },
+  {
+    "title": "Welcome!",
+    "subtitle": "Lower West",
+    "logo": "instituto_large_text.png",
+    "icon": "instituto_small.png",
+    "blog_slug": "welcome",
+    "x_coordinate": 1168716.801,
+    "y_coordinate": 1932469.91,
+    "latitude": 41.97022435,
+    "longitude": -87.6549972,
+    "location": "{'latitude': '41.970224345725285', 'longitude': '-87.6549971996707'}"
+  }
+]

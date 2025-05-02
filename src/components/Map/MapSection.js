@@ -1,5 +1,5 @@
 // general imports, state
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {useState, useEffect, useRef, useCallback, useMemo} from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -16,14 +16,14 @@ import {
 import { CSVLoader } from "@loaders.gl/csv";
 // import { GPUGridLayer, HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { fitBounds } from "@math.gl/web-mercator";
-import MapboxGLMap from "react-map-gl";
+import MapboxGLMap, {Marker, Popup} from "react-map-gl";
 import { scaleThreshold } from "d3-scale";
 import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
 
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from "..";
 import { scaleColor } from "../../utils";
-import {colors, parsedOverlays} from "../../config";
+import {colors, loadStickers, parsedOverlays} from "../../config";
 import * as SVG from "../../config/svg";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useChivesData } from "../../hooks/useChivesData";
@@ -31,11 +31,16 @@ import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
 import MapOverlayTooltipContent from "./MapOverlayTooltipContent";
-import MapBlogPostsTooltipContent from "./MapBlogPostsTooltipContent";
+import MapCommunityStickersTooltipContent from "./MapMarkerPopup";
+import MapMarkerPin from "./MapMarkerPin";
+import MapMarkerPopup from "./MapMarkerPopup";
+import Pin from "./MapMarkerPin";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
-  overlay?.setProps(props);
+  if (overlay?.setProps) {
+    overlay.setProps(props);
+  }
   return null;
 }
 
@@ -71,7 +76,7 @@ const MapContainer = styled.div`
 `;
 
 
-const BlogPostsHoverDiv = styled.div`
+const CommunityStickersHoverDiv = styled.div`
   max-width: 50vh;
   line-height: 1.5;
   background: ${colors.white};
@@ -701,7 +706,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
   // See https://github.com/healthyregions/chicago-environment-explorer/issues/168
   const overlayLayers = parsedOverlays
       .filter(({ id }) => mapParams.overlays.includes(id))
-      .filter(({ id }) => id !== 'blog-posts')
       .map((parsedOverlay) => {
     const colors = JSON.parse(parsedOverlay.fillColor);
     return new GeoJsonLayer({
@@ -822,64 +826,60 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       })
     );
 
-  const blogSlug = 'blog-posts';
-  if (mapParams.overlays?.includes(blogSlug)) {
-    const parsedOverlay = parsedOverlays?.find(o => o?.id === blogSlug);
-    const colors = JSON.parse(parsedOverlay?.fillColor);
-    overlayLayers.push(
-
-      // TODO: Explore using custom map image/icons sourced from google sheet
-      //     https://docs.mapbox.com/mapbox-gl-js/example/custom-marker-icons/
-      new GeoJsonLayer({
-        // Define Blog Posts Layer
-        id: blogSlug,
-        data: parsedOverlay.data,
-
-        // Behavior
-        pickable: true,
-
-        // Look & Feel
-        opacity: (colors === [0,0,0,0] || colors === [0,0,0]) ? 1.0 : 0.8,
-        material: false,
-        stroked: !!parsedOverlay.lineColor,
-        filled: !!parsedOverlay.fillColor,
-        extruded: true,
-        getElevation: 20,
-        //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
-        //getText: f => f.properties[parsedOverlay.symbolProp],
-        getFillColor: Array.isArray(colors) ? colors : (feature) => {
-          // If single color, use that color
-          // If mapping of colors, choose color based on symbolProp
-          const { symbolProp } = parsedOverlay;
-          const symbolKey = feature.properties[symbolProp];
-          return colors[symbolKey];
+  const [stickers, setStickers] = useState([]);
+  useEffect(async () => {
+    setStickers(await loadStickers('/content/stickers/stickers.json'));
+  }, []);
+  
+  const communityStickersLayer =
+    new GeoJsonLayer({
+      // Define Blog Posts Layer
+      id: 'community-stickers',
+      data: stickers?.map(sticker => ({
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [sticker.longitude, sticker.latitude]
         },
+        "properties": sticker
+      })),
 
-        lineWidthScale: 1,
-        lineWidthMinPixels: 1,
-        lineWidthMaxPixels: 4,
+      // Behavior
+      pickable: true,
 
-        getLineWidth: 1,
-        getLineColor: Number(parsedOverlay.lineColor) || [0,0,0,255],
+      // Look & Feel
+      opacity: 1.0,
+      material: false,
+      stroked: true,
+      filled: true,
+      extruded: true,
+      getElevation: 20,
+      //getPosition: (d) => [d.x_coordinate, d.y_coordinate],
+      //getText: f => f.properties[parsedOverlay.symbolProp],
+      getFillColor: [255,0,255,255],
 
-        getPointRadius: 4,
-        getTextSize: 12,
-        pointRadiusUnits: 'pixels',
-        pointType: 'circle',
-        onClick: (feature) => handleMapClick(feature, parsedOverlay),
+      lineWidthScale: 1,
+      lineWidthMinPixels: 1,
+      lineWidthMaxPixels: 4,
 
-        // Visibility
-        visible: mapParams.overlays.includes(parsedOverlay.id),
-        updateTriggers: {
-          visible: [mapParams.overlay, mapParams.overlays],
-        },
-        beforeId: "state-label",
-      })
-    );
-  }
+      getLineWidth: 1,
+      getLineColor:  [255,0,255,255],
 
+      getPointRadius: 4,
+      getTextSize: 12,
+      pointRadiusUnits: 'pixels',
+      pointType: 'circle',
+      onClick: (feature) => handleMapClick(feature),
 
-  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
+      // Visibility
+      visible: mapParams.showCommunityStickers,
+      updateTriggers: {
+        visible: [mapParams.showCommunityStickers],
+      },
+      beforeId: "state-label",
+    });
+
+  const allLayers = [...baseLayers, ...customLayers, ...overlayLayers, communityStickersLayer];
 
   useEffect(() => {
     if (use3d) {
@@ -899,6 +899,26 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
             (object.properties.hours_of_operation ? object.properties.hours_of_operation : ''));
   }
 
+  const mapStickers = useMemo(() =>
+    stickers ? <>loading...</> : stickers?.map((sticker, index) => (
+      <Marker
+        key={`marker-${index}`}
+        longitude={sticker.longitude}
+        latitude={sticker.latitude}
+        anchor="bottom"
+        onClick={e => {
+          // If we let the click event propagates to the map, it will immediately close the popup
+          // with `closeOnClick: true`
+          e.originalEvent.stopPropagation();
+          setPopupInfo(sticker);
+        }}
+      >
+        <Pin/>
+      </Marker>
+    )), [stickers]);
+
+
+  const [popupInfo, setPopupInfo] = useState(null);
   return (
     <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
       <MapboxGLMap
@@ -951,6 +971,18 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           }
         }}
       >
+        {mapStickers}
+        {popupInfo && (
+          <Popup
+            anchor="top"
+            longitude={Number(popupInfo.longitude)}
+            latitude={Number(popupInfo.latitude)}
+            onClose={() => setPopupInfo(null)}
+          >
+            <Pin />
+            {/*<MapMarkerPopup sticker={popupInfo} />*/}
+          </Popup>
+        )}
         <DeckGLOverlay
           interleaved={true}
           width={"100%"}
@@ -1024,8 +1056,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         </HoverDiv>
       )}
       {
-        overlayHover.object && overlayHover?.overlay?.id === 'blog-posts' &&
-        <BlogPostsHoverDiv
+        overlayHover.object && mapParams.showCommunityStickers &&
+        <CommunityStickersHoverDiv
           style={{
             position: "absolute",
             zIndex: 1,
@@ -1034,11 +1066,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
             top: overlayHover.y,
           }}
           ref={hoverCcRef}>
-          <MapBlogPostsTooltipContent content={overlayHover.object} overlay={overlayHover.overlay}></MapBlogPostsTooltipContent>
-        </BlogPostsHoverDiv>
+          <MapCommunityStickersTooltipContent content={overlayHover.object} overlay={overlayHover.overlay}></MapCommunityStickersTooltipContent>
+        </CommunityStickersHoverDiv>
       }
       {
-        overlayHover.object && overlayHover?.overlay?.id !== 'blog-posts' &&
+        overlayHover.object &&
           <HoverDiv
               style={{
                 position: "absolute",

@@ -295,13 +295,10 @@ const VariablePanel = (props) => {
     dispatch(changeVariable(variablePresets[e.target.value]));
   }
 
-  const handleShowBlogPosts = (e) => {
-    const slug = 'blog-posts';
-    if (e.target.checked) {
-      handleMapOverlay([...mapParams.overlays, slug]);
-    } else {
-      handleMapOverlay(mapParams.overlays.filter((o) => o !== slug));
-    }
+  const toggleCommunityStickers = (e) => {
+    dispatch(setMapParams({
+      showCommunityStickers: !!e.target.checked
+    }));
   };
 
   return (
@@ -327,19 +324,19 @@ const VariablePanel = (props) => {
               </MenuItem>
             ))}
           </Select>
-          <div style={{ margin: '1rem 0' }}>
+          <div style={{ margin: '1rem 0 0.5rem' }}>
             <span style={{ color: colors.pink }}>Overlays:</span> {mapParams.overlays?.map((selectedOverlay, index) => <>
-              {parsedOverlays.filter((o) => o?.id !== 'blog-posts').map(parsedOverlay => <>
+              {parsedOverlays.map((parsedOverlay, i) => <div key={`overlays-enabled-list-${i}`}>
                 { selectedOverlay === parsedOverlay?.id && <span style={{ color: colors.darkgray }} key={`overlay-description-${selectedOverlay}`}>
                   <span style={{ display: index === 0 ? 'none' : 'inline' }}>, </span>{parsedOverlay?.displayName}</span> }
-              </>)}
+              </div>)}
             </>)}
           </div>
 
           <AntSwitchLabel label={'Show Community Stickers'}
             control={
-              <AntSwitch checked={mapParams.overlays?.includes('blog-posts')}
-                         onClick={(e) => handleShowBlogPosts(e)} />
+              <AntSwitch checked={mapParams.showCommunityStickers}
+                         onClick={(e) => toggleCommunityStickers(e)} />
             } />
 
           <Link to='/builder' style={{ textDecoration: 'none', color: 'rgb(1 ,123, 255)' }}>Create a Custom Vulnerability Index with Multiple Variables</Link>
@@ -389,7 +386,7 @@ const VariablePanel = (props) => {
               None
             </MenuItem>
             {
-              parsedOverlays?.filter((overlay) => overlay?.id !== 'blog-posts')?.map((overlay) =>
+              parsedOverlays?.map((overlay) =>
                   <MenuItem value={overlay.id} key={overlay.id}>
                     {overlay.displayName}
                   </MenuItem>
@@ -400,16 +397,16 @@ const VariablePanel = (props) => {
             </MenuItem>
           </Select>
         </FormControl>
-        {mapParams.overlays.map(selectedOverlay => <>
-          {parsedOverlays.filter(o => o?.id !== 'blog-posts').map(parsedOverlay => {
+        {mapParams.overlays.map((selectedOverlay, index) => <div key={`overlay-legend-container-${index}`}>
+          {parsedOverlays.map((parsedOverlay, subindex) => {
             const fillColor = JSON.parse(parsedOverlay?.fillColor);
             return (<>
-            { selectedOverlay === parsedOverlay?.id && parsedOverlay?.fillColor && <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+            { selectedOverlay === parsedOverlay?.id && parsedOverlay?.fillColor && <div key={`overlay-legend-${selectedOverlay}-${index}-${subindex}`} style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
               <h3>{parsedOverlay?.description}</h3>
             {parsedOverlay?.fillColor && !Array.isArray(fillColor) && Object.entries(fillColor).map(([key, color]) => (
-                <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", margin:'.25em 0' }}>
+                <div key={`overlay-legend-${selectedOverlay}-${index}-${subindex}`} style={{ display: "flex", margin:'.25em 0' }}>
                 <span
-                    key={key}
+                    key={`overlay-key-${key}-${index}-${subindex}`}
                     style={{
                       backgroundColor: `rgb(${color.join(",")})`,
                       width: 16,
@@ -431,7 +428,7 @@ const VariablePanel = (props) => {
               </div>}
             </div>}
           </>)})}
-        </>)}
+        </div>)}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}
