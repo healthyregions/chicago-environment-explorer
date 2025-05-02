@@ -13,7 +13,7 @@ import { Gutter } from "../../styled_components";
 import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } from "../../actions"; //variableChangeZ, setNotification, storeMobilityData
 import {colors, variablePresets, dataDescriptions, parsedOverlays} from "../../config";
 import * as SVG from "../../config/svg";
-import { FormControl, Switch, Stack } from "@mui/material";
+import {FormControl, Switch, Stack, FormControlLabel, FormGroup} from "@mui/material";
 import {Link} from "react-router-dom";
 
 const VariablePanelContainer = styled.div`
@@ -182,6 +182,19 @@ const ControlsContainer = styled.div`
     background-size: 50%, 100%;
   }
 `
+const AntSwitchLabel = styled(FormControlLabel)`
+  margin: 0.5rem 0;
+  color: rgb(1 ,123, 255);
+  text-decoration: none;
+  
+  .MuiSwitch-root {
+    margin-right: 0.5rem;
+  }
+  .MuiTypography-root {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 13px !important;
+  }
+`;
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -323,9 +336,11 @@ const VariablePanel = (props) => {
             </>)}
           </div>
 
-          <p>Show Community Stickers</p>
-          <AntSwitch checked={mapParams.overlays?.includes('blog-posts')}
-                     onClick={(e) => handleShowBlogPosts(e)} />
+          <AntSwitchLabel label={'Show Community Stickers'}
+            control={
+              <AntSwitch checked={mapParams.overlays?.includes('blog-posts')}
+                         onClick={(e) => handleShowBlogPosts(e)} />
+            } />
 
           <Link to='/builder' style={{ textDecoration: 'none', color: 'rgb(1 ,123, 255)' }}>Create a Custom Vulnerability Index with Multiple Variables</Link>
         </FormControl>
