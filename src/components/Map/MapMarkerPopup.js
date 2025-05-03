@@ -4,6 +4,11 @@ import {ContentContainer} from "../../styled_components";
 import Grid from "@mui/material/Grid";
 import styled from "styled-components";
 import {ImageList, ImageListItem} from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { colors } from '../../config';
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import MapMarkerPin from "./MapMarkerPin";
 
 
 // TODO: Source these from CMS?
@@ -103,16 +108,6 @@ const NeighborhoodImageList = ({ nhImageList }) =>
   </ImageList>
 
 
-const MapMarkerPin = ({ sticker }) =>
-  <>
-      <img src={sticker?.logo} alt={sticker?.title} />
-      <br/>
-      <br/>
-      <br/>
-      <a href={`/posts/${sticker?.blog_slug}`} target={'_blank'}>Read more &rarr;</a>
-  </>
-
-
 // This component handles and formats the map tooltip info regarding the clicked Blog Post.
 // The props passed to this component should contain the hovered object (from deck, info.object by default),
 // as well as a reference to the overlay that was clicked
@@ -123,9 +118,8 @@ const MapMarkerPopup = ({ sticker }) => {
     useEffect(async () => {
         if (!postMetadata) {
             try {
-                const postsResponse = await fetch('/content/posts.json');
-                const posts = postsResponse.json();
-                const post = posts.find((post) => sticker?.blog_slug === post.slug);
+                const posts = await fetch('/content/posts.json').then(r => r.json());
+                const post = posts.find((post) => sticker?.blog_slug === post?.slug);
                 console.log("post found:", post);
                 setPostMetadata(post);
             } catch (e) {
@@ -136,8 +130,7 @@ const MapMarkerPopup = ({ sticker }) => {
 
     return (
         <>
-            <h2>{sticker?.title}</h2>
-            {sticker && <div style={{ overflowY: 'scroll', maxHeight: '55vh' }}>
+            {sticker && <>
                 <ContentContainer>
                     {/* TODO: Refactor - Move this to the blog post
                       <Grid container>
@@ -146,18 +139,30 @@ const MapMarkerPopup = ({ sticker }) => {
                         </Grid>
                       </Grid>*/}
 
-                    <Grid container spacing={4}>
-                        <Grid item xs={3} direction={'row'}>
-                            <MapMarkerPin sticker={sticker} />
+                    <Grid container spacing={2}>
+                        <Grid item xs={4}>
+                            <MapMarkerPin size={60} sticker={sticker} />
                         </Grid>
+                        <Grid item xs={8}>
+                            <Typography variant={'h6'}>{sticker?.title}</Typography>
+                            <Typography variant={'overline'} color={colors.chicagoRed}>{sticker?.subtitle}</Typography>
+                        </Grid>
+                    </Grid>
 
-                        <Grid item xs={9}>
+                    <Grid container spacing={0}>
+                        <Grid item xs={12}>
                             {/* TODO: Truncate content if too long */}
-                            <p>{postMetadata?.content}</p>
+                            <ReactMarkdown children={postMetadata?.content} remarkPlugins={[remarkGfm]}></ReactMarkdown>
+                        </Grid>
+                    </Grid>
+
+                    <Grid container spacing={0}>
+                        <Grid item xs={12}>
+                            <a href={`/posts/${sticker?.blog_slug}`} target={'_blank'}>Read more &rarr;</a>
                         </Grid>
                     </Grid>
                 </ContentContainer>
-            </div>}
+            </>}
         </>
     )
 }

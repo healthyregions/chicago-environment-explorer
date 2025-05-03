@@ -863,7 +863,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           setPopupInfo(sticker);
         }}
       >
-        <Pin/>
+        <MapMarkerPin size={30} sticker={sticker} />
       </Marker>
     )), [stickers]);
 
