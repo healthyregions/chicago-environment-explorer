@@ -113,20 +113,27 @@ const NeighborhoodImageList = ({ nhImageList }) =>
 // as well as a reference to the overlay that was clicked
 const MapMarkerPopup = ({ sticker }) => {
     // Metadata from the CMS system
-    const [postMetadata, setPostMetadata] = useState(undefined);
+    const [posts, setPosts] = useState([]);
+    const [post, setPost] = useState(undefined);
 
-    useEffect(async () => {
-        if (!postMetadata) {
-            try {
-                const posts = await fetch('/content/posts.json').then(r => r.json());
-                const post = posts.find((post) => sticker?.blog_slug === post?.slug);
-                console.log("post found:", post);
-                setPostMetadata(post);
-            } catch (e) {
-                setPostMetadata([{ title: `Error: failed to fetch news post metadata - ${sticker?.blog_slug}` }]);
-            }
+    useEffect(() => {
+        fetch('/content/posts.json')
+          .then(response => response.json())
+          .then(posts => {
+              setPosts(posts);
+              console.log("posts loaded:", posts);
+          });
+    }, []);
+
+    useEffect(() => {
+        if (sticker) {
+            const post = posts.find((post) => sticker?.blog_slug === post?.slug);
+            console.log("post found:", post);
+            setPost(post);
+        } else {
+            setPost(undefined);
         }
-    });
+    }, [posts, sticker]);
 
     return (
         <>
@@ -152,13 +159,13 @@ const MapMarkerPopup = ({ sticker }) => {
                     <Grid container spacing={0}>
                         <Grid item xs={12}>
                             {/* TODO: Truncate content if too long */}
-                            <ReactMarkdown children={postMetadata?.content} remarkPlugins={[remarkGfm]}></ReactMarkdown>
+                            <ReactMarkdown children={post?.content} remarkPlugins={[remarkGfm]}></ReactMarkdown>
                         </Grid>
                     </Grid>
 
                     <Grid container spacing={0}>
                         <Grid item xs={12}>
-                            <a href={`/posts/${sticker?.blog_slug}`} target={'_blank'}>Read more &rarr;</a>
+                            <a href={`/posts/${post?.slug}`} target={'_blank'}>Read more &rarr;</a>
                         </Grid>
                     </Grid>
                 </ContentContainer>
