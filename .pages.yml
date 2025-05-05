@@ -19,7 +19,6 @@ content:
       - name: icon
         label: Map Icon
         type: image
-        multiple: false
       - name: long
         label: Longitude
         description: X-coordinate on the map
