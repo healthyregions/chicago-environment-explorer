@@ -5,41 +5,36 @@ content:
   - name: stickers
     label: Community Stickers
     path: public/content/stickers/stickers.json
-    format: json
     type: file
+    list: true
     fields:
-    - name: communityStickers
-      label: Community Stickers
-      type: object
-      list: true
-      fields:
-        - name: title
-          label: Title
-          description: Title/header of the map popup that appears in black
-          type: string
-        - name: subtitle
-          label: Subtitle
-          description: Subtitle/caption of the map popup that appears in red
-          type: string
-        - name: icon
-          label: Map Icon
-          type: image
-          multiple: false
-        - name: long
-          label: Longitude
-          description: X-coordinate on the map
-          type: number
-          # TODO: min/max for boundaries or IL/Chicago
-        - name: lat
-          label: Latitude
-          description: Y-coordinate on the map
-          type: number
-          # TODO: min/max for boundaries or IL/Chicago
-        - name: blog_slug
-          label: Featured Blog Post
-          type: reference
-          options:
-            collection: posts
+      - name: title
+        label: Title
+        description: Title/header of the map popup that appears in black
+        type: string
+      - name: subtitle
+        label: Subtitle
+        description: Subtitle/caption of the map popup that appears in red
+        type: string
+      - name: icon
+        label: Map Icon
+        type: image
+        multiple: false
+      - name: long
+        label: Longitude
+        description: X-coordinate on the map
+        type: number
+        # TODO: min/max for boundaries or IL/Chicago
+      - name: lat
+        label: Latitude
+        description: Y-coordinate on the map
+        type: number
+        # TODO: min/max for boundaries or IL/Chicago
+      - name: blog_slug
+        label: Featured Blog Post
+        type: reference
+        options:
+          collection: posts
   - name: posts
     label: Posts
     type: collection
