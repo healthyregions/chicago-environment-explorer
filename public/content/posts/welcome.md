@@ -1,4 +1,8 @@
 ---
+imageList:
+  - ../../green-chives-logo.png
+  - ../../herop-1.png
+  - ../../ncsa.png
 published: true
 date: 2025-04-18
 title: Welcome to the ChiVes Blog!
