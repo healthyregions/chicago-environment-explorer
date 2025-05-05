@@ -847,14 +847,14 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
 
   const [stickers, setStickers] = useState([]);
   useEffect(async () => {
-    setStickers(await loadStickers('/content/stickers/stickers.json'));
+    setStickers(await loadStickers('/content/stickers.json'));
   }, []);
   const mapStickers = useMemo(() =>
     stickers?.map((sticker, index) => (
       <Marker
         key={`marker-${index}`}
-        longitude={sticker.longitude}
-        latitude={sticker.latitude}
+        longitude={sticker.longitude||0}
+        latitude={sticker.latitude||0}
         anchor="bottom"
         onClick={e => {
           // If we let the click event propagates to the map, it will immediately close the popup
