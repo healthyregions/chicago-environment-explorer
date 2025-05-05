@@ -6,38 +6,42 @@ content:
     label: Community Stickers
     path: public/content/stickers
     filename: '{fields.blog_slug}.json'
-    type: collection
+    type: file
     fields:
-      - name: title
-        label: Title
-        description: Title/header of the map popup that appears in black
-        type: string
-      - name: subtitle
-        label: Subtitle
-        description: Subtitle/caption of the map popup that appears in red
-        type: string
-      - name: icon
-        label: Map Icon
-        type: image
-      - name: long
-        label: Longitude
-        description: X-coordinate on the map
-        type: number
-        # TODO: min/max for boundaries or IL/Chicago
-      - name: lat
-        label: Latitude
-        description: Y-coordinate on the map
-        type: number
-        # TODO: min/max for boundaries or IL/Chicago
-      - name: blog_slug
-        label: Featured Blog Post
-        type: reference
-        options:
-          collection: posts
-          # Shown while choosing the selection
-          label: '{date} - {title}'
-          # Shown after choosing the selection
-          value: '{slug}'
+      - name: stickers
+        list: true
+        type: object
+        fields:
+          - name: title
+            label: Title
+            description: Title/header of the map popup that appears in black
+            type: string
+          - name: subtitle
+            label: Subtitle
+            description: Subtitle/caption of the map popup that appears in red
+            type: string
+          - name: icon
+            label: Map Icon
+            type: image
+          - name: long
+            label: Longitude
+            description: X-coordinate on the map
+            type: number
+            # TODO: min/max for boundaries or IL/Chicago
+          - name: lat
+            label: Latitude
+            description: Y-coordinate on the map
+            type: number
+            # TODO: min/max for boundaries or IL/Chicago
+          - name: blog_slug
+            label: Featured Blog Post
+            type: reference
+            options:
+              collection: posts
+              # Shown while choosing the selection
+              label: '{date} - {title}'
+              # Shown after choosing the selection
+              value: '{slug}'
   - name: posts
     label: Posts
     type: collection
