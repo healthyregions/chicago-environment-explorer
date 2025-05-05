@@ -127,7 +127,7 @@ const MapMarkerPopup = ({ sticker }) => {
 
     useEffect(() => {
         if (sticker) {
-            const post = posts.find((post) => sticker?.blog_slug === `${post?.title} - ${post?.date}`);
+            const post = posts.find((post) => sticker?.blog_slug === post?.slug);
             console.log("post found:", post);
             setPost(post);
         } else {
