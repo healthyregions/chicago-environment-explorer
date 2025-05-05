@@ -926,6 +926,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         {popupInfo && (
           <Popup
             anchor="top"
+            className="sticker-marker-popup"
             longitude={Number(popupInfo.long||popupInfo.longitude)}
             latitude={Number(popupInfo.lat||popupInfo.latitude)}
             onClose={() => setPopupInfo(null)}
