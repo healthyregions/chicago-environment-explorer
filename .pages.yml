@@ -34,8 +34,8 @@ content:
         type: reference
         options:
           collection: posts
-          # Shown before choosing the selection
-          label: '{title} - {date}'
+          # Shown while choosing the selection
+          label: '{date} - {title}'
           # Shown after choosing the selection
           value: '{title} - {date}'
   - name: posts
