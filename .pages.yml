@@ -36,6 +36,7 @@ content:
         options:
           collection: posts
           value: '{date} - {title}'
+          label: '{title} - {date}'
   - name: posts
     label: Posts
     type: collection
