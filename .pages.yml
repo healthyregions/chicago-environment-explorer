@@ -4,10 +4,9 @@ media:
 content:
   - name: stickers
     label: Community Stickers
-    path: public/content/stickers/stickers.json
-    type: file
-    list: true
-    format: datagrid
+    path: public/content/stickers
+    filename: '{fields.blog_slug}.json'
+    type: collection
     fields:
       - name: title
         label: Title
