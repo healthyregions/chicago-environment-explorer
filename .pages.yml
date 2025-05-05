@@ -51,8 +51,9 @@ content:
         label: Images
         type: image
         description: list of images to be displayed with blog post
-        multiple: true
         required: false
+        options:
+          multiple: true
       - name: published
         label: Published
         description: if false, hide this post from being displayed on the ChiVes website
