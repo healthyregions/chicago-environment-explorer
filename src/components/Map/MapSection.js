@@ -853,8 +853,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
     stickers?.map((sticker, index) => (
       <Marker
         key={`marker-${index}`}
-        longitude={sticker.longitude||0}
-        latitude={sticker.latitude||0}
+        longitude={sticker.long||sticker.longitude}
+        latitude={sticker.lat||sticker.latitude}
         anchor="bottom"
         onClick={e => {
           // If we let the click event propagates to the map, it will immediately close the popup
@@ -926,8 +926,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         {popupInfo && (
           <Popup
             anchor="top"
-            longitude={Number(popupInfo.longitude)}
-            latitude={Number(popupInfo.latitude)}
+            longitude={Number(popupInfo.long||popupInfo.longitude)}
+            latitude={Number(popupInfo.lat||popupInfo.latitude)}
             onClose={() => setPopupInfo(null)}
           >
             <MapMarkerPopup sticker={popupInfo} />

@@ -127,7 +127,7 @@ const MapMarkerPopup = ({ sticker }) => {
 
     useEffect(() => {
         if (sticker) {
-            const post = posts.find((post) => sticker?.blog_slug === post?.slug);
+            const post = posts.find((post) => sticker?.blog_slug === `${post?.title} - ${post?.date}`);
             console.log("post found:", post);
             setPost(post);
         } else {
@@ -159,7 +159,7 @@ const MapMarkerPopup = ({ sticker }) => {
                     <Grid container spacing={0}>
                         <Grid item xs={12}>
                             {/* TODO: Truncate content if too long */}
-                            <ReactMarkdown children={post?.content} remarkPlugins={[remarkGfm]}></ReactMarkdown>
+                            <ReactMarkdown children={post?.contents} remarkPlugins={[remarkGfm]}></ReactMarkdown>
                         </Grid>
                     </Grid>
 
