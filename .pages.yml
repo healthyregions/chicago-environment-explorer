@@ -35,6 +35,7 @@ content:
         type: reference
         options:
           collection: posts
+          value: '{date} - {title}'
   - name: posts
     label: Posts
     type: collection
