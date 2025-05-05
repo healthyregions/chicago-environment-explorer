@@ -1,7 +1,7 @@
 ---
 imageList:
   - ../../green-chives-logo.png
-  - ../../herop-1.png
+  - ../../herop_dark_logo_teal.png
   - ../../ncsa.png
 published: true
 date: 2025-04-18
