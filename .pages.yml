@@ -19,14 +19,14 @@ content:
         label: Map Icon
         type: image
         multiple: false
-      - name: lat
-        label: Latitude
-        description: Y-coordinate on the map
-        type: number
-        # TODO: min/max for boundaries or IL/Chicago
       - name: long
         label: Longitude
         description: X-coordinate on the map
+        type: number
+        # TODO: min/max for boundaries or IL/Chicago
+      - name: lat
+        label: Latitude
+        description: Y-coordinate on the map
         type: number
         # TODO: min/max for boundaries or IL/Chicago
       - name: blog_slug
