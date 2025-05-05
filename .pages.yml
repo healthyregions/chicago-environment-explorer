@@ -5,7 +5,7 @@ content:
   - name: stickers
     label: Community Stickers
     path: public/content/stickers/stickers.json
-    type: file
+    type: collection
     fields:
       - name: title
         label: Title
