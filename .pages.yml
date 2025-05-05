@@ -6,7 +6,7 @@ content:
     label: Community Stickers
     path: public/content/stickers
     filename: '{fields.blog_slug}.json'
-    type: file
+    type: collection
     fields:
       - name: title
         label: Title
