@@ -37,7 +37,7 @@ content:
           # Shown while choosing the selection
           label: '{date} - {title}'
           # Shown after choosing the selection
-          value: '{title} - {date}'
+          value: '{slug}'
   - name: posts
     label: Posts
     type: collection
