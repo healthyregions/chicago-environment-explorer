@@ -5,7 +5,7 @@ content:
   - name: stickers
     label: Community Stickers
     path: public/content/stickersdeleteme
-    filename: '{fields.blog_slug}.json'
+    filename: 'stickers.json'
     type: file
     fields:
       - name: stickers
