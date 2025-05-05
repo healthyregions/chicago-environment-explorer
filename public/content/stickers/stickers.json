@@ -1,26 +1,8 @@
-[
-  {
-    "title": "Earth Day 2025 Release",
-    "subtitle": "Lower West",
-    "logo": "/img/logos/depaul.png",
-    "icon": "/img/logos/ncsa.png",
-    "blog_slug": "earth-day-release-2025",
-    "x_coordinate": 1158984.036,
-    "y_coordinate": 1915825.244,
-    "latitude": 41.92475626,
-    "longitude": -87.69124357,
-    "location": "{'latitude': '41.9247562570513', 'longitude': '-87.6912435686367'}"
-  },
-  {
-    "title": "Welcome!",
-    "subtitle": "Lower West",
-    "logo": "/img/logos/instituto.png",
-    "icon": "/img/logos/NASA_logo.png",
-    "blog_slug": "welcome",
-    "x_coordinate": 1168716.801,
-    "y_coordinate": 1932469.91,
-    "latitude": 41.97022435,
-    "longitude": -87.6549972,
-    "location": "{'latitude': '41.970224345725285', 'longitude': '-87.6549971996707'}"
-  }
-]
+{
+  "title": "Example 1",
+  "subtitle": "Lower West",
+  "icon": "../../depaul.png",
+  "lat": 41.92475626,
+  "long": -87.69124357,
+  "blog_slug": "public/content/posts/release.md"
+}
