@@ -49,21 +49,27 @@ content:
       - name: imageList
         label: Images
         type: image
+        description: list of images to be displayed with blog post
         multiple: true
         required: false
       - name: published
         label: Published
+        description: if false, hide this post from being displayed on the ChiVes website
         type: boolean
         default: true
       - name: date
         label: Date
+        description: date that this post was created
         type: date
       - name: title
         label: Title
+        description: title of this blog post
         type: string
       - name: body
         label: Body
+        description: content of this blog post (accepts github-flavored markdown)
         type: rich-text
       - name: slug
         label: Slug
+        description: filename / slug of this blog post
         type: string
