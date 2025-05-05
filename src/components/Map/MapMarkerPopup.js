@@ -148,7 +148,7 @@ const MapMarkerPopup = ({ sticker }) => {
 
                     <Grid container spacing={2}>
                         <Grid item xs={4}>
-                            <MapMarkerPin size={60} sticker={sticker} />
+                            <MapMarkerPin size={60} imgSrc={sticker?.logo} imgAlt={sticker?.title} />
                         </Grid>
                         <Grid item xs={8}>
                             <Typography variant={'h6'}>{sticker?.title}</Typography>

@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 
-function MapMarkerPin({size = 30, sticker}) {
+function MapMarkerPin({size = 30, imgSrc, imgAlt }) {
   const pinStyle = {
     cursor: 'pointer',
     stroke: 'none',
@@ -13,7 +13,7 @@ function MapMarkerPin({size = 30, sticker}) {
   };
 
   return (
-    <img width={size} height={size} style={pinStyle} src={sticker?.logo} alt={sticker?.title} />
+    <img width={size} height={size} style={pinStyle} src={imgSrc} alt={imgAlt} />
   );
 }
 

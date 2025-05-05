@@ -824,11 +824,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       })
     );
 
-  const [stickers, setStickers] = useState([]);
-  useEffect(async () => {
-    setStickers(await loadStickers('/content/stickers/stickers.json'));
-  }, []);
-
   const allLayers = [...baseLayers, ...customLayers, ...overlayLayers];
 
   useEffect(() => {
@@ -849,6 +844,11 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
             (object.properties.hours_of_operation ? object.properties.hours_of_operation : ''));
   }
 
+
+  const [stickers, setStickers] = useState([]);
+  useEffect(async () => {
+    setStickers(await loadStickers('/content/stickers/stickers.json'));
+  }, []);
   const mapStickers = useMemo(() =>
     stickers?.map((sticker, index) => (
       <Marker
@@ -864,7 +864,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           setPopupInfo(sticker);
         }}
       >
-        <MapMarkerPin size={30} sticker={sticker} />
+        <MapMarkerPin size={30} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
       </Marker>
     )), [stickers]);
 
