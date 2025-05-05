@@ -32,6 +32,7 @@ content:
       - name: blog_slug
         label: Featured Blog Post
         type: reference
+        required: true
         options:
           collection: posts
           # Shown while choosing the selection
