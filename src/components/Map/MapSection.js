@@ -31,7 +31,6 @@ import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
 import MapOverlayTooltipContent from "./MapOverlayTooltipContent";
-import MapCommunityStickersTooltipContent from "./MapMarkerPopup";
 import MapMarkerPin from "./MapMarkerPin";
 import MapMarkerPopup from "./MapMarkerPopup";
 import Pin from "./MapMarkerPin";
@@ -1006,20 +1005,6 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           <MapTooltipContent content={hoverInfo.object} showCustom={showCustom} />
         </HoverDiv>
       )}
-      {
-        overlayHover.object && mapParams.showCommunityStickers &&
-        <CommunityStickersHoverDiv
-          style={{
-            position: "absolute",
-            zIndex: 1,
-            maxWidth: '40vw',
-            left: overlayHover.x,
-            top: overlayHover.y,
-          }}
-          ref={hoverCcRef}>
-          <MapCommunityStickersTooltipContent content={overlayHover.object} overlay={overlayHover.overlay}></MapCommunityStickersTooltipContent>
-        </CommunityStickersHoverDiv>
-      }
       {
         overlayHover.object &&
           <HoverDiv

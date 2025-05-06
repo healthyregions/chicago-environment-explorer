@@ -54,7 +54,7 @@ const PostsPage = ({}) => {
            <ContentContainer>
                {
                    /* If we find a slug, attempt to render the Post that matches the slug */
-                   slug && <Post posts={posts} post={post} />
+                   slug && <Post post={post} />
                }
                {
                    /* If we are not given a slug, render the list of Posts*/
