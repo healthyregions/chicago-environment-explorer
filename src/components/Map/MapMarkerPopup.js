@@ -6,7 +6,18 @@ import { colors } from '../../config';
 import remarkGfm from "remark-gfm";
 import MapMarkerPin from "./MapMarkerPin";
 import ReactMarkdown from "react-markdown";
+import styled from "styled-components";
 
+const FlexRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.5rem;
+`;
+const FlexCol = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: 1rem;
+`;
 
 // This component handles and formats the map tooltip info regarding the clicked Blog Post.
 // The props passed to this component should contain the hovered object (from deck, info.object by default),
@@ -22,7 +33,6 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
           .then(response => response.json())
           .then(posts => {
               setPosts(posts);
-              console.log("posts loaded:", posts);
           });
     }, []);
 
@@ -30,7 +40,6 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
     useEffect(() => {
         if (sticker) {
             const post = posts.find((post) => sticker?.blog_slug === post?.slug);
-            console.log("post found:", post);
             setPost(post);
         } else {
             setPost(undefined);
@@ -58,15 +67,13 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
         <>
             {sticker && <>
                 <ContentContainer>
-                    <Grid container spacing={2}>
-                        <Grid item xs={2}>
-                            <MapMarkerPin size={60} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
-                        </Grid>
-                        <Grid item xs={10}>
+                    <FlexRow>
+                        <MapMarkerPin size={60} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
+                        <FlexCol>
                             <Typography variant={'h6'}>{sticker?.title}</Typography>
                             <Typography variant={'overline'} color={colors.chicagoRed}>{sticker?.subtitle}</Typography>
-                        </Grid>
-                    </Grid>
+                        </FlexCol>
+                    </FlexRow>
 
                     <Grid container spacing={0}>
                         <Grid item xs={12}>
