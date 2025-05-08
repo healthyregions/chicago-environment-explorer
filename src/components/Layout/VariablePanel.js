@@ -333,7 +333,7 @@ const VariablePanel = (props) => {
             </>)}
           </div>
 
-          <AntSwitchLabel label={'Show Community Stickers'}
+          <AntSwitchLabel label={'Community Stickers'}
             control={
               <AntSwitch checked={mapParams.showCommunityStickers}
                          onClick={(e) => toggleCommunityStickers(e)} />
