@@ -52,10 +52,6 @@ Discover other maps, data, and resources about the Chicago environment from feat
 <img width="1125" alt="ResourceGuide" src="https://user-images.githubusercontent.com/49726781/164777815-afa6fdc7-fb42-48e4-bf31-848f3423f954.png">
 
 
-# Data
-
-ChiVes uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018). Learn more on the [Data](https://chichives.com/data) page.
-
 # Blog
 
 ChiVes incorporates a basic static blog setup, using [PagesCMS](https://pagescms.org).
@@ -91,7 +87,28 @@ Title: Upcoming ChiVes Symposium
 Slug: upcoming-chives-symposium
 ```
 
+
 Once your blog post is ready, let @mradamcox or @bodom0015 know and we'll make a Pull Request to publish the post on the main site.
+
+
+### 5. (Optional) Add a Sticker for your Blog Post on the Map
+
+On PagesCMS, choose the Community Stickers collection and click "Add an entry" at the top-right.
+
+Enter title/subtitle, an image, lat/lon coordinates, and the slug of an existing blog post.
+
+Insert screencap here
+
+Click Save to create the sticker as a new file.
+
+Submit this new file as part of your pull request to publish your sticker to the public ChiVes map
+
+Insert screencap here
+
+
+# Data
+
+ChiVes uses harmonized, standardized environmental data at the census tract scale including tree canopy characteristics, surface temperature, logged traffic volume, urban flood susceptibility, social vulnerability, hardship, modeled fine particulate matter estimates, and more in Chicago, IL around 2018 (data ranges from 2010-2018). Learn more on the [Data](https://chichives.com/data) page.
 
 ## Data Standards & Submission Guidelines
 See the [Standards & Submissions Guidelines](https://docs.google.com/document/d/12lwkCAXxI9eW4Mdf6gaeR6LCsaNI3E0E6xvi7dqXr9k/edit#heading=h.3v2r5cc9r630) for complete information. This resource includes information on:
