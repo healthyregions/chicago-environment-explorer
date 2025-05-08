@@ -33,7 +33,6 @@ import { useControl } from "react-map-gl";
 import MapOverlayTooltipContent from "./MapOverlayTooltipContent";
 import MapMarkerPin from "./MapMarkerPin";
 import MapMarkerPopup from "./MapMarkerPopup";
-import Pin from "./MapMarkerPin";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
@@ -926,6 +925,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           <Popup
             anchor="top"
             className="sticker-marker-popup"
+            style={{ maxWidth: '30vw' }}
             longitude={Number(popupInfo.long||popupInfo.longitude)}
             latitude={Number(popupInfo.lat||popupInfo.latitude)}
             onClose={() => setPopupInfo(null)}

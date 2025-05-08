@@ -1,20 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import Neighborhood from "./Neighborhood";
 import {ContentContainer} from "../../styled_components";
 import Grid from "@mui/material/Grid";
-import styled from "styled-components";
-import {ImageList, ImageListItem} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { colors } from '../../config';
-import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import MapMarkerPin from "./MapMarkerPin";
+import ReactMarkdown from "react-markdown";
 
 
 // This component handles and formats the map tooltip info regarding the clicked Blog Post.
 // The props passed to this component should contain the hovered object (from deck, info.object by default),
 // as well as a reference to the overlay that was clicked
-const MapMarkerPopup = ({ sticker }) => {
+const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
     // Metadata from the CMS system
     const [posts, setPosts] = useState([]);
     const [post, setPost] = useState(undefined);
@@ -38,15 +35,21 @@ const MapMarkerPopup = ({ sticker }) => {
         }
     }, [posts, sticker]);
 
+    const [truncatedMd, setTruncatedMd] = useState('');
+    useEffect(() =>  {
+        const trunc = post?.content?.split(" ")?.slice(0, truncLength).join(" ");
+        setTruncatedMd(trunc + (trunc?.endsWith('.') ? '..' : '...'));
+    }, [post]);
+
     return (
         <>
             {sticker && <>
                 <ContentContainer>
                     <Grid container spacing={2}>
-                        <Grid item xs={4}>
+                        <Grid item xs={2}>
                             <MapMarkerPin size={60} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
                         </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={10}>
                             <Typography variant={'h6'}>{sticker?.title}</Typography>
                             <Typography variant={'overline'} color={colors.chicagoRed}>{sticker?.subtitle}</Typography>
                         </Grid>
@@ -54,8 +57,7 @@ const MapMarkerPopup = ({ sticker }) => {
 
                     <Grid container spacing={0}>
                         <Grid item xs={12}>
-                            {/* TODO: Truncate content if too long */}
-                            <ReactMarkdown children={post?.content} remarkPlugins={[remarkGfm]}></ReactMarkdown>
+                            <ReactMarkdown children={truncatedMd} remarkPlugins={[remarkGfm]}></ReactMarkdown>
                         </Grid>
                     </Grid>
 
