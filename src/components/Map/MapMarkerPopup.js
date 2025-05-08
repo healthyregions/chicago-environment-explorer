@@ -16,6 +16,7 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
     const [posts, setPosts] = useState([]);
     const [post, setPost] = useState(undefined);
 
+    /** Fetch posts from CMS */
     useEffect(() => {
         fetch('/content/posts.json')
           .then(response => response.json())
@@ -25,6 +26,7 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
           });
     }, []);
 
+    /** Find our desired post */
     useEffect(() => {
         if (sticker) {
             const post = posts.find((post) => sticker?.blog_slug === post?.slug);
@@ -35,6 +37,7 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
         }
     }, [posts, sticker]);
 
+    /** Truncate post length, if necessary */
     const [truncatedMd, setTruncatedMd] = useState('');
     useEffect(() =>  {
         // Split post content into words and coompare this to truncLength
