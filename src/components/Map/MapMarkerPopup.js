@@ -37,8 +37,18 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
 
     const [truncatedMd, setTruncatedMd] = useState('');
     useEffect(() =>  {
-        const trunc = post?.content?.split(" ")?.slice(0, truncLength).join(" ");
-        setTruncatedMd(trunc + (trunc?.endsWith('.') ? '..' : '...'));
+        // Split post content into words and coompare this to truncLength
+        const segments = post?.content?.split(" ");
+        if (segments?.length > truncLength) {
+            // Only use the first truncLength # of words
+            const truncatedText = segments?.slice(0, truncLength)?.join(" ");
+            // Ensure that truncated text always ends with ellipses
+            const suffix = truncatedText?.endsWith('.') ? '..' : '...';
+            setTruncatedMd(`${truncatedText}${suffix}`);
+        } else {
+            // If post contents are shorter than our configured truncLength, then show full post content
+            setTruncatedMd(post?.content);
+        }
     }, [post]);
 
     return (
