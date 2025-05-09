@@ -1,6 +1,7 @@
 import rawVariables from './variables.json';
 import rawCategories from './categories.json';
 import rawOverlays from './overlays.json';
+import {useEffect, useState} from "react";
 
 export const defaultData = 'chives-data.geojson';
 export const defaultVariable = "Tree Canopy Change";
@@ -28,6 +29,12 @@ export const dataDescriptions = rawVariables.reduce(
       <br/>
       <b>Data Year</b>:{" "}{row['Data Year']}</div> }),
   {});
+
+
+export const loadStickers = async (url) => {
+  return await fetch(url).then(r => r.json());
+}
+
 
 // mapbox API token
 

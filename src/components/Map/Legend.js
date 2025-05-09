@@ -163,10 +163,10 @@ const BinLabel = ({ label }) => {
 }
 
 const Legend = ({
-    label,
-    bins,
-    colorScale,
-    precision
+    label = '',
+    bins = [],
+    colorScale = null,
+    precision = 2
 }) => {
     const { storedGeojson } = useChivesData();
     const mapParams = useSelector((state) => state.mapParams);
@@ -187,7 +187,7 @@ const Legend = ({
                 <Grid container spacing={2} id='legend-bins-container'>
                     <Grid item xs={12}>
                         <LegendTitle>
-                            {label}
+                            {label || ''}
                         </LegendTitle>
                     </Grid>
                     <Grid item xs={12}>
