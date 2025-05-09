@@ -97,13 +97,13 @@ On PagesCMS, choose the Community Stickers collection and click "Add an entry" a
 
 Enter title/subtitle, an image, lat/lon coordinates, and the slug of an existing blog post.
 
-Insert screencap here
+![Screenshot_2025-05-08_at_4_33_11_PM](https://github.com/user-attachments/assets/09412a96-c397-4272-88b9-bae63b3807c8)
 
 Click Save to create the sticker as a new file.
 
 Submit this new file as part of your pull request to publish your sticker to the public ChiVes map
 
-Insert screencap here
+![Screenshot_2025-05-08_at_4_52_51_PM](https://github.com/user-attachments/assets/3430138c-6805-4891-a902-030f6d0ccafe)
 
 
 # Data
