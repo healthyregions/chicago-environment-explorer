@@ -25,7 +25,7 @@ export default function
            <p>It appears you might be lost.</p>
            <p>We couldn't find the page you requested: <strong><i>{currentRoute}</i></strong></p>
 
-           <a href='#' onClick={() => window.history.back()}>Go Back</a>
+           <a href='#' onClick={() => window.history.back()}>Back to ChiVes</a>
          </ContentContainer>
          <Footer/>
      </ErrorPage>
