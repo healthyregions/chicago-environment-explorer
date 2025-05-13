@@ -124,7 +124,7 @@ export default function App() {
 							<Route path="/community/peoplesresponse.html" component={PRN} />
 							<Route path="/community/peoplesresponsenetwork" component={PRN} />
 							<Route path="/community/peoplesresponsenetwork.html" component={PRN} /> */}
-							<Route path="*" component={ErrorPage} />
+							<Route component={ErrorPage} />
 						</Switch>
 					</Suspense>
 				</ThemeProvider>

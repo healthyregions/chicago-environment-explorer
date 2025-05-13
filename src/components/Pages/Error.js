@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { ContentContainer } from '../../styled_components';
-import { Accordion, MemberGrid, NavBar, Footer } from '../../components';
-import Grid from "@mui/material/Grid";
-import { colors } from "../../config";
-import {NavLink, useLocation} from 'react-router-dom';
+import { NavBar, Footer } from '../../components';
+import { useLocation } from 'react-router-dom';
 
 
 
