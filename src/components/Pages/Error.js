@@ -1,31 +1,35 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { ContentContainer } from '../../styled_components';
-import { NavBar, Footer } from '../../components';
-import { useLocation } from 'react-router-dom';
-
-
+import { NavBar, Footer } from '../';
 
 const ErrorPage = styled.div`
-    background:white;
+  background:white;
+  min-height:100vh;
+  text-align:center;
+  img.errorImg {
+    padding:60px;
+  }
 `
 
-export default function
-(){
-  const location = useLocation();
-  const currentRoute = location.pathname;
+const Error = () => {
 
   return (
-     <ErrorPage>
-         <NavBar />
-         <ContentContainer>
-           <h2>Uh-oh...</h2>
-           <p>It appears you might be lost.</p>
-           <p>We couldn't find the page you requested: <strong><i>{currentRoute}</i></strong></p>
-
-           <a href='#' onClick={() => window.history.back()}>Back to ChiVes</a>
-         </ContentContainer>
-         <Footer/>
-     </ErrorPage>
+    <ErrorPage >
+      <NavBar/>
+      <ContentContainer>
+        <h1>Error 404</h1>
+        <h2>We can't get you where you're going.</h2>
+        <p>
+          Sorry, we can't find the page you're looking for. It may have moved or recently changed.
+          <br/><br/>
+          Please use the navigation bar or footer.
+        </p>
+      </ContentContainer>
+      <Footer/>
+    </ErrorPage>
   );
 }
+
+export default Error;
