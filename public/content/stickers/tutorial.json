@@ -1,7 +1,7 @@
 {
-  "title": "Example 2",
-  "subtitle": "Dynamically Added!",
-  "icon": "../../NASA_logo.png",
+  "title": "Pilsen",
+  "subtitle": "Lower West",
+  "icon": "../../Instituto_workshops/Earth.png",
   "long": -87.6549972,
   "lat": 41.97022435,
   "blog_slug": "designing-chives-with-instituto"
