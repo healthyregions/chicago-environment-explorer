@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
@@ -8,8 +8,10 @@ import { FaArrowCircleLeft } from "@react-icons/all-files/fa/FaArrowCircleLeft";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Divider from '@mui/material/Divider';
-import {ImageList, ImageListItem} from "@mui/material";
+import {Dialog, IconButton, ImageList, ImageListItem} from "@mui/material";
 import styled from "styled-components";
+import {FaTimes} from "@react-icons/all-files/fa/FaTimes";
+
 
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
@@ -19,20 +21,43 @@ const Image = styled.img`
   border: solid lightgray 1px;
 `;
 
-const BlogPostImageList = ({ imageList }) =>
-  <ImageList variant={'woven'} cols={4} gap={0} sx={{ paddingBottom:'2rem', overflowY: 'hidden' }}>
-    {/* TODO: this may need a more complex media configuration - need a real test case to know what to target! */}
-    {imageList?.map((url) => url.replace('../..', '', 1)).map((url) => (
-      <ImageListItem key={url}>
-        <Image
-          srcSet={url}
-          src={url}
-          alt={url}
-          loading="lazy"
-        />
-      </ImageListItem>
-    ))}
-  </ImageList>;
+const PullRightPanel = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+`
+
+const BlogPostImageList = ({ imageList }) => {
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  return (
+    <>
+      {imagePreviewUrl}
+      <Dialog open={imagePreviewUrl}>
+        <PullRightPanel>
+          <IconButton onClick={() => setImagePreviewUrl(null)}>
+            <FaTimes/>
+          </IconButton>
+        </PullRightPanel>
+        <img src={imagePreviewUrl} />
+      </Dialog>
+      <ImageList variant={'woven'} cols={4} gap={0} sx={{paddingBottom: '2rem', overflowY: 'hidden'}}>
+        {/* TODO: this may need a more complex media configuration - need a real test case to know what to target! */}
+        {imageList?.map((url) => url.replace('../..', '', 1)).map((url) => (
+          <ImageListItem key={url}>
+            <Image
+              srcSet={url}
+              src={url}
+              alt={url}
+              loading="lazy"
+              style={{ cursor: 'pointer' }}
+              onClick={() => setImagePreviewUrl(url)}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </>
+  );
+};
 
 const Post = ({ post }) => <>
   <NavLink to={'/posts'} style={{ color: colors.forest }}>
