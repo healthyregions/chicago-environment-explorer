@@ -31,7 +31,6 @@ const BlogPostImageList = ({ imageList }) => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   return (
     <>
-      {imagePreviewUrl}
       <Dialog open={imagePreviewUrl}>
         <PullRightPanel>
           <IconButton onClick={() => setImagePreviewUrl(null)}>
