@@ -155,7 +155,7 @@ export default function Data() {
                 </p>
 
                 <Hero>
-                    <h2> Current Data Release (6-17-2024)</h2>
+                    <h2> Current Data Release (4-22-2025)</h2>
                     <a href={`${process.env.PUBLIC_URL}/shp/chives-data-public.zip`} id="button-search" download>ShapeFile</a>
                     <a href={`${process.env.PUBLIC_URL}/geojson/chives-data-public.geojson`} id="button-search" download>GeoJSON</a>
                     <a href={`${process.env.PUBLIC_URL}/csv/chives-data-public.csv`} id="button-search" download>CSV / Excel</a>
