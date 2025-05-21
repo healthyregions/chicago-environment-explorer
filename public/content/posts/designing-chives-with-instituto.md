@@ -65,7 +65,7 @@ During our second workshop, the research team supported participants in explorin
 
 ## **Third Workshop: Building an Action Agenda and Looking Ahead**
 
-Our final workshop featured two speakers: Claudia Galeano-García (Mujeres por Espacios Verdes) and Rolando Favela (Chicago Urban Forestry Advisory Board). They presented native flower planting initiatives and environmental justice community organization strategies—directly addressing needs identified in earlier sessions. At the end of the third workshop, the speakers and PRN members supported students in developing a comprehensive action agenda for mobilizing ChiVes to raise awareness about environmental justice, with particular emphasis on underserved and migrant communities.
+Our final workshop featured two speakers: Claudia Galeano-Sanchez (Mujeres por Espacios Verdes) and Rolando Favela (Chicago Urban Forestry Advisory Board). They presented native flower planting initiatives and environmental justice community organization strategies—directly addressing needs identified in earlier sessions. At the end of the third workshop, the speakers and PRN members supported students in developing a comprehensive action agenda for mobilizing ChiVes to raise awareness about environmental justice, with particular emphasis on underserved and migrant communities.
 
 The partnership with Instituto del Progreso Latino and PRN exemplifies the power of community-centered design in environmental justice work. By incorporating the perspectives and ideas of IDPL students and faculty alongside the expertise and experience of People's Response Network, ChiVes has evolved into a more responsive, effective tool for identifying and addressing environmental inequities in Chicago.
 
