@@ -40,7 +40,7 @@ const BlogPostImageList = ({ imageList }) => {
         </PullRightPanel>
         <img src={imagePreviewUrl} />
       </Dialog>
-      <ImageList variant={'woven'} cols={4} gap={0} sx={{paddingBottom: '2rem', overflowY: 'hidden'}}>
+      <ImageList variant={'woven'} cols={6} gap={0} sx={{paddingBottom: '2rem', overflowY: 'hidden'}}>
         {/* TODO: this may need a more complex media configuration - need a real test case to know what to target! */}
         {imageList?.map((url) => url.replace('../..', '', 1)).map((url) => (
           <ImageListItem key={url}>
