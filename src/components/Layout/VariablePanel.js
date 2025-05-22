@@ -13,7 +13,7 @@ import { Gutter } from "../../styled_components";
 import { changeVariable, setMapParams, setPanelState, toggle3d, toggleCustom } from "../../actions"; //variableChangeZ, setNotification, storeMobilityData
 import {colors, variablePresets, dataDescriptions, parsedOverlays} from "../../config";
 import * as SVG from "../../config/svg";
-import { FormControl, Switch, Stack } from "@mui/material";
+import {FormControl, Switch, Stack, FormControlLabel, FormGroup} from "@mui/material";
 import {Link} from "react-router-dom";
 
 const VariablePanelContainer = styled.div`
@@ -182,6 +182,19 @@ const ControlsContainer = styled.div`
     background-size: 50%, 100%;
   }
 `
+const AntSwitchLabel = styled(FormControlLabel)`
+  margin: 0.5rem 0;
+  color: rgb(1 ,123, 255);
+  text-decoration: none;
+  
+  .MuiSwitch-root {
+    margin-right: 0.5rem;
+  }
+  .MuiTypography-root {
+    font-family: 'Roboto', sans-serif !important;
+    font-size: 13px !important;
+  }
+`;
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -249,9 +262,8 @@ const VariablePanel = (props) => {
     }
   }, [mapParams, dispatch, variableChanged]);
 
-  const handleMapOverlay = (event) => {
+  const handleMapOverlay = (overlays) => {
     let prevOverlays = mapParams.overlays;
-    let overlays = event.target.value;
 
     // If "None" is clicked, remove all other overlays
     if ((!prevOverlays.includes('None') && overlays.includes('None')) || !overlays.length) {
@@ -265,7 +277,6 @@ const VariablePanel = (props) => {
 
     dispatch(
       setMapParams({
-        overlay: event.target.value,
         overlays: overlays,
       })
     );
@@ -284,6 +295,11 @@ const VariablePanel = (props) => {
     dispatch(changeVariable(variablePresets[e.target.value]));
   }
 
+  const toggleCommunityStickers = (e) => {
+    dispatch(setMapParams({
+      showCommunityStickers: !!e.target.checked
+    }));
+  };
 
   return (
     <VariablePanelContainer
@@ -308,14 +324,20 @@ const VariablePanel = (props) => {
               </MenuItem>
             ))}
           </Select>
-          <div style={{ margin: '1rem 0' }}>
+          <div style={{ margin: '1rem 0 0.5rem' }}>
             <span style={{ color: colors.pink }}>Overlays:</span> {mapParams.overlays?.map((selectedOverlay, index) => <>
-              {parsedOverlays.map(parsedOverlay => <>
+              {parsedOverlays.map((parsedOverlay, i) => <div key={`overlays-enabled-list-${i}`}>
                 { selectedOverlay === parsedOverlay?.id && <span style={{ color: colors.darkgray }} key={`overlay-description-${selectedOverlay}`}>
                   <span style={{ display: index === 0 ? 'none' : 'inline' }}>, </span>{parsedOverlay?.displayName}</span> }
-              </>)}
+              </div>)}
             </>)}
           </div>
+
+          <AntSwitchLabel label={'Community Stickers'}
+            control={
+              <AntSwitch checked={mapParams.showCommunityStickers}
+                         onClick={(e) => toggleCommunityStickers(e)} />
+            } />
 
           <Link to='/builder' style={{ textDecoration: 'none', color: 'rgb(1 ,123, 255)' }}>Create a Custom Vulnerability Index with Multiple Variables</Link>
         </FormControl>
@@ -349,13 +371,14 @@ const VariablePanel = (props) => {
 
 
         <Gutter h={20} />
+
         <h2>Data Overlay</h2>
         <FormControl variant="filled">
           <InputLabel htmlFor="overlay-select">Overlay</InputLabel>
           <Select
             id="overlay-select"
             value={mapParams.overlays}
-            onChange={handleMapOverlay}
+            onChange={(e) => handleMapOverlay(e.target.value)}
             multiple={true}
             style={{ maxWidth: '300px' }}
           >
@@ -374,16 +397,16 @@ const VariablePanel = (props) => {
             </MenuItem>
           </Select>
         </FormControl>
-        {mapParams.overlays.map(selectedOverlay => <>
-          {parsedOverlays.map(parsedOverlay => {
+        {mapParams.overlays.map((selectedOverlay, index) => <div key={`overlay-legend-container-${index}`}>
+          {parsedOverlays.map((parsedOverlay, subindex) => {
             const fillColor = JSON.parse(parsedOverlay?.fillColor);
             return (<>
-            { selectedOverlay === parsedOverlay?.id && parsedOverlay?.fillColor && <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
+            { selectedOverlay === parsedOverlay?.id && parsedOverlay?.fillColor && <div key={`overlay-legend-${selectedOverlay}-${index}-${subindex}`} style={{ display: "flex", flexDirection: "column", marginTop:'1em' }}>
               <h3>{parsedOverlay?.description}</h3>
             {parsedOverlay?.fillColor && !Array.isArray(fillColor) && Object.entries(fillColor).map(([key, color]) => (
-                <div key={`overlay-legend-${selectedOverlay}`} style={{ display: "flex", margin:'.25em 0' }}>
+                <div key={`overlay-legend-${selectedOverlay}-${index}-${subindex}`} style={{ display: "flex", margin:'.25em 0' }}>
                 <span
-                    key={key}
+                    key={`overlay-key-${key}-${index}-${subindex}`}
                     style={{
                       backgroundColor: `rgb(${color.join(",")})`,
                       width: 16,
@@ -405,7 +428,7 @@ const VariablePanel = (props) => {
               </div>}
             </div>}
           </>)})}
-        </>)}
+        </div>)}
       </ControlsContainer>
       <button
         onClick={handleOpenClose}

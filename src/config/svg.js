@@ -82,7 +82,7 @@ export const minus = <svg viewBox="0 0 100 100">
 
 export const plus = <svg viewBox="0 0 100 100" >
             <g>
-                <polygon className="st0" points="43.1,17.2 56.9,17.2 56.9,42.6 80,42.6 80,57.4 56.9,57.4 56.9,82.8 43.1,82.8 43.1,57.4 20,57.4 
+                <polygon className="st0" points="43.1,17.2 56.9,17.2 56.9,42.6 80,42.6 80,57.4 56.9,57.4 56.9,82.8 43.1,82.8 43.1,57.4 20,57.4
                     20,42.6 43.1,42.6 	"/>
             </g>
     </svg>
@@ -124,9 +124,9 @@ export const embed = <svg viewBox="0 0 512 512"><path d="M288 368l48 48 160-160-
 
 export const hamburger = <svg height="24px" width="24px" viewBox="0 0 24 24">
     <g>
-        <rect id="Rectangle" fill-rule="nonzero" fill="none" x="0" y="0" width="24" height="24"></rect>
-        <line x1="5" y1="7" x2="19" y2="7" id="Path" stroke="#2e7d32" stroke-width="1.5"></line>
-        <line x1="5" y1="17" x2="19" y2="17" id="Path" stroke="#2e7d32" stroke-width="1.5"></line>
-        <line x1="5" y1="12" x2="19" y2="12" id="Path" stroke="#2e7d32" stroke-width="1.5"></line>
+        <rect id="Rectangle" fillRule="nonzero" fill="none" x="0" y="0" width="24" height="24"></rect>
+        <line x1="5" y1="7" x2="19" y2="7" id="Path" stroke="#2e7d32" strokeWidth="1.5"></line>
+        <line x1="5" y1="17" x2="19" y2="17" id="Path" stroke="#2e7d32" strokeWidth="1.5"></line>
+        <line x1="5" y1="12" x2="19" y2="12" id="Path" stroke="#2e7d32" strokeWidth="1.5"></line>
 </g>
 </svg>

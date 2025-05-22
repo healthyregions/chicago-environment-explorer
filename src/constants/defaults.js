@@ -49,7 +49,8 @@ export const INITIAL_STATE = {
     storedRange: null,
     bins: [],
     overlay: "community_areas",
-    overlays: ["community_areas"]
+    overlays: ["community_areas"],
+    showCommunityStickers: false,
   },
   panelState: {
     variables: window.innerWidth > 768,
