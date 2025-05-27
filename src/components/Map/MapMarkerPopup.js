@@ -68,7 +68,7 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
             {sticker && <>
                 <ContentContainer>
                     <FlexRow>
-                        <MapMarkerPin size={60} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
+                        <MapMarkerPin size={60} imgSrc={sticker?.logo} imgAlt={sticker?.title} />
                         <FlexCol>
                             <Typography variant={'h6'}>{sticker?.title}</Typography>
                             <Typography variant={'overline'} color={colors.chicagoRed}>{sticker?.subtitle}</Typography>
