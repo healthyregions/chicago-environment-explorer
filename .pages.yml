@@ -18,11 +18,11 @@ content:
         type: string
       - name: icon
         label: Map Icon
-        description: Clickable image that appears on the map
+        description: Clickable image that appears on the map. Note that a square image will appear best (1:1 aspect ratio)
         type: image
       - name: logo
         label: Sticker Logo
-        description: Image that is shown in the dialog after the sticker is clicked
+        description: Image that is shown in the dialog after the sticker is clicked. Note that a square image will appear best (1:1 aspect ratio)
         type: image
       - name: long
         label: Longitude
