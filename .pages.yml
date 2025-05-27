@@ -18,17 +18,31 @@ content:
         type: string
       - name: icon
         label: Map Icon
+        description: Clickable image that appears on the map
+        type: image
+      - name: logo
+        label: Sticker Logo
+        description: Image that is shown in the dialog after the sticker is clicked
         type: image
       - name: long
         label: Longitude
-        description: X-coordinate on the map
+        description: X-coordinate on the map (must be within current ChiVes map area)
         type: number
-        # TODO: min/max for boundaries or IL/Chicago
+        options:
+          # min/max for boundaries ~ current area of ChiVes map
+          # -87.971249,41.621613,-87.506590,42.033640
+          min: -87.971249
+          max: -87.506590
+        
       - name: lat
         label: Latitude
-        description: Y-coordinate on the map
+        description: Y-coordinate on the map (must be within current ChiVes map area)
         type: number
-        # TODO: min/max for boundaries or IL/Chicago
+        options:
+          # min/max for boundaries ~ current area of ChiVes map
+          # -87.971249,41.621613,-87.506590,42.033640
+          min: 41.621613
+          max: 42.033640
       - name: blog_slug
         label: Featured Blog Post
         type: reference
