@@ -1,7 +1,8 @@
 {
   "title": "Pilsen",
   "subtitle": "Lower West",
-  "icon": "../../Instituto_workshops/Earth.png",
+  "icon": "../../icons/stickers/pilsen-icon.svg",
+  "logo": "../../icons/stickers/pilsen-logo.svg",
   "long": -87.6885052,
   "lat": 41.8457851,
   "blog_slug": "designing-chives-with-instituto"
