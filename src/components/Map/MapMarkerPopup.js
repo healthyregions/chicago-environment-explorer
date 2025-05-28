@@ -31,7 +31,7 @@ const PopupSubtitle = styled.h4`
     text-transform: uppercase;
 `;
 const PopupBody = styled.p`
-    font-family: Roboto,sans-serif !important;
+    font-family: Lora,sans-serif !important;
     font-size: 1rem !important;
     letter-spacing: 0 !important;
     p {
