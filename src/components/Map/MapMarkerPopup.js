@@ -18,6 +18,26 @@ const FlexCol = styled.div`
     flex-direction: column;
     margin-left: 1rem;
 `;
+const PopupTitle = styled.h2`
+    font-family: Roboto,sans-serif !important;
+    font-size: 2rem !important;
+    margin-bottom: 0 !important;
+`;
+const PopupSubtitle = styled.h4`
+    font-family: Roboto,sans-serif !important;
+    font-size: 1rem !important;
+    color: ${colors.chicagoRed} !important;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+`;
+const PopupBody = styled.p`
+    font-family: Roboto,sans-serif !important;
+    font-size: 1rem !important;
+    letter-spacing: 0 !important;
+    p {
+        line-height: 1.25;
+    }
+`;
 
 // This component handles and formats the map tooltip info regarding the clicked Blog Post.
 // The props passed to this component should contain the hovered object (from deck, info.object by default),
@@ -66,26 +86,19 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
     return (
         <>
             {sticker && <>
-                <ContentContainer>
-                    <FlexRow>
+                <ContentContainer style={{ padding: '2em 1em' }}>
+                    <FlexRow className={'flex-row'}>
                         <MapMarkerPin size={60} imgSrc={sticker?.logo} imgAlt={sticker?.title} />
                         <FlexCol>
-                            <Typography variant={'h6'}>{sticker?.title}</Typography>
-                            <Typography variant={'overline'} color={colors.chicagoRed}>{sticker?.subtitle}</Typography>
+                            <PopupTitle>{sticker?.title}</PopupTitle>
+                            <PopupSubtitle>{sticker?.subtitle}</PopupSubtitle>
                         </FlexCol>
                     </FlexRow>
 
-                    <Grid container spacing={0}>
-                        <Grid item xs={12}>
-                            <ReactMarkdown children={truncatedMd} remarkPlugins={[remarkGfm]}></ReactMarkdown>
-                        </Grid>
-                    </Grid>
-
-                    <Grid container spacing={0}>
-                        <Grid item xs={12}>
-                            <a href={`/posts/${post?.slug}`} target={'_blank'}>Read more &rarr;</a>
-                        </Grid>
-                    </Grid>
+                    <PopupBody>
+                        <ReactMarkdown children={truncatedMd} remarkPlugins={[remarkGfm]}></ReactMarkdown>
+                        <a className={'read-more'} href={`/posts/${post?.slug}`} target={'_blank'}>Read more &rarr;</a>
+                    </PopupBody>
                 </ContentContainer>
             </>}
         </>
