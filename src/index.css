@@ -198,3 +198,8 @@ iframe.skiptranslate { visibility: hidden !important; }
 .post-content img {
     max-width: 100%;
 }
+
+.mapboxgl-popup-close-button {
+  font-size: 2rem;
+  margin: 0.5rem 1rem;
+}
