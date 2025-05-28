@@ -33,7 +33,7 @@ content:
           # -87.971249,41.621613,-87.506590,42.033640
           min: -87.971249
           max: -87.506590
-        
+          step: 0.01
       - name: lat
         label: Latitude
         description: Y-coordinate on the map (must be within current ChiVes map area)
@@ -43,6 +43,7 @@ content:
           # -87.971249,41.621613,-87.506590,42.033640
           min: 41.621613
           max: 42.033640
+          step: 0.01
       - name: blog_slug
         label: Featured Blog Post
         type: reference
@@ -53,6 +54,7 @@ content:
           label: '{date} - {title}'
           # Shown after choosing the selection
           value: '{slug}'
+
   - name: posts
     label: Posts
     type: collection
