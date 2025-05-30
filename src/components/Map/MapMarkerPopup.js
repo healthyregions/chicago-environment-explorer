@@ -39,9 +39,8 @@ const PopupBody = styled.p`
     }
 `;
 
-// This component handles and formats the map tooltip info regarding the clicked Blog Post.
-// The props passed to this component should contain the hovered object (from deck, info.object by default),
-// as well as a reference to the overlay that was clicked
+// This component handles and formats the map tooltip info regarding the clicked Community Sticker.
+// The props passed to this component should contain a reference to the Sticker that was clicked
 const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
     // Metadata from the CMS system
     const [posts, setPosts] = useState([]);
