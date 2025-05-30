@@ -38,13 +38,13 @@ date: 2025-05-06
 title: Co-Designing ChiVes with Instituto del Progreso Latino
 slug: designing-chives-with-instituto
 ---
-Instituto del Progreso Latino (IDPL) is a nonprofit community agency providing vital legal services and application assistance to citizenship applicants throughout Chicago. Their mission goes beyond legal support—they contribute to the fullest development of Latino/a immigrants and their families through education, training, and employment opportunities that foster full participation in American society while preserving cultural identity and dignity.
+Instituto del Progreso Latino (IDPL) is a nonprofit community agency that provides vital legal services and application assistance to citizenship applicants throughout Chicago. Their mission goes beyond legal support—they contribute to the fullest development of Latine immigrants and their families through education, training, and employment opportunities that foster full participation in American society while preserving cultural identity and dignity.
 
-In late 2023, the ChiVes team invited organizations from the Pilsen and Little Village areas to participate in co-design workshops aimed at improving our environmental justice application. Two local organizations, Instituto del Progreso Latino and People's Response Network (PRN), answered this call. In 2024, after a series of listening sessions, we launched a three-session workshop featuring students and faculty from IDPL alongside PRN members.
+In late 2023, the ChiVes team invited organizations from the Pilsen and Little Village areas to participate in co-design workshops aimed at improving our environmental justice application. Two local organizations, Instituto del Progreso Latino and People's Response Network (PRN), answered this call. In 2024, after a series of listening sessions, we launched together a three-session workshop featuring students and faculty from IDPL alongside PRN members.
 
 ## **First Workshop: Listening and Identifying Priorities**
 
-During our initial session, after a brief presentation of the ChiVes, participants gathered around a printed map to engage in meaningful discussions about environmental challenges facing their communities. The workshop created a space for participants to share their firsthand experiences and identify the most pressing environmental justice concerns across Chicago neighborhoods.
+During our initial session, after a brief presentation of ChiVes, participants gathered around a printed map to engage in meaningful discussions about environmental challenges facing their communities. The workshop created a space for participants to share their firsthand experiences and identify the most pressing environmental justice concerns across Chicago neighborhoods.
 
 Through these conversations, several key priority areas emerged, including:
 
