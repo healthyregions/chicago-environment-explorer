@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 
-function MapMarkerPin({size = 30, imgSrc, imgAlt }) {
+function MapMarkerPin({size = 30, imgSrc, imgAlt, clickable = true }) {
   const pinStyle = {
-    cursor: 'pointer',
+    cursor: clickable ? 'pointer' : 'inherit',
     stroke: 'none',
     //width: size + 'px',
     height: size + 'px',

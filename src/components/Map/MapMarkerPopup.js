@@ -86,9 +86,9 @@ const MapMarkerPopup = ({ sticker, truncLength = 50 }) => {
     return (
         <>
             {sticker && <>
-                <ContentContainer style={{ padding: '2em 1em' }}>
+                <ContentContainer style={{ padding: '1em 1em 0' }}>
                     <FlexRow className={'flex-row'}>
-                        <MapMarkerPin size={60} imgSrc={sticker?.logo} imgAlt={sticker?.title} />
+                        <MapMarkerPin size={60} clickable={false} imgSrc={sticker?.logo} imgAlt={sticker?.title} />
                         <FlexCol>
                             <PopupTitle>{sticker?.title}</PopupTitle>
                             <PopupSubtitle>{sticker?.subtitle}</PopupSubtitle>
