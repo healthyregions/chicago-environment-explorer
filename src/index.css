@@ -203,3 +203,56 @@ iframe.skiptranslate { visibility: hidden !important; }
   font-size: 2rem;
   margin: 0.5rem 1rem;
 }
+
+.mapboxgl-popup-content {
+  box-shadow: 0 4px 4px #0000001a;
+  /*
+   FIXME: Adding a border here creates an interesting problem - the pointer tip does not include this border
+   I've tried to fix this with some complex CSS below, and it's close.. but it still looks/feels "wrong" (bee below)
+  */
+  /*border: 2px solid #9FDA60;*/
+  border-radius: 2px;
+}
+
+/* FIXME: an honest attempt at adding the green border to the map popup, as detailed in the designs
+
+.mapboxgl-popup-tip {
+
+  z-index: -1;
+  content: "";
+  height: 1%;
+  width: 2%;
+  border-top: 2px solid #9FDA60;
+
+  &:before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3%;
+    width: 49%;
+    background-color: inherit;
+    border-right: 2px solid #9FDA60;
+    -webkit-transform: skewX(-45deg);
+    -moz-transform: skewX(-45deg);
+    -ms-transform: skewX(-45deg);
+    transform: skewX(-45deg);
+  }
+  &:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 51%;
+    height: 3%;
+    width: 49%;
+    background-color: inherit;
+    border-left: 2px solid #9FDA60;
+    -webkit-transform: skewX(45deg);
+    -moz-transform: skewX(45deg);
+    -ms-transform: skewX(45deg);
+    transform: skewX(45deg);
+  }
+}
+ */
