@@ -26,7 +26,7 @@ const PopupTitle = styled.h2`
 const PopupSubtitle = styled.h4`
     font-family: Roboto,sans-serif !important;
     font-size: 1rem !important;
-    color: ${colors.chicagoRed} !important;
+    color: #E83F6F !important;
     margin-bottom: 0.75rem;
     text-transform: uppercase;
 `;
