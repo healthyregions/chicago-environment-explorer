@@ -72,16 +72,6 @@ const MapContainer = styled.div`
 `;
 
 
-const CommunityStickersHoverDiv = styled.div`
-  max-width: 50vh;
-  line-height: 1.5;
-  background: ${colors.white};
-  padding: 20px;
-  color: ${colors.black};
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.7);
-  border-radius: 0 15px 15px 15px;
-`;
-
 const HoverDiv = styled.div`
   background: ${colors.white};
   padding: 20px;
@@ -862,7 +852,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           setPopupInfo(sticker);
         }}
       >
-        <MapMarkerPin size={45} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
+        <MapMarkerPin size={72} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
       </Marker>
     )), [stickers]);
 
@@ -925,7 +915,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           <Popup
             anchor="top"
             className="sticker-marker-popup"
-            style={{ maxWidth: '30vw' }}
+            maxWidth={'45vw'}
             longitude={Number(popupInfo.long||popupInfo.longitude)}
             latitude={Number(popupInfo.lat||popupInfo.latitude)}
             onClose={() => setPopupInfo(null)}
