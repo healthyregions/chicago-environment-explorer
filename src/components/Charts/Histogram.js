@@ -250,7 +250,6 @@ export default function Histogram({
           open={isPopoverOpen}
           anchorEl={popoverAnchorEl}
           onClose={handleInfoClose}
-          anchorPosition={'left'}
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',

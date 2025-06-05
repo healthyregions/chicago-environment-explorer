@@ -1,5 +1,5 @@
 // general imports, state
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, {useState, useEffect, useRef, useCallback, useMemo} from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
@@ -16,14 +16,14 @@ import {
 import { CSVLoader } from "@loaders.gl/csv";
 // import { GPUGridLayer, HeatmapLayer } from "@deck.gl/aggregation-layers";
 import { fitBounds } from "@math.gl/web-mercator";
-import MapboxGLMap from "react-map-gl";
+import MapboxGLMap, {Marker, Popup} from "react-map-gl";
 import { scaleThreshold } from "d3-scale";
 import { DataFilterExtension, FillStyleExtension } from "@deck.gl/extensions";
 
 // component, action, util, and config import
 import { MapTooltipContent, Geocoder } from "..";
 import { scaleColor } from "../../utils";
-import {colors, parsedOverlays} from "../../config";
+import {colors, loadStickers, parsedOverlays} from "../../config";
 import * as SVG from "../../config/svg";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useChivesData } from "../../hooks/useChivesData";
@@ -31,10 +31,12 @@ import { useChivesWorkerQuery } from "../../hooks/useChivesWorkerQuery";
 import { MapboxOverlay } from "@deck.gl/mapbox";
 import { useControl } from "react-map-gl";
 import MapOverlayTooltipContent from "./MapOverlayTooltipContent";
+import MapMarkerPin from "./MapMarkerPin";
+import MapMarkerPopup from "./MapMarkerPopup";
 
 function DeckGLOverlay(props) {
   const overlay = useControl(() => new MapboxOverlay(props));
-  overlay?.setProps(props);
+  overlay && overlay?.setProps(props);
   return null;
 }
 
@@ -68,6 +70,7 @@ const MapContainer = styled.div`
     }
   }
 `;
+
 
 const HoverDiv = styled.div`
   background: ${colors.white};
@@ -730,7 +733,7 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
       onClick: (feature) => handleMapClick(feature, parsedOverlay),
 
       // Visibility
-      visible: mapParams.overlays.includes(parsedOverlay.id),
+      visible: mapParams.overlays.includes(parsedOverlay?.id),
       updateTriggers: {
         visible: [mapParams.overlay, mapParams.overlays],
       },
@@ -829,6 +832,32 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
             (object.properties.hours_of_operation ? object.properties.hours_of_operation : ''));
   }
 
+
+  const [stickers, setStickers] = useState([]);
+  useEffect(async () => {
+    setStickers(await loadStickers('/content/stickers.json'));
+  }, []);
+  const mapStickers = useMemo(() =>
+    stickers?.map((sticker, index) => (
+      <Marker
+        key={`marker-${index}`}
+        longitude={sticker.long||sticker.longitude}
+        latitude={sticker.lat||sticker.latitude}
+        anchor="bottom"
+        onClick={e => {
+          // If we let the click event propagates to the map, it will immediately close the popup
+          // with `closeOnClick: true`
+          e.originalEvent.stopPropagation();
+          setPopupInfo(null);
+          setPopupInfo(sticker);
+        }}
+      >
+        <MapMarkerPin size={72} imgSrc={sticker?.icon} imgAlt={sticker?.title} />
+      </Marker>
+    )), [stickers]);
+
+
+  const [popupInfo, setPopupInfo] = useState(null);
   return (
     <MapContainer infoPanel={panelState.info} ref={mapContainerRef}>
       <MapboxGLMap
@@ -881,6 +910,19 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           }
         }}
       >
+        {mapParams.showCommunityStickers && mapStickers}
+        {popupInfo && (
+          <Popup
+            anchor="top"
+            className="sticker-marker-popup"
+            maxWidth={'45vw'}
+            longitude={Number(popupInfo.long||popupInfo.longitude)}
+            latitude={Number(popupInfo.lat||popupInfo.latitude)}
+            onClose={() => setPopupInfo(null)}
+          >
+            <MapMarkerPopup sticker={popupInfo} />
+          </Popup>
+        )}
         <DeckGLOverlay
           interleaved={true}
           width={"100%"}
@@ -953,8 +995,8 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
           <MapTooltipContent content={hoverInfo.object} showCustom={showCustom} />
         </HoverDiv>
       )}
-
-      {overlayHover.object && (
+      {
+        overlayHover.object &&
           <HoverDiv
               style={{
                 position: "absolute",
@@ -964,9 +1006,9 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
               }}
               ref={hoverCcRef}
           >
-            <MapOverlayTooltipContent content={overlayHover.object} overlay={overlayHover.overlay} />
+           <MapOverlayTooltipContent content={overlayHover.object} overlay={overlayHover.overlay} />
           </HoverDiv>
-      )}
+      }
 
       {!geoids.length && (
         <LogoContainer infoPanel={panelState.info}>

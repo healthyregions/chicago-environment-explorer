@@ -1,26 +1,69 @@
 [
     {
+        "imageList": [
+            "../../Instituto_workshops/Workshop3.png",
+            "../../Instituto_workshops/Workshop4.png",
+            "../../Instituto_workshops/Workshop5.png",
+            "../../Instituto_workshops/Workshop1.png",
+            "../../Instituto_workshops/Workshop2.png",
+            "../../Instituto_workshops/Instituto2.jpg",
+            "../../Instituto_workshops/Mariposas_Insituto.png",
+            "../../Instituto_workshops/Instituto1.jpg",
+            "../../Instituto_workshops/Indice_Instituto.png",
+            "../../Instituto_workshops/3 Trees.png",
+            "../../Instituto_workshops/Chicago.png",
+            "../../Instituto_workshops/Cut tree.png",
+            "../../Instituto_workshops/Dry tree 2.png",
+            "../../Instituto_workshops/Dry tree.png",
+            "../../Instituto_workshops/Pilsen.png",
+            "../../Instituto_workshops/Sweating.png",
+            "../../Instituto_workshops/Reborn.png",
+            "../../Instituto_workshops/Solo tree.png",
+            "../../Instituto_workshops/Earth.png",
+            "../../Instituto_workshops/Tree cutting.png",
+            "../../Instituto_workshops/Fall.png",
+            "../../Instituto_workshops/Trash.png",
+            "../../Instituto_workshops/Instituto3.png",
+            "../../Instituto_workshops/Instituto4.png",
+            "../../Instituto_workshops/Instituto5.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.07.46 PM.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.10.25 PM.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.11.05 PM.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.11.35 PM.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.13.57 PM.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.14.18 PM.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.14.32 PM.png",
+            "../../Instituto_workshops/Screenshot 2025-05-20 at 12.15.57 PM.png"
+        ],
+        "published": true,
+        "date": "2025-05-06",
+        "title": "Co-Designing ChiVes with Instituto del Progreso Latino",
+        "slug": "designing-chives-with-instituto",
+        "content": "Instituto del Progreso Latino (IDPL) is a nonprofit community agency that provides vital legal services and application assistance to citizenship applicants throughout Chicago. Their mission goes beyond legal support—they contribute to the fullest development of Latine immigrants and their families through education, training, and employment opportunities that foster full participation in American society while preserving cultural identity and dignity.\n\nIn late 2023, the ChiVes team invited organizations from the Pilsen and Little Village areas to participate in co-design workshops aimed at improving our environmental justice application. Two local organizations, Instituto del Progreso Latino and People's Response Network (PRN), answered this call. In 2024, after a series of listening sessions, we launched together a three-session workshop featuring students and faculty from IDPL alongside PRN members.\n\n## **First Workshop: Listening and Identifying Priorities**\n\nDuring our initial session, after a brief presentation of ChiVes, participants gathered around a printed map to engage in meaningful discussions about environmental challenges facing their communities. The workshop created a space for participants to share their firsthand experiences and identify the most pressing environmental justice concerns across Chicago neighborhoods.\n\nThrough these conversations, several key priority areas emerged, including:\n\n*   Extreme urban heat zones and their disproportionate impact on vulnerable communities\n    \n*   Persistent air quality challenges\n    \n*   Inadequate waste management systems and their effects on neighborhood cleanliness\n    \n*   Widespread sewage infrastructure problems\n    \n\nThese discussions of lived experiences provided crucial context and direction for the subsequent workshop sessions, ensuring ChiVes' focus remained aligned with community needs.\n\n## **Second Workshop: Putting the ChiVes Index Builder to Work**\n\nDuring our second workshop, the research team supported participants in exploring Chives new index builder application to investigate previously identified issues. By engaging with the index builder, participants created their own custom maps of the Chicago environment. Their practical engagement provided crucial insights that helped ChiVes’ design team improve the dashboard's functionality and user experience. After interacting with the index builder, IDPL students designed custom artwork for future integration into ChiVes. At the end of the session, participants identified the need to invite community leaders to brainstorm how they could mobilize the potential outcomes of these workshops.\n\n## **Third Workshop: Building an Action Agenda and Looking Ahead**\n\nOur final workshop featured two speakers: Claudia Galeano-Sanchez (Mujeres por Espacios Verdes) and Rolando Favela (Chicago Urban Forestry Advisory Board). They presented native flower planting initiatives and environmental justice community organization strategies—directly addressing needs identified in earlier sessions. At the end of the third workshop, the speakers and PRN members supported students in developing a comprehensive action agenda for mobilizing ChiVes to raise awareness about environmental justice, with particular emphasis on underserved and migrant communities.\n\nThe partnership with Instituto del Progreso Latino and PRN exemplifies the power of community-centered design in environmental justice work. By incorporating the perspectives and ideas of IDPL students and faculty alongside the expertise and experience of People's Response Network, ChiVes has evolved into a more responsive, effective tool for identifying and addressing environmental inequities in Chicago.\n\nIDPL's commitment to supporting Latino/a immigrants and their families aligns perfectly with ChiVes's mission of ensuring environmental justice for all Chicago residents, regardless of their background or location. As we continue to develop and refine the ChiVes application, the insights and feedback provided by Instituto del Progreso Latino and PRN will remain central to our approach.",
+        "tagline": "Instituto del Progreso Latino (IDPL) is a nonprofit community agency that provides vital legal services and application assistance to citizenship applicants throughout Chicago. Their mission..."
+    },
+    {
         "published": true,
         "date": "2025-04-22",
         "title": "Earth Day 2025 Release (v3.1.0)",
         "slug": "earth-day-release-2025",
-        "tagline": "On the 4th anniversary of ChiVes, we’re delighted to share some extra green updates for Earth Day 2025 with Version 3.1.0 including new variables, features,...",
-        "content": "On the 4th anniversary of ChiVes, we’re delighted to share some extra green updates for Earth Day 2025 with Version 3.1.0 including new variables, features, and news:\n\n🌳 **Tree Canopy Data** - Check out brand new 2017 tree canopy data, a revised 2010 estimate, and canopy change over time. See how the policies of the 1990s impacted green infrastructure today. A big shoutout to [**_Lindsay Darling_**](https://mortonarb.org/science/staff/lindsay-darling/) at the **_Morton Arboretum_** for pioneering this dataset, and **_Cat Discenza_** at UIUC for aggregating to tract level. Expect some piping hot research coming out soon from this team…   \n\n🗞️ **News -** We also have a new [blog](https://chichives.com/posts) and [subscribe link](https://groups.webservices.illinois.edu/subscribe/200077) for a quarterly newsletter.\n\n💬 **Tutorial en Español** - DePaul’s latest update includes a translated version of the ChiVes tutorial. Mira este [tutorial en español](https://www.youtube.com/watch?v=kG2fSofKw0k.) en nuestra lista de reproducción de Youtube.\n\n💡 Don’t forget that **multiple translations** are available for every page you view in ChiVes. Click on the “translate” option on the bottom left side of the page you need translated.\n\n🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with **\\_Mujeres del Espacios Verde\\_s** and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… \n\nThanks to the phenomenal community who made [ChiVes](https://chichives.com/team) a dream come true! We’ll have to have a big party to celebrate five years in 2026. 🎂\n\n![](../../ChiVes%20Earth%20Day%202025.gif)"
+        "content": "On the 4th anniversary of ChiVes, we’re delighted to share some extra green updates for Earth Day 2025 with Version 3.1.0 including new variables, features, and news:\n\n🌳 **Tree Canopy Data** - Check out brand new 2017 tree canopy data, a revised 2010 estimate, and canopy change over time. See how the policies of the 1990s impacted green infrastructure today. A big shoutout to [**_Lindsay Darling_**](https://mortonarb.org/science/staff/lindsay-darling/) at the **_Morton Arboretum_** for pioneering this dataset, and **_Cat Discenza_** at UIUC for aggregating to tract level. Expect some piping hot research coming out soon from this team…   \n\n🗞️ **News -** We also have a new [blog](https://chichives.com/posts) and [subscribe link](https://groups.webservices.illinois.edu/subscribe/200077) for a quarterly newsletter.\n\n💬 **Tutorial en Español** - DePaul’s latest update includes a translated version of the ChiVes tutorial. Mira este [tutorial en español](https://www.youtube.com/watch?v=kG2fSofKw0k.) en nuestra lista de reproducción de Youtube.\n\n💡 Don’t forget that **multiple translations** are available for every page you view in ChiVes. Click on the “translate” option on the bottom left side of the page you need translated.\n\n🦋 Check back soon for updates on work with **_Instituto del Progreso Latino_**, Monarch Gardens with **\\_Mujeres del Espacios Verde\\_s** and **_Beth Beyer,_** and rolling out a new partnership with **_Prof Serap Erdal_** at UIC and Pilsen tracking air pollution this summer… \n\nThanks to the phenomenal community who made [ChiVes](https://chichives.com/team) a dream come true! We’ll have to have a big party to celebrate five years in 2026. 🎂\n\n![](../../ChiVes%20Earth%20Day%202025.gif)",
+        "tagline": "On the 4th anniversary of ChiVes, we’re delighted to share some extra green updates for Earth Day 2025 with Version 3.1.0 including new variables, features,..."
     },
     {
         "published": true,
         "date": "2025-04-21",
         "title": "Spanish Language Tutorial for ChiVes",
         "slug": "tutorial",
-        "tagline": "A Spanish language version of the ChiVes tutorial, generated by the DePaul Team (Drs. Michelle Stuhlmacher and Winifred Curran), has been posted to the [_Learn_](https://chichives.com/learn)...",
-        "content": "A Spanish language version of the ChiVes tutorial, generated by the DePaul Team (Drs. Michelle Stuhlmacher and Winifred Curran), has been posted to the [_Learn_](https://chichives.com/learn) page. Scroll to the bottom of the page to access, or watch directly on our [Youtube](https://www.youtube.com/watch?v=kG2fSofKw0k) playlist!\n\n[![](../../Screenshot%202025-04-21%20at%2011.44.15%E2%80%AFAM.png)](https://www.youtube.com/watch?v=kG2fSofKw0k)\n\nEn este vídeo, recorra la aplicación web ChiVes ([https://chichives.com](https://chichives.com)). ChiVes es una aplicación colaborativa de datos y mapeo comunitario que reúne datos sobre el medio ambiente de Chicago a nivel de vecindario."
+        "content": "A Spanish language version of the ChiVes tutorial, generated by the DePaul Team (Drs. Michelle Stuhlmacher and Winifred Curran), has been posted to the [_Learn_](https://chichives.com/learn) page. Scroll to the bottom of the page to access, or watch directly on our [Youtube](https://www.youtube.com/watch?v=kG2fSofKw0k) playlist!\n\n[![](../../Screenshot%202025-04-21%20at%2011.44.15%E2%80%AFAM.png)](https://www.youtube.com/watch?v=kG2fSofKw0k)\n\nEn este vídeo, recorra la aplicación web ChiVes ([https://chichives.com](https://chichives.com)). ChiVes es una aplicación colaborativa de datos y mapeo comunitario que reúne datos sobre el medio ambiente de Chicago a nivel de vecindario.",
+        "tagline": "A Spanish language version of the ChiVes tutorial, generated by the DePaul Team (Drs. Michelle Stuhlmacher and Winifred Curran), has been posted to the [_Learn_](https://chichives.com/learn)..."
     },
     {
         "published": true,
         "date": "2025-04-18",
         "title": "Welcome to the ChiVes Blog!",
         "slug": "welcome",
-        "tagline": "We are happy to announce that moving forward we will have a blog here on the ChiVes site that will serve as place for news...",
-        "content": "We are happy to announce that moving forward we will have a blog here on the ChiVes site that will serve as place for news updates about the ChiVes platform, community partnerships, and future events.\n\nEvery quarter, we'll share those updates as a newsletter. Sign up for that here: [https://groups.webservices.illinois.edu/subscribe/200077](https://groups.webservices.illinois.edu/subscribe/200077)"
+        "content": "We are happy to announce that moving forward we will have a blog here on the ChiVes site that will serve as place for news updates about the ChiVes platform, community partnerships, and future events.\n\nEvery quarter, we'll share those updates as a newsletter. Sign up for that here: [https://groups.webservices.illinois.edu/subscribe/200077](https://groups.webservices.illinois.edu/subscribe/200077)\n",
+        "tagline": "We are happy to announce that moving forward we will have a blog here on the ChiVes site that will serve as place for news..."
     }
 ]

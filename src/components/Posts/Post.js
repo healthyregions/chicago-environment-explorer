@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
@@ -8,33 +8,77 @@ import { FaArrowCircleLeft } from "@react-icons/all-files/fa/FaArrowCircleLeft";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Divider from '@mui/material/Divider';
+import {Dialog, IconButton, ImageList, ImageListItem} from "@mui/material";
+import styled from "styled-components";
+import {FaTimes} from "@react-icons/all-files/fa/FaTimes";
+
 
 // see example of this pattern:
 // https://github.com/healthyregions/oeps/blob/main/explorer/pages/docs/%5Bmd%5D.js
 
-const Post = ({ posts, post }) => {
-    return (
-       <>
-           <NavLink to={'/posts'} style={{ color: colors.forest }}>
-               <FaArrowCircleLeft style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} /> Back
-           </NavLink>
+const Image = styled.img`
+  width: 9rem;
+  border: solid lightgray 1px;
+`;
 
-           <Grid container spacing={0}>
-               <Grid item xs={12}>
-                   <Typography variant={'h4'}>{post.title}</Typography>
-                   <Typography variant={'subtitle2'} style={{ color: colors.darkgray }}>{post.date}</Typography>
-               </Grid>
-           </Grid>
+const PullRightPanel = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+`
 
-           <Divider style={{ color: colors.forest }} />
+const BlogPostImageList = ({ imageList }) => {
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  return (
+    <>
+      <Dialog open={imagePreviewUrl}>
+        <PullRightPanel>
+          <IconButton onClick={() => setImagePreviewUrl(null)}>
+            <FaTimes/>
+          </IconButton>
+        </PullRightPanel>
+        <img src={imagePreviewUrl} />
+      </Dialog>
+      <ImageList variant={'masonry'} cols={6} gap={0} sx={{ paddingBottom: '2rem', overflowY: 'hidden' }} >
+        {/* TODO: this may need a more complex media configuration - need a real test case to know what to target! */}
+        {imageList?.map((url) => url.replace('../..', '', 1)).map((url) => (
+          <ImageListItem key={url}>
+            <Image
+              srcSet={url}
+              src={url}
+              alt={url}
+              loading="lazy"
+              style={{ cursor: 'pointer' }}
+              onClick={() => setImagePreviewUrl(url)}
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </>
+  );
+};
 
-           {/* // the rest of the markdown */}
-           <div class="post-content">
-               <ReactMarkdown children={post.content} remarkPlugins={[remarkGfm]}/>
-           </div>
-       </>
-    );
-}
+const Post = ({ post }) => <>
+  <NavLink to={'/posts'} style={{ color: colors.forest }}>
+    <FaArrowCircleLeft style={{ verticalAlign: 'middle', marginRight: '1rem', color: colors.forest, cursor: 'pointer' }} /> Back
+  </NavLink>
+
+  <Grid container spacing={0}>
+    <Grid item xs={12}>
+      <Typography variant={'h4'}>{post.title}</Typography>
+      <Typography variant={'subtitle2'} style={{ color: colors.darkgray }}>{post.date}</Typography>
+    </Grid>
+  </Grid>
+
+  <Divider style={{ color: colors.forest }} />
+
+  { post?.imageList?.length > 0 && <BlogPostImageList imageList={post.imageList} /> }
+
+  {/* // the rest of the markdown */}
+  <div className="post-content">
+    <ReactMarkdown children={post.content} remarkPlugins={[remarkGfm]}/>
+  </div>
+  </>
 
 export default Post;
 

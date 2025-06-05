@@ -2,27 +2,92 @@ media:
   input: public
   output: ../..
 content:
+  - name: stickers
+    label: Community Stickers
+    path: public/content/stickers
+    filename: '{fields.blog_slug}.json'
+    type: collection
+    fields:
+      - name: title
+        label: Title
+        description: Title/header of the map popup that appears in black
+        type: string
+      - name: subtitle
+        label: Subtitle
+        description: Subtitle/caption of the map popup that appears in red
+        type: string
+      - name: icon
+        label: Map Icon
+        description: Clickable image that appears on the map. Note that a square image will appear best (1:1 aspect ratio)
+        type: image
+      - name: logo
+        label: Sticker Logo
+        description: Image that is shown in the dialog after the sticker is clicked. Note that a square image will appear best (1:1 aspect ratio)
+        type: image
+      - name: long
+        label: Longitude
+        description: X-coordinate on the map (must be within current ChiVes map area)
+        type: number
+        options:
+          # min/max for boundaries ~ current area of ChiVes map
+          # -87.971249,41.621613,-87.506590,42.033640
+          min: -87.971249
+          max: -87.506590
+          step: 0.01
+      - name: lat
+        label: Latitude
+        description: Y-coordinate on the map (must be within current ChiVes map area)
+        type: number
+        options:
+          # min/max for boundaries ~ current area of ChiVes map
+          # -87.971249,41.621613,-87.506590,42.033640
+          min: 41.621613
+          max: 42.033640
+          step: 0.01
+      - name: blog_slug
+        label: Featured Blog Post
+        type: reference
+        required: true
+        options:
+          collection: posts
+          # Shown while choosing the selection
+          label: '{date} - {title}'
+          # Shown after choosing the selection
+          value: '{slug}'
+
   - name: posts
     label: Posts
     type: collection
     path: 'public/content/posts'
     filename: '{fields.slug}.md'
     view:
-      fields: [ title, published, date ]
+      fields: [ title, published, date, imageList ]
     fields:
+      - name: imageList
+        label: Images
+        type: image
+        description: list of images to be displayed with blog post
+        required: false
+        options:
+          multiple: true
       - name: published
         label: Published
+        description: if false, hide this post from being displayed on the ChiVes website
         type: boolean
         default: true
       - name: date
         label: Date
+        description: date that this post was created
         type: date
       - name: title
         label: Title
+        description: title of this blog post
         type: string
       - name: body
         label: Body
+        description: content of this blog post (accepts github-flavored markdown)
         type: rich-text
       - name: slug
         label: Slug
+        description: filename / slug of this blog post
         type: string
