@@ -36,7 +36,6 @@
             "../../Instituto_workshops/Screenshot 2025-05-20 at 12.15.57 PM.png"
         ],
         "tags": [
-            "events",
             "community",
             "partners"
         ],
@@ -49,8 +48,7 @@
     },
     {
         "tags": [
-            "events",
-            "feature updates"
+            "events"
         ],
         "published": true,
         "date": "2025-04-22",
