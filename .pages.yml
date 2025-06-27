@@ -76,7 +76,7 @@ content:
         required: true
         type: select
         options:
-          values: [ partners, community, feature updates, events, research ]
+          values: [ partners, community, feature-updates, events, research ]
           multiple: true
       - name: published
         label: Published
