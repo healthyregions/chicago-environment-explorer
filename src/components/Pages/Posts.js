@@ -57,7 +57,7 @@ const PostsPage = ({}) => {
                    slug && <Post post={post} />
                }
                {
-                   /* If we are not given a slug, render the list of Posts*/
+                   /* If we are not given a slug, render the list of Posts */
                    !slug && <PostList posts={posts} />
                }
            </ContentContainer>
