@@ -36,10 +36,8 @@ const PostList = ({ posts, limit, hideHeader }) => {
   useEffect(() => {
     const searchParams = new URLSearchParams(search);
     console.log("Search params: ", searchParams);
-    let tags = searchParams.get("tag");
-    if (typeof(tags) === 'string') {
-      tags = [tags]
-    }
+    const tagsRaw = searchParams.getAll("tag");
+    const tags = typeof(tagsRaw) === 'string' ? [tagsRaw] : tagsRaw;
     console.log("Tags parsed: ", tags);
 
     if (!search) {
