@@ -1,7 +1,6 @@
 ---
 tags:
   - events
-  - feature updates
 published: true
 date: 2025-04-22
 title: Earth Day 2025 Release (v3.1.0)
