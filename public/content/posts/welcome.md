@@ -1,4 +1,5 @@
 ---
+tags: feature updates
 published: true
 date: 2025-04-18
 title: Welcome to the ChiVes Blog!
