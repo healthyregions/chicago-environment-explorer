@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {NavLink, useHistory, useLocation} from "react-router-dom";
+import {NavLink, useLocation} from "react-router-dom";
 
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
@@ -12,7 +12,8 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import {colors} from "../../config";
 import Divider from "@mui/material/Divider";
-import {Chip} from "@mui/material";
+import TagsList from "./TagsList";
+import TagsDisplay from "./TagsDisplay";
 
 const PostList = ({ posts, limit, hideHeader }) => {
   // Tags allow users to filter the list of Posts - collect all existing tags here
@@ -53,55 +54,16 @@ const PostList = ({ posts, limit, hideHeader }) => {
     setFilteredPosts(filtered);
   }, [setFilteredPosts, setRequestedTags, search, posts]);
 
-  const history = useHistory();
-
-  // Given a tag, "select" this tag in the UI
-  // This will show as a URL query param and filter the list of posts
-  const selectTag = (tag) => {
-    if (!requestedTags?.includes(tag)) {
-      console.log('Adding tag: ', tag);
-      // Build up a query containing this tag and navigate to it
-      const newTags = requestedTags?.concat(tag);
-      const query = newTags?.map((tag) => `tag=${tag}`)?.join('&');
-      console.log(query);
-      const url = `/posts?${query}`;
-      console.log(url);
-      history.push(url);
-    }
-  }
-
-  // Given a tag, "deselect" this tag in the UI
-  // This will remove the URL query param and refilter the list of posts
-  const deselectTag = (tag) => {
-    if (requestedTags?.includes(tag)) {
-      console.log('Removing tag: ', tag);
-      // Build up a query without this tag and navigate to it
-      const query = requestedTags?.filter(t => tag !== t)?.map((tag) => `tag=${tag}`)?.join('&');
-      console.log(query);
-      const url = `/posts?${query}`;
-      console.log(url);
-      history.push(url);
-    }
-  }
 
   return (
     <>
-      <div>
-        {
-          allTags?.map((tag) =>
-            requestedTags?.includes(tag)
-              ? <Chip style={{marginRight: '3rem', cursor: 'pointer' }} label={`#${tag}`}
-                      variant="outlined" onClick={() => deselectTag(tag)} />
-              : <Chip style={{marginRight: '3rem', cursor: 'pointer' }} label={`#${tag}`}
-                      onClick={() => selectTag(tag)} />
-          )
-        }
-      </div>
 
        {!hideHeader && <>
            <Typography variant={'h1'}>News</Typography>
-           <Divider style={{ marginBottom: 0, color: colors.forest }} />
        </>}
+
+      <TagsList tags={allTags} selection={requestedTags}></TagsList>
+      <Divider style={{ marginBottom: 0, color: colors.forest }} />
 
        <TableContainer>
            <Table aria-label="simple table">
@@ -118,13 +80,7 @@ const PostList = ({ posts, limit, hideHeader }) => {
                                      <Typography variant={'subtitle2'} style={{ color: colors.darkgray }}>{post.date}</Typography>
                                  </div>
                                  <ReactMarkdown children={post.tagline} remarkPlugins={[remarkGfm]}></ReactMarkdown>
-                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                                   {
-                                     post?.tags?.map((tag) =>
-                                       <NavLink to={`/posts?tag=${tag}`}>#{tag}</NavLink>
-                                     )
-                                   }
-                                 </div>
+                               <TagsDisplay tags={post?.tags}></TagsDisplay>
                              </NavLink>
                          </TableCell>
                      </TableRow>)
