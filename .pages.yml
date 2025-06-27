@@ -74,10 +74,10 @@ content:
         label: Tags
         description: 'Assign tags to help categorize this blog post'
         required: true
-        multiple: true
         type: select
         options:
           values: [ partners, community, feature updates, events, research ]
+          multiple: true
       - name: published
         label: Published
         description: if false, hide this post from being displayed on the ChiVes website
