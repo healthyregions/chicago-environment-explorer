@@ -34,7 +34,6 @@ imageList:
   - ../../Instituto_workshops/Screenshot 2025-05-20 at 12.14.32 PM.png
   - ../../Instituto_workshops/Screenshot 2025-05-20 at 12.15.57 PM.png
 tags:
-  - events
   - community
   - partners
 published: true
