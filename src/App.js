@@ -93,28 +93,28 @@ export default function App() {
 							<Route exact path="/about.html" component={About} />
 							<Route exact path="/team" component={Team} />
 							<Route exact path="/team.html" component={Team} />
-							<Route path="/guide" component={Guide} />
-							<Route path="/guide.html" component={Guide} />
+							<Route exact path="/guide" component={Guide} />
+							<Route exact path="/guide.html" component={Guide} />
 							<Route path="/posts/:slug?" component={Posts} />
-							<Route path="/contact" component={Contact} />
-							<Route path="/contact.html" component={Contact} />
+							<Route exact path="/contact" component={Contact} />
+							<Route exact path="/contact.html" component={Contact} />
 							<Route exact path="/community" component={Community} />
 							<Route exact
 								path="/community.html"
 								component={Community}
 							/>
-							<Route exact path="/data" component={Data} />
-							<Route exact path="/data.html" component={Data} />
-							<Route exact path="/builder" component={IndexBuilder} />
-							<Route exact path="/builder.html" component={IndexBuilder} />
-							<Route exact path="/learn" component={Learn} />
-							<Route exact path="/learn.html" component={Learn} />
 							<Route exact path="/learn/mapping101" component={LearnMapping101} />
 							<Route exact path="/learn/mapping101.html" component={LearnMapping101} />
 							<Route exact path="/learn/histogram" component={LearnHistogramFilter} />
 							<Route exact path="/learn/histogram.html" component={LearnHistogramFilter} />
 							<Route exact path="/learn/indexBuilder" component={LearnIndexBuilder} />
 							<Route exact path="/learn/indexBuilder.html" component={LearnIndexBuilder} />
+							<Route exact path="/learn" component={Learn} />
+							<Route exact path="/learn.html" component={Learn} />
+							<Route exact path="/data" component={Data} />
+							<Route exact path="/data.html" component={Data} />
+							<Route exact path="/builder" component={IndexBuilder} />
+							<Route exact path="/builder.html" component={IndexBuilder} />
 
 							{/* <Route path="/community/instituto" component={Instituto} />
 							<Route path="/community/instituto.html" component={Instituto} />
