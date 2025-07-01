@@ -1,4 +1,4 @@
-# ChiVes: Chicago Environment Explorer 
+# ChiVes: Chicago Environment Explorer
 ### [ChiVes](https://chichives.com/) is a data collaborative and community mapping application that brings data on Chicago’s environment together at the neighborhood level.
 
 # About
