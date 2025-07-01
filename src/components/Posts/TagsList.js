@@ -1,7 +1,11 @@
 import {Chip} from "@mui/material";
 import React from "react";
 import {useHistory} from "react-router-dom";
+import styled from "styled-components";
 
+const TagsListContainer = styled.div`
+  margin-top: 1em;
+`;
 
 const TagsList = ({tags, selection}) => {
   const history = useHistory();
@@ -27,7 +31,7 @@ const TagsList = ({tags, selection}) => {
   }
 
   return (
-    <>
+    <TagsListContainer>
       {
         tags?.map((tag) =>
           selection?.includes(tag)
@@ -37,7 +41,7 @@ const TagsList = ({tags, selection}) => {
                     onClick={() => selectTag(tag)} />
         )
       }
-    </>
+    </TagsListContainer>
   );
 }
 
