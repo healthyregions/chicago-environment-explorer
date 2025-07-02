@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import {Dialog, IconButton, ImageList, ImageListItem} from "@mui/material";
 import styled from "styled-components";
 import {FaTimes} from "@react-icons/all-files/fa/FaTimes";
+import TagsDisplay from "./TagsDisplay";
 
 
 // see example of this pattern:
@@ -69,6 +70,8 @@ const Post = ({ post }) => <>
       <Typography variant={'subtitle2'} style={{ color: colors.darkgray }}>{post.date}</Typography>
     </Grid>
   </Grid>
+
+  <TagsDisplay tags={post?.tags}></TagsDisplay>
 
   <Divider style={{ color: colors.forest }} />
 

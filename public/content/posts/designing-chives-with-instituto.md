@@ -33,6 +33,8 @@ imageList:
   - ../../Instituto_workshops/Screenshot 2025-05-20 at 12.14.18 PM.png
   - ../../Instituto_workshops/Screenshot 2025-05-20 at 12.14.32 PM.png
   - ../../Instituto_workshops/Screenshot 2025-05-20 at 12.15.57 PM.png
+tags:
+  - community
 published: true
 date: 2025-05-06
 title: Co-Designing ChiVes with Instituto del Progreso Latino

@@ -1,4 +1,6 @@
 ---
+tags:
+  - feature-updates
 published: true
 date: 2025-04-21
 title: Spanish Language Tutorial for ChiVes
