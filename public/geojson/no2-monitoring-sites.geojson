@@ -1,0 +1,31 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.7135,41.7514]
+            },
+            "properties": {
+                "aqs_id": "17-031-0076",
+                "site_description": "Com Ed",
+                "address": "7801 Lawndale",
+                "owner": "CCDES"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.6744,41.92068]
+            },
+            "properties": {
+                "aqs_id": "17-031-0219",
+                "site_description": "Kennedy near-road #2",
+                "address": "Kennedy Expy & W. Webster Ave",
+                "owner": "IEPA"
+            }
+        }
+    ]
+}

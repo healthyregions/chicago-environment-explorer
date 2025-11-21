@@ -1,0 +1,57 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.5395,41.68717]
+            },
+            "properties": {
+                "aqs_id": "17-031-0022",
+                "site_description": "Washington High School",
+                "address": "3535 E. 114th St",
+                "owner": "CCDES"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.7135,41.7514]
+            },
+            "properties": {
+                "aqs_id": "17-031-0076",
+                "site_description": "Com Ed",
+                "address": "7801 Lawndale",
+                "owner": "CCDES"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.7499,41.96548]
+            },
+            "properties": {
+                "aqs_id": "17-031-0052",
+                "site_description": "Mayfair Pump Station",
+                "address": "4850 Wilson Ave.",
+                "owner": "CCDES"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.7227,41.91274]
+            },
+            "properties": {
+                "aqs_id": "17-031-0057",
+                "site_description": "Springfield Pump Station",
+                "address": "1745 N. Springfield Ave.",
+                "owner": "CCDES"
+            }
+        }
+    ]
+}
