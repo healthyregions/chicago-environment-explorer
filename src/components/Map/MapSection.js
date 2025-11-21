@@ -716,6 +716,23 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         // If mapping of colors, choose color based on symbolProp
         const { symbolProp } = parsedOverlay;
         const symbolKey = feature.properties[symbolProp];
+
+        // Treat as boolean map if symbolKey is not a string
+        if (typeof symbolKey === 'object') {
+          const boolMap = symbolKey;
+          const colorsToAvg = Object.keys(colors)
+            .filter(key => boolMap[key] === true);
+          if (!colorsToAvg?.length) {
+            console.error(`Failed to parse colors for ${parsedOverlay?.id}: ${JSON.stringify(symbolKey)}`, feature)
+            return colors[symbolKey];
+          }
+
+          // Average the colors together
+          return colorsToAvg.map(key => colors[key])
+            .reduce((a, c) => [a[0]+c[0], a[1]+c[1], a[2]+c[2]], [0,0,0])
+            .map(rgb => rgb / colorsToAvg.length);
+        }
+
         return colors[symbolKey];
       },
 

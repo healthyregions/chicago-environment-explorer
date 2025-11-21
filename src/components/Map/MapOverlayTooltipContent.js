@@ -16,14 +16,23 @@ const MapOverlayTooltipContent = ({content, overlay}) => {
 
     const popupFields = JSON.parse(overlay?.popupContent);
 
+    const printContents = (popupFields, content) => {
+      return (
+        <>
+          {Object.keys(popupFields)?.map((keyName) => <tr key={'popup-content-' + keyName}>
+            {content[keyName] && typeof content[keyName] === 'string' && <><td>{popupFields[keyName]}</td><td>{content[keyName]}</td></>}
+            {content[keyName] && typeof content[keyName] === 'object' && <>{printContents(popupFields, content[keyName])}</>}
+          </tr>)}
+        </>
+      )
+    };
+
     return (
         <>
             <h2>{interpolatePopupTitle(content, overlay)}</h2>
             {content && <div style={{overflowY:'scroll', height:'150px'}}><span><table>
                 <tbody>
-                    {Object.keys(popupFields)?.map((keyName) => <tr key={'popup-content-' + keyName}>
-                        {content[keyName] && <><td>{popupFields[keyName]}</td><td>{content[keyName]}</td></>}
-                    </tr>)}
+                    {printContents(popupFields, content)}
                 </tbody>
             </table>
 
