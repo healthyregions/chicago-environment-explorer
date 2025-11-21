@@ -17,7 +17,6 @@ const MapOverlayTooltipContent = ({content, overlay}) => {
     const popupFields = JSON.parse(overlay?.popupContent);
 
     const printContents = (popupFields, content) => {
-      console.log('Printing contents:', {popupFields, content});
       return (
         <>
           {typeof content === 'boolean' && <>{printContents(popupFields, content ? 'Yes' : 'No')}</>}
