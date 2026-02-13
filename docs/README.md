@@ -164,6 +164,7 @@ Along with Map Variables, the web map features a set of "Data Overlays" that pro
             "D": [226, 77, 90]
         }
         ```
+    - If your chosen `symbolProp` has an array value, you can also specify combinations of different keys: for example "A & B". These keys should appear in alphabetical order using ampersand (&) as a separator. Remember to assign a color for all present combinations of keys. For an example, see the "EPA Monitoring Sites" Overlay.
 - `popupTitle`: Optionally set the title for clickable popups on each feature, example: `{site_name}`.
 - `popupContent`: Optionally set a mapping for columns -> display titles to define what shows up in a popup. For example:
     ```
