@@ -716,6 +716,16 @@ function MapSection({ setViewStateFn = () => {}, bounds, geoids = [], showSearch
         // If mapping of colors, choose color based on symbolProp
         const { symbolProp } = parsedOverlay;
         const symbolKey = feature.properties[symbolProp];
+
+        if (typeof symbolKey === 'object' && symbolKey.sort) {
+          // Treat as array of strings
+          const key = symbolKey.sort().join(" & ");
+          return colors[key];
+        } else if (typeof symbolKey === 'object') {
+          // Treat as a mapping of strings
+          console.error('ERROR: Currently unsupported - please use an array of strings for your symbol instead');
+        }
+
         return colors[symbolKey];
       },
 

@@ -1,0 +1,70 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.5395,41.68717]
+            },
+            "properties": {
+                "site_description": "Washington High School",
+                "address": "3535 E. 114th St",
+                "owner": "CCDES",
+                "monitors": ["PM2.5"]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.7135,41.7514]
+            },
+            "properties": {
+                "site_description": "Com Ed",
+                "address": "7801 Lawndale",
+                "owner": "CCDES",
+                "monitors": ["PM2.5", "NO2"]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.7499,41.96548]
+            },
+            "properties": {
+                "site_description": "Mayfair Pump Station",
+                "address": "4850 Wilson Ave.",
+                "owner": "CCDES",
+                "monitors": ["PM2.5"]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.7227,41.91274]
+            },
+            "properties": {
+                "site_description": "Springfield Pump Station",
+                "address": "1745 N. Springfield Ave.",
+                "owner": "CCDES",
+                "monitors": ["PM2.5"]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+               "type": "Point",
+               "coordinates":  [-87.6744,41.92068]
+            },
+            "properties": {
+                "site_description": "Kennedy near-road #2",
+                "address": "Kennedy Expy & W. Webster Ave",
+                "owner": "IEPA",
+                "monitors": ["NO2"]
+            }
+        }
+    ]
+}
