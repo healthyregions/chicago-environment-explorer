@@ -56,7 +56,7 @@ inputs.variables.text: |md
 inputs.baselayers: ""
 inputs.baselayers.class: input
 inputs.baselayers.text: |md 
-### BaseLayers
+### Basemap Layers
 Basemap layer definitions and credits|
 inputs.logos: ""
 inputs.logos.class: input
@@ -70,6 +70,22 @@ inputs.resources.text: |md
 - Title
 - Link
 - Description, etc.|
+
+inputs.overlays: ""
+inputs.overlays.class: input
+inputs.overlays.text: |md 
+### Overlays
+- id, name, title, source, etc.
+- style config (symbols, colors, etc.)
+- popup config (title, content)
+- filter config (prop, display name)|
+
+inputs.categories: ""
+inputs.categories.class: input
+inputs.categories.text: |md 
+### Categories
+- Category Name
+- Order|
 
 gdrive -- inputs.data-sheets {
     style: {
@@ -97,10 +113,16 @@ inputs.data-sheets -> ybd.tab-join
 base-geo -> ybd.tab-join -> outputs.data
 
 # set 2
-ybd.clean: Clean and build\ntree for frontend\nlist.
+ybd.clean: Clean and build\ntree for Map Variables\nlist.
 ybd.clean.shape: step
 
+inputs.categories -> ybd.clean
 inputs.variables -> ybd.clean -> outputs.mapvars
+
+ybd.clean2: Clean and build\ntree for Data Overlays\nlist.
+ybd.clean2.shape: step
+
+inputs.overlays -> ybd.clean2
 
 # set 3
 ybd.agg: |md
@@ -153,4 +175,6 @@ site.guide: /resources
 outputs.docs -> site.docs
 outputs.mapvars -> site.map
 outputs.data -> aq-join -> site.map
+
+ybd.clean2 -> site.map
 
